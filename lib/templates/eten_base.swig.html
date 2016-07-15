@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="target-densitydpi=device-dpi, width=720, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=EDGE"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+    <meta name="renderer" content="webkit"/>
+    <title>{% block title %}{% endblock %}</title>
+    <link type="text/css" rel="stylesheet" href="stylesheets/all.less.css"/>
+    {% block css %}{% endblock %}
+
+    <!--[if lt IE 9]>
+    <script src='javascripts/es5-shim.js'></script>
+    <script src='javascripts/es5-sham.js'></script>
+    <script src='javascripts/json3.min.js'></script>
+    <script src='javascripts/es6-shim.min.js'></script>
+    <script src='javascripts/es6-sham.min.js'></script>
+    <script src='javascripts/es7-shim@lastest.js'></script>
+    <![endif]-->
+
+</head>
+<body>
+
+<!--接口地址前缀,结尾需要添加斜线-->
+<input type="hidden" id="api-path" value="{{ API_PATH }}"/>
+
+<div id="header-status-bar"></div>
+{% include 'header-nav-bar.swig.html' %}
+{% block content %}{% endblock %}
+{% include 'footer.swig.html' %}
+
+<script src="javascripts/lib.js"></script>
+<script src="javascripts/bundle.js"></script>
+</body>
+</html>

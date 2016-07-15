@@ -1,0 +1,33 @@
+@barHeight: 80px;
+
+.header-nav-bar {
+  height: @barHeight;
+  display: table;
+  width: 100%;
+
+  img {
+    max-height: @barHeight;
+  }
+
+  .header-nav-bar-links {
+    height: @barHeight;
+    float: right;
+
+    a {
+      display: inline-block;
+      padding: 0 20px;
+      cursor: pointer;
+      font-size: 18px;
+      height: @barHeight;
+      line-height: @barHeight;
+
+      &:last-child {
+        padding-right: 0;
+      }
+
+      &.active {
+        color: #f9655a;
+      }
+    }
+  }
+}
