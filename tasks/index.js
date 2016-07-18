@@ -45,7 +45,10 @@ module.exports = function (site_name, project_name, configs) {
     jsx_files.push(`${app_path}react/components/*.jsx`);
     jsx_files.push(`${app_path}${CONFIG.main_jsx}`);
 
-    var common_javascript_files = [`${lib_path}jquery-1.12.4.min.js`];
+    var common_javascript_files = [
+        `${lib_path}jquery-1.12.4.min.js`,
+        `${lib_path}javascripts/eten/common-functions.js`
+    ];
     if (CONFIG.debug) {
         common_javascript_files.push(`${lib_path}react-0.14.8/react.js`);
         common_javascript_files.push(`${lib_path}react-0.14.8/react-dom.js`);

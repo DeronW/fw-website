@@ -19,7 +19,7 @@
 
       .home-link {
         display: block;
-        margin-bottom: 40px;
+        margin-bottom: 34px;
       }
       a {
 
@@ -28,6 +28,10 @@
         width: 30%;
         height: 30px;
         line-height: 30px;
+
+        &:hover {
+          color: white;
+        }
       }
     }
 
@@ -47,15 +51,15 @@
       .service-phone {
         font-size: 22px;
         font-family: arial;
-        margin-bottom: 10px;
+        margin-bottom: 5px;
       }
 
       .service-connect {
-        padding-top: 10px;
+        padding-top: 1px;
       }
 
       .service-qq {
-        display: inline-block;
+        display: block;
         width: 125px;
         height: 30px;
         border: solid 1px #b4d6fe;
@@ -63,6 +67,7 @@
         line-height: 30px;
         font-size: 14px;
         cursor: pointer;
+        float: left;
 
         .icon-qq {
           display: inline-block;
@@ -86,20 +91,27 @@
       }
 
       .service-weibo {
-        display: inline-block;
+        float: left;
+        display: block;
+        width: 36px;
+        height: 36px;
         margin-left: 20px;
         cursor: pointer;
       }
       .service-wechat {
         margin-left: 20px;
         cursor: pointer;
+        float: left;
+        display: block;
+        width: 36px;
+        height: 36px;
         position: relative;
 
         .wechat-qrcode {
           display: none;
           width: 172px;
           height: 200px;
-          top: -215px;
+          top: -195px;
           left: -110px;
           position: absolute;
         }
@@ -143,6 +155,34 @@
           margin-top: 4px;
           margin-left: 15px;
         }
+
+        &:hover {
+          background-color: rgb(180, 214, 254);
+          color: rgb(51, 67, 91);
+        }
+      }
+
+      .app-iphone {
+        b {
+          background-position: -104px 0px;
+        }
+        &:hover {
+          b {
+            background-position: -104px -25px;
+
+          }
+        }
+      }
+
+      .app-android {
+        b {
+          background-position: -133px 0px;
+        }
+        &:hover {
+          b {
+            background-position: -133px -25px;
+          }
+        }
       }
 
       .app-qrcode {
@@ -152,9 +192,16 @@
         color: #b4d6fe;
         margin-left: 20px;
         line-height: 20px;
+
         img {
           display: block;
           margin: 0 auto 5px;
+          border-radius: 3px;
+          border: solid 2px #b4d6fe;
+        }
+
+        &:hover {
+          color: #b4d6fe !important;
         }
       }
     }
