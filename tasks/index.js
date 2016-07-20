@@ -38,6 +38,7 @@ module.exports = function (site_name, project_name, configs) {
         `${lib_path}less/header-status-bar.less`,
         `${lib_path}less/header-nav-bar.less`,
         `${lib_path}less/footer.less`,
+        `${lib_path}less/sidebar-fn.less`,
         `${app_path}less/index.less`
     ];
 
@@ -61,7 +62,10 @@ module.exports = function (site_name, project_name, configs) {
         CONFIG.include_common_js.map(file => `${lib_path}${file}`));
 
     function compile_html() {
-        return html([`${app_path}index.html`], build_path, CONFIG.html_engine, {API_PATH: CONFIG.api_path})
+        return html([`${app_path}index.html`], build_path, CONFIG.html_engine, {
+            API_PATH: CONFIG.api_path,
+            DEBUG: CONFIG.debug
+        })
     }
 
     function compile_stylesheets() {

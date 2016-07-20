@@ -32,8 +32,11 @@
 {% include 'header-nav-bar.swig.html' %}
 {% block content %}{% endblock %}
 {% include 'footer.swig.html' %}
+{% include 'sidebar-fn.swig.html' %}
 
 <script src="javascripts/lib.js"></script>
 <script src="javascripts/bundle.js"></script>
+
+{% if !DEBUG %}{% include 'tong_ji.swig.html' %}{% endif %}
 </body>
 </html>
