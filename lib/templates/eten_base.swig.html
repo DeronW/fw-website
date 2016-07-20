@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html>
+<!--[if lt IE 8 ]>
+<html lang="zh-cn" class="not-support-ie6-7"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html lang="zh-cn"> <!--<![endif]-->
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="target-densitydpi=device-dpi, width=720, user-scalable=no">
@@ -33,6 +36,7 @@
 {% block content %}{% endblock %}
 {% include 'footer.swig.html' %}
 {% include 'sidebar-fn.swig.html' %}
+{% include 'not-support-ie6-ie7.swig.html' %}
 
 <script src="javascripts/lib.js"></script>
 <script src="javascripts/bundle.js"></script>

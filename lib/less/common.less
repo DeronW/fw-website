@@ -13,3 +13,55 @@ a {
   }
   color: #333;
 }
+
+.not-support-ie6-7 {
+  html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .please-update-your-browser {
+    display: block;
+  }
+}
+
+.please-update-your-browser {
+  display: block;
+  position: absolute;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 99;
+
+  .ub-bg {
+    position: absolute;
+    background: black;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0.3;
+  }
+
+  .ub-dialog {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -403px;
+    margin-top: -264px;
+    width: 807px;
+    height: 518px;
+    background: transparent url(../images/bg-not-support-ie6-ie7.gif) no-repeat center center;
+  }
+
+  .ub-dialog-content {
+    position: absolute;
+    top: 20px;
+    left: 30px;
+    width: 400px;
+    background: black;
+  }
+}
