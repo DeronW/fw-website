@@ -39,6 +39,7 @@ module.exports = function (site_name, project_name, configs) {
         `${lib_path}less/header-nav-bar.less`,
         `${lib_path}less/footer.less`,
         `${lib_path}less/sidebar-fn.less`,
+        `${lib_path}less/not-support-ie6-ie7.less`,
         `${app_path}less/index.less`
     ];
 
@@ -73,7 +74,7 @@ module.exports = function (site_name, project_name, configs) {
     }
 
     function compile_less() {
-        return less2css(less_files, `${build_path}stylesheets`, 'all.less.css')
+        return less2css(less_files, `${build_path}stylesheets`, 'all.less.css', CONFIG.debug)
     }
 
     function compile_react() {
