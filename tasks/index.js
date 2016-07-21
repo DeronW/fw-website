@@ -70,7 +70,7 @@ module.exports = function (site_name, project_name, configs) {
     }
 
     function compile_stylesheets() {
-        return stylesheets([app_path + 'stylesheets/*'], `${build_path}stylesheets`)
+        return stylesheets([`${app_path}stylesheets/*.css`], `${build_path}stylesheets`)
     }
 
     function compile_less() {
@@ -82,7 +82,7 @@ module.exports = function (site_name, project_name, configs) {
     }
 
     function compile_javascripts() {
-        return javascripts([`${app_path}javascritps/*.js`, `${lib_path}javascripts/*`],
+        return javascripts([`${app_path}javascripts/*.js`, `${lib_path}javascripts/*.js`],
             `${build_path}javascripts`, null, CONFIG.debug)
     }
 
@@ -114,13 +114,12 @@ module.exports = function (site_name, project_name, configs) {
     }
 
     function monitor() {
-        let project_path = `apps/${site_name}/${project_name}/`;
-        gulp.watch(`${project_path}index.html`, gulp.parallel(compile_html));
-        gulp.watch(`${project_path}images/**`, gulp.parallel(compile_images));
-        gulp.watch(`${project_path}stylesheets/**`, gulp.parallel(compile_stylesheets));
-        gulp.watch(`${project_path}less/**`, gulp.parallel(compile_less));
-        gulp.watch(`${project_path}javascripts/**`, gulp.parallel(compile_javascripts));
-        gulp.watch(`${project_path}react/**`, gulp.parallel(compile_react));
+        gulp.watch(`${app_path}index.html`, gulp.parallel(compile_html));
+        gulp.watch(`${app_path}images/**`, gulp.parallel(compile_images));
+        gulp.watch(`${app_path}stylesheets/**`, gulp.parallel(compile_stylesheets));
+        gulp.watch(`${app_path}less/**`, gulp.parallel(compile_less));
+        gulp.watch(`${app_path}javascripts/**`, gulp.parallel(compile_javascripts));
+        gulp.watch(`${app_path}react/**`, gulp.parallel(compile_react));
 
         gulp.watch(`${public_path}common/images/**`, gulp.parallel(compile_images));
         gulp.watch(`lib/components/**`, gulp.parallel(compile_react));
