@@ -9,6 +9,7 @@ gulp.task('default', function (done) {
 });
 
 const ETEN_APP_NAMES = [
+    'account-setting',
     'guide'
 ];
 
