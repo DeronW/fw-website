@@ -1,4 +1,3 @@
-
 const HeaderStatusBar = React.createClass({
     getInitialState: function () {
         return {
@@ -11,19 +10,19 @@ const HeaderStatusBar = React.createClass({
         }
     },
     componentDidMount: function () {
-        //$FW.Ajax({
-        //    url: 'api',
-        //    success: function () {
-        //
-        //    }
-        //})
-        this.setState({
-            is_login: true,
-            username: 'xxx',
-            real_name: '真是姓名',
-            avatar: 'http://placehold.it/50x50',
-            msg_count: 3
-        })
+        $.get(API_PATH + 'api/v1/user-state.json', null,
+            function (data) {
+                var data = data.data;
+                if (!data.is_login) return;
+
+                this.setState({
+                    is_login: true,
+                    username: data.username,
+                    real_name: data.real_name,
+                    avatar: data.avatar,
+                    msg_count: data.msg_count
+                })
+            }.bind(this), 'json');
     },
     showUserPopHandler: function () {
         this.setState({showUserPop: true})

@@ -1,0 +1,111 @@
+
+.not-support-ie6-7 {
+  html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .please-update-your-browser {
+    display: block;
+  }
+}
+
+.please-update-your-browser {
+  display: none;
+  position: absolute;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 99;
+
+  .ub-bg {
+    position: absolute;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+    background-color: black;
+  }
+
+  .ub-dialog {
+    position: absolute;
+    z-index: 101;
+    top: 50%;
+    left: 50%;
+    margin-left: -330px;
+    margin-top: -263px;
+    width: 719px;
+    height: 516px;
+    background: transparent url(../images/bg-not-support-ie6-ie7.gif) no-repeat center center;
+  }
+
+  .ub-dialog-content {
+    position: absolute;
+    top: 27px;
+    left: 26px;
+    width: 583px;
+    height: 328px;
+    padding-top: 12px;
+
+    .big-text {
+      margin-left: 20px;
+      font-size: 20px;
+      color: #405c82;
+      line-height: 32px;
+    }
+
+    .recommended-browser {
+      display: table;
+      width: 100%;
+      font-size: 20px;
+      color: #405c82;
+      padding-left: 20px;
+      margin-top: 10px;
+
+      a {
+        display: inline-block;
+        margin-right: 10px;
+        padding: 0 20px;
+        color: #7fb5fb;
+        border: 1px solid #7fb5fb;
+        height: 48px;
+        line-height: 48px;
+
+        &:hover {
+          color: #fc6456;
+        }
+      }
+
+      img {
+        width: 25px;
+        height: 25px;
+        position: relative;
+        top: 5px;
+      }
+    }
+
+    .use-app {
+      color: #bac3d0;
+      font-size: 16px;
+      padding-left: 20px;
+      margin-top: 58px;
+    }
+
+    .download-app {
+      margin-top: 10px;
+      padding-left: 20px;
+
+      img {
+        width: 86px;
+        height: 86px;
+        margin-right: 20px;
+      }
+    }
+  }
+}

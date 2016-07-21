@@ -9,8 +9,13 @@ gulp.task('default', function (done) {
 });
 
 const ETEN_APP_NAMES = [
+<<<<<<< HEAD
     'guide',
     'lol'
+=======
+    'account-setting',
+    'guide'
+>>>>>>> d5d7bbee757a43721c5665ee2b92b54260917fb1
 ];
 
 ETEN_APP_NAMES.forEach(function (i) {
@@ -19,7 +24,7 @@ ETEN_APP_NAMES.forEach(function (i) {
 
     gt('eten', i, {
         debug: true,
-        api_path: '',
+        api_path: 'http://localhost/fake/',
         include_components: common_components,
         include_common_js: common_js
     });
