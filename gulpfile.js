@@ -9,13 +9,9 @@ gulp.task('default', function (done) {
 });
 
 const ETEN_APP_NAMES = [
-<<<<<<< HEAD
+    'account-setting',
     'guide',
     'lol'
-=======
-    'account-setting',
-    'guide'
->>>>>>> d5d7bbee757a43721c5665ee2b92b54260917fb1
 ];
 
 ETEN_APP_NAMES.forEach(function (i) {

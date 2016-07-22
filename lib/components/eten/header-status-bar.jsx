@@ -23,6 +23,8 @@ const HeaderStatusBar = React.createClass({
                     msg_count: data.msg_count
                 })
             }.bind(this), 'json');
+
+        this.setState({is_login: true});
     },
     showUserPopHandler: function () {
         this.setState({showUserPop: true})
@@ -81,7 +83,7 @@ const HeaderStatusBar = React.createClass({
                     <a className="link" href="/mesageCenter/msssageList.shtml?messageType=1">消息中心</a>
                     {separate_line}
 
-                    {this.state.is_login ? user_state : null}
+                    {this.state.is_login && this.state.username ? user_state : null}
 
                     {this.state.is_login ? null : <a className="link" href="/orderUser/register.shtml">免费注册</a>}
                     {this.state.is_login ? null : separate_line}
