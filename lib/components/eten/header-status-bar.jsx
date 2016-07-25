@@ -25,16 +25,7 @@ const HeaderStatusBar = React.createClass({
             }.bind(this), 'json');
 
         // 临时设置, 后端完成用户接口后就去掉这个默认设置
-        //this.setState({is_login: true});
-
-        this.setState({
-            is_login: true,
-            username: 'xxx',
-            real_name: 'rrr',
-            avatar: '',
-            msg_count: 0
-        });
-
+        this.setState({is_login: true});
     },
     showUserPopHandler: function () {
         this.setState({showUserPop: true})
