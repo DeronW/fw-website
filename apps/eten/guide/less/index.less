@@ -16,8 +16,13 @@
 }
 
 .understand-area {
+	* {
+		margin: 0;
+		padding: 0;
+	}	
 
 	.title {
+		margin: 70px 0 20px 0 ;
 		font-size: 30px;
 		color: #3f4c67;
 		text-align: center;
@@ -43,7 +48,9 @@
 	}
 
 	.understand-text {
+		margin: 30px 0 0 0;
 		line-height: 22px;
+		color: #4b4c4d;
 	}
 
 	.understand-img {
@@ -59,6 +66,11 @@
 	background-color: #3b4b7e;
 
 	.content {
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
 		padding: 70px 0 40px;
 		text-align: center;
 
@@ -84,10 +96,9 @@
 			
 			.tab-title {
 				position: relative;
-				left: 20px;
 				margin: 0 auto;
 				width: 758px;
-				height: 55px;
+				height: 45px;
 				border: 2px solid #fff;
 				border-radius: 5px;
 
@@ -98,16 +109,21 @@
 					z-index: 2;
 					margin: 0;
 					padding: 0;
-					height: 55px;
+					height: 45px;
 					
 					li {
 						float: left;
 						width: 251px;
-						height: 55px;
+						height: 45px;
 						border-right: 2px solid #fff;
-						line-height: 55px;
+						line-height: 45px;
 						list-style: none;
 						font-size: 18px;	
+
+						.text {
+							display: block;
+							line-height: 49px;
+						}
 					}
 
 					.select-li {
@@ -125,7 +141,7 @@
 					left: 0;
 					z-index: 1;
 					width: 33.3%;
-					height: 55px;
+					height: 45px;
 					background-color: #fff;	
 				}
 			}
@@ -152,6 +168,7 @@
 						.text {
 							margin: 0;
 							line-height: 22px;
+							text-align: left;
 						}
 					}
 				}	
@@ -166,6 +183,15 @@
 
 						.text {
 							font-size: 14px;
+							text-align: center;;
+						}
+					}
+
+					.free-li {
+						.img {
+							img {
+								margin-left: 22px;
+							}
 						}
 					}
 				}
@@ -182,6 +208,9 @@
 				}
 
 				.honor {
+					height: 230px;
+					padding-top: 20px;
+
 					li {
 						width: 16.666%;
 						
@@ -301,6 +330,7 @@
 									font-size: 22px;
 									font-weight: normal;
 									color: #ff0000;
+									font-family: "Arial";
 
 									.change-text {
 										font-size: 12px;
@@ -332,11 +362,11 @@
 						top: 88px;
 						left: 1px;
 						width: 280px;
-						height: 66px;
-						padding: 10px;
+						height: 69px;
+						padding: 7px 10px 10px;
 						border-radius: 3px;
 						color: #fff;
-						background-color: rgba(0, 0, 0, 0.6);
+						background-color: rgba(50, 58, 84, 0.9);
 
 						.info-text {
 							height: 36px;
@@ -473,7 +503,11 @@
 			.constantly-content {
 				
 				.constantly-content-info {
-					padding: 26px 0 0 0;	
+					height: 289px;
+					padding: 50px 0 0 0;	
+					margin: 0 1px;
+					background-color: #33447b;
+
 
 					ul {
 						li {
@@ -498,6 +532,7 @@
 							.text {
 								font-size: 14px;
 								line-height: 22px;
+								text-align: left;
 							}
 						}
 					}
