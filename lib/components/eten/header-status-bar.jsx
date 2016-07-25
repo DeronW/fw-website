@@ -10,7 +10,7 @@ const HeaderStatusBar = React.createClass({
         }
     },
     componentDidMount: function () {
-        $.get(API_PATH + 'api/v1/user-state.json', null,
+        $.get(API_PATH + 'api/userState/v1/userState.json', null,
             function (data) {
                 var data = data.data;
                 if (!data.is_login) return;
@@ -24,6 +24,7 @@ const HeaderStatusBar = React.createClass({
                 })
             }.bind(this), 'json');
 
+        // 临时设置, 后端完成用户接口后就去掉这个默认设置
         this.setState({is_login: true});
     },
     showUserPopHandler: function () {
@@ -59,7 +60,7 @@ const HeaderStatusBar = React.createClass({
                     <div
                         className={this.state.showUserPop ? "hover login-user-state-username" : "login-user-state-username"}
                         onMouseEnter={this.showUserPopHandler} onMouseLeave={this.hideUserPopHandler}>
-                        {this.state.username}
+                        <a href="/account/home.shtml"> {this.state.username} </a>
                         <i className="arrow"> </i>
                         <div className="hidden-stone"></div>
                         {this.state.showUserPop ? pop : null}
