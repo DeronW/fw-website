@@ -47,7 +47,7 @@
     background: rgb(128, 145, 171);
     color: white;
     font-size: 12px;
-    padding-top: 10px;
+    padding-top: 8px;
   }
 
   .qrcode {
@@ -67,13 +67,14 @@
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 99;
+  z-index: 999;
   color: #666;
   display: none;
 
   .bg {
     background: black;
     opacity: 0.3;
+    filter: "alpha(opacity=57)";   /* IE 8 */
     position: absolute;
     width: 100%;
     height: 100%;
