@@ -78,7 +78,7 @@ const HeaderStatusBar = React.createClass({
                         旗下互联网金融平台
                     </div>
 
-                    <a className="link" href="/activity/user-guide/">新手引导</a>
+                    <a className="link" href="/static/web/guide/index.html">新手引导</a>
                     {separate_line}
 
                     <a className="link" href="/mesageCenter/msssageList.shtml?messageType=1">消息中心</a>
