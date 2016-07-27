@@ -12,20 +12,27 @@ const HeaderStatusBar = React.createClass({
     componentDidMount: function () {
         $.get(API_PATH + 'api/userState/v1/userState.json', null,
             function (data) {
-                var data = data.data;
-                if (!data.is_login) return;
+                if (data.code != 10000) {
+                    console.log('got error', data.message);
+                    return
+                }
+                var d = data.data;
 
+                var avatar = d.avatar ? d.avatar : (d.sex ? 'http://www.9888.cn/img/man.png' : 'http://www.9888.cn/img/woman.png');
                 this.setState({
-                    is_login: true,
-                    username: data.username,
-                    real_name: data.real_name,
-                    avatar: data.avatar,
-                    msg_count: data.msg_count
-                })
+                    is_login: d.isLogin,
+                    username: d.userName,
+                    real_name: d.realName,
+                    avatar: avatar,
+                    msg_count: null
+                });
+
+                window.IS_LOGIN = d.isLogin;
+
             }.bind(this), 'json');
 
         // 临时设置, 后端完成用户接口后就去掉这个默认设置
-        this.setState({is_login: true});
+        //this.setState({is_login: true});
     },
     showUserPopHandler: function () {
         this.setState({showUserPop: true})
