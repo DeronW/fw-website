@@ -10,25 +10,27 @@ const HeaderStatusBar = React.createClass({
         }
     },
     componentDidMount: function () {
-        $.get(API_PATH + 'api/v1/user-state.json', null,
+        $.get(API_PATH + 'api/userState/v1/userState.json', null,
             function (data) {
-                var data = data.data;
-                if (!data.is_login) return;
+                if (data.code != 10000) {
+                    console.log('got error', data.message);
+                    return
+                }
+                var d = data.data;
 
+                var avatar = d.avatar ? d.avatar : (d.sex ? 'http://www.9888.cn/img/man.png' : 'http://www.9888.cn/img/woman.png');
                 this.setState({
-                    is_login: true,
-                    username: data.username,
-                    real_name: data.real_name,
-                    avatar: data.avatar,
-                    msg_count: data.msg_count
+                    is_login: d.isLogin,
+                    username: d.userName,
+                    real_name: d.realName,
+                    avatar: avatar,
+                    msg_count: null
                 });
 
                 // set current page is login or not. this is base function, very IMPORTANT!
-                window.IS_LOGIN = data.is_login;
+                window.IS_LOGIN = d.isLogin;
 
             }.bind(this), 'json');
-
-        this.setState({is_login: true});
     },
     showUserPopHandler: function () {
         this.setState({showUserPop: true})
@@ -44,15 +46,15 @@ const HeaderStatusBar = React.createClass({
         if (this.state.is_login) {
             let pop = (
                 <div className="login-user-state-pop">
-                    <img src={this.state.avatar}/>
+                    <a href="/account/home.shtml"> <img src={this.state.avatar}/> </a>
                     <div className="text">
                         <div> {this.state.real_name} </div>
                         <div>
-                            <a href=""> 我的投资 </a>
+                            <a href="/prdOrder/uinvest.shtml"> 我的投资 </a>
                             <span className="v-line"> &nbsp;|&nbsp; </span>
-                            <a href=""> 交易记录 </a>
+                            <a href="/actUser/funds.shtml"> 交易记录 </a>
                         </div>
-                        <a href="" className="btn-recharge">充值</a>
+                        <a href="/payBill/recharges.shtml" className="btn-recharge">充值</a>
                     </div>
                 </div>
             );
@@ -63,7 +65,7 @@ const HeaderStatusBar = React.createClass({
                     <div
                         className={this.state.showUserPop ? "hover login-user-state-username" : "login-user-state-username"}
                         onMouseEnter={this.showUserPopHandler} onMouseLeave={this.hideUserPopHandler}>
-                        {this.state.username}
+                        <a href="/account/home.shtml"> {this.state.username} </a>
                         <i className="arrow"> </i>
                         <div className="hidden-stone"></div>
                         {this.state.showUserPop ? pop : null}
@@ -81,7 +83,7 @@ const HeaderStatusBar = React.createClass({
                         旗下互联网金融平台
                     </div>
 
-                    <a className="link" href="/activity/user-guide/">新手引导</a>
+                    <a className="link" href="/static/web/guide/index.html">新手引导</a>
                     {separate_line}
 
                     <a className="link" href="/mesageCenter/msssageList.shtml?messageType=1">消息中心</a>

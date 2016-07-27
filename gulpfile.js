@@ -11,8 +11,8 @@ gulp.task('default', function (done) {
 const ETEN_APP_NAMES = [
     'account-setting',
     'guide',
-    'lol',
-    'guide-cookbook'
+    'guide-cookbook',
+    'yi-zhuan-ying'
 ];
 
 ETEN_APP_NAMES.forEach(function (i) {
@@ -26,7 +26,7 @@ ETEN_APP_NAMES.forEach(function (i) {
         include_common_js: common_js
     });
     gt('eten', i, {
-        api_path: "http://www.9888.cn",
+        api_path: "http://www.9888.cn/",
         cmd_prefix: 'pack',
         cdn_prefix: '/static/web/' + i + '/',
         include_components: common_components,

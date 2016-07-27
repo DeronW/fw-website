@@ -42,6 +42,15 @@
 <script src="javascripts/bundle.js"></script>
 
 {% block js %}{% endblock %}
-{% if !DEBUG %}{% include 'tong_ji.swig.html' %}{% endif %}
+
+{% if !DEBUG %}
+{% include 'tong_ji.swig.html' %}
+<script charset="utf-8" src="http://wpa.b.qq.com/cgi/wpa.php"></script>
+<script>
+    BizQQWPA.addCustom({aty: '0', a: '0', nameAccount: 4006766988, selector: 'qq-ke-fu'});
+    BizQQWPA.addCustom({aty: '0', a: '0', nameAccount: 4006766988, selector: 'qq-ke-fu-1'});
+    BizQQWPA.addCustom({aty: '0', a: '0', nameAccount: 4006766988, selector: 'qq-ke-fu-2'});
+</script>
+{% endif %}
 </body>
 </html>
