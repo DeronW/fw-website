@@ -45,7 +45,7 @@ const HeaderStatusBar = React.createClass({
         if (this.state.is_login) {
             let pop = (
                 <div className="login-user-state-pop">
-                    <img src={this.state.avatar}/>
+                    <a href="/account/home.shtml"> <img src={this.state.avatar}/> </a>
                     <div className="text">
                         <div> {this.state.real_name} </div>
                         <div>
