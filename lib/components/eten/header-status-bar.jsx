@@ -21,7 +21,11 @@ const HeaderStatusBar = React.createClass({
                     real_name: data.real_name,
                     avatar: data.avatar,
                     msg_count: data.msg_count
-                })
+                });
+
+                // set current page is login or not. this is base function, very IMPORTANT!
+                window.IS_LOGIN = data.is_login;
+
             }.bind(this), 'json');
 
         this.setState({is_login: true});

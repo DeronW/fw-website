@@ -11,7 +11,8 @@ gulp.task('default', function (done) {
 const ETEN_APP_NAMES = [
     'account-setting',
     'guide',
-    'lol'
+    'lol',
+    'guide-cookbook'
 ];
 
 ETEN_APP_NAMES.forEach(function (i) {
