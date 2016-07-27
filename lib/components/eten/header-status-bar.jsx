@@ -30,9 +30,6 @@ const HeaderStatusBar = React.createClass({
                 window.IS_LOGIN = d.isLogin;
 
             }.bind(this), 'json');
-
-        // 临时设置, 后端完成用户接口后就去掉这个默认设置
-        //this.setState({is_login: true});
     },
     showUserPopHandler: function () {
         this.setState({showUserPop: true})
@@ -52,11 +49,11 @@ const HeaderStatusBar = React.createClass({
                     <div className="text">
                         <div> {this.state.real_name} </div>
                         <div>
-                            <a href=""> 我的投资 </a>
+                            <a href="/prdOrder/uinvest.shtml"> 我的投资 </a>
                             <span className="v-line"> &nbsp;|&nbsp; </span>
-                            <a href=""> 交易记录 </a>
+                            <a href="/actUser/funds.shtml"> 交易记录 </a>
                         </div>
-                        <a href="" className="btn-recharge">充值</a>
+                        <a href="/payBill/recharges.shtml" className="btn-recharge">充值</a>
                     </div>
                 </div>
             );
