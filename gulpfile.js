@@ -11,7 +11,9 @@ gulp.task('default', function (done) {
 const ETEN_APP_NAMES = [
     'account-setting',
     'guide',
-    'yi-zhuan-ying'
+    'yi-zhuan-ying',
+    'you-ju-dai',
+    'preservation'
 ];
 
 ETEN_APP_NAMES.forEach(function (i) {
