@@ -82,8 +82,27 @@ const HeaderStatusBar = React.createClass({
                         <a href="http://www.creditchina.hk/">中国信贷(08207.HK)</a>
                         旗下互联网金融平台
                     </div>
+                    
+                    <div className="guide-nav">
+                        <span className="btn icon">
+                            新手引导
 
-                    <a className="link" href="/static/web/guide/index.html">新手引导</a>
+                            <i className="arrow-icon">
+                                <img src="images/icon-arrow-12x12.png" />
+                            </i>
+                        </span>
+                        <div className="block">
+                            <a className="link icon" href="/static/web/guide/index.html">
+                                <span>新手引导</span>
+
+                                <i className="arrow-icon">
+                                    <img src="images/icon-arrow-12x12.png" />
+                                </i>
+                            </a>
+                            <a className="link" href=""><span>玩赚攻略</span></a>
+                        </div>                    
+                    </div>
+                    
                     {separate_line}
 
                     <a className="link" href="/mesageCenter/msssageList.shtml?messageType=1">消息中心</a>

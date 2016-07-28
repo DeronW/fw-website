@@ -52,7 +52,7 @@ var Content = React.createClass({
 
                                 <div className="info">
                                     <p className="main-text">我是金融工场工友代表：在金融工场注册的小伙伴都是我们的“工友”哦~~</p>
-                                    <p className="assistant-text">“精选产品，100元起投，期限灵活投资后提现免费”</p>
+                                    <p className="assistant-text">“100元起投，期限灵活，投资后提现免费”</p>
                                 </div>
 
                                 <div className="r-back"></div>
@@ -102,15 +102,15 @@ var Content = React.createClass({
                                             </div>
                                         </li>
                                         <li>
-                                            <p className="title-text">注册成功即可获得</p>
-                                            <p className="info-text">120元返现券礼包</p>
+                                            <p className="title-text">新工友可投</p>
+                                            <p className="info-text">新手专享标</p>
                                             <div className="img">
                                                 <img src="images/welfare-2.png" />
                                             </div>
                                         </li>
                                         <li className="last-li">
-                                            <p className="title-text">注册成功即可获得</p>
-                                            <p className="info-text">120元返现券礼包</p>
+                                            <p className="title-text">首投满5000及以上即可获得</p>
+                                            <p className="info-text">最高150元返现券礼包</p>
                                             <div className="img">
                                                 <img src="images/welfare-3.png" />
                                             </div>
@@ -183,8 +183,8 @@ var Content = React.createClass({
                                         <div className="text-block">
                                             <p className="text">温馨提示：</p>
                                             <p className="text">邀请了N名好友首投5000元，邀请人获50*N元返现券，邀越多赚越多，看看你人脉有多广！</p>
-                                            <p className="text">好友达VIP2及以上所赠返现券在好友注册后的第30天10:00(注册当天算第1天),按好友注册30天内最高等级发放。</p>
-                                            <p className="text">相应好友投资返利可去 <em className="c-629df9">我的工场>工场码</em>中查看。</p>
+                                            <p className="text">好友达VIP2及以上所赠返现券在好友注册后的第30天10:00（注册当天算第1天）,按好友注册30天内最高等级发放。</p>
+                                            <p className="text">相应好友投资返利可去 <a href="http://www.9888.cn/factoryCode/info.shtml" target="_blank" className="c-629df9">我的工场>工场码</a> 中查看。</p>
                                         </div>
 
                                         <div className="pop-arrow-icon"></div>
@@ -310,17 +310,17 @@ var Content = React.createClass({
                                     </ul>
 
                                     <div className="list-title">
-                                        <h3 className="text">1.工友可用工分换礼物</h3>
-                                        <p className="">兑换券是领取工场促销活动礼品的小凭证，可以自主在工豆商城中兑换虚拟或实物礼品。可在 我的商城>我的兑换券中查看。</p>
+                                        <h3 className="text">2.工友可用兑换券换礼物</h3>
+                                        <p className="">兑换券是领取工场促销活动礼品的小凭证，可以自主在工豆商城中兑换虚拟或实物礼品。可在 <a href="http://mall.9888.cn/member/ticket.shtm" target="_blank" className="c-629df9">我的商城>我的兑换券</a> 中查看。</p>
                                     </div>
                                 </div>
 
                                 <div className="prompt for-gift-prompt">
                                     <div className="prompt-text">
                                         <div className="text-block">
-                                            <p className="text">根据会员贡献值不同，工友将荣升为不同的VIP等级，级别越高享有的权益越多哦~~ </p>
-                                            <p className="text">贡献值包括投资贡献值和邀友贡献值。</p>
-                                            <p className="text">还不明白，豆哥这里还有更详细的哦， <em className="c-629df9">查看升级攻略></em></p>
+                                            <p className="text">去豆哥商城兑换前，别忘了赚工分哦~~</p>
+                                            <p className="text">工分是金融工场给工友的回馈奖励，签到、投资、参加论坛活动都能领取哦~~，在豆哥商城兑换后扣减相应工分。</p>
+                                            <p className="text">更详细的赚工分秘笈在这里，<a href="http://www.9888.cn/activity/gfxq/" target="_blank" className="c-629df9">点击查看></a></p>
                                         </div>
 
                                         <div className="pop-arrow-icon"></div>
@@ -356,7 +356,7 @@ var Content = React.createClass({
                                             <div className="img">
                                                 <img src="images/more-img-1.png" />
                                             </div>
-                                            <p className="text">返现券是返现型优惠券，投资成功即以现金形式返至工场账户，可投资或提现<a href="http://www.9888.cn/help/explanation/1636.html" target="_blank" className="c-629df9">了解更多></a></p>
+                                            <p className="text">返现券是返现型优惠券，投资成功即以现金形式返至工场账户，可投资或提现。<a href="http://www.9888.cn/help/explanation/1636.html" target="_blank" className="c-629df9">了解更多></a></p>
                                         </li>
                                         <li>
                                             <div className="img">

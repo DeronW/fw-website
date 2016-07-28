@@ -37,6 +37,62 @@
     background: transparent url('../images/icon-line-1x16.jpg') no-repeat center center;
   }
 
+  .guide-nav {
+      position: relative;
+      float: right;
+      width: 90px;
+      height: 34px;
+      margin-top: 6px;
+      text-align: center;
+
+      .arrow-icon {
+          position: absolute;
+          float: right;
+          right: 3px;
+          top: -2px;
+          width: 12px;
+          transform: rotate(180deg);
+      }
+
+      .btn {
+          position: relative;
+          display: block;
+          line-height: 28px;
+      }
+
+      &:hover > .block {
+          display: block;
+      }
+
+      .block {
+          position: absolute;
+          display: none;
+          top: -3px;
+          width: 88px;
+          border: 1px solid #ccc;
+          background-color: #fff;
+
+
+          .link {
+              display: block;
+              float: none;
+              height: 32px;
+              line-height: 32px;
+
+              &:hover span {
+                color: #7bafee;
+
+              }
+
+              .arrow-icon {
+                  right: 2px;
+                  top: 0px;
+                  transform: rotate(360deg);
+              }
+          }
+      }
+  }
+
   .login-user-state {
     float: right;
     height: 35px;
