@@ -61,6 +61,7 @@ $(function(){
 	setTimeout(function(){
 		$("#menu div>div>div").mouseout(function(){
 			$(".mouse").show();
+			$(".option>li").hide();
 		})
 	},1000)	
 	
