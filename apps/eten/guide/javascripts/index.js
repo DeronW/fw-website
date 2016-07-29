@@ -1,47 +1,46 @@
-(function() {
-	console.log("ready");
+(function () {
 
-	function tab(obj) {
-		obj.bind("click", function() {
-			var _this = $(this);
+    function tab(obj) {
+        obj.bind("click", function () {
+            var _this = $(this);
 
 
-			var ifHide = $($(".tab-content-info")[_this.index()]).is(":hidden");
+            var ifHide = $($(".tab-content-info")[_this.index()]).is(":hidden");
 
-			if(ifHide == false) {
-				return;
-			}
+            if (ifHide == false) {
+                return;
+            }
 
-			obj.removeClass("select-li");	
+            obj.removeClass("select-li");
 
-			$(".tab-content-info").hide();
-			
-			$("#selectTab").animate({
-				left: (_this.width() + 2) * _this.index()
-			}, 200, function() {
-				_this.addClass("select-li");
+            $(".tab-content-info").hide();
 
-				$($(".tab-content-info")[_this.index()]).show();
-			});
-			
-		});
-	} 
+            $("#selectTab").animate({
+                left: (_this.width() + 2) * _this.index()
+            }, 200, function () {
+                _this.addClass("select-li");
 
-	function movObj(liObj, showObj, hideObj) {
-		liObj.hover(function() {
-			$($(hideObj)[$(this).index()]).animate({
-				top: 1
-			}, 300);	
-		}, function() {
-			$($(hideObj)[$(this).index()]).animate({
-				top: 88
-			}, 300);	
-		});
+                $($(".tab-content-info")[_this.index()]).show();
+            });
 
-		
-	}
+        });
+    }
 
-	movObj($("#pluralisticProductUl li"), $("#pluralisticProductUl li .show-info"), $("#pluralisticProductUl li .hide-info"));
+    function movObj(liObj, showObj, hideObj) {
+        liObj.hover(function () {
+            $($(hideObj)[$(this).index()]).animate({
+                top: 1
+            }, 300);
+        }, function () {
+            $($(hideObj)[$(this).index()]).animate({
+                top: 88
+            }, 300);
+        });
 
-	tab($("#tabTitle li "));
+
+    }
+
+    movObj($("#pluralisticProductUl li"), $("#pluralisticProductUl li .show-info"), $("#pluralisticProductUl li .hide-info"));
+
+    tab($("#tabTitle li "));
 })();

@@ -12,20 +12,25 @@ const HeaderStatusBar = React.createClass({
     componentDidMount: function () {
         $.get(API_PATH + 'api/userState/v1/userState.json', null,
             function (data) {
-                var data = data.data;
-                if (!data.is_login) return;
+                if (data.code != 10000) {
+                    console.log('got error', data.message);
+                    return
+                }
+                var d = data.data;
 
+                var avatar = d.avatar ? d.avatar : (d.sex ? 'http://www.9888.cn/img/man.png' : 'http://www.9888.cn/img/woman.png');
                 this.setState({
-                    is_login: true,
-                    username: data.username,
-                    real_name: data.real_name,
-                    avatar: data.avatar,
-                    msg_count: data.msg_count
-                })
-            }.bind(this), 'json');
+                    is_login: d.isLogin,
+                    username: d.userName,
+                    real_name: d.realName,
+                    avatar: avatar,
+                    msg_count: null
+                });
 
-        // 临时设置, 后端完成用户接口后就去掉这个默认设置
-        this.setState({is_login: true});
+                // set current page is login or not. this is base function, very IMPORTANT!
+                window.IS_LOGIN = d.isLogin;
+
+            }.bind(this), 'json');
     },
     showUserPopHandler: function () {
         this.setState({showUserPop: true})
@@ -41,15 +46,15 @@ const HeaderStatusBar = React.createClass({
         if (this.state.is_login) {
             let pop = (
                 <div className="login-user-state-pop">
-                    <img src={this.state.avatar}/>
+                    <a href="/account/home.shtml"> <img src={this.state.avatar}/> </a>
                     <div className="text">
                         <div> {this.state.real_name} </div>
                         <div>
-                            <a href=""> 我的投资 </a>
+                            <a href="/prdOrder/uinvest.shtml"> 我的投资 </a>
                             <span className="v-line"> &nbsp;|&nbsp; </span>
-                            <a href=""> 交易记录 </a>
+                            <a href="/actUser/funds.shtml"> 交易记录 </a>
                         </div>
-                        <a href="" className="btn-recharge">充值</a>
+                        <a href="/payBill/recharges.shtml" className="btn-recharge">充值</a>
                     </div>
                 </div>
             );
@@ -77,8 +82,27 @@ const HeaderStatusBar = React.createClass({
                         <a href="http://www.creditchina.hk/">中国信贷(08207.HK)</a>
                         旗下互联网金融平台
                     </div>
+                    
+                    <div className="guide-nav">
+                        <span className="btn icon">
+                            新手引导
 
-                    <a className="link" href="/activity/user-guide/">新手引导</a>
+                            <i className="arrow-icon">
+                                <img src="images/icon-arrow-12x12.png" />
+                            </i>
+                        </span>
+                        <div className="block">
+                            <a className="link icon" href="/static/web/guide/index.html">
+                                <span>新手引导</span>
+
+                                <i className="arrow-icon">
+                                    <img src="images/icon-arrow-12x12.png" />
+                                </i>
+                            </a>
+                            <a className="link" href=""><span>玩赚攻略</span></a>
+                        </div>                    
+                    </div>
+                    
                     {separate_line}
 
                     <a className="link" href="/mesageCenter/msssageList.shtml?messageType=1">消息中心</a>

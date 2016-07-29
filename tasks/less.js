@@ -9,7 +9,7 @@ module.exports = less2css = function (src_path, build_path, name, debug) {
     return gulp.src(src_path)
         .pipe(changed(build_path))
         .pipe(less())
-        .pipe(debug ? plugins.util.noop() : cssnano())
+        .pipe(debug ? plugins.util.noop() : cssnano({zindex: false}))
         .pipe(concat(name))
         .pipe(gulp.dest(build_path));
 };
