@@ -38,59 +38,55 @@
   }
 
   .guide-nav {
-      position: relative;
+    position: relative;
+    float: right;
+    width: 90px;
+    height: 34px;
+    margin-top: 6px;
+    text-align: center;
+
+    .arrow-icon {
+      position: absolute;
       float: right;
-      width: 90px;
-      height: 34px;
-      margin-top: 6px;
-      text-align: center;
+      right: 3px;
+      width: 12px;
+    }
 
+    .btn {
+      position: relative;
+      display: block;
+      line-height: 28px;
+    }
+
+    &:hover .block {
+      display: block;
       .arrow-icon {
-          position: absolute;
-          float: right;
-          right: 3px;
+        transform: rotate(180deg);
+      }
+    }
+
+    .block {
+      position: absolute;
+      display: none;
+      top: -3px;
+      width: 88px;
+      border: 1px solid #ccc;
+      background-color: #fff;
+
+      .link {
+        display: block;
+        float: none;
+        height: 32px;
+        line-height: 32px;
+
+        .arrow-icon {
+          right: 2px;
           top: -2px;
-          width: 12px;
-          transform: rotate(180deg);
+          transition: all ease-in-out 0.5s;
+          transition-delay: 100ms;
+        }
       }
-
-      .btn {
-          position: relative;
-          display: block;
-          line-height: 28px;
-      }
-
-      &:hover > .block {
-          display: block;
-      }
-
-      .block {
-          position: absolute;
-          display: none;
-          top: -3px;
-          width: 88px;
-          border: 1px solid #ccc;
-          background-color: #fff;
-
-
-          .link {
-              display: block;
-              float: none;
-              height: 32px;
-              line-height: 32px;
-
-              &:hover span {
-                color: #7bafee;
-
-              }
-
-              .arrow-icon {
-                  right: 2px;
-                  top: 0px;
-                  transform: rotate(360deg);
-              }
-          }
-      }
+    }
   }
 
   .login-user-state {
