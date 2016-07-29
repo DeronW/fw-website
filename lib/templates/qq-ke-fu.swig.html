@@ -1,0 +1,16 @@
+// QQ客服
+<script>
+    $(function () {
+        // 加载QQ客服代码库
+        var qq = document.createElement("script");
+        qq.src = "http://wpa.b.qq.com/cgi/wpa.php";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(qq, s);
+
+        // 设置打开QQ客服按钮
+        var ids = ['qq-ke-fu', 'qq-ke-fu-1', 'qq-ke-fu-2'];
+        for (var i = 0; i < ids.length; i++) {
+            BizQQWPA.addCustom({aty: '0', a: '0', nameAccount: 4006766988, selector: ids[i]});
+        }
+    })
+</script>
