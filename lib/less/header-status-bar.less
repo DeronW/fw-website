@@ -14,7 +14,7 @@
 
   .xin-dai {
     padding-left: 20px;
-    display: inline-block;
+    float: left;
     box-sizing: border-box;
     background: transparent url('../images/icon-xin-dai.png') no-repeat center left;
   }
@@ -186,6 +186,27 @@
         color: #fff !important;
         border-radius: 2px;
       }
+    }
+  }
+
+  .app-nav-block {
+    position: relative;
+    float: right;
+    margin: 0 20px 0 0;
+    cursor: pointer;
+    padding: 0 0 0 20px;
+    background: url(../images/g-ico-phone.png) no-repeat left center;
+
+    &:hover .img {
+      display: block;
+    }
+
+    .img {
+      display: none;
+      position: absolute;
+      top: 23px;
+      left: -28px;
+      z-index: 1000;
     }
   }
 
