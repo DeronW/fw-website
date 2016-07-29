@@ -3,6 +3,7 @@
 
 .idea
 .project
+npm-debug.log
 
 cdn
 build
