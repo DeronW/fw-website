@@ -8,20 +8,19 @@
 <script src="javascripts/index.js"></script>
 <script type="text/javascript">
 jQuery(document).ready(function($){
-	// set up the options to be used for jqDock...
 	var dockOptions =
-		{ align: 'top' // horizontal menu, with expansion UP/DOWN from the middle
-		, size: 80  // set the maximum minor axis (horizontal) image dimension to 36px
-		, sizeMax: 0
-		, inactivity: 0
+		{ align: 'top'
 		, distance: 72
-		, noBuffer: false
-		, noAntiFlutter: false
-		, labels: 'bl'// add labels (override the 'tl' default)
+		, labels: 'bl'
 		, coefficient: 6
 		};
-	// ...and apply...
-	$('#menu').jqDock(dockOptions);
+
+	a = 130
+	$('#menu').jqDock({
+		size: a,
+		distance: 3 * a,
+		//active: 3
+	});
 });
 </script>
 {% endblock %}
@@ -89,6 +88,8 @@ jQuery(document).ready(function($){
 	  </div>
 	</div>
 	
+	<div class="mouse"><img class="bao-e" src="images/bao-e.png"/>用鼠标指向以上各个气泡来进一步了解金融工场电子数据保全的更多优点。</div>
+	
 	<ul class="option">
 		<li>
 			<div class="zl">
@@ -111,17 +112,17 @@ jQuery(document).ready(function($){
 				<p><img class="bao-e" src="images/bao-e.png"/>多端无缝接入：用户在移动端和PC端都可CA认证。</p>
 			</div>
 			<div class="Id">
-				<p><img class="bao-e" src="images/bao-e.png"/>身份信息安全：U盾为用户本人在银行现场办理、面签。</p>
+				<p><img class="bao-e" id="icn" src="images/bao-e.png"/><span class="infor">身份信息安全：U盾为用户本人在银行现场办理、面签。</span></p>
 			</div>
 		</li>
 		<li style="display: none;">
 			<div class="zl">
-				<p><img class="bao-e" src="images/bao-e.png"/>合同上加盖中心的电子签章，一旦发生篡改，用户点击电子签章会显示文件更改详情，更加及时和直观的展 现了电子文档的真实和完整性。</p>
+				<p><img class="bao-e" id="show" src="images/bao-e.png"/><span class="Stamp">合同上加盖中心的电子签章，一旦发生篡改，用户点击电子签章会显示文件更改详情，更加及时和直观的展 现了电子文档的真实和完整性。</span></p>
 			</div>
 		</li>
 		<li style="display: none;">
 			<div class="zl">
-				<p><img class="bao-e" src="images/bao-e.png"/>公证处与司法鉴定中心高度认可电子数据保全中心的电子数据保全结果，可直接在线申请司法出证，公证书、司法鉴定书、保全验证证书邮寄到家。</p>
+				<p><img class="bao-e" id="higher" src="images/bao-e.png"/><span class="Notar">公证处与司法鉴定中心高度认可电子数据保全中心的电子数据保全结果，可直接在线申请司法出证，公证书、司法鉴定书、保全验证证书邮寄到家。</span></p>
 			</div>
 		</li>
 		<li style="display: none;">
@@ -150,15 +151,15 @@ jQuery(document).ready(function($){
 		</div>
 		<div class="line">
 			<div class="what center">2.易保全电子数据保全中心提供什么？</div>
-			<div class="Include">提供受法律认可的电子数据认证证书服务...<span class="more_txt" style="display: none;">运用专利技术进行运算、加密固定，载明保全生成的标准时间、运算值、档案编号等，以防止被人篡改，确保电子数据的原始性、客观性的程序及方法。</span><a href="javascript:;" class="more_link">[详情]</a></div>
+			<div class="Include">提供受法律认可的电子数据认证证书服务...<span class="more_txt1" style="display: none;">运用专利技术进行运算、加密固定，载明保全生成的标准时间、运算值、档案编号等，以防止被人篡改，确保电子数据的原始性、客观性的程序及方法。</span><a href="javascript:;" class="more_link1">[详情]</a></div>
 		</div>
 		<div class="line">
 			<div class="what center">3.投资者如何检验保全证书真伪？</div>
-			<div class="Include">投资者拿到保全证书后，可以登录www.ebaoquan.org，录入证书上的备案号及上传被保全文件（如电子合同）进行真伪验证...<span class="more_txt" style="display: none;">运用专利技术进行运算、加密固定，载明保全生成的标准时间、运算值、档案编号等，以防止被人篡改，确保电子数据的原始性、客观性的程序及方法。</span><a href="javascript:;" class="more_link">[详情]</a></div>
+			<div class="Include">投资者拿到保全证书后，可以登录www.ebaoquan.org，录入证书上的备案号及上传被保全文件（如电子合同）进行真伪验证...<span class="more_txt2" style="display: none;">运用专利技术进行运算、加密固定，载明保全生成的标准时间、运算值、档案编号等，以防止被人篡改，确保电子数据的原始性、客观性的程序及方法。</span><a href="javascript:;" class="more_link2">[详情]</a></div>
 		</div>
 		<div>
 			<div class="what center">4.电子数据保全是否具有法律效力？</div>
-			<div class="Include">最新修正的《刑法诉讼法》、《民事诉讼法》均将电子数据列为证据的一种，电子数据保全中心提供的保全证书，可作为司法人员和律...<span class="more_txt" style="display: none;">运用专利技术进行运算、加密固定，载明保全生成的标准时间、运算值、档案编号等，以防止被人篡改，确保电子数据的原始性、客观性的程序及方法。</span><a href="javascript:;" class="more_link">[详情]</a></div>
+			<div class="Include">最新修正的《刑法诉讼法》、《民事诉讼法》均将电子数据列为证据的一种，电子数据保全中心提供的保全证书，可作为司法人员和律...<span class="more_txt3" style="display: none;">运用专利技术进行运算、加密固定，载明保全生成的标准时间、运算值、档案编号等，以防止被人篡改，确保电子数据的原始性、客观性的程序及方法。</span><a href="javascript:;" class="more_link3">[详情]</a></div>
 		</div>
 		
 	</div>
