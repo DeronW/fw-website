@@ -85,7 +85,7 @@ const HeaderStatusBar = React.createClass({
 
                     <div className="guide-nav">
                         <a className="btn icon">
-                            新手引导
+                            新手指引
 
                             <i className="arrow-icon">
                                 <img src="images/icon-arrow-12x12.png"/>
@@ -93,7 +93,7 @@ const HeaderStatusBar = React.createClass({
                         </a>
                         <div className="block">
                             <a className="link icon" href="/static/web/guide/index.html">
-                                新手引导
+                                新手指引
                                 <i className="arrow-icon">
                                     <img src="images/icon-arrow-12x12.png"/>
                                 </i>
