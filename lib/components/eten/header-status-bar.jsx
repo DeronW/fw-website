@@ -113,15 +113,18 @@ const HeaderStatusBar = React.createClass({
                     {this.state.is_login ? null : separate_line}
                     {this.state.is_login ? null : <a className="link" href="/orderUser/login.shtml">立即登录</a>}
 
+					<span className="separate-line"> </span>
 
                     <div className="app-nav-block">
                         <a href="/activity/app/">APP 客户端</a>
                         <div className="img">
                             <a href="/activity/app/">
-                                <img src="images/menu-app.jpg" />
+                                <img src="images/menu-app.png" />
                             </a>
                         </div>
                     </div>
+
+
                 </div>
             </div>
         )
