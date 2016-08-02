@@ -78,27 +78,16 @@ const HeaderStatusBar = React.createClass({
         return (
             <div className="header-status-bar">
                 <div className="container">
-                    <div className="xin-dai">
+                    <div className="hsb-xin-dai">
                         <a href="http://www.creditchina.hk/">中国信贷(08207.HK)</a>
                         旗下互联网金融平台
                     </div>
 
-                    <div className="guide-nav">
-                        <a className="btn icon">
-                            新手指引
-
-                            <i className="arrow-icon">
-                                <img src="images/icon-arrow-12x12.png"/>
-                            </i>
-                        </a>
-                        <div className="block">
-                            <a className="link icon" href="/static/web/guide/index.html">
-                                新手指引
-                                <i className="arrow-icon">
-                                    <img src="images/icon-arrow-12x12.png"/>
-                                </i>
-                            </a>
-                            <a className="link" href="/static/web/guide-cookbook/index.html">玩赚攻略</a>
+                    <div className="hsb-guide-nav">
+                        <div className="hsb-guide-nav-box">
+                            <i className="arrow"> </i>
+                            <a className="" href="/static/web/guide/index.html"> 新手指引 </a>
+                            <a className="" href="/static/web/guide-cookbook/index.html">玩赚攻略</a>
                         </div>
                     </div>
 
@@ -113,15 +102,13 @@ const HeaderStatusBar = React.createClass({
                     {this.state.is_login ? null : separate_line}
                     {this.state.is_login ? null : <a className="link" href="/orderUser/login.shtml">立即登录</a>}
 
-					<span className="separate-line"> </span>
+                    <span className="separate-line"> </span>
 
-                    <div className="app-nav-block">
+                    <div className="header-status-bar-app">
                         <a href="/activity/app/">APP 客户端</a>
-                        <div className="img">
-                            <a href="/activity/app/">
-                                <img src="images/menu-app.png" />
-                            </a>
-                        </div>
+                        <a href="/activity/app/" className="hsb-qrcode">
+                            <img src="images/menu-app.png"/>
+                        </a>
                     </div>
 
 
