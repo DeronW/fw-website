@@ -31,6 +31,11 @@ const HeaderStatusBar = React.createClass({
                 window.IS_LOGIN = d.isLogin;
 
             }.bind(this), 'json');
+
+        this.setState({
+            is_login: true,
+            username: 'xxxx'
+        });
     },
     showUserPopHandler: function () {
         this.setState({showUserPop: true})
