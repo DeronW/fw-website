@@ -105,8 +105,8 @@ const HeaderStatusBar = React.createClass({
                     <span className="separate-line"> </span>
 
                     <div className="header-status-bar-app">
-                        <a href="/activity/app/">APP 客户端</a>
-                        <a href="/activity/app/" className="hsb-qrcode">
+                        <a href="/static/web/app-download/index.html">APP 客户端</a>
+                        <a href="/static/web/app-download/index.html" className="hsb-qrcode">
                             <img src="images/menu-app.png"/>
                         </a>
                     </div>
