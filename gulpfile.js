@@ -17,10 +17,10 @@ const ETEN_APP_NAMES = [
     'yi-zhuan-ying',
 	'yi-che-xiang',
     'you-ju-dai',
+    'yi-shou-bao',
 
     'preservation',
-    'guide-cookbook',
-    'yi-shou-bao'
+    'guide-cookbook'
 ];
 
 ETEN_APP_NAMES.forEach(function (i) {
