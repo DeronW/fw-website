@@ -10,17 +10,15 @@ gulp.task('default', function (done) {
 
 const ETEN_APP_NAMES = [
     'account-setting',
-
     'guide',
     'app-download',
-
     'yi-zhuan-ying',
 	'yi-che-xiang',
     'you-ju-dai',
-
+     'yi-shou-bao',
     'preservation',
     'guide-cookbook',
-    'yi-shou-bao'
+    'fu-mao-tong'
 ];
 
 ETEN_APP_NAMES.forEach(function (i) {
