@@ -10,12 +10,16 @@ gulp.task('default', function (done) {
 
 const ETEN_APP_NAMES = [
     'account-setting',
+
     'guide',
     'app-download',
+
     'yi-zhuan-ying',
 	'yi-che-xiang',
 	'li-sui-xiang',
     'you-ju-dai',
+    'yi-shou-bao',
+
     'preservation',
     'guide-cookbook'
 ];
@@ -39,4 +43,4 @@ ETEN_APP_NAMES.forEach(function (i) {
     });
 });
 
-gulp.task('build:eten', gulp.series(ETEN_APP_NAMES.map((name) => `eten:pack:${name}:revision`)));
+gulp.task('build:eten', gulp.series(ETEN_APP_NAMES.map(name => `eten:pack:${name}:revision`)));
