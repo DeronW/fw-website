@@ -14,6 +14,7 @@ const ETEN_APP_NAMES = [
     'app-download',
     'yi-zhuan-ying',
 	'yi-che-xiang',
+	'li-sui-xiang',
     'you-ju-dai',
     'preservation',
     'guide-cookbook'
