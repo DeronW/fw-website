@@ -50,13 +50,17 @@
       float: right;
       right: -9px;
       width: 12px;
+	  
+	img{ 
+	  vertical-align: middle!important;
+	  }
     }
 
     .btn {
       position: relative;
       display: block;
 	  width: 60px;
-      line-height: 28px;
+      line-height: 29px;
     }
 
     &:hover .block {
@@ -82,11 +86,12 @@
         line-height: 32px;
 
         .arrow-icon {
-          right: -1px;
-          top: 0;
+          right: 0px;
+          top: 1px;
           transition: all ease-in-out 0.5s;
           transition-delay: 100ms;
-        }
+		  img{vertical-align: middle!important;}
+		}
       }
     }
   }
