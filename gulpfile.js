@@ -12,6 +12,7 @@ const ETEN_APP_NAMES = [
     'account-setting',
     'guide',
     'yi-zhuan-ying',
+	'yi-che-xiang',
     'you-ju-dai',
     'preservation',
     'guide-cookbook'
