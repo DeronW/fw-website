@@ -103,7 +103,6 @@ $(function(){
 		}
 	})
 	
-
 	$(window).on("resize",function(){
 		toSize();
 	})
