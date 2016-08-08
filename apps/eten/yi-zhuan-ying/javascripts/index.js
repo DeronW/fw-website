@@ -102,4 +102,51 @@ $(function(){
 			$(".menue ul li a").attr("class","");
 		}
 	})
+	
+
+	$(window).on("resize",function(){
+		toSize();
+	})
+	toSize();
+	function toSize(){
+		$(".agency_list").css("left",0);
+	}
+	var iNum=0;
+	var timer=null;
+	var onesize=$(".agency_list li").eq(0).width(); // 一个运动单位的长度就是一个LI的宽度
+	$(".agency_list").css("width",onesize*$(".agency_list li").size()); // 动态计算UL的宽度
+	$(".circle").find("a").click(function(){
+		iNum=$(this).index();
+		fnclear();  // 重新分配A的class函数
+		$(".agency_list").stop().animate({left:-iNum*onesize});
+	})
+	function fnclear(){
+		$(".circle").find("a").attr("class","");
+		$(".circle").find("a").eq(iNum).attr("class","on");
+	}
+	
+	clearInterval(timer);
+	timer=setInterval(autoplay,3000);
+	function autoplay(){  // 自动播放函数
+		iNum++;
+		if(iNum<$(".agency_list li").size()){
+			fnclear();
+			$(".agency_list").stop().animate({left:-iNum*onesize});
+		}else{
+			iNum=0;
+			fnclear();
+			$(".agency_list li").eq(0).css("position","relative").css("left",$(".agency_list li").size()*$(".agency_list li").eq(0).width());
+			$(".agency_list").stop().animate({left:-$(".agency_list li").size()*onesize},function(){
+				$(".agency_list li").eq(0).css("position","static");
+				$(".agency_list").css("left",0);
+			});
+		}
+	}
+	$(".agency").mouseover(function(){
+		clearInterval(timer);
+	});
+	$(".agency").mouseout(function(){
+		clearInterval(timer);
+		timer=setInterval(autoplay,3000);
+	})
 })
