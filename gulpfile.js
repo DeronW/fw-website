@@ -16,6 +16,7 @@ const ETEN_APP_NAMES = [
 
     'yi-zhuan-ying',
 	'yi-che-xiang',
+	'li-sui-xiang',
     'you-ju-dai',
     'yi-shou-bao',
 
