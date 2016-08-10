@@ -90,6 +90,10 @@
     height: 35px;
     line-height: 30px;
     padding: 5px 5px 0;
+
+    & > span, & > a {
+      display: inline-block;
+    }
   }
 
   .login-user-state-username {
@@ -124,9 +128,9 @@
       height: 12px;
       display: block;
       float: right;
+      position: absolute;
       top: 9px;
-      position: relative;
-      left: 5px;
+      right: 1px;
       transition: all ease-in-out 0.5s;
       background: transparent url('../images/icon-arrow-12x12.png') no-repeat center center;
     }
