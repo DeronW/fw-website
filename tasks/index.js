@@ -49,7 +49,8 @@ module.exports = function (site_name, project_name, configs) {
 
     var common_javascript_files = [
         `${lib_path}jquery-1.12.4.min.js`,
-        `${lib_path}javascripts/eten/common-functions.js`
+        `${lib_path}javascripts/eten/common-functions.js`,
+        `${lib_path}javascripts/eten/interest-calculator.js`
     ];
     if (CONFIG.debug) {
         common_javascript_files.push(`${lib_path}react-0.14.8/react.js`);

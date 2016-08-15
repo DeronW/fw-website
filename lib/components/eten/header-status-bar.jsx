@@ -28,8 +28,7 @@ const HeaderStatusBar = React.createClass({
                 });
 
                 // set current page is login or not. this is base function, very IMPORTANT!
-                window.IS_LOGIN = d.isLogin;
-
+                window.UserReady.go(d.isLogin);
             }.bind(this), 'json');
     },
     showUserPopHandler: function () {
