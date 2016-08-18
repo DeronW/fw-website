@@ -1,7 +1,7 @@
 const Content = React.createClass({
     getInitialState: function () {
         return {
-            // page in start, level, game, ladder, end, share
+            // page in: start, level, complete, game, ladder, end, share
             page: 'start',
             level_list: [],
             level: null
@@ -48,7 +48,7 @@ const Content = React.createClass({
         this.setState({page: 'game', level: level});
     },
     levelComplete: function () {
-        this.setState({page: 'level'})
+        this.setState({page: 'complete'});
     },
     showLadder: function () {
     },
@@ -59,6 +59,9 @@ const Content = React.createClass({
         Game.initStage();
         this.setState({page: 'game'})
     },
+    setPage: function (page) {
+        this.setState({page: page})
+    },
     render: function () {
 
         var style = {display: this.state.page == 'game' ? 'none' : 'block'};
@@ -67,6 +70,7 @@ const Content = React.createClass({
             {this.state.page == 'level' ?
                 <Content.Level playGame={this.playGameHandler} level_list={this.state.level_list}
                                switchLevel={this.switchLevel}/> : null}
+            {this.state.page == 'complete' ? <Content.LevelComplete star={0} setPage={this.setPage}/> : null}
         </div>
     }
 });
@@ -90,6 +94,7 @@ Content.Level = React.createClass({
             return (
                 <div key={index} className="level">
                     <div className={cn_bg} onClick={() => this.clickHandler(index + 1)}>
+                        <div className="num">{index + 1}</div>
                         {item.star ? star : null}
                     </div>
                 </div>
@@ -103,11 +108,25 @@ Content.Level = React.createClass({
         </div>
     }
 });
-Content.LevelResult = React.createClass({
-    render: function () {
-        return (
-            <div>
 
+Content.LevelComplete = React.createClass({
+    showLevelListHandler: function () {
+        this.props.setPage('level')
+    },
+    nextLevelHandler: function () {
+    },
+    render: function () {
+        var pass = this.props.star == 0;
+
+        var dialog_cls = pass ? "dialog pass" : "dialog fail";
+        return (
+            <div className="level-complete">
+                <div className={dialog_cls}>
+                    <div className={"star star-" + this.props.star}></div>
+                    <div className="score"> xxx</div>
+                    <img className="btn-next" src="images/level-next.png" onClick={this.nextLevelHandler}/>
+                    <img className="btn-level-list" src="images/level-home.png" onClick={this.showLevelListHandler}/>
+                </div>
             </div>
         )
     }

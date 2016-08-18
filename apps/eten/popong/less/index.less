@@ -36,24 +36,24 @@ body, html {
     position: absolute;
     top: 20px;
     right: 20px;
-    width: 89px;
-    height: 37px;
+    width: 178px;
+    height: 74px;
     background: transparent url(../images/start-page-btn-rule.png) no-repeat;
     background-size: 100%;
   }
   .start {
-    width: 120px;
-    height: 60px;
+    width: 240px;
+    height: 120px;
     display: block;
-    margin: 400px auto 0;
+    margin: 800px auto 0;
     background: transparent url(../images/start-page-btn-start.png) no-repeat;
     background-size: 100%;
   }
   .guide {
-    width: 120px;
-    height: 50px;
+    width: 240px;
+    height: 100px;
     display: block;
-    margin: 10px auto 0;
+    margin: 20px auto 0;
     background: transparent url(../images/start-page-btn-guide.png) no-repeat;
     background-size: 100%;
   }
@@ -68,24 +68,25 @@ body, html {
 
   .rule-detail {
     position: absolute;
-    top: 150px;
-    width: 280px;
+    top: 300px;
+    width: 560px;
     left: 50%;
-    margin-left: -140px;
-    border-radius: 10px;
+    margin-left: -280px;
+    border-radius: 20px;
     background: white;
-    min-height: 300px;
+    min-height: 600px;
 
     img {
       max-width: 90%;
       position: relative;
-      top: -30px;
-      left: 40px;
+      top: -60px;
+      left: 80px;
     }
 
     .text {
       color: #728ba3;
       margin: 20px;
+      font-size: 36px;
     }
   }
 
@@ -99,14 +100,14 @@ body, html {
 
   .guide-detail {
     position: absolute;
-    top: 100px;
-    width: 300px;
+    top: 200px;
+    width: 600px;
     left: 50%;
-    margin-left: -150px;
-    height: 405px;
+    margin-left: -300px;
+    height: 800px;
     background: transparent url(../images/start-page-bg-guide.png) no-repeat;
     background-size: 100%;
-    padding-top: 100px;
+    padding-top: 200px;
 
     img {
       width: 80%;
@@ -115,6 +116,7 @@ body, html {
     }
 
     .text {
+      font-size: 36px;
       text-align: center;
       margin: 10px auto;
     }
@@ -140,7 +142,6 @@ body, html {
   }
 
   .level {
-    height: 92px;
     position: relative;
     background-size: 100% !important;
     margin: 10px auto;
@@ -148,8 +149,8 @@ body, html {
     width: 33.3%;
 
     & > div {
-      width: 92px;
-      height: 92px;
+      width: 184px;
+      height: 184px;
       margin: 0 auto;
       background-size: 100% !important;
       position: relative;
@@ -173,13 +174,24 @@ body, html {
 
     .star {
       display: block;
-      width: 60px;
-      height: 23px;
+      width: 120px;
+      height: 46px;
       position: absolute;
       left: 50%;
-      margin-left: -30px;
-      bottom: 5px;
+      margin-left: -60px;
+      bottom: 10px;
       background-size: 100% !important;
+    }
+
+    .num {
+      color: white;
+      font-size: 60px;
+      text-align: center;
+      padding-top: 46px;
+    }
+
+    .img-locked .num {
+      display: none
     }
 
     .level-gift .star {
@@ -198,5 +210,70 @@ body, html {
       background: transparent url('../images/star-3.png') no-repeat;
     }
 
+  }
+}
+
+.level-complete {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  background: #81dcf4;
+
+  .dialog {
+    background-repeat: no-repeat;
+    background-size: 100%;
+    width: 300px;
+    height: 300px;
+    margin: 100px auto 0;
+    position: relative;
+    padding-top: 80px;
+
+    &.pass {
+      background-image: url(../images/level-bg-complete.png);
+    }
+    &.fail {
+      background-image: url(../images/level-bg-fail.png);
+    }
+
+    .score {
+      text-align: center;
+      font-size: 28px;
+    }
+
+    .btn-next, .btn-retry {
+      height: 40px;
+      width: 118px;
+      float: left;
+    }
+
+    .btn-level-list {
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  .star {
+    width: 100px;
+    height: 34px;
+    margin: 0 auto;
+    background-size: 100%;
+
+    &.star-0 {
+      background-image: url(../images/star-0.png);
+    }
+    &.star-1 {
+      background-image: url(../images/star-1.png);
+    }
+    &.star-2 {
+      background-image: url(../images/star-2.png);
+    }
+    &.star-3 {
+      background-image: url(../images/star-3.png);
+    }
+  }
+
+  .btn-level-list {
+    float: right;
   }
 }
