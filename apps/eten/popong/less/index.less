@@ -1,0 +1,202 @@
+
+body, div, canvas {
+  image-rendering: optimizeSpeed;
+  -webkit-image-rendering: optimizeSpeed;
+  -webkit-interpolation-mode: nearest-neighbor;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  font-size: 12px;
+  background-color: #fff;
+}
+
+body, html {
+  height: 100%;
+}
+
+.content {
+  position: absolute;
+  z-index: 5;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.start-page {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  background: #c1d029 url(../images/start-page-1.png) no-repeat;
+  background-size: 100%;
+
+  .rule {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 89px;
+    height: 37px;
+    background: transparent url(../images/start-page-btn-rule.png) no-repeat;
+    background-size: 100%;
+  }
+  .start {
+    width: 120px;
+    height: 60px;
+    display: block;
+    margin: 400px auto 0;
+    background: transparent url(../images/start-page-btn-start.png) no-repeat;
+    background-size: 100%;
+  }
+  .guide {
+    width: 120px;
+    height: 50px;
+    display: block;
+    margin: 10px auto 0;
+    background: transparent url(../images/start-page-btn-guide.png) no-repeat;
+    background-size: 100%;
+  }
+
+  .rule-dialog {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    background: rgba(28, 140, 144, 0.9);
+  }
+
+  .rule-detail {
+    position: absolute;
+    top: 150px;
+    width: 280px;
+    left: 50%;
+    margin-left: -140px;
+    border-radius: 10px;
+    background: white;
+    min-height: 300px;
+
+    img {
+      max-width: 90%;
+      position: relative;
+      top: -30px;
+      left: 40px;
+    }
+
+    .text {
+      color: #728ba3;
+      margin: 20px;
+    }
+  }
+
+  .guide-dialog {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    background: rgba(28, 140, 144, 0.9);
+  }
+
+  .guide-detail {
+    position: absolute;
+    top: 100px;
+    width: 300px;
+    left: 50%;
+    margin-left: -150px;
+    height: 405px;
+    background: transparent url(../images/start-page-bg-guide.png) no-repeat;
+    background-size: 100%;
+    padding-top: 100px;
+
+    img {
+      width: 80%;
+      display: block;
+      margin: 20px auto 0;
+    }
+
+    .text {
+      text-align: center;
+      margin: 10px auto;
+    }
+  }
+}
+
+.level-list {
+  background: #f6d3ab;
+  position: absolute;
+  width: 100%;
+  top: 0;
+  bottom: 0;
+
+  .header {
+    width: 100%;
+  }
+
+  .footer {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+
+  .level {
+    height: 92px;
+    position: relative;
+    background-size: 100% !important;
+    margin: 10px auto;
+    float: left;
+    width: 33.3%;
+
+    & > div {
+      width: 92px;
+      height: 92px;
+      margin: 0 auto;
+      background-size: 100% !important;
+      position: relative;
+    }
+
+    .img-unlocked {
+      background: transparent url('../images/level-complete.png') no-repeat;
+    }
+
+    .img-unlocked.level-gift {
+      background: transparent url('../images/level-complete-gift.png') no-repeat;
+    }
+
+    .img-locked {
+      background: transparent url('../images/level-not-complete.png') no-repeat;
+    }
+
+    .img-locked.level-gift {
+      background: transparent url('../images/level-not-complete-gift.png') no-repeat;
+    }
+
+    .star {
+      display: block;
+      width: 60px;
+      height: 23px;
+      position: absolute;
+      left: 50%;
+      margin-left: -30px;
+      bottom: 5px;
+      background-size: 100% !important;
+    }
+
+    .level-gift .star {
+      bottom: 2px;
+    }
+
+    .star-1 {
+      background: transparent url('../images/star-1.png') no-repeat;
+    }
+
+    .star-2 {
+      background: transparent url('../images/star-2.png') no-repeat;
+    }
+
+    .star-3 {
+      background: transparent url('../images/star-3.png') no-repeat;
+    }
+
+  }
+}

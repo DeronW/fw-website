@@ -19,7 +19,8 @@ const ETEN_APP_NAMES = [
     'yi-shou-bao',
     'preservation',
     'guide-cookbook',
-    'bu-mao-tong'
+    'bu-mao-tong',
+    'popong'
 ];
 
 ETEN_APP_NAMES.forEach(function (i) {
