@@ -1,0 +1,30 @@
+{% extends '../../../lib/templates/eten_base.swig.html' %}
+
+{% block js %}
+<script type="text/javascript"
+        src="http://webapi.amap.com/maps?v=1.3&key=79c419dbc96750428754af13019fbb06"></script>
+
+<script src="javascripts/json3.min.js"></script>
+<script src="javascripts/highcharts-4.2.5.min.js"></script>
+<script src="javascripts/index.js"></script>
+{% endblock %}
+
+{% block content %}
+<div class="statistic-container">
+    <div class="news-panel">
+        <div id="topInvestment"></div>
+        <!--<div id="investing"></div>-->
+    </div>
+    <div id="mapContainer" class="map-container"></div>
+    <div id="mapTL" class="map-angle-top-left">
+        <iframe name="weather_inc" src="http://i.tianqi.com/index.php?c=code&id=7"
+                width="225" height="90" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
+    </div>
+    <div id="mapTR" class="map-angle-top-right">
+    </div>
+    <div id="mapBL" class="map-angle-bottom-left"></div>
+    <div id="mapBR" class="map-angle-bottom-right"></div>
+    <div class="chart-panel" id="chart">
+    </div>
+</div>
+{% endblock %}

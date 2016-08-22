@@ -20,6 +20,8 @@ const ETEN_APP_NAMES = [
     'preservation',
     'guide-cookbook',
     'bu-mao-tong',
+
+    'statistics',
     'popong'
 ];
 
