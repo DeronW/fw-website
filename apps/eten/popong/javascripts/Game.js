@@ -68,7 +68,7 @@
 
             this.initGameContainer();
 
-            this.levelTailImage = this.asset.colorLevel;
+            this.levelTailImage = this.asset.level_1;
             //this.setLevel(20, 0)
         },
 

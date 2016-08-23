@@ -19,7 +19,15 @@
 
         load: function () {
             var resources = [
-                {id: 'colorLevel', src: 'images/game/level_color.png'},
+                {id: 'level_1', src: 'images/game/level_1.png'},
+                {id: 'level_2', src: 'images/game/level_2.png'},
+                {id: 'level_3', src: 'images/game/level_3.png'},
+                {id: 'level_4', src: 'images/game/level_4.png'},
+                {id: 'level_5', src: 'images/game/level_5.png'},
+                {id: 'level_6', src: 'images/game/level_6.png'},
+                {id: 'level_7', src: 'images/game/level_7.png'},
+                {id: 'level_8', src: 'images/game/level_8.png'},
+                {id: 'level_9', src: 'images/game/level_9.png'},
                 {id: 'tipStar', src: 'images/game/tip-star.jpg'}
             ];
 
