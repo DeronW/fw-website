@@ -1,0 +1,20 @@
+{% extends 'eten_base.swig.html' %}
+
+{% block content %}
+
+<div class="account">
+    <div class="user-panel">
+        <div>
+
+        </div>
+
+        <div>
+            <a href="/mesageCenter/msssageList.shtml"> 消息中心 </a>
+        </div>
+    </div>
+    <div>
+        {% block account_content %}{% endblock %}
+    </div>
+</div>
+
+{% endblock %}

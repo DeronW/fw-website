@@ -28,8 +28,7 @@ const HeaderStatusBar = React.createClass({
                 });
 
                 // set current page is login or not. this is base function, very IMPORTANT!
-                window.IS_LOGIN = d.isLogin;
-
+                window.UserReady.go(d.isLogin);
             }.bind(this), 'json');
     },
     showUserPopHandler: function () {
@@ -105,8 +104,8 @@ const HeaderStatusBar = React.createClass({
                     <span className="separate-line"> </span>
 
                     <div className="header-status-bar-app">
-                        <a href="/activity/app/">APP 客户端</a>
-                        <a href="/activity/app/" className="hsb-qrcode">
+                        <a href="/static/web/app-download/index.html">APP 客户端</a>
+                        <a href="/static/web/app-download/index.html" className="hsb-qrcode">
                             <img src="images/menu-app.png"/>
                         </a>
                     </div>

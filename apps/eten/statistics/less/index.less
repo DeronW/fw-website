@@ -1,0 +1,77 @@
+@import "map.less";
+@import "chart.less";
+@import "news.less";
+@import "angle-top-left.less";
+@import "angle-top-right.less";
+@import "angle-bottom-left.less";
+@import "angle-bottom-right.less";
+
+@mapWidth: 800px;
+@mapHeight: 800px;
+@newsWidth: 400px;
+
+html {
+  height: 100%
+}
+
+body {
+  margin: 0;
+  background: whitesmoke;
+  color: #333;
+  height: 100%;
+}
+
+.statistic-container {
+  width: 100%;
+  //height: 100%;
+  position: relative;
+  background: whitesmoke;
+
+  .map-container {
+    height: @mapWidth;
+    margin-right: @newsWidth;
+  }
+
+  .news-panel {
+    float: right;
+    width: @newsWidth;
+    height: @mapHeight;
+    overflow: hidden;
+  }
+
+  .chart-panel {
+    width: 100%;
+    height: 300px;
+  }
+
+  .map-angle-top-left {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 227px;
+    height: 90px;
+    background: white;
+  }
+  .map-angle-top-right {
+    position: absolute;
+    top: 0;
+    right: @newsWidth;
+    width: 300px;
+    height: 300px;
+  }
+  .map-angle-bottom-left {
+    position: absolute;
+    top: @mapHeight - 300;
+    left: 0;
+    width: 400px;
+    height: 300px;
+    background: black;
+  }
+  .map-angle-bottom-right {
+    position: absolute;
+    top: @mapHeight - 100;
+    right: @newsWidth;
+    width: 100px;
+    height: 100px;
+  }
+}
