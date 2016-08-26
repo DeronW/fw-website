@@ -9,20 +9,25 @@ gulp.task('default', function (done) {
 });
 
 const ETEN_APP_NAMES = [
-    'account-setting',
-    'guide',
-    'app-download',
-    'yi-zhuan-ying',
-	'yi-che-xiang',
-	'li-sui-xiang',
-    'you-ju-dai',
-    'yi-shou-bao',
-    'preservation',
-    'guide-cookbook',
-    'vip-prerogative',
-    'bu-mao-tong',
+    // 'account-setting',
+    // 'guide',
+    // 'app-download',
+    //
+    // // 主营产品分类说明页面
+    // 'yi-zhuan-ying',
+    // 'yi-che-xiang',
+    // 'li-sui-xiang',
+    // 'you-ju-dai',
+    // 'yi-shou-bao',
+    // 'bu-mao-tong',
+    // // 主营产品分类说明页面 END
+    //
+    // 'preservation',
+    // 'guide-cookbook',
+
+    'vip-prerogative', // 等级攻略页
     'statistics',
-    'popong'
+    // 'popong' // 点点点游戏页
 ];
 
 ETEN_APP_NAMES.forEach(function (i) {
