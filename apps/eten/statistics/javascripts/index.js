@@ -3,9 +3,10 @@ $(function () {
     window.Chart = new Highcharts.Chart({
         chart: {
             renderTo: 'chart',
-            type: 'column'
+            type: 'column',
+            backgroundColor: 'transparent'
         },
-        title: { text: '金融工场投资一览表(省份)'},
+        title: {text: null},
         xAxis: {
             categories: [
                 '北京',
@@ -64,33 +65,23 @@ $(function () {
         series: [{
             name: '投资',
             data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4, 21, 22, 23, 24, 25, 26, 27, 28, 29, 10, 11, 12, 13, 14, 15, 16, 17, 18]
-        }, {
-            name: '回款',
-            data: [83.6, 78.8, 98.5, 93.4, 106.0, 84.5, 105.0, 104.3, 91.2, 83.5, 106.6, 92.3, 21, 22, 23, 24, 25, 26, 27, 28, 29, 10, 11, 12, 13, 14, 15, 16, 17, 18]
-        }, {
-            name: '投资人数',
-            data: [48.9, 38.8, 39.3, 41.4, 47.0, 48.3, 59.0, 59.6, 52.4, 65.2, 59.3, 51.2, 21, 22, 23, 24, 25, 26, 27, 28, 29, 10, 11, 12, 13, 14, 15, 16, 17, 18]
         }]
     });
 });
 
 $(function () {
     // initial AMap
-    var mainMap = new AMap.Map('mapContainer', {
+    var mainMap = new AMap.Map('map', {
         resizeEnable: true,
         zoom: 11,
         center: [116.397428, 39.90923]
     });
 
-    var hotMap = new AMap.Map('mapBL', {
-        resizeEnable: true,
-        zoom: 2,
-        center: [107, 37]
-    });
+    mainMap.setMapStyle('blue_night');
 
-    AMap.plugin(['AMap.OverView'], function () {
-        mainMap.addControl(new AMap.OverView({isOpen: true}));
-    });
+    // AMap.plugin(['AMap.OverView'], function () {
+    //     mainMap.addControl(new AMap.OverView({isOpen: true}));
+    // });
 
     function createMarker(map, lng, lat) {
         return new AMap.Marker({

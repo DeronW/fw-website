@@ -1,81 +1,154 @@
-@import "map.less";
-@import "chart.less";
-@import "news.less";
-@import "angle-top-left.less";
-@import "angle-top-right.less";
-@import "angle-bottom-left.less";
-@import "angle-bottom-right.less";
-
-@mapWidth: 800px;
-@mapHeight: 800px;
-@newsWidth: 400px;
-
-html {
-  height: 100%
-}
 
 body {
   margin: 0;
-  background: whitesmoke;
-  color: #333;
-  height: 100%;
-}
-
-.statistic-container {
-  width: 100%;
-  //height: 100%;
-  position: relative;
-  background: whitesmoke;
-
-  .map-container {
-    height: @mapWidth;
-    margin-right: @newsWidth;
-  }
-
-  .news-panel {
-    float: right;
-    width: @newsWidth;
-    height: @mapHeight;
-    overflow: hidden;
-  }
-
-  .chart-panel {
-    width: 100%;
-    height: 300px;
-  }
-
-  .map-angle-top-left {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 227px;
-    height: 90px;
-    background: white;
-  }
-  .map-angle-top-right {
-    position: absolute;
-    top: 0;
-    right: @newsWidth;
-    width: 300px;
-    height: 300px;
-  }
-  .map-angle-bottom-left {
-    position: absolute;
-    top: @mapHeight - 300;
-    left: 0;
-    width: 400px;
-    height: 300px;
-    background: black;
-  }
-  .map-angle-bottom-right {
-    position: absolute;
-    top: @mapHeight - 100;
-    right: @newsWidth;
-    width: 100px;
-    height: 100px;
-  }
+  background: gray;
 }
 
 .header {
+  height: 70px;
+  background: #111536;
+  position: relative;
+  padding: 0 20px;
 
+  .logo {
+    display: block;
+    float: left;
+    margin-right: 40px;
+    margin-top: 24px;
+  }
+
+  .title {
+    display: block;
+    float: left;
+    color: white;
+    font-size: 30px;
+    line-height: 70px;
+  }
+
+  .transaction {
+    color: #cfdaed;
+    line-height: 70px;
+    font-size: 20px;
+    float: right;
+    display: block;
+    margin-right: 40px;
+    span {
+      color: #35ecfd;
+      font-size: 28px;
+      margin: 0 3px;
+    }
+  }
+
+  .date {
+    color: #cfdaed;
+    line-height: 70px;
+    font-size: 16px;
+    float: right;
+    display: block;
+    margin-top: 3px;
+  }
+}
+
+.content {
+  height: 680px;
+  margin: 20px;
+  background: #251c36;
+  position: relative;
+
+  .title-panel {
+    height: 50px;
+    border-bottom: 1px dotted gray;
+    padding-top: 1px;
+
+    .title {
+      color: white;
+      font-size: 24px;
+      border-left: 2px solid #35ecfd;
+      height: 26px;
+      line-height: 24px;
+      margin: 10px 0 0 24px;
+      padding-left: 20px;
+
+    }
+  }
+
+  .weather_inc {
+    position: absolute;
+    z-index: 999;
+    top: 70px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.7);
+  }
+}
+
+.ladder {
+  float: left;
+  width: 460px;
+  margin-left: 30px;
+  color: white;
+
+  .row {
+    display: table;
+    height: 60px;
+    width: 100%;
+    border-bottom: 1px solid gray;
+    line-height: 60px;
+
+    & > div {
+      float: left;
+      text-align: center;
+      font-size: 18px;
+    }
+
+    .province {
+      width: 65px;
+    }
+    .phone {
+      width: 160px;
+    }
+    .money {
+      width: 160px;
+      color: #32e1f4;
+    }
+    .time {
+      width: 75px;
+    }
+  }
+}
+
+.map {
+  margin: 20px 20px 20px 570px;
+  height: 585px;
+  position: relative;
+  transform: translate3d(0, 0, 0);
+}
+
+.chart {
+  height: 280px;
+  background: #1f1b39;
+  margin: 0 20px 20px 20px;
+  overflow: hidden;
+
+  .chart-panel {
+    height: 240px;
+    position: relative;
+    top: 30px;
+  }
+
+  .title-panel {
+    height: 50px;
+    border-bottom: 1px dotted gray;
+    padding-top: 1px;
+
+    .title {
+      color: white;
+      font-size: 24px;
+      border-left: 2px solid #35ecfd;
+      height: 26px;
+      line-height: 24px;
+      margin: 10px 0 0 24px;
+      padding-left: 20px;
+
+    }
+  }
 }
