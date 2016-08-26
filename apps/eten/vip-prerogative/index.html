@@ -68,9 +68,9 @@
                                 <li style="font-size: 18px; color: #e84f76;">年化加息奖励</li>
                                 <li id="add-interest-text-0">-</li>
                                 <li id="add-interest-text-1">-</li>
-                                <li id="add-interest-text-2">0.2%<br></li>
-                                <li id="add-interest-text-3">0.4%<br></li>
-                                <li id="add-interest-text-4">0.6%<br></li>
+                                <li id="add-interest-text-2">-</li>
+                                <li id="add-interest-text-3">-</li>
+                                <li id="add-interest-text-4">-</li>
                             </ol>
                         </div>
 
@@ -246,20 +246,17 @@
         });
 
         var levelInfoUrl = 'http://www.9888.cn/api/userLevel/v1/giftVO.json';
-        $.ajax({
-            url: levelInfoUrl,
-//            dataType: 'jsonp',
-            success: function (data) {
-                if (data.code != 10000) throw new Error('接口异常, ' + levelInfoUrl);
+        $.get(levelInfoUrl, {}, function (data) {
+            if (data.code != 10000) throw new Error('接口异常, ' + levelInfoUrl);
 
-                for (var i = 0; i < data.levelGiftRule.length; i++) {
-                    var interest = data.levelGiftRule[i].addInterest;
-                    if (interest) {
-                        $("#add-interest-text-" + i).html(interest.describe);
-                    }
+            var rule = data.data.levelGiftRule;
+            for (var i = 0; i < rule.length; i++) {
+                var interest = rule[i].addInterest;
+                if (interest) {
+                    $("#add-interest-text-" + i).html(interest.describe);
                 }
             }
-        });
+        }, 'json');
     })
 
 
