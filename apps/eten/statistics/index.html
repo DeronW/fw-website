@@ -1,15 +1,32 @@
-{% extends '../../../lib/templates/eten_base.swig.html' %}
+<!doctype html>
+<head>
+    <meta charset="utf-8"/>
+    <script src="javascripts/react-15.0.1/react-dom.min.js"></script>
+    <script src="javascripts/react-15.0.1/react.min.js"></script>
+    <script src="javascripts/jquery-1.12.4.min.js"></script>
+    <script src="javascripts/json3.min.js"></script>
+    <script src="http://webapi.amap.com/maps?v=1.3&key=79c419dbc96750428754af13019fbb06"></script>
+</head>
+<body>
 
-{% block js %}
-<script type="text/javascript"
-        src="http://webapi.amap.com/maps?v=1.3&key=79c419dbc96750428754af13019fbb06"></script>
+<div class="header">
+    <a href="/">
+        <img src="images/logo.png">
+    </a>
 
-<script src="javascripts/json3.min.js"></script>
-<script src="javascripts/highcharts-4.2.5.min.js"></script>
-<script src="javascripts/index.js"></script>
-{% endblock %}
+    <span>交易直播室</span>
 
-{% block content %}
+    <div>
+        今日交易<span></span>万元
+    </div>
+    <div>
+        投资总金额
+    </div>
+    <div>
+        今日交易
+    </div>
+</div>
+
 <div class="statistic-container">
     <div class="news-panel">
         <div id="topInvestment"></div>
@@ -27,4 +44,9 @@
     <div class="chart-panel" id="chart">
     </div>
 </div>
-{% endblock %}
+
+
+<script src="javascripts/highcharts-4.2.5.min.js"></script>
+<script src="javascripts/index.js"></script>
+
+</body>

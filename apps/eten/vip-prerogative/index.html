@@ -66,11 +66,11 @@
                         <div class="gid-a">
                             <ol class="gdia">
                                 <li style="font-size: 18px; color: #e84f76;">年化加息奖励</li>
-                                <li>-</li>
-                                <li>-</li>
-                                <li>0.2%<br></li>
-                                <li>0.4%<br></li>
-                                <li>0.6%<br></li>
+                                <li id="add-interest-text-0">-</li>
+                                <li id="add-interest-text-1">-</li>
+                                <li id="add-interest-text-2">0.2%<br></li>
+                                <li id="add-interest-text-3">0.4%<br></li>
+                                <li id="add-interest-text-4">0.6%<br></li>
                             </ol>
                         </div>
 
@@ -140,11 +140,11 @@
                     <h1>怎么获取贡献值</h1>
                     <div class="wta atw">
                         <p class="wa-a">投资贡献值：用户实时待收年化投资额度；</p>
-                        <p class="aw">邀友贡献值：<span id="tagText"></span>天内，每成功邀请一位好友首投<span id="moneyText"></span>元，邀请人获得<span id="contributionText"></span>贡献值。</p>
+                        <p class="aw">邀友贡献值：<span id="tagText"></span>天内，每成功邀请一位好友首投<span
+                                id="moneyText"></span>元，邀请人获得<span id="contributionText"></span>贡献值。</p>
                     </div>
                 </div>
             </div>
-
 
 
             <div class="faq">
@@ -153,7 +153,8 @@
                     <div class="wie">
                         <div class="tile"><span class="te-a">01</span><span class="ti">如何获得贡献值？</span></div>
                         <div class="involve">
-                            <p>贡献值包括投资贡献值和邀友贡献值，其中投资贡献值即用户实时待收年化投资额度，邀友贡献值即每成功邀请1名首投5000元的好友奖励1000贡献值。<span class="user-a">（A码用户不获取邀友贡献值。）</span></p>
+                            <p>贡献值包括投资贡献值和邀友贡献值，其中投资贡献值即用户实时待收年化投资额度，邀友贡献值即每成功邀请1名首投5000元的好友奖励1000贡献值。<span
+                                    class="user-a">（A码用户不获取邀友贡献值。）</span></p>
                         </div>
                         <div class="clientele">
                             <div class="cen-lf">
@@ -226,15 +227,16 @@
 
 {% block  js%}
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
+
         $.ajax({
             url: 'http://m.9888.cn/mpwap/api/v1/upgrade-formula.shtml',
             dataType: 'jsonp',
-            success: function(data){
-                $("#lv0").text(globalInterestCalculator.formatMoney(data.data.levelConfig.minLv1).split('.')[0] + "~" +  globalInterestCalculator.formatMoney(data.data.levelConfig.maxLv1).split('.')[0]);
-                $("#lv1").text(globalInterestCalculator.formatMoney(data.data.levelConfig.minLv2).split('.')[0] + "~" +  globalInterestCalculator.formatMoney(data.data.levelConfig.maxLv2).split('.')[0]);
-                $("#lv2").text(globalInterestCalculator.formatMoney(data.data.levelConfig.minLv3).split('.')[0] + "~" +  globalInterestCalculator.formatMoney(data.data.levelConfig.maxLv3).split('.')[0]);
-                $("#lv3").text(globalInterestCalculator.formatMoney(data.data.levelConfig.minLv4).split('.')[0] + "~" +  globalInterestCalculator.formatMoney(data.data.levelConfig.maxLv4).split('.')[0]);
+            success: function (data) {
+                $("#lv0").text(globalInterestCalculator.formatMoney(data.data.levelConfig.minLv1).split('.')[0] + "~" + globalInterestCalculator.formatMoney(data.data.levelConfig.maxLv1).split('.')[0]);
+                $("#lv1").text(globalInterestCalculator.formatMoney(data.data.levelConfig.minLv2).split('.')[0] + "~" + globalInterestCalculator.formatMoney(data.data.levelConfig.maxLv2).split('.')[0]);
+                $("#lv2").text(globalInterestCalculator.formatMoney(data.data.levelConfig.minLv3).split('.')[0] + "~" + globalInterestCalculator.formatMoney(data.data.levelConfig.maxLv3).split('.')[0]);
+                $("#lv3").text(globalInterestCalculator.formatMoney(data.data.levelConfig.minLv4).split('.')[0] + "~" + globalInterestCalculator.formatMoney(data.data.levelConfig.maxLv4).split('.')[0]);
                 $("#lv4").text(globalInterestCalculator.formatMoney(data.data.levelConfig.minLv5).split('.')[0]);
 
                 $("#tagText").text(data.data.limitDays);
@@ -243,9 +245,22 @@
             }
         });
 
+        var levelInfoUrl = 'http://www.9888.cn/api/userLevel/v1/giftVO.json';
+        $.ajax({
+            url: levelInfoUrl,
+//            dataType: 'jsonp',
+            success: function (data) {
+                if (data.code != 10000) throw new Error('接口异常, ' + levelInfoUrl);
 
+                for (var i = 0; i < data.levelGiftRule.length; i++) {
+                    var interest = data.levelGiftRule[i].addInterest;
+                    if (interest) {
+                        $("#add-interest-text-" + i).html(interest.describe);
+                    }
+                }
+            }
+        });
     })
-
 
 
 </script>
