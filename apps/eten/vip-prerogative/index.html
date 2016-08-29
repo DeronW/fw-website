@@ -77,22 +77,22 @@
                         <div class="gid-a gia">
                             <ol class="gdia gai">
                                 <li style="font-size: 18px; color: #e84f76;">生日大礼包</li>
-                                <li>50元返现券<br></li>
-                                <li>60元返现券<br></li>
-                                <li>80元返现券<br></li>
-                                <li>100元返现券<br></li>
-                                <li>120元返现券<br></li>
+                                <li id="birthday-text-0">-</li>
+                                <li id="birthday-text-1">-</li>
+                                <li id="birthday-text-2">-</li>
+                                <li id="birthday-text-3">-</li>
+                                <li id="birthday-text-4">-</li>
                             </ol>
                         </div>
 
                         <div class="gid-a">
                             <ol class="gdia gai">
                                 <li style="font-size: 18px; color: #e84f76;">升级大礼包</li>
-                                <li>-</li>
-                                <li>60元返现券<br></li>
-                                <li>80元返现券<br></li>
-                                <li>100元返现券<br></li>
-                                <li>120元返现券<br></li>
+                                <li id="level-text-0">-</li>
+                                <li id="level-text-1">-</li>
+                                <li id="level-text-2">-</li>
+                                <li id="level-text-3">-</li>
+                                <li id="level-text-4">-</li>
                             </ol>
                         </div>
 
@@ -254,6 +254,16 @@
                 var interest = rule[i].addInterest;
                 if (interest) {
                     $("#add-interest-text-" + i).html(interest.describe);
+                }
+
+                var birthday = rule[i].birthdayBag;
+                if (birthday) {
+                    $("#birthday-text-" + i).html(birthday.describe);
+                }
+
+                var levelUp = rule[i].birthdayBag;
+                if (levelUp) {
+                    $("#level-text-" + i).html(levelUp.describe);
                 }
             }
         }, 'json');
