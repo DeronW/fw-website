@@ -190,7 +190,17 @@
             match_tiles.forEach(function (i) {
                 i.bitmap.removeFromParent(this.gameContainer);
                 this.cells[i.row][i.column] = null;
-            }.bind(this))
+            }.bind(this));
+
+            // 如果没有匹配, 说明点错了, 要惩罚
+            if (!match_tiles.length) {
+
+                for (var i = 0; i < 3; i++) {
+                    var r = this.getRandomEmptyCell();
+                    if (!r) return;
+                    this.addTile(null, r.x, r.y)
+                }
+            }
         },
 
         checkLevelComplete: function () {
@@ -217,7 +227,7 @@
             }
         },
 
-        setLevel: function (count) {
+        setLevel: function (initCount, level) {
             var _this = this;
             this.cells.forEach(function (row) {
                 row.forEach(function (i) {
@@ -230,39 +240,60 @@
                 this.cells[i] = []
             }
 
-            var list = randListChoices(count, 88);
+            // 设置当前关卡的游戏头像
+            this.levelTailImage = this.asset['level_' + level];
+
+            var list = randListChoices(initCount, 88);
             for (var i = 0; i < list.length; i++) {
                 var row = Math.floor(list[i] / 8);
                 var column = list[i] % this.columnCount;
 
-                var position = Math.round(Math.random() * 8) % 8;
-                this.addTile(position, row, column);
+                this.addTile(null, row, column);
             }
 
             this.gameMoving();
         },
 
         gameMoving: function () {
-            var delay = 5000 - this.score * 10;
+            var delay = 4000 - this.score * 10;
             if (delay < 300) delay = 500;
 
             this.progressTimer = setTimeout(function () {
 
-                var position = Math.round(Math.random() * 8) % 8;
-                var r = parseInt(Math.random() * this.rowCount * this.columnCount);
-                var or = r;
-
-                while (this.cells[Math.floor(r / this.columnCount)][r % this.columnCount]) {
-                    r++;
-                    if (r >= this.rowCount * this.columnCount) r = 0;
-                    if (r == or) {
-                        return;
-                    }
+                var r = this.getRandomEmptyCell();
+                if (!r) {
+                    // no more empty cell, game over
+                    return;
                 }
 
-                this.addTile(position, Math.floor(r / this.columnCount), r % this.columnCount, 'animate');
+                this.addTile(null, r.x, r.y, 'animate');
+
                 this.gameMoving();
             }.bind(this), delay);
+        },
+
+        getRandomEmptyCell: function () {
+            var remainCellCount = this.rowCount * this.columnCount - this.getTileCount();
+            if (remainCellCount < 1) {
+                console.log('game over');
+                return null; // 游戏结束了
+            }
+
+            var randCell = Math.floor(Math.random() * remainCellCount);
+            var x = 0, y = 0;
+
+            out:
+                while (x < this.rowCount) {
+                    while (y < this.columnCount) {
+                        if (!this.cells[x][y]) randCell--;
+                        if (randCell < 0) break out;
+                        y++;
+                    }
+                    y = 0;
+                    x++;
+                }
+
+            return {x: x, y: y}
         },
 
         pauseGameProgress: function () {
@@ -271,8 +302,9 @@
 
         addTile: function (position, row, column, with_animate) {
             if (this.cells[row][column])
-                throw 'cell in row:' + row + ', column:' + column + 'already exist';
+                throw 'cell in row:' + row + ', column:' + column + ' already exist';
 
+            if (position === null) position = Math.round(Math.random() * 8) % 8;
             var padding = 4;
             var scale = with_animate ? 1 : 1;
 
@@ -305,10 +337,7 @@
             return tile_count;
         },
 
-        onUpdate: function (delta) {
-            if (this.getTileCount() >= this.rowCount * this.columnCount) {
-                //alert('game over')
-            }
+        onUpdate: function () {
         }
     }
 })();

@@ -44,7 +44,7 @@ const Content = React.createClass({
 
         if (t.star && !confirm('已获取' + t.star + '星, 要重新挑战吗')) return;
 
-        Game.setLevel(30, 0);
+        Game.setLevel(30, level);
         this.setState({page: 'game', level: level});
     },
     levelComplete: function () {
