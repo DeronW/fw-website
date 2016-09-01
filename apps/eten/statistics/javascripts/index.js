@@ -129,26 +129,42 @@ $(function () {
         console.log('error', evt)
     };
 
-    function msgHandler(msg) {
-        //console.log(msg)
-        var msg_type = msg.type, data = msg.data;
-        window.InvestingPanel.receiveMessage(msg);
+    window.msgHandler = function (packet) {
+        console.log(packet);
+        var data = packet.data;
 
-        // 有投资进来了
-        if (msg_type == 1) {
-            console.log('message', msg);
+        var msg = {
+            username: data.name,
+            money: data.money,
+            avatar: '',
+            project_name: '[投标]',
+            sex: 'male',
+            province: data.province,
+            city: data.city,
+            phone: data.phone,
+            timestamp: +new Date()
+        };
 
-            window.TopInvestmentPanel.receiveInvestMessage({
-                username: data.name,
-                money: data.money,
-                avatar: '',
-                project_name: '[投标]',
-                sex: 'male',
-                province: data.province,
-                city: data.city
-            });
+        Ladder.receiveInterestMsg(msg);
 
-            window.markInvestOnMap(data.longitude, data.latitude);
-        }
+        // var msg_type = msg.type, data = msg.data;
+        // window.InvestingPanel.receiveMessage(msg);
+        //
+        // // 有投资进来了
+        // if (msg_type == 1) {
+        //     console.log('message', msg);
+        //
+        //     window.TopInvestmentPanel.receiveInvestMessage({
+        //         username: data.name,
+        //         money: data.money,
+        //         avatar: '',
+        //         project_name: '[投标]',
+        //         sex: 'male',
+        //         province: data.province,
+        //         city: data.city
+        //     });
+        //
+        //     window.markInvestOnMap(data.longitude, data.latitude);
+        // }
     }
 });

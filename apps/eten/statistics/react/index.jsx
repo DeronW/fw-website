@@ -7,7 +7,7 @@ const Header = React.createClass({
     },
     render: function () {
         var d = new Date();
-        let date = `${d.getFullYear()}年${d.getMonth()}月${d.getDate()}日`;
+        let date = `${d.getFullYear()}年${d.getMonth() + 1}月${d.getDate()}日`;
 
         return (
             <div className="header">
@@ -35,29 +35,46 @@ const Ladder = React.createClass({
                 timestamp: 1472201445773,
                 province: '北京',
                 phone: '189****2123',
-                money: 1293234,
+                money: 93234,
             }, {
                 timestamp: 1472201445774,
                 province: '北京',
                 phone: '189****2123',
-                money: 1293234,
+                money: 293234,
             }, {
                 timestamp: 1472201415773,
                 province: '北京',
                 phone: '189****2123',
-                money: 1293234,
+                money: 193234,
             }, {
                 timestamp: 1472201445776,
                 province: '北京',
                 phone: '189****2123',
-                money: 1293234,
+                money: 12931234,
             }]
         }
+    },
+    receiveInterestMsg: function (msg) {
+        var items = this.state.items;
+        items.push({
+            timestamp: msg.timestamp,
+            province: msg.province,
+            phone: msg.phone,
+            money: msg.money
+        });
+
+        items.sort((a, b) => a.money < b.money);
+        if (items.length >= 10) items.pop();
+        this.setState({items: items});
     },
     render: function () {
         let row = (data) => {
             var d = new Date(data.timestamp);
             var time = d.getHours() + ':' + d.getMinutes();
+
+            let money = data.money.toString().match(/\d{3}/g).join(',');
+            money
+
             return (
                 <div className="row" key={data.timestamp}>
                     <div className="province">{data.province}</div>
@@ -67,9 +84,6 @@ const Ladder = React.createClass({
                 </div>
             )
         };
-
-
-        console.log(this.state.items);
 
         return (
             <div className="ladder">
@@ -82,4 +96,8 @@ const Ladder = React.createClass({
 $(function () {
     ReactDOM.render(<Header/>, document.getElementById('header'));
     ReactDOM.render(<Ladder/>, document.getElementById('ladder'));
+
+    setTimeout(function () {
+        location.reload()
+    }, 3 * 60 * 60 * 1000);
 });
