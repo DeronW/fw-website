@@ -9,11 +9,11 @@ gulp.task('default', function (done) {
 });
 
 const ETEN_APP_NAMES = [
-    'account-setting',
-    'guide',
-    'app-download',
+    // 'account-setting',
+    'guide', // 新手引导
+    'app-download', // app 下载页面
 
-    // 主营产品分类说明页面
+    // 主营产品分类说明页面 START
     'yi-zhuan-ying',
     'yi-che-xiang',
     'li-sui-xiang',
@@ -22,8 +22,8 @@ const ETEN_APP_NAMES = [
     'bu-mao-tong',
     // 主营产品分类说明页面 END
 
-    'preservation',
-    'guide-cookbook',
+    'preservation', // 安全保障介绍页面
+    'guide-cookbook', // 玩赚攻略页
 
     'vip-prerogative', // 等级攻略页
     'statistics',
