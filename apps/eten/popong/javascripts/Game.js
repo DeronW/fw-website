@@ -308,6 +308,8 @@
             var padding = 4;
             var scale = with_animate ? 1 : 1;
 
+            scale = 1.3
+
             this.cells[row][column] = {
                 position: position,
                 row: row,

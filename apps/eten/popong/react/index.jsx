@@ -169,8 +169,8 @@ Content.StartPage = React.createClass({
             </div>
         }
         return <div className="start-page">
-            <div className="rule" onClick={this.ruleToggleHandler}></div>
             <div className="start" onClick={this.props.startGame}></div>
+            <div className="rule" onClick={this.ruleToggleHandler}></div>
             <div className="guide" onClick={this.guideToggleHandler}></div>
             {rule}
             {guide}
