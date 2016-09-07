@@ -11,7 +11,7 @@ const images = require('./images.js');
 const copy = require('./copy.js');
 const revision = require('./revision.js');
 
-let common_javascripts_task_flag = false;
+let COMMON_JAVASCRIPTS_TASK = {};
 
 // project_name 每次使用新项目时, 只需要更换项目名称
 module.exports = function generate_task(site_name, project_name, configs) {
@@ -152,9 +152,9 @@ module.exports = function generate_task(site_name, project_name, configs) {
         gulp.task(`${task_name}:watch`, gulp.series(task_name, monitor)) :
         gulp.task(`${task_name}:revision`, gulp.series(task_name, copy2cdn, compile_revision));
 
-    if (!CONFIG.debug && !common_javascripts_task_flag) {
+    if (!CONFIG.debug && !COMMON_JAVASCRIPTS_TASK[site_name]) {
         gulp.task(`${site_name}:common_js`, gulp.series(
             () => javascripts(common_javascript_files, tmp_path, 'lib.js')));
-        common_javascripts_task_flag = true;
+        COMMON_JAVASCRIPTS_TASK[site_name] = true;
     }
 };
