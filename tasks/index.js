@@ -153,9 +153,8 @@ module.exports = function generate_task(site_name, project_name, configs) {
         gulp.task(`${task_name}:revision`, gulp.series(task_name, copy2cdn, compile_revision));
 
     if (!CONFIG.debug && !common_javascripts_task_flag) {
-        gulp.task(`${site_name}:common_js`, gulp.series(function () {
-            return javascripts(common_javascript_files, tmp_path, 'lib.js')
-        }));
+        gulp.task(`${site_name}:common_js`, gulp.series(
+            () => javascripts(common_javascript_files, tmp_path, 'lib.js')));
         common_javascripts_task_flag = true;
     }
 };
