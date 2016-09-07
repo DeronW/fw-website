@@ -20,7 +20,7 @@ module.exports = function generate_task(site_name, project_name, configs) {
         build_path = `build/${site_name}/${project_name}/`,
         public_path = 'public/',
         tmp_path = `build/${site_name}-tmp/`,
-        lib_path = 'lib/'
+        lib_path = 'lib/',
         cdn_path = `cdn/${site_name}/${project_name}/`,
         CONFIG = Object.assign({
             debug: false,
