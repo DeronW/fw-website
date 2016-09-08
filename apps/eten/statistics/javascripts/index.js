@@ -1,5 +1,37 @@
 $(function () {
-    //window.Chart = $('#chart').highcharts({
+    var xAxis = [
+        ['beijing', '北京'],
+        ['tianjin', '天津'],
+        ['shanxi', '山西'],
+        '内蒙',
+        '辽宁',
+        '吉林',
+        '黑龙江',
+        '上海',
+        '江苏',
+        '浙江',
+        '安徽',
+        '福建',
+        '江西',
+        '山东',
+        '河南',
+        '湖北',
+        '湖南',
+        '广东',
+        '广西',
+        '重庆',
+        '四川',
+        '贵州',
+        '云南',
+        '西藏',
+        '陕西',
+        '甘肃',
+        '青海',
+        '宁夏',
+        '新疆',
+        '海南',
+        '港澳台'
+    ];
     window.Chart = new Highcharts.Chart({
         chart: {
             renderTo: 'chart',
@@ -8,6 +40,7 @@ $(function () {
         },
         title: {text: null},
         xAxis: {
+            color: 'white',
             categories: [
                 '北京',
                 '天津',
@@ -51,7 +84,7 @@ $(function () {
         tooltip: {
             headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
             pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-            '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+            '<td style="padding:0"><b>{point.y:.1f} 万</b></td></tr>',
             footerFormat: '</table>',
             shared: true,
             useHTML: true
@@ -64,7 +97,8 @@ $(function () {
         },
         series: [{
             name: '投资',
-            data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4, 21, 22, 23, 24, 25, 26, 27, 28, 29, 10, 11, 12, 13, 14, 15, 16, 17, 18]
+            // data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4, 21, 22, 23, 24, 25, 26, 27, 28, 29, 10, 11, 12, 13, 14, 15, 16, 17, 18]
+            data: []
         }]
     });
 });
@@ -106,11 +140,9 @@ $(function () {
     }
 
     window.markInvestOnMap = function (lng, lat) {
-        createMarker(hotMap, lng, lat);
         mainMap.setZoomAndCenter(12, [lng, lat]);
         openInfoWindow(mainMap);
     };
-    window.hotMap = hotMap;
 });
 
 $(function () {
@@ -130,22 +162,45 @@ $(function () {
     };
 
     window.msgHandler = function (packet) {
-        console.log(packet);
-        var data = packet.data;
 
-        var msg = {
-            username: data.name,
-            money: data.money,
-            avatar: '',
-            project_name: '[投标]',
-            sex: 'male',
-            province: data.province,
-            city: data.city,
-            phone: data.phone,
-            timestamp: +new Date()
-        };
+        if (packet.type == 1) {
+            // 模拟投资
+            // http://10.10.100.104:8080/logtest/invest?ip=111.202.74.131&name=XXXX
+            var phone = packet.data.phone;
+            if (!phone) phone = packet.data.name[0] + '**';
 
-        Ladder.receiveInterestMsg(msg);
+            window._Ladder.receiveInterestMsg({
+                phone: phone,
+                timestamp: +new Date(),
+                money: parseInt(packet.data.money),
+                province: packet.data.province
+            });
+
+            window.markInvestOnMap(packet.data.latitude, packet.data.longitude);
+
+        } else if (packet.type == 2) {
+            window._Header.receiveInterestMsg({
+                today: packet.data.today,
+                total: packet.data.total
+            });
+            console.log(packet);
+        } else {
+            var msg = {
+                username: data.name,
+                money: data.money,
+                avatar: '',
+                project_name: '[投标]',
+                sex: 'male',
+                province: data.province,
+                city: data.city,
+                phone: data.phone,
+                timestamp: +new Date()
+            };
+
+            window._Ladder.receiveInterestMsg(msg);
+            window._Header.receiveInterestMsg(msg);
+        }
+
 
         // var msg_type = msg.type, data = msg.data;
         // window.InvestingPanel.receiveMessage(msg);
