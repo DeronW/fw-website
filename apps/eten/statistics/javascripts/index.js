@@ -53,7 +53,7 @@ $(function () {
         tooltip: {
             headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
             pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-            '<td style="padding:0"><b>{point.y:.1f} 万</b></td></tr>',
+            '<td style="padding:0"><b>&yen;{point.y:.1f}</b></td></tr>',
             footerFormat: '</table>',
             shared: true,
             useHTML: true
@@ -66,7 +66,7 @@ $(function () {
         },
         series: [{
             name: '总投资',
-            data: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,1,1,1,1,1,1,1,1,1,1]
+            data: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
         }]
     });
     window.Chart.receiveInterestMsg = function (msg) {
@@ -78,7 +78,7 @@ $(function () {
 
         for (var i in msg) {
             for (var j = 0; j < Provinces.length; j++) {
-                if (i == Provinces[j]) {
+                if (i.indexOf(Provinces[j]) > -1) {
                     data[j] = parseInt(msg[i]);
                     break;
                 }
@@ -168,8 +168,8 @@ $(function () {
             });
 
             window.markInvestOnMap(
-                packet.data.latitude,
                 packet.data.longitude,
+                packet.data.latitude,
                 packet.data.name,
                 packet.data.money
             );

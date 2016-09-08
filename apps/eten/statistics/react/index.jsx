@@ -41,7 +41,7 @@ const Ladder = React.createClass({
                 timestamp: +new Date(),
                 province: '省份',
                 phone: '联系电话',
-                money: '投资金额',
+                money: '0',
             }]
         }
     },
@@ -57,6 +57,7 @@ const Ladder = React.createClass({
         });
 
         items.sort((a, b) => a.money < b.money);
+
         if (items.length >= 10) items.pop();
         this.setState({items: items});
     },
@@ -64,14 +65,12 @@ const Ladder = React.createClass({
         let row = (data) => {
             var d = new Date(data.timestamp);
             var time = d.toTimeString().split(' ')[0];
-            let money = data.money.toString().match(/\d{3}/g);
-            money = money ? money.join(',') : data.money;
 
             return (
                 <div className="row" key={data.timestamp}>
                     <div className="province">{data.province}</div>
                     <div className="phone">{data.phone}</div>
-                    <div className="money">&yen;{money}</div>
+                    <div className="money">&yen;{format_currency(data.money)}</div>
                     <div className="time">{time}</div>
                 </div>
             )
@@ -80,6 +79,15 @@ const Ladder = React.createClass({
         return <div className="ladder"> {this.state.items.map(row)} </div>;
     }
 });
+
+function format_currency(n) {
+    n = parseInt(n);
+    var s = n.toString().split('').reverse().join('');
+    var m = s.match(/\d{3}/g) || [];
+    var o = m.concat([s.substr(3 * m.length)]).join(',');
+    var r = o.split('').reverse().join('');
+    return r.indexOf(',') === 0 ? r.substr(1) : r;
+}
 
 $(function () {
     window._Header = ReactDOM.render(<Header/>, document.getElementById('header'));
