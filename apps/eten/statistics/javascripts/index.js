@@ -196,26 +196,5 @@ $(function () {
             window._Ladder.receiveInterestMsg(msg);
             window._Header.receiveInterestMsg(msg);
         }
-
-
-        // var msg_type = msg.type, data = msg.data;
-        // window.InvestingPanel.receiveMessage(msg);
-        //
-        // // 有投资进来了
-        // if (msg_type == 1) {
-        //     console.log('message', msg);
-        //
-        //     window.TopInvestmentPanel.receiveInvestMessage({
-        //         username: data.name,
-        //         money: data.money,
-        //         avatar: '',
-        //         project_name: '[投标]',
-        //         sex: 'male',
-        //         province: data.province,
-        //         city: data.city
-        //     });
-        //
-        //     window.markInvestOnMap(data.longitude, data.latitude);
-        // }
     }
 });
