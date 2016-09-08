@@ -1,8 +1,8 @@
 $(function () {
-    var xAxis = [
-        ['beijing', '北京'],
-        ['tianjin', '天津'],
-        ['shanxi', '山西'],
+    var Provinces = [
+        '北京',
+        '天津',
+        '山西',
         '内蒙',
         '辽宁',
         '吉林',
@@ -30,7 +30,9 @@ $(function () {
         '宁夏',
         '新疆',
         '海南',
-        '港澳台'
+        '台湾',
+        '香港',
+        '澳门'
     ];
     window.Chart = new Highcharts.Chart({
         chart: {
@@ -40,40 +42,7 @@ $(function () {
         },
         title: {text: null},
         xAxis: {
-            color: 'white',
-            categories: [
-                '北京',
-                '天津',
-                '山西',
-                '内蒙',
-                '辽宁',
-                '吉林',
-                '黑龙江',
-                '上海',
-                '江苏',
-                '浙江',
-                '安徽',
-                '福建',
-                '江西',
-                '山东',
-                '河南',
-                '湖北',
-                '湖南',
-                '广东',
-                '广西',
-                '重庆',
-                '四川',
-                '贵州',
-                '云南',
-                '西藏',
-                '陕西',
-                '甘肃',
-                '青海',
-                '宁夏',
-                '新疆',
-                '海南',
-                '港澳台'
-            ]
+            categories: Provinces,
         },
         yAxis: {
             min: 0,
@@ -96,11 +65,33 @@ $(function () {
             }
         },
         series: [{
-            name: '投资',
-            // data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4, 21, 22, 23, 24, 25, 26, 27, 28, 29, 10, 11, 12, 13, 14, 15, 16, 17, 18]
-            data: []
+            name: '总投资',
+            data: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,1,1,1,1,1,1,1,1,1,1]
         }]
     });
+    window.Chart.receiveInterestMsg = function (msg) {
+        console.log('msg', msg);
+        if (window._deny_redraw_flag) return;
+
+        var series = Chart.series[0];
+        var data = series.yData.slice();
+
+        for (var i in msg) {
+            for (var j = 0; j < Provinces.length; j++) {
+                if (i == Provinces[j]) {
+                    data[j] = parseInt(msg[i]);
+                    break;
+                }
+            }
+        }
+
+        series.setData(data);
+
+        window._deny_redraw_flag = true;
+        window._chart_timer = setTimeout(function () {
+            window._deny_redraw_flag = false;
+        }, 5000);
+    }
 });
 
 $(function () {
@@ -126,12 +117,12 @@ $(function () {
     }
 
     //在指定位置打开信息窗体
-    function openInfoWindow(map) {
+    function openInfoWindow(map, username, money) {
         //构建信息窗体中显示的内容
         var html = [];
-        html.push('<div>');
-        html.push('<h3>有一笔新投资</h3>');
-        html.push('');
+        html.push('<div style="padding-left: 12px; padding-bottom: 12px;">');
+        html.push('<h3>' + username + '</h3>');
+        html.push('<div>' + money + '</div>');
         html.push('</div>');
         infoWindow = new AMap.InfoWindow({
             content: html.join('')  //使用默认信息窗体框样式，显示信息内容
@@ -139,9 +130,9 @@ $(function () {
         infoWindow.open(map, map.getCenter());
     }
 
-    window.markInvestOnMap = function (lng, lat) {
+    window.markInvestOnMap = function (lng, lat, username, money) {
         mainMap.setZoomAndCenter(12, [lng, lat]);
-        openInfoWindow(mainMap);
+        openInfoWindow(mainMap, username, money);
     };
 });
 
@@ -176,14 +167,19 @@ $(function () {
                 province: packet.data.province
             });
 
-            window.markInvestOnMap(packet.data.latitude, packet.data.longitude);
+            window.markInvestOnMap(
+                packet.data.latitude,
+                packet.data.longitude,
+                packet.data.name,
+                packet.data.money
+            );
 
         } else if (packet.type == 2) {
             window._Header.receiveInterestMsg({
                 today: packet.data.today,
                 total: packet.data.total
             });
-            console.log(packet);
+            window.Chart.receiveInterestMsg(packet.data.province);
         } else {
             var msg = {
                 username: data.name,
