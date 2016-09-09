@@ -26,6 +26,7 @@ const ETEN_APP_NAMES = [
     'guide-cookbook', // 玩赚攻略页
 
     'vip-prerogative', // 等级攻略页
+	'a-rebate', //  a码用户返利规则
     'statistics',
     'popong' // 点点点游戏页
 ];
