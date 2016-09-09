@@ -14,19 +14,19 @@ const ETEN_APP_NAMES = [
     'app-download', // app 下载页面
 
     // 主营产品分类说明页面 START
-    'yi-zhuan-ying',
-    'yi-che-xiang',
-    'li-sui-xiang',
-    'you-ju-dai',
-    'yi-shou-bao',
-    'bu-mao-tong',
+    'topic-yi-zhuan-ying',
+    'topic-yi-che-xiang',
+    'topic-li-sui-xiang',
+    'topic-you-ju-dai',
+    'topic-yi-shou-bao',
+    'topic-bu-mao-tong',
     // 主营产品分类说明页面 END
 
     'preservation', // 安全保障介绍页面
     'guide-cookbook', // 玩赚攻略页
 
     'vip-prerogative', // 等级攻略页
-	'a-rebate', //  a码用户返利规则
+	'topic-a-rebate', //  a码用户返利规则
     'statistics',
     'popong' // 点点点游戏页
 ];
