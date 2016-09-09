@@ -11,12 +11,15 @@ const images = require('./images.js');
 const copy = require('./copy.js');
 const revision = require('./revision.js');
 
+let COMMON_JAVASCRIPTS_TASK = {};
+
 // project_name 每次使用新项目时, 只需要更换项目名称
-module.exports = function (site_name, project_name, configs) {
+module.exports = function generate_task(site_name, project_name, configs) {
 
     var app_path = `apps/${site_name}/${project_name}/`,
         build_path = `build/${site_name}/${project_name}/`,
         public_path = 'public/',
+        tmp_path = `build/${site_name}-tmp/`,
         lib_path = 'lib/',
         cdn_path = `cdn/${site_name}/${project_name}/`,
         CONFIG = Object.assign({
@@ -91,6 +94,10 @@ module.exports = function (site_name, project_name, configs) {
         return javascripts(common_javascript_files, `${build_path}javascripts`, 'lib.js', CONFIG.debug)
     }
 
+    function copy_common_javascripts() {
+        return copy([`${tmp_path}lib.js`], `${build_path}javascripts`)
+    }
+
     function compile_images() {
         return images([`${app_path}images/**/*.+(jpg|png|gif)`], `${build_path}images`)
     }
@@ -128,6 +135,8 @@ module.exports = function (site_name, project_name, configs) {
         gulp.watch(`lib/less/**/*.less`, gulp.parallel(compile_less));
     }
 
+    var common_javascripts = CONFIG.debug ? compile_common_javascripts : copy_common_javascripts;
+
     gulp.task(task_name,
         gulp.series(
             compile_html,
@@ -135,13 +144,17 @@ module.exports = function (site_name, project_name, configs) {
             compile_less,
             compile_javascripts,
             compile_react,
-            compile_common_javascripts,
+            common_javascripts,
             compile_images,
             compile_common_assets));
 
-    if (CONFIG.debug)
-        gulp.task(`${task_name}:watch`, gulp.series(task_name, monitor));
-
-    if (!CONFIG.debug)
+    CONFIG.debug ?
+        gulp.task(`${task_name}:watch`, gulp.series(task_name, monitor)) :
         gulp.task(`${task_name}:revision`, gulp.series(task_name, copy2cdn, compile_revision));
+
+    if (!CONFIG.debug && !COMMON_JAVASCRIPTS_TASK[site_name]) {
+        gulp.task(`${site_name}:common_js`, gulp.series(
+            () => javascripts(common_javascript_files, tmp_path, 'lib.js')));
+        COMMON_JAVASCRIPTS_TASK[site_name] = true;
+    }
 };

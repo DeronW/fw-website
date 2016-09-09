@@ -128,26 +128,30 @@
             var i, top = {}, left = {}, right = {}, bottom = {};
 
             for (i = column; i >= 0; i--) {
-                if (this.cells[row][i]) {
-                    left = this.cells[row][i];
+                var c_a = this.cells[row][i];
+                if (c_a && !c_a.with_animate) {
+                    left = c_a;
                     break;
                 }
             }
             for (i = column; i < this.columnCount; i++) {
-                if (this.cells[row][i]) {
-                    right = this.cells[row][i];
+                var c_b = this.cells[row][i];
+                if (c_b && !c_b.with_animate) {
+                    right = c_b;
                     break
                 }
             }
             for (i = row; i >= 0; i--) {
-                if (this.cells[i][column]) {
-                    top = this.cells[i][column];
+                var c_c = this.cells[i][column];
+                if (c_c && !c_c.with_animate) {
+                    top = c_c;
                     break;
                 }
             }
             for (i = row; i < this.rowCount; i++) {
-                if (this.cells[i][column]) {
-                    bottom = this.cells[i][column];
+                var c_d = this.cells[i][column];
+                if (c_d && !c_d.with_animate) {
+                    bottom = c_d;
                     break;
                 }
             }
@@ -198,7 +202,7 @@
                 for (var i = 0; i < 3; i++) {
                     var r = this.getRandomEmptyCell();
                     if (!r) return;
-                    this.addTile(null, r.x, r.y)
+                    this.addTile(null, r.x, r.y, 'with_animate')
                 }
             }
         },
@@ -306,12 +310,13 @@
 
             if (position === null) position = Math.round(Math.random() * 8) % 8;
             var padding = 4;
-            var scale = with_animate ? 1 : 1;
+            var scale = with_animate ? 0.1 : 1;
 
             this.cells[row][column] = {
                 position: position,
                 row: row,
                 column: column,
+                with_animate: with_animate,
                 bitmap: new Hilo.Bitmap({
                     x: this.cellWidth * column + padding,
                     y: this.cellHeight * row + padding,
@@ -338,6 +343,23 @@
         },
 
         onUpdate: function () {
+            // 每次更新, 检查那个新增块需要动画
+            if (!this.cells.length) return;
+
+            for (var i = 0; i < this.rowCount; i++) {
+                for (var j = 0; j < this.columnCount; j++) {
+                    var cell = this.cells[i][j];
+                    if (cell && cell.with_animate) {
+                        var scale = cell.bitmap.scaleX;
+                        scale += 0.12;
+                        if (scale >= 1) scale = 1;
+                        cell.bitmap.scaleX = scale;
+                        cell.bitmap.scaleY = scale;
+
+                        if (scale >= 1) cell.with_animate = false;
+                    }
+                }
+            }
         }
     }
 })();
