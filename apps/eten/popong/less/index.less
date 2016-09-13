@@ -213,6 +213,89 @@ body, html {
   }
 }
 
+.level-prepare {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #42b6d5;
+  z-index: 3;
+
+  .up {
+    background: white;
+    position: relative;
+    margin: 200px auto 0;
+    width: 500px;
+    border-radius: 60px;
+    padding: 10px 0;
+
+    .title {
+      top: -70px;
+      width: 376px;
+      height: 116px;
+      position: absolute;
+      left: 50%;
+      margin-left: -188px;
+      background: transparent url(../images/prepare/title.png) no-repeat;
+      color: white;
+      text-align: center;
+      font-size: 40px;
+      line-height: 80px;
+    }
+
+    .dou-ge {
+      display: block;
+      margin: 20px auto;
+    }
+
+    .start {
+      display: block;
+      margin: 20px auto;
+    }
+  }
+
+  .ladder {
+    background: white;
+    position: relative;
+    margin: 40px auto 0;
+    width: 500px;
+    border-radius: 20px;
+    overflow: hidden;
+
+    .ladder-title {
+      height: 65px;
+      color: white;
+      line-height: 65px;
+      font-size: 30px;
+      text-align: center;
+      background: #ff7c2c;
+    }
+
+    .ladder-list {
+      height: 300px;
+      overflow: scroll;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    .ladder-item {
+      display: table;
+      width: 100%;
+      margin: 10px;
+      font-size: 24px;
+
+      .num, .avatar, .name {
+        float: left;
+        display: block;
+        margin-right: 20px;
+      }
+      .score {
+        float: right;
+      }
+    }
+  }
+}
+
 .level-complete {
   position: fixed;
   top: 0;
@@ -223,8 +306,8 @@ body, html {
   .dialog {
     background-repeat: no-repeat;
     background-size: 100%;
-    width: 300px;
-    height: 300px;
+    width: 518px;
+    height: 467px;
     margin: 100px auto 0;
     position: relative;
     padding-top: 80px;
@@ -239,24 +322,27 @@ body, html {
     .score {
       text-align: center;
       font-size: 28px;
+      padding: 30px;
     }
 
     .btn-next, .btn-retry {
-      height: 40px;
-      width: 118px;
+      height: 79px;
+      width: 225px;
       float: left;
+      margin-left: 60px;
     }
 
     .btn-level-list {
-      width: 40px;
-      height: 40px;
+      width: 83px;
+      height: 81px;
+      margin-right: 80px;
     }
   }
 
   .star {
-    width: 100px;
-    height: 34px;
-    margin: 0 auto;
+    width: 219px;
+    height: 76px;
+    margin: 40px auto 0;
     background-size: 100%;
 
     &.star-0 {

@@ -18,11 +18,21 @@
         // game cells
         cellWidth: null,
         cellHeight: null,
-        rowCount: 11,
+        rowCount: 9,
         columnCount: 8,
-        gameContainerMarginTop: 180,
+        gameContainerMarginTop: 660,
         levelTailImage: null,
         cells: [],
+
+        // 记录当前关卡完成进度
+        status: {
+            level: '第几关',
+            startAt: '关卡开始时间',
+            star: '获得几颗星',
+            wrongTouch: 0
+        },
+        // 游戏道具
+        tools: {},
 
         loadAssets: function () {
             if (this.initialized) return;
@@ -49,7 +59,8 @@
                 width: this.width,
                 height: this.height,
                 scaleX: this.scale,
-                scaleY: this.scale
+                scaleY: this.scale,
+                background: '#f6d3ab'
             });
             document.getElementById('game').appendChild(this.stage.canvas);
 
@@ -108,6 +119,62 @@
                     background: '#f0b67d'
                 }).addTo(c)
             }
+
+            // 添加顶部背景
+            new Hilo.Bitmap({
+                image: this.asset.grasshead,
+                width: this.width,
+                height: 271 * 2,
+                y: 0,
+                x: 0
+            }).addTo(this.stage);
+
+            // 添加底部草地
+            new Hilo.Bitmap({
+                image: this.asset.grassland,
+                width: this.width,
+                height: 160,
+                y: this.height - 160,
+                x: 0
+            }).addTo(this.stage);
+
+            // 添加暂停按钮
+            new Hilo.Bitmap({
+                image: this.asset.pause,
+                width: 84 * 2,
+                height: 84 * 2,
+                y: 30,
+                x: this.width - 280
+            }).addTo(this.stage);
+
+            // 添加关卡title
+            new Hilo.Text({
+                text: 'LEVEL 9',
+                textAlign: 'center',
+                width: 300 * 2,
+                height: 50 * 2,
+                y: 60,
+                x: 100
+            }).addTo(this.stage).setFont('40px');
+
+            // 道具: 重新排列
+            this.tools.refresh = new Hilo.Bitmap({
+                image: this.asset.propsRefresh,
+                width: 83 * 2,
+                height: 96 * 2,
+                y: 320,
+                x: 280
+            }).addTo(this.stage);
+
+            // 道具: 提示
+            this.tools.tips = new Hilo.Bitmap({
+                image: this.asset.propsTips,
+                width: 83 * 2,
+                height: 96 * 2,
+                y: 300,
+                x: this.width - 320 - 83 - 83
+            }).addTo(this.stage);
+
         },
 
         onUserInput: function (e) {
@@ -118,6 +185,14 @@
                 var column = Math.floor(x / cellWidth), row = Math.floor(y / cellHeight);
                 this.biuAction(row, column);
                 setTimeout(this.checkLevelComplete.bind(this), 500);
+            } else if (e.eventTarget == this.tools.refresh) {
+                this.toolsRefresh();
+            } else if (e.eventTarget == this.tools.tips) {
+                this.toolsShowTips()
+            } else if (e.eventTarget == this.tools.freeze) {
+                this.toolsFreeze()
+            } else if (e.eventTarget == this.tools.dismiss) {
+                this.toolsDismiss()
             }
         },
 
@@ -174,7 +249,7 @@
             return tiles;
         },
 
-        showTips: function () {
+        toolsShowTips: function () {
             var padding = 4;
             var scale = 1;
             var star = new Hilo.Bitmap({
@@ -188,6 +263,16 @@
             }).addTo(this.gameContainer);
         },
 
+        toolsRefresh: function () {
+            alert('重排道具未完成')
+        },
+        toolsFreeze: function () {
+            alert('冰冻道具未完成')
+        },
+        toolsDismiss: function () {
+            alert('消除道具未完成')
+        },
+
         biuAction: function (row, column) {
             if (this.cells[row][column]) return;
             var match_tiles = this.checkHasMatch(row, column);
@@ -198,8 +283,9 @@
 
             // 如果没有匹配, 说明点错了, 要惩罚
             if (!match_tiles.length) {
-
-                for (var i = 0; i < 3; i++) {
+                this.status.wrongTouch++;
+                var newCount = Math.min(this.status.wrongTouch, 6);
+                for (var i = 0; i < newCount; i++) {
                     var r = this.getRandomEmptyCell();
                     if (!r) return;
                     this.addTile(null, r.x, r.y, 'with_animate')
@@ -226,8 +312,8 @@
 
             if (over) {
                 this.pauseGameProgress();
-                alert('level complete');
-                window.ContentPanel.levelComplete();
+                var used_time = parseInt((+new Date() - this.status.startAt) / 1000);
+                window.ContentPanel.levelComplete(used_time, 2);
             }
         },
 
@@ -247,31 +333,39 @@
             // 设置当前关卡的游戏头像
             this.levelTailImage = this.asset['level_' + level];
 
-            var list = randListChoices(initCount, 88);
+            var list = randListChoices(initCount, this.rowCount * this.columnCount);
             for (var i = 0; i < list.length; i++) {
-                var row = Math.floor(list[i] / 8);
+                var row = Math.floor(list[i] / this.columnCount);
                 var column = list[i] % this.columnCount;
 
                 this.addTile(null, row, column);
             }
 
+            // 初始化某一关卡的游戏时, 充值当前关卡游戏的进度
+            this.status = {
+                level: level,
+                startAt: +new Date(),
+                star: 0,
+                wrongTouch: 0
+            };
+
             this.gameMoving();
         },
 
         gameMoving: function () {
-            var delay = 4000 - this.score * 10;
-            if (delay < 300) delay = 500;
+            var delay, consume = parseInt((+new Date() - this.status.startAt) / 1000);
+
+            delay = 5000 - parseInt((this.status.level - 1) / 3) * 500;
+            delay -= Math.min(6, parseInt(consume / 10)) * 500;
 
             this.progressTimer = setTimeout(function () {
-
                 var r = this.getRandomEmptyCell();
                 if (!r) {
                     // no more empty cell, game over
+                    window.ContentPanel.levelComplete(100, 1);
                     return;
                 }
-
                 this.addTile(null, r.x, r.y, 'animate');
-
                 this.gameMoving();
             }.bind(this), delay);
         },
@@ -351,7 +445,7 @@
                     var cell = this.cells[i][j];
                     if (cell && cell.with_animate) {
                         var scale = cell.bitmap.scaleX;
-                        scale += 0.12;
+                        scale += 0.18;
                         if (scale >= 1) scale = 1;
                         cell.bitmap.scaleX = scale;
                         cell.bitmap.scaleY = scale;

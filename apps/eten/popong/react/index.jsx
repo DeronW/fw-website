@@ -1,13 +1,25 @@
+const GAME_NAME = 'qMzjW'; // 点点点游戏
+const USER_ID = 63; // 临时模拟的用户id
+
 const Content = React.createClass({
     getInitialState: function () {
         return {
-            // page in: start, level, complete, game, ladder, end, share
+            // page in: start, prepare, level, complete, game, ladder, end, share
             page: 'start',
             level_list: [],
-            level: null
+            level: null,
+            current_level_seconds: null,
+            current_level_star: null
         }
     },
     componentDidMount: function () {
+        // $FW.Ajax({
+        //     url: '',
+        //     success: () => {
+        //
+        //     }
+        // });
+
         this.setState({
             level_list: [{
                 star: 1,
@@ -36,19 +48,19 @@ const Content = React.createClass({
         })
     },
     switchLevel: function (level) {
-        var t = this.state.level_list[level - 1];
-        if (t.locked) {
-            alert('未解锁');
-            alert('测试中, 可以试玩');
-        }
-
-        if (t.star && !confirm('已获取' + t.star + '星, 要重新挑战吗')) return;
-
-        Game.setLevel(30, level);
-        this.setState({page: 'game', level: level});
+        this.setState({page: 'prepare', level: level});
     },
-    levelComplete: function () {
-        this.setState({page: 'complete'});
+    playHandler: function () {
+        var start_count = [28, 30, 32, 34, 36, 38, 38, 42, 46];
+        Game.setLevel(start_count[this.state.level - 1], this.state.level);
+        this.setState({page: 'game'});
+    },
+    levelComplete: function (seconds, star) {
+        this.setState({
+            page: 'complete',
+            current_level_seconds: seconds,
+            current_level_star: star
+        });
     },
     showLadder: function () {
     },
@@ -65,13 +77,85 @@ const Content = React.createClass({
     render: function () {
 
         var style = {display: this.state.page == 'game' ? 'none' : 'block'};
-        return <div className="content" style={style}>
-            {this.state.page == 'start' ? <Content.StartPage startGame={this.startGameHandler}/> : null}
-            {this.state.page == 'level' ?
-                <Content.Level playGame={this.playGameHandler} level_list={this.state.level_list}
-                               switchLevel={this.switchLevel}/> : null}
-            {this.state.page == 'complete' ? <Content.LevelComplete star={0} setPage={this.setPage}/> : null}
-        </div>
+        var page = this.state.page, cnt;
+
+        if (page == 'start') {
+            cnt = <Content.StartPage startGame={this.startGameHandler}/>
+        } else if (page == 'prepare') {
+            var records = [
+                {
+                    avatar: '1.png',
+                    name: '123123',
+                    score: '20`21'
+                },
+                {
+                    avatar: '1.png',
+                    name: '123123',
+                    score: '20`21'
+                },
+                {
+                    avatar: '1.png',
+                    name: '123123',
+                    score: '20`21'
+                },
+                {
+                    avatar: '1.png',
+                    name: '123123',
+                    score: '20`21'
+                },
+                {
+                    avatar: '1.png',
+                    name: '123123',
+                    score: '20`21'
+                },
+                {
+                    avatar: '1.png',
+                    name: '123123',
+                    score: '20`21'
+                },
+                {
+                    avatar: '1.png',
+                    name: '123123',
+                    score: '20`21'
+                },
+                {
+                    avatar: '1.png',
+                    name: '123123',
+                    score: '20`21'
+                },
+                {
+                    avatar: '1.png',
+                    name: '123123',
+                    score: '20`21'
+                },
+                {
+                    avatar: '1.png',
+                    name: '123123',
+                    score: '20`21'
+                },
+                {
+                    avatar: '1.png',
+                    name: '123123',
+                    score: '20`21'
+                }
+            ];
+            cnt = <Content.Prepare level={this.state.level}
+                                   records={records}
+                                   playHandler={this.playHandler}/>
+        } else if (page == 'level') {
+            cnt = <Content.Level playGame={this.playGameHandler}
+                                 level_list={this.state.level_list}
+                                 switchLevel={this.switchLevel}/>
+        } else if (page == 'complete') {
+            cnt = <Content.LevelComplete star={this.state.current_level_star}
+                                         seconds={this.state.current_level_seconds}
+                                         level={this.state.level}
+                                         setPage={this.setPage}
+                                         switchLevel={this.switchLevel}
+            />
+        }
+
+        return <div className="content" style={style}> {cnt} </div>
     }
 });
 
@@ -108,24 +192,72 @@ Content.Level = React.createClass({
         </div>
     }
 });
+Content.Prepare = React.createClass({
+    render: function () {
+        let record = (item, index) => {
+            return (
+                <div key={index} className="ladder-item">
+                    <div className="num">{index + 1}</div>
+                    <img className="avatar" src={item.avatar}/>
+                    <div className="name">{item.name}</div>
+                    <div className="score">{item.score}</div>
+                </div>
+            )
+        };
 
+        return (
+            <div className="level-prepare">
+                <div className="up">
+                    <div className="title"> LEVEL {this.props.level} </div>
+                    <img className="dou-ge" src="images/prepare/dou.png"/>
+                    <img className="start" onClick={this.props.playHandler}
+                         src="images/prepare/start.png"/>
+                </div>
+                <div className="ladder">
+                    <div className="ladder-title">本关TOP10排行榜</div>
+                    <div className="ladder-list">
+                        {this.props.records.map(record)}
+                    </div>
+                </div>
+            </div>
+        )
+    }
+});
 Content.LevelComplete = React.createClass({
     showLevelListHandler: function () {
         this.props.setPage('level')
     },
-    nextLevelHandler: function () {
+    nextHandler: function () {
+        var level = this.props.level;
+        if (level >= 9) {
+            alert('没有更多关卡啦');
+            return;
+        }
+        this.props.switchLevel(level + 1);
+    },
+    retryHandler: function () {
+        this.props.switchLevel(this.props.level);
     },
     render: function () {
-        var pass = this.props.star == 0;
+        var pass = this.props.star !== 0;
 
         var dialog_cls = pass ? "dialog pass" : "dialog fail";
+        var time = parseInt(this.props.seconds / 60) + '``' + this.props.seconds % 60;
+
+        let btn = pass ?
+            <img className="btn-next" src="images/level-next.png"
+                 onClick={this.nextHandler}/> :
+            <img className="btn-next" src="images/level-retry.png"
+                 onClick={this.retryHandler}/>;
+
         return (
             <div className="level-complete">
                 <div className={dialog_cls}>
                     <div className={"star star-" + this.props.star}></div>
-                    <div className="score"> xxx</div>
-                    <img className="btn-next" src="images/level-next.png" onClick={this.nextLevelHandler}/>
-                    <img className="btn-level-list" src="images/level-home.png" onClick={this.showLevelListHandler}/>
+                    <div className="score">用时: {time}</div>
+                    {btn}
+                    <img className="btn-level-list" src="images/level-home.png"
+                         onClick={this.showLevelListHandler}/>
                 </div>
             </div>
         )

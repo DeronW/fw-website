@@ -28,7 +28,14 @@
                 {id: 'level_7', src: 'images/game/level_7.png'},
                 {id: 'level_8', src: 'images/game/level_8.png'},
                 {id: 'level_9', src: 'images/game/level_9.png'},
-                {id: 'tipStar', src: 'images/game/tip-star.png'}
+                {id: 'tipStar', src: 'images/game/tip-star.png'},
+                {id: 'grassland', src: 'images/game/grassland.png'},
+                {id: 'grasshead', src: 'images/game/grass-head.png'},
+                {id: 'pause', src: 'images/game/pause.png'},
+                {id: 'propsTips', src: 'images/game/props-tips.png'},
+                {id: 'propsRefresh', src: 'images/game/props-refresh.png'},
+                {id: 'propsFreeze', src: 'images/game/props-freeze.png'},
+                {id: 'propsDismiss', src: 'images/game/props-dismiss.png'},
             ];
 
             this.queue = new Hilo.LoadQueue();
@@ -48,7 +55,15 @@
             this.level_7 = this.queue.get('level_7').content;
             this.level_8 = this.queue.get('level_8').content;
             this.level_9 = this.queue.get('level_9').content;
+
             this.tipStar = this.queue.get('tipStar').content;
+
+            this.grassland = this.queue.get('grassland').content;
+            this.grasshead = this.queue.get('grasshead').content;
+            this.pause = this.queue.get('pause').content;
+
+            this.propsRefresh = this.queue.get('propsRefresh').content;
+            this.propsTips = this.queue.get('propsTips').content;
 
             this.queue.off('complete');
             this.fire('complete');
