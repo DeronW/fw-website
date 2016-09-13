@@ -29,8 +29,10 @@
             level: '第几关',
             startAt: '关卡开始时间',
             pauseAt: '暂停开始时间',
+            refreshAt: '开始重新排列',
             star: '获得几颗星',
             wrongTouch: 0,
+            initCount: '初始化方块数量',
             title: null
         },
         // 游戏道具
@@ -259,11 +261,16 @@
         },
 
         toolsRefresh: function () {
-            alert('重排道具未完成')
+            this.status.refreshAt = now();
+            setTimeout(function () {
+                this.setLevel(this.status.initCount, this.status.level);
+            }.bind(this), 2200);
         },
+
         toolsFreeze: function () {
             alert('冰冻道具未完成')
         },
+
         toolsDismiss: function () {
             alert('消除道具未完成')
         },
@@ -314,6 +321,7 @@
 
         setLevel: function (initCount, level) {
             var _this = this;
+
             this.cells.forEach(function (row) {
                 row.forEach(function (i) {
                     i.bitmap.removeFromParent(_this.gameContainer)
@@ -343,6 +351,7 @@
                 startAt: +new Date(),
                 continueAt: 0,
                 star: 0,
+                initCount: initCount,
                 wrongTouch: 0,
                 title: null
             };
@@ -372,7 +381,7 @@
             delay = 5000 - parseInt((this.status.level - 1) / 3) * 500;
             delay -= Math.min(6, parseInt(consume / 10)) * 500;
 
-            console.log('consume', consume, 'delay', delay);
+            console.log('new tile show time: consume', consume, 'delay', delay);
 
             this.progressTimer = setTimeout(function () {
                 var r = this.getRandomEmptyCell();
@@ -414,6 +423,7 @@
             clearTimeout(this.progressTimer);
             this.status.continueAt = +new Date();
         },
+
         continueGameProgress: function () {
             if (this.status.continueAt)
                 this.status.startAt += +new Date() - this.status.continueAt;
@@ -459,9 +469,29 @@
         },
 
         onUpdate: function () {
-            // 每次更新, 检查那个新增块需要动画
-            if (!this.cells.length) return;
 
+            // 重新排列时的过场动画
+            if (this.status.refreshAt) this.onUpdateRefreshAnimate();
+            // 每次更新, 检查那个新增块需要动画
+            if (this.cells.length) this.onUpdateTileAnimate();
+        },
+
+        onUpdateRefreshAnimate: function () {
+            var i, j, bm;
+            for (i = 0; i < this.rowCount; i++) {
+                for (j = 0; j < this.columnCount; j++) {
+                    bm = this.cells[i][j].bitmap;
+                    // TODO: 洗牌的动画轨迹
+                    // bm.x = 0;
+                    // bm.y = 0;
+                }
+            }
+
+            if (+new Date() - this.status.refreshAt > 2000)
+                this.status.refreshAt = false;
+        },
+
+        onUpdateTileAnimate: function () {
             for (var i = 0; i < this.rowCount; i++) {
                 for (var j = 0; j < this.columnCount; j++) {
                     var cell = this.cells[i][j];
@@ -494,4 +524,8 @@ function randListChoices(count, all) {
     }
 
     return res;
+}
+
+function now() {
+    return +new Date()
 }
