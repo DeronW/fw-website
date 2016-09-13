@@ -4,7 +4,7 @@ const USER_ID = 63; // 临时模拟的用户id
 const Content = React.createClass({
     getInitialState: function () {
         return {
-            // page in: start, prepare, level, complete, game, ladder, end, share
+            // page in: start, prepare, level, pause, complete, game, ladder, end, share
             page: 'start',
             level_list: [],
             level: null,
@@ -70,6 +70,10 @@ const Content = React.createClass({
     playGameHandler: function () {
         Game.initStage();
         this.setState({page: 'game'})
+    },
+    continueGameHandler: function () {
+        this.setState({page: 'game'});
+        Game.continueGameProgress();
     },
     setPage: function (page) {
         this.setState({page: page})
@@ -146,6 +150,8 @@ const Content = React.createClass({
             cnt = <Content.Level playGame={this.playGameHandler}
                                  level_list={this.state.level_list}
                                  switchLevel={this.switchLevel}/>
+        } else if (page == 'pause') {
+            cnt = <Content.Pause continue={this.continueGameHandler}/>
         } else if (page == 'complete') {
             cnt = <Content.LevelComplete star={this.state.current_level_star}
                                          seconds={this.state.current_level_seconds}
@@ -218,6 +224,20 @@ Content.Prepare = React.createClass({
                     <div className="ladder-list">
                         {this.props.records.map(record)}
                     </div>
+                </div>
+            </div>
+        )
+    }
+});
+Content.Pause = React.createClass({
+    clickHandler: function () {
+        this.props.continue()
+    },
+    render: function () {
+        return (
+            <div className="level-pause">
+                <div className="dialog">
+                    <img src="images/pause-btn.png" onClick={this.clickHandler}/>
                 </div>
             </div>
         )

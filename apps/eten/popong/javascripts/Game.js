@@ -28,8 +28,10 @@
         status: {
             level: '第几关',
             startAt: '关卡开始时间',
+            pauseAt: '暂停开始时间',
             star: '获得几颗星',
-            wrongTouch: 0
+            wrongTouch: 0,
+            title: null
         },
         // 游戏道具
         tools: {},
@@ -139,23 +141,13 @@
             }).addTo(this.stage);
 
             // 添加暂停按钮
-            new Hilo.Bitmap({
+            this.tools.pause = new Hilo.Bitmap({
                 image: this.asset.pause,
                 width: 84 * 2,
                 height: 84 * 2,
                 y: 30,
                 x: this.width - 280
             }).addTo(this.stage);
-
-            // 添加关卡title
-            new Hilo.Text({
-                text: 'LEVEL 9',
-                textAlign: 'center',
-                width: 300 * 2,
-                height: 50 * 2,
-                y: 60,
-                x: 100
-            }).addTo(this.stage).setFont('40px');
 
             // 道具: 重新排列
             this.tools.refresh = new Hilo.Bitmap({
@@ -193,6 +185,9 @@
                 this.toolsFreeze()
             } else if (e.eventTarget == this.tools.dismiss) {
                 this.toolsDismiss()
+            } else if (e.eventTarget == this.tools.pause) {
+                this.pauseGameProgress();
+                window.ContentPanel.setPage('pause');
             }
         },
 
@@ -341,13 +336,32 @@
                 this.addTile(null, row, column);
             }
 
-            // 初始化某一关卡的游戏时, 充值当前关卡游戏的进度
+            // 初始化某一关卡的游戏时, 重置当前关卡游戏的进度
+            this.status.title && this.status.title.removeFromParent(this.stage);
             this.status = {
                 level: level,
                 startAt: +new Date(),
+                continueAt: 0,
                 star: 0,
-                wrongTouch: 0
+                wrongTouch: 0,
+                title: null
             };
+
+            // 添加关卡title
+            this.status.title = new Hilo.Text({
+                text: 'LEVEL ' + this.status.level,
+                color: 'red',
+                font: '40px',
+                textAlign: 'center',
+                textVAlign: 'middle',
+                width: 300 * 2,
+                height: 50 * 2,
+                maxWidth: 300 * 2,
+                textHeight: 50 * 2,
+                textWidth: 300 * 2,
+                y: 120,
+                x: 420
+            }).addTo(this.stage).setFont('normal small-caps bold 80px Sans-serif');
 
             this.gameMoving();
         },
@@ -357,6 +371,8 @@
 
             delay = 5000 - parseInt((this.status.level - 1) / 3) * 500;
             delay -= Math.min(6, parseInt(consume / 10)) * 500;
+
+            console.log('consume', consume, 'delay', delay);
 
             this.progressTimer = setTimeout(function () {
                 var r = this.getRandomEmptyCell();
@@ -395,7 +411,13 @@
         },
 
         pauseGameProgress: function () {
-            clearTimeout(this.progressTimer)
+            clearTimeout(this.progressTimer);
+            this.status.continueAt = +new Date();
+        },
+        continueGameProgress: function () {
+            if (this.status.continueAt)
+                this.status.startAt += +new Date() - this.status.continueAt;
+            this.gameMoving();
         },
 
         addTile: function (position, row, column, with_animate) {
