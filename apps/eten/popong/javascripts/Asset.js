@@ -66,6 +66,20 @@
             this.propsRefresh = this.queue.get('propsRefresh').content;
             this.propsTips = this.queue.get('propsTips').content;
 
+            var numbers = this.queue.get('numbers').content;
+            this.numberGlyphs = {
+                0: {image: numbers, rect: [0, 0, 35, 35]},
+                1: {image: numbers, rect: [0, 0, 35 * 2, 35]},
+                2: {image: numbers, rect: [0, 0, 35 * 3, 35]},
+                3: {image: numbers, rect: [0, 0, 35 * 4, 35]},
+                4: {image: numbers, rect: [0, 0, 35 * 5, 35]},
+                5: {image: numbers, rect: [0, 0, 35 * 6, 35]},
+                6: {image: numbers, rect: [0, 0, 35 * 7, 35]},
+                7: {image: numbers, rect: [0, 0, 35 * 8, 35]},
+                8: {image: numbers, rect: [0, 0, 35 * 9, 35]},
+                9: {image: numbers, rect: [0, 0, 35 * 10, 35]}
+            };
+
             this.queue.off('complete');
             this.fire('complete');
         }

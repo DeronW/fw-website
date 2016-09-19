@@ -20,7 +20,7 @@
         cellHeight: null,
         rowCount: 9,
         columnCount: 8,
-        gameContainerMarginTop: 660,
+        gameContainerMarginTop: 560,
         levelTailImage: null,
         cells: [],
 
@@ -322,7 +322,6 @@
         },
 
         checkLevelComplete: function () {
-            console.log(now());
             var over = true;
 
             out:
