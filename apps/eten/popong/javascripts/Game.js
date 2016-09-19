@@ -348,7 +348,7 @@
 
             this.cells.forEach(function (row) {
                 row.forEach(function (i) {
-                    i.bitmap.removeFromParent(_this.gameContainer)
+                    i.bitmap && i.bitmap.removeFromParent(_this.gameContainer)
                 })
             });
 
