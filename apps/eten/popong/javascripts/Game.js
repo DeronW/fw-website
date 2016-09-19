@@ -83,9 +83,7 @@
             this.stage.onUpdate = this.onUpdate.bind(this);
 
             this.initGameContainer();
-
-            this.levelTailImage = this.asset.level_1;
-            //this.setLevel(20, 0)
+            // this.levelTailImage = this.asset.level_1;
         },
 
         initGameContainer: function () {
@@ -174,6 +172,8 @@
         },
 
         onUserInput: function (e) {
+            console.log(e, this.status)
+
             if (this.status.refreshAt) return; // 洗牌过程中不能响应用户事件
             if (e.eventTarget == this.gameContainer) {
                 var cellWidth = this.gameContainer.width / this.columnCount,
