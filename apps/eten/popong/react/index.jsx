@@ -9,43 +9,51 @@ const Content = React.createClass({
             level_list: [],
             level: null,
             current_level_seconds: null,
-            current_level_star: null
+            ladder: []
         }
     },
     componentDidMount: function () {
-        // $FW.Ajax({
-        //     url: '',
-        //     success: () => {
-        //
-        //     }
-        // });
+        // 设置默认值
+        let MAX_LEVEL = 9, level_list = [];
+        for (var i = 0; i < MAX_LEVEL; i++) {
+            level_list.push({locked: true})
+        }
+        this.setState({level_list: level_list});
 
-        this.setState({
-            level_list: [{
-                star: 1,
-                gift: null
-            }, {
-                star: 2,
-                gift: null
-            }, {
-                star: 3,
-                gift: true
-            }, {
-                star: 1,
-                gift: null
-            }, {
-                star: 2,
-                gift: null
-            }, {
-                star: 3,
-                gift: true
-            }, {}, {
-                locked: true
-            }, {
-                locked: true,
-                gift: true
-            }]
-        })
+        $.get(API_PATH + '/9888/game/web/index.php', {
+            r: 'user/user-play',
+            gameNo: GAME_NAME,
+            uid: USER_ID
+        }, function (data) {
+            if (data.code != 10000) {
+                alert('服务异常:' + data.msg);
+                return
+            }
+
+            for (var i = 0; i < data.data.length; i++) {
+                var m = data.data[i];
+                var lvl = level_list[parseInt(m.pass_num) - 1];
+                lvl.star = m.star;
+                lvl.score = m.score;
+                lvl.locked = false;
+            }
+            this.setState({level_list: level_list});
+        }.bind(this), 'json');
+
+        $.get(API_PATH + '/9888/game/web/index.php', {
+            r: 'user/game-gift',
+            gameNo: GAME_NAME
+        }, function (data) {
+            if (data.code != 10000) {
+                alert('服务异常:' + data.msg);
+                return
+            }
+            for (var i = 0; i < data.data.length; i++) {
+                var m = data.data[i];
+                level_list[parseInt(m.pass_num) - 1].gift = true;
+            }
+            this.setState({level_list: level_list});
+        }.bind(this), 'json')
     },
     switchLevel: function (level) {
         this.setState({page: 'prepare', level: level});
@@ -55,11 +63,11 @@ const Content = React.createClass({
         Game.setLevel(start_count[this.state.level - 1], this.state.level);
         this.setState({page: 'game'});
     },
-    levelComplete: function (seconds, star) {
+    levelComplete: function (success, seconds) {
         this.setState({
             page: 'complete',
             current_level_seconds: seconds,
-            current_level_star: star
+            current_level_success: success
         });
     },
     showLadder: function () {
@@ -86,66 +94,7 @@ const Content = React.createClass({
         if (page == 'start') {
             cnt = <Content.StartPage startGame={this.startGameHandler}/>
         } else if (page == 'prepare') {
-            var records = [
-                {
-                    avatar: '1.png',
-                    name: '123123',
-                    score: '20`21'
-                },
-                {
-                    avatar: '1.png',
-                    name: '123123',
-                    score: '20`21'
-                },
-                {
-                    avatar: '1.png',
-                    name: '123123',
-                    score: '20`21'
-                },
-                {
-                    avatar: '1.png',
-                    name: '123123',
-                    score: '20`21'
-                },
-                {
-                    avatar: '1.png',
-                    name: '123123',
-                    score: '20`21'
-                },
-                {
-                    avatar: '1.png',
-                    name: '123123',
-                    score: '20`21'
-                },
-                {
-                    avatar: '1.png',
-                    name: '123123',
-                    score: '20`21'
-                },
-                {
-                    avatar: '1.png',
-                    name: '123123',
-                    score: '20`21'
-                },
-                {
-                    avatar: '1.png',
-                    name: '123123',
-                    score: '20`21'
-                },
-                {
-                    avatar: '1.png',
-                    name: '123123',
-                    score: '20`21'
-                },
-                {
-                    avatar: '1.png',
-                    name: '123123',
-                    score: '20`21'
-                }
-            ];
-            cnt = <Content.Prepare level={this.state.level}
-                                   records={records}
-                                   playHandler={this.playHandler}/>
+            cnt = <Content.Prepare level={this.state.level} playHandler={this.playHandler}/>
         } else if (page == 'level') {
             cnt = <Content.Level playGame={this.playGameHandler}
                                  level_list={this.state.level_list}
@@ -153,14 +102,12 @@ const Content = React.createClass({
         } else if (page == 'pause') {
             cnt = <Content.Pause continue={this.continueGameHandler}/>
         } else if (page == 'complete') {
-            cnt = <Content.LevelComplete star={this.state.current_level_star}
+            cnt = <Content.LevelComplete success={this.state.current_level_success}
                                          seconds={this.state.current_level_seconds}
                                          level={this.state.level}
                                          setPage={this.setPage}
-                                         switchLevel={this.switchLevel}
-            />
+                                         switchLevel={this.switchLevel}/>
         }
-
         return <div className="content" style={style}> {cnt} </div>
     }
 });
@@ -198,7 +145,38 @@ Content.Level = React.createClass({
         </div>
     }
 });
+
 Content.Prepare = React.createClass({
+    getInitialState: function () {
+        return {records: []}
+    },
+    componentDidMount: function () {
+        $.get('http://10.105.7.129/9888/game/web/index.php', {
+            r: 'user/user-ranking',
+            gameNo: GAME_NAME,
+            passNum: this.props.level,
+            uid: USER_ID
+        }, function (data) {
+            if (data.code != 10000) {
+                alert('FAIL:' + data.message);
+                return;
+            }
+
+            var records = [], i, m;
+            for (i = 0; i < data.data.length; i++) {
+                m = data.data[i];
+                var avatar = 'images/prepare/avatar-' + (m.sex == 0 ? 'fe' : '') + 'male.png';
+
+                records.push({
+                    avatar: avatar,
+                    name: m.username,
+                    score: m.score
+                })
+            }
+            this.setState({records: records});
+        }.bind(this), 'json');
+
+    },
     render: function () {
         let record = (item, index) => {
             return (
@@ -222,13 +200,14 @@ Content.Prepare = React.createClass({
                 <div className="ladder">
                     <div className="ladder-title">本关TOP10排行榜</div>
                     <div className="ladder-list">
-                        {this.props.records.map(record)}
+                        {this.state.records.map(record)}
                     </div>
                 </div>
             </div>
         )
     }
 });
+
 Content.Pause = React.createClass({
     clickHandler: function () {
         this.props.continue()
@@ -243,7 +222,20 @@ Content.Pause = React.createClass({
         )
     }
 });
+
 Content.LevelComplete = React.createClass({
+    getInitialState: function () {
+        return {star: 0}
+    },
+    componentDidMount: function () {
+        if (this.props.success) {
+            calculateStar(this.props.level, this.props.seconds, function (data) {
+                this.setState({star: data.score})
+            }.bind(this));
+        } else {
+            this.setState({star: 0})
+        }
+    },
     showLevelListHandler: function () {
         this.props.setPage('level')
     },
@@ -259,12 +251,10 @@ Content.LevelComplete = React.createClass({
         this.props.switchLevel(this.props.level);
     },
     render: function () {
-        var pass = this.props.star !== 0;
-
-        var dialog_cls = pass ? "dialog pass" : "dialog fail";
+        var dialog_cls = this.props.success ? "dialog pass" : "dialog fail";
         var time = parseInt(this.props.seconds / 60) + '``' + this.props.seconds % 60;
 
-        let btn = pass ?
+        let btn = this.props.success ?
             <img className="btn-next" src="images/level-next.png"
                  onClick={this.nextHandler}/> :
             <img className="btn-next" src="images/level-retry.png"
@@ -273,7 +263,7 @@ Content.LevelComplete = React.createClass({
         return (
             <div className="level-complete">
                 <div className={dialog_cls}>
-                    <div className={"star star-" + this.props.star}></div>
+                    <div className={"star star-" + this.state.star}></div>
                     <div className="score">用时: {time}</div>
                     {btn}
                     <img className="btn-level-list" src="images/level-home.png"
@@ -283,6 +273,7 @@ Content.LevelComplete = React.createClass({
         )
     }
 });
+
 Content.StartPage = React.createClass({
     getInitialState: function () {
         return {
@@ -330,6 +321,29 @@ Content.StartPage = React.createClass({
     }
 });
 
+
+function calculateStar(level, seconds, cb) {
+    $.get('http://10.105.7.129/9888/game/web/index.php', {
+        r: 'user/user-addres',
+        gameNo: GAME_NAME,
+        passNum: level,
+        score: seconds,
+        success: 1,
+        uid: USER_ID
+    }, function (data) {
+        if (data.code == 10000) {
+            cb(data.data)
+        } else {
+            alert('FAIL:' + data.message)
+        }
+    }.bind(this), 'json');
+}
+
 $(function () {
+    $.get('http://10.105.7.129/9888/game/web/index.php?r=user/user-play', {},
+        function (data) {
+            // const USER_ID = data.uid
+        }, 'json');
+
     window.ContentPanel = ReactDOM.render(<Content />, document.getElementById('cnt'));
 });

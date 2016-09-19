@@ -33,6 +33,7 @@
             star: '获得几颗星',
             wrongTouch: 0,
             initCount: '初始化方块数量',
+            tips: [],
             title: null
         },
         // 游戏道具
@@ -172,6 +173,7 @@
         },
 
         onUserInput: function (e) {
+            if (this.status.refreshAt) return; // 洗牌过程中不能响应用户事件
             if (e.eventTarget == this.gameContainer) {
                 var cellWidth = this.gameContainer.width / this.columnCount,
                     cellHeight = this.gameContainer.height / this.rowCount;
@@ -247,24 +249,48 @@
         },
 
         toolsShowTips: function () {
-            var padding = 4;
-            var scale = 1;
-            var star = new Hilo.Bitmap({
-                x: this.cellWidth * column + padding,
-                y: this.cellHeight * row + padding,
-                scaleX: scale,
-                scaleY: scale,
-                height: this.cellHeight - padding * 2,
-                width: this.cellWidth - padding * 2,
-                //image: this.levelTailImage
-            }).addTo(this.gameContainer);
+
+            var i, j;
+            out:
+                for (i = 0; i < this.rowCount; i++) {
+                    for (j = 0; j < this.columnCount; j++) {
+                        var m = !!this.checkHasMatch(i, j).length;
+                        if (m) {
+                            addStar.call(this, i, j, 0.7);
+                            break out;
+                        }
+                    }
+                }
+
+            function addStar(row, col, scale) {
+                var padding = 4;
+                var x = this.cellWidth * col + padding, y = this.cellHeight * row + padding;
+                var bm = new Hilo.Bitmap({
+                    x: x + this.cellWidth / 2,
+                    y: y + this.cellHeight / 2,
+                    pivotX: this.cellWidth / 2,
+                    pivotY: this.cellHeight / 2,
+                    scaleX: scale,
+                    scaleY: scale,
+                    height: this.cellHeight - padding * 2,
+                    width: this.cellWidth - padding * 2,
+                    image: this.asset.tipStar
+                }).addTo(this.gameContainer);
+
+                this.status.tips.push({
+                    addAt: now(),
+                    bitmap: bm
+                });
+            };
         },
 
         toolsRefresh: function () {
+            if (this.status.refreshAt) return; // 正在刷新中, 不能重复点击
             this.status.refreshAt = now();
             setTimeout(function () {
-                this.setLevel(this.status.initCount, this.status.level);
-            }.bind(this), 2200);
+                this.setLevel(this.getTileCount(), this.status.level);
+                this.status.refreshAt = null;
+            }.bind(this), 800);
         },
 
         toolsFreeze: function () {
@@ -296,6 +322,7 @@
         },
 
         checkLevelComplete: function () {
+            console.log(now());
             var over = true;
 
             out:
@@ -308,14 +335,11 @@
                     }
                 }
 
-            if (over && this.getTileCount() / (this.rowCount * this.columnCount) > 0.8) {
-                over = false;
-            }
-
             if (over) {
                 this.pauseGameProgress();
-                var used_time = parseInt((+new Date() - this.status.startAt) / 1000);
-                window.ContentPanel.levelComplete(used_time, 2);
+                var used_time = parseInt((now() - this.status.startAt) / 1000);
+                var success = this.getTileCount() / (this.rowCount * this.columnCount) > 0.8;
+                window.ContentPanel.levelComplete(success, used_time);
             }
         },
 
@@ -346,13 +370,18 @@
 
             // 初始化某一关卡的游戏时, 重置当前关卡游戏的进度
             this.status.title && this.status.title.removeFromParent(this.stage);
+            this.status.tips.forEach(function (i) {
+                i.removeFromParent(this.gameContainer)
+            }.bind(this));
+
             this.status = {
                 level: level,
-                startAt: +new Date(),
+                startAt: now(),
                 continueAt: 0,
                 star: 0,
                 initCount: initCount,
                 wrongTouch: 0,
+                tips: [],
                 title: null
             };
 
@@ -376,21 +405,23 @@
         },
 
         gameMoving: function () {
-            var delay, consume = parseInt((+new Date() - this.status.startAt) / 1000);
+            var delay, consume = parseInt((now() - this.status.startAt) / 1000);
 
             delay = 5000 - parseInt((this.status.level - 1) / 3) * 500;
             delay -= Math.min(6, parseInt(consume / 10)) * 500;
-
-            console.log('new tile show time: consume', consume, 'delay', delay);
 
             this.progressTimer = setTimeout(function () {
                 var r = this.getRandomEmptyCell();
                 if (!r) {
                     // no more empty cell, game over
-                    window.ContentPanel.levelComplete(100, 1);
+                    window.ContentPanel.levelComplete(false, parseInt((now() - this.status.startAt) / 1000));
                     return;
                 }
+
                 this.addTile(null, r.x, r.y, 'animate');
+                // 添加方块后立即检查 游戏是否结束
+                setTimeout(this.checkLevelComplete.bind(this), 500);
+
                 this.gameMoving();
             }.bind(this), delay);
         },
@@ -421,12 +452,12 @@
 
         pauseGameProgress: function () {
             clearTimeout(this.progressTimer);
-            this.status.continueAt = +new Date();
+            this.status.continueAt = now();
         },
 
         continueGameProgress: function () {
             if (this.status.continueAt)
-                this.status.startAt += +new Date() - this.status.continueAt;
+                this.status.startAt += now() - this.status.continueAt;
             this.gameMoving();
         },
 
@@ -469,25 +500,27 @@
         },
 
         onUpdate: function () {
-
             // 重新排列时的过场动画
-            if (this.status.refreshAt) this.onUpdateRefreshAnimate();
+            if (this.status.refreshAt > 0) this.onUpdateRefreshAnimate();
             // 每次更新, 检查那个新增块需要动画
             if (this.cells.length) this.onUpdateTileAnimate();
+            // 如果有提示小星星, 让小行星转起来
+            if (this.status.tips.length) this.onUpdateRotateStar();
         },
 
         onUpdateRefreshAnimate: function () {
             var i, j, bm;
             for (i = 0; i < this.rowCount; i++) {
                 for (j = 0; j < this.columnCount; j++) {
+                    if (!this.cells[i][j]) continue;
                     bm = this.cells[i][j].bitmap;
                     // TODO: 洗牌的动画轨迹
                     // bm.x = 0;
-                    // bm.y = 0;
+                    bm.y = bm.y + 460;
                 }
             }
 
-            if (+new Date() - this.status.refreshAt > 2000)
+            if (now() - this.status.refreshAt > 2000)
                 this.status.refreshAt = false;
         },
 
@@ -503,6 +536,20 @@
                         cell.bitmap.scaleY = scale;
 
                         if (scale >= 1) cell.with_animate = false;
+                    }
+                }
+            }
+        },
+
+        onUpdateRotateStar: function () {
+            for (var i = 0; i < this.status.tips.length; i++) {
+                var tip = this.status.tips[i];
+                if (tip) {
+                    if (now() - tip.addAt > 3 * 1000) {
+                        tip.bitmap.removeFromParent(this.gameContainer);
+                        this.status.tips[i] = null;
+                    } else {
+                        tip.bitmap.rotation += 8;
                     }
                 }
             }

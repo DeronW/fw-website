@@ -36,6 +36,7 @@
                 {id: 'propsRefresh', src: 'images/game/props-refresh.png'},
                 {id: 'propsFreeze', src: 'images/game/props-freeze.png'},
                 {id: 'propsDismiss', src: 'images/game/props-dismiss.png'},
+                {id: 'numbers', src: 'images/game/numbers.png'},
             ];
 
             this.queue = new Hilo.LoadQueue();
