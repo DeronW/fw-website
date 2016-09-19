@@ -134,14 +134,15 @@
                 x: 0
             }).addTo(this.stage);
 
-            // 添加底部草地
-            new Hilo.Bitmap({
-                image: this.asset.grassland,
-                width: this.width,
-                height: 160,
-                y: this.height - 160,
-                x: 0
-            }).addTo(this.stage);
+            // 不添加底部草地了, 屏幕高度不够
+            // // 添加底部草地
+            // new Hilo.Bitmap({
+            //     image: this.asset.grassland,
+            //     width: this.width,
+            //     height: 160,
+            //     y: this.height - 160,
+            //     x: 0
+            // }).addTo(this.stage);
 
             // 添加暂停按钮
             this.tools.pause = new Hilo.Bitmap({

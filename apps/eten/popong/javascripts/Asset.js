@@ -77,7 +77,9 @@
                 6: {image: numbers, rect: [0, 0, 35 * 7, 35]},
                 7: {image: numbers, rect: [0, 0, 35 * 8, 35]},
                 8: {image: numbers, rect: [0, 0, 35 * 9, 35]},
-                9: {image: numbers, rect: [0, 0, 35 * 10, 35]}
+                9: {image: numbers, rect: [0, 0, 35 * 10, 35]},
+                a: {image: numbers, rect: [0, 0, 35 * 11, 35]},
+                b: {image: numbers, rect: [0, 0, 35 * 12, 35]}
             };
 
             this.queue.off('complete');
