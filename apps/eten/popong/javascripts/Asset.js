@@ -30,7 +30,7 @@
                 {id: 'level_9', src: 'images/game/level_9.png'},
                 {id: 'tipStar', src: 'images/game/tip-star.png'},
                 {id: 'grassland', src: 'images/game/grassland.png'},
-                {id: 'grasshead', src: 'images/game/grass-head.png'},
+                {id: 'grasshead', src: 'images/game/grasshead.png'},
                 {id: 'pause', src: 'images/game/pause.png'},
                 {id: 'propsTips', src: 'images/game/props-tips.png'},
                 {id: 'propsRefresh', src: 'images/game/props-refresh.png'},

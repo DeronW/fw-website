@@ -20,7 +20,7 @@
         cellHeight: null,
         rowCount: 9,
         columnCount: 8,
-        gameContainerMarginTop: 560,
+        gameContainerMarginTop: 400,
         levelTailImage: null,
         cells: [],
 
@@ -129,7 +129,7 @@
             new Hilo.Bitmap({
                 image: this.asset.grasshead,
                 width: this.width,
-                height: 271 * 2,
+                height: 162 * 2,
                 y: 0,
                 x: 0
             }).addTo(this.stage);
@@ -158,7 +158,7 @@
                 image: this.asset.propsRefresh,
                 width: 83 * 2,
                 height: 96 * 2,
-                y: 320,
+                y: 160,
                 x: 280
             }).addTo(this.stage);
 
@@ -167,7 +167,7 @@
                 image: this.asset.propsTips,
                 width: 83 * 2,
                 height: 96 * 2,
-                y: 300,
+                y: 160,
                 x: this.width - 320 - 83 - 83
             }).addTo(this.stage);
 
@@ -397,7 +397,7 @@
                 maxWidth: 300 * 2,
                 textHeight: 50 * 2,
                 textWidth: 300 * 2,
-                y: 120,
+                y: 60,
                 x: 420
             }).addTo(this.stage).setFont('normal small-caps bold 80px Sans-serif');
 
