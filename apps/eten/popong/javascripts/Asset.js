@@ -29,7 +29,6 @@
                 {id: 'level_8', src: 'images/game/level_8.png'},
                 {id: 'level_9', src: 'images/game/level_9.png'},
                 {id: 'tipStar', src: 'images/game/tip-star.png'},
-                {id: 'grassland', src: 'images/game/grassland.png'},
                 {id: 'grasshead', src: 'images/game/grasshead.png'},
                 {id: 'pause', src: 'images/game/pause.png'},
                 {id: 'propsTips', src: 'images/game/props-tips.png'},
@@ -59,7 +58,6 @@
 
             this.tipStar = this.queue.get('tipStar').content;
 
-            this.grassland = this.queue.get('grassland').content;
             this.grasshead = this.queue.get('grasshead').content;
             this.pause = this.queue.get('pause').content;
 
@@ -68,18 +66,18 @@
 
             var numbers = this.queue.get('numbers').content;
             this.numberGlyphs = {
-                0: {image: numbers, rect: [0, 0, 35, 35]},
-                1: {image: numbers, rect: [0, 0, 35 * 2, 35]},
-                2: {image: numbers, rect: [0, 0, 35 * 3, 35]},
-                3: {image: numbers, rect: [0, 0, 35 * 4, 35]},
-                4: {image: numbers, rect: [0, 0, 35 * 5, 35]},
-                5: {image: numbers, rect: [0, 0, 35 * 6, 35]},
-                6: {image: numbers, rect: [0, 0, 35 * 7, 35]},
-                7: {image: numbers, rect: [0, 0, 35 * 8, 35]},
-                8: {image: numbers, rect: [0, 0, 35 * 9, 35]},
-                9: {image: numbers, rect: [0, 0, 35 * 10, 35]},
-                a: {image: numbers, rect: [0, 0, 35 * 11, 35]},
-                b: {image: numbers, rect: [0, 0, 35 * 12, 35]}
+                0: {image: numbers, rect: [35 * 0, 0, 35, 35]},
+                1: {image: numbers, rect: [35 * 1, 0, 35, 35]},
+                2: {image: numbers, rect: [35 * 2, 0, 35, 35]},
+                3: {image: numbers, rect: [35 * 3, 0, 35, 35]},
+                4: {image: numbers, rect: [35 * 4, 0, 35, 35]},
+                5: {image: numbers, rect: [35 * 5, 0, 35, 35]},
+                6: {image: numbers, rect: [35 * 6, 0, 35, 35]},
+                7: {image: numbers, rect: [35 * 7, 0, 35, 35]},
+                8: {image: numbers, rect: [35 * 8, 0, 35, 35]},
+                9: {image: numbers, rect: [35 * 9, 0, 35, 35]},
+                a: {image: numbers, rect: [35 * 10, 0, 35, 35]},
+                b: {image: numbers, rect: [35 * 11, 0, 35, 35]}
             };
 
             this.queue.off('complete');

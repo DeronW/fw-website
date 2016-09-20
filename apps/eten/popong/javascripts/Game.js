@@ -27,13 +27,13 @@
         // 记录当前关卡完成进度
         status: {
             level: '第几关',
-            startAt: '关卡开始时间',
             pauseAt: '暂停开始时间',
             refreshAt: '开始重新排列',
             star: '获得几颗星',
             wrongTouch: 0,
             initCount: '初始化方块数量',
             tips: [],
+            timing: 0,
             title: null
         },
         // 游戏道具
@@ -83,7 +83,6 @@
             this.stage.onUpdate = this.onUpdate.bind(this);
 
             this.initGameContainer();
-            // this.levelTailImage = this.asset.level_1;
         },
 
         initGameContainer: function () {
@@ -112,7 +111,7 @@
                 }).addTo(c)
             }
 
-            for (var i = 0; i < this.rowCount; i++) {
+            for (var i = 0; i < this.rowCount / 2; i++) {
                 new Hilo.View({
                     x: 0,
                     y: c.height / this.rowCount * i * 2,
@@ -131,16 +130,6 @@
                 y: 0,
                 x: 0
             }).addTo(this.stage);
-
-            // 不添加底部草地了, 屏幕高度不够
-            // // 添加底部草地
-            // new Hilo.Bitmap({
-            //     image: this.asset.grassland,
-            //     width: this.width,
-            //     height: 160,
-            //     y: this.height - 160,
-            //     x: 0
-            // }).addTo(this.stage);
 
             // 添加暂停按钮
             this.tools.pause = new Hilo.Bitmap({
@@ -172,8 +161,6 @@
         },
 
         onUserInput: function (e) {
-            console.log(e, this.status)
-
             if (this.status.refreshAt) return; // 洗牌过程中不能响应用户事件
             if (e.eventTarget == this.gameContainer) {
                 var cellWidth = this.gameContainer.width / this.columnCount,
@@ -337,9 +324,8 @@
 
             if (over) {
                 this.pauseGameProgress();
-                var used_time = parseInt((now() - this.status.startAt) / 1000);
                 var success = this.getTileCount() / (this.rowCount * this.columnCount) > 0.8;
-                window.ContentPanel.levelComplete(success, used_time);
+                window.ContentPanel.levelComplete(success, this.status.timing);
             }
         },
 
@@ -373,15 +359,26 @@
             this.status.tips.forEach(function (i) {
                 i.removeFromParent(this.gameContainer)
             }.bind(this));
+            this.usageTime && this.usageTime.removeFromParent(this.stage);
+            this.usageTime = new Hilo.BitmapText({
+                x: 80,
+                y: 50,
+                visible: true,
+                text: '0b',
+                scaleX: 1.5,
+                scaleY: 1.5,
+                height: 35 * 2,
+                glyphs: this.asset.numberGlyphs
+            }).addTo(this.stage);
 
             this.status = {
                 level: level,
-                startAt: now(),
-                continueAt: 0,
+                pauseAt: false,
                 star: 0,
                 initCount: initCount,
                 wrongTouch: 0,
                 tips: [],
+                timing: 0,
                 title: null
             };
 
@@ -401,20 +398,34 @@
                 x: 420
             }).addTo(this.stage).setFont('normal small-caps bold 80px Sans-serif');
 
+            this.gameTiming();
             this.gameMoving();
         },
 
+        gameTiming: function () {
+            setTimeout(this.gameTiming.bind(this), 1000);
+            // 游戏暂停中, 不再计算时间
+            if (this.status.pauseAt) return;
+
+            this.status.timing = (this.status.timing || 1) + 1;
+            var minutes = parseInt(this.status.timing / 60);
+            var seconds = this.status.timing % 60;
+            if (seconds < 10) seconds = '0' + seconds;
+            var text = minutes + 'a' + seconds + 'b';
+            this.usageTime.setText(text);
+        },
+
         gameMoving: function () {
-            var delay, consume = parseInt((now() - this.status.startAt) / 1000);
+            var delay;
 
             delay = 5000 - parseInt((this.status.level - 1) / 3) * 500;
-            delay -= Math.min(6, parseInt(consume / 10)) * 500;
+            delay -= Math.min(6, parseInt(this.status.timing / 10)) * 500;
 
             this.progressTimer = setTimeout(function () {
                 var r = this.getRandomEmptyCell();
                 if (!r) {
                     // no more empty cell, game over
-                    window.ContentPanel.levelComplete(false, parseInt((now() - this.status.startAt) / 1000));
+                    window.ContentPanel.levelComplete(false, this.status.timing);
                     return;
                 }
 
@@ -452,12 +463,11 @@
 
         pauseGameProgress: function () {
             clearTimeout(this.progressTimer);
-            this.status.continueAt = now();
+            this.status.pauseAt = now();
         },
 
         continueGameProgress: function () {
-            if (this.status.continueAt)
-                this.status.startAt += now() - this.status.continueAt;
+            this.status.pauseAt = false;
             this.gameMoving();
         },
 
