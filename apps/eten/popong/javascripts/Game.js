@@ -403,7 +403,8 @@
         },
 
         gameTiming: function () {
-            setTimeout(this.gameTiming.bind(this), 1000);
+            clearTimeout(this._timing_timer);
+            this._timing_timer = setTimeout(this.gameTiming.bind(this), 1000);
             // 游戏暂停中, 不再计算时间
             if (this.status.pauseAt) return;
 
@@ -497,6 +498,29 @@
             };
 
             return this.cells[row][column];
+        },
+
+        addDotLine: function (row, column, orientation) {
+            var dots = [], i, c, delta;
+            for (i = 0; i < 3; i++) {
+                delta = 3 * (i + 1) - 1 / 10;
+                if (orientation == 'vertical') {
+
+                }
+                c = new Hilo.Container({
+                    x: row * this.cellHeight + this.cellHeight,
+                    y: column * this.cellWidth + this.cellWidth / 2,
+                    width: 20,
+                    height: 20,
+                    background: 'white'
+                }).addTo(this.gameContainer);
+                dots.push(c)
+            }
+            setTimeout(function () {
+                for (var j = 0; j < dots.length; j++) {
+                    dots[j].removeFromParent(this.gameContainer)
+                }
+            }.bind(this), 500);
         },
 
         getTileCount: function () {
