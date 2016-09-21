@@ -20,14 +20,15 @@ const ETEN_APP_NAMES = [
     'topic-you-ju-dai',
     'topic-yi-shou-bao',
     'topic-bu-mao-tong',
+
+    // 专题说明页面
     'topic-annual-commision',
-    // 主营产品分类说明页面 END
 
     'preservation', // 安全保障介绍页面
     'guide-cookbook', // 玩赚攻略页
 
     'vip-prerogative', // 等级攻略页
-	'topic-a-rebate', //  a码用户返利规则
+    'topic-a-rebate', //  a码用户返利规则
     'statistics',
     'popong' // 点点点游戏页
 ];
