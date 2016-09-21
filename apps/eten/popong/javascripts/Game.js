@@ -351,7 +351,7 @@
 
             this.cells.forEach(function (row) {
                 row.forEach(function (i) {
-                    i.bitmap && i.bitmap.removeFromParent(_this.gameContainer)
+                    i && i.bitmap && i.bitmap.removeFromParent(_this.gameContainer)
                 })
             });
 
@@ -524,7 +524,7 @@
                 x = column * this.cellHeight;
                 y = row * this.cellWidth;
 
-                if (orientation == 'vertical') {
+                if (orient7ation == 'vertical') {
                     x += this.cellHeight / 2 - radius / 2;
                     y += this.cellWidth * delta - radius / 2;
                 } else {
@@ -603,7 +603,7 @@
             for (var i = 0; i < this.status.tips.length; i++) {
                 var tip = this.status.tips[i];
                 if (tip) {
-                    if (now() - tip.addAt > 3 * 1000) {
+                    if (now() - tip.addAt > 2 * 1000) {
                         tip.bitmap.removeFromParent(this.gameContainer);
                         this.status.tips[i] = null;
                     } else {
