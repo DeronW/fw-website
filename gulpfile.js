@@ -20,6 +20,7 @@ const ETEN_APP_NAMES = [
     'topic-you-ju-dai',
     'topic-yi-shou-bao',
     'topic-bu-mao-tong',
+    'topic-annual-commision',
     // 主营产品分类说明页面 END
 
     'preservation', // 安全保障介绍页面
