@@ -157,7 +157,6 @@
                 y: 160,
                 x: this.width - 320 - 83 - 83
             }).addTo(this.stage);
-
         },
 
         onUserInput: function (e) {
@@ -269,7 +268,7 @@
                     addAt: now(),
                     bitmap: bm
                 });
-            };
+            }
         },
 
         toolsRefresh: function () {
@@ -292,6 +291,24 @@
         biuAction: function (row, column) {
             if (this.cells[row][column]) return;
             var match_tiles = this.checkHasMatch(row, column);
+            // 画线
+            match_tiles.forEach(function (i) {
+                if (i.row == row) {
+                    var col = column, d = column > i.column ? -1 : 1;
+                    while (Math.abs(col - i.column) > 1) {
+                        col += d;
+                        this.drawDotLine(row, col, 'horizon')
+                    }
+                } else {
+                    var r = row, d = row > i.row ? -1 : 1;
+                    while (Math.abs(r - i.row) > 1) {
+                        r += d;
+                        this.drawDotLine(r, column, 'vertical')
+                    }
+                }
+            }.bind(this));
+
+            // 去除方块
             match_tiles.forEach(function (i) {
                 i.bitmap.removeFromParent(this.gameContainer);
                 this.cells[i.row][i.column] = null;
@@ -500,27 +517,34 @@
             return this.cells[row][column];
         },
 
-        addDotLine: function (row, column, orientation) {
-            var dots = [], i, c, delta;
+        drawDotLine: function (row, column, orientation) {
+            var dots = [], i, c, delta, x, y, radius = 12;
             for (i = 0; i < 3; i++) {
-                delta = 3 * (i + 1) - 1 / 10;
-                if (orientation == 'vertical') {
+                delta = (3 * (i + 1) - 1) / 10;
+                x = column * this.cellHeight;
+                y = row * this.cellWidth;
 
+                if (orientation == 'vertical') {
+                    x += this.cellHeight / 2 - radius / 2;
+                    y += this.cellWidth * delta - radius / 2;
+                } else {
+                    y += this.cellWidth / 2 - radius / 2;
+                    x += this.cellHeight * delta - radius / 2;
                 }
-                c = new Hilo.Container({
-                    x: row * this.cellHeight + this.cellHeight,
-                    y: column * this.cellWidth + this.cellWidth / 2,
-                    width: 20,
-                    height: 20,
-                    background: 'white'
-                }).addTo(this.gameContainer);
-                dots.push(c)
+
+                c = new Hilo.Graphics({
+                    x: x,
+                    y: y,
+                    width: 40,
+                    height: 40
+                }).beginFill("white", 1).drawCircle(0, 0, radius).endFill().addTo(this.gameContainer);
+                dots.push(c);
             }
             setTimeout(function () {
                 for (var j = 0; j < dots.length; j++) {
                     dots[j].removeFromParent(this.gameContainer)
                 }
-            }.bind(this), 500);
+            }.bind(this), 150);
         },
 
         getTileCount: function () {
