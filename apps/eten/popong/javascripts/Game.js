@@ -169,9 +169,15 @@
                 this.biuAction(row, column);
                 setTimeout(this.checkLevelComplete.bind(this), 500);
             } else if (e.eventTarget == this.tools.refresh) {
-                this.toolsRefresh();
+                this.pauseGameProgress();
+                window.ContentPanel.useProps('xxx',
+                    function () {
+                        this.toolsRefresh();
+                        this.continueGameProgress();
+                    }.bind(this)
+                );
             } else if (e.eventTarget == this.tools.tips) {
-                this.toolsShowTips()
+                this.usePropsHandler('tips', this.toolsShowTips.bind(this));
             } else if (e.eventTarget == this.tools.freeze) {
                 this.toolsFreeze()
             } else if (e.eventTarget == this.tools.dismiss) {
@@ -180,6 +186,17 @@
                 this.pauseGameProgress();
                 window.ContentPanel.setPage('pause');
             }
+        },
+
+        usePropsHandler: function (prop_id, cb) {
+            this.pauseGameProgress();
+            window.ContentPanel.useProps(prop_id,
+                function () {
+                    cb();
+                    this.continueGameProgress();
+                }.bind(this)
+            );
+            // this.toolsShowTips.bind(this)
         },
 
         checkHasMatch: function (row, column) {
@@ -374,7 +391,7 @@
             // 初始化某一关卡的游戏时, 重置当前关卡游戏的进度
             this.status.title && this.status.title.removeFromParent(this.stage);
             this.status.tips.forEach(function (i) {
-                i.removeFromParent(this.gameContainer)
+                i && i.removeFromParent(this.gameContainer)
             }.bind(this));
             this.usageTime && this.usageTime.removeFromParent(this.stage);
             this.usageTime = new Hilo.BitmapText({
@@ -524,7 +541,7 @@
                 x = column * this.cellHeight;
                 y = row * this.cellWidth;
 
-                if (orient7ation == 'vertical') {
+                if (orientation == 'vertical') {
                     x += this.cellHeight / 2 - radius / 2;
                     y += this.cellWidth * delta - radius / 2;
                 } else {
@@ -544,7 +561,7 @@
                 for (var j = 0; j < dots.length; j++) {
                     dots[j].removeFromParent(this.gameContainer)
                 }
-            }.bind(this), 150);
+            }.bind(this), 250);
         },
 
         getTileCount: function () {

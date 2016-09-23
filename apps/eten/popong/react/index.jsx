@@ -1,14 +1,18 @@
 const GAME_NAME = 'qMzjW'; // 点点点游戏
 const USER_ID = 63; // 临时模拟的用户id
+const API_PATH = 'http://10.105.7.129';
 
 const Content = React.createClass({
     getInitialState: function () {
+        this._useCallback = null;
+
         return {
             // page in: start, prepare, level, props, pause, complete, game, ladder, end, share
-            page: 'props',
+            page: 'start',
             level_list: [],
             level: null,
             current_level_seconds: null,
+            using_prop_id: null,
             ladder: []
         }
     },
@@ -86,6 +90,14 @@ const Content = React.createClass({
     setPage: function (page) {
         this.setState({page: page})
     },
+    useProps: function (prop_id, cb) {
+        this.setState({page: 'props', using_prop_id: prop_id});
+        this._useCallback = cb;
+    },
+    propsCallback: function () {
+        this.setState({page: 'game'});
+        this._useCallback();
+    },
     render: function () {
 
         var style = {display: this.state.page == 'game' ? 'none' : 'block'};
@@ -96,7 +108,9 @@ const Content = React.createClass({
         } else if (page == 'prepare') {
             cnt = <Content.Prepare level={this.state.level} playHandler={this.playHandler}/>
         } else if (page == 'props') {
-            cnt = <Content.UserProps />
+            cnt = <Content.UserProps setPage={this.setPage}
+                                     prop_id={this.state.using_prop_id}
+                                     useCallback={this.propsCallback}/>
         } else if (page == 'level') {
             cnt = <Content.Level playGame={this.playGameHandler}
                                  level_list={this.state.level_list}
@@ -212,12 +226,52 @@ Content.Prepare = React.createClass({
 
 Content.UserProps = React.createClass({
     getInitialState: function () {
-        return {}
+        return {
+            value: 1,
+            title: '',
+            describe: '',
+            limitBuy: null
+        }
+    },
+    componentDidMount: function () {
+        this.setState({
+            title: '提示道具' + (new Date()).getSeconds(),
+            describe: '用于提示1个可消除的方块, 消耗5工分即可购买',
+            limitBuy: 3
+        });
+    },
+    closeHandler: function () {
+        this.props.setPage('game')
+    },
+    jiaHandler: function () {
+        this.setState({value: this.state.value + 1})
+    },
+    jianHandler: function () {
+        this.setState({value: Math.max(this.state.value - 1, 1)})
+    },
+    buyHandler: function () {
+
+    },
+    useHandler: function () {
+        this.props.useCallback();
     },
     render: function () {
         return (
             <div className="level-props">
-                sdfsdf
+                <div className="dialog">
+                    <div className="btn-close" onClick={this.closeHandler}></div>
+                    <div className="props-title">{this.state.title}</div>
+                    <div className="describe">{this.state.describe}</div>
+                    <div className="form">
+                        <a className="jian" onClick={this.jianHandler}> </a>
+                        <div className="value"> {this.state.value} </div>
+                        <a className="jia" onClick={this.jiaHandler}> </a>
+                    </div>
+                    <div className="limit">当前关卡限购{this.state.limitBuy}个</div>
+
+                    <a className="btn-use" onClick={this.useHandler}> </a>
+                    <a className="btn-buy" onClick={this.buyHandler}> </a>
+                </div>
             </div>
         )
     }
@@ -338,7 +392,7 @@ Content.StartPage = React.createClass({
 
 
 function calculateStar(level, seconds, cb) {
-    $.get('http://10.105.7.129/9888/game/web/index.php', {
+    $.get(API_PATH + '/9888/game/web/index.php', {
         r: 'user/user-addres',
         gameNo: GAME_NAME,
         passNum: level,
@@ -355,7 +409,7 @@ function calculateStar(level, seconds, cb) {
 }
 
 $(function () {
-    $.get('http://10.105.7.129/9888/game/web/index.php?r=user/user-play', {},
+    $.get(API_PATH + '/9888/game/web/index.php?r=user/user-play', {},
         function (data) {
             // const USER_ID = data.uid
         }, 'json');
