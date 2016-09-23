@@ -13,7 +13,7 @@ const ETEN_APP_NAMES = [
     'guide', // 新手引导
     'app-download', // app 下载页面
 
-    // 主营产品分类说明页面 START
+    // 主营产品分类说明页面
     'topic-yi-zhuan-ying',
     'topic-yi-che-xiang',
     'topic-li-sui-xiang',
@@ -22,7 +22,7 @@ const ETEN_APP_NAMES = [
     'topic-bu-mao-tong',
 
     // 专题说明页面
-    'topic-annual-commision',
+    'topic-annual-commision', // A码 佣金说明
 
     'preservation', // 安全保障介绍页面
     'guide-cookbook', // 玩赚攻略页

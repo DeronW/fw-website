@@ -4,8 +4,8 @@ const USER_ID = 63; // 临时模拟的用户id
 const Content = React.createClass({
     getInitialState: function () {
         return {
-            // page in: start, prepare, level, pause, complete, game, ladder, end, share
-            page: 'start',
+            // page in: start, prepare, level, props, pause, complete, game, ladder, end, share
+            page: 'props',
             level_list: [],
             level: null,
             current_level_seconds: null,
@@ -95,6 +95,8 @@ const Content = React.createClass({
             cnt = <Content.StartPage startGame={this.startGameHandler}/>
         } else if (page == 'prepare') {
             cnt = <Content.Prepare level={this.state.level} playHandler={this.playHandler}/>
+        } else if (page == 'props') {
+            cnt = <Content.UserProps />
         } else if (page == 'level') {
             cnt = <Content.Level playGame={this.playGameHandler}
                                  level_list={this.state.level_list}
@@ -203,6 +205,19 @@ Content.Prepare = React.createClass({
                         {this.state.records.map(record)}
                     </div>
                 </div>
+            </div>
+        )
+    }
+});
+
+Content.UserProps = React.createClass({
+    getInitialState: function () {
+        return {}
+    },
+    render: function () {
+        return (
+            <div className="level-props">
+                sdfsdf
             </div>
         )
     }
