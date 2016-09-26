@@ -20,6 +20,7 @@ const ETEN_APP_NAMES = [
     'topic-you-ju-dai',
     'topic-yi-shou-bao',
     'topic-bu-mao-tong',
+
     // 专题说明页面
     'topic-annual-commision', // A码 佣金说明
     'topic-hui-shang', // 徽商
@@ -29,7 +30,9 @@ const ETEN_APP_NAMES = [
     'guide-cookbook', // 玩赚攻略页
     'vip-prerogative', // 等级攻略页
     'topic-a-rebate', //  a码用户返利规则
-    'statistics',
+
+    // 其他页面
+    'statistics', // 实时交易统计
     'popong' // 点点点游戏页
 ];
 
