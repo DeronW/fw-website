@@ -23,10 +23,8 @@ const ETEN_APP_NAMES = [
     // 专题说明页面
     'topic-annual-commision', // A码 佣金说明
     'topic-hui-shang', // 徽商
-
     'preservation', // 安全保障介绍页面
     'guide-cookbook', // 玩赚攻略页
-
     'vip-prerogative', // 等级攻略页
     'topic-a-rebate', //  a码用户返利规则
     'statistics',
