@@ -13,22 +13,22 @@ const ETEN_APP_NAMES = [
     'guide', // 新手引导
     'app-download', // app 下载页面
 
-    // 主营产品分类说明页面 START
+    // 主营产品分类说明页面
     'topic-yi-zhuan-ying',
     'topic-yi-che-xiang',
     'topic-li-sui-xiang',
     'topic-you-ju-dai',
     'topic-yi-shou-bao',
     'topic-bu-mao-tong',
-    'topic-annual-commision',
-    'topic-hui-shang',
-    // 主营产品分类说明页面 END
+    // 专题说明页面
+    'topic-annual-commision', // A码 佣金说明
+    'topic-hui-shang', // 徽商
 
     'preservation', // 安全保障介绍页面
     'guide-cookbook', // 玩赚攻略页
 
     'vip-prerogative', // 等级攻略页
-	'topic-a-rebate', //  a码用户返利规则
+    'topic-a-rebate', //  a码用户返利规则
     'statistics',
     'popong' // 点点点游戏页
 ];
