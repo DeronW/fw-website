@@ -1,20 +1,22 @@
-
 $(function () {
     ReactDOM.render(<HeaderStatusBar />, document.getElementById('header-status-bar'));
 });
 
 $(function () {
+    var phase2 = location.search == "?phase2";
     var count = 0;
+    var phase = ".dots.phase-" + (phase2 ? 2 : 1);
+    if (phase2) $(".dots.phase-1 div").addClass("red");
 
     function draw() {
         if (count < 10) {
-            $(".dots.on div:eq(" + count + ")").addClass("red");
+            $(phase + " div:eq(" + count + ")").addClass("red");
             count++;
         } else {
             count = 0;
-            $(".dots.on div").removeClass("red")
+            $(phase + " div").removeClass("red")
         }
     }
 
-    setInterval(draw, 200);
+    setInterval(draw, 180);
 });
