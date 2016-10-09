@@ -129,6 +129,7 @@ const Content = React.createClass({
         } else if (page == 'props') {
             cnt = <Content.UserProps setPage={this.setPage}
                                      level={this.state.level}
+                                     continue={this.continueGameHandler}
                                      prop={this.getCurrentProp()}
                                      useCallback={this.propsCallback}/>
         } else if (page == 'level') {
@@ -278,6 +279,7 @@ Content.UserProps = React.createClass({
     componentDidMount: function () {
     },
     closeHandler: function () {
+        this.props.continue()
         this.props.setPage('game')
     },
     jiaHandler: function () {
