@@ -49,7 +49,6 @@
 
                 this.initialized = true
             }.bind(this));
-
             this.asset.load()
         },
 
@@ -140,7 +139,18 @@
                 x: this.width - 280
             }).addTo(this.stage);
 
-            // 道具: 重新排列
+        },
+
+        removeAllProps: function () {
+            // refresh 重新排列道具, tips 提示道具
+            ['refresh', 'tips'].forEach(function (name) {
+                this.tools[name] && this.tools[name].removeFromParent(this.stage);
+                delete this.tools[name];
+            }.bind(this))
+        },
+
+        // 道具: 重新排列
+        addPropsRefresh: function () {
             this.tools.refresh = new Hilo.Bitmap({
                 image: this.asset.propsRefresh,
                 width: 83 * 2,
@@ -148,8 +158,10 @@
                 y: 160,
                 x: 280
             }).addTo(this.stage);
+        },
 
-            // 道具: 提示
+        // 道具: 提示
+        addPropsTips: function () {
             this.tools.tips = new Hilo.Bitmap({
                 image: this.asset.propsTips,
                 width: 83 * 2,
@@ -170,7 +182,7 @@
                 setTimeout(this.checkLevelComplete.bind(this), 500);
             } else if (e.eventTarget == this.tools.refresh) {
                 this.pauseGameProgress();
-                window.ContentPanel.useProps('xxx',
+                window.ContentPanel.useProps('4', // refresh 刷新道具
                     function () {
                         this.toolsRefresh();
                         this.continueGameProgress();
@@ -196,7 +208,6 @@
                     this.continueGameProgress();
                 }.bind(this)
             );
-            // this.toolsShowTips.bind(this)
         },
 
         checkHasMatch: function (row, column) {
@@ -358,12 +369,17 @@
 
             if (over) {
                 this.pauseGameProgress();
-                var success = this.getTileCount() / (this.rowCount * this.columnCount) > 0.8;
+                var success = this.getTileCount() / (this.rowCount * this.columnCount) < 0.7;
                 window.ContentPanel.levelComplete(success, this.status.timing);
             }
         },
 
-        setLevel: function (initCount, level) {
+        /*
+         @params: initCount 初始化方块个数
+         @params: level 关卡数
+         @params: props 可用道具列表
+         */
+        setLevel: function (initCount, level, props) {
             var _this = this;
 
             this.cells.forEach(function (row) {
@@ -384,7 +400,6 @@
             for (var i = 0; i < list.length; i++) {
                 var row = Math.floor(list[i] / this.columnCount);
                 var column = list[i] % this.columnCount;
-
                 this.addTile(null, row, column);
             }
 
@@ -431,6 +446,11 @@
                 y: 60,
                 x: 420
             }).addTo(this.stage).setFont('normal small-caps bold 80px Sans-serif');
+
+            props.forEach(function (i) {
+                if (i.prop_id == 4) this.addPropsRefresh();
+                if (i.prop_id == 3) this.addPropsTips();
+            }.bind(this));
 
             this.gameTiming();
             this.gameMoving();

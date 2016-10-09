@@ -1,6 +1,5 @@
-const GAME_NAME = 'qMzjW'; // 点点点游戏
+const GAME_NAME = '0pn5m'; // 点点点游戏 0pn5m
 const USER_ID = 63; // 临时模拟的用户id
-const API_PATH = 'http://10.105.7.129';
 
 const Content = React.createClass({
     getInitialState: function () {
@@ -12,8 +11,9 @@ const Content = React.createClass({
             level_list: [],
             level: null,
             current_level_seconds: null,
-            using_prop_id: null,
-            ladder: []
+            ladder: [], // 排行榜
+            using_prop_id: null, // 要使用的道具ID
+            propsOptions: [] // 多个道具的相关信息
         }
     },
     componentDidMount: function () {
@@ -64,8 +64,17 @@ const Content = React.createClass({
     },
     playHandler: function () {
         var start_count = [28, 30, 32, 34, 36, 38, 38, 42, 46];
-        Game.setLevel(start_count[this.state.level - 1], this.state.level);
-        this.setState({page: 'game'});
+
+        $.get(`${API_PATH}/9888/game/web/index.php`, {
+            r: 'user/work-points',
+            uid: USER_ID,
+            gameNo: GAME_NAME,
+            passNum: this.state.level
+        }, (data)=> {
+            var propsOptions = data.data;
+            Game.setLevel(start_count[this.state.level - 1], this.state.level, propsOptions);
+            this.setState({page: 'game', propsOptions: propsOptions});
+        }, 'json');
     },
     levelComplete: function (success, seconds) {
         this.setState({
@@ -98,6 +107,16 @@ const Content = React.createClass({
         this.setState({page: 'game'});
         this._useCallback();
     },
+    getCurrentProp: function () {
+        var prop, props = this.state.propsOptions;
+        for (var i = 0; i < props.length; i++) {
+            if (props[i].prop_id == this.state.using_prop_id) {
+                prop = props[i];
+                break;
+            }
+        }
+        return prop;
+    },
     render: function () {
 
         var style = {display: this.state.page == 'game' ? 'none' : 'block'};
@@ -109,7 +128,8 @@ const Content = React.createClass({
             cnt = <Content.Prepare level={this.state.level} playHandler={this.playHandler}/>
         } else if (page == 'props') {
             cnt = <Content.UserProps setPage={this.setPage}
-                                     prop_id={this.state.using_prop_id}
+                                     level={this.state.level}
+                                     prop={this.getCurrentProp()}
                                      useCallback={this.propsCallback}/>
         } else if (page == 'level') {
             cnt = <Content.Level playGame={this.playGameHandler}
@@ -130,11 +150,28 @@ const Content = React.createClass({
 
 Content.Level = React.createClass({
     getInitialState: function () {
-        return {}
+        let list = [], ls = this.props.level_list.slice(), todo_level = null;
+
+        for (var i = 0; i < ls.length; i++) {
+            list.push(ls[i]);
+            if ((i == 0 && ls[i].locked) ||
+                (i > 0 && ls[i].locked && ls[i - 1].locked === false)) {
+                todo_level = i;
+            }
+        }
+        if (todo_level !== null) {
+            list[todo_level].star = '0';
+            list[todo_level].locked = false;
+        }
+        return {level_list: list}
     },
 
     clickHandler: function (level) {
-        this.props.switchLevel(level)
+        if (this.state.level_list[level - 1].locked) {
+            alert(`您还没有解锁${level}关`);
+        } else {
+            this.props.switchLevel(level)
+        }
     },
 
     render: function () {
@@ -148,7 +185,7 @@ Content.Level = React.createClass({
                 <div key={index} className="level">
                     <div className={cn_bg} onClick={() => this.clickHandler(index + 1)}>
                         <div className="num">{index + 1}</div>
-                        {item.star ? star : null}
+                        {item.star != null ? star : null}
                     </div>
                 </div>
             )
@@ -157,7 +194,7 @@ Content.Level = React.createClass({
         return <div className="level-list">
             <img className="header" src="images/level-list-header.png"/>
             <img className="footer" src="images/level-list-footer.png"/>
-            <div> {this.props.level_list.map(level)} </div>
+            <div> {this.state.level_list.map(level)} </div>
         </div>
     }
 });
@@ -167,7 +204,7 @@ Content.Prepare = React.createClass({
         return {records: []}
     },
     componentDidMount: function () {
-        $.get('http://10.105.7.129/9888/game/web/index.php', {
+        $.get(API_PATH + '/9888/game/web/index.php', {
             r: 'user/user-ranking',
             gameNo: GAME_NAME,
             passNum: this.props.level,
@@ -226,19 +263,19 @@ Content.Prepare = React.createClass({
 
 Content.UserProps = React.createClass({
     getInitialState: function () {
+        if (this.props.prop === null) alert('道具不存在');
+        var prop = this.props.prop;
+
         return {
+            id: prop.prop_id,
             value: 1,
-            title: '',
-            describe: '',
-            limitBuy: null
+            score: prop.price,
+            title: prop.prop_name,
+            describe: `${prop.comment}, 消耗${prop.price}工分即可购买`,
+            limitBuy: prop.remainder_buy
         }
     },
     componentDidMount: function () {
-        this.setState({
-            title: '提示道具' + (new Date()).getSeconds(),
-            describe: '用于提示1个可消除的方块, 消耗5工分即可购买',
-            limitBuy: 3
-        });
     },
     closeHandler: function () {
         this.props.setPage('game')
@@ -250,10 +287,29 @@ Content.UserProps = React.createClass({
         this.setState({value: Math.max(this.state.value - 1, 1)})
     },
     buyHandler: function () {
-
+        $.get(`${API_PATH}/9888/game/web/index.php?r=user/prop-buy`, {
+            buyNum: this.state.value,
+            gameNo: GAME_NAME,
+            passNum: this.props.level,
+            propId: this.state.id,
+            uid: USER_ID
+        }, (data)=> {
+            alert(data.code == 10000 ? '购买成功' : '购买失败')
+        }, 'json');
     },
     useHandler: function () {
-        this.props.useCallback();
+        $.get(`${API_PATH}/9888/game/web/index.php?r=user/prop-use`, {
+            gameNo: GAME_NAME,
+            passNum: this.props.level,
+            propId: this.state.id,
+            uid: USER_ID
+        }, (data)=> {
+            if (data.code == 10000) {
+                this.props.useCallback();
+            } else {
+                alert(data.message)
+            }
+        }, 'json');
     },
     render: function () {
         return (
@@ -363,10 +419,22 @@ Content.StartPage = React.createClass({
                 <div className="rule-detail">
                     <img src="images/start-page-btn-close.png" onClick={this.ruleToggleHandler}/>
                     <div className="text">
-                        1. xxxx
+                        1. 游戏单手操作即可，只需手指点击同一水平线或垂直线上两个或两个以上相同图案进行消除，完成每关的指定消除目标即可过关；
                     </div>
                     <div className="text">
-                        2. xxxx
+                        2. 如果您通关遇到障碍，可选择使用工分兑换道具，道具一经兑换，不能退换；
+                    </div>
+                    <div className="text">
+                        3. 请保持网络通畅，如遇断网情况，当前使用道具、游戏成绩作废；
+                    </div>
+                    <div className="text">
+                        4. 游戏前三关为试玩关卡，继续游戏需注册金融工场，注册后1-3关通关成绩保留，榜单成绩不做记录；
+                    </div>
+                    <div className="text">
+                        5. 有任何疑问可截图向微信客服获得帮助，客服微信公众号搜索：金融工场服务中心；
+                    </div>
+                    <div className="text">
+                        6. 本游戏所有解释权归金融工场所有。
                     </div>
                 </div>
             </div>
