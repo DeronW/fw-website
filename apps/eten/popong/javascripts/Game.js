@@ -189,7 +189,8 @@
                     }.bind(this)
                 );
             } else if (e.eventTarget == this.tools.tips) {
-                this.usePropsHandler('tips', this.toolsShowTips.bind(this));
+                // 3: 表示提示道具
+                this.usePropsHandler('3', this.toolsShowTips.bind(this));
             } else if (e.eventTarget == this.tools.freeze) {
                 this.toolsFreeze()
             } else if (e.eventTarget == this.tools.dismiss) {
