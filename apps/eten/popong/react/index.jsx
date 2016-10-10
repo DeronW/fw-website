@@ -23,27 +23,9 @@ const Content = React.createClass({
             level_list.push({locked: true})
         }
         this.setState({level_list: level_list});
+        this.refreshLevelList();
 
-        $.get(API_PATH + '/9888/game/web/index.php', {
-            r: 'user/user-play',
-            gameNo: GAME_NAME,
-            uid: USER_ID
-        }, function (data) {
-            if (data.code != 10000) {
-                alert('服务异常:' + data.msg);
-                return
-            }
-
-            for (var i = 0; i < data.data.length; i++) {
-                var m = data.data[i];
-                var lvl = level_list[parseInt(m.pass_num) - 1];
-                lvl.star = m.star;
-                lvl.score = m.score;
-                lvl.locked = false;
-            }
-            this.setState({level_list: level_list});
-        }.bind(this), 'json');
-
+        // 获取带带奖品关卡列表
         $.get(API_PATH + '/9888/game/web/index.php', {
             r: 'user/game-gift',
             gameNo: GAME_NAME
@@ -58,6 +40,29 @@ const Content = React.createClass({
             }
             this.setState({level_list: level_list});
         }.bind(this), 'json')
+    },
+    refreshLevelList: function () {
+        // 获取已通过关卡列表
+        $.get(API_PATH + '/9888/game/web/index.php', {
+            r: 'user/user-play',
+            gameNo: GAME_NAME,
+            uid: USER_ID
+        }, function (data) {
+            if (data.code != 10000) {
+                alert('服务异常:' + data.msg);
+                return
+            }
+
+            let level_list = this.state.level_list;
+            for (var i = 0; i < (data.data || []).length; i++) {
+                var m = data.data[i];
+                var lvl = level_list[parseInt(m.pass_num) - 1];
+                lvl.star = m.star;
+                lvl.score = m.score;
+                lvl.locked = false;
+            }
+            this.setState({level_list: level_list});
+        }.bind(this), 'json');
     },
     switchLevel: function (level) {
         this.setState({page: 'prepare', level: level});
@@ -83,8 +88,6 @@ const Content = React.createClass({
             current_level_success: success
         });
     },
-    showLadder: function () {
-    },
     startGameHandler: function () {
         this.setState({page: 'level'})
     },
@@ -97,7 +100,8 @@ const Content = React.createClass({
         Game.continueGameProgress();
     },
     setPage: function (page) {
-        this.setState({page: page})
+        this.setState({page: page});
+        if (page == 'level') this.refreshLevelList();
     },
     useProps: function (prop_id, cb) {
         this.setState({page: 'props', using_prop_id: prop_id});
@@ -118,7 +122,6 @@ const Content = React.createClass({
         return prop;
     },
     render: function () {
-
         var style = {display: this.state.page == 'game' ? 'none' : 'block'};
         var page = this.state.page, cnt;
 
@@ -151,7 +154,16 @@ const Content = React.createClass({
 
 Content.Level = React.createClass({
     getInitialState: function () {
-        let list = [], ls = this.props.level_list.slice(), todo_level = null;
+        return {level_list: this.getExtendList(this.props.level_list)}
+    },
+
+    componentWillReceiveProps: function (nextProps) {
+        this.setState({level_list: this.getExtendList(nextProps.level_list)})
+    },
+
+    getExtendList: function (level_list) {
+        let list = [], ls = JSON.parse(JSON.stringify(level_list)),
+            todo_level = null;
 
         for (var i = 0; i < ls.length; i++) {
             list.push(ls[i]);
@@ -164,7 +176,7 @@ Content.Level = React.createClass({
             list[todo_level].star = '0';
             list[todo_level].locked = false;
         }
-        return {level_list: list}
+        return list
     },
 
     clickHandler: function (level) {
@@ -217,7 +229,7 @@ Content.Prepare = React.createClass({
             }
 
             var records = [], i, m;
-            for (i = 0; i < data.data.length; i++) {
+            for (i = 0; i < (data.data || []).length; i++) {
                 m = data.data[i];
                 var avatar = 'images/prepare/avatar-' + (m.sex == 0 ? 'fe' : '') + 'male.png';
 
@@ -279,7 +291,7 @@ Content.UserProps = React.createClass({
     componentDidMount: function () {
     },
     closeHandler: function () {
-        this.props.continue()
+        this.props.continue();
         this.props.setPage('game')
     },
     jiaHandler: function () {
