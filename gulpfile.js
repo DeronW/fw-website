@@ -22,14 +22,13 @@ const ETEN_APP_NAMES = [
     'topic-bu-mao-tong',
 
     // 专题说明页面
-    'topic-annual-commision', // A码 佣金说明
+    'topic-annual-commision', // A码 用户返利规则 佣金说明
     'topic-hui-shang', // 徽商
     'topic-hui-shang-guide', // 徽商 开户引导
     'topic-hui-shang-updating', // 徽商 升级中
     'preservation', // 安全保障介绍页面
     'guide-cookbook', // 玩赚攻略页
     'vip-prerogative', // 等级攻略页
-    'topic-a-rebate', //  a码用户返利规则
 
     // 其他页面
     'statistics', // 实时交易统计
