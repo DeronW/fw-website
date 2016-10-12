@@ -1,12 +1,15 @@
 $(function () {
-    ReactDOM.render(<HeaderStatusBar />, document.getElementById('header-status-bar'));
+    // ReactDOM.render(<HeaderStatusBar />, document.getElementById('header-status-bar'));
 });
 
 $(function () {
     var phase2 = location.search == "?phase2";
     var count = 0;
     var phase = ".dots.phase-" + (phase2 ? 2 : 1);
-    if (phase2) $(".dots.phase-1 div").addClass("red");
+    if (phase2) {
+        $(".dots.phase-1 div").addClass("red");
+        $("#processing-node-2").removeClass("unfinished");
+    }
 
     function draw() {
         if (count < 10) {
