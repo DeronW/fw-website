@@ -28,6 +28,8 @@ const ETEN_APP_NAMES = [
     'topic-hui-shang-updating', // 徽商 升级中
     'preservation', // 安全保障介绍页面
     'guide-cookbook', // 玩赚攻略页
+
+
     'vip-prerogative', // 等级攻略页
 
     // 其他页面
