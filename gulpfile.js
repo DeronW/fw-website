@@ -25,6 +25,8 @@ const ETEN_APP_NAMES = [
     'preservation', // 安全保障介绍页面
     'guide-cookbook', // 玩赚攻略页
 
+    'topic-hui-shang-updating',
+
     'vip-prerogative', // 等级攻略页
 	'topic-a-rebate', //  a码用户返利规则
     'statistics',
