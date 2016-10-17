@@ -20,19 +20,20 @@
         cellHeight: null,
         rowCount: 9,
         columnCount: 8,
-        gameContainerMarginTop: 660,
+        gameContainerMarginTop: 400,
         levelTailImage: null,
         cells: [],
 
         // 记录当前关卡完成进度
         status: {
             level: '第几关',
-            startAt: '关卡开始时间',
             pauseAt: '暂停开始时间',
             refreshAt: '开始重新排列',
             star: '获得几颗星',
             wrongTouch: 0,
             initCount: '初始化方块数量',
+            tips: [],
+            timing: 0,
             title: null
         },
         // 游戏道具
@@ -48,7 +49,6 @@
 
                 this.initialized = true
             }.bind(this));
-
             this.asset.load()
         },
 
@@ -82,9 +82,6 @@
             this.stage.onUpdate = this.onUpdate.bind(this);
 
             this.initGameContainer();
-
-            this.levelTailImage = this.asset.level_1;
-            //this.setLevel(20, 0)
         },
 
         initGameContainer: function () {
@@ -113,7 +110,7 @@
                 }).addTo(c)
             }
 
-            for (var i = 0; i < this.rowCount; i++) {
+            for (var i = 0; i < this.rowCount / 2; i++) {
                 new Hilo.View({
                     x: 0,
                     y: c.height / this.rowCount * i * 2,
@@ -128,17 +125,8 @@
             new Hilo.Bitmap({
                 image: this.asset.grasshead,
                 width: this.width,
-                height: 271 * 2,
+                height: 162 * 2,
                 y: 0,
-                x: 0
-            }).addTo(this.stage);
-
-            // 添加底部草地
-            new Hilo.Bitmap({
-                image: this.asset.grassland,
-                width: this.width,
-                height: 160,
-                y: this.height - 160,
                 x: 0
             }).addTo(this.stage);
 
@@ -151,27 +139,40 @@
                 x: this.width - 280
             }).addTo(this.stage);
 
-            // 道具: 重新排列
+        },
+
+        removeAllProps: function () {
+            // refresh 重新排列道具, tips 提示道具
+            ['refresh', 'tips'].forEach(function (name) {
+                this.tools[name] && this.tools[name].removeFromParent(this.stage);
+                delete this.tools[name];
+            }.bind(this))
+        },
+
+        // 道具: 重新排列
+        addPropsRefresh: function () {
             this.tools.refresh = new Hilo.Bitmap({
                 image: this.asset.propsRefresh,
                 width: 83 * 2,
                 height: 96 * 2,
-                y: 320,
+                y: 160,
                 x: 280
             }).addTo(this.stage);
+        },
 
-            // 道具: 提示
+        // 道具: 提示
+        addPropsTips: function () {
             this.tools.tips = new Hilo.Bitmap({
                 image: this.asset.propsTips,
                 width: 83 * 2,
                 height: 96 * 2,
-                y: 300,
+                y: 160,
                 x: this.width - 320 - 83 - 83
             }).addTo(this.stage);
-
         },
 
         onUserInput: function (e) {
+            if (this.status.refreshAt) return; // 洗牌过程中不能响应用户事件
             if (e.eventTarget == this.gameContainer) {
                 var cellWidth = this.gameContainer.width / this.columnCount,
                     cellHeight = this.gameContainer.height / this.rowCount;
@@ -180,9 +181,16 @@
                 this.biuAction(row, column);
                 setTimeout(this.checkLevelComplete.bind(this), 500);
             } else if (e.eventTarget == this.tools.refresh) {
-                this.toolsRefresh();
+                this.pauseGameProgress();
+                window.ContentPanel.useProps('4', // refresh 刷新道具
+                    function () {
+                        this.toolsRefresh();
+                        this.continueGameProgress();
+                    }.bind(this)
+                );
             } else if (e.eventTarget == this.tools.tips) {
-                this.toolsShowTips()
+                // 3: 表示提示道具
+                this.usePropsHandler('3', this.toolsShowTips.bind(this));
             } else if (e.eventTarget == this.tools.freeze) {
                 this.toolsFreeze()
             } else if (e.eventTarget == this.tools.dismiss) {
@@ -191,6 +199,16 @@
                 this.pauseGameProgress();
                 window.ContentPanel.setPage('pause');
             }
+        },
+
+        usePropsHandler: function (prop_id, cb) {
+            this.pauseGameProgress();
+            window.ContentPanel.useProps(prop_id,
+                function () {
+                    cb();
+                    this.continueGameProgress();
+                }.bind(this)
+            );
         },
 
         checkHasMatch: function (row, column) {
@@ -247,24 +265,48 @@
         },
 
         toolsShowTips: function () {
-            var padding = 4;
-            var scale = 1;
-            var star = new Hilo.Bitmap({
-                x: this.cellWidth * column + padding,
-                y: this.cellHeight * row + padding,
-                scaleX: scale,
-                scaleY: scale,
-                height: this.cellHeight - padding * 2,
-                width: this.cellWidth - padding * 2,
-                //image: this.levelTailImage
-            }).addTo(this.gameContainer);
+
+            var i, j;
+            out:
+                for (i = 0; i < this.rowCount; i++) {
+                    for (j = 0; j < this.columnCount; j++) {
+                        var m = !!this.checkHasMatch(i, j).length;
+                        if (m) {
+                            addStar.call(this, i, j, 0.7);
+                            break out;
+                        }
+                    }
+                }
+
+            function addStar(row, col, scale) {
+                var padding = 4;
+                var x = this.cellWidth * col + padding, y = this.cellHeight * row + padding;
+                var bm = new Hilo.Bitmap({
+                    x: x + this.cellWidth / 2,
+                    y: y + this.cellHeight / 2,
+                    pivotX: this.cellWidth / 2,
+                    pivotY: this.cellHeight / 2,
+                    scaleX: scale,
+                    scaleY: scale,
+                    height: this.cellHeight - padding * 2,
+                    width: this.cellWidth - padding * 2,
+                    image: this.asset.tipStar
+                }).addTo(this.gameContainer);
+
+                this.status.tips.push({
+                    addAt: now(),
+                    bitmap: bm
+                });
+            }
         },
 
         toolsRefresh: function () {
+            if (this.status.refreshAt) return; // 正在刷新中, 不能重复点击
             this.status.refreshAt = now();
             setTimeout(function () {
-                this.setLevel(this.status.initCount, this.status.level);
-            }.bind(this), 2200);
+                this.setLevel(this.getTileCount(), this.status.level);
+                this.status.refreshAt = null;
+            }.bind(this), 800);
         },
 
         toolsFreeze: function () {
@@ -278,6 +320,24 @@
         biuAction: function (row, column) {
             if (this.cells[row][column]) return;
             var match_tiles = this.checkHasMatch(row, column);
+            // 画线
+            match_tiles.forEach(function (i) {
+                if (i.row == row) {
+                    var col = column, d = column > i.column ? -1 : 1;
+                    while (Math.abs(col - i.column) > 1) {
+                        col += d;
+                        this.drawDotLine(row, col, 'horizon')
+                    }
+                } else {
+                    var r = row, d = row > i.row ? -1 : 1;
+                    while (Math.abs(r - i.row) > 1) {
+                        r += d;
+                        this.drawDotLine(r, column, 'vertical')
+                    }
+                }
+            }.bind(this));
+
+            // 去除方块
             match_tiles.forEach(function (i) {
                 i.bitmap.removeFromParent(this.gameContainer);
                 this.cells[i.row][i.column] = null;
@@ -308,23 +368,24 @@
                     }
                 }
 
-            if (over && this.getTileCount() / (this.rowCount * this.columnCount) > 0.8) {
-                over = false;
-            }
-
             if (over) {
                 this.pauseGameProgress();
-                var used_time = parseInt((+new Date() - this.status.startAt) / 1000);
-                window.ContentPanel.levelComplete(used_time, 2);
+                var success = this.getTileCount() / (this.rowCount * this.columnCount) < 0.7;
+                window.ContentPanel.levelComplete(success, this.status.timing);
             }
         },
 
-        setLevel: function (initCount, level) {
+        /*
+         @params: initCount 初始化方块个数
+         @params: level 关卡数
+         @params: props 可用道具列表
+         */
+        setLevel: function (initCount, level, props) {
             var _this = this;
 
             this.cells.forEach(function (row) {
                 row.forEach(function (i) {
-                    i.bitmap.removeFromParent(_this.gameContainer)
+                    i && i.bitmap && i.bitmap.removeFromParent(_this.gameContainer)
                 })
             });
 
@@ -340,19 +401,34 @@
             for (var i = 0; i < list.length; i++) {
                 var row = Math.floor(list[i] / this.columnCount);
                 var column = list[i] % this.columnCount;
-
                 this.addTile(null, row, column);
             }
 
             // 初始化某一关卡的游戏时, 重置当前关卡游戏的进度
             this.status.title && this.status.title.removeFromParent(this.stage);
+            this.status.tips.forEach(function (i) {
+                i && i.removeFromParent(this.gameContainer)
+            }.bind(this));
+            this.usageTime && this.usageTime.removeFromParent(this.stage);
+            this.usageTime = new Hilo.BitmapText({
+                x: 80,
+                y: 50,
+                visible: true,
+                text: '0b',
+                scaleX: 1.5,
+                scaleY: 1.5,
+                height: 35 * 2,
+                glyphs: this.asset.numberGlyphs
+            }).addTo(this.stage);
+
             this.status = {
                 level: level,
-                startAt: +new Date(),
-                continueAt: 0,
+                pauseAt: false,
                 star: 0,
                 initCount: initCount,
                 wrongTouch: 0,
+                tips: [],
+                timing: 0,
                 title: null
             };
 
@@ -368,29 +444,51 @@
                 maxWidth: 300 * 2,
                 textHeight: 50 * 2,
                 textWidth: 300 * 2,
-                y: 120,
+                y: 60,
                 x: 420
             }).addTo(this.stage).setFont('normal small-caps bold 80px Sans-serif');
 
+            props.forEach(function (i) {
+                if (i.prop_id == 4) this.addPropsRefresh();
+                if (i.prop_id == 3) this.addPropsTips();
+            }.bind(this));
+
+            this.gameTiming();
             this.gameMoving();
         },
 
+        gameTiming: function () {
+            clearTimeout(this._timing_timer);
+            this._timing_timer = setTimeout(this.gameTiming.bind(this), 1000);
+            // 游戏暂停中, 不再计算时间
+            if (this.status.pauseAt) return;
+
+            this.status.timing = (this.status.timing || 1) + 1;
+            var minutes = parseInt(this.status.timing / 60);
+            var seconds = this.status.timing % 60;
+            if (seconds < 10) seconds = '0' + seconds;
+            var text = minutes + 'a' + seconds + 'b';
+            this.usageTime.setText(text);
+        },
+
         gameMoving: function () {
-            var delay, consume = parseInt((+new Date() - this.status.startAt) / 1000);
+            var delay;
 
             delay = 5000 - parseInt((this.status.level - 1) / 3) * 500;
-            delay -= Math.min(6, parseInt(consume / 10)) * 500;
-
-            console.log('new tile show time: consume', consume, 'delay', delay);
+            delay -= Math.min(6, parseInt(this.status.timing / 10)) * 500;
 
             this.progressTimer = setTimeout(function () {
                 var r = this.getRandomEmptyCell();
                 if (!r) {
                     // no more empty cell, game over
-                    window.ContentPanel.levelComplete(100, 1);
+                    window.ContentPanel.levelComplete(false, this.status.timing);
                     return;
                 }
+
                 this.addTile(null, r.x, r.y, 'animate');
+                // 添加方块后立即检查 游戏是否结束
+                setTimeout(this.checkLevelComplete.bind(this), 500);
+
                 this.gameMoving();
             }.bind(this), delay);
         },
@@ -421,12 +519,11 @@
 
         pauseGameProgress: function () {
             clearTimeout(this.progressTimer);
-            this.status.continueAt = +new Date();
+            this.status.pauseAt = now();
         },
 
         continueGameProgress: function () {
-            if (this.status.continueAt)
-                this.status.startAt += +new Date() - this.status.continueAt;
+            this.status.pauseAt = false;
             this.gameMoving();
         },
 
@@ -458,6 +555,36 @@
             return this.cells[row][column];
         },
 
+        drawDotLine: function (row, column, orientation) {
+            var dots = [], i, c, delta, x, y, radius = 12;
+            for (i = 0; i < 3; i++) {
+                delta = (3 * (i + 1) - 1) / 10;
+                x = column * this.cellHeight;
+                y = row * this.cellWidth;
+
+                if (orientation == 'vertical') {
+                    x += this.cellHeight / 2 - radius / 2;
+                    y += this.cellWidth * delta - radius / 2;
+                } else {
+                    y += this.cellWidth / 2 - radius / 2;
+                    x += this.cellHeight * delta - radius / 2;
+                }
+
+                c = new Hilo.Graphics({
+                    x: x,
+                    y: y,
+                    width: 40,
+                    height: 40
+                }).beginFill("white", 1).drawCircle(0, 0, radius).endFill().addTo(this.gameContainer);
+                dots.push(c);
+            }
+            setTimeout(function () {
+                for (var j = 0; j < dots.length; j++) {
+                    dots[j].removeFromParent(this.gameContainer)
+                }
+            }.bind(this), 250);
+        },
+
         getTileCount: function () {
             var tile_count = 0;
             this.cells.forEach(function (rows) {
@@ -469,25 +596,27 @@
         },
 
         onUpdate: function () {
-
             // 重新排列时的过场动画
-            if (this.status.refreshAt) this.onUpdateRefreshAnimate();
+            if (this.status.refreshAt > 0) this.onUpdateRefreshAnimate();
             // 每次更新, 检查那个新增块需要动画
             if (this.cells.length) this.onUpdateTileAnimate();
+            // 如果有提示小星星, 让小行星转起来
+            if (this.status.tips.length) this.onUpdateRotateStar();
         },
 
         onUpdateRefreshAnimate: function () {
             var i, j, bm;
             for (i = 0; i < this.rowCount; i++) {
                 for (j = 0; j < this.columnCount; j++) {
+                    if (!this.cells[i][j]) continue;
                     bm = this.cells[i][j].bitmap;
                     // TODO: 洗牌的动画轨迹
                     // bm.x = 0;
-                    // bm.y = 0;
+                    bm.y = bm.y + 460;
                 }
             }
 
-            if (+new Date() - this.status.refreshAt > 2000)
+            if (now() - this.status.refreshAt > 2000)
                 this.status.refreshAt = false;
         },
 
@@ -503,6 +632,20 @@
                         cell.bitmap.scaleY = scale;
 
                         if (scale >= 1) cell.with_animate = false;
+                    }
+                }
+            }
+        },
+
+        onUpdateRotateStar: function () {
+            for (var i = 0; i < this.status.tips.length; i++) {
+                var tip = this.status.tips[i];
+                if (tip) {
+                    if (now() - tip.addAt > 2 * 1000) {
+                        tip.bitmap.removeFromParent(this.gameContainer);
+                        this.status.tips[i] = null;
+                    } else {
+                        tip.bitmap.rotation += 8;
                     }
                 }
             }

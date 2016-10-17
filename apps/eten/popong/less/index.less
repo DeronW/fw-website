@@ -44,7 +44,7 @@ body, html {
     width: 265px;
     height: 265px;
     display: block;
-    margin: 700px auto 50px;
+    margin: 400px auto 50px;
     background: transparent url(../images/start-page-btn-start.png) no-repeat;
     background-size: 100%;
   }
@@ -68,7 +68,7 @@ body, html {
 
   .rule-detail {
     position: absolute;
-    top: 300px;
+    top: 160px;
     width: 560px;
     left: 50%;
     margin-left: -280px;
@@ -86,7 +86,7 @@ body, html {
     .text {
       color: #728ba3;
       margin: 20px;
-      font-size: 36px;
+      font-size: 30px;
     }
   }
 
@@ -198,6 +198,10 @@ body, html {
       bottom: 2px;
     }
 
+    .star-0 {
+      background: transparent url('../images/star-0.png') no-repeat;
+    }
+
     .star-1 {
       background: transparent url('../images/star-1.png') no-repeat;
     }
@@ -283,6 +287,15 @@ body, html {
       width: 100%;
       margin: 10px;
       font-size: 24px;
+      height: 60px;
+      line-height: 60px;
+      padding-right: 20px;
+      box-sizing: border-box;
+
+      img {
+        width: 60px;
+        height: 60px;
+      }
 
       .num, .avatar, .name {
         float: left;
@@ -293,6 +306,106 @@ body, html {
         float: right;
       }
     }
+  }
+}
+
+.level-props {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(8, 122, 143, 0.7);
+
+  .dialog {
+    width: 518px;
+    height: 426px;
+    position: relative;
+    margin: 300px auto 0;
+    background: url(../images/props-bg.png) no-repeat;
+    padding: 60px;
+    box-sizing: border-box;
+    text-align: center;
+
+    .btn-close {
+      top: 0;
+      right: 0;
+      position: absolute;
+      width: 65px;
+      height: 65px;
+      background: url(../images/props-btn-close.png) no-repeat;
+
+    }
+  }
+
+  .props-title {
+    color: #25d2da;
+    font-size: 36px;
+    text-align: center;
+  }
+
+  .describe {
+    margin-top: 10px;
+    color: #728ba3;
+    font-size: 26px;
+    text-align: center;
+  }
+
+  .form {
+    margin-top: 20px;
+    height: 60px;
+    position: relative;
+
+    .jian {
+      position: absolute;
+      margin-left: -74px;
+      left: 50%;
+      display: block;
+      width: 43px;
+      height: 39px;
+      background: url(../images/props-btn-decrease.png) no-repeat;
+    }
+    .jia {
+      position: absolute;
+      left: 50%;
+      margin-left: 30px;
+      display: block;
+      width: 43px;
+      height: 39px;
+      background: url(../images/props-btn-increase.png) no-repeat;
+    }
+    .value {
+      position: absolute;
+      left: 50%;
+      margin-left: -25px;
+      width: 50px;
+      height: 38px;
+      line-height: 38px;
+      background: #e0dede;
+      border-radius: 8px;
+      font-size: 26px;
+    }
+  }
+
+  .limit {
+    color: #ff5f4e;
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+
+  .btn-buy {
+    display: block;
+    width: 166px;
+    height: 79px;
+    float: right;
+    background: url(../images/props-btn-buy.png) no-repeat;
+  }
+  .btn-use {
+    float: left;
+    display: block;
+    width: 166px;
+    height: 79px;
+    background: url(../images/props-btn-use.png) no-repeat;
   }
 }
 

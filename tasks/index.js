@@ -82,12 +82,11 @@ module.exports = function generate_task(site_name, project_name, configs) {
     }
 
     function compile_react() {
-        return react(jsx_files, `${build_path}javascripts`, 'bundle.js')
+        return react(jsx_files, `${build_path}javascripts`, 'bundle.js', CONFIG.debug)
     }
 
     function compile_javascripts() {
-        return javascripts([`${app_path}javascripts/*.js`, `${lib_path}javascripts/*.js`],
-            `${build_path}javascripts`, null, CONFIG.debug)
+        return javascripts([`${app_path}javascripts/*.js`], `${build_path}javascripts`, null, CONFIG.debug)
     }
 
     function compile_common_javascripts() {
@@ -102,8 +101,12 @@ module.exports = function generate_task(site_name, project_name, configs) {
         return images([`${app_path}images/**/*.+(jpg|png|gif)`], `${build_path}images`)
     }
 
-    function compile_common_assets() {
-        return copy([`${public_path}common/images/*`], `${build_path}images`)
+    function compile_public_images() {
+        return copy([`${public_path}images/*`], `${build_path}images`)
+    }
+
+    function compile_public_javascripts() {
+        return copy([`${public_path}javascripts/*`], `${build_path}javascript`)
     }
 
     function copy2cdn() {
@@ -146,7 +149,9 @@ module.exports = function generate_task(site_name, project_name, configs) {
             compile_react,
             common_javascripts,
             compile_images,
-            compile_common_assets));
+            compile_public_images,
+            compile_public_javascripts
+        ));
 
     CONFIG.debug ?
         gulp.task(`${task_name}:watch`, gulp.series(task_name, monitor)) :
