@@ -29,13 +29,13 @@
                 {id: 'level_8', src: 'images/game/level_8.png'},
                 {id: 'level_9', src: 'images/game/level_9.png'},
                 {id: 'tipStar', src: 'images/game/tip-star.png'},
-                {id: 'grassland', src: 'images/game/grassland.png'},
-                {id: 'grasshead', src: 'images/game/grass-head.png'},
+                {id: 'grasshead', src: 'images/game/grasshead.png'},
                 {id: 'pause', src: 'images/game/pause.png'},
                 {id: 'propsTips', src: 'images/game/props-tips.png'},
                 {id: 'propsRefresh', src: 'images/game/props-refresh.png'},
                 {id: 'propsFreeze', src: 'images/game/props-freeze.png'},
                 {id: 'propsDismiss', src: 'images/game/props-dismiss.png'},
+                {id: 'numbers', src: 'images/game/numbers.png'},
             ];
 
             this.queue = new Hilo.LoadQueue();
@@ -58,12 +58,27 @@
 
             this.tipStar = this.queue.get('tipStar').content;
 
-            this.grassland = this.queue.get('grassland').content;
             this.grasshead = this.queue.get('grasshead').content;
             this.pause = this.queue.get('pause').content;
 
             this.propsRefresh = this.queue.get('propsRefresh').content;
             this.propsTips = this.queue.get('propsTips').content;
+
+            var numbers = this.queue.get('numbers').content;
+            this.numberGlyphs = {
+                0: {image: numbers, rect: [35 * 0, 0, 35, 35]},
+                1: {image: numbers, rect: [35 * 1, 0, 35, 35]},
+                2: {image: numbers, rect: [35 * 2, 0, 35, 35]},
+                3: {image: numbers, rect: [35 * 3, 0, 35, 35]},
+                4: {image: numbers, rect: [35 * 4, 0, 35, 35]},
+                5: {image: numbers, rect: [35 * 5, 0, 35, 35]},
+                6: {image: numbers, rect: [35 * 6, 0, 35, 35]},
+                7: {image: numbers, rect: [35 * 7, 0, 35, 35]},
+                8: {image: numbers, rect: [35 * 8, 0, 35, 35]},
+                9: {image: numbers, rect: [35 * 9, 0, 35, 35]},
+                a: {image: numbers, rect: [35 * 10, 0, 35, 35]},
+                b: {image: numbers, rect: [35 * 11, 0, 35, 35]}
+            };
 
             this.queue.off('complete');
             this.fire('complete');
