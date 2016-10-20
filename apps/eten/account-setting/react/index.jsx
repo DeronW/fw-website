@@ -31,4 +31,4 @@ const Waiting = React.createClass({
     }
 });
 
-    ReactDOM.render(<Waiting />, document.getElementById('cnt'));
+ReactDOM.render(<Waiting />, document.getElementById('cnt'));
