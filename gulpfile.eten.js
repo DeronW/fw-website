@@ -1,3 +1,5 @@
+'use strict';
+
 const ETEN_APP_NAMES = [
     // 'account-setting',
     'guide', // 新手引导
