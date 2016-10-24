@@ -106,7 +106,7 @@ module.exports = function generate_task(site_name, project_name, configs) {
     }
 
     function compile_public_javascripts() {
-        return copy([`${public_path}javascripts/*`], `${build_path}javascript`)
+        return copy([`${public_path}javascripts/*`], `${build_path}javascripts`)
     }
 
     function copy2cdn() {
