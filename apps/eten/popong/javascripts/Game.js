@@ -264,40 +264,41 @@
             return tiles;
         },
 
-        toolsShowTips: function () {
+        showStarInCell: function (row, col, scale, duration) {
+            var padding = 4;
+            var x = this.cellWidth * col + padding, y = this.cellHeight * row + padding;
+            var bm = new Hilo.Bitmap({
+                x: x + this.cellWidth / 2,
+                y: y + this.cellHeight / 2,
+                pivotX: this.cellWidth / 2,
+                pivotY: this.cellHeight / 2,
+                scaleX: scale,
+                scaleY: scale,
+                height: this.cellHeight - padding * 2,
+                width: this.cellWidth - padding * 2,
+                image: this.asset.tipStar
+            }).addTo(this.gameContainer);
 
+            this.status.tips.push({
+                addAt: now(),
+                duration: duration || 2 * 1000,
+                bitmap: bm
+            });
+        },
+
+        toolsShowTips: function () {
             var i, j;
             out:
                 for (i = 0; i < this.rowCount; i++) {
                     for (j = 0; j < this.columnCount; j++) {
                         var m = !!this.checkHasMatch(i, j).length;
                         if (m) {
-                            addStar.call(this, i, j, 0.7);
+                            this.showStarInCell.call(this, i, j, 0.7);
                             break out;
                         }
                     }
                 }
 
-            function addStar(row, col, scale) {
-                var padding = 4;
-                var x = this.cellWidth * col + padding, y = this.cellHeight * row + padding;
-                var bm = new Hilo.Bitmap({
-                    x: x + this.cellWidth / 2,
-                    y: y + this.cellHeight / 2,
-                    pivotX: this.cellWidth / 2,
-                    pivotY: this.cellHeight / 2,
-                    scaleX: scale,
-                    scaleY: scale,
-                    height: this.cellHeight - padding * 2,
-                    width: this.cellWidth - padding * 2,
-                    image: this.asset.tipStar
-                }).addTo(this.gameContainer);
-
-                this.status.tips.push({
-                    addAt: now(),
-                    bitmap: bm
-                });
-            }
         },
 
         toolsRefresh: function () {
@@ -343,8 +344,8 @@
                 this.cells[i.row][i.column] = null;
             }.bind(this));
 
-            // 如果没有匹配, 说明点错了, 要惩罚
             if (!match_tiles.length) {
+                // 如果没有匹配, 说明点错了, 要惩罚
                 this.status.wrongTouch++;
                 var newCount = Math.min(this.status.wrongTouch, 6);
                 for (var i = 0; i < newCount; i++) {
@@ -352,6 +353,9 @@
                     if (!r) return;
                     this.addTile(null, r.x, r.y, 'with_animate')
                 }
+            } else {
+                // 成功消除方块后在当前位置显示一颗小星星
+                this.showStarInCell(row, column, 0.7, 500)
             }
         },
 
@@ -641,7 +645,7 @@
             for (var i = 0; i < this.status.tips.length; i++) {
                 var tip = this.status.tips[i];
                 if (tip) {
-                    if (now() - tip.addAt > 2 * 1000) {
+                    if (now() - tip.addAt > tip.duration) {
                         tip.bitmap.removeFromParent(this.gameContainer);
                         this.status.tips[i] = null;
                     } else {
