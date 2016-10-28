@@ -305,6 +305,7 @@
             if (this.status.refreshAt) return; // 正在刷新中, 不能重复点击
             this.status.refreshAt = now();
             setTimeout(function () {
+                console.log('before refresh', this.getTileCount());
                 this.setLevel(this.getTileCount(), this.status.level);
                 this.status.refreshAt = null;
             }.bind(this), 800);
@@ -357,6 +358,7 @@
                 // 成功消除方块后在当前位置显示一颗小星星
                 this.showStarInCell(row, column, 0.7, 500)
             }
+            console.log('remain count', this.getTileCount())
         },
 
         checkLevelComplete: function () {
@@ -452,7 +454,7 @@
                 x: 420
             }).addTo(this.stage).setFont('normal small-caps bold 80px Sans-serif');
 
-            props.forEach(function (i) {
+            (props || []).forEach(function (i) {
                 if (i.prop_id == 4) this.addPropsRefresh();
                 if (i.prop_id == 3) this.addPropsTips();
             }.bind(this));
@@ -593,7 +595,7 @@
             var tile_count = 0;
             this.cells.forEach(function (rows) {
                 rows.forEach(function (i) {
-                    tile_count++
+                    i && tile_count++
                 })
             });
             return tile_count;

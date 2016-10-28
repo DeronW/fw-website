@@ -160,6 +160,7 @@ function calculateStar(level, seconds, cb) {
         gameNo: GAME_NAME,
         passNum: level,
         score: seconds,
+        time: seconds,
         success: 1,
         uid: USER_ID
     }, function (data) {
