@@ -6,7 +6,7 @@ const LevelComplete = React.createClass({
     componentDidMount: function () {
         if (this.props.success) {
             calculateStar(this.props.level, this.props.seconds, function (data) {
-                this.setState({star: data.score})
+                this.setState({star: data.star})
             }.bind(this));
         } else {
             this.setState({star: 0})

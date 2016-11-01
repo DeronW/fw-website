@@ -1,4 +1,3 @@
-
 const Prepare = React.createClass({
     getInitialState: function () {
         return {records: []}
@@ -18,12 +17,12 @@ const Prepare = React.createClass({
             var records = [], i, m;
             for (i = 0; i < (data.data || []).length; i++) {
                 m = data.data[i];
-                var avatar = 'images/prepare/avatar-' + (m.sex == 0 ? 'fe' : '') + 'male.png';
-
+                let avatar = 'images/prepare/avatar-' + (m.sex == 0 ? 'fe' : '') + 'male.png';
+                // let time = ''
                 records.push({
                     avatar: avatar,
                     name: m.username,
-                    score: m.score
+                    time: m.time
                 })
             }
             this.setState({records: records});
@@ -37,7 +36,7 @@ const Prepare = React.createClass({
                     <div className="num">{index + 1}</div>
                     <img className="avatar" src={item.avatar}/>
                     <div className="name">{item.name}</div>
-                    <div className="score">{item.score}</div>
+                    <div className="score">{item.time}</div>
                 </div>
             )
         };

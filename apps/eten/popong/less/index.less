@@ -44,7 +44,7 @@ body, html {
     width: 265px;
     height: 265px;
     display: block;
-    margin: 400px auto 50px;
+    margin: 450px auto 50px;
     background: transparent url(../images/start-page-btn-start.png) no-repeat;
     background-size: 100%;
   }
@@ -75,10 +75,11 @@ body, html {
     border-radius: 20px;
     background: white;
     min-height: 600px;
+    padding-top: 40px;
 
     img {
       max-width: 90%;
-      position: relative;
+      position: absolute;
       top: -60px;
       left: 80px;
     }
@@ -250,12 +251,14 @@ body, html {
 
     .dou-ge {
       display: block;
-      margin: 20px auto;
+      margin: 20px auto 0;
     }
 
     .start {
       display: block;
-      margin: 20px auto;
+      margin: 0 auto 20px;
+      position: relative;
+      top: -5px;
     }
   }
 
@@ -439,7 +442,8 @@ body, html {
   top: 0;
   bottom: 0;
   width: 100%;
-  background: #81dcf4;
+  //background: #81dcf4;
+  background: rgba(129, 220, 244, 0.5);
 
   .dialog {
     background-repeat: no-repeat;

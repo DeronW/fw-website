@@ -37,7 +37,7 @@ const Content = React.createClass({
             }
             for (var i = 0; i < data.data.length; i++) {
                 var m = data.data[i];
-                level_list[parseInt(m.pass_num) - 1].gift = true;
+                if (m.gift_id && m.gift_id != 0) level_list[parseInt(m.pass_num) - 1].gift = true;
             }
             this.setState({level_list: level_list});
         }.bind(this), 'json')
@@ -152,7 +152,6 @@ const Content = React.createClass({
         return <div className="content" style={style}> {cnt} </div>
     }
 });
-
 
 function calculateStar(level, seconds, cb) {
     $.get(API_PATH + '/9888/game/web/index.php', {

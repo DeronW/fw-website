@@ -179,7 +179,7 @@
                 var x = e.stageX, y = e.stageY - this.gameContainerMarginTop;
                 var column = Math.floor(x / cellWidth), row = Math.floor(y / cellHeight);
                 this.biuAction(row, column);
-                setTimeout(this.checkLevelComplete.bind(this), 500);
+                setTimeout(this.checkLevelComplete.bind(this), 800);
             } else if (e.eventTarget == this.tools.refresh) {
                 this.pauseGameProgress();
                 window.ContentPanel.useProps('4', // refresh 刷新道具
@@ -493,7 +493,7 @@
 
                 this.addTile(null, r.x, r.y, 'animate');
                 // 添加方块后立即检查 游戏是否结束
-                setTimeout(this.checkLevelComplete.bind(this), 500);
+                setTimeout(this.checkLevelComplete.bind(this), 800);
 
                 this.gameMoving();
             }.bind(this), delay);
