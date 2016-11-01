@@ -150,7 +150,7 @@
         },
 
         // 道具: 重新排列
-        addPropsRefresh: function () {
+        addPropsRefresh: function (props) {
             this.tools.refresh = new Hilo.Bitmap({
                 image: this.asset.propsRefresh,
                 width: 83 * 2,
@@ -158,10 +158,21 @@
                 y: 160,
                 x: 280
             }).addTo(this.stage);
+
+            this.tools.refreshText = new Hilo.Text({
+                text: props.price + '工分',
+                color: 'white',
+                textAlign: 'center',
+                textVAlign: 'middle',
+                width: 83 * 2,
+                height: 96 * 2,
+                y: 220,
+                x: 280
+            }).addTo(this.stage).setFont('normal small-caps bold 40px Sans-serif');
         },
 
         // 道具: 提示
-        addPropsTips: function () {
+        addPropsTips: function (props) {
             this.tools.tips = new Hilo.Bitmap({
                 image: this.asset.propsTips,
                 width: 83 * 2,
@@ -169,6 +180,17 @@
                 y: 160,
                 x: this.width - 320 - 83 - 83
             }).addTo(this.stage);
+
+            this.tools.refreshText = new Hilo.Text({
+                text: props.price + '工分',
+                color: 'white',
+                textAlign: 'center',
+                textVAlign: 'middle',
+                width: 83 * 2,
+                height: 96 * 2,
+                y: 220,
+                x: this.width - 320 - 83 - 83
+            }).addTo(this.stage).setFont('normal small-caps bold 40px Sans-serif');
         },
 
         onUserInput: function (e) {
@@ -420,7 +442,7 @@
                 x: 80,
                 y: 50,
                 visible: true,
-                text: '0b',
+                text: '0a',
                 scaleX: 1.5,
                 scaleY: 1.5,
                 height: 35 * 2,
@@ -445,7 +467,7 @@
                 font: '40px',
                 textAlign: 'center',
                 textVAlign: 'middle',
-                width: 300 * 2,
+                width: 300 * 3,
                 height: 50 * 2,
                 maxWidth: 300 * 2,
                 textHeight: 50 * 2,
@@ -455,8 +477,8 @@
             }).addTo(this.stage).setFont('normal small-caps bold 80px Sans-serif');
 
             (props || []).forEach(function (i) {
-                if (i.prop_id == 4) this.addPropsRefresh();
-                if (i.prop_id == 3) this.addPropsTips();
+                if (i.prop_id == 4) this.addPropsRefresh(i);
+                if (i.prop_id == 3) this.addPropsTips(i);
             }.bind(this));
 
             this.gameTiming();
@@ -470,11 +492,12 @@
             if (this.status.pauseAt) return;
 
             this.status.timing = (this.status.timing || 1) + 1;
-            var minutes = parseInt(this.status.timing / 60);
-            var seconds = this.status.timing % 60;
-            if (seconds < 10) seconds = '0' + seconds;
-            var text = minutes + 'a' + seconds + 'b';
-            this.usageTime.setText(text);
+            // var minutes = parseInt(this.status.timing / 60);
+            // var seconds = this.status.timing % 60;
+            // if (seconds < 10) seconds = '0' + seconds;
+            // var text = minutes + 'a' + seconds + 'b';
+            // this.usageTime.setText(text);
+            this.usageTime.setText(this.status.timing + 'a');
         },
 
         gameMoving: function () {

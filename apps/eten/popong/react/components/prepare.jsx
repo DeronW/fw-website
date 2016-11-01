@@ -36,7 +36,7 @@ const Prepare = React.createClass({
                     <div className="num">{index + 1}</div>
                     <img className="avatar" src={item.avatar}/>
                     <div className="name">{item.name}</div>
-                    <div className="score">{item.time}</div>
+                    <div className="score">{item.time}秒</div>
                 </div>
             )
         };

@@ -1,4 +1,3 @@
-
 const LevelComplete = React.createClass({
     getInitialState: function () {
         return {star: 0}
@@ -28,7 +27,7 @@ const LevelComplete = React.createClass({
     },
     render: function () {
         var dialog_cls = this.props.success ? "dialog pass" : "dialog fail";
-        var time = parseInt(this.props.seconds / 60) + '``' + this.props.seconds % 60;
+        var time = parseInt(this.props.seconds / 60) + '分' + this.props.seconds % 60 + '秒';
 
         let btn = this.props.success ?
             <img className="btn-next" src="images/level-next.png"
