@@ -149,14 +149,65 @@
             }.bind(this))
         },
 
+        // 道具: 自动消除
+        addPropsDismiss: function (props) {
+            var x = this.width - 320 - 83,
+                y = 180;
+            this.tools.refresh = new Hilo.Bitmap({
+                image: this.asset.propsFreeze,
+                width: 83 * 2,
+                height: 96 * 2,
+                y: y,
+                x: x
+            }).addTo(this.stage);
+
+            this.tools.dismissText = new Hilo.Text({
+                text: props.price + '工分',
+                color: 'white',
+                textAlign: 'center',
+                textVAlign: 'middle',
+                width: 83 * 2,
+                height: 96 * 2,
+                y: y + 60,
+                x: x
+            }).addTo(this.stage).setFont('normal small-caps bold 40px Sans-serif');
+        },
+
+        // 道具: 时间冻结
+        addPropsFreeze: function (props) {
+            var x = this.width - 320 - 180,
+                y = 180;
+            this.tools.refresh = new Hilo.Bitmap({
+                image: this.asset.propsFreeze,
+                width: 83 * 2,
+                height: 96 * 2,
+                y: y,
+                x: x
+            }).addTo(this.stage);
+
+            this.tools.freezeText = new Hilo.Text({
+                text: props.price + '工分',
+                color: 'white',
+                textAlign: 'center',
+                textVAlign: 'middle',
+                width: 83 * 2,
+                height: 96 * 2,
+                y: y + 60,
+                x: x
+            }).addTo(this.stage).setFont('normal small-caps bold 40px Sans-serif');
+        },
+
         // 道具: 重新排列
         addPropsRefresh: function (props) {
+            var x = 460,
+                y = 180;
+
             this.tools.refresh = new Hilo.Bitmap({
                 image: this.asset.propsRefresh,
                 width: 83 * 2,
                 height: 96 * 2,
-                y: 160,
-                x: 280
+                y: y,
+                x: x
             }).addTo(this.stage);
 
             this.tools.refreshText = new Hilo.Text({
@@ -166,19 +217,20 @@
                 textVAlign: 'middle',
                 width: 83 * 2,
                 height: 96 * 2,
-                y: 220,
-                x: 280
+                y: y + 60,
+                x: x
             }).addTo(this.stage).setFont('normal small-caps bold 40px Sans-serif');
         },
 
         // 道具: 提示
         addPropsTips: function (props) {
+            var x = 280, y = 180;
             this.tools.tips = new Hilo.Bitmap({
                 image: this.asset.propsTips,
                 width: 83 * 2,
                 height: 96 * 2,
-                y: 160,
-                x: this.width - 320 - 83 - 83
+                y: y,
+                x: x
             }).addTo(this.stage);
 
             this.tools.refreshText = new Hilo.Text({
@@ -188,8 +240,8 @@
                 textVAlign: 'middle',
                 width: 83 * 2,
                 height: 96 * 2,
-                y: 220,
-                x: this.width - 320 - 83 - 83
+                y: y + 60,
+                x: x
             }).addTo(this.stage).setFont('normal small-caps bold 40px Sans-serif');
         },
 
@@ -473,12 +525,14 @@
                 textHeight: 50 * 2,
                 textWidth: 300 * 2,
                 y: 60,
-                x: 420
+                x: 320
             }).addTo(this.stage).setFont('normal small-caps bold 80px Sans-serif');
 
             (props || []).forEach(function (i) {
+                if (i.prop_id == 5) this.addPropsFreeze(i);
                 if (i.prop_id == 4) this.addPropsRefresh(i);
                 if (i.prop_id == 3) this.addPropsTips(i);
+                // this.addPropsDismiss(i);
             }.bind(this));
 
             this.gameTiming();

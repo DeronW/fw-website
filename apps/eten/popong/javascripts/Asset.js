@@ -63,6 +63,8 @@
 
             this.propsRefresh = this.queue.get('propsRefresh').content;
             this.propsTips = this.queue.get('propsTips').content;
+            this.propsFreeze = this.queue.get('propsFreeze').content;
+            this.propsDismiss = this.queue.get('propsDismiss').content;
 
             var numbers = this.queue.get('numbers').content;
             this.numberGlyphs = {

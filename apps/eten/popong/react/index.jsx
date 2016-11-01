@@ -22,7 +22,6 @@ const Content = React.createClass({
         for (var i = 0; i < MAX_LEVEL; i++) {
             level_list.push({locked: true})
         }
-        level_list[0].locked = false;
         this.setState({level_list: level_list});
         this.refreshLevelList();
 
