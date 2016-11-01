@@ -18,7 +18,7 @@ const Content = React.createClass({
     },
     componentDidMount: function () {
         // 设置默认值
-        let MAX_LEVEL = 9, level_list = [];
+        let MAX_LEVEL = 18, level_list = [];
         for (var i = 0; i < MAX_LEVEL; i++) {
             level_list.push({locked: true})
         }

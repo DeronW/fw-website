@@ -53,7 +53,7 @@ const Level = React.createClass({
         return <div className="level-list">
             <img className="header" src="images/level-list-header.png"/>
             <img className="footer" src="images/level-list-footer.png"/>
-            <div> {this.state.level_list.map(level)} </div>
+            <div className="levels"> {this.state.level_list.map(level)} </div>
         </div>
     }
 });
