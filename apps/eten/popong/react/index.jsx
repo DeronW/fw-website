@@ -2,8 +2,10 @@ const GAME_NAME = '0pn5m'; // 点点点游戏 0pn5m
 const USER_ID = 63; // 临时模拟的用户id
 
 const PROPS_NAME_IDS = {
+    tips: 3,
     refresh: 4,
-    tips: 3
+    freeze: 5,
+    dismiss: 7
 };
 
 const Content = React.createClass({
