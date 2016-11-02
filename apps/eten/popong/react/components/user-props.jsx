@@ -1,4 +1,3 @@
-
 const UserProps = React.createClass({
     getInitialState: function () {
         if (this.props.prop === null) alert('道具不存在');
@@ -45,6 +44,11 @@ const UserProps = React.createClass({
         }, (data)=> {
             if (data.code == 10000) {
                 this.props.useCallback();
+                if (this.state.id == PROPS_NAME_IDS.refresh) {
+                    Game.audios.propsRefresh.play();
+                } else if (this.state.id == PROPS_NAME_IDS.tips) {
+                    Game.audios.propsTips.play();
+                }
             } else {
                 alert(data.message)
             }

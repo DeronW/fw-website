@@ -24,6 +24,14 @@
         levelTailImage: null,
         cells: [],
 
+        audios: {
+            levelComplete: new Hilo.HTMLAudio({src: 'audios/level-complete.mp3'}),
+            popOff: new Hilo.HTMLAudio({src: 'audios/pop-off.wav'}),
+            propsRefresh: new Hilo.HTMLAudio({src: 'audios/props-refresh.mp3'}),
+            propsTips: new Hilo.HTMLAudio({src: 'audios/props-tips.wav'}),
+            wrongTouch: new Hilo.HTMLAudio({src: 'audios/wrong-touch.mp3'})
+        },
+
         // 记录当前关卡完成进度
         status: {
             level: '第几关',
@@ -143,9 +151,12 @@
 
         removeAllProps: function () {
             // refresh 重新排列道具, tips 提示道具
-            ['refresh', 'tips'].forEach(function (name) {
+            ['refresh', 'tips', 'freeze'].forEach(function (name) {
+                var text = name + 'Text';
                 this.tools[name] && this.tools[name].removeFromParent(this.stage);
+                this.tools[text] && this.tools[text].removeFromParent(this.stage);
                 delete this.tools[name];
+                delete this.tools[text];
             }.bind(this))
         },
 
@@ -177,7 +188,7 @@
         addPropsFreeze: function (props) {
             var x = this.width - 320 - 180,
                 y = 180;
-            this.tools.refresh = new Hilo.Bitmap({
+            this.tools.freeze = new Hilo.Bitmap({
                 image: this.asset.propsFreeze,
                 width: 83 * 2,
                 height: 96 * 2,
@@ -256,7 +267,8 @@
                 setTimeout(this.checkLevelComplete.bind(this), 800);
             } else if (e.eventTarget == this.tools.refresh) {
                 this.pauseGameProgress();
-                window.ContentPanel.useProps('4', // refresh 刷新道具
+                // refresh 刷新道具
+                window.ContentPanel.useProps(PROPS_NAME_IDS.refresh,
                     function () {
                         this.toolsRefresh();
                         this.continueGameProgress();
@@ -264,7 +276,7 @@
                 );
             } else if (e.eventTarget == this.tools.tips) {
                 // 3: 表示提示道具
-                this.usePropsHandler('3', this.toolsShowTips.bind(this));
+                this.usePropsHandler(PROPS_NAME_IDS.tips, this.toolsShowTips.bind(this));
             } else if (e.eventTarget == this.tools.freeze) {
                 this.toolsFreeze()
             } else if (e.eventTarget == this.tools.dismiss) {
@@ -428,9 +440,11 @@
                     if (!r) return;
                     this.addTile(null, r.x, r.y, 'with_animate')
                 }
+                this.audios.wrongTouch.play();
             } else {
                 // 成功消除方块后在当前位置显示一颗小星星
-                this.showStarInCell(row, column, 0.7, 500)
+                this.showStarInCell(row, column, 0.7, 500);
+                this.audios.popOff.play();
             }
             console.log('remain count', this.getTileCount())
         },

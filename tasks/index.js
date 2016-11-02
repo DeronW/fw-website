@@ -105,6 +105,10 @@ module.exports = function generate_task(site_name, project_name, configs) {
         return copy([`${public_path}images/*`], `${build_path}images`)
     }
 
+    function copy_audios() {
+        return copy([`${app_path}audios/*`], `${build_path}audios`)
+    }
+
     function compile_public_javascripts() {
         return copy([`${public_path}javascripts/*`], `${build_path}javascripts`)
     }
@@ -150,6 +154,7 @@ module.exports = function generate_task(site_name, project_name, configs) {
             common_javascripts,
             compile_images,
             compile_public_images,
+            copy_audios,
             compile_public_javascripts
         ));
 

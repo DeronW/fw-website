@@ -7,6 +7,7 @@ const LevelComplete = React.createClass({
             calculateStar(this.props.level, this.props.seconds, function (data) {
                 this.setState({star: data.star})
             }.bind(this));
+            Game.audios.levelComplete.play();
         } else {
             this.setState({star: 0})
         }
