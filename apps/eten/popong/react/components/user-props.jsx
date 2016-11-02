@@ -1,6 +1,7 @@
 const UserProps = React.createClass({
     getInitialState: function () {
         if (this.props.prop === null) alert('道具不存在');
+
         var prop = this.props.prop;
 
         return {
@@ -55,23 +56,60 @@ const UserProps = React.createClass({
         }, 'json');
     },
     render: function () {
-        return (
-            <div className="level-props">
-                <div className="dialog">
-                    <div className="btn-close" onClick={this.closeHandler}></div>
-                    <div className="props-title">{this.state.title}</div>
-                    <div className="describe">{this.state.describe}</div>
-                    <div className="form">
-                        <a className="jian" onClick={this.jianHandler}> </a>
-                        <div className="value"> {this.state.value} </div>
-                        <a className="jia" onClick={this.jiaHandler}> </a>
-                    </div>
-                    <div className="limit">当前关卡限购{this.state.limitBuy}个</div>
+        let {level, prop} = this.props;
 
-                    <a className="btn-use" onClick={this.useHandler}> </a>
-                    <a className="btn-buy" onClick={this.buyHandler}> </a>
+        let panel;
+
+        if (prop.unlock > level) {
+            panel = (
+                <div className="props-locked">
+                    <div className="props-locked-panel">
+                        <div className="props-locked-text">
+                            <div className="props-title">{this.state.title}</div>
+                            <div className="describe">{this.state.describe}</div>
+                        </div>
+                        <a className="btn-know-it" onClick={this.closeHandler}> </a>
+                    </div>
                 </div>
-            </div>
+            )
+        } else {
+            panel = (
+                <div className="level-props">
+                    <div className="dialog">
+                        <div className="btn-close" onClick={this.closeHandler}></div>
+                        <div className="props-title">{this.state.title}</div>
+                        <div className="describe">{this.state.describe}</div>
+                        <div className="form">
+                            <a className="jian" onClick={this.jianHandler}> </a>
+                            <div className="value"> {this.state.value} </div>
+                            <a className="jia" onClick={this.jiaHandler}> </a>
+                        </div>
+                        <div className="limit">当前关卡限购{this.state.limitBuy}个</div>
+
+                        <a className="btn-use" onClick={this.useHandler}> </a>
+                        <a className="btn-buy" onClick={this.buyHandler}> </a>
+                    </div>
+                </div>
+            );
+
+        }
+
+        return panel;
+    }
+});
+
+UserProps.BuySuccess = React.createClass({
+    render: function () {
+        return (
+            <div>sss</div>
+        )
+    }
+});
+
+UserProps.BuyFail = React.createClass({
+    render: function () {
+        return (
+            <div>sss</div>
         )
     }
 });

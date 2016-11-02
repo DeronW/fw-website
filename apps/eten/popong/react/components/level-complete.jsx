@@ -1,6 +1,6 @@
 const LevelComplete = React.createClass({
     getInitialState: function () {
-        return {star: 0}
+        return {star: 0, win_gift: false}
     },
     componentDidMount: function () {
         if (this.props.success) {
@@ -15,6 +15,9 @@ const LevelComplete = React.createClass({
     showLevelListHandler: function () {
         this.props.setPage('level')
     },
+    showGiftPackageHandler: function () {
+        this.setState({win_gift: true})
+    },
     nextHandler: function () {
         var level = this.props.level;
         if (level >= 9) {
@@ -22,6 +25,9 @@ const LevelComplete = React.createClass({
             return;
         }
         this.props.switchLevel(level + 1);
+    },
+    hideWinGiftHandler: function () {
+        this.setState({win_gift: false})
     },
     retryHandler: function () {
         this.props.switchLevel(this.props.level);
@@ -36,16 +42,34 @@ const LevelComplete = React.createClass({
             <img className="btn-next" src="images/level-retry.png"
                  onClick={this.retryHandler}/>;
 
-        return (
+        let panel;
+
+        panel = (
             <div className="level-complete">
                 <div className={dialog_cls}>
                     <div className={"star star-" + this.state.star}></div>
                     <div className="score">用时: {time}</div>
                     {btn}
-                    <img className="btn-level-list" src="images/level-home.png"
-                         onClick={this.showLevelListHandler}/>
+                    <img className="btn-level-list" src="images/level-home.png" onClick={this.showLevelListHandler}/>
+                    <img className="btn-level-list" src="images/level-complete/gift.jpg"
+                         onClick={this.showGiftPackageHandler}/>
                 </div>
             </div>
-        )
+        );
+
+        if (this.state.win_gift) {
+            panel = (
+                <div className="level-complete-gift">
+                    <div className="level-complete-gift-panel">
+                        <div className="gift-title">获得通关礼包</div>
+                        <div className="describe">这里应该是一段礼包描述</div>
+
+                        <a className="btn-know-it" onClick={this.hideWinGiftHandler}> </a>
+                    </div>
+                </div>
+            )
+        }
+
+        return panel;
     }
 });

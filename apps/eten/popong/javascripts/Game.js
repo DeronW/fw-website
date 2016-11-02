@@ -285,12 +285,21 @@
                     }.bind(this)
                 );
             } else if (e.eventTarget == this.tools.tips || e.eventTarget == this.tools.tipsText) {
-                // 3: 表示提示道具
+                // 表示提示道具
                 this.usePropsHandler(PROPS_NAME_IDS.tips, this.toolsShowTips.bind(this));
             } else if (e.eventTarget == this.tools.freeze || e.eventTarget == this.tools.freezeText) {
-                this.toolsFreeze()
+                // 冰冻时间道具
+                this.pauseGameProgress();
+                window.ContentPanel.useProps(PROPS_NAME_IDS.freeze, function () {
+                    // this.toolsFreeze()
+                    this.continueGameProgress();
+                })
             } else if (e.eventTarget == this.tools.dismiss || e.eventTarget == this.tools.dismissText) {
-                this.toolsDismiss()
+                this.pauseGameProgress();
+                window.ContentPanel.useProps(PROPS_NAME_IDS.dismiss, function () {
+                    // this.toolsDismiss()
+                    this.continueGameProgress();
+                })
             } else if (e.eventTarget == this.tools.pause) {
                 this.pauseGameProgress();
                 window.ContentPanel.setPage('pause');
@@ -401,7 +410,6 @@
             if (this.status.refreshAt) return; // 正在刷新中, 不能重复点击
             this.status.refreshAt = now();
             setTimeout(function () {
-                console.log('before refresh', this.getTileCount());
                 this.setLevel(this.getTileCount(), this.status.level);
                 this.status.refreshAt = null;
             }.bind(this), 800);
