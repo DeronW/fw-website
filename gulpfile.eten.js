@@ -5,6 +5,7 @@ const ETEN_APP_NAMES = [
     'guide', // 新手引导
     'app-download', // app 下载页面
     'register', // 推广用户注册落地页面
+    'notice-corporate-structure',//
 
     // 主营产品分类说明页面
     'topic-yi-zhuan-ying',
