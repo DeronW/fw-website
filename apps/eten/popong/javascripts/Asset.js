@@ -28,6 +28,9 @@
                 {id: 'level_7', src: 'images/game/level_7.png'},
                 {id: 'level_8', src: 'images/game/level_8.png'},
                 {id: 'level_9', src: 'images/game/level_9.png'},
+                {id: 'level_10', src: 'images/game/level_10.png'},
+                {id: 'level_11', src: 'images/game/level_11.png'},
+                {id: 'level_12', src: 'images/game/level_12.png'},
                 {id: 'tipStar', src: 'images/game/tip-star.png'},
                 {id: 'grasshead', src: 'images/game/grasshead.png'},
                 {id: 'pause', src: 'images/game/pause.png'},
@@ -55,6 +58,9 @@
             this.level_7 = this.queue.get('level_7').content;
             this.level_8 = this.queue.get('level_8').content;
             this.level_9 = this.queue.get('level_9').content;
+            this.level_10 = this.queue.get('level_10').content;
+            this.level_11 = this.queue.get('level_11').content;
+            this.level_12 = this.queue.get('level_12').content;
 
             this.tipStar = this.queue.get('tipStar').content;
 

@@ -16,9 +16,11 @@ const HeaderStatusBar = React.createClass({
                     console.log('got error', data.message);
                     return
                 }
-                var d = data.data;
+                let d = data.data;
 
-                var avatar = d.avatar ? d.avatar : (d.sex ? 'http://www.9888.cn/img/man.png' : 'http://www.9888.cn/img/woman.png');
+                let avatar = d.avatar ? d.avatar : (d.sex ?
+                    'http://www.9888.cn/img/man.png' :
+                    'http://www.9888.cn/img/woman.png');
                 this.setState({
                     is_login: d.isLogin,
                     username: d.userName,
@@ -26,7 +28,6 @@ const HeaderStatusBar = React.createClass({
                     avatar: avatar,
                     msg_count: null
                 });
-
                 // set current page is login or not. this is base function, very IMPORTANT!
                 $UserReady.fire(d.isLogin);
             }.bind(this), 'json');
@@ -81,7 +82,8 @@ const HeaderStatusBar = React.createClass({
                         <a href="http://www.creditchina.hk/">中国信贷(08207.HK)</a>
                         旗下互联网金融平台
                     </div>
-
+                    <a className="link" href="/static/web/notice-corporate-structure/index.html">信息披露</a>
+                    {separate_line}
                     <div className="hsb-guide-nav">
                         <div className="hsb-guide-nav-box">
                             <i className="arrow"> </i>
@@ -89,14 +91,10 @@ const HeaderStatusBar = React.createClass({
                             <a className="" href="/static/web/guide-cookbook/index.html">玩赚攻略</a>
                         </div>
                     </div>
-
                     {separate_line}
-
                     <a className="link" href="/mesageCenter/msssageList.shtml?messageType=1">消息中心</a>
                     {separate_line}
-
                     {this.state.is_login && this.state.username ? user_state : null}
-
                     {this.state.is_login ? null : <a className="link" href="/orderUser/register.shtml">免费注册</a>}
                     {this.state.is_login ? null : separate_line}
                     {this.state.is_login ? null : <a className="link" href="/orderUser/login.shtml">立即登录</a>}
@@ -109,7 +107,6 @@ const HeaderStatusBar = React.createClass({
                             <img src="images/menu-app.png"/>
                         </a>
                     </div>
-
 
                 </div>
             </div>

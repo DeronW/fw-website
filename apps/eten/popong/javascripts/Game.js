@@ -24,6 +24,14 @@
         levelTailImage: null,
         cells: [],
 
+        audios: {
+            levelComplete: new Hilo.HTMLAudio({src: 'audios/level-complete.mp3'}),
+            popOff: new Hilo.HTMLAudio({src: 'audios/pop-off.wav'}),
+            propsRefresh: new Hilo.HTMLAudio({src: 'audios/props-refresh.mp3'}),
+            propsTips: new Hilo.HTMLAudio({src: 'audios/props-tips.wav'}),
+            wrongTouch: new Hilo.HTMLAudio({src: 'audios/wrong-touch.mp3'})
+        },
+
         // 记录当前关卡完成进度
         status: {
             level: '第几关',
@@ -143,9 +151,12 @@
 
         removeAllProps: function () {
             // refresh 重新排列道具, tips 提示道具
-            ['refresh', 'tips'].forEach(function (name) {
+            ['refresh', 'tips', 'freeze'].forEach(function (name) {
+                var text = name + 'Text';
                 this.tools[name] && this.tools[name].removeFromParent(this.stage);
+                this.tools[text] && this.tools[text].removeFromParent(this.stage);
                 delete this.tools[name];
+                delete this.tools[text];
             }.bind(this))
         },
 
@@ -153,16 +164,19 @@
         addPropsDismiss: function (props) {
             var x = this.width - 320 - 83,
                 y = 180;
-            this.tools.refresh = new Hilo.Bitmap({
-                image: this.asset.propsFreeze,
+            this.tools.dismiss = new Hilo.Bitmap({
+                image: this.asset.propsDismiss,
                 width: 83 * 2,
                 height: 96 * 2,
                 y: y,
                 x: x
             }).addTo(this.stage);
 
+            var text = props.price + '工分';
+            if (props.unlock && props.unlock > this.status.level) text = props.unlock + '关解锁';
+
             this.tools.dismissText = new Hilo.Text({
-                text: props.price + '工分',
+                text: text,
                 color: 'white',
                 textAlign: 'center',
                 textVAlign: 'middle',
@@ -175,9 +189,9 @@
 
         // 道具: 时间冻结
         addPropsFreeze: function (props) {
-            var x = this.width - 320 - 180,
+            var x = this.width - 320 - 300,
                 y = 180;
-            this.tools.refresh = new Hilo.Bitmap({
+            this.tools.freeze = new Hilo.Bitmap({
                 image: this.asset.propsFreeze,
                 width: 83 * 2,
                 height: 96 * 2,
@@ -185,8 +199,10 @@
                 x: x
             }).addTo(this.stage);
 
+            var text = props.price + '工分';
+            if (props.unlock && props.unlock > this.status.level) text = props.unlock + '关解锁';
             this.tools.freezeText = new Hilo.Text({
-                text: props.price + '工分',
+                text: text,
                 color: 'white',
                 textAlign: 'center',
                 textVAlign: 'middle',
@@ -210,8 +226,10 @@
                 x: x
             }).addTo(this.stage);
 
+            var text = props.price + '工分';
+            if (props.unlock && props.unlock > this.status.level) text = props.unlock + '关解锁';
             this.tools.refreshText = new Hilo.Text({
-                text: props.price + '工分',
+                text: text,
                 color: 'white',
                 textAlign: 'center',
                 textVAlign: 'middle',
@@ -224,7 +242,7 @@
 
         // 道具: 提示
         addPropsTips: function (props) {
-            var x = 280, y = 180;
+            var x = 240, y = 180;
             this.tools.tips = new Hilo.Bitmap({
                 image: this.asset.propsTips,
                 width: 83 * 2,
@@ -233,8 +251,10 @@
                 x: x
             }).addTo(this.stage);
 
-            this.tools.refreshText = new Hilo.Text({
-                text: props.price + '工分',
+            var text = props.price + '工分';
+            if (props.unlock && props.unlock > this.status.level) text = props.unlock + '关解锁';
+            this.tools.tipsText = new Hilo.Text({
+                text: text,
                 color: 'white',
                 textAlign: 'center',
                 textVAlign: 'middle',
@@ -247,6 +267,7 @@
 
         onUserInput: function (e) {
             if (this.status.refreshAt) return; // 洗牌过程中不能响应用户事件
+
             if (e.eventTarget == this.gameContainer) {
                 var cellWidth = this.gameContainer.width / this.columnCount,
                     cellHeight = this.gameContainer.height / this.rowCount;
@@ -254,21 +275,31 @@
                 var column = Math.floor(x / cellWidth), row = Math.floor(y / cellHeight);
                 this.biuAction(row, column);
                 setTimeout(this.checkLevelComplete.bind(this), 800);
-            } else if (e.eventTarget == this.tools.refresh) {
+            } else if (e.eventTarget == this.tools.refresh || e.eventTarget == this.tools.refreshText) {
                 this.pauseGameProgress();
-                window.ContentPanel.useProps('4', // refresh 刷新道具
+                // refresh 刷新道具
+                window.ContentPanel.useProps(PROPS_NAME_IDS.refresh,
                     function () {
                         this.toolsRefresh();
                         this.continueGameProgress();
                     }.bind(this)
                 );
-            } else if (e.eventTarget == this.tools.tips) {
-                // 3: 表示提示道具
-                this.usePropsHandler('3', this.toolsShowTips.bind(this));
-            } else if (e.eventTarget == this.tools.freeze) {
-                this.toolsFreeze()
-            } else if (e.eventTarget == this.tools.dismiss) {
-                this.toolsDismiss()
+            } else if (e.eventTarget == this.tools.tips || e.eventTarget == this.tools.tipsText) {
+                // 表示提示道具
+                this.usePropsHandler(PROPS_NAME_IDS.tips, this.toolsShowTips.bind(this));
+            } else if (e.eventTarget == this.tools.freeze || e.eventTarget == this.tools.freezeText) {
+                // 冰冻时间道具
+                this.pauseGameProgress();
+                window.ContentPanel.useProps(PROPS_NAME_IDS.freeze, function () {
+                    // this.toolsFreeze()
+                    this.continueGameProgress();
+                })
+            } else if (e.eventTarget == this.tools.dismiss || e.eventTarget == this.tools.dismissText) {
+                this.pauseGameProgress();
+                window.ContentPanel.useProps(PROPS_NAME_IDS.dismiss, function () {
+                    // this.toolsDismiss()
+                    this.continueGameProgress();
+                })
             } else if (e.eventTarget == this.tools.pause) {
                 this.pauseGameProgress();
                 window.ContentPanel.setPage('pause');
@@ -379,7 +410,6 @@
             if (this.status.refreshAt) return; // 正在刷新中, 不能重复点击
             this.status.refreshAt = now();
             setTimeout(function () {
-                console.log('before refresh', this.getTileCount());
                 this.setLevel(this.getTileCount(), this.status.level);
                 this.status.refreshAt = null;
             }.bind(this), 800);
@@ -428,11 +458,12 @@
                     if (!r) return;
                     this.addTile(null, r.x, r.y, 'with_animate')
                 }
+                this.audios.wrongTouch.play();
             } else {
                 // 成功消除方块后在当前位置显示一颗小星星
-                this.showStarInCell(row, column, 0.7, 500)
+                this.showStarInCell(row, column, 0.7, 500);
+                this.audios.popOff.play();
             }
-            console.log('remain count', this.getTileCount())
         },
 
         checkLevelComplete: function () {
@@ -529,10 +560,10 @@
             }).addTo(this.stage).setFont('normal small-caps bold 80px Sans-serif');
 
             (props || []).forEach(function (i) {
-                if (i.prop_id == 5) this.addPropsFreeze(i);
-                if (i.prop_id == 4) this.addPropsRefresh(i);
-                if (i.prop_id == 3) this.addPropsTips(i);
-                // this.addPropsDismiss(i);
+                if (i.prop_id == PROPS_NAME_IDS.freeze) this.addPropsFreeze(i);
+                if (i.prop_id == PROPS_NAME_IDS.refresh) this.addPropsRefresh(i);
+                if (i.prop_id == PROPS_NAME_IDS.tips) this.addPropsTips(i);
+                if (i.prop_id == PROPS_NAME_IDS.dismiss) this.addPropsDismiss(i);
             }.bind(this));
 
             this.gameTiming();

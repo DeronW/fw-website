@@ -1,3 +1,4 @@
+@import "../../../../lib/less/partial/user-center-panel.less";
 
 body, div, canvas {
   image-rendering: optimizeSpeed;
@@ -63,7 +64,7 @@ body, html {
     top: 0;
     bottom: 0;
     width: 100%;
-    background: rgba(28, 140, 144, 0.9);
+    background: rgba(10, 133, 155, 0.9);
   }
 
   .rule-detail {
@@ -75,19 +76,19 @@ body, html {
     border-radius: 20px;
     background: white;
     min-height: 600px;
-    padding-top: 40px;
+    padding-top: 80px;
 
     img {
       max-width: 90%;
       position: absolute;
-      top: -60px;
-      left: 80px;
+      top: -55px;
+      left: 72px;
     }
 
     .text {
       color: #728ba3;
-      margin: 20px;
-      font-size: 30px;
+      margin: 10px 50px 0;
+      font-size: 24px;
     }
   }
 
@@ -140,12 +141,15 @@ body, html {
     position: absolute;
     bottom: 0;
     left: 0;
+    z-index: 99;
   }
 
   .levels {
     display: block;
     overflow: scroll;
-    height: 820px;
+    position: absolute;
+    top: 230px;
+    bottom: 170px;
   }
 
   .level {
@@ -407,14 +411,22 @@ body, html {
     width: 166px;
     height: 79px;
     float: right;
-    background: url(../images/props-btn-buy.png) no-repeat;
+    background: url(../images/use-props/props-btn-buy.png) no-repeat;
+
+    &.disable {
+      background-image: url(../images/use-props/btn-buy-disable.png);
+    }
   }
   .btn-use {
     float: left;
     display: block;
     width: 166px;
     height: 79px;
-    background: url(../images/props-btn-use.png) no-repeat;
+    background: url(../images/use-props/btn-use.png) no-repeat;
+
+    &.disable {
+      background-image: url(../images/use-props/props-btn-use.png);
+    }
   }
 }
 
@@ -486,7 +498,7 @@ body, html {
     .btn-level-list {
       width: 83px;
       height: 81px;
-      margin-right: 80px;
+      margin-right: 25px;
     }
   }
 
@@ -513,4 +525,95 @@ body, html {
   .btn-level-list {
     float: right;
   }
+}
+
+.props-locked {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(129, 220, 244, 0.5);
+
+  .props-locked-panel {
+    width: 519px;
+    height: 468px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -234px;
+    margin-left: -260px;
+    background: transparent url(../images/use-props/bg.png) no-repeat center;
+
+    .props-locked-text {
+      width: 80%;
+      margin: 140px auto 50px;
+      font-size: 26px;
+      color: #728ba3;
+      text-align: center;
+
+      .props-title {
+        color: #25d2da;
+        font-size: 36px;
+        text-align: center;
+      }
+
+      .describe {
+        margin-top: 10px;
+        color: #728ba3;
+        font-size: 26px;
+        text-align: center;
+      }
+    }
+
+    .btn-know-it {
+      width: 225px;
+      height: 80px;
+      position: absolute;
+      bottom: 50px;
+      left: 50%;
+      margin-left: -112px;
+      display: block;
+      background: transparent url(../images/use-props/know-it.jpg) no-repeat center;
+    }
+  }
+}
+
+.level-complete-gift {
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(129, 220, 244, 1) url(../images/level-complete/gift-bg.png) no-repeat center 180px;
+
+  .level-complete-gift-panel {
+    width: 520px;
+    height: 350px;
+    position: relative;
+    margin: 550px auto 0;
+
+    .gift-title {
+      color: #25d2da;
+      font-size: 36px;
+      text-align: center;
+    }
+
+    .describe {
+      margin-top: 10px;
+      color: #728ba3;
+      font-size: 26px;
+      text-align: center;
+    }
+
+    .btn-know-it {
+      width: 225px;
+      height: 80px;
+      margin: 50px auto 0;
+      display: block;
+      background: transparent url(../images/use-props/know-it.jpg) no-repeat center;
+    }
+  }
+
 }
