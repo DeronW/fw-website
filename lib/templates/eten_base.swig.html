@@ -34,11 +34,11 @@
 <input type="hidden" id="api-path" value="{{ API_PATH }}"/>
 
 <div id="header-status-bar"></div>
-{% include 'header-nav-bar.swig.html' %}
+{% include 'eten/header-nav-bar.swig.html' %}
 {% block content %}{% endblock %}
-{% include 'footer.swig.html' %}
-{% include 'sidebar-fn.swig.html' %}
-{% include 'not-support-ie6-ie7.swig.html' %}
+{% include 'eten/footer.swig.html' %}
+{% include 'eten/sidebar-fn.swig.html' %}
+{% include 'eten/not-support-ie6-ie7.swig.html' %}
 
 <script src="javascripts/lib.js"></script>
 <script src="javascripts/bundle.js"></script>
@@ -46,8 +46,8 @@
 {% block js %}{% endblock %}
 
 {% if !DEBUG %}
-{% include 'tong_ji.swig.html' %}
-{% include 'qq-ke-fu.swig.html' %}
+{% include 'eten/tong_ji.swig.html' %}
+{% include 'eten/qq-ke-fu.swig.html' %}
 {% endif %}
 </body>
 </html>

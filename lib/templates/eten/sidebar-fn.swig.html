@@ -1,5 +1,4 @@
 <div class="global-sidebar-fn">
-
     <a href="/activity/app/" target="_blank">
         <img class="icon" src="images/icon-sidebar-fn-phone.png">
         <div class="cover-text">
@@ -26,7 +25,7 @@
         </div>
     </a>
 
-    <a onClick="globalInterestCalculator.show()">
+    <a onClick="GlobalInterestCalculator.show()">
         <img class="icon" src="images/icon-sidebar-fn-cal.png">
         <div class="cover-text">
             <div>计算</div>
@@ -49,13 +48,12 @@
             <div> 顶部</div>
         </div>
     </a>
-
 </div>
 
 <div class="interest-calculator">
-    <div class="bg" onClick="globalInterestCalculator.hide()"></div>
+    <div class="bg" onClick="GlobalInterestCalculator.hide()"></div>
     <div class="ic-panel">
-        <div class="ic-title">投资计算器 <b onClick="globalInterestCalculator.hide()">&times;</b></div>
+        <div class="ic-title">投资计算器 <b onClick="GlobalInterestCalculator.hide()">&times;</b></div>
 
         <table>
             <tr>
@@ -104,8 +102,8 @@
             <tr>
                 <td></td>
                 <td>
-                    <a class="ic-cal" onClick="globalInterestCalculator.calculate()">计算</a>
-                    <a class="ic-reset" onClick="globalInterestCalculator.reset()">重置</a>
+                    <a class="ic-cal" onClick="GlobalInterestCalculator.calculate()">计算</a>
+                    <a class="ic-reset" onClick="GlobalInterestCalculator.reset()">重置</a>
                 </td>
             </tr>
         </table>
@@ -118,5 +116,4 @@
             <div class="ic-result-item">最后一月应收本息： <b>0.00</b></div>
         </div>
     </div>
-
 </div>

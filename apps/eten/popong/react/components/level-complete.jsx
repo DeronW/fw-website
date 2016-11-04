@@ -20,11 +20,11 @@ const LevelComplete = React.createClass({
     },
     nextHandler: function () {
         var level = this.props.level;
-        if (level >= 9) {
+        if (level >= 12) {
             alert('没有更多关卡啦');
             return;
         }
-        this.props.switchLevel(level + 1);
+        this.props.switchLevel(level + 1, true);
     },
     hideWinGiftHandler: function () {
         this.setState({win_gift: false})
@@ -36,11 +36,20 @@ const LevelComplete = React.createClass({
         var dialog_cls = this.props.success ? "dialog pass" : "dialog fail";
         var time = parseInt(this.props.seconds / 60) + '分' + this.props.seconds % 60 + '秒';
 
-        let btn = this.props.success ?
-            <img className="btn-next" src="images/level-next.png"
-                 onClick={this.nextHandler}/> :
-            <img className="btn-next" src="images/level-retry.png"
-                 onClick={this.retryHandler}/>;
+        let btn;
+
+        if (this.props.success) {
+            if (this.props.level >= 11) {
+                btn = <img className="btn-next" src="images/level-complete/coming-soon.png"
+                           onClick={this.showLevelListHandler}/>;
+            } else {
+                btn = <img className="btn-next" src="images/level-next.png"
+                           onClick={this.nextHandler}/>;
+            }
+        } else {
+            btn = <img className="btn-next" src="images/level-retry.png"
+                       onClick={this.retryHandler}/>;
+        }
 
         let panel;
 
@@ -51,8 +60,8 @@ const LevelComplete = React.createClass({
                     <div className="score">用时: {time}</div>
                     {btn}
                     <img className="btn-level-list" src="images/level-home.png" onClick={this.showLevelListHandler}/>
-                    <img className="btn-level-list" src="images/level-complete/gift.jpg"
-                         onClick={this.showGiftPackageHandler}/>
+                    {/*<img className="btn-level-list" src="images/level-complete/gift.jpg"*/}
+                    {/*onClick={this.showGiftPackageHandler}/>*/}
                 </div>
             </div>
         );

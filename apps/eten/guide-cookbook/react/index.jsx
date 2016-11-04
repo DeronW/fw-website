@@ -430,7 +430,7 @@ var Content = React.createClass({
                                 <img src="images/web-icon.png" />
                             </div>
                             <span className="strong-text">手机WAP版</span>
-                            <p className="text">用户可通过手机浏览器输入金融工场网<br/>址：www.9888.cn，或直接搜索“金融<br />工场工场”，即可快捷注册投资。</p>
+                            <p className="text">用户可通过手机浏览器输入金融工场网<br/>址：www.9888.cn，或直接搜索“金融<br />工场”，即可快捷注册投资。</p>
                         </li>
                     </ul>
                 </div>

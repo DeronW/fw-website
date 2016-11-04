@@ -9,7 +9,7 @@ const UserProps = React.createClass({
             value: 1,
             score: prop.price,
             title: prop.prop_name,
-            describe: `${prop.comment}, 消耗${prop.price}工分即可购买`,
+            describe: prop.comment,
             limitBuy: prop.remainder_buy
         }
     },
@@ -67,6 +67,7 @@ const UserProps = React.createClass({
                         <div className="props-locked-text">
                             <div className="props-title">{this.state.title}</div>
                             <div className="describe">{this.state.describe}</div>
+                            <div className="describe">{`消耗${prop.price}工分即可购买`}</div>
                         </div>
                         <a className="btn-know-it" onClick={this.closeHandler}> </a>
                     </div>
@@ -79,6 +80,7 @@ const UserProps = React.createClass({
                         <div className="btn-close" onClick={this.closeHandler}></div>
                         <div className="props-title">{this.state.title}</div>
                         <div className="describe">{this.state.describe}</div>
+                        <div className="describe">{`消耗${prop.price}工分即可购买`}</div>
                         <div className="form">
                             <a className="jian" onClick={this.jianHandler}> </a>
                             <div className="value"> {this.state.value} </div>
