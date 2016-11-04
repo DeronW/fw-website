@@ -39,7 +39,7 @@ const LevelComplete = React.createClass({
         let btn;
 
         if (this.props.success) {
-            if (this.props.level >= 11) {
+            if (this.props.level > 11) {
                 btn = <img className="btn-next" src="images/level-complete/coming-soon.png"
                            onClick={this.showLevelListHandler}/>;
             } else {
