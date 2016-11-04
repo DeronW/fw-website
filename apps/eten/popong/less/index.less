@@ -147,7 +147,9 @@ body, html {
   .levels {
     display: block;
     overflow: scroll;
-    height: 680px;
+    position: absolute;
+    top: 230px;
+    bottom: 170px;
   }
 
   .level {
@@ -409,14 +411,22 @@ body, html {
     width: 166px;
     height: 79px;
     float: right;
-    background: url(../images/props-btn-buy.png) no-repeat;
+    background: url(../images/use-props/props-btn-buy.png) no-repeat;
+
+    &.disable {
+      background-image: url(../images/use-props/btn-buy-disable.png);
+    }
   }
   .btn-use {
     float: left;
     display: block;
     width: 166px;
     height: 79px;
-    background: url(../images/props-btn-use.png) no-repeat;
+    background: url(../images/use-props/btn-use.png) no-repeat;
+
+    &.disable {
+      background-image: url(../images/use-props/props-btn-use.png);
+    }
   }
 }
 

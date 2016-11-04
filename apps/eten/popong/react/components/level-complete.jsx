@@ -36,11 +36,20 @@ const LevelComplete = React.createClass({
         var dialog_cls = this.props.success ? "dialog pass" : "dialog fail";
         var time = parseInt(this.props.seconds / 60) + '分' + this.props.seconds % 60 + '秒';
 
-        let btn = this.props.success ?
-            <img className="btn-next" src="images/level-next.png"
-                 onClick={this.nextHandler}/> :
-            <img className="btn-next" src="images/level-retry.png"
-                 onClick={this.retryHandler}/>;
+        let btn;
+
+        if (this.props.success) {
+            if (this.props.level >= 11) {
+                btn = <img className="btn-next" src="images/level-complete/coming-soon.png"
+                           onClick={this.showLevelListHandler}/>;
+            } else {
+                btn = <img className="btn-next" src="images/level-next.png"
+                           onClick={this.nextHandler}/>;
+            }
+        } else {
+            btn = <img className="btn-next" src="images/level-retry.png"
+                       onClick={this.retryHandler}/>;
+        }
 
         let panel;
 
