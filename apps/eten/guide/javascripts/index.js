@@ -1,4 +1,3 @@
-return
 (function () {
 
     function tab(obj) {

@@ -1,4 +1,3 @@
-
 const StartPage = React.createClass({
     getInitialState: function () {
         return {
@@ -18,6 +17,9 @@ const StartPage = React.createClass({
             rule = <div className="rule-dialog">
                 <div className="rule-detail">
                     <img src="images/start-page-btn-close.png" onClick={this.ruleToggleHandler}/>
+                    <div className="text">
+                        游戏规则
+                    </div>
                     <div className="text">
                         1. 游戏单手操作即可，只需手指点击同一水平线或垂直线上两个或两个以上相同图案进行消除，完成每关的指定消除目标即可过关；
                     </div>
@@ -42,7 +44,7 @@ const StartPage = React.createClass({
         if (this.state.show_guide) {
             guide = <div className="guide-dialog" onClick={this.guideToggleHandler}>
                 <div className="guide-detail">
-                    <div className="text"> 点击将方块链接的直线中心点</div>
+                    <div className="text"> 点击将方块连接的直线中心点</div>
                     <div className="text"> 进行消除</div>
                     <img src="images/how2play.gif"/>
                 </div>

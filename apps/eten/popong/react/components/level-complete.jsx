@@ -20,11 +20,11 @@ const LevelComplete = React.createClass({
     },
     nextHandler: function () {
         var level = this.props.level;
-        if (level >= 9) {
+        if (level >= 12) {
             alert('没有更多关卡啦');
             return;
         }
-        this.props.switchLevel(level + 1);
+        this.props.switchLevel(level + 1, true);
     },
     hideWinGiftHandler: function () {
         this.setState({win_gift: false})
@@ -51,8 +51,8 @@ const LevelComplete = React.createClass({
                     <div className="score">用时: {time}</div>
                     {btn}
                     <img className="btn-level-list" src="images/level-home.png" onClick={this.showLevelListHandler}/>
-                    <img className="btn-level-list" src="images/level-complete/gift.jpg"
-                         onClick={this.showGiftPackageHandler}/>
+                    {/*<img className="btn-level-list" src="images/level-complete/gift.jpg"*/}
+                    {/*onClick={this.showGiftPackageHandler}/>*/}
                 </div>
             </div>
         );

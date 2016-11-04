@@ -25,7 +25,7 @@ const Content = React.createClass({
     },
     componentDidMount: function () {
         // 设置默认值
-        let MAX_LEVEL = 18, level_list = [];
+        let MAX_LEVEL = 12, level_list = [];
         for (var i = 0; i < MAX_LEVEL; i++) {
             level_list.push({locked: true})
         }
@@ -71,11 +71,13 @@ const Content = React.createClass({
             this.setState({level_list: level_list});
         }.bind(this), 'json');
     },
-    switchLevel: function (level) {
-        this.setState({page: 'prepare', level: level});
+    switchLevel: function (level, directly_play) {
+        this.setState({page: 'prepare', level: level}, ()=> {
+            if (directly_play) this.playHandler();
+        });
     },
     playHandler: function () {
-        var start_count = [28, 30, 32, 34, 36, 38, 38, 42, 46];
+        var start_count = [28, 30, 32, 34, 36, 38, 38, 42, 46, 52, 56, 60];
 
         $.get(`${API_PATH}/9888/game/web/index.php`, {
             r: 'user/work-points',
