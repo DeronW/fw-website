@@ -41,7 +41,7 @@ module.exports = function (gulp, generate_task, settings) {
 
         generate_task('eten', i, {
             debug: true,
-            api_path: settings.api_dev_path,
+            api_path: settings.eten.dev_api_path,
             include_components: common_components,
             include_common_js: common_js
         });
