@@ -224,7 +224,7 @@ h1, h2, h3, h4, h5, h6 {
           height: 31px;
           position: relative;
           display: inline-block;
-          margin-left: 10px;
+          margin-left: 15px;
           &:hover {
             cursor: pointer;
             span {
@@ -241,7 +241,7 @@ h1, h2, h3, h4, h5, h6 {
           height: 31px;
           position: relative;
           display: inline-block;
-          margin-left: 10px;
+          margin-left: 15px;
           &:hover {
             cursor: pointer;
             span {
@@ -253,7 +253,7 @@ h1, h2, h3, h4, h5, h6 {
     }
     .meun-left {
       margin-top: 10px;
-      border: 1px solid #E0DFDD;
+      border-top: 1px solid #E0DFDD;
       .nav-tab {
         &:hover {
           cursor: pointer;
@@ -279,17 +279,17 @@ h1, h2, h3, h4, h5, h6 {
             margin-left: 8px;
             color: #333;
           }
-          &.active a {
-            color: #71b0ff;
-            background: url(../images/meun-left-bg.jpg) no-repeat;
-            margin-left: -1px;
-          }
-          &.active span {
-            color: #71b0ff;
-          }
-          &:hover span {
-            color: #71b0ff;
-          }
+        }
+        &.active a {
+          color: #71b0ff;
+          background: url(../images/meun-left-bg.jpg) no-repeat;
+          margin-left: -1px;
+        }
+        &.active span {
+          color: #71b0ff;
+        }
+        &:hover span {
+          color: #71b0ff;
         }
       }
     }
@@ -297,9 +297,11 @@ h1, h2, h3, h4, h5, h6 {
   .p2p_right {
     width: 797px;
     margin: 20px;
+    float: left;
     .per-risk-assess {
       height: 40px;
       line-height: 40px;
+      p{margin: 0}
       .icon {
         float: left;
         margin: 7px 6px 0 0;

@@ -2,13 +2,6 @@
 
 const API_PATH = document.getElementById('api-path').value;
 
-const P2pCon = React.createClass({
-    render: function () {
-        return (
-            <div className="p2p_con clearfix"><CenCont orders={this.props.orders}/>
-            </div>);
-    }
-})
 
 const CenCont = React.createClass({
     getInitialState: function () {
@@ -34,7 +27,7 @@ const CenCont = React.createClass({
         let blockText = <div className="no-commodity-block">暂无记录</div>;
 
         return (
-            <div className="p2p_right fl">
+            <div>
                 {riskAssess}
                 <div className="per-totinfo-box">
                     <div className="vip-block">
@@ -71,7 +64,7 @@ $(function(){
         url: "../user-center/order_list.json",
         data: "",
         success: function(data){
-            ReactDOM.render(<P2pCon orders={data.orders}/>, document.getElementById("cnt"));
+            ReactDOM.render(<CenCont orders={data.orders}/>, document.querySelector(".p2p_right"));
         }
     });
 
