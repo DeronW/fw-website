@@ -20,4 +20,3 @@ const SETTINGS = Object.assign({}, require('./gulpfile.settings.default.js'), se
 
 // gulpfile 本地扩展配置
 require('./gulpfile.eten.js')(gulp, gt, SETTINGS);
-
