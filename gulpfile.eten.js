@@ -23,12 +23,14 @@ const ETEN_APP_NAMES = [
     'preservation', // 安全保障介绍页面
     'guide-cookbook', // 玩赚攻略页
 
-
     'vip-prerogative', // 等级攻略页
 
     // 其他页面
     'statistics', // 实时交易统计
-    'popong' // 点点点游戏页
+    'popong', // 点点点游戏页
+
+    // 重构页面
+    'user-messages' // 用户消息页面
 ];
 
 module.exports = function (gulp, generate_task, settings) {

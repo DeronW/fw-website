@@ -1,8 +1,10 @@
 {% extends 'eten_base.swig.html' %}
 
 {% block content %}
-<div class="">
-
+<div class="partial-user-center-panel">
+    <div class="p2p_con">
+        {% include './eten/partial/user-center-panel.swig.html' %}
+    </div>
     {% block user_content %}{% endblock %}
 </div>
 {% endblock %}
