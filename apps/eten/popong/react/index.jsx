@@ -77,8 +77,8 @@ const Content = React.createClass({
         });
     },
     playHandler: function () {
-        // var start_count = [28, 30, 32, 34, 36, 38, 38, 42, 46, 52, 56, 60];
-        var start_count = [28, 6, 6, 34, 36, 38, 38, 42, 46, 52, 56, 60];
+        var start_count = [28, 30, 32, 34, 36, 38, 38, 42, 46, 52, 56, 60];
+        // var start_count = [28, 6, 6, 34, 36, 38, 38, 42, 46, 52, 56, 60];
 
         $.get(`${API_PATH}/9888/game/web/index.php`, {
             r: 'user/work-points',
