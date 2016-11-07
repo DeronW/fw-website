@@ -1,8 +1,9 @@
 //@import "./partial/user-center-panel.less";
 @import "common.less";
+
 .couponWrap{
   width: 1140px;
-  margin: auto;
+  margin:20px auto;
   height: 1000px;
 }
 .couponContent{
@@ -10,4 +11,187 @@
   height: 1000px;
   border: 1px solid @colorBorder;
   float: right;
+  position: relative;
+  .couponTitle{
+    display: block;
+    position: absolute;
+    right: 20px;
+    height: 46px;
+    line-height: 46px;
+    font-size: @fontSize14;
+    color: @color3;
+    cursor: pointer;
+  }
+}
+.couponContainer{
+  width: 798px;
+  border: 1px solid #eaeaea;
+  margin:46px auto 0;
+  .containerTop{
+    height: 50px;
+    background: @colorF2;
+    .containerTopCom{
+      width: 160px;
+      height: 48px;
+      float: left;
+      background: @colorF2 url('../images/right.png') no-repeat right bottom;
+      border-bottom: 2px solid @colorDb;
+      border-right: 1px solid @colorDb;
+      text-align: center;
+      line-height: 50px;
+      font-size: @fontSize16;
+      color: @color6;
+    }
+    .containerTopOn{
+      border-top: 2px solid @color8c;
+      border-bottom: transparent;
+      background:@colorWhite
+    }
+  }
+}
+
+.tabStyle {
+  border-top:2px solid red;
+  border-bottom:transparent;
+  background-color: #fff;
+};
+
+.containerCenter{
+  em{
+    font-style: normal;
+  }
+  .containerCenterTitle{
+    height: 32px;
+    padding-top: 18px;
+    .centerTitleCom{
+      height: 16px;
+      float: left;
+      padding: 0 20px;
+      border-right: 1px solid #dcdcdc;
+      line-height: 16px;
+      font-size: @fontSize12;
+      color: @color6;
+    }
+    .centerTitleLeft,.centerTitleRight{
+      em{
+        color: @color3;
+      }
+    }
+    .centerTitleCenter{
+      em{
+        color: @colorEa;
+      }
+    }
+  }
+  .containerCenterList{
+    margin: 0 10px 20px 10px;
+    height: 26px;
+    border-bottom: 2px solid @colorC;
+      .centerList{
+        height: 26px;
+        float: left;
+        width: 130px;
+        text-align: center;
+        border-bottom: 2px solid @colorC;
+      }
+    .centerList1{
+      border-bottom: 2px solid @color8c;
+    }
+  }
+  .containerCenterTable{
+    .tableTitle{
+      height: 34px;
+      border-top: 1px solid @colorF2;
+      background: #fbfbf9;
+      padding: 0 20px;
+      font-size: @fontSize14;
+      color: @color3;
+      line-height: 34px;
+    }
+    .tableTitleTd{
+      float: left;
+      text-align: left;
+      margin-right: 40px;
+    }
+    .tableTitleTd1{
+      width: 54px;
+    }
+    .tableTitleTd2{
+      width: 110px;
+    }
+    .tableTitleTd3{
+      width: 100px;
+    }
+    .tableTitleTd4{
+      width: 100px;
+    }
+    .tableTitleTd5{
+      width: 118px;
+    }
+    .tableTitleTd6{
+      width: 60px;
+      text-align: center;
+      margin-right: 0;
+    }
+    .tableContent{
+      .tableContentItem{
+        height: 35px;
+        border-bottom: 1px dashed #eaeaea;
+        padding:  20px;
+        font-size: @fontSize16;
+        color: @color6;
+        .tableTitleTd4{
+          width: 100px;
+          font-size: @fontSize12;
+        }
+        .tableTitleTd5{
+          width: 108px;
+          font-size: @fontSize12;
+        }
+        .tableTitleTd6{
+          width: 82px;
+          height: 30px;
+          margin: 0;
+          line-height: 30px;
+          color: @colorWhite;
+          background: url('../images/sendBg.png') no-repeat;
+          font-size: @fontSize14;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+  .containerPage{
+    height: 60px;
+    width: 206px;
+    margin: auto;
+    padding-top: 30px;
+    color: @color6;
+    font-size: @fontSize12;
+    .containerPageLeft{
+      float: left;
+      color: @color3;
+      height: 24px;
+      line-height: 24px;
+      margin-top: 1px;
+    }
+    .containerPageStart{
+      float: left;
+      width: 50px;
+      height: 24px;
+      line-height: 24px;
+      text-align: center;
+      border:1px solid @colorD9;
+      margin-left: 4px;
+    }
+    .containerPageEnd{
+      float: left;
+      width: 50px;
+      height: 24px;
+      line-height: 24px;
+      text-align: center;
+      margin-left: 4px;
+      border:1px solid @colorD9;
+    }
+  }
 }
