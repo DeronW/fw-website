@@ -27,10 +27,16 @@ const ETEN_APP_NAMES = [
 
     // 其他页面
     'statistics', // 实时交易统计
-    'popong', // 点点点游戏页
+
+    'popong',// 点点点游戏页
+
+    //用户界面
+    'user-coupon',//用户优惠券
+    
 
     // 重构页面
     'user-messages' // 用户消息页面
+
 ];
 
 module.exports = function (gulp, generate_task, settings) {
