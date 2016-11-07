@@ -1,6 +1,13 @@
 const LevelComplete = React.createClass({
     getInitialState: function () {
-        return {star: 0, win_gift: false}
+        let {level_list, level} = this.props;
+        return {
+            star: 0,
+            has_gift: level_list[level - 1].gift,
+            win_gift: false,
+            win_gift_title: '',
+            win_gift_desc: ''
+        }
     },
     componentDidMount: function () {
         if (this.props.success) {
@@ -23,11 +30,14 @@ const LevelComplete = React.createClass({
             passNum: this.props.level
         }, function (data) {
             if (data.code == 10000) {
-
+                this.setState({
+                    win_gift_title: data.message,
+                    win_gift_desc: ''
+                })
             } else {
-                alert(data.message)
+                this.setState({win_gift_title: data.message})
             }
-        }, 'json');
+        }.bind(this), 'json');
         this.setState({win_gift: true})
     },
     nextHandler: function () {
@@ -48,7 +58,7 @@ const LevelComplete = React.createClass({
         var dialog_cls = this.props.success ? "dialog pass" : "dialog fail";
         var time = parseInt(this.props.seconds / 60) + '分' + this.props.seconds % 60 + '秒';
 
-        let btn;
+        let btn, panel;
 
         if (this.props.success) {
             if (this.props.level > 11) {
@@ -63,8 +73,6 @@ const LevelComplete = React.createClass({
                        onClick={this.retryHandler}/>;
         }
 
-        let panel;
-
         panel = (
             <div className="level-complete">
                 <div className={dialog_cls}>
@@ -72,8 +80,10 @@ const LevelComplete = React.createClass({
                     <div className="score">用时: {time}</div>
                     {btn}
                     <img className="btn-level-list" src="images/level-home.png" onClick={this.showLevelListHandler}/>
-                    {/*<img className="btn-level-list" src="images/level-complete/gift.jpg"*/}
-                    {/*onClick={this.showGiftPackageHandler}/>*/}
+                    {this.state.has_gift ?
+                        <img className="btn-level-list" src="images/level-complete/gift.jpg"
+                             onClick={this.showGiftPackageHandler}/>
+                        : null}
                 </div>
             </div>
         );
@@ -82,9 +92,8 @@ const LevelComplete = React.createClass({
             panel = (
                 <div className="level-complete-gift">
                     <div className="level-complete-gift-panel">
-                        <div className="gift-title">获得通关礼包</div>
-                        <div className="describe">这里应该是一段礼包描述</div>
-
+                        <div className="gift-title">{this.state.win_gift_title}</div>
+                        <div className="describe">{this.state.win_gift_desc}</div>
                         <a className="btn-know-it" onClick={this.hideWinGiftHandler}> </a>
                     </div>
                 </div>
