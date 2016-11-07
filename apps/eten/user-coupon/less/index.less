@@ -1,21 +1,18 @@
 //@import "./partial/user-center-panel.less";
 @import "common.less";
 
-.couponWrap{
-  width: 1140px;
-  margin:20px auto;
-  height: 1000px;
-}
+
 .couponContent{
-  width: 840px;
+  width: 797px;
   height: 1000px;
-  border: 1px solid @colorBorder;
-  float: right;
+  //border: 1px solid @colorBorder;
+  float: left;
   position: relative;
+  margin-left: 20px;
   .couponTitle{
     display: block;
     position: absolute;
-    right: 20px;
+    right: 0px;
     height: 46px;
     line-height: 46px;
     font-size: @fontSize14;
@@ -30,7 +27,7 @@
   .containerTop{
     height: 50px;
     background: @colorF2;
-    .containerTopCom{
+    div{
       width: 160px;
       height: 48px;
       float: left;
@@ -41,11 +38,12 @@
       line-height: 50px;
       font-size: @fontSize16;
       color: @color6;
-    }
-    .containerTopOn{
-      border-top: 2px solid @color8c;
-      border-bottom: transparent;
-      background:@colorWhite
+      cursor: pointer;
+      &.active{
+        border-top: 2px solid @color8c;
+        border-bottom: transparent;
+        background:@colorWhite;
+      }
     }
   }
 }
@@ -77,6 +75,9 @@
         color: @color3;
       }
     }
+    .centerTitleRight{
+      border: transparent;
+    }
     .centerTitleCenter{
       em{
         color: @colorEa;
@@ -87,14 +88,14 @@
     margin: 0 10px 20px 10px;
     height: 26px;
     border-bottom: 2px solid @colorC;
-      .centerList{
+      div{
         height: 26px;
         float: left;
         width: 130px;
         text-align: center;
         border-bottom: 2px solid @colorC;
       }
-    .centerList1{
+    .centerList{
       border-bottom: 2px solid @color8c;
     }
   }
@@ -157,6 +158,12 @@
           background: url('../images/sendBg.png') no-repeat;
           font-size: @fontSize14;
           cursor: pointer;
+        }
+      }
+      .tableContentItem1{
+        .tableTitleTd5{
+          width: 148px;
+          font-size: @fontSize12;
         }
       }
     }

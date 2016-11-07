@@ -1,59 +1,288 @@
 'use strict';
 const API_PATH = document.getElementById('api-path').value;
 
-const MoneyTable = React.createClass({
+
+
+const ContainerTitle = React.createClass({
    render: function () {
-       var moneyItem = function(item,index){
-         return  <div className="tableContentItem" key={index}>
-             <div className="tableTitleTd1 tableTitleTd">50</div>
-             <div className="tableTitleTd2 tableTitleTd">5000</div>
-             <div className="tableTitleTd3 tableTitleTd">全场通用</div>
-             <div className="tableTitleTd4 tableTitleTd">2015-07-08 至  2015-08-07</div>
-             <div className="tableTitleTd5 tableTitleTd">单投1万元送60元 返现券:活动赠送</div>
-             <div className="tableTitleTd6 tableTitleTd">赠送</div>
-         </div>
-       };
        return(
-           <div className="tableContent">
+           <div className="containerCenterTitle">
+               <div className="centerTitleLeft centerTitleCom">可用<em>{this.props.leftName}</em> <em>{this.props.leftNum}</em> 张，共 <em>{this.props.leftMoney}</em> 元</div>
+               <div className="centerTitleCenter centerTitleCom">
+                   {
+                       this.props.centerMoney ? <div>即将过期 <em>{this.props.centerNum}</em> 张（<em>{this.props.centerMoney}</em> 元）</div> : null
+                   }
+               </div>
+               <div className="centerTitleRight centerTitleCom">已使用 <em>{this.props.rightNum}</em> 张，共 <em>{this.props.rightMoney}</em> 元</div>
+           </div>
+       )
+   }
+});
+
+const ContainerList = React.createClass({
+   render: function () {
+       var name1 = ['未使用','已使用','已过期','已赠送'];
+       this.props.present ? name1 : name1 = ['未使用','已使用','已过期'];
+       console.log(this.props.listIndex);
+       return(
+           <div className="containerCenterList">
                {
-                   this.props.moneyData.map(moneyItem)
+                   name1.map((n,index) => {
+                       return <div key={index} className={this.props.listTab == n ? "centerList" : null}
+                           onClick={() => this.props.toggleListHandle(n,index)}>{n}
+                       </div>
+                   })
                }
            </div>
        )
    }
 });
 
+const Table1 = React.createClass({
+   render: function () {
+       var this1 = this;
+       var tableData = [
+           {
+               beanCount:5000,
+               couponTypeGiven:"全场通用",
+               investMultip:"5000",
+               investPeriod:"2015-07-08 至  2015-08-07",
+               remark:"单投1万元送60元 返现券:活动赠送",
+               transferNumber:2
+           },
+           {
+               beanCount:5000,
+               couponTypeGiven:"全场通用",
+               investMultip:"5000",
+               investPeriod:"2015-07-08 至  2015-08-07",
+               remark:"单投1万元送60元 返现券:活动赠送",
+               transferNumber:0
+           }
+       ];
+       var noUserItem = function(item,index){
+           return  <div className="tableContentItem" key={index}>
+               <div className="tableTitleTd1 tableTitleTd">{item.beanCount/100}</div>
+               <div className="tableTitleTd2 tableTitleTd">{item.investMultip}</div>
+               <div className="tableTitleTd3 tableTitleTd">{item.couponTypeGiven}</div>
+               <div className="tableTitleTd4 tableTitleTd">{item.investPeriod}</div>
+               <div className="tableTitleTd5 tableTitleTd">{item.remark}</div>
+               {
+                   !item.transferNumber >= 1 ? <div className="tableTitleTd6 tableTitleTd">赠送</div> : null
+               }
+           </div>
+       };
+       var alreadyUserItem = function (item, index) {
+           return <div className="tableContentItem tableContentItem1" key={index}>
+                   <div className="tableTitleTd1 tableTitleTd">{item.beanCount/100}</div>
+                   <div className="tableTitleTd2 tableTitleTd">{item.investMultip}</div>
+                   <div className="tableTitleTd3 tableTitleTd">{item.couponTypeGiven}</div>
+                   <div className="tableTitleTd4 tableTitleTd">{item.investPeriod}</div>
+               </div>
+       };
+       var alreadyOverdue = function (item,index) {
+           return <div className="tableContentItem tableContentItem1" key={index}>
+               <div className="tableTitleTd1 tableTitleTd">{item.beanCount/100}</div>
+               <div className="tableTitleTd2 tableTitleTd">{item.investMultip}</div>
+               <div className="tableTitleTd3 tableTitleTd">{item.couponTypeGiven}</div>
+               <div className="tableTitleTd4 tableTitleTd">{item.investPeriod}</div>
+           </div>
+       };
+       var tableEml = function () {
+           if(this1.props.listIndex == 0){
+               return  <div className="containerCenterTable">
+                   <div className="tableTitle">
+                       <div className="tableTitleTd1 tableTitleTd">面值(元)</div>
+                       <div className="tableTitleTd2 tableTitleTd">所需投资现金(元)</div>
+                       <div className="tableTitleTd3 tableTitleTd">可投标期限(元)</div>
+                       <div className="tableTitleTd4 tableTitleTd">有效期</div>
+                       <div className="tableTitleTd5 tableTitleTd">备注</div>
+                       <div className="tableTitleTd6 tableTitleTd">操作</div>
+                   </div>
+                   <div className="tableContent">
+                       {
+                           tableData.map(noUserItem)
+                       }
+                   </div>
+               </div>
+           }else if(this1.props.listIndex == 1){
+               return <div className="containerCenterTable">
+                   <div className="tableTitle">
+                       <div className="tableTitleTd1 tableTitleTd">面值(元)</div>
+                       <div className="tableTitleTd2 tableTitleTd">最小投资金额(元)</div>
+                       <div className="tableTitleTd3 tableTitleTd">可投标期限(元)</div>
+                       <div className="tableTitleTd4 tableTitleTd">使用时间</div>
+                       <div className="tableTitleTd5 tableTitleTd">备注</div>
+                   </div>
+                   <div className="tableContent">
+                       {
+                           tableData.map(alreadyUserItem)
+                       }
+                   </div>
+               </div>
+           }else if(this1.props.listIndex == 2){
+               return <div className="containerCenterTable">
+                   <div className="tableTitle">
+                       <div className="tableTitleTd1 tableTitleTd">面值(元)</div>
+                       <div className="tableTitleTd2 tableTitleTd">最小投资金额(元)</div>
+                       <div className="tableTitleTd3 tableTitleTd">可投标期限(元)</div>
+                       <div className="tableTitleTd4 tableTitleTd">过期时间</div>
+                       <div className="tableTitleTd5 tableTitleTd">备注</div>
+                   </div>
+                   <div className="tableContent">
+                       {
+                           tableData.map(alreadyOverdue)
+                       }
+                   </div>
+               </div>
+           }
+       };
+       return(
+           <div>
+               {
+                   tableEml()
+               }
+           </div>
+       )
+   }
+});
+
+const Table2 = React.createClass({
+    render: function () {
+        var this1 = this;
+        var tableData = [
+            {
+                beanCount:5000,
+                couponTypeGiven:"全场通用",
+                investMultip:"5000",
+                investPeriod:"2015-07-08 至  2015-08-07",
+                remark:"单投1万元送60元 返现券:活动赠送",
+                transferNumber:2
+            },
+            {
+                beanCount:5000,
+                couponTypeGiven:"全场通用",
+                investMultip:"5000",
+                investPeriod:"2015-07-08 至  2015-08-07",
+                remark:"单投1万元送60元 返现券:活动赠送",
+                transferNumber:0
+            }
+        ];
+        var moneyItem = function(item,index){
+            return  <div className="tableContentItem" key={index}>
+                <div className="tableTitleTd1 tableTitleTd">{item.beanCount/100}</div>
+                <div className="tableTitleTd2 tableTitleTd">{item.investMultip}</div>
+                <div className="tableTitleTd3 tableTitleTd">{item.couponTypeGiven}</div>
+                <div className="tableTitleTd4 tableTitleTd">{item.investPeriod}</div>
+                <div className="tableTitleTd5 tableTitleTd">{item.remark}</div>
+                {
+                    !item.transferNumber >= 1 ? <div className="tableTitleTd6 tableTitleTd">赠送</div> : null
+                }
+            </div>
+        };
+        var tableEml = function () {
+            if(this1.props.listIndex == 0){
+                return  <div className="containerCenterTable">
+                    <div className="tableTitle">
+                        <div className="tableTitleTd1 tableTitleTd">面值(元)</div>
+                        <div className="tableTitleTd2 tableTitleTd">所需投资现金(元)</div>
+                        <div className="tableTitleTd3 tableTitleTd">可投标期限(元)</div>
+                        <div className="tableTitleTd4 tableTitleTd">有效期</div>
+                        <div className="tableTitleTd5 tableTitleTd">备注</div>
+                        <div className="tableTitleTd6 tableTitleTd">操作</div>
+                    </div>
+                    <div className="tableContent">
+                        {
+                            tableData.map(moneyItem)
+                        }
+                    </div>
+                </div>
+            }
+        };
+        return(
+            <div>
+                {
+                    tableEml()
+                }
+            </div>
+        )
+    }
+});
 const Coupon = React.createClass({
     getInitialState: function () {
       return({
-          isOn:true,
-          tabText: ["返现券", "返息券" , "兑换券"],
-          tabIndex: 0
+          tab:'返现券',
+          tabIndex:0,
+          listIndex:0,
+          listTab:"未使用",
       })
     },
-    tabHandler: function(index) {
-        let ps = this.state.tabText
-
+    toggleTabHandler: function (tab_name,index) {
         this.setState({
+            tab: tab_name,
             tabIndex: index
-        });
+        })
+    },
+    toggleListHandle: function (tabName,index) {
+        this.setState({
+            listTab:tabName,
+            listIndex:index
+        })
     },
    render: function () {
        var _this = this;
-
-       var tabDiv = function(product, index) {
-           //className={_this.state.tabText[index][1] ? "containerTopCom tabStyle" : "containerTopCom"}
-           return <div onClick={_this.tabHandler.bind(this, index)}>
-
-                        {product}
-                   </div>
-       };
-
+       var tab_bar;
+       tab_bar = (
+           <div className="containerTop">
+               {['返现券', '返息券', '兑换券'].map((n, index)=> {
+                   return (
+                       <div key={index} className={this.state.tab == n ? "active" : null}
+                            onClick={()=>this.toggleTabHandler(n,index)}>{n}
+                       </div>
+                   )
+               })}
+           </div>
+       );
        var tabEml = function() {
            if(_this.state.tabIndex == 0 ) {
-               return <div>0</div>
+               return  <div className="containerCenter">
+                    <ContainerTitle leftName={"返现券"} leftNum={2} leftMoney={200}
+                                    centerNum={3} centerMoney={260}
+                                    rightNum={26} rightMoney={1198}/>
+
+                   <ContainerList present={true} listTab={_this.state.listTab} toggleListHandle={_this.toggleListHandle} listIndex={_this.state.listIndex}/>
+                   <Table1 listIndex={_this.state.listIndex}/>
+                   <div className="containerPage">
+                       <div className="containerPageLeft">
+                           第<em>1</em>页，共<em>1</em>页
+                       </div>
+                       <div className="containerPageStart">首页</div>
+                       <div className="containerPageEnd">末页</div>
+                   </div>
+               </div>
            } else if(_this.state.tabIndex == 1 ) {
-               return <div>1</div>
+               return <div className="containerCenter">
+                   <ContainerTitle leftName={"返现券"} leftNum={2} leftMoney={200}
+                                   centerNum={3} centerMoney={260}
+                                   rightNum={26} rightMoney={1198}/>
+                   <ContainerList present={true}/>
+                   <div className="containerCenterTable">
+                       <div className="tableTitle">
+                           <div className="tableTitleTd1 tableTitleTd">面值(元)</div>
+                           <div className="tableTitleTd2 tableTitleTd">所需投资现金(元)</div>
+                           <div className="tableTitleTd3 tableTitleTd">可投标期限(元)</div>
+                           <div className="tableTitleTd4 tableTitleTd">有效期</div>
+                           <div className="tableTitleTd5 tableTitleTd">备注</div>
+                           <div className="tableTitleTd6 tableTitleTd">操作</div>
+                       </div>
+                   </div>
+                   <div className="containerPage">
+                       <div className="containerPageLeft">
+                           第<em>1</em>页，共<em>1</em>页
+                       </div>
+                       <div className="containerPageStart">首页</div>
+                       <div className="containerPageEnd">末页</div>
+                   </div>
+               </div>
            } else if(_this.state.tabIndex == 2 ) {
                return <div>2</div>
            }
@@ -65,46 +294,8 @@ const Coupon = React.createClass({
                        了解更多优惠券>
                    </a>
                    <div className="couponContainer">
-                        <div className="containerTop" onClick={this.handleTabBg}>
-                            {
-                                this.state.tabText.map(tabDiv, this)
-                            }
-                        </div>
-
-                       {
-                           tabEml()
-                       }
-
-                       <div className="containerCenter">
-                            <div className="containerCenterTitle">
-                                <div className="centerTitleLeft centerTitleCom">可用返现券 <em>3</em> 张，共 <em>310</em> 元</div>
-                                <div className="centerTitleCenter centerTitleCom">即将过期 <em>2</em> 张（<em>260</em> 元）</div>
-                                <div className="centerTitleRight centerTitleCom">已使用 <em>11</em> 张，共 <em>260</em> 元</div>
-                            </div>
-                           <div className="containerCenterList">
-                                <div className="centerList centerList1">未使用</div>
-                                <div className="centerList centerList2">已使用</div>
-                                <div className="centerList centerList3">已过期</div>
-                                <div className="centerList centerList4">已赠送</div>
-                           </div>
-                           <div className="containerCenterTable">
-                                <div className="tableTitle">
-                                    <div className="tableTitleTd1 tableTitleTd">面值(元)</div>
-                                    <div className="tableTitleTd2 tableTitleTd">所需投资现金(元)</div>
-                                    <div className="tableTitleTd3 tableTitleTd">可投标期限(元)</div>
-                                    <div className="tableTitleTd4 tableTitleTd">有效期</div>
-                                    <div className="tableTitleTd5 tableTitleTd">备注</div>
-                                    <div className="tableTitleTd6 tableTitleTd">操作</div>
-                                </div>
-                           </div>
-                           <div className="containerPage">
-                                <div className="containerPageLeft">
-                                    第<em>1</em>页，共<em>1</em>页
-                                </div>
-                               <div className="containerPageStart">首页</div>
-                               <div className="containerPageEnd">末页</div>
-                           </div>
-                       </div>
+                       {tab_bar}
+                       {tabEml()}
                    </div>
                </div>
        )
