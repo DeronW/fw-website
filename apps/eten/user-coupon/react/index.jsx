@@ -3,7 +3,6 @@ const API_PATH = document.getElementById('api-path').value;
 const Coupon = React.createClass({
    render: function () {
        return(
-           <div className="couponWrap">
                <div className="couponContent">
                    <div className="couponTitle">
                        了解更多优惠券>
@@ -19,7 +18,6 @@ const Coupon = React.createClass({
                        </div>
                    </div>
                </div>
-           </div>
        )
    }
 });
