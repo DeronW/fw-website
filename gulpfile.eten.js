@@ -1,12 +1,9 @@
 'use strict';
 
 const ETEN_APP_NAMES = [
-	'user-center',//用户中心
-    'account-setting',
     'guide', // 新手引导
     'app-download', // app 下载页面
     'register', // 推广用户注册落地页面
-    'notice-corporate-structure',//
 
     // 主营产品分类说明页面
     'topic-yi-zhuan-ying',
@@ -15,28 +12,24 @@ const ETEN_APP_NAMES = [
     'topic-you-ju-dai',
     'topic-yi-shou-bao',
     'topic-bu-mao-tong',
-
     // 专题说明页面
     'topic-annual-commision', // A码 用户返利规则 佣金说明
     'topic-hui-shang', // 徽商
     'topic-hui-shang-guide', // 徽商 开户引导
     'preservation', // 安全保障介绍页面
     'guide-cookbook', // 玩赚攻略页
-
     'vip-prerogative', // 等级攻略页
+    'notice-corporate-structure',// 信息披露页面
+
+    // 重构页面
+    //用户界面
+    'user-center',//用户中心
+    'user-coupon',//用户优惠券
+    'user-messages', // 用户消息页面
 
     // 其他页面
     'statistics', // 实时交易统计
-
     'popong',// 点点点游戏页
-
-    //用户界面
-    'user-coupon',//用户优惠券
-    
-
-    // 重构页面
-    'user-messages' // 用户消息页面
-
 ];
 
 module.exports = function (gulp, generate_task, settings) {
