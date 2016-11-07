@@ -26,6 +26,8 @@ const CenCont = React.createClass({
 
         let blockText = <div className="no-commodity-block">暂无记录</div>;
 
+
+
         return (
             <div>
                 {riskAssess}
@@ -50,6 +52,16 @@ const CenCont = React.createClass({
                         </p>
                         <p className="ft1 line_h3 col3">待收本息：<span className="ft2">17,743.71<em className="ft1"> 元</em></span>
                         </p>
+                    </div>
+                    <div className="qiandao">
+                        <input type="hidden" value="true" id="sendPagerFlag"/>
+                        <a href="javascript:;" id="click_qiandao2">
+                            <img src="./images/img_qiandao.png" width="80" height="80"/>
+                            <span className="tip_info">
+                                签到奖励2工分；<br/>2、连续签到7天，可额外再奖励10工分；<br/><strong className="red2">3、投资更有机会领红包哦！</strong>
+                            </span>
+                        </a>
+                        <span className="getWp"></span>
                     </div>
                 </div>
             </div>
