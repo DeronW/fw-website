@@ -77,7 +77,8 @@ const Content = React.createClass({
         });
     },
     playHandler: function () {
-        var start_count = [28, 30, 32, 34, 36, 38, 38, 42, 46, 52, 56, 60];
+        // var start_count = [28, 30, 32, 34, 36, 38, 38, 42, 46, 52, 56, 60];
+        var start_count = [28, 6, 6, 34, 36, 38, 38, 42, 46, 52, 56, 60];
 
         $.get(`${API_PATH}/9888/game/web/index.php`, {
             r: 'user/work-points',
@@ -153,6 +154,7 @@ const Content = React.createClass({
         } else if (page == 'complete') {
             cnt = <LevelComplete success={this.state.current_level_success}
                                  seconds={this.state.current_level_seconds}
+                                 level_list={this.state.level_list}
                                  level={this.state.level}
                                  setPage={this.setPage}
                                  switchLevel={this.switchLevel}/>
