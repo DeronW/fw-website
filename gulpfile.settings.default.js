@@ -1,5 +1,5 @@
 module.exports = {
-    main: {
+    eten: {
         dev_api_path: 'http://localhost/fake-api/'
     },
     mall: {
