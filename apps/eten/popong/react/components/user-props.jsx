@@ -10,6 +10,7 @@ const UserProps = React.createClass({
             score: prop.price,
             title: prop.prop_name,
             describe: prop.comment,
+            limitUse: parseInt(prop.remainder_use),
             limitBuy: prop.remainder_buy
         }
     },
@@ -88,8 +89,10 @@ const UserProps = React.createClass({
                         </div>
                         <div className="limit">当前关卡限购{this.state.limitBuy}个</div>
 
-                        <a className="btn-use" onClick={this.useHandler}> </a>
-                        <a className="btn-buy" onClick={this.buyHandler}> </a>
+                        <a className={this.state.limitUse > 0 ? "btn-use" : "btn-use disable"}
+                           onClick={this.state.limitUse > 0 ? this.useHandler : null}> </a>
+                        <a className={this.state.limitBuy > 0 ? "btn-buy" : "btn-buy disable"}
+                           onClick={this.state.limitBuy > 0 ? this.buyHandler : null}> </a>
                     </div>
                 </div>
             );

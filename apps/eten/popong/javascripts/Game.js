@@ -163,7 +163,7 @@
         // 道具: 自动消除
         addPropsDismiss: function (props) {
             var x = this.width - 320 - 83,
-                y = 180;
+                y = 160;
             this.tools.dismiss = new Hilo.Bitmap({
                 image: this.asset.propsDismiss,
                 width: 83 * 2,
@@ -190,7 +190,7 @@
         // 道具: 时间冻结
         addPropsFreeze: function (props) {
             var x = this.width - 320 - 300,
-                y = 180;
+                y = 160;
             this.tools.freeze = new Hilo.Bitmap({
                 image: this.asset.propsFreeze,
                 width: 83 * 2,
@@ -216,7 +216,7 @@
         // 道具: 重新排列
         addPropsRefresh: function (props) {
             var x = 460,
-                y = 180;
+                y = 160;
 
             this.tools.refresh = new Hilo.Bitmap({
                 image: this.asset.propsRefresh,
@@ -242,7 +242,7 @@
 
         // 道具: 提示
         addPropsTips: function (props) {
-            var x = 240, y = 180;
+            var x = 240, y = 160;
             this.tools.tips = new Hilo.Bitmap({
                 image: this.asset.propsTips,
                 width: 83 * 2,
