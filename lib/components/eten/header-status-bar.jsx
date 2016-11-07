@@ -10,6 +10,7 @@ const HeaderStatusBar = React.createClass({
         }
     },
     componentDidMount: function () {
+        // 获取用户登录信息
         $.get(API_PATH + 'api/userState/v1/userState.json', null,
             function (data) {
                 if (data.code != 10000) {
@@ -25,12 +26,20 @@ const HeaderStatusBar = React.createClass({
                     is_login: d.isLogin,
                     username: d.userName,
                     real_name: d.realName,
-                    avatar: avatar,
-                    msg_count: null
+                    avatar: avatar
                 });
                 // set current page is login or not. this is base function, very IMPORTANT!
                 $UserReady.fire(d.isLogin);
             }.bind(this), 'json');
+
+        // 获取用户未读消息数
+        $.get(API_PATH + 'mesageCenter/refressSession.shtml', null, function (data) {
+            if (!isNaN(data)) {
+                this.setState({msg_count: data})
+            } else {
+                throw 'unread message count is not a number';
+            }
+        }.bind(this), 'json')
     },
     showUserPopHandler: function () {
         this.setState({showUserPop: true})
@@ -39,7 +48,7 @@ const HeaderStatusBar = React.createClass({
         this.setState({showUserPop: false})
     },
     render: function () {
-        let user_state = null;
+        let user_state = null, msg = null;
 
         let separate_line = <span className="separate-line"> </span>;
 
@@ -75,6 +84,10 @@ const HeaderStatusBar = React.createClass({
             )
         }
 
+        if (this.state.msg_count) {
+            msg = <div className="unread-msg-count">({this.state.msg_count})</div>
+        }
+
         return (
             <div className="header-status-bar">
                 <div className="container">
@@ -92,7 +105,10 @@ const HeaderStatusBar = React.createClass({
                         </div>
                     </div>
                     {separate_line}
-                    <a className="link" href="/mesageCenter/msssageList.shtml?messageType=1">消息中心</a>
+                    <a className="link" href="/mesageCenter/msssageList.shtml?messageType=1">
+                        消息中心
+                        {msg}
+                    </a>
                     {separate_line}
                     {this.state.is_login && this.state.username ? user_state : null}
                     {this.state.is_login ? null : <a className="link" href="/orderUser/register.shtml">免费注册</a>}

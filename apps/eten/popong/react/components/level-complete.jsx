@@ -16,6 +16,18 @@ const LevelComplete = React.createClass({
         this.props.setPage('level')
     },
     showGiftPackageHandler: function () {
+        $.get(`${API_PATH}/9888/game/web/index.php`, {
+            r: 'user/user-gift',
+            uid: USER_ID,
+            gameNo: GAME_NAME,
+            passNum: this.props.level
+        }, function (data) {
+            if (data.code == 10000) {
+
+            } else {
+                alert(data.message)
+            }
+        }, 'json');
         this.setState({win_gift: true})
     },
     nextHandler: function () {
