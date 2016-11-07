@@ -22,8 +22,8 @@ const MessagePanel = React.createClass({
             isUse: m[type],
             _: +new Date()
         }, function (data) {
-
-        }, 'json')
+            this.setState({msg_list: data.pageData.result})
+        }.bind(this), 'json');
     },
     toggleTabHandler: function (tab_name) {
         this.setState({tab: tab_name}, ()=> this.loadMessages(this.state.tab))
@@ -63,7 +63,7 @@ const MessagePanel = React.createClass({
                     <img src="./images/icon-msg.png"/>
                     <div>
                         <b className="msg-title">{msg.title}</b>
-                        <b className="msg-date"> {msg.date} </b>
+                        <b className="msg-date"> {msg.createTime} </b>
                     </div>
                     <div className="content">{msg.content}</div>
                 </a>
