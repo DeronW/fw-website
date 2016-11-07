@@ -2,9 +2,9 @@
 
 {% block content %}
 <div class="partial-user-center-panel">
-    <div class="p2p_con">
+    <div class="p2p_con clearfix">
         {% include './eten/partial/user-center-panel.swig.html' %}
+        {% block user_content %}{% endblock %}
     </div>
-    {% block user_content %}{% endblock %}
 </div>
 {% endblock %}
