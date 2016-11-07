@@ -31,8 +31,8 @@ const LevelComplete = React.createClass({
         }, function (data) {
             if (data.code == 10000) {
                 this.setState({
-                    win_gift_title: data.message,
-                    win_gift_desc: ''
+                    win_gift_title: data.data.prop_name,
+                    win_gift_desc: data.data.comment
                 })
             } else {
                 this.setState({win_gift_title: data.message})
