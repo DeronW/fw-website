@@ -12,13 +12,14 @@
 <script>
   $(function(){
      // var API_PATH = document.getElementById('api-path').value;
-      var API_PATH ='http://www.9888.cn/';
+      var API_PATH ='http://www.9888.cn';
+
         $.ajax({
             type: "POST",
             url: API_PATH + "/api/userState/v2/userState.json",
             data: "",
             success: function(data){
-               if(data.data.orderUser.sex==1){
+               if(data.data.orderUser.headurl== null||  data.data.orderUser.sex==1){
                     $('.head-kuang').removeClass('moren').addClass('man')
                 }
                if(data.data.orderUser.sex==0){
@@ -47,7 +48,6 @@
                 }
             }
         });
-
-    })
+     })
 </script>
 {% endblock %}
