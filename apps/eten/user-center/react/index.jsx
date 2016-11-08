@@ -69,15 +69,4 @@ const CenCont = React.createClass({
 
     }
 });
-
-$(function(){
-    $.ajax({
-        type: "POST",
-        url: "../user-center/order_list.json",
-        data: "",
-        success: function(data){
-            ReactDOM.render(<CenCont orders={data.orders}/>, document.querySelector(".p2p_right"));
-        }
-    });
-
-})
+ReactDOM.render(<CenCont/>, document.querySelector(".p2p_right"));

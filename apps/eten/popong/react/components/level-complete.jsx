@@ -52,7 +52,7 @@ const LevelComplete = React.createClass({
         this.setState({win_gift: false})
     },
     retryHandler: function () {
-        this.props.switchLevel(this.props.level);
+        this.props.switchLevel(this.props.level, true);
     },
     render: function () {
         var dialog_cls = this.props.success ? "dialog pass" : "dialog fail";
