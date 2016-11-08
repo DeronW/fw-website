@@ -43,7 +43,7 @@ const Level = React.createClass({
             return (
                 <div key={index} className="level">
                     <div className={cn_bg} onClick={() => this.clickHandler(index + 1)}>
-                        <div className="num">{index + 1}</div>
+                        <div className={"num num-" + (index + 1)}>{index + 1}</div>
                         {item.star != null ? star : null}
                     </div>
                 </div>
@@ -51,8 +51,8 @@ const Level = React.createClass({
         };
 
         return <div className="level-list">
-            <img className="header" src="images/level-list-header.png"/>
-            <img className="footer" src="images/level-list-footer.png"/>
+            <img className="header" src="images/level-list/header.png"/>
+            <img className="footer" src="images/level-list/footer.png"/>
             <div className="levels"> {this.state.level_list.map(level)} </div>
         </div>
     }
