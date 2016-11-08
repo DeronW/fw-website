@@ -1,51 +1,53 @@
 var Banner = React.createClass({
-   render: function() {
-       return (
-           <div className="banner">
-               <div className="banner-cnt">
-                   <div className="back-info">
-                       <div className="title-block">
-                            <img src="images/banner-title.png" title="攻略 玩转金融工厂" className="zoom-in" />
-                       </div>
+    render: function () {
+        return (
+            <div className="banner">
+                <div className="banner-cnt">
+                    <div className="back-info">
+                        <div className="title-block">
+                            <img src="images/banner-title.png" title="攻略 玩转金融工厂" className="zoom-in"/>
+                        </div>
 
 
-                       <div className="earth fade-in-Up">
+                        <div className="earth fade-in-Up">
 
-                       </div>
+                        </div>
 
-                       <div className="back-b">
+                        <div className="back-b">
 
-                       </div>
+                        </div>
 
-                       <div id="Clouds">
-                           <div className="Cloud cloud-1"></div>
-                           <div className="Cloud cloud-2"></div>
-                           <div className="Cloud cloud-3"></div>
-                           <div className="Cloud cloud-4"></div>
-                       </div>
+                        <div id="Clouds">
+                            <div className="Cloud cloud-1"></div>
+                            <div className="Cloud cloud-2"></div>
+                            <div className="Cloud cloud-3"></div>
+                            <div className="Cloud cloud-4"></div>
+                        </div>
 
-                       <div className="balloon balloon-in-Up">
+                        <div className="balloon balloon-in-Up">
 
-                       </div>
-                   </div>
-               </div>
+                        </div>
+                    </div>
+                </div>
 
-           </div>
-       );
-   }
+            </div>
+        );
+    }
 });
 
 var Content = React.createClass({
-    render: function() {
+    render: function () {
         return (
             <div className="content-area">
                 <div className="content-title-info">
-                    <p className="title-text">金融工场是由香港上市金融企业中国信贷控股有限公司（Credit China，股票代码：08207.HK）战略控股，由北京凤凰信用管理有限公司（简称：凤凰信用）倾力打造的，专注于金融资产交易信息撮合的互联网金融平台。</p>
+                    <p className="title-text">
+                        金融工场是由香港上市公司——中国信贷科技控股有限公司（Credit China，股票代码：08207.HK）战略控股，由北京凤凰信用管理有限公司（简称：凤凰信用）倾力打造的，专注于网络借贷信息撮合的互联网金融平台。
+                    </p>
 
                     <div className="block">
                         <div className="block-info">
                             <div className="img">
-                                <img src="images/icon-img-1.png" />
+                                <img src="images/icon-img-1.png"/>
                             </div>
                             <div className="text-block">
                                 <div className="l-back"></div>
@@ -61,7 +63,7 @@ var Content = React.createClass({
 
                         <div className="block-info">
                             <div className="img">
-                                <img src="images/icon-img-2.png" />
+                                <img src="images/icon-img-2.png"/>
                             </div>
                             <div className="text-block">
                                 <div className="l-back"></div>
@@ -88,7 +90,8 @@ var Content = React.createClass({
                                     <h2 className="text">新工友注册好福利</h2>
                                     <i className="icon-r"></i>
                                 </div>
-                                <a href="http://www.9888.cn/news/notice/1861.html?reloadworkpage=y" target="_blank" className="btn-link">完整新手秘笈></a>
+                                <a href="http://www.9888.cn/news/notice/1861.html?reloadworkpage=y" target="_blank"
+                                   className="btn-link">完整新手秘笈></a>
                             </div>
 
                             <div className="info-block">
@@ -98,21 +101,21 @@ var Content = React.createClass({
                                             <p className="title-text">注册成功即可获得</p>
                                             <p className="info-text">120元返现券礼包</p>
                                             <div className="img">
-                                                <img src="images/welfare-1.png" />
+                                                <img src="images/welfare-1.png"/>
                                             </div>
                                         </li>
                                         <li>
                                             <p className="title-text">新工友可投</p>
                                             <p className="info-text">新手专享标</p>
                                             <div className="img">
-                                                <img src="images/welfare-2.png" />
+                                                <img src="images/welfare-2.png"/>
                                             </div>
                                         </li>
                                         <li className="last-li">
                                             <p className="title-text">首投满5000及以上即可获得</p>
                                             <p className="info-text">最高150元返现券礼包</p>
                                             <div className="img">
-                                                <img src="images/welfare-3.png" />
+                                                <img src="images/welfare-3.png"/>
                                             </div>
                                         </li>
                                     </ul>
@@ -151,28 +154,32 @@ var Content = React.createClass({
                                     <h2 className="text">邀请好友礼上礼</h2>
                                     <i className="icon-r"></i>
                                 </div>
-                                <a href="http://www.9888.cn/news/notice/1861.html?reloadworkpage=y" target="_blank" className="btn-link">完整邀友返利攻略></a>
+                                <a href="http://www.9888.cn/news/notice/1861.html?reloadworkpage=y" target="_blank"
+                                   className="btn-link">完整邀友返利攻略></a>
                             </div>
 
                             <div className="info-block">
                                 <div className="list gift-list">
                                     <ul>
                                         <li>
-                                            <p className="title-text">好友填邀请码注册并首投满<em className="c-629df9">5000</em>，送邀请人</p>
+                                            <p className="title-text">好友填邀请码注册并首投满<em className="c-629df9">5000</em>，送邀请人
+                                            </p>
                                             <div className="img">
-                                                <img src="images/gift-1.png" />
+                                                <img src="images/gift-1.png"/>
                                             </div>
                                         </li>
                                         <li>
-                                            <p className="title-text">好友达到<em className="c-629df9">VIP2及以上</em>，最高再送邀请人</p>
+                                            <p className="title-text">好友达到<em className="c-629df9">VIP2及以上</em>，最高再送邀请人
+                                            </p>
                                             <div className="img">
-                                                <img src="images/gift-2.png" />
+                                                <img src="images/gift-2.png"/>
                                             </div>
                                         </li>
                                         <li className="last-li">
-                                            <p className="title-text">好友每投资一笔，邀请人均可获<em className="c-629df9">投资返利</em></p>
+                                            <p className="title-text">好友每投资一笔，邀请人均可获<em className="c-629df9">投资返利</em>
+                                            </p>
                                             <div className="img">
-                                                <img src="images/gift-3.png" />
+                                                <img src="images/gift-3.png"/>
                                             </div>
                                         </li>
                                     </ul>
@@ -183,8 +190,11 @@ var Content = React.createClass({
                                         <div className="text-block">
                                             <p className="text">温馨提示：</p>
                                             <p className="text">邀请了N名好友首投5000元，邀请人获50*N元返现券，邀越多赚越多，看看你人脉有多广！</p>
-                                            <p className="text">好友达VIP2及以上所赠返现券在好友注册后的第30天10:00（注册当天算第1天）,按好友注册30天内最高等级发放。</p>
-                                            <p className="text">相应好友投资返利可去 <a href="http://www.9888.cn/factoryCode/info.shtml" target="_blank" className="c-629df9">我的工场>工场码</a> 中查看。</p>
+                                            <p className="text">
+                                                好友达VIP2及以上所赠返现券在好友注册后的第30天10:00（注册当天算第1天）,按好友注册30天内最高等级发放。</p>
+                                            <p className="text">相应好友投资返利可去 <a
+                                                href="http://www.9888.cn/factoryCode/info.shtml" target="_blank"
+                                                className="c-629df9">我的工场>工场码</a> 中查看。</p>
                                         </div>
 
                                         <div className="pop-arrow-icon"></div>
@@ -215,28 +225,28 @@ var Content = React.createClass({
 
                             <div className="info-block">
                                 <div className="list vip-list">
-                                    <div　className="">
-                                        <img　src="images/vip-nav.png"　/>
+                                    <div className="">
+                                        <img src="images/vip-nav.png"/>
                                     </div>
                                     <ul>
                                         <li>
                                             <div className="img">
-                                                <img src="images/vip-1.png" />
+                                                <img src="images/vip-1.png"/>
                                             </div>
                                         </li>
                                         <li>
                                             <div className="img">
-                                                <img src="images/vip-2.png" />
+                                                <img src="images/vip-2.png"/>
                                             </div>
                                         </li>
                                         <li className="">
                                             <div className="img">
-                                                <img src="images/vip-3.png" />
+                                                <img src="images/vip-3.png"/>
                                             </div>
                                         </li>
                                         <li className="last-li">
                                             <div className="img">
-                                                <img src="images/vip-4.png" />
+                                                <img src="images/vip-4.png"/>
                                             </div>
                                         </li>
                                     </ul>
@@ -247,7 +257,9 @@ var Content = React.createClass({
                                         <div className="text-block">
                                             <p className="text">根据会员贡献值不同，工友将荣升为不同的VIP等级，级别越高享有的权益越多哦~~ </p>
                                             <p className="text">贡献值包括投资贡献值和邀友贡献值。</p>
-                                            <p className="text">还不明白，豆哥这里还有更详细的哦， <a href="http://www.9888.cn/user/level/levelRule.shtml" target="_blank" className="c-629df9">查看升级攻略></a></p>
+                                            <p className="text">还不明白，豆哥这里还有更详细的哦， <a
+                                                href="http://www.9888.cn/user/level/levelRule.shtml" target="_blank"
+                                                className="c-629df9">查看升级攻略></a></p>
                                         </div>
 
                                         <div className="pop-arrow-icon"></div>
@@ -289,29 +301,31 @@ var Content = React.createClass({
                                     <ul>
                                         <li>
                                             <div className="img">
-                                                <img src="images/for-gift-1.png" />
+                                                <img src="images/for-gift-1.png"/>
                                             </div>
                                         </li>
                                         <li>
                                             <div className="img">
-                                                <img src="images/for-gift-2.png" />
+                                                <img src="images/for-gift-2.png"/>
                                             </div>
                                         </li>
                                         <li className="">
                                             <div className="img">
-                                                <img src="images/for-gift-3.png" />
+                                                <img src="images/for-gift-3.png"/>
                                             </div>
                                         </li>
                                         <li className="last-li">
                                             <div className="img">
-                                                <img src="images/for-gift-4.png" />
+                                                <img src="images/for-gift-4.png"/>
                                             </div>
                                         </li>
                                     </ul>
 
                                     <div className="list-title">
                                         <h3 className="text">2.工友可用兑换券换礼物</h3>
-                                        <p className="">兑换券是领取工场促销活动礼品的小凭证，可以自主在工豆商城中兑换虚拟或实物礼品。可在 <a href="http://mall.9888.cn/member/ticket.shtm" target="_blank" className="c-629df9">我的商城>我的兑换券</a> 中查看。</p>
+                                        <p className="">兑换券是领取工场促销活动礼品的小凭证，可以自主在工豆商城中兑换虚拟或实物礼品。可在 <a
+                                            href="http://mall.9888.cn/member/ticket.shtm" target="_blank"
+                                            className="c-629df9">我的商城>我的兑换券</a> 中查看。</p>
                                     </div>
                                 </div>
 
@@ -320,7 +334,9 @@ var Content = React.createClass({
                                         <div className="text-block">
                                             <p className="text">去豆哥商城兑换前，别忘了赚工分哦~~</p>
                                             <p className="text">工分是金融工场给工友的回馈奖励，签到、投资、参加论坛活动都能领取哦~~，在豆哥商城兑换后扣减相应工分。</p>
-                                            <p className="text">更详细的赚工分秘笈在这里，<a href="http://www.9888.cn/activity/gfxq/" target="_blank" className="c-629df9">点击查看></a></p>
+                                            <p className="text">更详细的赚工分秘笈在这里，<a href="http://www.9888.cn/activity/gfxq/"
+                                                                                target="_blank" className="c-629df9">点击查看></a>
+                                            </p>
                                         </div>
 
                                         <div className="pop-arrow-icon"></div>
@@ -354,27 +370,35 @@ var Content = React.createClass({
                                     <ul>
                                         <li>
                                             <div className="img">
-                                                <img src="images/more-img-1.png" />
+                                                <img src="images/more-img-1.png"/>
                                             </div>
-                                            <p className="text">返现券是返现型优惠券，投资成功即以现金形式返至工场账户，可投资或提现。<a href="http://www.9888.cn/help/explanation/1636.html" target="_blank" className="c-629df9">了解更多></a></p>
+                                            <p className="text">返现券是返现型优惠券，投资成功即以现金形式返至工场账户，可投资或提现。<a
+                                                href="http://www.9888.cn/help/explanation/1636.html" target="_blank"
+                                                className="c-629df9">了解更多></a></p>
                                         </li>
                                         <li>
                                             <div className="img">
-                                                <img src="images/more-img-2.png" />
+                                                <img src="images/more-img-2.png"/>
                                             </div>
-                                            <p className="text">返息券是返息型优惠券，投资成功即以工豆形式返至工场工豆账户，可投资使用。<a href="http://www.9888.cn/help/explanation/1537.html" target="_blank" className="c-629df9">了解更多></a></p>
+                                            <p className="text">返息券是返息型优惠券，投资成功即以工豆形式返至工场工豆账户，可投资使用。<a
+                                                href="http://www.9888.cn/help/explanation/1537.html" target="_blank"
+                                                className="c-629df9">了解更多></a></p>
                                         </li>
                                         <li className="">
                                             <div className="img">
-                                                <img src="images/more-img-3.png" />
+                                                <img src="images/more-img-3.png"/>
                                             </div>
-                                            <p className="text">红包含工豆红包和返现券红包，须通过微信分享及领取，抢光后可获相应奖励红包。<a href="http://www.9888.cn/help/explanation/1638.html" target="_blank" className="c-629df9">了解更多></a></p>
+                                            <p className="text">红包含工豆红包和返现券红包，须通过微信分享及领取，抢光后可获相应奖励红包。<a
+                                                href="http://www.9888.cn/help/explanation/1638.html" target="_blank"
+                                                className="c-629df9">了解更多></a></p>
                                         </li>
                                         <li className="last-li">
                                             <div className="img">
-                                                <img src="images/more-img-4.png" />
+                                                <img src="images/more-img-4.png"/>
                                             </div>
-                                            <p className="text">100个工豆等值1元人民币，投资时当钱花！<a href="http://www.9888.cn/help/explanation/1637.html" target="_blank" className="c-629df9">了解更多></a></p>
+                                            <p className="text">100个工豆等值1元人民币，投资时当钱花！<a
+                                                href="http://www.9888.cn/help/explanation/1637.html" target="_blank"
+                                                className="c-629df9">了解更多></a></p>
                                         </li>
                                     </ul>
                                 </div>
@@ -413,21 +437,21 @@ var Content = React.createClass({
                     <ul>
                         <li className="app-li">
                             <div className="img">
-                                <img src="images/phone-icon.png" />
+                                <img src="images/phone-icon.png"/>
                             </div>
                             <span className="strong-text">手机客户端</span>
                             <p className="text">用户可扫描上方二维码下载金融工场<br />手机APP手机APP。快捷支付，随手可投。</p>
                         </li>
                         <li className="weChat-li">
                             <div className="img">
-                                <img src="images/weChat-icon.png" />
+                                <img src="images/weChat-icon.png"/>
                             </div>
                             <span className="strong-text">微信公众号</span>
                             <p className="text">打开微信扫描二维码或搜索公众号jrgc_p2p，<br />关注金融工场微信，轻松自如投资，第一时间<br />了解最新活动。</p>
                         </li>
                         <li className="web-li">
                             <div className="img">
-                                <img src="images/web-icon.png" />
+                                <img src="images/web-icon.png"/>
                             </div>
                             <span className="strong-text">手机WAP版</span>
                             <p className="text">用户可通过手机浏览器输入金融工场网<br/>址：www.9888.cn，或直接搜索“金融<br />工场”，即可快捷注册投资。</p>
@@ -440,7 +464,7 @@ var Content = React.createClass({
 });
 
 var LNav = React.createClass({
-    render: function() {
+    render: function () {
         var name = window.IS_LOGIN;
 
         return (
@@ -450,13 +474,13 @@ var LNav = React.createClass({
                     <a href="http://www.9888.cn/prdClaims/list.shtml" className="" target="_blank">我要投资</a>
                     <a href="http://www.9888.cn/factoryCode/info.shtml" className="" target="_blank">如何邀友</a>
                 </div>
-            </div>  
+            </div>
         );
     }
 });
 
 var Cnt = React.createClass({
-    render: function() {
+    render: function () {
         return (
             <div className="">
                 <Banner />
@@ -473,5 +497,5 @@ var Cnt = React.createClass({
 $(function () {
     ReactDOM.render(<HeaderStatusBar />, document.getElementById('header-status-bar'));
 
-    ReactDOM.render(<Cnt /> , document.getElementById("cnt"));
+    ReactDOM.render(<Cnt />, document.getElementById("cnt"));
 });
