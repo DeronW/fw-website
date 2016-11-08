@@ -6,7 +6,8 @@ const Table1 = React.createClass({
           isShow:false,
           transNum:2,
           code:4,
-          couponProduce:[]
+          couponProduce:[],
+          couponPresentProduce:[]
       })
     },
     handleShow: function () {
@@ -25,27 +26,36 @@ const Table1 = React.createClass({
         })
     },
     componentDidMount: function () {
+        var this1 = this;
         $.ajax({
             url:'./coupon.json?limit=5&couponType=-1&status=1&page=1',
             type:'get',
             success: function (data) {
-                console.log(data.data.pageData.result);
+                if(data.code == 10000){
+                    this1.setState({
+                        couponProduce:data.data.pageData.result
+                    })
+                }
             }
         })
     },
     ajaxCouponList: function () {
-      $.ajax({
-          url:'./coupon.json?limit=5&couponType=-1&status=1&page=1',
-          type:'get',
-          success: function (data) {
-              if(data.code == 10000){
-                this.setState({
-                    couponProduce:data.data.pageData.result
+        var this1 = this;
+        $.ajax({
+            url:'./coupon1.json?limit=5&couponType=-1&status=1&page=1',
+            type:'get',
+            success: function (data) {
+                this1.setState({
+                    couponPresentProduce:data.data.pageData.result
                 })
-
-              }
-          }
-      })
+            }
+        })
+    },
+    getLocalTime: function (ns) {
+        return new Date(parseInt(ns)).toLocaleString().substr(0,10);
+    },
+    getLocalTimes: function (ns) {
+        return new Date(parseInt(ns)).toLocaleString().substr(0,24);
     },
     render: function () {
         var this1 = this;
@@ -119,63 +129,119 @@ const Table1 = React.createClass({
         };
         var tableData = [
             {
-                beanCount:5000,
-                couponTypeGiven:"全场通用",
-                investMultip:"5000",
-                investPeriod:"2015-07-08 至  2015-08-07",
-                remark:"单投1万元送60元 返现券:活动赠送",
-                transferNumber:2,
-
+                "couponInfo": {
+                    "id": 63812412,
+                    "issueType": "TYPE_ACTIVITY",
+                    "userId": 63,
+                    "issueTime": 1476429489000,
+                    "beanCount": 0,
+                    "beanUsed": 0,
+                    "beanUnused": 0,
+                    "beanOverdue": 0,
+                    "overdueTime": 1476892800000,
+                    "status": "STATUS_EXPIRED",
+                    "remark": "庆金融工场资金存管上线",
+                    "investMultip": 100,
+                    "businessId": null,
+                    "reportRemark": "庆金融工场资金存管上线",
+                    "hdType": null,
+                    "inverstPeriod": 90,
+                    "businessRemark": null,
+                    "couponType": "TYPE_INTEREST",
+                    "prdOrderId": null,
+                    "backInterestRate": 1.2,
+                    "couponTypeGiven": "TYPE_GIVEN_ABLE",
+                    "transferNumber": null
+                }
             },
             {
-                beanCount:5000,
-                couponTypeGiven:"全场通用",
-                investMultip:"5000",
-                investPeriod:"2015-07-08 至  2015-08-07",
-                remark:"单投1万元送60元 返现券:活动赠送",
-                transferNumber:0
+                "couponInfo": {
+                    "id": 63812412,
+                    "issueType": "TYPE_ACTIVITY",
+                    "userId": 63,
+                    "issueTime": 1476429489000,
+                    "beanCount": 0,
+                    "beanUsed": 0,
+                    "beanUnused": 0,
+                    "beanOverdue": 0,
+                    "overdueTime": 1476892800000,
+                    "status": "STATUS_EXPIRED",
+                    "remark": "庆金融工场资金存管上线",
+                    "investMultip": 100,
+                    "businessId": null,
+                    "reportRemark": "庆金融工场资金存管上线",
+                    "hdType": null,
+                    "inverstPeriod": 90,
+                    "businessRemark": null,
+                    "couponType": "TYPE_INTEREST",
+                    "prdOrderId": null,
+                    "backInterestRate": 1.2,
+                    "couponTypeGiven": "TYPE_GIVEN_ABLE",
+                    "transferNumber": null
+                }
             }
         ];
         var noUserItem = function(item,index){
-            console.log("dasjhdjkash")
-            console.log(item);
             return  <div className="tableContentItem" key={index}>
                 <div className="tableTitleTd1 tableTitleTd">{item.couponInfo.beanCount/100}</div>
                 <div className="tableTitleTd2 tableTitleTd">{item.couponInfo.investMultip}</div>
-                <div className="tableTitleTd3 tableTitleTd">{item.couponInfo.couponTypeGiven}</div>
-                <div className="tableTitleTd4 tableTitleTd">{item.couponInfo.investPeriod}</div>
+                <div className="tableTitleTd3 tableTitleTd">≥{item.couponInfo.inverstPeriod}</div>
+                <div className="tableTitleTd4 tableTitleTd">
+                    {
+                        this1.getLocalTime(item.couponInfo.issueTime)
+                    }至
+                    {
+                        this1.getLocalTime(item.couponInfo.overdueTime)
+                    }
+                 </div>
                 <div className="tableTitleTd5 tableTitleTd">{item.couponInfo.remark}</div>
                 {
-                    !item.couponInfo.transferNumber >= 1&&!item.couponInfo.couponTypeGive   ? <div className="tableTitleTd6 tableTitleTd" onClick={this1.handleShow}>赠送</div> : null
+                    !item.couponInfo.transferNumber >= 1&&!item.couponInfo.couponTypeGive  ? <div className="tableTitleTd6 tableTitleTd" onClick={this1.handleShow}>赠送</div> : null
                 }
             </div>
         };
         var alreadyUserItem = function (item, index) {
             return <div className="tableContentItem" key={index}>
-                <div className="tableTitleTd1 tableTitleTd">{item.beanCount/100}</div>
-                <div className="tableTitleTd2 tableTitleTd">{item.investMultip}</div>
-                <div className="tableTitleTd3 tableTitleTd">{item.couponTypeGiven}</div>
-                <div className="tableTitleTd4 tableTitleTd">{item.investPeriod}</div>
-                <div className="tableTitleTd5 tableTitleTd">{item.remark}</div>
+                <div className="tableTitleTd1 tableTitleTd">{item.couponInfo.beanCount/100}</div>
+                <div className="tableTitleTd2 tableTitleTd">{item.couponInfo.investMultip}</div>
+                <div className="tableTitleTd3 tableTitleTd">≥{item.couponInfo.inverstPeriod}</div>
+                <div className="tableTitleTd4 tableTitleTd">
+                    {
+                        this1.getLocalTimes(item.usedTime)
+                    }
+                </div>
+                <div className="tableTitleTd5 tableTitleTd">{item.couponInfo.remark}</div>
             </div>
         };
         var alreadyOverdue = function (item,index) {
             return <div className="tableContentItem" key={index}>
-                <div className="tableTitleTd1 tableTitleTd">{item.beanCount/100}</div>
-                <div className="tableTitleTd2 tableTitleTd">{item.investMultip}</div>
-                <div className="tableTitleTd3 tableTitleTd">{item.couponTypeGiven}</div>
-                <div className="tableTitleTd4 tableTitleTd">{item.investPeriod}</div>
+                <div className="tableTitleTd1 tableTitleTd">{item.couponInfo.beanCount/100}</div>
+                <div className="tableTitleTd2 tableTitleTd">{item.couponInfo.investMultip}</div>
+                <div className="tableTitleTd3 tableTitleTd">≥{item.couponInfo.inverstPeriod}</div>
+                <div className="tableTitleTd4 tableTitleTd">
+                    {
+                        this1.getLocalTime(item.couponInfo.overdueTime)
+                    }
+                </div>
+                <div className="tableTitleTd5 tableTitleTd">{item.couponInfo.remark}</div>
             </div>
         };
         var alreadyPresent = function (item,index) {
             return <div className="tableContentItem" key={index}>
-                <div className="tableTitleTd1 tableTitleTd">{item.beanCount/100}</div>
-                <div className="tableTitleTd2 tableTitleTd">{item.investMultip}</div>
-                <div className="tableTitleTd3 tableTitleTd">{item.couponTypeGiven}</div>
-                <div className="tableTitleTd4 tableTitleTd">{item.investPeriod}</div>
-                <div className="tableTitleTd5 tableTitleTd">{item.investMultip}</div>
-                <div className="tableTitleTd6 tableTitleTd">{item.couponTypeGiven}</div>
-                <div className="tableTitleTd7 tableTitleTd">{}</div>
+                <div className="tableTitleTd1 tableTitleTd">{item.couponInfo.beanCount/100}</div>
+                <div className="tableTitleTd2 tableTitleTd">{item.couponInfo.investMultip}</div>
+                <div className="tableTitleTd3 tableTitleTd">≥{item.couponInfo.inverstPeriod}</div>
+                <div className="tableTitleTd4 tableTitleTd">
+                    {
+                        this1.getLocalTime(item.couponInfo.issueTime)
+                    }至
+                    {
+                        this1.getLocalTime(item.couponInfo.overdueTime)
+                    }
+                </div>
+                <div className="tableTitleTd5 tableTitleTd">{this1.getLocalTime(item.couponInfo.issueTime)}</div>
+                <div className="tableTitleTd6 tableTitleTd">{item.transferName}</div>
+                <div className="tableTitleTd7 tableTitleTd">{item.couponInfo.remark}</div>
             </div>
         };
         var tableEml = function () {
@@ -209,7 +275,7 @@ const Table1 = React.createClass({
                     </div>
                     <div className="tableContent">
                         {
-                            tableData.map(alreadyUserItem)
+                            this1.state.couponProduce.map(alreadyUserItem)
                         }
                     </div>
                 </div>
@@ -224,11 +290,12 @@ const Table1 = React.createClass({
                     </div>
                     <div className="tableContent">
                         {
-                            tableData.map(alreadyOverdue)
+                            this1.state.couponProduce.map(alreadyOverdue)
                         }
                     </div>
                 </div>
             }else if(this1.props.listIndex == 3){
+                this1.ajaxCouponList();
                 return <div className="containerCenterTable containerCenterTable2">
                     <div className="tableTitle">
                         <div className="tableTitleTd1 tableTitleTd">面值(元)</div>
@@ -241,7 +308,7 @@ const Table1 = React.createClass({
                     </div>
                     <div className="tableContent">
                         {
-                            tableData.map(alreadyPresent)
+                            this1.state.couponPresentProduce.map(alreadyPresent)
                         }
                     </div>
                 </div>
