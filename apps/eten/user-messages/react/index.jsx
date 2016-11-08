@@ -128,7 +128,7 @@ $(function () {
     $UserReady(function (is_login, user) {
         // 如果没有登录, 先引导去登录
         if (!is_login) {
-            location.href = `https://passport.9888.cn/passport/login?sourceSite=jrgc&service=${location.protocol}//${location.hostname}${location.pathname}`
+            location.href = `https://passport.9888.cn/passport/login?sourceSite=jrgc&service=${location.hostname}${location.pathname}`
         }
     })
 });
