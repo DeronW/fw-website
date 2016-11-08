@@ -1,8 +1,6 @@
 'use strict';
 const API_PATH = document.getElementById('api-path').value;
 
-
-
 const ContainerTitle = React.createClass({
    render: function () {
        return(
@@ -57,13 +55,39 @@ const Coupon = React.createClass({
           tabIndex:0,
           listIndex:0,
           listTab:"未使用",
+          staData:{}
       })
+    },
+    componentDidMount: function() {
+        var _this = this;
+        $.ajax({
+            url:'./couponStatistics.json',
+            type:'get',
+            success: function (data) {
+                _this.setState({
+                    staData:data.data.couponAccount
+                })
+            }
+        })
+    },
+    getCouponStatistics: function () {
+        var _this = this;
+        $.ajax({
+            url:'./couponStatistics.json',
+            type:'get',
+            data: _this.state.tabIndex,
+            success: function (data) {
+                _this.setState({
+                    staData:data.data.couponAccount
+                })
+            }
+        })
     },
     toggleTabHandler: function (tab_name,index) {
         this.setState({
             tab: tab_name,
             tabIndex: index
-        })
+        });
     },
     toggleListHandle: function (tabName,index) {
         this.setState({
@@ -73,8 +97,7 @@ const Coupon = React.createClass({
     },
    render: function () {
        var _this = this;
-       var tab_bar;
-       tab_bar = (
+       var tab_bar = (
            <div className="containerTop">
                {['返现券', '返息券', '兑换券'].map((n, index)=> {
                    return (
@@ -161,6 +184,7 @@ const Coupon = React.createClass({
 });
 
 $(function () {
+
     $.ajax({
         url:'',
         post:'',

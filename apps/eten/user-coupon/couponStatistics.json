@@ -1,0 +1,14 @@
+{
+	"data": {
+		"couponAccount": {
+			"usedAmount": 823,
+			"availableNumber": 51,
+			"willExpireAmount": 73,
+			"willExpireNumber": 128,
+			"usedNumber": 123,
+			"availableAmount": 214
+		}
+	},
+	"message": 1,
+	"code": 1
+}

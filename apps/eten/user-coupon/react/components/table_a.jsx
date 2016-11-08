@@ -1,7 +1,122 @@
 
+
 const Table1 = React.createClass({
+    getInitialState: function () {
+      return({
+          isShow:false,
+          transNum:2,
+          code:4,
+          couponProduce:[]
+      })
+    },
+    handleShow: function () {
+      this.setState({
+          isShow:!this.state.isShow
+      })
+    },
+    handleTransformSuccess: function () {
+      this.setState({
+          transNum:this.state.code
+      })
+    },
+    handleTransformFail: function () {
+        this.setState({
+            transNum:2
+        })
+    },
+    componentDidMount: function () {
+        $.ajax({
+            url:'./coupon.json?limit=5&couponType=-1&status=1&page=1',
+            type:'get',
+            success: function (data) {
+                console.log(data.data.pageData.result);
+            }
+        })
+    },
+    ajaxCouponList: function () {
+      $.ajax({
+          url:'./coupon.json?limit=5&couponType=-1&status=1&page=1',
+          type:'get',
+          success: function (data) {
+              if(data.code == 10000){
+                this.setState({
+                    couponProduce:data.data.pageData.result
+                })
+
+              }
+          }
+      })
+    },
     render: function () {
         var this1 = this;
+        var showStyle = {
+            display:this.state.isShow ? "block" : "none"
+        };
+        var totalOnePop = function () {
+            return <div className="totalPop" style={showStyle}>
+                <div className="popContent">
+                    <div className="oneBtnPop">
+                        <div className="close" onClick={this1.handleShow}></div>
+                        <div className="onePrompt">抱歉，您暂无推荐好友，无法进行赠送。</div>
+                        <div className="btn">
+                            <div className="knowBtn" onClick={this1.handleShow}>知道了</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        };
+        var totalTwoPop = function () {
+            return <div className="totalPop" style={showStyle}>
+                <div className="popContent">
+                    <div className="twoBtnPop">
+                        <div className="close" onClick={this1.handleShow}></div>
+                        <div className="twoPrompt">您确定赠送<em>1.4%</em>返息券给您的好友吗？</div>
+                        <div className="btn">
+                            <div className="leftBtn  commonBtn" onClick={this1.handleTransformSuccess}>确定</div>
+                            <div className="rightBtn  commonBtn" onClick={this1.handleShow}>取消</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        };
+        var totalPopSuccess = function () {
+            return <div className="totalPop" style={showStyle}>
+                <div className="popContent">
+                    <div className="oneBtnPop">
+                        <div className="close" onClick={this1.handleShow}></div>
+                        <div className="onePrompt">恭喜您，返现券赠送成功！</div>
+                        <div className="btn">
+                            <div className="knowBtn" onClick={this1.handleShow}>知道了</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        };
+        var totalPopFail = function () {
+            return <div className="totalPop" style={showStyle}>
+                <div className="popContent">
+                    <div className="twoBtnPop">
+                        <div className="close" onClick={this1.handleShow}></div>
+                        <div className="twoPrompt">抱歉，返息券赠送失败！</div>
+                        <div className="btn">
+                            <div className="leftBtn  commonBtn" onClick={this1.handleTransformFail}>重新操作</div>
+                            <div className="rightBtn  commonBtn" onClick={this1.handleShow}>暂不</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        };
+        var popJudge = function () {
+            if(this1.state.transNum == 1){
+                return totalOnePop()
+            }else if(this1.state.transNum == 2){
+                return totalTwoPop()
+            }else if(this1.state.transNum == 3){
+                return totalPopSuccess()
+            }else if(this1.state.transNum == 4){
+                return totalPopFail()
+            }
+        };
         var tableData = [
             {
                 beanCount:5000,
@@ -22,14 +137,16 @@ const Table1 = React.createClass({
             }
         ];
         var noUserItem = function(item,index){
+            console.log("dasjhdjkash")
+            console.log(item);
             return  <div className="tableContentItem" key={index}>
-                <div className="tableTitleTd1 tableTitleTd">{item.beanCount/100}</div>
-                <div className="tableTitleTd2 tableTitleTd">{item.investMultip}</div>
-                <div className="tableTitleTd3 tableTitleTd">{item.couponTypeGiven}</div>
-                <div className="tableTitleTd4 tableTitleTd">{item.investPeriod}</div>
-                <div className="tableTitleTd5 tableTitleTd">{item.remark}</div>
+                <div className="tableTitleTd1 tableTitleTd">{item.couponInfo.beanCount/100}</div>
+                <div className="tableTitleTd2 tableTitleTd">{item.couponInfo.investMultip}</div>
+                <div className="tableTitleTd3 tableTitleTd">{item.couponInfo.couponTypeGiven}</div>
+                <div className="tableTitleTd4 tableTitleTd">{item.couponInfo.investPeriod}</div>
+                <div className="tableTitleTd5 tableTitleTd">{item.couponInfo.remark}</div>
                 {
-                    !item.transferNumber >= 1 ? <div className="tableTitleTd6 tableTitleTd">赠送</div> : null
+                    !item.couponInfo.transferNumber >= 1&&!item.couponInfo.couponTypeGive   ? <div className="tableTitleTd6 tableTitleTd" onClick={this1.handleShow}>赠送</div> : null
                 }
             </div>
         };
@@ -74,9 +191,12 @@ const Table1 = React.createClass({
                     </div>
                     <div className="tableContent">
                         {
-                            tableData.map(noUserItem)
+                            this1.state.couponProduce.map(noUserItem)
                         }
                     </div>
+                    {
+                        popJudge()
+                    }
                 </div>
             }else if(this1.props.listIndex == 1){
                 return <div className="containerCenterTable containerCenterTable1">
