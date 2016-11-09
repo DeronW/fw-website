@@ -3,7 +3,7 @@
 {% block title %}金融工场是由北京凤凰信用管理有限公司（简称：凤凰信用）倾力打造的专注于小贷公司资产交易的P2P平台—上金融工场，圆财富梦想！{% endblock %}
 
 {% block js %}
-<script src="javascripts/index.js"></script>
+<!--<script src="javascripts/index.js"></script>-->
 {% endblock %}
 
 {% block content %}
@@ -231,7 +231,6 @@
     </div>
 
     <!--收益模块-->
-
     <div class="earning">
         <div class="earningMain">
             <div class="earningItem">
@@ -241,35 +240,32 @@
                 <div class="earningImg">
                     <img src="images/img_6.jpg" alt="">
                 </div>
-                <div class="earningData" id="yibox">
-                </div>
+                <div class="earningData" id="yibox" style="padding-left: 30px"></div>
             </div>
 
             <div class="earningItem">
                 <div class="earningTitle">
-                    用户投资总额
+                    用户赚取总收益
                 </div>
                 <div class="earningImg">
                     <img src="images/img_7.jpg" alt="">
                 </div>
-                <div class="earningData" id="yibox2"></div>
+                <div class="earningData" id="yibox2" style="padding-left: 88px;"></div>
             </div>
 
 
             <div class="earningItem">
                 <div class="earningTitle">
-                    用户投资总额
+                    注册会员数量超过
                 </div>
                 <div class="earningImg">
                     <img src="images/img_8.jpg" alt="">
                 </div>
-                <div class="earningData" id="yibox3">
-
-
-                </div>
+                <div class="earningData" id="yibox3" style="padding-left: 156px"></div>
             </div>
         </div>
     </div>
+
     <!--优势板块-->
     <div class="advantage clearfix">
         <div class="advantageTitle">
@@ -280,84 +276,48 @@
                 <div class="selectImg">
                     <img src="images/guide_selectlistB-01.jpg" alt="">
                 </div>
-                <p class="select-title">
-                    上市公司
-                </p>
-                <p class="select-des">
-                    上市公司中国信贷
-                    <br>
-                    战略控股
-                </p>
+                <p class="select-title"> 上市公司 </p>
+                <p class="select-des"> 上市公司中国信贷 <br> 战略控股 </p>
             </div>
 
             <div class="selectItem">
                 <div class="selectImg">
                     <img src="images/guide_selectlistB-02.jpg" alt="">
                 </div>
-                <p class="select-title">
-                    上市公司
-                </p>
-                <p class="select-des">
-                    上市公司中国信贷
-                    <br>
-                    战略控股
-                </p>
+                <p class="select-title"> 低门槛赚收益 </p>
+                <p class="select-des"> 100元起投 <br> 预期年化收益6-13% </p>
             </div>
 
             <div class="selectItem">
                 <div class="selectImg">
                     <img src="images/guide_selectlistB-03.jpg" alt="">
                 </div>
-                <p class="select-title">
-                    上市公司
-                </p>
-                <p class="select-des">
-                    上市公司中国信贷
-                    <br>
-                    战略控股
-                </p>
+                <p class="select-title"> 0手续费 </p>
+                <p class="select-des"> 回款提现 <br> 免手续费 </p>
             </div>
 
             <div class="selectItem">
                 <div class="selectImg">
                     <img src="images/guide_selectlistB-04.jpg" alt="">
                 </div>
-                <p class="select-title">
-                    上市公司
-                </p>
-                <p class="select-des">
-                    上市公司中国信贷
-                    <br>
-                    战略控股
-                </p>
+                <p class="select-title"> 资金周转灵活 </p>
+                <p class="select-des"> 期限灵活、提现快 <br> 可债权转让 </p>
             </div>
 
             <div class="selectItem">
                 <div class="selectImg">
                     <img src="images/guide_selectlistB-05.jpg" alt="">
                 </div>
-                <p class="select-title">
-                    上市公司
-                </p>
-                <p class="select-des">
-                    上市公司中国信贷
-                    <br>
-                    战略控股
-                </p>
+                <p class="select-title"> 第三方担保 </p>
+                <p class="select-des"> 融资性担保公司 <br> 第三方担保 </p>
             </div>
 
             <div class="selectItem">
                 <div class="selectImg">
                     <img src="images/guide_selectlistB-06.jpg" alt="">
                 </div>
-                <p class="select-title">
-                    上市公司
-                </p>
-                <p class="select-des">
-                    上市公司中国信贷
-                    <br>
-                    战略控股
-                </p>
+                <p class="select-title"> 银行资金存管 </p>
+                <p class="select-des"> 徽商银行资金存管 </p>
             </div>
         </div>
     </div>
@@ -371,9 +331,10 @@
             </div>
             <div class="scrollBoxRight">
                 <a href="#" class="rightnow">立即注册，领取120元</a>
-                <a href="" class="new">更多新手指引</a>
+                <a href="/static/web/guide/index.html" class="new">更多新手指引</a>
             </div>
         </div>
     </div>
+
 </div>
 {% endblock %}
