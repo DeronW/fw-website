@@ -1,8 +1,6 @@
 'use strict';
 const API_PATH = document.getElementById('api-path').value;
 
-
-
 const ContainerTitle = React.createClass({
    render: function () {
        return(
@@ -33,8 +31,7 @@ const ContainerTitle = React.createClass({
 const ContainerList = React.createClass({
    render: function () {
        var name1 = ['未使用','已使用','已过期','已赠送'];
-       this.props.present ? name1 : name1 = ['未使用','已使用','已过期'];
-       console.log(this.props.listIndex);
+       this.props.present ? name1 : name1=['未使用','已使用','已过期']
        return(
            <div className="containerCenterList">
                {
@@ -49,6 +46,22 @@ const ContainerList = React.createClass({
    }
 });
 
+//const ContainerListEx = React.createClass({
+//    render: function () {
+//        var name2 = ['未使用','已使用','已过期'];
+//        return(
+//            <div className="containerCenterList">
+//                {
+//                    name2.map((n,index) => {
+//                        return <div key={index} className={this.props.listTab == n ? "centerList" : null}
+//                                    onClick={() => this.props.toggleListHandle(n,index)}>{n}
+//                        </div>
+//                    })
+//                }
+//            </div>
+//        )
+//    }
+//});
 
 const Coupon = React.createClass({
     getInitialState: function () {
@@ -57,13 +70,39 @@ const Coupon = React.createClass({
           tabIndex:0,
           listIndex:0,
           listTab:"未使用",
+          staData:{}
       })
+    },
+    componentDidMount: function() {
+        var _this = this;
+        $.ajax({
+            url:'./couponStatistics.json',
+            type:'get',
+            success: function (data) {
+                _this.setState({
+                    staData:data.data.couponAccount
+                })
+            }
+        })
+    },
+    getCouponStatistics: function () {
+        var _this = this;
+        $.ajax({
+            url:'./couponStatistics.json',
+            type:'get',
+            data: _this.state.tabIndex,
+            success: function (data) {
+                _this.setState({
+                    staData:data.data.couponAccount
+                })
+            }
+        })
     },
     toggleTabHandler: function (tab_name,index) {
         this.setState({
             tab: tab_name,
             tabIndex: index
-        })
+        });
     },
     toggleListHandle: function (tabName,index) {
         this.setState({
@@ -73,8 +112,7 @@ const Coupon = React.createClass({
     },
    render: function () {
        var _this = this;
-       var tab_bar;
-       tab_bar = (
+       var tab_bar = (
            <div className="containerTop">
                {['返现券', '返息券', '兑换券'].map((n, index)=> {
                    return (
@@ -161,6 +199,7 @@ const Coupon = React.createClass({
 });
 
 $(function () {
+
     $.ajax({
         url:'',
         post:'',
