@@ -19,21 +19,21 @@
             url: API_PATH + "/api/userState/v2/userState.json",
             data: "",
             success: function(data){//头像
-                if(data.data.orderUser.headurl!= null|| data.data.orderUser.headurl!= ''){
+                if(data.data.orderUser.headurl!= null && data.data.orderUser.headurl!= ''){
                     $('.head-kuang').removeClass('moren').css("background","url("+data.data.orderUser.headurl+") no-repeat");
                 }
-                if((data.data.orderUser.headurl== null|| data.data.orderUser.headurl== '')&&( data.data.orderUser.sex==1)){
+                if((data.data.orderUser.headurl== null && data.data.orderUser.headurl== '')&&( data.data.orderUser.sex==1)){
                     $('.head-kuang').removeClass('moren').addClass('man')
                 }
-                if((data.data.orderUser.headurl== null|| data.data.orderUser.headurl== '')&&(data.data.orderUser.sex==0)){
+                if((data.data.orderUser.headurl== null && data.data.orderUser.headurl== '')&&(data.data.orderUser.sex==0)){
                     $('.head-kuang').removeClass('moren').addClass('woman')
                 }
 
-                if(data.data.open_name!=null||data.data.open_name!=''){//名字
+                if(data.data.open_name!=null && data.data.open_name!=''){//名字
                     $('.user-name').html(data.data.open_name);
                 }
                 else{
-                    if(data.data.orderUser.realName!=null||data.data.orderUser.realName!=''){
+                    if(data.data.orderUser.realName!=null && data.data.orderUser.realName!=''){
                         $('.user-name').html(data.data.orderUser.realName);
                     }
                     else{
@@ -41,7 +41,7 @@
                     }
                 }
 
-                if(data.data.open_name == null||data.data.open_name=='') {//工厂码
+                if(data.data.open_name == null && data.data.open_name=='') {//工厂码
                     $('.ws-code').find('span').html(data.data.orderUser.promotioncode);
                 }
                 else{
@@ -62,20 +62,20 @@
                 });
 
                 //是否绑定开通存管和设置交易密码
-                if(data.data.orderUser.mobile!= null|| data.data.orderUser.mobile!= ''){
+                if(data.data.orderUser.mobile!= null && data.data.orderUser.mobile!= ''){
                     $('#bind_mobile_img').html('已完成手机绑定'+data.data.orderUser.mobile.substring(0,3)+'****'+data.data.orderUser.mobile.substring(7,11)+'，<a href="/depository/account/changePhoneOld.shtml" class="bls">修改</a>。 <span></span>')
                 }
-                if((data.data.openAccountStatus!= null|| data.data.openAccountStatus!= '') && (data.data.openAccountStatus == 2 || data.data.openAccountStatus == 3 || data.data.openAccountStatus == 4|| data.data.openAccountStatus == 5)){
+                if((data.data.openAccountStatus!= null && data.data.openAccountStatus!= '') && (data.data.openAccountStatus == 2 || data.data.openAccountStatus == 3 || data.data.openAccountStatus == 4|| data.data.openAccountStatus == 5)){
                     $('#open_account_img').removeClass('not').addClass('yes');
                 }
                 else{
                     $('#open_account_img').html('').append('<span class="ywc wyc chg">为确保资金安全，请尽快开通存管账户，<a href="${ctx}/depository/openAccount/toOpenAccount.shtml" class="bls">立即开户</a>。<span></span></span>');
                 }
 
-                if((data.data.openAccountStatus!= null|| data.data.openAccountStatus!= '') && (data.data.openAccountStatus == 5)){
+                if((data.data.openAccountStatus!= null && data.data.openAccountStatus!= '') && (data.data.openAccountStatus == 5)){
                     $('#bind_card_img').removeClass('not').addClass('yes0');
                 }
-                else if((data.data.openAccountStatus!= null|| data.data.openAccountStatus!= '') && (data.data.openAccountStatus == 4)){
+                else if((data.data.openAccountStatus!= null && data.data.openAccountStatus!= '') && (data.data.openAccountStatus == 4)){
                     $('#bind_card_img').removeClass('not').addClass('yes');
                 }
                 else{
@@ -91,7 +91,7 @@
                 if(data.data.subrogationCount>0){ $('#left11').show() }
                 if(data.data.debtorsCount>0){  $('#left12').show() }
 
-                if((data.data.financialerStatus!=null||data.data.financialerStatus!='') && data.data.financialerStatus==3){  $('#left16').show() }
+                if((data.data.financialerStatus!=null && data.data.financialerStatus!='') && data.data.financialerStatus==3){  $('#left16').show() }
             }
         });
     })
