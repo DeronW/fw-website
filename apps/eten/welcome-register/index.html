@@ -6,54 +6,22 @@
 <!--<script src="javascripts/index.js"></script>-->
 {% endblock %}
 
+<div>
+    http://www.9888.cn/activity/new-user-guide/
+</div>
+
 {% block content %}
 <div class="main">
     <div class="top">
-        <div class="banner">
-
-        </div>
-        <form action="">
+        <div class="banner"></div>
+        <div class="form">
             <div class="registerTab">
-                <div class="registerTab1">
-                    绑定手机号
-                </div>
-                <div class="registerTab2">
-                    完成注册
-                </div>
-                <div class="registerTab3">
-
-                </div>
+                <div class="registerTab1"> 绑定手机号</div>
+                <div class="registerTab2"> 完成注册</div>
+                <div class="registerTab3"></div>
             </div>
-            <div class="phoneNumber">
-                <label for="phoneNumber">
-                    手机号
-                    <span class="red">*</span>
-                </label>
-                <input type="text" placeholder="请输入手机号码" id="phoneNumber">
-                <span class="phonetips" id="phonetips" style="display: none">请输入手机号</span>
-            </div>
-            <div class="person">
-                <label for="person">
-                    推荐人
-                </label>
-                <input type="text" placeholder="请填写推荐人工场码" id="person">
-            </div>
-            <div class="test">
-                <label for="test">
-                    网页验证码
-                    <span class="red">*</span>
-                </label>
-                <input type="text" id="test">
-                <img src="http://www.9888.cn/activity/new-user-guide/index.php?op=imgCode" alt=""
-                     class="verificationCode" id="verificationCode">
-                <span class="testtips" id="testtips" style="display: none">请输入验证码</span>
-            </div>
-            <div class="get">
-                <span href="" id="submit" class="submit">
-                    立即领取120元
-                </span>
-            </div>
-        </form>
+            <div id="form"></div>
+        </div>
     </div>
 
     <div class="gift clearfix">
