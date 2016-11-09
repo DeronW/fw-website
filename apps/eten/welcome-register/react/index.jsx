@@ -124,7 +124,7 @@ const FormStepOne = React.createClass({
         }
     },
     componentDidMount: function () {
-        ReactDOM.render(<FormStepTwo phone={123}/>, document.getElementById('form'));
+        // ReactDOM.render(<FormStepTwo phone={123}/>, document.getElementById('form'));
     },
     onTextInputChangeHandler: function (field, e) {
         let state = this.state;
@@ -276,6 +276,57 @@ const FormStepTwo = React.createClass({
     }
 });
 
+const Invest = React.createClass({
+    getInitialState: function () {
+        return {
+            products: []
+        }
+    },
+    componentDidMount: function () {
+        $.get(API_PATH + 'prdClaims/phpDataList.shtml', {}, function (data) {
+            console.log(data);
+            this.setState({products: data.pageData.result})
+        }.bind(this), 'json')
+    },
+    render: function () {
+        let product = (i, index) => {
+
+            return (
+                <div className="invest-item" key={index}>
+                    <div>
+                        <i className={''}> </i>
+                        {i.prdName}
+                        <div>{i.repayPeriod}天</div>
+                        <div>按天一次性还本付息</div>
+                    </div>
+                    <div>
+                        <div>
+                            预期年化	9%+1%
+                        </div>
+                        <a>I </a>
+                    </div>
+                    <div>
+                        90%
+                    </div>
+                    <div>
+                        <a>投资</a>
+                        可投
+                    </div>
+                </div>
+            )
+        };
+
+        return (
+            <div className="invest">
+                <div className="invest-title">热门投资等你来</div>
+                <div className="invest-list">
+                    {products.map(product)}
+                </div>
+            </div>
+        )
+    }
+});
+
 $(function () {
     $.get(API_PATH + "/cms/api/dealstatis.php", null, function (data) {
         ReactDOM.render(<NumberBoard num={data.totalDeals}/>, document.getElementById('yibox'));
@@ -330,4 +381,5 @@ $(function () {
 $(function () {
     ReactDOM.render(<HeaderStatusBar />, document.getElementById('header-status-bar'));
     ReactDOM.render(<FormStepOne />, document.getElementById('form'));
+    ReactDOM.render(<Invest />, document.getElementById('invest'));
 });
