@@ -301,7 +301,7 @@ const Invest = React.createClass({
                     </div>
                     <div>
                         <div>
-                            预期年化	9%+1%
+                            预期年化 9%+1%
                         </div>
                         <a>I </a>
                     </div>
@@ -310,7 +310,7 @@ const Invest = React.createClass({
                     </div>
                     <div>
                         <a>投资</a>
-                        可投
+                        <div> 可投{}万</div>
                     </div>
                 </div>
             )
@@ -320,7 +320,7 @@ const Invest = React.createClass({
             <div className="invest">
                 <div className="invest-title">热门投资等你来</div>
                 <div className="invest-list">
-                    {products.map(product)}
+                    {this.state.products.map(product)}
                 </div>
             </div>
         )
