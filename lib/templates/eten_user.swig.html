@@ -62,6 +62,9 @@
                 });
 
                 //是否绑定开通存管和设置交易密码
+                if(data.data.orderUser.mobile!= null|| data.data.orderUser.mobile!= ''){
+                    $('#bind_mobile_img').html('已完成手机绑定'+data.data.orderUser.mobile.substring(0,3)+'****'+data.data.orderUser.mobile.substring(7,11)+'，<a href="/depository/account/changePhoneOld.shtml" class="bls">修改</a>。 <span></span>')
+                }
                 if((data.data.openAccountStatus!= null|| data.data.openAccountStatus!= '') && (data.data.openAccountStatus == 2 || data.data.openAccountStatus == 3 || data.data.openAccountStatus == 4|| data.data.openAccountStatus == 5)){
                     $('#open_account_img').removeClass('not').addClass('yes');
                 }
