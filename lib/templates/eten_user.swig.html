@@ -18,7 +18,7 @@
             type: "POST",
             url: API_PATH + "/api/userState/v2/userState.json",
             data: "",
-            success: function(data){
+            success: function(data){//头像
                if(data.data.orderUser.headurl!= null|| data.data.orderUser.headurl!= ''){
                    $('.head-kuang').removeClass('moren').css("background","url("+data.data.orderUser.headurl+") no-repeat");
                }
@@ -29,7 +29,7 @@
                     $('.head-kuang').removeClass('moren').addClass('woman')
                 }
 
-                if(data.data.open_name!=null||data.data.open_name!=''){
+                if(data.data.open_name!=null||data.data.open_name!=''){//名字
                     $('.user-name').html(data.data.open_name);
                 }
                 else{
@@ -41,15 +41,15 @@
                     }
                 }
 
-                if(data.data.open_name == null||data.data.open_name=='') {
+                if(data.data.open_name == null||data.data.open_name=='') {//工厂码
                     $('.ws-code').find('span').html(data.data.orderUser.promotioncode);
                 }
                 else{
                     $('.ws-code').remove()
                 }
 
-                $('#VIP-SPAN').html('VIP'+data.data.userLevel);
-
+                $('#VIP-SPAN').html('VIP'+data.data.userLevel);//vip等级
+                //是否绑定开通存管和设置交易密码
                 if((data.data.openAccountStatus!= null|| data.data.openAccountStatus!= '') && (data.data.openAccountStatus == 2 || data.data.openAccountStatus == 3 || data.data.openAccountStatus == 4|| data.data.openAccountStatus == 5)){
                      $('#open_account_img').removeClass('not').addClass('yes');
                  }
@@ -66,6 +66,14 @@
                 else{
                     $('#bind_card_img').html('').append('<span class="ywc ctg chg">为确保资金安全，请尽快设置交易密码，<a href="${ctx}/depository/openAccount/toTradePwd.shtml" class="bls">立即设置</a>。<span></span></span>');
                 }
+
+                if(!data.data.is_companyagent){ $('#left5').show() }
+                if(data.data.borrowCount>0||data.subrogationCount>0||data.debtorsCount>0){
+                    $('#left10').show()
+                }
+                if(data.data.borrowCount>0){ $('#left11').show() }
+                if(data.subrogationCount>0){ $('#left12').show() }
+                if(data.debtorsCount>0){  $('#left13').show() }
             }
         });
      })
