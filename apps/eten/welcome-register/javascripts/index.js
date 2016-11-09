@@ -1,43 +1,5 @@
 window.onload = function () {
-    $("#redcash").on("mouseenter", function () {
-        $("#redbag1").css("display", "block").removeClass().addClass("redbag1");
-        $("#redbag2").css("display", "block");
-    }).on("mouseleave", function () {
-        $("#redbag1").css("display", "none").removeClass().css({"left": "0", "top": "0"}).addClass("redbag1-down");
-        $("#redbag2").css("display", "none");
-    });
-    $("#redcash2").on("mouseenter", function () {
-        $("#redbag21").css("display", "block");
-        $("#redbag22").css("display", "block");
-    }).on("mouseleave", function () {
-        $("#redbag21").css("display", "none");
-        $("#redbag22").css("display", "none");
-    });
-    $("#redcash3").on("mouseenter", function () {
-        $("#redbag31").css("display", "block");
-        $("#redbag32").css("display", "block");
-    }).on("mouseleave", function () {
-        $("#redbag31").css("display", "none");
-        $("#redbag32").css("display", "none");
-    });
-    $(".selectItem").on("mouseenter", function () {
-        console.log($(this).find("img"));
-        $(this).find("img").attr("src", "images/guide_selectlistB-0" + ($(this).index() + 1) + ".gif");
 
-    }).on("mouseleave", function () {
-
-        $(this).find("img").attr("src", "images/guide_selectlistB-0" + ($(this).index() + 1) + ".jpg");
-    });
-    // 鼠标滚动一定高度后显示
-    $(document).scroll(function () {
-        var top = $(document).scrollTop();
-        if (top >= 400) {
-            $(".scroll").css("display", "block");
-        } else {
-            $(".scroll").css("display", "none");
-        }
-
-    });
     // 表单验证相关
     function phoneNumberVer(obj) {
         var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
@@ -114,19 +76,4 @@ window.onload = function () {
 
     $("#ftwo").text(data().hotDeil[0].proName);
     $("#ftwoDay").text(data().hotDeil[0].repayPeriod + "天");
-
-    //开始得到数据
-    $.ajax({
-        url:"http://www.9888.cn/cms/api/dealstatis.php",
-        dataType:"json",
-        type:"post",
-        success:function (data) {
-            console.log(data);
-        }
-    });
-
-
-
-
-
-}
+};
