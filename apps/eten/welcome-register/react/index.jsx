@@ -293,24 +293,24 @@ const Invest = React.createClass({
 
             return (
                 <div className="invest-item" key={index}>
-                    <div>
+                    <div className="invest-item-1">
                         <i className={''}> </i>
                         {i.prdName}
-                        <div>{i.repayPeriod}天</div>
-                        <div>按天一次性还本付息</div>
+                        <div className="remain-day">{i.repayPeriod}天</div>
+                        <div className="pay">按天一次性还本付息</div>
                     </div>
-                    <div>
+                    <div className="invest-item-2">
                         <div>
                             预期年化 9%+1%
                         </div>
                         <a>I </a>
                     </div>
-                    <div>
+                    <div className="invest-item-3">
                         90%
                     </div>
-                    <div>
+                    <div className="invest-item-4">
                         <a>投资</a>
-                        <div> 可投{}万</div>
+                        <div> 可投{(i.borrowAmount - i.completeLoan) / 10000}万</div>
                     </div>
                 </div>
             )
