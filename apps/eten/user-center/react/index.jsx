@@ -23,10 +23,7 @@ const CenCont = React.createClass({
                                                          className="text">立即评估</a>!</p></div>
         }
 
-
         let blockText = <div className="no-commodity-block">暂无记录</div>;
-
-
 
         return (
             <div>
@@ -40,30 +37,40 @@ const CenCont = React.createClass({
                         投资专享优惠多多！
                         <a href="../user/level/userLevel.shtml" className="see-detail">查看详情&gt;</a>
                     </div>
-                </div>
-                <div className="per-shouyi">
-                    <div className="block1 bl">
-                        <h5>累计收益(元)<span id="principal" className="tip_fanli"><span className="fanli_info">累计收益=已收利息+待收利息+已用工豆+已用优惠券<span></span></span></span>
-                        </h5>
-                        <span className="accu-income">19,730.63</span>
-                    </div>
-                    <div className="block2 bl">
-                        <p className="ft1 line_h3 col3">账户总资产：<span className="ft2">17,743.71<em className="ft1"> 元</em></span>
-                        </p>
-                        <p className="ft1 line_h3 col3">待收本息：<span className="ft2">17,743.71<em className="ft1"> 元</em></span>
-                        </p>
-                    </div>
-                    <div className="qiandao">
-                        <input type="hidden" value="true" id="sendPagerFlag"/>
-                        <a href="javascript:;" id="click_qiandao2">
-                            <img src="./images/img_qiandao.png" width="80" height="80"/>
+                    <div className="per-shouyi">
+                        <div className="block1 bl">
+                            <h5>累计收益(元)<span id="principal" className="tip_income"><span className="income_info">累计收益=已收利息+待收利息+已用工豆+已用优惠券<span className="san"></span></span></span>
+                            </h5>
+                            <span className="accu-income">19,730.63</span>
+                        </div>
+                        <div className="block2 bl">
+                            <p className="ft1 line_h3 col3">账户总资产：<span className="ft2">17,743.71<em className="ft1"> 元</em></span>
+                            </p>
+                            <p className="ft1 line_h3 col3">待收本息：<span className="ft2">17,743.71<em className="ft1"> 元</em></span>
+                            </p>
+                        </div>
+                        <div className="qiandao">
+                            <input type="hidden" value="true" id="sendPagerFlag"/>
+                            <a href="javascript:;" id="click_qiandao2">
+                                <img src="./images/img_qiandao.png" width="80" height="80"/>
                             <span className="tip_info">
-                                签到奖励2工分；<br/>2、连续签到7天，可额外再奖励10工分；<br/><strong className="red2">3、投资更有机会领红包哦！</strong>
+                                签到奖励2工分；<br/>2、连续签到7天，可额外再奖励10工分；<br/><strong className="red2">3、投资更有机会领红包哦！</strong><span className="san"></span>
                             </span>
-                        </a>
-                        <span className="getWp"></span>
+                            </a>
+                            <p className="q_text">连续签到有惊喜</p>
+                            <span className="getMoney" id="getMoney"></span>
+                        </div>
+                    </div>
+                    <div className="per-yue-box rel">
+                        <div><p></p><span></span><em></em></div>
+                        <div></div>
+                        <div></div>
+                        <a></a>
+                        <a></a>
+                        <a></a>
                     </div>
                 </div>
+
             </div>
         );
 
