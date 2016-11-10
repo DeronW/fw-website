@@ -116,10 +116,11 @@
 
         $UserReady(function (is_login, user) {
             if (!is_login) {
-                window.location.href = "https://passport.9888.cn/passport/login?sourceSite=jrgc&service=" + location.href;
+                var url=location.href;
+                window.location.href = "https://passport.9888.cn/passport/login?sourceSite=jrgc&service=" + url;
             }
             else {
-                
+
                 var API_PATH = 'http://www.9888.cn';// var API_PATH = document.getElementById('api-path').value;
 
                 $.ajax({
