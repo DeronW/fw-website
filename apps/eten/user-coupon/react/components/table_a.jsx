@@ -75,7 +75,7 @@ const Table1 = React.createClass({
         var this1 = this;
         var n = 2;
         if(index == 0) {
-            n = 2;
+            n = 1;
         } else if(index == 1) {
             n = 1;
         } else if(index == 2) {
@@ -156,6 +156,9 @@ const Table1 = React.createClass({
         };
         var listShowStyle = {
             display:this1.state.isListShow ? "block" : "none"
+        };
+        var popJudge = function () {
+            
         };
         var popList = function () {
             var friend = function (item,index) {
@@ -366,7 +369,7 @@ const Table1 = React.createClass({
                                 </div>
                                 <div className="containerPage">
                                     <div className="containerPageLeft">
-                                        第<em>{this1.state.couponProduce.pagination.pageNo}</em>页，共<em>{this1.state.couponProduce.pagination.pageSize}</em>页
+                                        第<em>{this1.state.couponProduce.pagination.pageNo}</em>页，共<em>{this1.state.couponProduce.pagination.totalPage}</em>页
                                     </div>
                                     <div className="containerPageStart">首页</div>
                                     <div className="containerPageEnd">末页</div>
@@ -398,7 +401,7 @@ const Table1 = React.createClass({
                                 </div>
                                 <div className="containerPage">
                                     <div className="containerPageLeft">
-                                        第<em>{this1.state.couponProduce.pagination.pageNo}</em>页，共<em>{this1.state.couponProduce.pagination.pageSize}</em>页
+                                        第<em>{this1.state.couponProduce.pagination.pageNo}</em>页，共<em>{this1.state.couponProduce.pagination.totalPage}</em>页
                                     </div>
                                     <div className="containerPageStart">首页</div>
                                     <div className="containerPageEnd">末页</div>
@@ -426,7 +429,7 @@ const Table1 = React.createClass({
                                 </div>
                                 <div className="containerPage">
                                     <div className="containerPageLeft">
-                                        第<em>{this1.state.couponProduce.pagination.pageNo}</em>页，共<em>{this1.state.couponProduce.pagination.pageSize}</em>页
+                                        第<em>{this1.state.couponProduce.pagination.pageNo}</em>页，共<em>{this1.state.couponProduce.pagination.totalPage}</em>页
                                     </div>
                                     <div className="containerPageStart">首页</div>
                                     <div className="containerPageEnd">末页</div>
@@ -456,7 +459,7 @@ const Table1 = React.createClass({
                                 </div>
                                 <div className="containerPage">
                                     <div className="containerPageLeft">
-                                        第<em>{this1.state.couponPresentProduce.pagination.pageNo}</em>页，共<em>{this1.state.couponPresentProduce.pagination.pageSize}</em>页
+                                        第<em>{this1.state.couponPresentProduce.pagination.pageNo}</em>页，共<em>{this1.state.couponPresentProduce.pagination.totalPage}</em>页
                                     </div>
                                     <div className="containerPageStart">首页</div>
                                     <div className="containerPageEnd">末页</div>
@@ -846,7 +849,7 @@ const Table2 = React.createClass({
                                 </div>
                                 <div className="containerPage">
                                     <div className="containerPageLeft">
-                                        第<em>{this1.state.couponProduce.pagination.pageNo}</em>页，共<em>{this1.state.couponProduce.pagination.pageSize}</em>页
+                                        第<em>{this1.state.couponProduce.pagination.pageNo}</em>页，共<em>{this1.state.couponProduce.pagination.totalPage}</em>页
                                     </div>
                                     <div className="containerPageStart">首页</div>
                                     <div className="containerPageEnd">末页</div>
@@ -878,7 +881,7 @@ const Table2 = React.createClass({
                                 </div>
                                 <div className="containerPage">
                                     <div className="containerPageLeft">
-                                        第<em>{this1.state.couponProduce.pagination.pageNo}</em>页，共<em>{this1.state.couponProduce.pagination.pageSize}</em>页
+                                        第<em>{this1.state.couponProduce.pagination.pageNo}</em>页，共<em>{this1.state.couponProduce.pagination.totalPage}</em>页
                                     </div>
                                     <div className="containerPageStart">首页</div>
                                     <div className="containerPageEnd">末页</div>
@@ -906,7 +909,7 @@ const Table2 = React.createClass({
                                 </div>
                                 <div className="containerPage">
                                     <div className="containerPageLeft">
-                                        第<em>{this1.state.couponProduce.pagination.pageNo}</em>页，共<em>{this1.state.couponProduce.pagination.pageSize}</em>页
+                                        第<em>{this1.state.couponProduce.pagination.pageNo}</em>页，共<em>{this1.state.couponProduce.pagination.totalPage}</em>页
                                     </div>
                                     <div className="containerPageStart">首页</div>
                                     <div className="containerPageEnd">末页</div>
@@ -936,7 +939,7 @@ const Table2 = React.createClass({
                                 </div>
                                 <div className="containerPage">
                                     <div className="containerPageLeft">
-                                        第<em>{this1.state.couponPresentProduce.pagination.pageNo}</em>页，共<em>{this1.state.couponPresentProduce.pagination.pageSize}</em>页
+                                        第<em>{this1.state.couponPresentProduce.pagination.pageNo}</em>页，共<em>{this1.state.couponPresentProduce.pagination.totalPage}</em>页
                                     </div>
                                     <div className="containerPageStart">首页</div>
                                     <div className="containerPageEnd">末页</div>
@@ -978,7 +981,6 @@ const Table3 = React.createClass({
             type:'get',
             success: function (data) {
                 if(data.code == 10000){
-                    console.log(data.data.pageData)
                     this1.setState({
                         couponProduce:data.data.pageData
                     })
@@ -1060,7 +1062,7 @@ const Table3 = React.createClass({
         var noUserItem = function(item,index){
             return  <div className="tableContentItem" key={index}>
                 <div className="tableTitleTd1 tableTitleTd">
-                    {item.productName}
+                    <span>{item.productName}</span>
                     <em>
                         {
                             productName(item.isDelete,item.status)
@@ -1084,20 +1086,55 @@ const Table3 = React.createClass({
             </div>
         };
         var alreadyUserItem = function (item, index) {
-            return <div className="tableContentItem" key={index}>
-                <div className="tableTitleTd1 tableTitleTd">{item.beanCount/100}</div>
-                <div className="tableTitleTd2 tableTitleTd">{item.investMultip}</div>
-                <div className="tableTitleTd3 tableTitleTd">{item.couponTypeGiven}</div>
-                <div className="tableTitleTd4 tableTitleTd">{item.investPeriod}</div>
-                <div className="tableTitleTd5 tableTitleTd">{item.remark}</div>
+            return  <div className="tableContentItem" key={index}>
+                <div className="tableTitleTd1 tableTitleTd">
+                    <span>{item.productName}</span>
+                    <em>
+                        {
+                            productName(item.isDelete,item.status)
+                        }
+                    </em>
+                </div>
+                <div className="tableTitleTd2 tableTitleTd">{item.productNumber}</div>
+                <div className="tableTitleTd3 tableTitleTd">
+                    {
+                        item.pointsPrice != null && item.pointsPrice != '' ?
+                            <div>{item.rmbPrice}</div>:<div>{item.rmbPrice}+<em>{item.pointsPrice}工分</em></div>
+                    }
+                </div>
+                <div className="tableTitleTd4 tableTitleTd">{item.endTime}</div>
+                <div className="tableTitleTd5 tableTitleTd">
+                    {
+                        source(item.source)
+                    }
+                </div>
+                <div className="tableTitleTd6 tableTitleTd">{item.remark}</div>
             </div>
         };
         var alreadyOverdue = function (item,index) {
-            return <div className="tableContentItem" key={index}>
-                <div className="tableTitleTd1 tableTitleTd">{item.beanCount/100}</div>
-                <div className="tableTitleTd2 tableTitleTd">{item.investMultip}</div>
-                <div className="tableTitleTd3 tableTitleTd">{item.couponTypeGiven}</div>
-                <div className="tableTitleTd4 tableTitleTd">{item.investPeriod}</div>
+            return  <div className="tableContentItem" key={index}>
+                <div className="tableTitleTd1 tableTitleTd">
+                    <span>{item.productName}</span>
+                    <em>
+                        {
+                            productName(item.isDelete,item.status)
+                        }
+                    </em>
+                </div>
+                <div className="tableTitleTd2 tableTitleTd">{item.productNumber}</div>
+                <div className="tableTitleTd3 tableTitleTd">
+                    {
+                        item.pointsPrice != null && item.pointsPrice != '' ?
+                            <div>{item.rmbPrice}</div>:<div>{item.rmbPrice}+<em>{item.pointsPrice}工分</em></div>
+                    }
+                </div>
+                <div className="tableTitleTd4 tableTitleTd">{item.endTime}</div>
+                <div className="tableTitleTd5 tableTitleTd">
+                    {
+                        source(item.source)
+                    }
+                </div>
+                <div className="tableTitleTd6 tableTitleTd">{item.remark}</div>
             </div>
         };
         var tableEml = function () {
@@ -1112,7 +1149,7 @@ const Table3 = React.createClass({
                         <div className="tableTitleTd6 tableTitleTd">备注</div>
                     </div>
                     {
-                        this1.state.couponProduce.result == [] ?
+                        this1.state.couponProduce.result.length == 0 ?
                             <div className="noHaveRecord"><p>没有记录</p></div> :
                             <div>
                                 <div className="tableContent">
@@ -1122,7 +1159,7 @@ const Table3 = React.createClass({
                                 </div>
                                 <div className="containerPage">
                                     <div className="containerPageLeft">
-                                        第<em>1</em>页，共<em>2</em>页
+                                        第<em>{this1.state.couponProduce.pagination.pageNo}</em>页，共<em>{this1.state.couponProduce.pagination.totalPage}</em>页
                                     </div>
                                     <div className="containerPageStart">首页</div>
                                     <div className="containerPageEnd">末页</div>
@@ -1140,11 +1177,24 @@ const Table3 = React.createClass({
                         <div className="tableTitleTd5 tableTitleTd">来源</div>
                         <div className="tableTitleTd6 tableTitleTd">备注</div>
                     </div>
-                    <div className="tableContent">
-                        {
-                            this1.state.couponProduce.result.map(alreadyUserItem)
-                        }
-                    </div>
+                    {
+                        this1.state.couponProduce.result.length == 0 ?
+                            <div className="noHaveRecord"><p>没有记录</p></div> :
+                            <div>
+                                <div className="tableContent">
+                                    {
+                                        this1.state.couponProduce.result.map(alreadyUserItem)
+                                    }
+                                </div>
+                                <div className="containerPage">
+                                    <div className="containerPageLeft">
+                                        第<em>{this1.state.couponProduce.pagination.pageNo}</em>页，共<em>{this1.state.couponProduce.pagination.totalPage}</em>页
+                                    </div>
+                                    <div className="containerPageStart">首页</div>
+                                    <div className="containerPageEnd">末页</div>
+                                </div>
+                            </div>
+                    }
                 </div>
             }else if(this1.props.listIndex == 2){
                 return <div className="containerCenterTable containerCenterTableExchange containerCenterTableExchange2">
@@ -1156,11 +1206,24 @@ const Table3 = React.createClass({
                         <div className="tableTitleTd5 tableTitleTd">来源</div>
                         <div className="tableTitleTd6 tableTitleTd">备注</div>
                     </div>
-                    <div className="tableContent">
-                        {
-                            this1.state.couponProduce.result.map(alreadyOverdue)
-                        }
-                    </div>
+                    {
+                        this1.state.couponProduce.result.length == 0 ?
+                            <div className="noHaveRecord"><p>没有记录</p></div> :
+                            <div>
+                                <div className="tableContent">
+                                    {
+                                        this1.state.couponProduce.result.map(alreadyOverdue)
+                                    }
+                                </div>
+                                <div className="containerPage">
+                                    <div className="containerPageLeft">
+                                        第<em>{this1.state.couponProduce.pagination.pageNo}</em>页，共<em>{this1.state.couponProduce.pagination.totalPage}</em>页
+                                    </div>
+                                    <div className="containerPageStart">首页</div>
+                                    <div className="containerPageEnd">末页</div>
+                                </div>
+                            </div>
+                    }
                 </div>
             }
         };
