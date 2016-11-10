@@ -25,6 +25,41 @@ body, html {
   width: 100%;
 }
 
+.guest-or-login {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 99;
+
+  .panel {
+    width: 521px;
+    height: 469px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -260px;
+    margin-left: -235px;
+    background: transparent url(../images/guest-or-login.png) no-repeat center;
+  }
+
+  .btn-guest, .btn-login {
+    display: block;
+    width: 200px;
+    height: 80px;
+    position: absolute;
+    bottom: 70px;
+  }
+  .btn-guest {
+    left: 40px;
+  }
+  .btn-login {
+    right: 40px;
+  }
+}
+
 .start-page {
   position: absolute;
   top: 0;
