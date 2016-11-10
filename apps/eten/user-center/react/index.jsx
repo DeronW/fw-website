@@ -54,7 +54,7 @@ const CenCont = React.createClass({
                             <a href="javascript:;" id="click_qiandao2">
                                 <img src="./images/img_qiandao.png" width="80" height="80"/>
                             <span className="tip_info">
-                                签到奖励2工分；<br/>2、连续签到7天，可额外再奖励10工分；<br/><strong className="red2">3、投资更有机会领红包哦！</strong><span className="san"></span>
+                                1、每日签到奖励2工分；<br/>2、连续签到7天，可额外再奖励10工分；<br/><strong className="red2">3、投资更有机会领红包哦！</strong><span className="san"></span>
                             </span>
                             </a>
                             <p className="q_text">连续签到有惊喜</p>
@@ -62,9 +62,9 @@ const CenCont = React.createClass({
                         </div>
                     </div>
                     <div className="per-yue-box rel">
-                        <div><p></p><span></span><em></em></div>
-                        <div></div>
-                        <div></div>
+                        <div className="block1"><p>账户余额(元)</p><span>0.00</span><em></em></div>
+                        <div className="block2"><p>账户资金(元)</p><span>0.00</span><em></em></div>
+                        <div className="block2"><p>冻结资金(元)</p><span>0.00</span></div>
                         <a></a>
                         <a></a>
                         <a></a>
