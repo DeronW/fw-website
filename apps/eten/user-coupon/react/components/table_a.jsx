@@ -1122,7 +1122,7 @@ const Table3 = React.createClass({
                                 </div>
                                 <div className="containerPage">
                                     <div className="containerPageLeft">
-                                        第<em>{this1.state.couponProduce.pagination.pageNo}</em>页，共<em>{this1.state.couponPresentProduce.pagination.pageSize}</em>页
+                                        第<em>1</em>页，共<em>2</em>页
                                     </div>
                                     <div className="containerPageStart">首页</div>
                                     <div className="containerPageEnd">末页</div>
