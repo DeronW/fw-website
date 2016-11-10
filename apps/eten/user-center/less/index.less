@@ -71,7 +71,7 @@
           font-family: arial;
           font-size: 24px;
         }
-        .tip_fanli {
+        .tip_income {
           z-index: 99;
           position: absolute;
           width: 21px;
@@ -81,7 +81,10 @@
           cursor: pointer;
           left: 130px;
           top: 47px;
-          .fanli_info {
+          &:hover .income_info {
+            display:block;
+          }
+          .income_info {
             position: absolute;
             white-space: nowrap;
             z-index: 10;
@@ -96,6 +99,17 @@
             color: #666;
             margin-top: -6px;
             margin-left: -159px;
+            .san {
+              position: absolute;
+              top: -7px;
+              left: 50%;
+              margin-left: -24px;
+              width: 39px;
+              height: 8px;
+              font-size: 1px;
+              display: inline-block;
+              background: url(../images/bg_blue_arrow.png) no-repeat;
+            }
           }
         }
       }
@@ -114,12 +128,17 @@
         position: absolute;
         top: 19px;
         right: 15px;
+        text-align: center;
+        .q_text{
+          color: #333;
+          line-height: 22px;
+          font-size: 12px;
+        }
         .tip_info{
           position: absolute;
           white-space: nowrap;
           z-index: 10;
-          top: 28px;
-          left: 50%;
+          top: 100%;
           font-size: 12px;
           display: none;
           padding: 5px 15px;
@@ -127,8 +146,41 @@
           line-height: 16px;
           background: #F4F9FF;
           color: #666;
-          margin-top: -6px;
+          margin: 0 auto;
+          left: 50%;
+          margin-left: -156px;
+          margin-top: 4px;
+          text-align: center;
+          .san{
+            position: absolute;
+            top: -7px;
+            left: 50%;
+            margin-left: -24px;
+            width: 39px;
+            height: 8px;
+            font-size: 1px;
+            display: inline-block;
+            background: url(../images/bg_blue_arrow.png) no-repeat;
+          }
+         }
+        img:hover + .tip_info{
+          display: block;
         }
+      }
+    }
+    .per-yue-box{
+      div{
+        vertical-align: top;
+      }
+      .block1{
+        position: relative;
+        width: 192px;
+        padding: 34px 0 0 20px;
+      }
+      .block2{
+        position: relative;
+        padding: 34px 0 0 0;
+        margin-right: 20px;
       }
     }
   }

@@ -25,13 +25,13 @@
                     data: "",
                     success: function(data){//头像
                         if(data.data.orderUser.headurl!= null && data.data.orderUser.headurl!= ''){
-                            $('.head-kuang').removeClass('moren').css("background","url("+data.data.orderUser.headurl+") no-repeat");
+                            $('.head-kuang').find('div').removeClass('moren').css("background","url("+data.data.orderUser.headurl+") no-repeat");
                         }
                         if((data.data.orderUser.headurl== null || data.data.orderUser.headurl== '')&&( data.data.orderUser.sex==1)){
-                            $('.head-kuang').removeClass('moren').addClass('man')
+                            $('.head-kuang').find('div').removeClass('moren').addClass('man')
                         }
                         if((data.data.orderUser.headurl== null || data.data.orderUser.headurl== '')&&(data.data.orderUser.sex==0)){
-                            $('.head-kuang').removeClass('moren').addClass('woman')
+                            $('.head-kuang').find('div').removeClass('moren').addClass('woman')
                         }
 
                         if(data.data.open_name!=null && data.data.open_name!=''){//名字
