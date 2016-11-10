@@ -4,16 +4,32 @@ const Table1 = React.createClass({
     getInitialState: function () {
       return({
           isShow:false,
+          isListShow:false,
           transNum:2,
           code:4,
-          couponProduce:[],
-          couponPresentProduce:[]
+          status:1,
+          couponProduce:{
+              result:[]
+          },
+          couponPresentProduce:{
+              result:[]
+          },
+          friendsList:{
+              result:[],
+              pagination:{}
+          }
       })
     },
     handleShow: function () {
       this.setState({
           isShow:!this.state.isShow
       })
+    },
+    handleListShow: function () {
+        this.setState({
+            isListShow:!this.state.isListShow
+        });
+        this.ajaxFriendsList();
     },
     handleTransformSuccess: function () {
       this.setState({
@@ -25,29 +41,102 @@ const Table1 = React.createClass({
             transNum:2
         })
     },
+    handleStatus: function (status) {
+      this.setState({
+          status:status
+      })
+    },
     componentDidMount: function () {
         var this1 = this;
         $.ajax({
-            url:'./coupon.json?limit=5&couponType=-1&status=1&page=1',
+            url:API_PATH+'api/coupon/v1/dataList.json',
+            data:{
+                page:1,
+                limit:8,
+                status: 2,
+                couponType:1
+            },
             type:'get',
             success: function (data) {
                 if(data.code == 10000){
                     this1.setState({
-                        couponProduce:data.data.pageData.result
+                        couponProduce:data.data.pageData
                     })
                 }
             }
         })
     },
-    ajaxCouponList: function () {
+    componentWillReceiveProps: function(nextProps){
+        this.ajaxCouponInterest(nextProps.listIndex)
+    },
+    ajaxCouponInterest: function (index) {
+        var this1 = this;
+        var n = 2;
+        if(index == 0) {
+            n = 1;
+        } else if(index == 1) {
+            n = 1;
+        } else if(index == 2) {
+            n = 3;
+        } else if(index == 3){
+            console.log("SDf")
+            this1.ajaxPresentList()
+        }
+        $.ajax({
+            url:API_PATH+'api/coupon/v1/dataList.json',
+            data:{
+                page:1,
+                limit:8,
+                status: n,
+                couponType:1
+            },
+            type:'post',
+            success: function (data) {
+                if(data.code == 10000){
+                    this1.setState({
+                        couponProduce:data.data.pageData
+                    })
+                }
+            }
+        })
+    },
+    ajaxPresentList: function () {
         var this1 = this;
         $.ajax({
-            url:'./coupon1.json?limit=5&couponType=-1&status=1&page=1',
+            url:API_PATH+'api/coupon/v1/dataListByTransfer.json',
+            data:{
+                page:1,
+                limit:8,
+                status: 2,
+                couponType:1
+            },
+            type:'post',
+            success: function (data) {
+                if(data.code == 10000){
+                    console.log(data.data.pageData.result[0].couponTransferInfo.newUserId)
+                    this1.setState({
+                        couponPresentProduce:data.data.pageData
+                    })
+                }
+            }
+        })
+    },
+    ajaxFriendsList: function () {
+        var this1 = this;
+        $.ajax({
+            url:API_PATH+'api/parttimeFinancialer/v1/searchFriends.json',
+            data:{
+                page:1,
+                rows:10
+            },
             type:'get',
             success: function (data) {
                 this1.setState({
-                    couponPresentProduce:data.data.pageData.result
+                    friendsList:data.data.pageData
                 })
+            },
+            fail: function (error) {
+                alert(error)
             }
         })
     },
@@ -55,13 +144,64 @@ const Table1 = React.createClass({
         return new Date(parseInt(ns)).toLocaleString().substr(0,10);
     },
     getLocalTimes: function (ns) {
-        return new Date(parseInt(ns)).toLocaleString().substr(0,24);
+        return new Date(parseInt(ns)).toLocaleString().substr(0,10) + new Date(parseInt(ns)).toLocaleString().substr(12,24);
     },
     render: function () {
+
         var this1 = this;
         var showStyle = {
-            display:this.state.isShow ? "block" : "none"
+            display:this1.state.isShow ? "block" : "none"
         };
+        var listShowStyle = {
+            display:this1.state.isListShow ? "block" : "none"
+        };
+        var popList = function () {
+            var friend = function (item,index) {
+                return <li key={index}>
+                    <div className="centerCon1 centerCon">
+                        <input type="radio" name="single"/>
+                    </div>
+                    <div className="centerCon2 centerCon">{item.loginName}</div>
+                    <div className="centerCon3 centerCon">{item.realName}</div>
+                    <div className="centerCon4 centerCon">{item.mobile}</div>
+                    <div className="centerCon5 centerCon">{item.createTime}</div>
+                </li>
+            };
+            return  <div className="listPopBg" style={listShowStyle}>
+                <div className="listPop">
+                    <div className="listTop">
+                        <div className="topLeft">请选择好友</div>
+                        <div className="topClose" onClick={this1.handleListShow}>关闭</div>
+                    </div>
+                    <div className="listCenter">
+                        <div className="centerTitle">
+                            <div className="centerCon1 centerCon">选择</div>
+                            <div className="centerCon2 centerCon">好友登录名</div>
+                            <div className="centerCon3 centerCon">好友姓名</div>
+                            <div className="centerCon4 centerCon">好友手机号</div>
+                            <div className="centerCon5 centerCon">好友注册时间</div>
+                        </div>
+                        <ul>
+                            {
+                                this1.state.friendsList.result.map(friend)
+                            }
+                        </ul>
+                        <div className="centerPage">
+                            <div className="pageCurrent">
+                                第<span>{this1.state.friendsList.pagination.pageNo}</span>页,共<p>{this1.state.friendsList.pagination.totalPage}</p>页
+                            </div>
+                            <div className="pageHome">首页</div>
+                            <div className="pageEnd">尾页</div>
+                        </div>
+                    </div>
+                    <div className="listFooter">
+                        <div className="sendBtn footerBtn">赠送</div>
+                        <div className="cancelBtn footerBtn" onClick={this1.handleListShow}>取消</div>
+                    </div>
+                </div>
+            </div>
+        };
+
         var totalOnePop = function () {
             return <div className="totalPop" style={showStyle}>
                 <div className="popContent">
@@ -127,58 +267,267 @@ const Table1 = React.createClass({
                 return totalPopFail()
             }
         };
+        var noUserItem = function(item,index){
+            return  <div className="tableContentItem" key={index}>
+                <div className="tableTitleTd1 tableTitleTd">{item.couponInfo.beanCount/100}</div>
+                <div className="tableTitleTd2 tableTitleTd">{item.couponInfo.investMultip}</div>
+                <div className="tableTitleTd3 tableTitleTd">
+                    {
+                        item.couponInfo.inverstPeriod == 0 ? <div>全场通用</div> : <div> ≥{item.couponInfo.inverstPeriod}</div>
+                    }
+                </div>
+                <div className="tableTitleTd4 tableTitleTd">
+                    {
+                        this1.getLocalTime(item.couponInfo.issueTime)
+                    }至
+                    {
+                        this1.getLocalTime(item.couponInfo.overdueTime)
+                    }
+                 </div>
+                <div className="tableTitleTd5 tableTitleTd">{item.couponInfo.remark}</div>
+                {
+                    !item.couponInfo.transferNumber >= 1 && !item.couponInfo.couponTypeGive  ? <div className="tableTitleTd6 tableTitleTd" onClick={this1.handleListShow}>赠送</div> : null
+                }
+            </div>
+        };
+        var alreadyUserItem = function (item, index) {
+            return <div className="tableContentItem" key={index}>
+                <div className="tableTitleTd1 tableTitleTd">{item.couponInfo.beanCount/100}</div>
+                <div className="tableTitleTd2 tableTitleTd">{item.couponInfo.investMultip}</div>
+                <div className="tableTitleTd3 tableTitleTd">
+                    {
+                        item.couponInfo.inverstPeriod == 0 ? <div>全场通用</div> : <div> ≥{item.couponInfo.inverstPeriod}</div>
+                    }
+                </div>
+                <div className="tableTitleTd4 tableTitleTd">
+                    {
+                        this1.getLocalTimes(item.usedTime)
+                    }
+                </div>
+                <div className="tableTitleTd5 tableTitleTd">{item.couponInfo.remark}</div>
+            </div>
+        };
+        var alreadyOverdue = function (item,index) {
+            return <div className="tableContentItem" key={index}>
+                <div className="tableTitleTd1 tableTitleTd">{item.couponInfo.beanCount/100}</div>
+                <div className="tableTitleTd2 tableTitleTd">{item.couponInfo.investMultip}</div>
+                <div className="tableTitleTd3 tableTitleTd">
+                    {
+                        item.couponInfo.inverstPeriod == 0 ? <div>全场通用</div> : <div> ≥{item.couponInfo.inverstPeriod}</div>
+                    }
+                </div>
+                <div className="tableTitleTd4 tableTitleTd">
+                    {
+                        this1.getLocalTime(item.couponInfo.overdueTime)
+                    }
+                </div>
+                <div className="tableTitleTd5 tableTitleTd">{item.couponInfo.remark}</div>
+            </div>
+        };
+        var alreadyPresent = function (item,index) {
+            return <div className="tableContentItem" key={index}>
+                <div className="tableTitleTd1 tableTitleTd">{item.couponTransferInfo.beanCount/100}</div>
+                <div className="tableTitleTd2 tableTitleTd">{item.couponTransferInfo.investMultip}</div>
+                <div className="tableTitleTd3 tableTitleTd">≥{item.couponTransferInfo.inverstPeriod}</div>
+                <div className="tableTitleTd4 tableTitleTd">
+                    {
+                        this1.getLocalTime(item.couponTransferInfo.issueTime)
+                    }至
+                    {
+                        this1.getLocalTime(item.couponTransferInfo.overdueTime)
+                    }
+                </div>
+                <div className="tableTitleTd5 tableTitleTd">{this1.getLocalTime(item.couponTransferInfo.givenTime)}</div>
+                <div className="tableTitleTd6 tableTitleTd">{item.transferName}</div>
+                <div className="tableTitleTd7 tableTitleTd">{item.couponTransferInfo.remark}</div>
+            </div>
+        };
+        var tableEml = function () {
+            if(this1.props.listIndex == 0){
+                console.log("12")
+                return  <div className="containerCenterTable">
+                    <div className="tableTitle">
+                        <div className="tableTitleTd1 tableTitleTd">面值(元)</div>
+                        <div className="tableTitleTd2 tableTitleTd">所需投资现金(元)</div>
+                        <div className="tableTitleTd3 tableTitleTd">可投标期限(元)</div>
+                        <div className="tableTitleTd4 tableTitleTd">有效期</div>
+                        <div className="tableTitleTd5 tableTitleTd">备注</div>
+                        <div className="tableTitleTd6 tableTitleTd">操作</div>
+                    </div>
+                    <div className="tableContent">
+                        {
+                            this1.state.couponProduce.result.map(noUserItem)
+                        }
+                    </div>
+                    {
+                        popList()
+                    }
+                </div>
+            }else if(this1.props.listIndex == 1){
+                return <div className="containerCenterTable containerCenterTable1">
+                    <div className="tableTitle">
+                        <div className="tableTitleTd1 tableTitleTd">面值(元)</div>
+                        <div className="tableTitleTd2 tableTitleTd">最小投资金额(元)</div>
+                        <div className="tableTitleTd3 tableTitleTd">可投标期限(元)</div>
+                        <div className="tableTitleTd4 tableTitleTd">使用时间</div>
+                        <div className="tableTitleTd5 tableTitleTd">备注</div>
+                    </div>
+                    <div className="tableContent">
+                        {
+                            this1.state.couponProduce.result.map(alreadyUserItem)
+                        }
+                    </div>
+                </div>
+            }else if(this1.props.listIndex == 2){
+                return <div className="containerCenterTable containerCenterTable1">
+                    <div className="tableTitle">
+                        <div className="tableTitleTd1 tableTitleTd">面值(元)</div>
+                        <div className="tableTitleTd2 tableTitleTd">最小投资金额(元)</div>
+                        <div className="tableTitleTd3 tableTitleTd">可投标期限(元)</div>
+                        <div className="tableTitleTd4 tableTitleTd">过期时间</div>
+                        <div className="tableTitleTd5 tableTitleTd">备注</div>
+                    </div>
+                    <div className="tableContent">
+                        {
+                            this1.state.couponProduce.result.map(alreadyOverdue)
+                        }
+                    </div>
+                </div>
+            }else if(this1.props.listIndex == 3){
+                return <div className="containerCenterTable containerCenterTable2">
+                    <div className="tableTitle">
+                        <div className="tableTitleTd1 tableTitleTd">面值(元)</div>
+                        <div className="tableTitleTd2 tableTitleTd">最小投资金额(元)</div>
+                        <div className="tableTitleTd3 tableTitleTd">可投标期限(元)</div>
+                        <div className="tableTitleTd4 tableTitleTd">有效期</div>
+                        <div className="tableTitleTd5 tableTitleTd">赠送日期</div>
+                        <div className="tableTitleTd6 tableTitleTd">赠送人</div>
+                        <div className="tableTitleTd7 tableTitleTd">备注</div>
+                    </div>
+                    <div className="tableContent">
+                        {
+                            this1.state.couponPresentProduce.result.map(alreadyPresent)
+                        }
+                    </div>
+                </div>
+            }
+        };
+
+        return(
+            <div>
+                {
+                    this1.state.couponPresentProduce == undefined  || this1.state.couponProduce == undefined ?
+                        <div className="noHaveRecord"><p>没有记录</p></div> :
+                        <div>
+                            {
+                                tableEml()
+                            }
+                            <div className="containerPage">
+                            <div className="containerPageLeft">
+                            第<em>1</em>页，共<em>1</em>页
+                            </div>
+                            <div className="containerPageStart">首页</div>
+                            <div className="containerPageEnd">末页</div>
+                            </div>
+                        </div>
+                }
+
+            </div>
+        )
+    }
+});
+
+const Table2 = React.createClass({
+    getInitialState: function () {
+        return({
+            isShow:false,
+            transNum:2,
+            code:4,
+            couponType:1,
+            couponProduce:[],
+            couponPresentProduce:[]
+        })
+    },
+    handleShow: function () {
+        this.setState({
+            isShow:!this.state.isShow
+        })
+    },
+    handleTransformSuccess: function () {
+        this.setState({
+            transNum:this.state.code
+        })
+    },
+    handleTransformFail: function () {
+        this.setState({
+            transNum:2
+        })
+    },
+    componentDidMount: function () {
+        var this1 = this;
+        $.ajax({
+            url:'http://www.9888.cn/api/coupon/v1/dataListByTransfer.json?',
+            type:'get',
+            success: function (data) {
+                if(data.code == 10000){
+                    this1.setState({
+                        couponProduce:data.data.pageData.result
+                    })
+                }
+            }
+        })
+    },
+    ajaxCouponInterest: function () {
+        var this1 = this;
+        $.ajax({
+            url:'http://www.9888.cn/api/coupon/v1/dataListByTransfer.json?',
+            type:'get',
+            success: function (data) {
+                if(data.code == 10000){
+                    this1.setState({
+                        couponProduce:data.data.pageData.result
+                    })
+                }
+            }
+        })
+    },
+    ajaxCouponList: function () {
+        var this1 = this;
+        $.ajax({
+            url:'./coupon1.json?limit=5&couponType=-1&status=1&page=1',
+            type:'get',
+            success: function (data) {
+                this1.setState({
+                    couponPresentProduce:data.data.pageData.result
+                })
+            }
+        })
+    },
+    getLocalTime: function (ns) {
+        return new Date(parseInt(ns)).toLocaleString().substr(0,10);
+    },
+    getLocalTimes: function (ns) {
+        return new Date(parseInt(ns)).toLocaleString().substr(0,24);
+    },
+    render: function () {
+        var this1 = this;
         var tableData = [
             {
-                "couponInfo": {
-                    "id": 63812412,
-                    "issueType": "TYPE_ACTIVITY",
-                    "userId": 63,
-                    "issueTime": 1476429489000,
-                    "beanCount": 0,
-                    "beanUsed": 0,
-                    "beanUnused": 0,
-                    "beanOverdue": 0,
-                    "overdueTime": 1476892800000,
-                    "status": "STATUS_EXPIRED",
-                    "remark": "庆金融工场资金存管上线",
-                    "investMultip": 100,
-                    "businessId": null,
-                    "reportRemark": "庆金融工场资金存管上线",
-                    "hdType": null,
-                    "inverstPeriod": 90,
-                    "businessRemark": null,
-                    "couponType": "TYPE_INTEREST",
-                    "prdOrderId": null,
-                    "backInterestRate": 1.2,
-                    "couponTypeGiven": "TYPE_GIVEN_ABLE",
-                    "transferNumber": null
-                }
+                beanCount:5000,
+                couponTypeGiven:"全场通用",
+                investMultip:"5000",
+                investPeriod:"2015-07-08 至  2015-08-07",
+                remark:"单投1万元送60元 返现券:活动赠送",
+                transferNumber:2,
+
             },
             {
-                "couponInfo": {
-                    "id": 63812412,
-                    "issueType": "TYPE_ACTIVITY",
-                    "userId": 63,
-                    "issueTime": 1476429489000,
-                    "beanCount": 0,
-                    "beanUsed": 0,
-                    "beanUnused": 0,
-                    "beanOverdue": 0,
-                    "overdueTime": 1476892800000,
-                    "status": "STATUS_EXPIRED",
-                    "remark": "庆金融工场资金存管上线",
-                    "investMultip": 100,
-                    "businessId": null,
-                    "reportRemark": "庆金融工场资金存管上线",
-                    "hdType": null,
-                    "inverstPeriod": 90,
-                    "businessRemark": null,
-                    "couponType": "TYPE_INTEREST",
-                    "prdOrderId": null,
-                    "backInterestRate": 1.2,
-                    "couponTypeGiven": "TYPE_GIVEN_ABLE",
-                    "transferNumber": null
-                }
+                beanCount:5000,
+                couponTypeGiven:"全场通用",
+                investMultip:"5000",
+                investPeriod:"2015-07-08 至  2015-08-07",
+                remark:"单投1万元送60元 返现券:活动赠送",
+                transferNumber:0
             }
         ];
         var noUserItem = function(item,index){
@@ -193,7 +542,7 @@ const Table1 = React.createClass({
                     {
                         this1.getLocalTime(item.couponInfo.overdueTime)
                     }
-                 </div>
+                </div>
                 <div className="tableTitleTd5 tableTitleTd">{item.couponInfo.remark}</div>
                 {
                     !item.couponInfo.transferNumber >= 1&&!item.couponInfo.couponTypeGive  ? <div className="tableTitleTd6 tableTitleTd" onClick={this1.handleShow}>赠送</div> : null
@@ -239,7 +588,7 @@ const Table1 = React.createClass({
                         this1.getLocalTime(item.couponInfo.overdueTime)
                     }
                 </div>
-                <div className="tableTitleTd5 tableTitleTd">{this1.getLocalTime(item.couponInfo.issueTime)}</div>
+                <div className="tableTitleTd5 tableTitleTd">{this1.getLocalTime(item.couponInfo.givenTime)}</div>
                 <div className="tableTitleTd6 tableTitleTd">{item.transferName}</div>
                 <div className="tableTitleTd7 tableTitleTd">{item.couponInfo.remark}</div>
             </div>
@@ -248,7 +597,7 @@ const Table1 = React.createClass({
             if(this1.props.listIndex == 0){
                 return  <div className="containerCenterTable">
                     <div className="tableTitle">
-                        <div className="tableTitleTd1 tableTitleTd">面值(元)</div>
+                        <div className="tableTitleTd1 tableTitleTd">返息率</div>
                         <div className="tableTitleTd2 tableTitleTd">所需投资现金(元)</div>
                         <div className="tableTitleTd3 tableTitleTd">可投标期限(元)</div>
                         <div className="tableTitleTd4 tableTitleTd">有效期</div>
@@ -260,14 +609,11 @@ const Table1 = React.createClass({
                             this1.state.couponProduce.map(noUserItem)
                         }
                     </div>
-                    {
-                        popJudge()
-                    }
                 </div>
             }else if(this1.props.listIndex == 1){
                 return <div className="containerCenterTable containerCenterTable1">
                     <div className="tableTitle">
-                        <div className="tableTitleTd1 tableTitleTd">面值(元)</div>
+                        <div className="tableTitleTd1 tableTitleTd">返息率</div>
                         <div className="tableTitleTd2 tableTitleTd">最小投资金额(元)</div>
                         <div className="tableTitleTd3 tableTitleTd">可投标期限(元)</div>
                         <div className="tableTitleTd4 tableTitleTd">使用时间</div>
@@ -282,7 +628,7 @@ const Table1 = React.createClass({
             }else if(this1.props.listIndex == 2){
                 return <div className="containerCenterTable containerCenterTable1">
                     <div className="tableTitle">
-                        <div className="tableTitleTd1 tableTitleTd">面值(元)</div>
+                        <div className="tableTitleTd1 tableTitleTd">返息率</div>
                         <div className="tableTitleTd2 tableTitleTd">最小投资金额(元)</div>
                         <div className="tableTitleTd3 tableTitleTd">可投标期限(元)</div>
                         <div className="tableTitleTd4 tableTitleTd">过期时间</div>
@@ -298,7 +644,7 @@ const Table1 = React.createClass({
                 this1.ajaxCouponList();
                 return <div className="containerCenterTable containerCenterTable2">
                     <div className="tableTitle">
-                        <div className="tableTitleTd1 tableTitleTd">面值(元)</div>
+                        <div className="tableTitleTd1 tableTitleTd">返息率</div>
                         <div className="tableTitleTd2 tableTitleTd">最小投资金额(元)</div>
                         <div className="tableTitleTd3 tableTitleTd">可投标期限(元)</div>
                         <div className="tableTitleTd4 tableTitleTd">有效期</div>
@@ -319,144 +665,13 @@ const Table1 = React.createClass({
                 {
                     tableEml()
                 }
-            </div>
-        )
-    }
-});
-
-const Table2 = React.createClass({
-    render: function () {
-        var this1 = this;
-        var tableData = [
-            {
-                beanCount:5000,
-                couponTypeGiven:"全场通用",
-                investMultip:"5000",
-                investPeriod:"2015-07-08 至  2015-08-07",
-                remark:"单投1万元送60元 返现券:活动赠送",
-                transferNumber:2,
-
-            },
-            {
-                beanCount:5000,
-                couponTypeGiven:"全场通用",
-                investMultip:"5000",
-                investPeriod:"2015-07-08 至  2015-08-07",
-                remark:"单投1万元送60元 返现券:活动赠送",
-                transferNumber:0
-            }
-        ];
-        var noUserItem = function(item,index){
-            return  <div className="tableContentItem" key={index}>
-                <div className="tableTitleTd1 tableTitleTd">{item.beanCount/100}</div>
-                <div className="tableTitleTd2 tableTitleTd">{item.investMultip}</div>
-                <div className="tableTitleTd3 tableTitleTd">{item.couponTypeGiven}</div>
-                <div className="tableTitleTd4 tableTitleTd">{item.investPeriod}</div>
-                <div className="tableTitleTd5 tableTitleTd">{item.remark}</div>
-                {
-                    !item.transferNumber >= 1 ? <div className="tableTitleTd6 tableTitleTd">赠送</div> : null
-                }
-            </div>
-        };
-        var alreadyUserItem = function (item, index) {
-            return <div className="tableContentItem" key={index}>
-                <div className="tableTitleTd1 tableTitleTd">{item.beanCount/100}</div>
-                <div className="tableTitleTd2 tableTitleTd">{item.investMultip}</div>
-                <div className="tableTitleTd3 tableTitleTd">{item.couponTypeGiven}</div>
-                <div className="tableTitleTd4 tableTitleTd">{item.investPeriod}</div>
-                <div className="tableTitleTd5 tableTitleTd">{item.remark}</div>
-            </div>
-        };
-        var alreadyOverdue = function (item,index) {
-            return <div className="tableContentItem" key={index}>
-                <div className="tableTitleTd1 tableTitleTd">{item.beanCount/100}</div>
-                <div className="tableTitleTd2 tableTitleTd">{item.investMultip}</div>
-                <div className="tableTitleTd3 tableTitleTd">{item.couponTypeGiven}</div>
-                <div className="tableTitleTd4 tableTitleTd">{item.investPeriod}</div>
-            </div>
-        };
-        var alreadyPresent = function (item,index) {
-            return <div className="tableContentItem" key={index}>
-                <div className="tableTitleTd1 tableTitleTd">{item.beanCount/100}</div>
-                <div className="tableTitleTd2 tableTitleTd">{item.investMultip}</div>
-                <div className="tableTitleTd3 tableTitleTd">{item.couponTypeGiven}</div>
-                <div className="tableTitleTd4 tableTitleTd">{item.investPeriod}</div>
-                <div className="tableTitleTd5 tableTitleTd">{item.investMultip}</div>
-                <div className="tableTitleTd6 tableTitleTd">{item.couponTypeGiven}</div>
-                <div className="tableTitleTd7 tableTitleTd">{}</div>
-            </div>
-        };
-        var tableEml = function () {
-            if(this1.props.listIndex == 0){
-                return  <div className="containerCenterTable">
-                    <div className="tableTitle">
-                        <div className="tableTitleTd1 tableTitleTd">返息率</div>
-                        <div className="tableTitleTd2 tableTitleTd">所需投资现金(元)</div>
-                        <div className="tableTitleTd3 tableTitleTd">可投标期限(元)</div>
-                        <div className="tableTitleTd4 tableTitleTd">有效期</div>
-                        <div className="tableTitleTd5 tableTitleTd">备注</div>
-                        <div className="tableTitleTd6 tableTitleTd">操作</div>
+                <div className="containerPage">
+                    <div className="containerPageLeft">
+                        第<em>1</em>页，共<em>1</em>页
                     </div>
-                    <div className="tableContent">
-                        {
-                            tableData.map(noUserItem)
-                        }
-                    </div>
+                    <div className="containerPageStart">首页</div>
+                    <div className="containerPageEnd">末页</div>
                 </div>
-            }else if(this1.props.listIndex == 1){
-                return <div className="containerCenterTable containerCenterTable1">
-                    <div className="tableTitle">
-                        <div className="tableTitleTd1 tableTitleTd">返息率</div>
-                        <div className="tableTitleTd2 tableTitleTd">最小投资金额(元)</div>
-                        <div className="tableTitleTd3 tableTitleTd">可投标期限(元)</div>
-                        <div className="tableTitleTd4 tableTitleTd">使用时间</div>
-                        <div className="tableTitleTd5 tableTitleTd">备注</div>
-                    </div>
-                    <div className="tableContent">
-                        {
-                            tableData.map(alreadyUserItem)
-                        }
-                    </div>
-                </div>
-            }else if(this1.props.listIndex == 2){
-                return <div className="containerCenterTable containerCenterTable1">
-                    <div className="tableTitle">
-                        <div className="tableTitleTd1 tableTitleTd">返息率</div>
-                        <div className="tableTitleTd2 tableTitleTd">最小投资金额(元)</div>
-                        <div className="tableTitleTd3 tableTitleTd">可投标期限(元)</div>
-                        <div className="tableTitleTd4 tableTitleTd">过期时间</div>
-                        <div className="tableTitleTd5 tableTitleTd">备注</div>
-                    </div>
-                    <div className="tableContent">
-                        {
-                            tableData.map(alreadyOverdue)
-                        }
-                    </div>
-                </div>
-            }else if(this1.props.listIndex == 3){
-                return <div className="containerCenterTable containerCenterTable2">
-                    <div className="tableTitle">
-                        <div className="tableTitleTd1 tableTitleTd">返息率</div>
-                        <div className="tableTitleTd2 tableTitleTd">最小投资金额(元)</div>
-                        <div className="tableTitleTd3 tableTitleTd">可投标期限(元)</div>
-                        <div className="tableTitleTd4 tableTitleTd">有效期</div>
-                        <div className="tableTitleTd5 tableTitleTd">赠送日期</div>
-                        <div className="tableTitleTd6 tableTitleTd">赠送人</div>
-                        <div className="tableTitleTd7 tableTitleTd">备注</div>
-                    </div>
-                    <div className="tableContent">
-                        {
-                            tableData.map(alreadyPresent)
-                        }
-                    </div>
-                </div>
-            }
-        };
-        return(
-            <div>
-                {
-                    tableEml()
-                }
             </div>
         )
     }
@@ -566,6 +781,13 @@ const Table3 = React.createClass({
                 {
                     tableEml()
                 }
+                <div className="containerPage">
+                    <div className="containerPageLeft">
+                        第<em>1</em>页，共<em>1</em>页
+                    </div>
+                    <div className="containerPageStart">首页</div>
+                    <div className="containerPageEnd">末页</div>
+                </div>
             </div>
         )
     }
