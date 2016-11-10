@@ -69,4 +69,7 @@ const CenCont = React.createClass({
 
     }
 });
-ReactDOM.render(<CenCont/>, document.querySelector(".p2p_right"));
+$(function(){
+    ReactDOM.render(<HeaderStatusBar />, document.getElementById('header-status-bar'));
+    ReactDOM.render(<CenCont/>, document.querySelector(".p2p_right"));
+})

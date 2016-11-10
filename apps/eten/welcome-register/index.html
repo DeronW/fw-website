@@ -1,59 +1,21 @@
 {% extends '../../../lib/templates/eten_base.swig.html' %}
 
-{% block title %}金融工场是由北京凤凰信用管理有限公司（简称：凤凰信用）倾力打造的专注于小贷公司资产交易的P2P平台—上金融工场，圆财富梦想！{% endblock %}
-
-{% block js %}
-<!--<script src="javascripts/index.js"></script>-->
-{% endblock %}
+<div>
+    http://www.9888.cn/activity/new-user-guide/
+</div>
 
 {% block content %}
 <div class="main">
     <div class="top">
-        <div class="banner">
-
-        </div>
-        <form action="">
+        <div class="banner"></div>
+        <div class="form">
             <div class="registerTab">
-                <div class="registerTab1">
-                    绑定手机号
-                </div>
-                <div class="registerTab2">
-                    完成注册
-                </div>
-                <div class="registerTab3">
-
-                </div>
+                <div class="registerTab1"> 绑定手机号</div>
+                <div class="registerTab2"> 完成注册</div>
+                <div class="registerTab3"></div>
             </div>
-            <div class="phoneNumber">
-                <label for="phoneNumber">
-                    手机号
-                    <span class="red">*</span>
-                </label>
-                <input type="text" placeholder="请输入手机号码" id="phoneNumber">
-                <span class="phonetips" id="phonetips" style="display: none">请输入手机号</span>
-            </div>
-            <div class="person">
-                <label for="person">
-                    推荐人
-                </label>
-                <input type="text" placeholder="请填写推荐人工场码" id="person">
-            </div>
-            <div class="test">
-                <label for="test">
-                    网页验证码
-                    <span class="red">*</span>
-                </label>
-                <input type="text" id="test">
-                <img src="http://www.9888.cn/activity/new-user-guide/index.php?op=imgCode" alt=""
-                     class="verificationCode" id="verificationCode">
-                <span class="testtips" id="testtips" style="display: none">请输入验证码</span>
-            </div>
-            <div class="get">
-                <span href="" id="submit" class="submit">
-                    立即领取120元
-                </span>
-            </div>
-        </form>
+            <div id="form"></div>
+        </div>
     </div>
 
     <div class="gift clearfix">
@@ -103,132 +65,7 @@
     </div>
 
     <!--热门投资板块-->
-    <div class="invest">
-        <div class="investMain">
-            <div class="investMainTitle">
-                <h3>热门投资等你来</h3>
-            </div>
-            <div class="investContent clearfix">
-                <div class="investContentItem clearfix">
-                    <div class="investContentItem-1 fl">
-                        <p class="firstLine clearfix">
-                            <a href="#" class="fone">
-                                <img src="images/proPic_12.png" alt="" style="width: 30px;height: 30px;">
-                            </a>
-                            <span>
-                                <a href="#" class="ftwo" id="ftwo"></a>
-                                <span class="fthree">新手共享</span>
-                            </span>
-                        </p>
-                        <p class="secondLine">
-                            <em id="ftwoDay"></em>
-                            <span>100起投</span>
-                            <span>限投1次最高5000元</span>
-                            <span>末投送10元工豆</span>
-                        </p>
-                        <p class="lastLine">
-                            按天一次性还本付息
-                            <img src="images/i_baoz.png" alt="">
-                        </p>
-                    </div>
-                    <div class="investContentItem-2 fl">
-                        <p>
-                            <span class="year">预期年化</span>
-                            <span class="rate">6.2%</span>
-                        </p>
-                    </div>
-                    <div class="investContentItem-3 fl">3</div>
-                    <div class="investContentItem-4 fr">
-                        <p class="up">
-                            <a href="#">投资</a>
-                        </p>
-                        <p class="down">
-                            可投13.57万
-                        </p>
-                    </div>
-                </div>
-
-                <div class="investContentItem clearfix">
-                    <div class="investContentItem-1 fl">
-                        <p class="firstLine clearfix">
-                            <a href="#" class="fone">
-                                <img src="images/proPic_12.png" alt="" style="width: 30px;height: 30px;">
-                            </a>
-                            <span>
-                                <a href="#" class="ftwo">利随享9674</a>
-                                <span class="fthree">新手共享</span>
-                            </span>
-                        </p>
-                        <p class="secondLine">
-                            <em>30天</em>
-                            <span>100起投</span>
-                            <span>限投1次最高5000元</span>
-                            <span>末投送10元工豆</span>
-                        </p>
-                        <p class="lastLine">
-                            按天一次性还本付息
-                            <img src="images/i_baoz.png" alt="">
-                        </p>
-                    </div>
-                    <div class="investContentItem-2 fl">
-                        <p>
-                            <span class="year">预期年化</span>
-                            <span class="rate">6.2%</span>
-                        </p>
-                    </div>
-                    <div class="investContentItem-3 fl">3</div>
-                    <div class="investContentItem-4 fr">
-                        <p class="up">
-                            <a href="#">投资</a>
-                        </p>
-                        <p class="down">
-                            可投13.57万
-                        </p>
-                    </div>
-                </div>
-
-                <div class="investContentItem clearfix">
-                    <div class="investContentItem-1 fl">
-                        <p class="firstLine clearfix">
-                            <a href="#" class="fone">
-                                <img src="images/proPic_12.png" alt="" style="width: 30px;height: 30px;">
-                            </a>
-                            <span>
-                                <a href="#" class="ftwo">利随享9674</a>
-                                <span class="fthree">新手共享</span>
-                            </span>
-                        </p>
-                        <p class="secondLine">
-                            <em>30天</em>
-                            <span>100起投</span>
-                            <span>限投1次最高5000元</span>
-                            <span>末投送10元工豆</span>
-                        </p>
-                        <p class="lastLine">
-                            按天一次性还本付息
-                            <img src="images/i_baoz.png" alt="">
-                        </p>
-                    </div>
-                    <div class="investContentItem-2 fl">
-                        <p>
-                            <span class="year">预期年化</span>
-                            <span class="rate">6.2%</span>
-                        </p>
-                    </div>
-                    <div class="investContentItem-3 fl">3</div>
-                    <div class="investContentItem-4 fr">
-                        <p class="up">
-                            <a href="#">投资</a>
-                        </p>
-                        <p class="down">
-                            可投13.57万
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
+    <div id="invest"></div>
 
     <!--收益模块-->
     <div class="earning">
@@ -267,7 +104,7 @@
     </div>
 
     <!--优势板块-->
-    <div class="advantage clearfix">
+    <div class="advantage">
         <div class="advantageTitle">
             <h3 class="advantageText">金融工场的优势</h3>
         </div>
