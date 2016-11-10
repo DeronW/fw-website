@@ -75,7 +75,7 @@ const Table1 = React.createClass({
         var this1 = this;
         var n = 2;
         if(index == 0) {
-            n = 1;
+            n = 2;
         } else if(index == 1) {
             n = 1;
         } else if(index == 2) {
@@ -157,8 +157,32 @@ const Table1 = React.createClass({
         var listShowStyle = {
             display:this1.state.isListShow ? "block" : "none"
         };
-        var popJudge = function () {
-            
+        var popLoginName = function (sex,loginName,gcm,finalRole) {
+            var sexValue="";
+            if(sex==1){
+                sexValue="先生";
+            }else{
+                sexValue="女士";
+            }
+            if(item.loginName != null && gcm.substring(0,1) == 'A'){
+                if(finalRole==4){
+                    if(loginName.length<=4){
+                        return loginName.substring(0,1)+"**"
+                    }else{
+                        return loginName.substring(0,2)+"**"+loginName.substring(loginName.length-2,loginName.length);
+                    }
+                }else{
+                    return loginName;
+                }
+            }else if(loginName != null){
+                if(loginName.length<=4){
+                    return loginName.substring(0,1)+"**";
+                }else{
+                    return loginName.substring(0,2)+"**"+loginName.substring(loginName.length-2,loginName.length);
+                }
+            }else{
+                return ;
+            }
         };
         var popList = function () {
             var friend = function (item,index) {
