@@ -119,20 +119,22 @@ const Coupon = React.createClass({
         var _this = this;
         if(index == 2){
             _this.ajaxExchangeStatistics()
+        }else{
+            $.ajax({
+                url:API_PATH+'api/coupon/v1/accountCouponStatistics.json',
+                data:{
+                    couponType:m
+                },
+                type:'get',
+                success: function (data) {
+                    console.log(_this.state.couponType)
+                    _this.setState({
+                        staInterestData:data.data.couponAccount[0]
+                    })
+                }
+            })
         }
-        $.ajax({
-            url:API_PATH+'api/coupon/v1/accountCouponStatistics.json',
-            data:{
-                couponType:m
-            },
-            type:'get',
-            success: function (data) {
-                console.log(_this.state.couponType)
-                _this.setState({
-                    staInterestData:data.data.couponAccount[0]
-                })
-            }
-        })
+
     },
     ajaxExchangeStatistics:function(){
         var _this = this;
