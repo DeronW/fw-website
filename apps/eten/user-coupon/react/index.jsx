@@ -7,19 +7,19 @@ const ContainerTitle = React.createClass({
            <div className="containerCenterTitle">
                <div className="centerTitleLeft centerTitleCom">
                    {
-                   this.props.leftMoney ? <div>可用<em>{this.props.leftName}</em> <em>{this.props.leftNum}</em> 张，共 <em>{this.props.leftMoney}</em> 元</div>:
+                   this.props.leftMoney>=0 ? <div>可用<em>{this.props.leftName}</em> <em>{this.props.leftNum}</em> 张，共 <em>{this.props.leftMoney}</em> 元</div>:
                                             <div>可用<em>{this.props.leftName}</em> <em>{this.props.leftNum}</em> 张</div>
                    }
                </div>
                <div className="centerTitleCenter centerTitleCom">
                    {
-                       this.props.centerMoney ? <div>即将过期 <em>{this.props.centerNum}</em> 张（<em>{this.props.centerMoney}</em> 元）</div> :
+                       this.props.centerMoney>=0  ? <div>即将过期 <em>{this.props.centerNum}</em> 张（<em>{this.props.centerMoney}</em> 元）</div> :
                                                  <div>即将过期 <em>{this.props.centerNum}</em> 张</div>
                    }
                </div>
                <div className="centerTitleRight centerTitleCom">
                    {
-                       this.props.rightMoney ?  <div>已使用 <em>{this.props.rightNum}</em> 张，共 <em>{this.props.rightMoney}</em> 元</div>:
+                       this.props.rightMoney>=0  ?  <div>已使用 <em>{this.props.rightNum}</em> 张，共 <em>{this.props.rightMoney}</em> 元</div>:
                                                 <div>已使用 <em>{this.props.rightNum}</em> 张</div>
                    }
                </div>
@@ -46,56 +46,11 @@ const ContainerList = React.createClass({
    }
 });
 
-//const ContainerListEx = React.createClass({
-//    render: function () {
-//        var name2 = ['未使用','已使用','已过期'];
-//        return(
-//            <div className="containerCenterList">
-//                {
-//                    name2.map((n,index) => {
-//                        return <div key={index} className={this.props.listTab == n ? "centerList" : null}
-//                                    onClick={() => this.props.toggleListHandle(n,index)}>{n}
-//                        </div>
-//                    })
-//                }
-//            </div>
-//        )
-//    }
-//});
-
-const Coupon = React.createClass({
+const CouponFather = React.createClass({
     getInitialState: function () {
-      return({
-          tab:'返现券',
-          tabIndex:0,
-          listIndex:0,
-          listTab:"未使用",
-          staData:{}
-      })
-    },
-    componentDidMount: function() {
-        var _this = this;
-        $.ajax({
-            url:'./couponStatistics.json',
-            type:'get',
-            success: function (data) {
-                _this.setState({
-                    staData:data.data.couponAccount
-                })
-            }
-        })
-    },
-    getCouponStatistics: function () {
-        var _this = this;
-        $.ajax({
-            url:'./couponStatistics.json',
-            type:'get',
-            data: _this.state.tabIndex,
-            success: function (data) {
-                _this.setState({
-                    staData:data.data.couponAccount
-                })
-            }
+        return({
+            tab:'返现券',
+            tabIndex:0
         })
     },
     toggleTabHandler: function (tab_name,index) {
@@ -104,7 +59,96 @@ const Coupon = React.createClass({
             tabIndex: index
         });
     },
+    render: function () {
+        var tab_bar = (
+            <div className="containerTop">
+                {['返现券', '返息券', '兑换券'].map((n, index)=> {
+                    return (
+                        <div key={index} className={this.state.tab == n ? "active" : null}
+                             onClick={()=>this.toggleTabHandler(n,index)}>{n}
+                        </div>
+                    )
+                })}
+            </div>
+        );
+        return(
+            <div className="couponContent">
+                <a className="couponTitle">
+                    了解更多优惠券>
+                </a>
+                <div className="couponContainer">
+                    {tab_bar}
+                    <Coupon tabIndex={this.state.tabIndex}/>
+                </div>
+            </div>
+        )
+    }
+});
+
+const Coupon = React.createClass({
+    getInitialState: function () {
+      return({
+          listIndex:0,
+          listTab:"未使用",
+          couponType:1,
+          staMoneyData:[],
+          staInterestData:[],
+          staExchangeData:{}
+      })
+    },
+    componentDidMount: function() {
+        var _this = this;
+        $.ajax({
+            url:API_PATH+'api/coupon/v1/accountCouponStatistics.json',
+            data:{
+                couponType:1
+            },
+            type:'get',
+            success: function (data) {
+                _this.setState({
+                    staMoneyData:data.data.couponAccount[0]
+                })
+            }
+        })
+    },
+    componentWillReceiveProps: function (nextProps) {
+        this.ajaxCouponStatistics(nextProps.tabIndex)
+    },
+    ajaxCouponStatistics: function (index) {
+        var m = index + 1;
+        var _this = this;
+        if(index == 2){
+            _this.ajaxExchangeStatistics()
+        }
+        $.ajax({
+            url:API_PATH+'api/coupon/v1/accountCouponStatistics.json',
+            data:{
+                couponType:m
+            },
+            type:'get',
+            success: function (data) {
+                console.log(_this.state.couponType)
+                _this.setState({
+                    staInterestData:data.data.couponAccount[0]
+                })
+            }
+        })
+    },
+    ajaxExchangeStatistics:function(){
+        var _this = this;
+        $.ajax({
+            url:API_PATH+'api/coupon/v1/accountTickeStatistics.json',
+            type:'get',
+            success: function (data) {
+                console.log(data.data.unUseCount);
+                _this.setState({
+                    staExchangeData:data.data
+                })
+            }
+        })
+    },
     toggleListHandle: function (tabName,index) {
+        console.log(index);
         this.setState({
             listTab:tabName,
             listIndex:index
@@ -124,76 +168,44 @@ const Coupon = React.createClass({
            </div>
        );
        var tabEml = function() {
-           if(_this.state.tabIndex == 0 ) {
+           if(_this.props.tabIndex == 0 ) {
                return  <div className="containerCenter">
-                    <ContainerTitle leftName={"返现券"} leftNum={2} leftMoney={200}
-                                    centerNum={3} centerMoney={260}
-                                    rightNum={26} rightMoney={1198}/>
+                    <ContainerTitle leftName={"返现券"} leftNum={_this.state.staMoneyData.availableNumber} leftMoney={_this.state.staMoneyData.availableAmount}
+                                    centerNum={_this.state.staMoneyData.willExpireNumber} centerMoney={_this.state.staMoneyData.willExpireAmount}
+                                    rightNum={_this.state.staMoneyData.usedNumber} rightMoney={_this.state.staMoneyData.usedAmount}/>
 
                    <ContainerList present={true} listTab={_this.state.listTab} toggleListHandle={_this.toggleListHandle} listIndex={_this.state.listIndex}/>
                    <div className="containerRecord">
-                       <div className="haveCard">
-                           <Table1 listIndex={_this.state.listIndex}/>
-                           <div className="containerPage">
-                               <div className="containerPageLeft">
-                                   第<em>1</em>页，共<em>1</em>页
-                               </div>
-                               <div className="containerPageStart">首页</div>
-                               <div className="containerPageEnd">末页</div>
-                           </div>
-                       </div>
-                       <div className="noHaveRecord">
-                            <div>没有记录</div>
-                       </div>
+                       <Table1 listIndex={_this.state.listIndex} />
                    </div>
                </div>
-           } else if(_this.state.tabIndex == 1 ) {
+           } else if(_this.props.tabIndex == 1 ) {
                return <div className="containerCenter">
-                   <ContainerTitle leftName={"返息券"} leftNum={2}
-                                   centerNum={3}
-                                   rightNum={26} />
+                   <ContainerTitle leftName={"返息券"} leftNum={_this.state.staInterestData.availableNumber}
+                                   centerNum={_this.state.staInterestData.willExpireNumber}
+                                   rightNum={_this.state.staInterestData.usedNumber} />
                    <ContainerList present={true} listTab={_this.state.listTab} toggleListHandle={_this.toggleListHandle} listIndex={_this.state.listIndex}/>
                    <div className="containerRecord">
-                       <Table2 listIndex={_this.state.listIndex}/>
-                       <div className="containerPage">
-                           <div className="containerPageLeft">
-                               第<em>1</em>页，共<em>1</em>页
-                           </div>
-                           <div className="containerPageStart">首页</div>
-                           <div className="containerPageEnd">末页</div>
-                       </div>
+                       <Table2 listIndex={_this.state.listIndex} />
                    </div>
                </div>
-           } else if(_this.state.tabIndex == 2 ) {
+           } else if(_this.props.tabIndex == 2 ) {
                return <div className="containerCenter">
-                   <ContainerTitle leftName={"兑换券"} leftNum={2}
-                                   centerNum={3}
-                                   rightNum={26} />
+                   <ContainerTitle leftName={"兑换券"} leftNum={_this.state.staExchangeData.unUseCount}
+                                   centerNum={_this.state.staExchangeData.overCount}
+                                   rightNum={_this.state.staExchangeData.useCount} />
                    <ContainerList present={false} listTab={_this.state.listTab} toggleListHandle={_this.toggleListHandle} listIndex={_this.state.listIndex}/>
                    <div className="containerRecord">
                        <Table3 listIndex={_this.state.listIndex}/>
-                       <div className="containerPage">
-                           <div className="containerPageLeft">
-                               第<em>1</em>页，共<em>1</em>页
-                           </div>
-                           <div className="containerPageStart">首页</div>
-                           <div className="containerPageEnd">末页</div>
-                       </div>
                    </div>
                </div>
            }
        };
 
        return(
-               <div className="couponContent">
-                   <a className="couponTitle">
-                       了解更多优惠券>
-                   </a>
-                   <div className="couponContainer">
-                       {tab_bar}
-                       {tabEml()}
-                   </div>
-               </div>
+           <div >
+               {tabEml()}
+           </div>
        )
    }
 });
@@ -215,4 +227,4 @@ $(function () {
     })
 })
 ReactDOM.render(<HeaderStatusBar />, document.getElementById('header-status-bar'));
-ReactDOM.render(<Coupon />, document.getElementById('cnt'));
+ReactDOM.render(<CouponFather />, document.getElementById('cnt'));
