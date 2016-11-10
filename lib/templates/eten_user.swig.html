@@ -19,10 +19,10 @@
                 if (arg != null) {
                     $('.head-kuang').find('div').removeClass('moren').css("background", "url(" + arg + ") no-repeat");
                 }
-                if ((arg == null ) && ( orderUser.sex == 1)) {
+                if ((arg == null ) && ( arg.sex == 1)) {
                     $('.head-kuang').find('div').removeClass('moren').addClass('man')
                 }
-                if ((arg == null) && (orderUser.sex == 0)) {
+                if ((arg == null) && (arg.sex == 0)) {
                     $('.head-kuang').find('div').removeClass('moren').addClass('woman')
                 }
             },
