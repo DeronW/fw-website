@@ -71,7 +71,8 @@ const Coupon = React.createClass({
     render: function () {
         let coupon;
         let {staMoneyData, staInterestData, staExchangeData} = this.state;
-
+        var listMoney = ['未使用', '已使用', '已过期', '已赠送'];
+        var listExchange = ['未使用', '已使用', '已过期'];
         if (this.props.tab_name == '返现券') {
             coupon = <div className="containerCenter">
                 {CouponTitleBar('返现券', {
@@ -82,12 +83,11 @@ const Coupon = React.createClass({
                     usedCount: staMoneyData.usedNumber,
                     usedMoney: staMoneyData.usedAmount
                 })}
-
-                <ContainerList present={true} listTab={this.state.listTab}
-                               toggleListHandle={this.toggleListHandle} listIndex={this.state.listIndex}/>
-
+                {
+                    couponListBar(listMoney,this.state.listTab,this.toggleListHandle)
+                }
                 <div className="containerRecord">
-                    <TableMoney tab_index={this.state.listIndex}/>
+                    <TableMoney tab_name={this.state.listTab}/>
                 </div>
             </div>
         } else if (this.props.tab_name == '返息券') {
@@ -98,9 +98,9 @@ const Coupon = React.createClass({
                     expiredCount: staInterestData.willExpireNumber,
                     usedCount: staInterestData.usedNumber
                 })}
-
-                <ContainerList present={true} listTab={this.state.listTab}
-                               toggleListHandle={this.toggleListHandle} listIndex={this.state.listIndex}/>
+                {
+                    couponListBar(listMoney,this.state.listTab,this.toggleListHandle)
+                }
                 <div className="containerRecord">
                     <Table2 listIndex={this.state.listIndex}/>
                 </div>
@@ -113,9 +113,9 @@ const Coupon = React.createClass({
                     expiredCount: staExchangeData.overCount,
                     usedCount: staExchangeData.useCount
                 })}
-
-                <ContainerList present={false} listTab={this.state.listTab}
-                               toggleListHandle={this.toggleListHandle} listIndex={this.state.listIndex}/>
+                {
+                    couponListBar(listExchange,this.state.listTab,this.toggleListHandle)
+                }
                 <div className="containerRecord">
                     <Table3 listIndex={this.state.listIndex}/>
                 </div>
@@ -131,6 +131,7 @@ let CouponTitleBar = function (tab_name, data) {
     if (data.availableMoney >= 0) {
         available = (
             <div>可用
+                <em>{tab_name}</em>
                 <em>{data.availableCount}</em>
                 张，共
                 <em>{data.availableMoney}</em>
@@ -146,23 +147,21 @@ let CouponTitleBar = function (tab_name, data) {
         );
     }
 
-
-    if (data.expiredMoney) {
+    if (data.expiredMoney >= 0) {
         expired = (
             <div>即将过期 <em>{data.expiredCount}</em> 张（<em>{data.expiredMoney}</em> 元）</div>
         );
     } else {
-        expired = <div>已使用 <em>{data.expiredCount}</em> 张</div>;
+        expired = <div>即将过期 <em>{data.expiredCount}</em> 张</div>;
     }
 
-    if (data.usedMoney) {
+    if (data.usedMoney >= 0) {
         used = (
             <div>已使用 <em>{data.usedCount}</em> 张，共 <em>{data.usedMoney}</em> 元</div>
         )
     } else {
         used = <div>已使用 <em>{data.usedCount}</em> 张</div>;
     }
-
 
     return (
         <div className="containerCenterTitle">
@@ -185,4 +184,18 @@ CouponTitleBar.propTypes = {
     expiredMoney: React.PropTypes.String,
     usedCount: React.PropTypes.String,
     usedMoney: React.PropTypes.String
+};
+
+const couponListBar = function (list,listTab,toggleListHandle) {
+    return (
+        <div className="containerCenterList">
+            {
+                list.map((n, index) => {
+                    return <div key={index} className={listTab == n ? "centerList" : null}
+                                onClick={() => toggleListHandle(n, index)}>{n}
+                    </div>
+                })
+            }
+        </div>
+    )
 };
