@@ -1,4 +1,4 @@
-const ReadOnlyTable = React.createClass({
+const Table = React.createClass({
     getInitialState: function () {
         return {
             page: 1,
@@ -31,7 +31,7 @@ const ReadOnlyTable = React.createClass({
 
     },
     render: function () {
-        let th = (t, index) => {
+        let th_cell = (t, index) => {
             return <th key={index}>{t}</th>
         };
 
@@ -68,8 +68,10 @@ const ReadOnlyTable = React.createClass({
         return (
             <div>
                 <table className="table-read-only">
-                    <tr> {this.state.th_rows.map(th)} </tr>
+                    <tbody>
+                    <tr>{this.state.th_rows.map(th_cell)}</tr>
                     {this.state.rows.map(tr)}
+                    </tbody>
                 </table>
                 {empty_records}
                 {pagination}
