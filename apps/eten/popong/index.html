@@ -18,6 +18,19 @@
 
     <link rel="stylesheet" href="stylesheets/all.less.css"/>
 
+    <script>
+        function flightHandler(data) {
+//            data = {
+//                visitors: null,
+//                uid: null
+//            }
+            window.GAME_NAME = '0pn5m'; // 点点点游戏 0pn5m
+//            window.USER_ID = 63; // 临时模拟的用户id
+
+            window.USER_ID = data.uid
+        }
+    </script>
+    <script src="http://10.105.7.208/9888/game/web/index.php?r=games/get-userid"></script>
     <script src="javascripts/hilo-standalone.js"></script>
     <script src="javascripts/Game.js"></script>
     <script src="javascripts/Asset.js"></script>

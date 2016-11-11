@@ -12,6 +12,7 @@
         }
 
         ReactDOM.render(React.createElement(Alert, {
+            id: id,
             text: text,
             unMountHandler: function () {
                 element.parentNode.removeChild(element)
@@ -30,31 +31,65 @@
     };
 
     let _style_panel = {
-        width: '400px',
-        height: '200px',
+        width: '340px',
+        height: '210px',
         position: 'absolute',
         top: '50%',
         left: '50%',
-        marginLeft: '-200px',
-        marginTop: '-100px'
+        marginLeft: '-170px',
+        marginTop: '-100px',
+        background: 'white',
+        borderRadius: '4px',
+        overflow: 'hidden'
     };
 
     let _style_title = {
-        height: '60px',
-        padding: '30px 0 0 0',
-        borderBottom: '2px solid blue'
+        height: '40px',
+        borderBottom: '2px solid #8db6f5',
+        position: 'relative',
+        background: '#efefef'
+    };
+
+    let _style_btn_close = {
+        display: 'block',
+        position: 'absolute',
+        top: '0',
+        right: '2px',
+        width: '40px',
+        height: '40px',
+        textAlign: 'center',
+        lineHeight: '40px',
+        color: '#a5a5a5',
+        cursor: 'pointer',
+        fontSize: '30px'
+    };
+
+    let _style_text = {
+        display: 'block',
+        textAlign: 'center',
+        fontSize: '14px',
+        margin: '40px auto',
+        color: '#333'
     };
 
     let _style_btn = {
         display: 'block',
         margin: '20px auto',
-        width: '80px',
-        height: '40px',
-        lineHeight: '40px',
-        textAlign: 'center'
+        width: '100px',
+        height: '34px',
+        lineHeight: '34px',
+        textAlign: 'center',
+        borderRadius: '4px',
+        background: '#ea6f5d',
+        fontSize: '14px',
+        cursor: 'pointer',
+        color: 'white'
     };
 
     const Alert = React.createClass({
+        closeHandler: function () {
+            ReactDOM.unmountComponentAtNode(document.getElementById(this.props.id));
+        },
         componentWillUnmount: function () {
             this.props.unMountHandler && this.props.unMountHandler();
         },
@@ -63,10 +98,10 @@
                 <div style={_style_bg}>
                     <div style={_style_panel}>
                         <div style={_style_title}>
-                            <b>&times;</b>
+                            <b onClick={this.closeHandler} style={_style_btn_close}>&times;</b>
                         </div>
-                        {this.props.text}
-                        <a style={_style_btn}>确定</a>
+                        <div style={_style_text}> {this.props.text} </div>
+                        <a style={_style_btn} onClick={this.closeHandler}>确定</a>
                     </div>
                 </div>
             )
