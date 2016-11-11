@@ -25,41 +25,6 @@ body, html {
   width: 100%;
 }
 
-.guest-or-login {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.3);
-  z-index: 99;
-
-  .panel {
-    width: 521px;
-    height: 469px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-top: -260px;
-    margin-left: -235px;
-    background: transparent url(../images/guest-or-login.png) no-repeat center;
-  }
-
-  .btn-guest, .btn-login {
-    display: block;
-    width: 200px;
-    height: 80px;
-    position: absolute;
-    bottom: 70px;
-  }
-  .btn-guest {
-    left: 40px;
-  }
-  .btn-login {
-    right: 40px;
-  }
-}
-
 .start-page {
   position: absolute;
   top: 0;
@@ -233,15 +198,46 @@ body, html {
     .num {
       color: white;
       font-size: 60px;
-      text-align: center;
       padding-top: 46px;
+      text-align: center;
+
+      i {
+        display: inline-block;
+        width: 46px;
+        height: 70px;
+        background: transparent url(../images/level-list/numbers.png) no-repeat center;
+      }
     }
 
-    .num-1 {
+    i.num-img-0 {
+      background-position: -476px -172px;
     }
-    .num-1 {
+    i.num-img-1 {
+      background-position: -49px -46px;
     }
-    .num-1 {
+    i.num-img-2 {
+      background-position: -152px -46px;
+    }
+    i.num-img-3 {
+      background-position: -262px -46px;
+    }
+    i.num-img-4 {
+      background-position: -368px -46px;
+    }
+    i.num-img-5 {
+      background-position: -478px -46px;
+    }
+    i.num-img-6 {
+      background-position: -46px -172px;
+    }
+    i.num-img-7 {
+      background-position: -157px -172px;
+    }
+    i.num-img-8 {
+      background-position: -263px -172px;
+    }
+    i.num-img-9 {
+      background-position: -374px -172px;
     }
 
     .img-locked .num {
@@ -347,6 +343,7 @@ body, html {
       line-height: 60px;
       padding-right: 20px;
       box-sizing: border-box;
+      color: #89a0b6;
 
       img {
         width: 60px;
@@ -358,6 +355,20 @@ body, html {
         display: block;
         margin-right: 20px;
       }
+
+      .num {
+        font-size: 30px;
+        &:first-child {
+          color: #f9743c;
+        }
+        &:nth-child(2) {
+          color: #ffa849;
+        }
+        &:nth-child(3) {
+          color: #6fbdf4;
+        }
+      }
+
       .score {
         float: right;
       }
@@ -379,7 +390,7 @@ body, html {
     position: relative;
     margin: 300px auto 0;
     background: url(../images/props-bg.png) no-repeat;
-    padding: 60px;
+    padding: 40px 60px 60px 60px;
     box-sizing: border-box;
     text-align: center;
 
@@ -479,7 +490,7 @@ body, html {
   left: 0;
   right: 0;
   bottom: 0;
-  background: #42b6d5;
+  background: rgba(63, 79, 94, 0.9);
 
   .dialog {
     position: absolute;
