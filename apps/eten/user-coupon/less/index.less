@@ -1,7 +1,7 @@
 @import "common.less";
 @import "table.less";
 
-ul, li ,p{
+ul, li, p {
   margin: 0;
   padding: 0;
 }
@@ -9,14 +9,15 @@ ul, li ,p{
 li {
   list-style: none;
 }
-.couponContent{
+
+.couponContent {
   width: 797px;
   height: 1000px;
   //border: 1px solid @colorBorder;
   float: left;
   position: relative;
   margin-left: 20px;
-  .couponTitle{
+  .couponTitle {
     display: block;
     position: absolute;
     right: 0px;
@@ -27,14 +28,15 @@ li {
     cursor: pointer;
   }
 }
-.couponContainer{
+
+.couponContainer {
   width: 798px;
   border: 1px solid #eaeaea;
-  margin:46px auto 0;
-  .containerTop{
+  margin: 46px auto 0;
+  .containerTop {
     height: 50px;
     background: @colorF2;
-    div{
+    div {
       width: 160px;
       height: 48px;
       float: left;
@@ -46,29 +48,31 @@ li {
       font-size: @fontSize16;
       color: @color6;
       cursor: pointer;
-      &.active{
+      &.active {
         border-top: 2px solid @color8c;
         border-bottom: transparent;
-        background:@colorWhite;
+        background: @colorWhite;
       }
     }
   }
 }
 
 .tabStyle {
-  border-top:2px solid red;
-  border-bottom:transparent;
+  border-top: 2px solid red;
+  border-bottom: transparent;
   background-color: #fff;
-};
+}
 
-.containerCenter{
-  em{
+;
+
+.containerCenter {
+  em {
     font-style: normal;
   }
-  .containerCenterTitle{
+  .containerCenterTitle {
     height: 32px;
     padding-top: 18px;
-    .centerTitleCom{
+    .centerTitleCom {
       height: 16px;
       float: left;
       padding: 0 20px;
@@ -77,47 +81,48 @@ li {
       font-size: @fontSize12;
       color: @color6;
     }
-    .centerTitleLeft,.centerTitleRight{
-      em{
+    .centerTitleLeft, .centerTitleRight {
+      em {
         color: @color3;
       }
     }
-    .centerTitleRight{
+    .centerTitleRight {
       border: transparent;
     }
-    .centerTitleCenter{
-      em{
+    .centerTitleCenter {
+      em {
         color: @colorEa;
       }
     }
   }
-  .containerCenterList{
+  .containerCenterList {
     margin: 0 10px 20px 10px;
     height: 26px;
     border-bottom: 2px solid @colorC;
-      div{
-        height: 26px;
-        float: left;
-        width: 130px;
-        text-align: center;
-        border-bottom: 2px solid @colorC;
-      }
-    .centerList{
+    div {
+      height: 26px;
+      float: left;
+      width: 130px;
+      text-align: center;
+      border-bottom: 2px solid @colorC;
+      cursor: pointer;
+    }
+    .centerList {
       border-bottom: 2px solid @color8c;
     }
   }
-  .containerRecord{
+  .containerRecord {
     min-height: 158px;
     position: relative;
-    .haveCard{
+    .haveCard {
       display: block;
     }
-    .noHaveRecord{
+    .noHaveRecord {
       border-top: 1px solid #eaeaea;
       //border-bottom: 1px solid #eaeaea;
       height: 50px;
       position: relative;
-      p{
+      p {
         position: absolute;
         margin: auto;
         left: 0;
@@ -130,8 +135,8 @@ li {
 
     }
   }
-  .containerCenterTable{
-    .tableTitle{
+  .containerCenterTable {
+    .tableTitle {
       height: 34px;
       border-top: 1px solid @colorF2;
       background: #fbfbf9;
@@ -140,52 +145,52 @@ li {
       color: @color3;
       line-height: 34px;
     }
-    .tableTitleTd{
+    .tableTitleTd {
       float: left;
       text-align: left;
       margin-right: 40px;
     }
-    .tableTitleTd1{
+    .tableTitleTd1 {
       width: 54px;
     }
-    .tableTitleTd2{
+    .tableTitleTd2 {
       width: 110px;
     }
-    .tableTitleTd3{
+    .tableTitleTd3 {
       width: 100px;
     }
-    .tableTitleTd4{
+    .tableTitleTd4 {
       width: 100px;
     }
-    .tableTitleTd5{
+    .tableTitleTd5 {
       width: 118px;
     }
-    .tableTitleTd6{
+    .tableTitleTd6 {
       width: 60px;
       text-align: center;
       margin-right: 0;
     }
-    .tableContentItem{
+    .tableContentItem {
       height: 35px;
       border-bottom: 1px dashed #eaeaea;
       font-size: @fontSize16;
       color: @color6;
       //display: table;
       padding: 20px;
-      .tableTitleTd{
+      .tableTitleTd {
         //display: table-cell;
         //vertical-align: middle;
       }
-      .tableTitleTd4{
+      .tableTitleTd4 {
         width: 100px;
         color: @color9;
         font-size: @fontSize12;
       }
-      .tableTitleTd5{
+      .tableTitleTd5 {
         width: 108px;
         font-size: @fontSize12;
       }
-      .tableTitleTd6{
+      .tableTitleTd6 {
         width: 82px;
         height: 30px;
         margin: 0;
@@ -197,19 +202,19 @@ li {
       }
     }
   }
-  .containerCenterTable1{
-    .tableTitleTd5{
+  .containerCenterTable1 {
+    .tableTitleTd5 {
       margin-left: 60px;
       margin-right: 0;
       text-align: right;
       width: 160px;
     }
-    .tableContentItem{
-      .tableTitleTd4{
+    .tableContentItem {
+      .tableTitleTd4 {
         line-height: 22px;
 
       }
-      .tableTitleTd5{
+      .tableTitleTd5 {
         text-align: right;
         width: 160px;
         margin-left: 60px;
@@ -217,44 +222,44 @@ li {
       }
     }
   }
-  .containerCenterTable2{
-    .tableTitleTd{
+  .containerCenterTable2 {
+    .tableTitleTd {
       float: left;
       text-align: left;
       margin-right: 20px;
     }
-    .tableTitleTd1{
+    .tableTitleTd1 {
       width: 54px;
     }
-    .tableTitleTd2{
+    .tableTitleTd2 {
       width: 110px;
     }
-    .tableTitleTd3{
+    .tableTitleTd3 {
       width: 100px;
     }
-    .tableTitleTd4{
+    .tableTitleTd4 {
       width: 100px;
     }
-    .tableTitleTd5{
+    .tableTitleTd5 {
       width: 100px;
       line-height: 35px;
     }
-    .tableTitleTd6{
+    .tableTitleTd6 {
       width: 100px;
       margin-right: 0;
     }
-    .tableTitleTd7{
+    .tableTitleTd7 {
       width: 50px;
       margin-right: 0;
       margin-left: 30px;
       text-align: right;
     }
-    .tableContentItem{
-      .tableTitleTd5{
+    .tableContentItem {
+      .tableTitleTd5 {
         width: 100px;
         text-align: left;
       }
-      .tableTitleTd6{
+      .tableTitleTd6 {
         width: 82px;
         height: 30px;
         margin: 0;
@@ -263,7 +268,7 @@ li {
         background: #fff;
         font-size: @fontSize14;
       }
-      .tableTitleTd7{
+      .tableTitleTd7 {
         font-size: 12px;
         width: 100px;
         margin-left: 0px;
@@ -272,53 +277,53 @@ li {
       }
     }
   }
-  .containerCenterTableExchange{
-    .tableTitleTd{
+  .containerCenterTableExchange {
+    .tableTitleTd {
       float: left;
       text-align: left;
       margin-right: 20px;
     }
-    .tableTitleTd1{
+    .tableTitleTd1 {
       width: 124px;
     }
-    .tableTitleTd2{
+    .tableTitleTd2 {
       width: 110px;
     }
-    .tableTitleTd3{
+    .tableTitleTd3 {
       text-align: right;
       width: 70px;
       margin-right: 50px;
     }
-    .tableTitleTd4{
+    .tableTitleTd4 {
       width: 100px;
     }
-    .tableTitleTd5{
+    .tableTitleTd5 {
       width: 100px;
       margin-right: 30px;
     }
-    .tableTitleTd6{
+    .tableTitleTd6 {
       width: 100px;
       margin-right: 0;
     }
   }
-  .containerCenterTableExchange{
+  .containerCenterTableExchange {
 
-    .tableContentItem{
-      .tableTitleTd{
+    .tableContentItem {
+      .tableTitleTd {
         font-size: 12px;
       }
-      .tableTitleTd1{
-        span{
+      .tableTitleTd1 {
+        span {
           color: @color8c;
         }
-        em{
+        em {
           color: #fc6455
         }
       }
-      .tableTitleTd3{
+      .tableTitleTd3 {
         color: #fc6455;
       }
-      .tableTitleTd6{
+      .tableTitleTd6 {
         width: 100px;
         height: 30px;
         margin: 0;
@@ -330,14 +335,14 @@ li {
       }
     }
   }
-  .containerCenterTableExchange1,.containerCenterTableExchange2{
+  .containerCenterTableExchange1, .containerCenterTableExchange2 {
     .tableContentItem {
       .tableTitleTd3 {
         color: #fc6455;
       }
     }
   }
-  .containerPage{
+  .containerPage {
     height: 60px;
     width: 206px;
     margin: auto;
@@ -345,36 +350,35 @@ li {
     color: @color6;
     font-size: @fontSize12;
 
-    .containerPageLeft{
+    .containerPageLeft {
       float: left;
       color: @color3;
       height: 24px;
       line-height: 24px;
       margin-top: 1px;
     }
-    .containerPageStart{
+    .containerPageStart {
       float: left;
       width: 50px;
       height: 24px;
       line-height: 24px;
       text-align: center;
-      border:1px solid @colorD9;
+      border: 1px solid @colorD9;
       margin-left: 4px;
     }
-    .containerPageEnd{
+    .containerPageEnd {
       float: left;
       width: 50px;
       height: 24px;
       line-height: 24px;
       text-align: center;
       margin-left: 4px;
-      border:1px solid @colorD9;
+      border: 1px solid @colorD9;
     }
   }
 }
 
-
-.totalPop{
+.totalPop {
   display: block;
   width: 100%;
   height: 100%;
@@ -384,7 +388,8 @@ li {
   left: 0;
   top: 0;
 }
-.popContent{
+
+.popContent {
   width: 340px;
   height: 214px;
   margin: auto;
@@ -395,7 +400,8 @@ li {
   right: 0;
   bottom: 0;
 }
-.close{
+
+.close {
   width: 16px;
   height: 16px;
   background: url('../images/close.png') no-repeat;
@@ -404,7 +410,8 @@ li {
   top: 12px;
   cursor: pointer;
 }
-.onePrompt{
+
+.onePrompt {
   position: absolute;
   top: 80px;
   left: 0px;
@@ -413,13 +420,15 @@ li {
   color: #333;
   font-size: 14px;
 }
-.btn{
+
+.btn {
   position: absolute;
   top: 138px;
   left: 0px;
   width: 340px;
 }
-.knowBtn{
+
+.knowBtn {
   margin: auto;
   width: 100px;
   height: 34px;
@@ -435,7 +444,8 @@ li {
   text-align: center;
   cursor: pointer;
 }
-.twoPrompt{
+
+.twoPrompt {
   position: absolute;
   top: 80px;
   left: 0px;
@@ -444,10 +454,12 @@ li {
   color: #333;
   font-size: 14px;
 }
-.twoPrompt em{
+
+.twoPrompt em {
   color: #fb6455;
 }
-.commonBtn{
+
+.commonBtn {
   float: left;
   width: 140px;
   height: 34px;
@@ -464,17 +476,20 @@ li {
   cursor: pointer;
   margin-left: 20px;
 }
-.rightBtn{
+
+.rightBtn {
   background: #8ab5f5;
 }
-.oneBtnPop{
-  display: block;
-}
-.twoBtnPop{
+
+.oneBtnPop {
   display: block;
 }
 
-.listPopBg{
+.twoBtnPop {
+  display: block;
+}
+
+.listPopBg {
   display: block;
   width: 100%;
   height: 100%;
@@ -484,7 +499,8 @@ li {
   left: 0;
   top: 0;
 }
-.listPop{
+
+.listPop {
   width: 600px;
   height: 480px;
   -webkit-border-radius: 4px;
@@ -500,7 +516,8 @@ li {
   right: 0;
   bottom: 0;
 }
-.listTop{
+
+.listTop {
   width: 600px;
   height: 40px;
   background: #efefef;
@@ -509,11 +526,13 @@ li {
   line-height: 40px;
   border-bottom: 1px solid #ddd;
 }
-.topLeft{
+
+.topLeft {
   float: left;
   margin-left: 20px;
 }
-.topClose{
+
+.topClose {
   float: right;
   margin-right: 5px;
   margin-top: 6px;
@@ -529,46 +548,56 @@ li {
   border: 1px solid #cfcfcf;
   cursor: pointer;
 }
-.listCenter{
+
+.listCenter {
   width: 100%;
   height: 376px;
   border-bottom: 1px solid #f1f1f1;
   position: relative;
 }
-.centerTitle{
+
+.centerTitle {
   height: 36px;
   width: 100%;
   background: #fbfbfb;
   border-bottom: 1px solid #f1f1f1;
 }
-.centerCon{
+
+.centerCon {
   float: left;
   text-align: center;
   line-height: 36px;
   border-right: 1px solid #f1f1f1;
   color: #999999;
 }
-.centerCon1{
+
+.centerCon1 {
   width: 68px;
 }
-.centerCon2{
+
+.centerCon2 {
   width: 130px;
 }
-.centerCon3{
+
+.centerCon3 {
   width: 106px;
 }
-.centerCon4{
+
+.centerCon4 {
   width: 130px;
 }
-.centerCon5{
+
+.centerCon5 {
   width: 160px;
 }
-.listCenter li .centerCon{
+
+.listCenter li .centerCon {
   height: 36px;
   color: #333;
   border-bottom: 1px solid #f1f1f1;
 }
-.centerPage{
+
+.centerPage {
   position: absolute;
   left: 0;
   right: 0;
@@ -576,27 +605,32 @@ li {
   width: 190px;
   margin: auto;
 }
-.centerPage>div{
+
+.centerPage > div {
   float: left;
 }
-.pageCurrent{
+
+.pageCurrent {
   color: #333;
   height: 22px;
   line-height: 22px;
 }
-.pageCurrent p{
+
+.pageCurrent p {
   display: inline-block;
 }
-.pageHome{
+
+.pageHome {
   width: 48px;
   height: 22px;
   border: 1px solid #d9d9d9;
   color: #999999;
-  margin:0 5px 0 2px;
+  margin: 0 5px 0 2px;
   text-align: center;
   line-height: 22px;
 }
-.pageEnd{
+
+.pageEnd {
   width: 48px;
   height: 22px;
   border: 1px solid #d9d9d9;
@@ -604,7 +638,8 @@ li {
   text-align: center;
   line-height: 22px;
 }
-.listFooter{
+
+.listFooter {
   width: 380px;
   height: 34px;
   margin: auto;
@@ -613,6 +648,7 @@ li {
   left: 0;
   right: 0;
 }
+
 .footerBtn {
   float: left;
   width: 170px;
@@ -627,6 +663,7 @@ li {
   border-radius: 4px;
   cursor: pointer;
 }
-.cancelBtn{
+
+.cancelBtn {
   background-color: #8ab5f5;
 }

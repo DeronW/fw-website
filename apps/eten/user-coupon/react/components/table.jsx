@@ -28,12 +28,29 @@ const Table = React.createClass({
         if (new_page) this.setState({page: new_page}, this.reloadData);
     },
     reloadData: function () {
-
+        this.props.fnLoadData && this.props.fnLoadData(this.state.page, (data)=> {
+            console.log('load data', data);
+            let filterData = this.props.fnFilterData && this.props.fnFilterData(data);
+            if (filterData)
+                this.setState({
+                    total_page: filterData.total_page,
+                    rows: filterData.rows
+                })
+        })
+    },
+    componentWillReceiveProps: function (nextProps) {
+        this.setState({
+            page: 1,
+            th_rows: nextProps.th_rows,
+            rows: []
+        }, this.reloadData)
     },
     componentDidMount: function () {
-
+        this.reloadData()
     },
     render: function () {
+        let {page, total_page, rows} = this.state;
+
         let th_cell = (t, index) => {
             return <th key={index} className="">{t}</th>
         };
@@ -42,26 +59,27 @@ const Table = React.createClass({
             let td = (cell, cell_index) => {
                 return (
                     <td key={cell_index} className="">
-                        {cell.toString()}
+                        {cell.text}
                     </td>
                 )
             };
             return (
                 <tr key={row_index}>
                     {row.map(td)}
-                </tr>
-            )
+                </tr>            )
         };
 
         let pagination, empty_records;
-        if (this.state.rows.length) {
+        if (rows.length) {
             pagination = (
                 <div className="pagination">
-                    第{this.state.page}页, 共{this.state.total_page}页
-                    <a onClick={()=>this.switchPageHandler('first')}>首页</a>
-                    <a onClick={()=>this.switchPageHandler('prev')}>上一页</a>
-                    <a onClick={()=>this.switchPageHandler('next')}>下一页</a>
-                    <a onClick={()=>this.switchPageHandler('last')}>尾页</a>
+                    第{page}页, 共{total_page}页
+                    {page > 1 ? <a onClick={()=>this.switchPageHandler('first')}>首页</a> : null}
+                    {page > 1 ? <a onClick={()=>this.switchPageHandler('prev')}>上一页</a> : null}
+                    {page < total_page ?
+                        <a onClick={()=>this.switchPageHandler('next')}>下一页</a> : null}
+                    {page < total_page ?
+                        <a onClick={()=>this.switchPageHandler('last')}>尾页</a> : null}
                 </div>
             );
         } else {
@@ -82,9 +100,3 @@ const Table = React.createClass({
         )
     }
 });
-
-Table.propTypes = {
-    url: React.PropTypes.string,
-    params: React.PropTypes.object,
-    dataFilter: React.PropTypes.func
-};
