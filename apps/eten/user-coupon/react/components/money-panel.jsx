@@ -69,7 +69,7 @@ const MoneyPanel = React.createClass({
                         </div>
                     </div>
                     <div className="centerTitleRight centerTitleCom">
-                        <div>   
+                        <div>
                             已使用 <em>{usedNumber}</em> 张
                             {usedAmount ? '，共' : null}
                             {usedAmount ? <em>{usedAmount}</em> : null}
