@@ -37,13 +37,16 @@ const Level = React.createClass({
         let level = (item, index) => {
             var cn_bg = item.locked ? 'img-locked' : 'img-unlocked';
             if (item.gift) cn_bg += ' level-gift';
-
-            var star = <div className={'star star-' + item.star}></div>;
+            let star = <div className={'star star-' + item.star}></div>;
+            let num = index + 1;
 
             return (
                 <div key={index} className="level">
                     <div className={cn_bg} onClick={() => this.clickHandler(index + 1)}>
-                        <div className={"num num-" + (index + 1)}>{index + 1}</div>
+                        <div className="num">
+                            {num > 9 ? <i className={"num-img-" + parseInt(num / 10)}> </i> : null}
+                            <i className={"num-img-" + (num % 10)}> </i>
+                        </div>
                         {item.star != null ? star : null}
                     </div>
                 </div>

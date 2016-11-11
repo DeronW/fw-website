@@ -25,6 +25,7 @@ const Content = React.createClass({
                     {tab_bar}
                     <Coupon tab_name={this.state.tab}/>
                 </div>
+                <ReadOnlyTable />
             </div>
         )
     }

@@ -20,16 +20,16 @@ const TableMoneyUnused = React.createClass({
             type: 'post',
             success: function (data) {
                 if (data.code == 10000) {
-                    this1.setState({
+                    this.setState({
                         couponProduce: data.data.pageData
                     })
                 }
-            }
+            }.bind(this)
         })
     },
     render: function () {
         let {couponProduce} = this.state;
-
+        var _this = this;
         var noUserItem = function (item, index) {
             return <div className="tableContentItem" key={index}>
                 <div className="tableTitleTd1 tableTitleTd">{item.couponInfo.beanCount / 100}</div>
@@ -42,16 +42,16 @@ const TableMoneyUnused = React.createClass({
                 </div>
                 <div className="tableTitleTd4 tableTitleTd">
                     {
-                        this1.getLocalTime(item.couponInfo.issueTime)
+                        _this.getLocalTime(item.couponInfo.issueTime)
                     }至
                     {
-                        this1.getLocalTime(item.couponInfo.overdueTime)
+                        _this.getLocalTime(item.couponInfo.overdueTime)
                     }
                 </div>
                 <div className="tableTitleTd5 tableTitleTd">{item.couponInfo.remark}</div>
                 {
                     !item.couponInfo.transferNumber >= 1 && !item.couponInfo.couponTypeGive ?
-                        <div className="tableTitleTd6 tableTitleTd" onClick={this1.handleListShow}>赠送</div> : null
+                        <div className="tableTitleTd6 tableTitleTd" onClick={_this.handleListShow}>赠送</div> : null
                 }
             </div>
         };
