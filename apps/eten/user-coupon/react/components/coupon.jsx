@@ -75,7 +75,7 @@ const Coupon = React.createClass({
         var listExchange = ['未使用', '已使用', '已过期'];
 
         if (this.props.tab_name == '返现券') {
-            coupon = <MoneyPanel data={staMoneyData} />;
+            coupon = <MoneyPanel data={staMoneyData}/>;
             // coupon = <div className="containerCenter">
             //     {CouponTitleBar('返现券', {
             //         availableCount: staMoneyData.availableNumber,
@@ -108,20 +108,21 @@ const Coupon = React.createClass({
                 </div>
             </div>
         } else if (this.props.tab_name == '兑换券') {
-            coupon = <div className="containerCenter">
-
-                {CouponTitleBar('兑换券', {
-                    availableCount: staExchangeData.unUseCount,
-                    expiredCount: staExchangeData.overCount,
-                    usedCount: staExchangeData.useCount
-                })}
-                {
-                    couponListBar(listExchange, this.state.listTab, this.toggleListHandle)
-                }
-                <div className="containerRecord">
-                    <Table3 listIndex={this.state.listIndex}/>
-                </div>
-            </div>
+            coupon = <ExchangePanel data={staExchangeData}/>;
+            // coupon = <div className="containerCenter">
+            //
+            //     {CouponTitleBar('兑换券', {
+            //         availableCount: staExchangeData.unUseCount,
+            //         expiredCount: staExchangeData.overCount,
+            //         usedCount: staExchangeData.useCount
+            //     })}
+            //     {
+            //         couponListBar(listExchange, this.state.listTab, this.toggleListHandle)
+            //     }
+            //     <div className="containerRecord">
+            //         <Table3 listIndex={this.state.listIndex}/>
+            //     </div>
+            // </div>
         }
         return coupon;
     }
