@@ -1,13 +1,16 @@
 const Table = React.createClass({
     getInitialState: function () {
+        /**
+         *  page 当前是第几页
+         *  total_page 总共第几页
+         *  th_rows 标题
+         *  rows 数据 二维数组
+         */
         return {
             page: 1,
             total_page: null,
-            th_rows: ['T1', 'T2'],
-            rows: [
-                ['a', 'b '],
-                ['c', 'd ']
-            ]
+            th_rows: this.props.th_rows || [],
+            rows: []
         }
     },
     switchPageHandler: function (type) {
@@ -32,7 +35,7 @@ const Table = React.createClass({
     },
     render: function () {
         let th_cell = (t, index) => {
-            return <th key={index}>{t}</th>
+            return <th key={index} className="">{t}</th>
         };
 
         let tr = (row, row_index) => {
@@ -80,7 +83,7 @@ const Table = React.createClass({
     }
 });
 
-ReadOnlyTable.propTypes = {
+Table.propTypes = {
     url: React.PropTypes.string,
     params: React.PropTypes.object,
     dataFilter: React.PropTypes.func

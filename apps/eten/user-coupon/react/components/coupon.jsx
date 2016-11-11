@@ -73,23 +73,25 @@ const Coupon = React.createClass({
         let {staMoneyData, staInterestData, staExchangeData} = this.state;
         var listMoney = ['未使用', '已使用', '已过期', '已赠送'];
         var listExchange = ['未使用', '已使用', '已过期'];
+
         if (this.props.tab_name == '返现券') {
-            coupon = <div className="containerCenter">
-                {CouponTitleBar('返现券', {
-                    availableCount: staMoneyData.availableNumber,
-                    availableMoney: staMoneyData.availableAmount,
-                    expiredCount: staMoneyData.willExpireNumber,
-                    expiredMoney: staMoneyData.willExpireAmount,
-                    usedCount: staMoneyData.usedNumber,
-                    usedMoney: staMoneyData.usedAmount
-                })}
-                {
-                    couponListBar(listMoney,this.state.listTab,this.toggleListHandle)
-                }
-                <div className="containerRecord">
-                    <TableMoney tab_name={this.state.listTab}/>
-                </div>
-            </div>
+            coupon = <MoneyPanel data={staMoneyData} />;
+            // coupon = <div className="containerCenter">
+            //     {CouponTitleBar('返现券', {
+            //         availableCount: staMoneyData.availableNumber,
+            //         availableMoney: staMoneyData.availableAmount,
+            //         expiredCount: staMoneyData.willExpireNumber,
+            //         expiredMoney: staMoneyData.willExpireAmount,
+            //         usedCount: staMoneyData.usedNumber,
+            //         usedMoney: staMoneyData.usedAmount
+            //     })}
+            //     {
+            //         couponListBar(listMoney, this.state.listTab, this.toggleListHandle)
+            //     }
+            //     <div className="containerRecord">
+            //         <TableMoney tab_name={this.state.listTab}/>
+            //     </div>
+            // </div>
         } else if (this.props.tab_name == '返息券') {
             coupon = <div className="containerCenter">
 
@@ -99,7 +101,7 @@ const Coupon = React.createClass({
                     usedCount: staInterestData.usedNumber
                 })}
                 {
-                    couponListBar(listMoney,this.state.listTab,this.toggleListHandle)
+                    couponListBar(listMoney, this.state.listTab, this.toggleListHandle)
                 }
                 <div className="containerRecord">
                     <Table2 listIndex={this.state.listIndex}/>
@@ -114,7 +116,7 @@ const Coupon = React.createClass({
                     usedCount: staExchangeData.useCount
                 })}
                 {
-                    couponListBar(listExchange,this.state.listTab,this.toggleListHandle)
+                    couponListBar(listExchange, this.state.listTab, this.toggleListHandle)
                 }
                 <div className="containerRecord">
                     <Table3 listIndex={this.state.listIndex}/>
@@ -186,16 +188,16 @@ CouponTitleBar.propTypes = {
     usedMoney: React.PropTypes.String
 };
 
-const couponListBar = function (list,listTab,toggleListHandle) {
+const couponListBar = function (list, listTab, toggleListHandle) {
+    let list_tab = (n, index) => {
+        return <div key={index} className={listTab == n ? "centerList" : null}
+                    onClick={() => toggleListHandle(n, index)}>{n}
+        </div>
+    };
+
     return (
         <div className="containerCenterList">
-            {
-                list.map((n, index) => {
-                    return <div key={index} className={listTab == n ? "centerList" : null}
-                                onClick={() => toggleListHandle(n, index)}>{n}
-                    </div>
-                })
-            }
+            { list.map(list_tab) }
         </div>
     )
 };
