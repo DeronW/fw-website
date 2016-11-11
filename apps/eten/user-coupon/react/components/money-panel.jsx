@@ -171,24 +171,6 @@ let MoneyPresentCouponList = function (page, cb) {
 };
 
 let MoneyUnusedCouponFilter = function (data) {
-    return{
-        total_page: data.pagination && data.pagination.totalPage,
-        rows: (data.result && data.result).map((item)=> {
-            return [{
-                text: item.couponInfo.beanCount / 100
-            }, {
-                text: item.couponInfo.investMultip
-            }, {
-                text: item.couponInfo.inverstPeriod == 0 ? '全场通用' : `≥${item.couponInfo.inverstPeriod}`
-            }, {
-                text: (new Date(parseInt(item.usedTime))).toString()
-            }, {
-                text: item.couponInfo.remark
-            }]
-        })
-    }
-};
-let MoneyUsedCouponFilter = function (data) {
     return {
         total_page: data.pagination && data.pagination.totalPage,
         rows: (data.result && data.result).map((item)=> {
@@ -206,6 +188,24 @@ let MoneyUsedCouponFilter = function (data) {
                 text: item.couponInfo.remark
             }, {
                 text: !item.couponInfo.transferNumber >= 1 && !item.couponInfo.couponTypeGive ? '赠送' : null
+            }]
+        })
+    }
+};
+let MoneyUsedCouponFilter = function (data) {
+    return{
+        total_page: data.pagination && data.pagination.totalPage,
+        rows: (data.result && data.result).map((item)=> {
+            return [{
+                text: item.couponInfo.beanCount / 100
+            }, {
+                text: item.couponInfo.investMultip
+            }, {
+                text: item.couponInfo.inverstPeriod == 0 ? '全场通用' : `≥${item.couponInfo.inverstPeriod}`
+            }, {
+                text: (new Date(parseInt(item.usedTime))).toString()
+            }, {
+                text: item.couponInfo.remark
             }]
         })
     }
