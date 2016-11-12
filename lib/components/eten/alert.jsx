@@ -3,6 +3,8 @@
      为了在文字中添加颜色, 使用字符串格式化方法. 颜色目前近支持两种, 工场红色和工场蓝色
      用法一: "这是一段文字, 包含了一个%s的颜色文字", "关键字", "red"
      用法而: "这是一段文字, 包含了2个%s, %s的颜色文字", ["关键字", "WORD2"], ["blue"]
+
+     usage: GlobalAlert('%sa%sb%sc', ['中', '2'], [null,'blue'])
      */
     let GlobalAlert = (tpl, values, colors) => {
 
