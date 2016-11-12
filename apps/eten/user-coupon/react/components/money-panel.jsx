@@ -123,8 +123,8 @@ let getTimesString = function (d) {
 };
 let MoneyUnusedCouponList = function (page, cb) {
     $.ajax({
-        //url: API_PATH + 'api/coupon/v1/dataList.json',
-        url: './coupon.json',
+        url: API_PATH + 'api/coupon/v1/dataList.json',
+        //url: './coupon.json',
         data: {
             page: page,
             limit: 8,

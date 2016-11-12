@@ -32,8 +32,8 @@ const PopList = React.createClass({
     ajaxFriendsList: function () {
         var this1 = this;
         $.ajax({
-            //url: API_PATH + 'api/parttimeFinancialer/v1/searchFriends.json',
-            url: './friends.json',
+            url: API_PATH + 'api/parttimeFinancialer/v1/searchFriends.json',
+            //url: './friends.json',
             data: {
                 page: this.state.page,
                 rows: 8
