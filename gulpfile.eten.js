@@ -36,7 +36,9 @@ const ETEN_APP_NAMES = [
 module.exports = function (gulp, generate_task, settings) {
 
     ETEN_APP_NAMES.forEach(function (i) {
-        let common_components = ['eten/header-status-bar.jsx', 'eten/alert.jsx'];
+        let common_components = [
+            'eten/header-status-bar.jsx', 'eten/alert.jsx', 'eten/confirm.jsx'
+        ];
         let common_js = [];
 
         generate_task('eten', i, {
