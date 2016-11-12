@@ -66,7 +66,7 @@
         width: '40px',
         height: '40px',
         textAlign: 'center',
-        lineHeight: '40px',
+        lineHeight: '37px',
         color: '#a5a5a5',
         cursor: 'pointer',
         fontSize: '30px'
