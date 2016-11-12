@@ -162,7 +162,8 @@ let ExchangeCouponFilter = function (data) {
         total_page: data.pagination && data.pagination.totalPage,
         rows: (data.result && data.result).map((item)=> {
             return [{
-                text: item.productName + productName(item.isDelete,item.status),
+                text: item.productName ,
+                content:productName(item.isDelete,item.status),
                 className:'exchangeName'
             }, {
                 text: item.productNumber
