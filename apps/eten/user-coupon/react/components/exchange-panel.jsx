@@ -23,7 +23,14 @@ const ExchangePanel = React.createClass({
             )
         };
         let th_rows, fn_load_data, fn_filter_data;
-        th_rows = ['名称', '商品编号', '价格', '有效期', '来源', '备注'];
+        th_rows = [
+            {title:'名称', width: '20px'},
+            {title:'商品编号', width: '70px'},
+            {title:'价格', width: '70px'},
+            {title:'有效期', width: '60px'},
+            {title:'来源', width: '60px'},
+            {title:'备注', width: '60px'}
+        ];
         fn_filter_data = ExchangeCouponFilter;
         if (this.state.tab_name == '未使用') {
             fn_load_data = ExchangeUnusedCouponList;
@@ -155,11 +162,13 @@ let ExchangeCouponFilter = function (data) {
         total_page: data.pagination && data.pagination.totalPage,
         rows: (data.result && data.result).map((item)=> {
             return [{
-                text: item.productName + productName(item.isDelete,item.status)
+                text: item.productName + productName(item.isDelete,item.status),
+                className:'exchangeName'
             }, {
                 text: item.productNumber
             }, {
-                text:  item.pointsPrice != null && item.pointsPrice != ''  ? item.rmbPrice : `${item.rmbPrice}+${item.pointsPrice}工分`
+                text:  item.pointsPrice != null && item.pointsPrice != ''  ?   `￥${item.rmbPrice}` : `￥${item.rmbPrice}+${item.pointsPrice}工分`,
+                className:'exchangePrice'
             }, {
                 text: item.endTime
             }, {

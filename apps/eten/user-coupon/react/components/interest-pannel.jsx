@@ -25,19 +25,46 @@ const InterestPanel = React.createClass({
        };
        let th_rows, fn_load_data, fn_filter_data;
        if (this.state.tab_name == '未使用') {
-           th_rows = ['返息率', '所需投资现金(元)', '可投标期限(元)', '有效期', '备注', '操作'];
+           th_rows = [
+               {title:'返息率', width: '20px'},
+               {title:'最小投资金额(元)', width: '70px'},
+               {title:'可投标期限(元)', width: '70px'},
+               {title:'有效期', width: '60px'},
+               {title:'备注', width: '60px'},
+               {title:'操作', width: '60px'}
+           ];
            fn_load_data = InterestUnusedCouponList;
            fn_filter_data = InterestUnusedCouponFilter
        } else if (this.state.tab_name == '已使用') {
-           th_rows = ['返息率', '最小投资金额(元)', '可投标期限(元)', '使用时间', '备注'];
+           th_rows = [
+               {title:'返息率', width: '30px'},
+               {title:'最小投资金额(元)', width: '70px'},
+               {title:'可投标期限(元)', width: '70px'},
+               {title:'使用时间', width: '60px'},
+               {title:'备注', width: '60px'}
+           ];
            fn_load_data = InterestUsedCouponList;
            fn_filter_data = InterestUsedCouponFilter;
        } else if(this.state.tab_name == '已过期'){
-           th_rows = ['返息率','最小投资金额(元)','可投标期限(元)','过期时间','备注'];
+           th_rows = [
+               {title:'返息率', width: '30px'},
+               {title:'最小投资金额(元)', width: '70px'},
+               {title:'可投标期限(元)', width: '70px'},
+               {title:'过期时间', width: '60px'},
+               {title:'备注', width: '60px'}
+           ];
            fn_load_data = InterestOverdueCouponList;
            fn_filter_data = InterestOverdueCouponFilter;
        } else if(this.state.tab_name == '已赠送'){
-           th_rows = ['返息率','最小投资金额(元)','可投标期限(元)','有效期','赠送日期','赠送人','备注'];
+           th_rows = [
+               {title:'返息率', width: '50px'},
+               {title:'最小投资金额(元)', width: '110px'},
+               {title:'可投标期限(元)', width: '100px'},
+               {title:'有效期', width: '50px'},
+               {title:'赠送日期', width: '50px'},
+               {title:'赠送人', width: '50px'},
+               {title:'备注', width: '50px'}
+           ];
            fn_load_data = InterestPresentCouponList;
            fn_filter_data = InterestPresentCouponFilter;
        }
@@ -76,6 +103,13 @@ const InterestPanel = React.createClass({
        )
    }
 });
+let getLocationDate = function (d) {
+    return new Date(d).toLocaleDateString().replace(/\//g,'-')
+};
+let getTimesString = function (d) {
+    return  new Date(d).toLocaleDateString().replace(/\//g,'-') + "&nbsp;&nbsp;" + new Date(d).toTimeString().split(' ',1)[0]
+};
+
 let InterestUnusedCouponList = function (page, cb) {
     $.ajax({
         url: API_PATH + 'api/coupon/v1/dataList.json',
@@ -95,7 +129,6 @@ let InterestUnusedCouponList = function (page, cb) {
         }.bind(this)
     })
 };
-
 let InterestUsedCouponList = function (page, cb) {
     $.ajax({
         url: API_PATH + 'api/coupon/v1/dataList.json',
@@ -115,7 +148,6 @@ let InterestUsedCouponList = function (page, cb) {
         }.bind(this)
     })
 };
-
 let InterestOverdueCouponList = function (page, cb) {
     $.ajax({
         url: API_PATH + 'api/coupon/v1/dataList.json',
@@ -135,7 +167,6 @@ let InterestOverdueCouponList = function (page, cb) {
         }.bind(this)
     })
 };
-
 let InterestPresentCouponList = function (page, cb) {
     $.ajax({
         url: API_PATH + 'api/coupon/v1/dataListByTransfer.json',
@@ -161,17 +192,23 @@ let InterestUnusedCouponFilter = function (data) {
         total_page: data.pagination && data.pagination.totalPage,
         rows: (data.result && data.result).map((item)=> {
             return [{
-                text: `${item.couponInfo.backInterestRate}%`
+                text: `${item.couponInfo.backInterestRate}%`,
+                className:'moneyUnused1'
             }, {
-                text: item.couponInfo.investMultip
+                text: item.couponInfo.investMultip,
+                className:'moneyUnused2'
             }, {
-                text: item.couponInfo.inverstPeriod == 0 ? '全场通用' : `≥${item.couponInfo.inverstPeriod}`
+                text: item.couponInfo.inverstPeriod == 0 ? '全场通用' : `≥${item.couponInfo.inverstPeriod}`,
+                className:'moneyUnused2'
             }, {
-                text: `${item.couponInfo.issueTime}至${item.couponInfo.overdueTime}`
+                text: `${getLocationDate(item.couponInfo.issueTime)}至${getLocationDate(item.couponInfo.overdueTime)}`,
+                className:'moneyUnused3'
             }, {
                 text: item.couponInfo.remark
             }, {
-                text: !item.couponInfo.transferNumber >= 1 && !item.couponInfo.couponTypeGive ? '赠送' : null
+                text: !item.couponInfo.transferNumber >= 1 && !item.couponInfo.couponTypeGive ? '赠送' : null,
+                className: 'moneyPresentBtn',
+                clickHandler: ''
             }]
         })
     }
@@ -181,32 +218,39 @@ let InterestUsedCouponFilter = function (data) {
         total_page: data.pagination && data.pagination.totalPage,
         rows: (data.result && data.result).map((item)=> {
             return [{
-                text: `${item.couponInfo.backInterestRate}%`
+                text: `${item.couponInfo.backInterestRate}%`,
+                className:'moneyUnused1'
             }, {
-                text: item.couponInfo.investMultip
+                text: item.couponInfo.investMultip,
+                className:'moneyUnused2'
             }, {
-                text: item.couponInfo.inverstPeriod == 0 ? '全场通用' : `≥${item.couponInfo.inverstPeriod}`
+                text: item.couponInfo.inverstPeriod == 0 ? '全场通用' : `≥${item.couponInfo.inverstPeriod}`,
+                className:'moneyUnused2'
             }, {
-                text: (new Date(parseInt(item.usedTime))).toString()
+                text: `${getLocationDate(item.usedTime)}   ${getTimesString(item.usedTime)}`,
+                className:'moneyUsedTime'
             }, {
                 text: item.couponInfo.remark
             }]
         })
     }
 };
-
 let InterestOverdueCouponFilter = function (data) {
     return {
         total_page: data.pagination && data.pagination.totalPage,
         rows: (data.result && data.result).map((item)=> {
             return [{
-                text: `${item.couponInfo.backInterestRate}%`
+                text: `${item.couponInfo.backInterestRate}%`,
+                className:'moneyUnused1'
             }, {
-                text: item.couponInfo.investMultip
+                text: item.couponInfo.investMultip,
+                className:'moneyUnused2'
             }, {
-                text: item.couponInfo.inverstPeriod == 0 ? '全场通用' : `≥${item.couponInfo.inverstPeriod}`
+                text: item.couponInfo.inverstPeriod == 0 ? '全场通用' : `≥${item.couponInfo.inverstPeriod}`,
+                className:'moneyUnused2'
             }, {
-                text: (new Date(parseInt(item.usedTime))).toString()
+                text: getLocationDate(item.couponInfo.overdueTime),
+                className:'moneyUsedTime'
             }, {
                 text: item.couponInfo.remark
             }]
@@ -218,15 +262,18 @@ let InterestPresentCouponFilter = function (data) {
         total_page: data.pagination && data.pagination.totalPage,
         rows: (data.result && data.result).map((item)=> {
             return [{
-                text: `${item.couponInfo.backInterestRate}%`
+                text: `${item.couponInfo.backInterestRate}%`,
+                className:'moneyUnused1'
             }, {
-                text: item.couponTransferInfo.investMultip
+                text: item.couponTransferInfo.investMultip,
+                className:'moneyUnused2'
             }, {
-                text: item.couponTransferInfo.inverstPeriod == 0 ? '全场通用' : `≥${item.couponTransferInfo.inverstPeriod}`
+                text: item.couponTransferInfo.inverstPeriod == 0 ? '全场通用' : `≥${item.couponTransferInfo.inverstPeriod}`,
+                className:'moneyUnused2'
             }, {
-                text: `${item.couponTransferInfo.issueTime}至${item.couponTransferInfo.overdueTime}`
+                text: `${getLocationDate(item.couponTransferInfo.issueTime)}至${getLocationDate(item.couponTransferInfo.overdueTime)}`,
             }, {
-                text: (new Date(parseInt(item.couponTransferInfo.givenTime))).toString()
+                text: getLocationDate(item.couponTransferInfo.givenTime)
             }, {
                 text: item.transferName
             }, {
