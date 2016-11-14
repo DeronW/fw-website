@@ -82,7 +82,7 @@ const MoneyPanel = React.createClass({
                         <div>
                             可用返现券 <em>{availableNumber}</em> 张
                             {availableAmount ? '，共' : null}
-                            {availableAmount ? <em>${availableAmount}</em> : null}
+                            {availableAmount ? <em>{availableAmount}</em> : null}
                             {availableAmount ? '元' : null}
                         </div>
                     </div>
@@ -90,7 +90,7 @@ const MoneyPanel = React.createClass({
                         <div>
                             即将过期 <em>{willExpireNumber}</em> 张
                             {willExpireAmount ? '（' : null}
-                            {willExpireAmount ? <em>${willExpireAmount}</em> : null}
+                            {willExpireAmount ? <em>{willExpireAmount}</em> : null}
                             {willExpireAmount ? '）' : null}
                         </div>
                     </div>
@@ -219,9 +219,9 @@ let MoneyUnusedCouponFilter = function (data) {
             }, {
                 text: item.couponInfo.remark
             }, {
-                text: !item.couponInfo.transferNumber >= 1 && !item.couponInfo.couponTypeGive ? '赠送' : null,
-                className: 'moneyPresentBtn',
-                clickHandler: () => showPopList('返现券',info.beanCount / 100, info.id)
+                text: item.couponInfo.transferNumber < 1 && !item.couponInfo.couponTypeGive ? '赠送' : null,
+                className: item.couponInfo.transferNumber < 1 && !item.couponInfo.couponTypeGive ?'moneyPresentBtn':null,
+                clickHandler: () => showPopList('返现券', info.beanCount / 100, info.id)
             }]
         })
     }
@@ -288,7 +288,7 @@ let MoneyPresentCouponFilter = function (data) {
             }, {
                 text: getLocationDate(item.couponTransferInfo.givenTime)
             }, {
-                text: item.transferName
+                text: item.transferName == null ? '--':item.transferName
             }, {
                 text: item.couponTransferInfo.remark
             }]

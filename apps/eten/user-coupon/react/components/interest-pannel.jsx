@@ -207,8 +207,8 @@ let InterestUnusedCouponFilter = function (data) {
             }, {
                 text: item.couponInfo.remark
             }, {
-                text: !item.couponInfo.transferNumber >= 1 && !item.couponInfo.couponTypeGive ? '赠送' : null,
-                className: 'moneyPresentBtn',
+                text:item.couponInfo.transferNumber < 1 && !item.couponInfo.couponTypeGive  ? '赠送' : null,
+                className: item.couponInfo.transferNumber < 1 && !item.couponInfo.couponTypeGive ?'moneyPresentBtn':'',
                 clickHandler: () => showPopList('返息券',`${info.backInterestRate}%`, info.id)
             }]
         })
@@ -276,7 +276,7 @@ let InterestPresentCouponFilter = function (data) {
             }, {
                 text: getLocationDate(item.couponTransferInfo.givenTime)
             }, {
-                text: item.transferName
+                text: item.transferName == null ? '--':item.transferName
             }, {
                 text: item.couponTransferInfo.remark
             }]
