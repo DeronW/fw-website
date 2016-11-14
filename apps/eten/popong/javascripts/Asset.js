@@ -39,6 +39,7 @@
                 {id: 'propsFreeze', src: 'images/game/props-freeze.png'},
                 {id: 'propsDismiss', src: 'images/game/props-dismiss.png'},
                 {id: 'numbers', src: 'images/game/numbers.png'},
+                {id: 'levelTitle', src: 'images/game/level-title.png'},
             ];
 
             this.queue = new Hilo.LoadQueue();
@@ -66,6 +67,7 @@
 
             this.grasshead = this.queue.get('grasshead').content;
             this.pause = this.queue.get('pause').content;
+            this.levelTitle = this.queue.get('levelTitle').content;
 
             this.propsRefresh = this.queue.get('propsRefresh').content;
             this.propsTips = this.queue.get('propsTips').content;

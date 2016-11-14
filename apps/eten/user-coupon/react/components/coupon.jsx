@@ -62,12 +62,6 @@ const Coupon = React.createClass({
             }.bind(this)
         })
     },
-    toggleListHandle: function (tabName, index) {
-        this.setState({
-            listTab: tabName,
-            listIndex: index
-        })
-    },
     render: function () {
         let coupon;
         let {staMoneyData, staInterestData, staExchangeData} = this.state;
