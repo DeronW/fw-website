@@ -111,11 +111,12 @@
                     $('#left16').show()
                 }
             },
+            //导航栏高亮切换
             active: function (arg) {
                 let url=location.href;
                 let arr=url.split("/");
                 let page=arr[arr.length-2];
-                let id = {'user-invest':2,'payment-details':3,'capital-flow':4,'ws-code':5,'red-paper ':6,'coupon':7,'work-point':'LEFT_CREDIT','work-bean':8,'contract-manage':9,'my-loan':10,'subrogation':11,'my-security':12,'account-setting':13,'bank-card':14,'message-center':15}[page] || 1;
+                let id = {'user-invest':2,'payment-details':3,'capital-flow':4,'ws-code':5,'red-paper ':6,'coupon':7,'work-point':'Credit','work-bean':8,'contract-manage':9,'my-loan':10,'subrogation':11,'my-security':12,'account-setting':13,'bank-card':14,'messages':15}[page] || 1;
                 $('#left'+id).addClass('active')
             }
         };
