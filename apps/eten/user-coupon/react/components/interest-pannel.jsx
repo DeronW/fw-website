@@ -191,6 +191,7 @@ let InterestUnusedCouponFilter = function (data) {
     return {
         total_page: data.pagination && data.pagination.totalPage,
         rows: (data.result && data.result).map((item)=> {
+            let info = item.couponInfo;
             return [{
                 text: `${item.couponInfo.backInterestRate}%`,
                 className:'moneyUnused1'
@@ -208,7 +209,7 @@ let InterestUnusedCouponFilter = function (data) {
             }, {
                 text: !item.couponInfo.transferNumber >= 1 && !item.couponInfo.couponTypeGive ? '赠送' : null,
                 className: 'moneyPresentBtn',
-                clickHandler: ''
+                clickHandler: () => showPopList('返息券',`${info.backInterestRate}%`, info.id)
             }]
         })
     }

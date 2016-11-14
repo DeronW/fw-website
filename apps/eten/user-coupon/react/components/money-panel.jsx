@@ -221,7 +221,7 @@ let MoneyUnusedCouponFilter = function (data) {
             }, {
                 text: !item.couponInfo.transferNumber >= 1 && !item.couponInfo.couponTypeGive ? '赠送' : null,
                 className: 'moneyPresentBtn',
-                clickHandler: () => showPopList('返现券', info.id)
+                clickHandler: () => showPopList('返现券',info.beanCount / 100, info.id)
             }]
         })
     }

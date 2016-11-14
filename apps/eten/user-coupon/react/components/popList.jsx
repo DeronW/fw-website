@@ -6,7 +6,7 @@ const PopList = React.createClass({
             gcm: '',
             finalRole: '',
             user_list: [],
-            selectedLoginName: null
+            selectedId: null
         }
     },
     componentDidMount: function () {
@@ -54,6 +54,7 @@ const PopList = React.createClass({
             finalRole: data.finalRole,
             total_page: pagination.totalPage,
             user_list: result.map((i)=>({
+                id:i.id,
                 loginName: i.loginName,
                 realName: i.realName,
                 sex: i.sex,
@@ -62,24 +63,47 @@ const PopList = React.createClass({
             }))
         })
     },
+    confirmPop: function () {
+        console.log(this.props.value);
+        if(this.state.selectedId){
+            ReactDOM.unmountComponentAtNode(document.getElementById('popList'));
+            GlobalConfirm('您确定赠送%s元'+this.props.type+'给您的好友吗？',[this.props.value], ['red'], () => {
+                this.presentCoupon()
+            })
+        }else{
+            GlobalAlert('请选择一个好友');
+        }
+    },
+    judgePresentCoupon: function () {
+        if(this.state.user_list.length > 0){
+            this.confirmPop()
+        }else{
+            GlobalAlert('抱歉，您暂无推荐好友，无法进行赠送。');
+        }
+    },
     presentCoupon: function () {
         console.log(this.props.type);
         console.log(this.props.id);
-        console.log(this.state.selectedLoginName);
+        console.log(this.state.selectedId);
         $.ajax({
             url:API_PATH+'api/coupon/v1/changeHolder.json',
             data:{
                 couponId:this.props.id,
-                newUserId:1
+                newUserId:this.state.selectedId
             },
             success: function (data) {
-                console.log(data.data.businessResult)
-            }
+                console.log(data.data.businessResult);
+                if(data.data.businessResult){
+                    GlobalAlert('恭喜您，'+this.props.type+'赠送成功！');
+                }else{
+                    GlobalConfirm('抱歉，'+this.props.type+'赠送失败！');
+                }
+            }.bind(this)
         })
     },
-    toggleSelectedHandler: function (name) {
-        console.log(name)
-        this.setState({selectedLoginName: name})
+    toggleSelectedHandler: function (id) {
+        console.log(id);
+        this.setState({selectedId: id})
     },
     render: function () {
         let {page, total_page} = this.state;
@@ -160,9 +184,9 @@ const PopList = React.createClass({
         };
 
         var friend = (item) => {
-            return <li key={item.loginName}>
-                <div className="centerCon1 centerCon" onClick={()=>this.toggleSelectedHandler(item.loginName)}>
-                    {this.state.selectedLoginName == item.loginName ? <img src="./images/checked.png"/> : <img src="./images/check.png"/>}
+            return <li key={item.id}>
+                <div className="centerCon1 centerCon" onClick={()=>this.toggleSelectedHandler(item.id)}>
+                    {this.state.selectedId == item.id ? <img src="./images/checked.png"/> : <img src="./images/check.png"/>}
                 </div>
                 <div className="centerCon2 centerCon">
                     { popLoginName(item.loginName, this.state.gcm, this.state.finalRole) }
@@ -210,7 +234,7 @@ const PopList = React.createClass({
                         </div>
                     </div>
                     <div className="listFooter">
-                        <div className="sendBtn footerBtn" onClick={this.presentCoupon}>赠送</div>
+                        <div className="sendBtn footerBtn" onClick={this.judgePresentCoupon}>赠送</div>
                         <div className="cancelBtn footerBtn" onClick={this.closeHandler}>取消</div>
                     </div>
                 </div>
@@ -219,6 +243,6 @@ const PopList = React.createClass({
     }
 });
 
-function showPopList(type, id) {
-    ReactDOM.render(<PopList type={type} id={id}/>, document.getElementById('popList'))
+function showPopList(type,value, id) {
+    ReactDOM.render(<PopList type={type} value={value} id={id}/>, document.getElementById('popList'))
 }
