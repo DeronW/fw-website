@@ -110,6 +110,14 @@
                 if ((arg.financialerStatus != null) && arg.financialerStatus == 3) {
                     $('#left16').show()
                 }
+            },
+            //导航栏高亮切换
+            active: function () {
+                var url=location.href;
+                var arr=url.split("/");
+                var page=arr[arr.length-2];
+                var id = {'user-invest':2,'payment-details':3,'capital-flow':4,'ws-code':5,'red-paper':6,'user-coupon':7,'work-point':'Credit','work-bean':8,'contract-manage':9,'my-loan':10,'subrogation':11,'my-security':12,'account-setting':13,'bank-card':14,'user-messages':15}[page] || 1;
+                $('#left'+id).addClass('active')
             }
         };
 
@@ -130,7 +138,7 @@
                         methods.level(data.userLevel);
                         methods.state(data, ou);
                         methods.left(data);
-
+                        methods.active()
                      }
 					});
             }
