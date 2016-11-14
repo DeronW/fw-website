@@ -167,7 +167,7 @@ const PopList = React.createClass({
             if (gcm.substring(0, 1) == 'A') {
                 if (finalRole == 4) {
                     if (mobile != null) {
-                        mobileValue = mobile.substring(0, 3) + "****" + item.mobile.substring(7, 11);
+                        mobileValue = mobile.substring(0, 3) + "****" + mobile.substring(7, 11);
                     } else {
                         mobileValue = "--"
                     }
@@ -176,7 +176,7 @@ const PopList = React.createClass({
                 }
             } else {
                 if (mobile != null) {
-                    mobileValue = mobile.substring(0, 3) + "****" + item.mobile.substring(7, 11)
+                    mobileValue = mobile.substring(0, 3) + "****" + mobile.substring(7, 11)
                 } else {
                     mobileValue = "--";
                 }
