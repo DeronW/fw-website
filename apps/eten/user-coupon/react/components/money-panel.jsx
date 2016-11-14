@@ -203,25 +203,24 @@ let MoneyUnusedCouponFilter = function (data) {
     return {
         total_page: data.pagination && data.pagination.totalPage,
         rows: (data.result && data.result).map((item)=> {
-            let info = item.couponInfo;
             return [{
-                text: item.couponInfo.beanCount / 100,
+                text: item.beanCount / 100,
                 className: 'moneyUnused1'
             }, {
-                text: item.couponInfo.investMultip,
+                text: item.investMultip,
                 className: 'moneyUnused2'
             }, {
-                text: item.couponInfo.inverstPeriod == 0 ? '全场通用' : `≥${item.couponInfo.inverstPeriod}`,
+                text: item.inverstPeriod == 0 ? '全场通用' : `≥${item.inverstPeriod}`,
                 className: 'moneyUnused2'
             }, {
-                text: `${getLocationDate(item.couponInfo.issueTime)}至${getLocationDate(item.couponInfo.overdueTime)}`,
+                text: `${getLocationDate(item.issueTime)}至${getLocationDate(item.overdueTime)}`,
                 className: 'moneyUnused3'
             }, {
-                text: item.couponInfo.remark
+                text: item.remark
             }, {
-                text: item.couponInfo.transferNumber < 1 && item.couponInfo.couponTypeGivenNum == 1 ? '赠送' : null,
-                className: item.couponInfo.transferNumber < 1 && item.couponInfo.couponTypeGivenNum == 1 ? 'moneyPresentBtn' : null,
-                clickHandler: () => showPopList('返现券', info.beanCount / 100, info.id)
+                text: item.transferNumber < 1 && item.couponTypeGivenNum == 1 ? '赠送' : null,
+                className: item.transferNumber < 1 && item.couponTypeGivenNum == 1 ? 'moneyPresentBtn' : null,
+                clickHandler: item.transferNumber < 1 && item.couponTypeGivenNum == 1 ?() => showPopList('返现券', item.beanCount / 100, item.id):null
             }]
         })
     }
@@ -231,19 +230,19 @@ let MoneyUsedCouponFilter = function (data) {
         total_page: data.pagination && data.pagination.totalPage,
         rows: (data.result && data.result).map((item)=> {
             return [{
-                text: item.couponInfo.beanCount / 100,
+                text: item.beanCount / 100,
                 className: 'moneyUnused1'
             }, {
-                text: item.couponInfo.investMultip,
+                text: item.investMultip,
                 className: 'moneyUnused2'
             }, {
-                text: item.couponInfo.inverstPeriod == 0 ? '全场通用' : `≥${item.couponInfo.inverstPeriod}`,
+                text: item.inverstPeriod == 0 ? '全场通用' : `≥${item.inverstPeriod}`,
                 className: 'moneyUnused2'
             }, {
                 text: `${getLocationDate(item.usedTime)}   ${getTimesString(item.usedTime)}`,
                 className: 'moneyUsedTime'
             }, {
-                text: item.couponInfo.remark
+                text: item.remark
             }]
         })
     }
@@ -253,19 +252,19 @@ let MoneyOverdueCouponFilter = function (data) {
         total_page: data.pagination && data.pagination.totalPage,
         rows: (data.result && data.result).map((item)=> {
             return [{
-                text: item.couponInfo.beanCount / 100,
+                text: item.beanCount / 100,
                 className: 'moneyUnused1'
             }, {
-                text: item.couponInfo.investMultip,
+                text: item.investMultip,
                 className: 'moneyUnused2'
             }, {
-                text: item.couponInfo.inverstPeriod == 0 ? '全场通用' : `≥${item.couponInfo.inverstPeriod}`,
+                text: item.inverstPeriod == 0 ? '全场通用' : `≥${item.inverstPeriod}`,
                 className: 'moneyUnused2'
             }, {
-                text: getLocationDate(item.couponInfo.overdueTime),
+                text: getLocationDate(item.overdueTime),
                 className: 'moneyUsedTime'
             }, {
-                text: item.couponInfo.remark
+                text: item.remark
             }]
         })
     }

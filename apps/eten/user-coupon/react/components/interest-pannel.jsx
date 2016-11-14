@@ -204,25 +204,24 @@ let InterestUnusedCouponFilter = function (data) {
     return {
         total_page: data.pagination && data.pagination.totalPage,
         rows: (data.result && data.result).map((item)=> {
-            let info = item.couponInfo;
             return [{
-                text: `${item.couponInfo.backInterestRate}%`,
+                text: `${item.backInterestRate}%`,
                 className:'moneyUnused1'
             }, {
-                text: item.couponInfo.investMultip,
+                text: item.investMultip,
                 className:'moneyUnused2'
             }, {
-                text: item.couponInfo.inverstPeriod == 0 ? '全场通用' : `≥${item.couponInfo.inverstPeriod}`,
+                text: item.inverstPeriod == 0 ? '全场通用' : `≥${item.inverstPeriod}`,
                 className:'moneyUnused2'
             }, {
-                text: `${getLocationDate(item.couponInfo.issueTime)}至${getLocationDate(item.couponInfo.overdueTime)}`,
+                text: `${getLocationDate(item.issueTime)}至${getLocationDate(item.overdueTime)}`,
                 className:'moneyUnused3'
             }, {
-                text: item.couponInfo.remark
+                text: item.remark
             }, {
-                text:item.couponInfo.transferNumber < 1 && item.couponInfo.couponTypeGivenNum == 1  ? '赠送' : null,
-                className: item.couponInfo.transferNumber < 1 && item.couponInfo.couponTypeGivenNum == 1 ?'moneyPresentBtn':'',
-                clickHandler: () => showPopList('返息券',`${info.backInterestRate}%`, info.id)
+                text:item.transferNumber < 1 && item.couponTypeGivenNum == 1  ? '赠送' : null,
+                className: item.transferNumber < 1 && item.couponTypeGivenNum == 1 ?'moneyPresentBtn':'',
+                clickHandler: item.transferNumber < 1 && item.couponTypeGivenNum == 1 ? () => showPopList('返息券',`${item.backInterestRate}%`, item.id):null
             }]
         })
     }
@@ -232,19 +231,19 @@ let InterestUsedCouponFilter = function (data) {
         total_page: data.pagination && data.pagination.totalPage,
         rows: (data.result && data.result).map((item)=> {
             return [{
-                text: `${item.couponInfo.backInterestRate}%`,
+                text: `${item.backInterestRate}%`,
                 className:'moneyUnused1'
             }, {
-                text: item.couponInfo.investMultip,
+                text: item.investMultip,
                 className:'moneyUnused2'
             }, {
-                text: item.couponInfo.inverstPeriod == 0 ? '全场通用' : `≥${item.couponInfo.inverstPeriod}`,
+                text: item.inverstPeriod == 0 ? '全场通用' : `≥${item.inverstPeriod}`,
                 className:'moneyUnused2'
             }, {
                 text: `${getLocationDate(item.usedTime)}   ${getTimesString(item.usedTime)}`,
                 className:'moneyUsedTime'
             }, {
-                text: item.couponInfo.remark
+                text: item.remark
             }]
         })
     }
@@ -254,19 +253,19 @@ let InterestOverdueCouponFilter = function (data) {
         total_page: data.pagination && data.pagination.totalPage,
         rows: (data.result && data.result).map((item)=> {
             return [{
-                text: `${item.couponInfo.backInterestRate}%`,
+                text: `${item.backInterestRate}%`,
                 className:'moneyUnused1'
             }, {
-                text: item.couponInfo.investMultip,
+                text: item.investMultip,
                 className:'moneyUnused2'
             }, {
-                text: item.couponInfo.inverstPeriod == 0 ? '全场通用' : `≥${item.couponInfo.inverstPeriod}`,
+                text: item.inverstPeriod == 0 ? '全场通用' : `≥${item.inverstPeriod}`,
                 className:'moneyUnused2'
             }, {
-                text: getLocationDate(item.couponInfo.overdueTime),
+                text: getLocationDate(item.overdueTime),
                 className:'moneyUsedTime'
             }, {
-                text: item.couponInfo.remark
+                text: item.remark
             }]
         })
     }
