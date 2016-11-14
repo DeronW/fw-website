@@ -166,7 +166,8 @@
             segment = {__html: segment};
 
             return (
-                <div style={_style_bg} className="">
+                <div style={_style_bg}>
+                    <div className="ie8-opacity-bg"></div>
                     <div style={_style_panel}>
                         <div style={_style_title}><b onClick={this.cancelHandler}
                                                      style={_style_btn_close}>&times;</b></div>

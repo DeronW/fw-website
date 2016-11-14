@@ -25,13 +25,18 @@ h1, h2, h3, h4, h5, h6, p {
 }
 
 .ie8-opacity-bg {
-  display: block;
+  display: none;
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+  background: black;
   filter: progid:DXImageTransform.Microsoft.Alpha(opacity=70);
+}
+
+.ie8 .ie8-opacity-bg {
+  display: block;
 }
 
 /*
