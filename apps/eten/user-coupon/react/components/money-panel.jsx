@@ -1,12 +1,24 @@
 const MoneyPanel = React.createClass({
     getInitialState: function () {
         return {
-            tab_name: '未使用'
+            tab_name: '未使用',
+            tab_name_list: ['未使用', '已使用', '已过期']
         }
     },
     toggleListHandle: function (name) {
         if (name == this.state.tab_name) return;
         this.setState({tab_name: name})
+    },
+    componentDidMount: function () {
+        $.get(API_PATH + 'api/coupon/v1/dataListByTransfer.json', {
+            page: 1,
+            limit: 1,
+            status: 2,
+            couponType: 1
+        }, (data) => {
+            if (data.code == 10000 && data.data.pageData)
+                this.setState({tab_name_list: ['未使用', '已使用', '已过期', '已赠送']})
+        }, 'json')
     },
     render: function () {
         let {
@@ -16,7 +28,7 @@ const MoneyPanel = React.createClass({
             willExpireAmount,
             usedNumber,
             usedAmount
-        } = this.props.data;
+            } = this.props.data;
 
         let tab = (name, index) => {
             return (
@@ -26,52 +38,40 @@ const MoneyPanel = React.createClass({
                 </div>
             )
         };
-
         let th_rows, fn_load_data, fn_filter_data;
         if (this.state.tab_name == '未使用') {
             th_rows = [
-                {title:'面值(元)', width: '20px'},
-                {title:'最小投资金额(元)', width: '70px'},
-                {title:'可投标期限(元)', width: '70px'},
-                {title:'有效期', width: '60px'},
-                {title:'备注', width: '60px'},
-                {title:'操作', width: '60px'}
+                {title: '面值(元)', width: '20px'},
+                {title: '最小投资金额(元)', width: '70px'},
+                {title: '可投标期限(元)', width: '70px'},
+                {title: '有效期', width: '60px'},
+                {title: '备注', width: '60px'},
+                {title: '操作', width: '60px'}
             ];
             fn_load_data = MoneyUnusedCouponList;
             fn_filter_data = MoneyUnusedCouponFilter
         } else if (this.state.tab_name == '已使用') {
             th_rows = [
-                {title:'面值(元)', width: '30px'},
-                {title:'最小投资金额(元)', width: '70px'},
-                {title:'可投标期限(元)', width: '70px'},
-                {title:'使用时间', width: '60px'},
-                {title:'备注', width: '60px'}
+                {title: '面值(元)', width: '30px'},
+                {title: '最小投资金额(元)', width: '70px'},
+                {title: '可投标期限(元)', width: '70px'},
+                {title: '使用时间', width: '60px'},
+                {title: '备注', width: '60px'}
             ];
             fn_load_data = MoneyUsedCouponList;
             fn_filter_data = MoneyUsedCouponFilter;
-        } else if(this.state.tab_name == '已过期'){
+        } else if (this.state.tab_name == '已过期') {
             th_rows = [
-                {title:'面值(元)', width: '30px'},
-                {title:'最小投资金额(元)', width: '70px'},
-                {title:'可投标期限(元)', width: '70px'},
-                {title:'过期时间', width: '60px'},
-                {title:'备注', width: '60px'}
+                {title: '面值(元)', width: '30px'},
+                {title: '最小投资金额(元)', width: '70px'},
+                {title: '可投标期限(元)', width: '70px'},
+                {title: '过期时间', width: '60px'},
+                {title: '备注', width: '60px'}
             ];
             fn_load_data = MoneyOverdueCouponList;
             fn_filter_data = MoneyOverdueCouponFilter;
-        } else if(this.state.tab_name == '已赠送'){
-            th_rows = [
-                {title:'面值(元)', width: '50px'},
-                {title:'最小投资金额(元)', width: '80px'},
-                {title:'可投标期限(元)', width: '80px'},
-                {title:'有效期', width: '50px'},
-                {title:'赠送日期', width: '50px'},
-                {title:'赠送人', width: '50px'},
-                {title:'备注', width: '50px'}
-            ];
-            fn_load_data = MoneyPresentCouponList;
-            fn_filter_data = MoneyPresentCouponFilter;
         }
+
 
         return (
 
@@ -105,7 +105,7 @@ const MoneyPanel = React.createClass({
                 </div>
 
                 <div className="containerCenterList">
-                    { ['未使用', '已使用', '已过期', '已赠送'].map(tab) }
+                    { this.state.tab_name_list.map(tab) }
                 </div>
 
                 <div className="containerRecord">
@@ -116,10 +116,10 @@ const MoneyPanel = React.createClass({
     }
 });
 let getLocationDate = function (d) {
-    return new Date(d).toLocaleDateString().replace(/\//g,'-')
+    return new Date(d).toLocaleDateString().replace(/\//g, '-')
 };
 let getTimesString = function (d) {
-    return  new Date(d).toTimeString().split(' ',1)[0]
+    return new Date(d).toTimeString().split(' ', 1)[0]
 };
 let MoneyUnusedCouponList = function (page, cb) {
     $.ajax({
@@ -206,42 +206,42 @@ let MoneyUnusedCouponFilter = function (data) {
             let info = item.couponInfo;
             return [{
                 text: item.couponInfo.beanCount / 100,
-                className:'moneyUnused1'
+                className: 'moneyUnused1'
             }, {
                 text: item.couponInfo.investMultip,
-                className:'moneyUnused2'
+                className: 'moneyUnused2'
             }, {
                 text: item.couponInfo.inverstPeriod == 0 ? '全场通用' : `≥${item.couponInfo.inverstPeriod}`,
-                className:'moneyUnused2'
+                className: 'moneyUnused2'
             }, {
                 text: `${getLocationDate(item.couponInfo.issueTime)}至${getLocationDate(item.couponInfo.overdueTime)}`,
-                className:'moneyUnused3'
+                className: 'moneyUnused3'
             }, {
                 text: item.couponInfo.remark
             }, {
-                text: item.couponInfo.transferNumber < 1 && !item.couponInfo.couponTypeGive ? '赠送' : null,
-                className: item.couponInfo.transferNumber < 1 && !item.couponInfo.couponTypeGive ?'moneyPresentBtn':null,
+                text: item.couponInfo.transferNumber < 1 && item.couponInfo.couponTypeGivenNum == 1 ? '赠送' : null,
+                className: item.couponInfo.transferNumber < 1 && item.couponInfo.couponTypeGivenNum == 1 ? 'moneyPresentBtn' : null,
                 clickHandler: () => showPopList('返现券', info.beanCount / 100, info.id)
             }]
         })
     }
 };
 let MoneyUsedCouponFilter = function (data) {
-    return{
+    return {
         total_page: data.pagination && data.pagination.totalPage,
         rows: (data.result && data.result).map((item)=> {
             return [{
                 text: item.couponInfo.beanCount / 100,
-                className:'moneyUnused1'
+                className: 'moneyUnused1'
             }, {
                 text: item.couponInfo.investMultip,
-                className:'moneyUnused2'
+                className: 'moneyUnused2'
             }, {
                 text: item.couponInfo.inverstPeriod == 0 ? '全场通用' : `≥${item.couponInfo.inverstPeriod}`,
-                className:'moneyUnused2'
+                className: 'moneyUnused2'
             }, {
                 text: `${getLocationDate(item.usedTime)}   ${getTimesString(item.usedTime)}`,
-                className:'moneyUsedTime'
+                className: 'moneyUsedTime'
             }, {
                 text: item.couponInfo.remark
             }]
@@ -254,16 +254,16 @@ let MoneyOverdueCouponFilter = function (data) {
         rows: (data.result && data.result).map((item)=> {
             return [{
                 text: item.couponInfo.beanCount / 100,
-                className:'moneyUnused1'
+                className: 'moneyUnused1'
             }, {
                 text: item.couponInfo.investMultip,
-                className:'moneyUnused2'
+                className: 'moneyUnused2'
             }, {
                 text: item.couponInfo.inverstPeriod == 0 ? '全场通用' : `≥${item.couponInfo.inverstPeriod}`,
-                className:'moneyUnused2'
+                className: 'moneyUnused2'
             }, {
                 text: getLocationDate(item.couponInfo.overdueTime),
-                className:'moneyUsedTime'
+                className: 'moneyUsedTime'
             }, {
                 text: item.couponInfo.remark
             }]
@@ -275,22 +275,22 @@ let MoneyPresentCouponFilter = function (data) {
         total_page: data.pagination && data.pagination.totalPage,
         rows: (data.result && data.result).map((item)=> {
             return [{
-                text: item.couponTransferInfo.beanCount / 100,
-                className:'moneyUnused1'
+                text: item.beanCount / 100,
+                className: 'moneyUnused1'
             }, {
-                text: item.couponTransferInfo.investMultip,
-                className:'moneyUnused2'
+                text: item.investMultip,
+                className: 'moneyUnused2'
             }, {
-                text: item.couponTransferInfo.inverstPeriod == 0 ? '全场通用' : `≥${item.couponTransferInfo.inverstPeriod}`,
-                className:'moneyUnused2'
+                text: item.inverstPeriod == 0 ? '全场通用' : `≥${item.inverstPeriod}`,
+                className: 'moneyUnused2'
             }, {
-                text: `${getLocationDate(item.couponTransferInfo.issueTime)}至${getLocationDate(item.couponTransferInfo.overdueTime)}`,
+                text: `${getLocationDate(item.issueTime)}至${getLocationDate(item.overdueTime)}`,
             }, {
-                text: getLocationDate(item.couponTransferInfo.givenTime)
+                text: getLocationDate(item.givenTime)
             }, {
-                text: item.transferName == null ? '--':item.transferName
+                text: item.transferName == null ? '--' : item.transferName
             }, {
-                text: item.couponTransferInfo.remark
+                text: item.remark
             }]
         })
     }

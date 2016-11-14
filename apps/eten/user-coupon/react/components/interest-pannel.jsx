@@ -1,12 +1,24 @@
 const InterestPanel = React.createClass({
     getInitialState: function () {
         return {
-            tab_name: '未使用'
+            tab_name: '未使用',
+            tab_name_list: ['未使用', '已使用', '已过期']
         }
     },
     toggleListHandle: function (name) {
         if (name == this.state.tab_name) return;
         this.setState({tab_name: name})
+    },
+    componentDidMount: function () {
+        $.get(API_PATH + 'api/coupon/v1/dataListByTransfer.json', {
+            page: 1,
+            limit: 1,
+            status: 2,
+            couponType: 1
+        }, (data) => {
+            if (data.code == 10000 && data.data.pageData)
+                this.setState({tab_name_list: ['未使用', '已使用', '已过期', '已赠送']})
+        }, 'json')
     },
    render: function () {
        let {
@@ -24,50 +36,86 @@ const InterestPanel = React.createClass({
            )
        };
        let th_rows, fn_load_data, fn_filter_data;
-       if (this.state.tab_name == '未使用') {
-           th_rows = [
-               {title:'返息率', width: '20px'},
-               {title:'最小投资金额(元)', width: '70px'},
-               {title:'可投标期限(元)', width: '70px'},
-               {title:'有效期', width: '60px'},
-               {title:'备注', width: '60px'},
-               {title:'操作', width: '60px'}
-           ];
-           fn_load_data = InterestUnusedCouponList;
-           fn_filter_data = InterestUnusedCouponFilter
-       } else if (this.state.tab_name == '已使用') {
-           th_rows = [
-               {title:'返息率', width: '30px'},
-               {title:'最小投资金额(元)', width: '70px'},
-               {title:'可投标期限(元)', width: '70px'},
-               {title:'使用时间', width: '60px'},
-               {title:'备注', width: '60px'}
-           ];
-           fn_load_data = InterestUsedCouponList;
-           fn_filter_data = InterestUsedCouponFilter;
-       } else if(this.state.tab_name == '已过期'){
-           th_rows = [
-               {title:'返息率', width: '30px'},
-               {title:'最小投资金额(元)', width: '70px'},
-               {title:'可投标期限(元)', width: '70px'},
-               {title:'过期时间', width: '60px'},
-               {title:'备注', width: '60px'}
-           ];
-           fn_load_data = InterestOverdueCouponList;
-           fn_filter_data = InterestOverdueCouponFilter;
-       } else if(this.state.tab_name == '已赠送'){
-           th_rows = [
-               {title:'返息率', width: '50px'},
-               {title:'最小投资金额(元)', width: '110px'},
-               {title:'可投标期限(元)', width: '100px'},
-               {title:'有效期', width: '50px'},
-               {title:'赠送日期', width: '50px'},
-               {title:'赠送人', width: '50px'},
-               {title:'备注', width: '50px'}
-           ];
-           fn_load_data = InterestPresentCouponList;
-           fn_filter_data = InterestPresentCouponFilter;
+       if(this.state.firstTransform == 'undefined'){
+           if (this.state.tab_name == '未使用') {
+               th_rows = [
+                   {title:'返息率', width: '20px'},
+                   {title:'最小投资金额(元)', width: '70px'},
+                   {title:'可投标期限(元)', width: '70px'},
+                   {title:'有效期', width: '60px'},
+                   {title:'备注', width: '60px'},
+                   {title:'操作', width: '60px'}
+               ];
+               fn_load_data = InterestUnusedCouponList;
+               fn_filter_data = InterestUnusedCouponFilter
+           } else if (this.state.tab_name == '已使用') {
+               th_rows = [
+                   {title:'返息率', width: '30px'},
+                   {title:'最小投资金额(元)', width: '70px'},
+                   {title:'可投标期限(元)', width: '70px'},
+                   {title:'使用时间', width: '60px'},
+                   {title:'备注', width: '60px'}
+               ];
+               fn_load_data = InterestUsedCouponList;
+               fn_filter_data = InterestUsedCouponFilter;
+           } else if(this.state.tab_name == '已过期'){
+               th_rows = [
+                   {title:'返息率', width: '30px'},
+                   {title:'最小投资金额(元)', width: '70px'},
+                   {title:'可投标期限(元)', width: '70px'},
+                   {title:'过期时间', width: '60px'},
+                   {title:'备注', width: '60px'}
+               ];
+               fn_load_data = InterestOverdueCouponList;
+               fn_filter_data = InterestOverdueCouponFilter;
+           }
+       }else{
+           if (this.state.tab_name == '未使用') {
+               th_rows = [
+                   {title:'返息率', width: '20px'},
+                   {title:'最小投资金额(元)', width: '70px'},
+                   {title:'可投标期限(元)', width: '70px'},
+                   {title:'有效期', width: '60px'},
+                   {title:'备注', width: '60px'},
+                   {title:'操作', width: '60px'}
+               ];
+               fn_load_data = InterestUnusedCouponList;
+               fn_filter_data = InterestUnusedCouponFilter
+           } else if (this.state.tab_name == '已使用') {
+               th_rows = [
+                   {title:'返息率', width: '30px'},
+                   {title:'最小投资金额(元)', width: '70px'},
+                   {title:'可投标期限(元)', width: '70px'},
+                   {title:'使用时间', width: '60px'},
+                   {title:'备注', width: '60px'}
+               ];
+               fn_load_data = InterestUsedCouponList;
+               fn_filter_data = InterestUsedCouponFilter;
+           } else if(this.state.tab_name == '已过期'){
+               th_rows = [
+                   {title:'返息率', width: '30px'},
+                   {title:'最小投资金额(元)', width: '70px'},
+                   {title:'可投标期限(元)', width: '70px'},
+                   {title:'过期时间', width: '60px'},
+                   {title:'备注', width: '60px'}
+               ];
+               fn_load_data = InterestOverdueCouponList;
+               fn_filter_data = InterestOverdueCouponFilter;
+           } else if(this.state.tab_name == '已赠送'){
+               th_rows = [
+                   {title:'返息率', width: '50px'},
+                   {title:'最小投资金额(元)', width: '110px'},
+                   {title:'可投标期限(元)', width: '100px'},
+                   {title:'有效期', width: '50px'},
+                   {title:'赠送日期', width: '50px'},
+                   {title:'赠送人', width: '50px'},
+                   {title:'备注', width: '50px'}
+               ];
+               fn_load_data = InterestPresentCouponList;
+               fn_filter_data = InterestPresentCouponFilter;
+           }
        }
+
        return(
            <div className="containerCenter">
 
@@ -93,7 +141,7 @@ const InterestPanel = React.createClass({
                </div>
 
                <div className="containerCenterList">
-                   { ['未使用', '已使用', '已过期', '已赠送'].map(tab) }
+                   { this.state.tab_name_list.map(tab) }
                </div>
 
                <div className="containerRecord">
@@ -207,8 +255,8 @@ let InterestUnusedCouponFilter = function (data) {
             }, {
                 text: item.couponInfo.remark
             }, {
-                text:item.couponInfo.transferNumber < 1 && !item.couponInfo.couponTypeGive  ? '赠送' : null,
-                className: item.couponInfo.transferNumber < 1 && !item.couponInfo.couponTypeGive ?'moneyPresentBtn':'',
+                text:item.couponInfo.transferNumber < 1 && item.couponInfo.couponTypeGivenNum == 1  ? '赠送' : null,
+                className: item.couponInfo.transferNumber < 1 && item.couponInfo.couponTypeGivenNum == 1 ?'moneyPresentBtn':'',
                 clickHandler: () => showPopList('返息券',`${info.backInterestRate}%`, info.id)
             }]
         })
@@ -263,22 +311,22 @@ let InterestPresentCouponFilter = function (data) {
         total_page: data.pagination && data.pagination.totalPage,
         rows: (data.result && data.result).map((item)=> {
             return [{
-                text: `${item.couponInfo.backInterestRate}%`,
+                text: `${item.backInterestRate}%`,
                 className:'moneyUnused1'
             }, {
-                text: item.couponTransferInfo.investMultip,
+                text: item.investMultip,
                 className:'moneyUnused2'
             }, {
-                text: item.couponTransferInfo.inverstPeriod == 0 ? '全场通用' : `≥${item.couponTransferInfo.inverstPeriod}`,
+                text: item.inverstPeriod == 0 ? '全场通用' : `≥${item.inverstPeriod}`,
                 className:'moneyUnused2'
             }, {
-                text: `${getLocationDate(item.couponTransferInfo.issueTime)}至${getLocationDate(item.couponTransferInfo.overdueTime)}`,
+                text: `${getLocationDate(item.issueTime)}至${getLocationDate(item.overdueTime)}`,
             }, {
-                text: getLocationDate(item.couponTransferInfo.givenTime)
+                text: getLocationDate(item.givenTime)
             }, {
                 text: item.transferName == null ? '--':item.transferName
             }, {
-                text: item.couponTransferInfo.remark
+                text: item.remark
             }]
         })
     }
