@@ -46,6 +46,8 @@
         },
         // 游戏道具
         tools: {},
+        propsWidth: 91,
+        propsHeight: 106,
 
         loadAssets: function () {
             if (this.initialized) return;
@@ -75,6 +77,15 @@
                 background: '#f6d3ab'
             });
             document.getElementById('game').appendChild(this.stage.canvas);
+
+            // 游戏底部留空要变成绿色
+            new Hilo.Container({
+                x: 0,
+                y: this.width / this.columnCount * this.rowCount + this.gameContainerMarginTop,
+                background: '#a3d03f',
+                width: this.width,
+                height: this.height - (this.width / this.columnCount * this.rowCount) - this.gameContainerMarginTop
+            }).addTo(this.stage);
 
             // 启动计时器
             this.ticker = new Hilo.Ticker(20);
@@ -146,7 +157,6 @@
                 y: 30,
                 x: this.width - 280
             }).addTo(this.stage);
-
         },
 
         removeAllProps: function () {
@@ -166,8 +176,8 @@
                 y = 160;
             this.tools.dismiss = new Hilo.Bitmap({
                 image: this.asset.propsDismiss,
-                width: 83 * 2,
-                height: 96 * 2,
+                width: this.propsWidth * 2,
+                height: this.propsHeight * 2,
                 y: y,
                 x: x
             }).addTo(this.stage);
@@ -180,9 +190,9 @@
                 color: 'white',
                 textAlign: 'center',
                 textVAlign: 'middle',
-                width: 83 * 2,
-                height: 96 * 2,
-                y: y + 60,
+                width: this.propsWidth * 2,
+                height: this.propsHeight * 2,
+                y: y + 65,
                 x: x
             }).addTo(this.stage).setFont('normal small-caps bold 40px Sans-serif');
         },
@@ -193,8 +203,8 @@
                 y = 160;
             this.tools.freeze = new Hilo.Bitmap({
                 image: this.asset.propsFreeze,
-                width: 83 * 2,
-                height: 96 * 2,
+                width: this.propsWidth * 2,
+                height: this.propsHeight * 2,
                 y: y,
                 x: x
             }).addTo(this.stage);
@@ -206,9 +216,9 @@
                 color: 'white',
                 textAlign: 'center',
                 textVAlign: 'middle',
-                width: 83 * 2,
-                height: 96 * 2,
-                y: y + 60,
+                width: this.propsWidth * 2,
+                height: this.propsHeight * 2,
+                y: y + 65,
                 x: x
             }).addTo(this.stage).setFont('normal small-caps bold 40px Sans-serif');
         },
@@ -220,8 +230,8 @@
 
             this.tools.refresh = new Hilo.Bitmap({
                 image: this.asset.propsRefresh,
-                width: 83 * 2,
-                height: 96 * 2,
+                width: this.propsWidth * 2,
+                height: this.propsHeight * 2,
                 y: y,
                 x: x
             }).addTo(this.stage);
@@ -233,9 +243,9 @@
                 color: 'white',
                 textAlign: 'center',
                 textVAlign: 'middle',
-                width: 83 * 2,
-                height: 96 * 2,
-                y: y + 60,
+                width: this.propsWidth * 2,
+                height: this.propsHeight * 2,
+                y: y + 65,
                 x: x
             }).addTo(this.stage).setFont('normal small-caps bold 40px Sans-serif');
         },
@@ -245,8 +255,8 @@
             var x = 240, y = 160;
             this.tools.tips = new Hilo.Bitmap({
                 image: this.asset.propsTips,
-                width: 83 * 2,
-                height: 96 * 2,
+                width: this.propsWidth * 2,
+                height: this.propsHeight * 2,
                 y: y,
                 x: x
             }).addTo(this.stage);
@@ -258,9 +268,9 @@
                 color: 'white',
                 textAlign: 'center',
                 textVAlign: 'middle',
-                width: 83 * 2,
-                height: 96 * 2,
-                y: y + 60,
+                width: this.propsWidth * 2,
+                height: this.propsHeight * 2,
+                y: y + 65,
                 x: x
             }).addTo(this.stage).setFont('normal small-caps bold 40px Sans-serif');
         },
@@ -544,20 +554,39 @@
             };
 
             // 添加关卡title
-            this.status.title = new Hilo.Text({
-                text: 'LEVEL ' + this.status.level,
-                color: 'red',
-                font: '40px',
-                textAlign: 'center',
-                textVAlign: 'middle',
-                width: 300 * 3,
-                height: 50 * 2,
-                maxWidth: 300 * 2,
-                textHeight: 50 * 2,
-                textWidth: 300 * 2,
+            // 添加顶部背景
+            new Hilo.Bitmap({
+                image: this.asset.levelTitle,
+                width: 128 * 2,
+                height: 28 * 2,
                 y: 60,
-                x: 320
-            }).addTo(this.stage).setFont('normal small-caps bold 80px Sans-serif');
+                x: this.width / 2 - 160 - 30
+            }).addTo(this.stage);
+            this.status.title = new Hilo.BitmapText({
+                x: this.width / 2 + 80,
+                y: 60,
+                visible: true,
+                text: this.status.level + 1,
+                scaleX: 1.5,
+                scaleY: 1.5,
+                height: 40 * 2,
+                glyphs: this.asset.numberGlyphs
+            }).addTo(this.stage);
+
+            // this.status.title = new Hilo.Text({
+            //     text: this.status.level,
+            //     color: 'red',
+            //     font: '40px',
+            //     textAlign: 'center',
+            //     textVAlign: 'middle',
+            //     width: 300 * 3,
+            //     height: 50 * 2,
+            //     maxWidth: 300 * 2,
+            //     textHeight: 50 * 2,
+            //     textWidth: 300 * 2,
+            //     y: 60,
+            //     x: 320
+            // }).addTo(this.stage).setFont('normal small-caps bold 80px Sans-serif');
 
             (props || []).forEach(function (i) {
                 if (i.prop_id == PROPS_NAME_IDS.freeze) this.addPropsFreeze(i);
