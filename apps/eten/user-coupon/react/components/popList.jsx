@@ -65,26 +65,22 @@ const PopList = React.createClass({
     },
     confirmPop: function () {
         console.log(this.props.value);
-        if(this.state.selectedId == null){
-            alert("接口错误，赠送对象的id值为null")
-        }else{
-            if(this.state.selectedId){
-                ReactDOM.unmountComponentAtNode(document.getElementById('popList'));
-                if(this.props.type == "返现券"){
-                    GlobalConfirm('您确定赠送%s元'+this.props.type+'给您的好友吗？',[this.props.value], ['red'], () => {
-                        this.presentCoupon()
-                    })
-                }else if(this.props.type == "返息券"){
-                    GlobalConfirm('您确定赠送%s'+this.props.type+'给您的好友吗？',[this.props.value], ['red'], () => {
-                        this.presentCoupon()
-                    })
-                }else{
-                    GlobalConfirm("没有确定返券类型")
-                }
-
+        if(this.state.selectedId){
+            ReactDOM.unmountComponentAtNode(document.getElementById('popList'));
+            if(this.props.type == "返现券"){
+                GlobalConfirm('您确定赠送%s元'+this.props.type+'给您的好友吗？',[this.props.value], ['red'], () => {
+                    this.presentCoupon()
+                })
+            }else if(this.props.type == "返息券"){
+                GlobalConfirm('您确定赠送%s'+this.props.type+'给您的好友吗？',[this.props.value], ['red'], () => {
+                    this.presentCoupon()
+                })
             }else{
-                GlobalAlert('请选择一个好友');
+                GlobalConfirm("没有确定返券类型")
             }
+
+        }else{
+            GlobalAlert('请选择一个好友');
         }
 
     },
