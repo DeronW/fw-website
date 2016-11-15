@@ -53,8 +53,8 @@ module.exports = function generate_task(site_name, project_name, configs) {
 
     var common_javascript_files = [
         `${lib_path}jquery-1.12.4.min.js`,
-        `${lib_path}javascripts/eten/common-functions.js`,
-        `${lib_path}javascripts/eten/interest-calculator.js`
+        `${lib_path}javascripts/web/common-functions.js`,
+        `${lib_path}javascripts/web/interest-calculator.js`
     ];
     if (CONFIG.debug) {
         common_javascript_files.push(`${lib_path}react-0.14.8/react.js`);
