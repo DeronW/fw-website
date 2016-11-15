@@ -30,21 +30,15 @@ const PopList = React.createClass({
         if (new_page) this.setState({page: new_page}, this.ajaxFriendsList);
     },
     ajaxFriendsList: function () {
-        var this1 = this;
         $.ajax({
             url: API_PATH + 'api/parttimeFinancialer/v1/searchFriends.json',
-            //url: './friends.json',
             data: {
                 page: this.state.page,
                 rows: 8
             },
             type: 'get',
-            success: function (data) {
-                this1.setAndFilterResultData(data.data)
-            },
-            fail: function (error) {
-                alert(error)
-            }
+            success: (data) => this.setAndFilterResultData(data.data),
+            fail: (err) => GlobalAlert(err)
         })
     },
     setAndFilterResultData: function (data) {
@@ -54,7 +48,7 @@ const PopList = React.createClass({
             finalRole: data.finalRole,
             total_page: pagination.totalPage,
             user_list: result.map((i)=>({
-                id:i.id,
+                id: i.id,
                 loginName: i.loginName,
                 realName: i.realName,
                 sex: i.sex,
@@ -64,55 +58,44 @@ const PopList = React.createClass({
         })
     },
     confirmPop: function () {
-        console.log(this.props.value);
-        if(this.state.selectedId){
+        if (this.state.selectedId) {
             ReactDOM.unmountComponentAtNode(document.getElementById('popList'));
-            if(this.props.type == "返现券"){
-                GlobalConfirm('您确定赠送%s元'+this.props.type+'给您的好友吗？',[this.props.value], ['red'], () => {
-                    this.presentCoupon()
-                })
-            }else if(this.props.type == "返息券"){
-                GlobalConfirm('您确定赠送%s'+this.props.type+'给您的好友吗？',[this.props.value], ['red'], () => {
-                    this.presentCoupon()
-                })
-            }else{
+            let couponName = this.props.type, username = this.props.value;
+            if (this.props.type == "返现券") {
+                GlobalConfirm(`您确定赠送%s元${couponName}给您的好友吗？`, username, this.presentCoupon)
+            } else if (this.props.type == "返息券") {
+                GlobalConfirm(`您确定赠送%s${couponName}给您的好友吗？`, username, this.presentCoupon)
+            } else {
                 GlobalConfirm("没有确定返券类型")
             }
-
-        }else{
+        } else {
             GlobalAlert('请选择一个好友');
         }
-
     },
     judgePresentCoupon: function () {
-        if(this.state.user_list.length > 0){
+        if (this.state.user_list.length > 0) {
             this.confirmPop()
-        }else{
+        } else {
             GlobalAlert('抱歉，您暂无推荐好友，无法进行赠送。');
         }
     },
     presentCoupon: function () {
-        console.log(this.props.type);
-        console.log(this.props.id);
-        console.log(this.state.selectedId);
         $.ajax({
-            url:API_PATH+'api/coupon/v1/changeHolder.json',
-            data:{
-                couponId:this.props.id,
-                newUserId:this.state.selectedId
+            url: API_PATH + 'api/coupon/v1/changeHolder.json',
+            data: {
+                couponId: this.props.id,
+                newUserId: this.state.selectedId
             },
             success: function (data) {
-                console.log(data.data.businessResult);
-                if(data.data.businessResult){
-                    GlobalAlert('恭喜您，'+this.props.type+'赠送成功！');
-                }else{
-                    GlobalConfirm('抱歉，'+this.props.type+'赠送失败！');
+                if (data.data.businessResult) {
+                    GlobalAlert('恭喜您，' + this.props.type + '赠送成功！');
+                } else {
+                    GlobalConfirm(`抱歉，${data.message}，${this.props.type}赠送失败！`);
                 }
             }.bind(this)
         })
     },
     toggleSelectedHandler: function (id) {
-        console.log(id);
         this.setState({selectedId: id})
     },
     render: function () {
@@ -141,14 +124,11 @@ const PopList = React.createClass({
             }
             return loginNameValue
         };
+
         var popRealName = function (sex, realName, gcm, finalRole) {
-            var sexValue = "";
-            if (sex == 1) {
-                sexValue = "先生";
-            } else {
-                sexValue = "女士";
-            }
-            var realNameValue = '';
+            let sexValue = sex == 1 ? "先生" : "女士";
+
+            var realNameValue = '--';
             if (realName != null && gcm.substring(0, 1) == 'A') {
                 if (finalRole == 4) {
                     realNameValue = realName.substring(0, 1) + sexValue;
@@ -157,13 +137,13 @@ const PopList = React.createClass({
                 }
             } else if (realName != null) {
                 realNameValue = realName.substring(0, 1) + sexValue
-            } else {
-                realNameValue = "--";
             }
             return realNameValue
         };
+
         var popMobile = function (mobile, gcm, finalRole) {
-            var mobileValue = '';
+            var mobileValue = '--';
+
             if (gcm.substring(0, 1) == 'A') {
                 if (finalRole == 4) {
                     if (mobile != null) {
@@ -174,29 +154,17 @@ const PopList = React.createClass({
                 } else {
                     mobileValue = mobile
                 }
-            } else {
-                if (mobile != null) {
-                    mobileValue = mobile.substring(0, 3) + "****" + mobile.substring(7, 11)
-                } else {
-                    mobileValue = "--";
-                }
+            } else if (mobile) {
+                mobileValue = `${mobile.substr(0, 3)}****${mobile.substr(7, 3)}`
             }
             return mobileValue
-        };
-        var popCreateTime = function (createTime) {
-            var time = '';
-            if (createTime != null) {
-                time = createTime
-            } else {
-                time = "--"
-            }
-            return time
         };
 
         var friend = (item) => {
             return <li key={item.id}>
                 <div className="centerCon1 centerCon" onClick={()=>this.toggleSelectedHandler(item.id)}>
-                    {this.state.selectedId == item.id ? <img src="./images/checked.png"/> : <img src="./images/check.png"/>}
+                    {this.state.selectedId == item.id ? <img src="./images/checked.png"/> :
+                        <img src="./images/check.png"/>}
                 </div>
                 <div className="centerCon2 centerCon">
                     { popLoginName(item.loginName, this.state.gcm, this.state.finalRole) }
@@ -208,7 +176,7 @@ const PopList = React.createClass({
                     { popMobile(item.mobile, this.state.gcm, this.state.finalRole) }
                 </div>
                 <div className="centerCon5 centerCon">
-                    { popCreateTime(item.createTime) }
+                    {item.createTime || '--'}
                 </div>
             </li>
         };
@@ -253,6 +221,6 @@ const PopList = React.createClass({
     }
 });
 
-function showPopList(type,value, id) {
+function showPopList(type, value, id) {
     ReactDOM.render(<PopList type={type} value={value} id={id}/>, document.getElementById('popList'))
 }
