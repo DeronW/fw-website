@@ -33,6 +33,7 @@ const PopList = React.createClass({
         $.ajax({
             url: API_PATH + 'api/parttimeFinancialer/v1/searchFriends.json',
             data: {
+                containOneself: 0,
                 page: this.state.page,
                 rows: 8
             },
