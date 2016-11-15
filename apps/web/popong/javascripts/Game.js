@@ -566,7 +566,7 @@
                 x: this.width / 2 + 80,
                 y: 60,
                 visible: true,
-                text: this.status.level + 1,
+                text: this.status.level,
                 scaleX: 1.5,
                 scaleY: 1.5,
                 height: 40 * 2,
