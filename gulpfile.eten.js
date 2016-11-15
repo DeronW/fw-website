@@ -30,7 +30,7 @@ const ETEN_APP_NAMES = [
 
     // 其他页面
     'statistics', // 实时交易统计
-    'popong',// 点点点游戏页
+    // 'popong',// 点点点游戏页
 ];
 
 module.exports = function (gulp, generate_task, settings) {
