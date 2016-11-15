@@ -14,6 +14,7 @@ const WEB_APP_NAMES = [
     'topic-yi-shou-bao',
     'topic-bu-mao-tong',
     'topic-xiao-fei-dai',
+
     // 专题说明页面
     'topic-annual-commision', // A码 用户返利规则 佣金说明
     'topic-hui-shang', // 徽商
