@@ -136,7 +136,7 @@ let MoneyUnusedCouponList = function (page, cb) {
             if (data.code == 10000) {
                 cb && cb(data.data.pageData)
             } else {
-                alert('API异常: ' + data.message)
+                console.log('API异常: ' + data.message)
             }
         }.bind(this)
     })
@@ -155,7 +155,7 @@ let MoneyUsedCouponList = function (page, cb) {
             if (data.code == 10000) {
                 cb && cb(data.data.pageData)
             } else {
-                alert('API异常: ' + data.message)
+                console.log('API异常: ' + data.message)
             }
         }.bind(this)
     })
@@ -174,7 +174,7 @@ let MoneyOverdueCouponList = function (page, cb) {
             if (data.code == 10000) {
                 cb && cb(data.data.pageData)
             } else {
-                alert('API异常: ' + data.message)
+                console.log('API异常: ' + data.message)
             }
         }.bind(this)
     })
@@ -193,7 +193,7 @@ let MoneyPresentCouponList = function (page, cb) {
             if (data.code == 10000) {
                 cb && cb(data.data.pageData)
             } else {
-                alert('API异常: ' + data.message)
+                console.log('API异常: ' + data.message)
             }
         }.bind(this)
     })

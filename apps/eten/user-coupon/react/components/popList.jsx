@@ -82,6 +82,7 @@ const PopList = React.createClass({
     presentCoupon: function () {
         $.ajax({
             url: API_PATH + 'api/coupon/v1/changeHolder.json',
+            method: 'post',
             data: {
                 couponId: this.props.id,
                 newUserId: this.state.selectedId
@@ -90,7 +91,7 @@ const PopList = React.createClass({
                 if (data.data.businessResult) {
                     GlobalAlert('恭喜您，' + this.props.type + '赠送成功！');
                 } else {
-                    GlobalConfirm(`抱歉，${data.message}，${this.props.type}赠送失败！`);
+                    GlobalConfirm(`抱歉，${data.message} ${this.props.type}赠送失败！`);
                 }
             }.bind(this)
         })
