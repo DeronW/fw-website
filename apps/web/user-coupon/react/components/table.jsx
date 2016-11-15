@@ -52,14 +52,15 @@ const Table = React.createClass({
         let {page, total_page, rows} = this.state;
 
         let th_cell = (t, index) => {
-            return <th className={"thCell"+index} key={index} width={t.width}>{t.title}</th>
+            return <th key={index} width={t.width}>{t.title}</th>
         };
 
         let tr = (row, row_index) => {
             let td = (cell, cell_index) => {
                 return (
-                    <td key={cell_index} className={cell.className} onClick={cell.clickHandler}>
-                        <span>{cell.text}</span><em className="productStatus">{cell.content}</em>
+                    <td key={cell_index} className={cell.className}>
+                        <span onClick={cell.clickHandler}>{cell.text}</span>
+                        <em className="productStatus">{cell.content}</em>
                     </td>
                 )
             };

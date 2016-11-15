@@ -65,7 +65,7 @@ const PopList = React.createClass({
             if (this.props.type == "返现券") {
                 GlobalConfirm(`您确定赠送%s元${couponName}给您的好友吗？`, username, this.presentCoupon)
             } else if (this.props.type == "返息券") {
-                GlobalConfirm(`您确定赠送%s${couponName}给您的好友吗？`, username, this.presentCoupon)
+                GlobalConfirm(`您确定赠送${couponName}给您的好友%s吗？`, username, this.presentCoupon)
             } else {
                 GlobalConfirm("没有确定返券类型")
             }
@@ -157,7 +157,7 @@ const PopList = React.createClass({
                     mobileValue = mobile
                 }
             } else if (mobile) {
-                mobileValue = `${mobile.substr(0, 3)}****${mobile.substr(7, 3)}`
+                mobileValue = `${mobile.substr(0, 3)}****${mobile.substr(7, 4)}`
             }
             return mobileValue
         };
