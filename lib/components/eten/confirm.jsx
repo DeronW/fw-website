@@ -6,9 +6,9 @@
 
      usage: GlobalAlert('%sa%sb%sc', ['中', '2'], [null,'blue'])
      */
-    let GlobalAlert = (tpl, values, colors) => {
+    let GlobalConfirm = (tpl, values, colors, cb) => {
 
-        var id = '_id_react_component_global_alert';
+        var id = '_id_react_component_global_confirm';
         var element = document.getElementById(id);
 
         if (!element) {
@@ -17,11 +17,20 @@
             document.body.appendChild(element);
         }
 
-        ReactDOM.render(React.createElement(Alert, {
+        if (typeof(values) == 'function') {
+            cb = values;
+            values = colors = null;
+        } else if (typeof(colors) == 'function') {
+            cb = colors;
+            colors = null;
+        }
+
+        ReactDOM.render(React.createElement(Confirm, {
             id: id,
             tpl: tpl,
             values: values,
             colors: colors,
+            cb: cb,
             unMountHandler: function () {
                 element.parentNode.removeChild(element)
             }
@@ -80,10 +89,11 @@
         color: '#333'
     };
 
-    let _style_btn = {
+    let _style_confirm_btn = {
         display: 'block',
-        margin: '20px auto',
-        width: '100px',
+        float: 'left',
+        marginLeft: '20px',
+        width: '140px',
         height: '34px',
         lineHeight: '34px',
         textAlign: 'center',
@@ -91,12 +101,34 @@
         background: '#ea6f5d',
         fontSize: '14px',
         cursor: 'pointer',
-        color: 'white'
+        color: 'white',
     };
 
-    const Alert = React.createClass({
+    let _style_cancel_btn = {
+        display: 'block',
+        float: 'right',
+        marginRight: '20px',
+        width: '140px',
+        height: '34px',
+        lineHeight: '34px',
+        textAlign: 'center',
+        borderRadius: '4px',
+        background: '#8ab5f5',
+        fontSize: '14px',
+        cursor: 'pointer',
+        color: 'white',
+    };
+
+    const Confirm = React.createClass({
         closeHandler: function () {
             ReactDOM.unmountComponentAtNode(document.getElementById(this.props.id));
+        },
+        cancelHandler: function () {
+            this.closeHandler()
+        },
+        confirmHandler: function () {
+            this.props.cb && this.props.cb(true);
+            this.closeHandler()
         },
         componentWillUnmount: function () {
             this.props.unMountHandler && this.props.unMountHandler();
@@ -137,15 +169,16 @@
                 <div style={_style_bg}>
                     <div className="ie8-opacity-bg"></div>
                     <div style={_style_panel}>
-                        <div style={_style_title}><b onClick={this.closeHandler}
+                        <div style={_style_title}><b onClick={this.cancelHandler}
                                                      style={_style_btn_close}>&times;</b></div>
                         <div style={_style_text} dangerouslySetInnerHTML={segment}></div>
-                        <a style={_style_btn} onClick={this.closeHandler}>确定</a>
+                        <a style={_style_confirm_btn} onClick={this.confirmHandler}>确定</a>
+                        <a style={_style_cancel_btn} onClick={this.cancelHandler}>取消</a>
                     </div>
                 </div>
             )
         }
     });
 
-    window.GlobalAlert = GlobalAlert;
+    window.GlobalConfirm = GlobalConfirm;
 })();

@@ -56,7 +56,8 @@ const LevelComplete = React.createClass({
     },
     render: function () {
         var dialog_cls = this.props.success ? "dialog pass" : "dialog fail";
-        var time = parseInt(this.props.seconds / 60) + '分' + this.props.seconds % 60 + '秒';
+        // var time = parseInt(this.props.seconds / 60) + '分' + this.props.seconds % 60 + '秒';
+        let time = this.props.seconds + '秒';
 
         let btn, panel;
 
@@ -81,7 +82,7 @@ const LevelComplete = React.createClass({
                     {btn}
                     <img className={this.state.has_gift ? "btn-level-list" : "btn-level-list alone"}
                          src="images/level-home.png" onClick={this.showLevelListHandler}/>
-                    {this.state.has_gift ?
+                    {this.state.has_gift && this.props.success?
                         <img className="btn-level-list" src="images/level-complete/gift.jpg"
                              onClick={this.showGiftPackageHandler}/>
                         : null}
