@@ -6,7 +6,10 @@ const PopList = React.createClass({
             gcm: '',
             finalRole: '',
             user_list: [],
-            selectedId: null
+            selectedId: null,
+            isConfirm:false,
+            staMoneyData: [],
+            staInterestData: [],
         }
     },
     componentDidMount: function () {
@@ -62,6 +65,7 @@ const PopList = React.createClass({
         if (this.state.selectedId) {
             ReactDOM.unmountComponentAtNode(document.getElementById('popList'));
             let couponName = this.props.type, userValue = this.props.value;
+            console.log(userValue);
             if (this.props.type == "返现券") {
                 GlobalConfirm('您确定赠送%s元'+couponName+'给您的好友吗？', userValue, this.presentCoupon)
             } else if (this.props.type == "返息券") {
@@ -84,12 +88,27 @@ const PopList = React.createClass({
             success: function (data) {
                 if (data.data.businessResult) {
                     GlobalAlert('恭喜您，' + this.props.type + '赠送成功！');
-
+                    this.ajaxJudgeMoney();
                 } else {
                     GlobalConfirm(`抱歉，${data.message} ${this.props.type}赠送失败！`);
                 }
             }.bind(this)
         })
+    },
+    ajaxJudgeMoney: function () {
+        $.ajax({
+            url: API_PATH + 'api/coupon/v1/accountCouponStatistics.json',
+            data: {
+                couponType: 1
+            },
+            type: 'get',
+            success: function (data) {
+                this.setState({
+                    staMoneyData: data.data.couponAccount[0],
+                    isConfirm:true
+                })
+            }.bind(this)
+        });
     },
     toggleSelectedHandler: function (id) {
         this.setState({selectedId: id})
@@ -181,7 +200,7 @@ const PopList = React.createClass({
                 </div>
             </li>
         };
-
+        var _this = this;
         return (
             <div className="listPopBg">
                 <div className="listPop">
@@ -217,6 +236,9 @@ const PopList = React.createClass({
                         <div className="cancelBtn footerBtn" onClick={this.closeHandler}>取消</div>
                     </div>
                 </div>
+                {
+                    _this.state.isConfirm ? <MoneyPanel data={_this.state.staMoneyData} /> : null
+                }
             </div>
         )
     }
