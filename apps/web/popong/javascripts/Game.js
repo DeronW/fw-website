@@ -155,7 +155,7 @@
                 width: 84 * 2,
                 height: 84 * 2,
                 y: 30,
-                x: this.width - 280
+                x: this.width - 200
             }).addTo(this.stage);
         },
 
@@ -173,7 +173,7 @@
         // 道具: 自动消除
         addPropsDismiss: function (props) {
             var x = this.width - 320 - 83,
-                y = 160;
+                y = 140;
             this.tools.dismiss = new Hilo.Bitmap({
                 image: this.asset.propsDismiss,
                 width: this.propsWidth * 2,
@@ -200,7 +200,7 @@
         // 道具: 时间冻结
         addPropsFreeze: function (props) {
             var x = this.width - 320 - 300,
-                y = 160;
+                y = 140;
             this.tools.freeze = new Hilo.Bitmap({
                 image: this.asset.propsFreeze,
                 width: this.propsWidth * 2,
@@ -226,7 +226,7 @@
         // 道具: 重新排列
         addPropsRefresh: function (props) {
             var x = 460,
-                y = 160;
+                y = 140;
 
             this.tools.refresh = new Hilo.Bitmap({
                 image: this.asset.propsRefresh,
@@ -252,7 +252,7 @@
 
         // 道具: 提示
         addPropsTips: function (props) {
-            var x = 240, y = 160;
+            var x = 240, y = 140;
             this.tools.tips = new Hilo.Bitmap({
                 image: this.asset.propsTips,
                 width: this.propsWidth * 2,
@@ -536,8 +536,8 @@
                 y: 50,
                 visible: true,
                 text: '0a',
-                scaleX: 1.5,
-                scaleY: 1.5,
+                scaleX: 2,
+                scaleY: 2,
                 height: 35 * 2,
                 glyphs: this.asset.numberGlyphs
             }).addTo(this.stage);
@@ -557,18 +557,18 @@
             // 添加顶部背景
             new Hilo.Bitmap({
                 image: this.asset.levelTitle,
-                width: 128 * 2,
-                height: 28 * 2,
+                width: 160 * 2,
+                height: 35 * 2,
                 y: 60,
                 x: this.width / 2 - 160 - 30
             }).addTo(this.stage);
             this.status.title = new Hilo.BitmapText({
-                x: this.width / 2 + 80,
+                x: this.width / 2 + 120,
                 y: 60,
                 visible: true,
                 text: this.status.level,
-                scaleX: 1.5,
-                scaleY: 1.5,
+                scaleX: 2,
+                scaleY: 2,
                 height: 40 * 2,
                 glyphs: this.asset.numberGlyphs
             }).addTo(this.stage);

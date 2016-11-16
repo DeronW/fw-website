@@ -1,4 +1,3 @@
-
 const PROPS_NAME_IDS = {
     tips: 3,
     refresh: 4,
@@ -70,7 +69,12 @@ const Content = React.createClass({
         }.bind(this), 'json');
     },
     switchLevel: function (level, directly_play) {
-        this.setState({page: 'prepare', level: level}, ()=> {
+        if (level > 3 && window.VISITOR) {
+            // 达到一定关数好要求强制登录, 通过 visitor 判断是否为游客登录
+            // http://game.9888.cn 域名下
+            location.href = '/front/game/popong/'
+        }
+        this.setState({page: 'prepare', level: level}, () => {
             if (directly_play) this.playHandler();
         });
     },
@@ -83,7 +87,7 @@ const Content = React.createClass({
             uid: USER_ID,
             gameNo: GAME_NAME,
             passNum: this.state.level
-        }, (data)=> {
+        }, (data) => {
             var propsOptions = data.data;
             Game.setLevel(start_count[this.state.level - 1], this.state.level, propsOptions);
             this.setState({page: 'game', propsOptions: propsOptions});
