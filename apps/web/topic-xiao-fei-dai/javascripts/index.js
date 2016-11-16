@@ -20,7 +20,7 @@ $(function () {
     //     console.log(scrollT);
     // });
     $(window).scroll(function () {
-        if ($(window).scrollTop() > 569) {
+        if ($(window).scrollTop() >420) {
             $("#nav").css({
                 "position": "fixed",
                 "top": "0",
