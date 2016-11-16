@@ -4,9 +4,9 @@ const Coupon = React.createClass({
             listIndex: 0,
             listTab: "未使用",
             couponType: 1,
-            staMoneyData: null,
-            staInterestData: null,
-            staExchangeData: null
+            staMoneyData: {},
+            staInterestData: {},
+            staExchangeData: {}
         })
     },
     componentDidMount: function () {
