@@ -52,7 +52,7 @@ const Table = React.createClass({
         let {page, total_page, rows} = this.state;
 
         let th_cell = (t, index) => {
-            return <th key={index} width={t.width}>{t.title}</th>
+            return <th key={index} width={t.width} className={"thCell"+index}>{t.title}</th>
         };
 
         let tr = (row, row_index) => {
