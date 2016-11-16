@@ -51,11 +51,11 @@ const MoneyPanel = React.createClass({
             fn_filter_data = MoneyUnusedCouponFilter
         } else if (this.state.tab_name == '已使用') {
             th_rows = [
-                {title: '面值(元)', width: '30px'},
-                {title: '最小投资金额(元)', width: '70px'},
-                {title: '可投标期限(天)', width: '70px'},
-                {title: '使用时间', width: '60px'},
-                {title: '备注', width: '60px'}
+                {title: '面值(元)', width: '14%'},
+                {title: '最小投资金额(元)', width: '18%'},
+                {title: '可投标期限(天)', width: '18%'},
+                {title: '使用时间', width: '24%'},
+                {title: '备注', width: '18%'}
             ];
             fn_load_data = MoneyUsedCouponList;
             fn_filter_data = MoneyUsedCouponFilter;
