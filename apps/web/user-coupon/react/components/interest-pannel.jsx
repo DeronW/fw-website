@@ -22,9 +22,9 @@ const InterestPanel = React.createClass({
     },
    render: function () {
        let {
-           availableNumber,
-           willExpireNumber,
-           usedNumber,
+           availableNumber = 0,
+           willExpireNumber = 0,
+           usedNumber = 0,
            } = this.props.data;
 
        let tab = (name, index) => {
@@ -40,7 +40,7 @@ const InterestPanel = React.createClass({
            th_rows = [
                {title:'返息率', width: '20px'},
                {title:'最小投资金额(元)', width: '70px'},
-               {title:'可投标期限(元)', width: '70px'},
+               {title:'可投标期限(天)', width: '70px'},
                {title:'有效期', width: '60px'},
                {title:'备注', width: '60px'},
                {title:'操作', width: '60px'}
@@ -51,7 +51,7 @@ const InterestPanel = React.createClass({
            th_rows = [
                {title:'返息率', width: '30px'},
                {title:'最小投资金额(元)', width: '70px'},
-               {title:'可投标期限(元)', width: '70px'},
+               {title:'可投标期限(天)', width: '70px'},
                {title:'使用时间', width: '60px'},
                {title:'备注', width: '60px'}
            ];
@@ -61,7 +61,7 @@ const InterestPanel = React.createClass({
            th_rows = [
                {title:'返息率', width: '30px'},
                {title:'最小投资金额(元)', width: '70px'},
-               {title:'可投标期限(元)', width: '70px'},
+               {title:'可投标期限(天)', width: '70px'},
                {title:'过期时间', width: '60px'},
                {title:'备注', width: '60px'}
            ];
@@ -71,7 +71,7 @@ const InterestPanel = React.createClass({
            th_rows = [
                {title:'返息率', width: '50px'},
                {title:'最小投资金额(元)', width: '110px'},
-               {title:'可投标期限(元)', width: '100px'},
+               {title:'可投标期限(天)', width: '100px'},
                {title:'有效期', width: '50px'},
                {title:'赠送日期', width: '50px'},
                {title:'赠送人', width: '50px'},
