@@ -57,11 +57,11 @@ $(function () {
     var iTop = $(".top").outerHeight();
     var iH = $(".centerNav").height();
     $(".centerNav ul li.list1").click(function () {
-        starMove(document, {'scrollbar': iH + iTop - 30});
+        starMove(document, {'scrollbar': iH + iTop-100});
         $(this).children("a").addClass("on").parent().siblings().children("a").removeClass("on");
     });
     $(".centerNav ul li.list2").click(function () {
-        starMove(document, {'scrollbar': onesize1 + iH + iTop - 30});
+        starMove(document, {'scrollbar': onesize1 + iH + iTop-70});
         $(this).children("a").addClass("on").parent().siblings().children("a").removeClass("on");
     });
     $(".centerNav ul li.list3").click(function () {
@@ -101,9 +101,9 @@ $(function () {
     };
     $(window).scroll(function () {
         var st = $(window).scrollTop();
-        if (st > (iTop + iH - 40) && st < (iH + iTop + onesize1 - 40)) {
+        if (st > (iTop + iH - 120) && st < (iH + iTop + onesize1 - 120)) {
             $(".list1 a").addClass("on").parent().siblings().children("a").removeClass("on");
-        } else if (st > (iH + iTop + onesize1 - 40) && st < (iTop + iH + onesize1 + onesize2 - 40)) {
+        } else if (st > (iH + iTop + onesize1-80) && st < (iTop + iH + onesize1 + onesize2-80)) {
             $(".list2 a").addClass("on").parent().siblings().children("a").removeClass("on");
         } else if (st > (iTop + iH + onesize1 + onesize2 - 40) && st < (iTop + iH + onesize1 + onesize2 + onesize3 - 40)) {
             $(".list3 a").addClass("on").parent().siblings().children("a").removeClass("on");
