@@ -24,9 +24,9 @@ const InterestPanel = React.createClass({
        let {
            availableNumber,
            willExpireNumber,
-           willExpireAmount,
            usedNumber,
            } = this.props.data;
+
        let tab = (name, index) => {
            return (
                <div key={index} className={this.state.tab_name == name ? "centerList" : null}

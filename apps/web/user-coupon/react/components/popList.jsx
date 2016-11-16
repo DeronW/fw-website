@@ -234,7 +234,6 @@ function showPopList(type, value, id, cb) {
         },
         type: 'get',
         success: (data) => {
-            console.log("是否有好友");
             if(data.data.pageData.result.length>0){
                 ReactDOM.render(<PopList type={type} value={value} id={id} callback={cb}/>, document.getElementById('popList'))
             }else{

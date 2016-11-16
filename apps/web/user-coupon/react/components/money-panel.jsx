@@ -29,7 +29,6 @@ const MoneyPanel = React.createClass({
             usedNumber,
             usedAmount
         } = this.props.data;
-
         let tab = (name, index) => {
             return (
                 <div key={index} className={this.state.tab_name == name ? "centerList" : null}
@@ -71,7 +70,6 @@ const MoneyPanel = React.createClass({
             fn_load_data = MoneyOverdueCouponList;
             fn_filter_data = MoneyOverdueCouponFilter;
         } else if (this.state.tab_name == '已赠送') {
-            console.log("money");
             th_rows = [
                 {title:'面值(元)', width: '50px'},
                 {title:'最小投资金额(元)', width: '110px'},
@@ -148,7 +146,7 @@ let MoneyUnusedCouponList = function (page, cb) {
             if (data.code == 10000) {
                 cb && cb(data.data.pageData)
             } else {
-                console.log('API异常: ' + data.message)
+
             }
         }.bind(this)
     })
@@ -166,8 +164,6 @@ let MoneyUsedCouponList = function (page, cb) {
         success: function (data) {
             if (data.code == 10000) {
                 cb && cb(data.data.pageData)
-            } else {
-                console.log('API异常: ' + data.message)
             }
         }.bind(this)
     })
@@ -185,8 +181,6 @@ let MoneyOverdueCouponList = function (page, cb) {
         success: function (data) {
             if (data.code == 10000) {
                 cb && cb(data.data.pageData)
-            } else {
-                console.log('API异常: ' + data.message)
             }
         }.bind(this)
     })
@@ -204,8 +198,6 @@ let MoneyPresentCouponList = function (page, cb) {
         success: function (data) {
             if (data.code == 10000) {
                 cb && cb(data.data.pageData)
-            } else {
-                console.log('API异常: ' + data.message)
             }
         }.bind(this)
     })

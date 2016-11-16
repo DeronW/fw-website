@@ -29,7 +29,6 @@ const Table = React.createClass({
     },
     reloadData: function () {
         this.props.fnLoadData && this.props.fnLoadData(this.state.page, (data)=> {
-            console.log('load data', data);
             let filterData = this.props.fnFilterData && this.props.fnFilterData(data);
             if (filterData)
                 this.setState({
