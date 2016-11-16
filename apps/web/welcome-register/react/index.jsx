@@ -7,13 +7,13 @@ const NumberBoard = React.createClass({
         let yizi_arr = [];
         //把数字分割开来的函数
         // let num2arr=(num,arr)=>num.toString().split("").forEach((i)=>arr.push)(i);
-        let num2arr = (num, arr)=> num.toString().split('').forEach((i)=>arr.push(i));
+        let num2arr = (num, arr) => num.toString().split('').forEach((i) => arr.push(i));
         //然后进行判断
         if (yizi < 1) {
             num2arr(wan, wan_arr);
             return {
                 yizi: yizi,
-                wan_arr: [...wan_arr].map(x=>0),
+                wan_arr: [...wan_arr].map(x => 0),
                 wan_target_arr: wan_arr
             }
         } else {
@@ -21,8 +21,8 @@ const NumberBoard = React.createClass({
             num2arr(wan, wan_arr);
             return {
                 yizi: yizi,
-                yizi_arr: [...yizi_arr].map(x=>0),
-                wan_arr: [...wan_arr].map(x=>0),
+                yizi_arr: [...yizi_arr].map(x => 0),
+                wan_arr: [...wan_arr].map(x => 0),
                 yizi_target_arr: yizi_arr,
                 wan_target_arr: wan_arr
             }
@@ -167,18 +167,18 @@ const FormStepOne = React.createClass({
             <div className="form-step-1">
                 <div className="phoneNumber">
                     <label> 手机号 <span className="red">*</span> </label>
-                    <input onChange={(e)=>this.onTextInputChangeHandler('phone', e)}
+                    <input onChange={(e) => this.onTextInputChangeHandler('phone', e)}
                            placeholder="请输入手机号码" value={this.state.phone}/>
                     {phone_error}
                 </div>
                 <div className="person">
                     <label> 推荐人 </label>
-                    <input onChange={(e)=>this.onTextInputChangeHandler('origin_code', e)} placeholder="请填写推荐人工场码"
+                    <input onChange={(e) => this.onTextInputChangeHandler('origin_code', e)} placeholder="请填写推荐人工场码"
                            value={this.state.origin_code}/>
                 </div>
                 <div className="test">
                     <label> 网页验证码 <span className="red">*</span> </label>
-                    <input onChange={(e)=>this.onTextInputChangeHandler('captcha', e)} value={this.state.captcha}/>
+                    <input onChange={(e) => this.onTextInputChangeHandler('captcha', e)} value={this.state.captcha}/>
                     <img src={this.state.captcha_img} className="verificationCode"
                          onClick={this.refreshCaptchaHandler}/>
                     {captcha_error}
@@ -250,24 +250,24 @@ const FormStepTwo = React.createClass({
             <div className="form-step-2">
                 <div className="row">
                     <div className="label">网页验证码 <b>&lowast;</b></div>
-                    <input className="short-input" onChange={(e)=>this.onTextInputChangeHandler('captcha', e)}
+                    <input className="short-input" onChange={(e) => this.onTextInputChangeHandler('captcha', e)}
                            value={this.state.captcha}/>
                     <img className="captcha-img" src={this.state.captcha_img} onClick={this.refreshCaptchaHandler}/>
                 </div>
                 <div className="row">
                     <div className="label">手机验证码 <b>&lowast;</b></div>
-                    <input className="short-input" onChange={(e)=>this.onTextInputChangeHandler('sms_code', e)}
+                    <input className="short-input" onChange={(e) => this.onTextInputChangeHandler('sms_code', e)}
                            value={this.state.sms_code}/>
                     <a className="btn-get-sms-code" onClick={this.getSMSCodeHandler}>获取手机验证码</a>
                 </div>
                 <div className="row">
                     <div className="label">设置密码 <b>&lowast;</b></div>
-                    <input className="wide-input" onChange={(e)=>this.onTextInputChangeHandler('password', e)}
+                    <input className="wide-input" onChange={(e) => this.onTextInputChangeHandler('password', e)}
                            value={this.state.password}/>
                 </div>
                 <div className="row">
                     <div className="label">确认密码 <b>&lowast;</b></div>
-                    <input className="wide-input" onChange={(e)=>this.onTextInputChangeHandler('password_confirm', e)}
+                    <input className="wide-input" onChange={(e) => this.onTextInputChangeHandler('password_confirm', e)}
                            value={this.state.password_confirm}/>
                 </div>
                 <a className="btn-register" onClick={this.registerHandler}>立即注册</a>
@@ -312,7 +312,7 @@ const Invest = React.createClass({
         if (product.status == 2) {
             title = '可投';
             if (product.prdChannels == '1') {
-                link = 'http://www.9888.cn/prdClaims/getId.shtml?id=' + product.id
+                link = `/prdClaims/getId.shtml?id=${product.id}`
             } else {
                 link = "/prdClaims/dealBid.shtml?id=" + product.id;
             }
