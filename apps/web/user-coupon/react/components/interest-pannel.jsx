@@ -14,7 +14,7 @@ const InterestPanel = React.createClass({
             page: 1,
             limit: 1,
             status: 2,
-            couponType: 1
+            couponType: 2
         }, (data) => {
             if (data.code == 10000 && data.data.pageData)
                 this.setState({tab_name_list: ['未使用', '已使用', '已过期', '已赠送']})

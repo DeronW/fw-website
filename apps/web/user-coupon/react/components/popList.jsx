@@ -6,7 +6,9 @@ const PopList = React.createClass({
             gcm: '',
             finalRole: '',
             user_list: [],
-            selectedId: null
+            selectedId: null,
+            staMoneyData: [],
+            staInterestData: [],
         }
     },
     componentDidMount: function () {
@@ -91,6 +93,7 @@ const PopList = React.createClass({
             }.bind(this)
         })
     },
+    
     toggleSelectedHandler: function (id) {
         this.setState({selectedId: id})
     },
