@@ -92,26 +92,26 @@ const MoneyPanel = React.createClass({
                 <div className="containerCenterTitle">
                     <div className="centerTitleLeft centerTitleCom">
                         <div>
-                            可用返现券 <em>{availableNumber}</em> 张
-                            {availableAmount ? '，共' : null}
-                            {availableAmount ? <em>{availableAmount}</em> : null}
-                            {availableAmount ? '元' : null}
+                            可用返现券 <em>{availableNumber?availableNumber:0}</em> 张
+                            {availableAmount ? '，共' : '，共'}
+                            {availableAmount ? <em>{availableAmount}</em> : 0}
+                            {availableAmount ? '元' : '元'}
                         </div>
                     </div>
                     <div className="centerTitleCenter centerTitleCom">
                         <div>
-                            即将过期 <em>{willExpireNumber}</em> 张
-                            {willExpireAmount ? '（' : null}
-                            {willExpireAmount ? <em>{willExpireAmount}</em> : null}
-                            {willExpireAmount ? '）' : null}
+                            即将过期 <em>{willExpireNumber?willExpireNumber:0}</em> 张
+                            {willExpireAmount ?'（': '（'}
+                            {willExpireAmount ? <em>{willExpireAmount}</em> : <em>0</em>}
+                            {willExpireAmount ? '元）' : '元）'}
                         </div>
                     </div>
                     <div className="centerTitleRight centerTitleCom">
                         <div>
-                            已使用 <em>{usedNumber}</em> 张
-                            {usedAmount ? '，共' : null}
-                            {usedAmount ? <em>{usedAmount}</em> : null}
-                            {usedAmount ? '元' : null}
+                            已使用 <em>{usedNumber?usedNumber:0}</em> 张
+                            {usedAmount ? '，共' : '，共'}
+                            {usedAmount ? <em>{usedAmount}</em> : 0}
+                            {usedAmount ? '元' : '元'}
                         </div>
                     </div>
                 </div>
