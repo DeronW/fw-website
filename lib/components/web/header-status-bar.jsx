@@ -11,26 +11,30 @@ const HeaderStatusBar = React.createClass({
     },
     componentDidMount: function () {
         // 获取用户登录信息
-        $.get(API_PATH + 'api/userState/v1/userState.json', null,
-            function (data) {
-                if (data.code != 10000) {
-                    console.log('got error', data.message);
-                    return
-                }
-                let d = data.data;
+        // hack: 因为passport和主站的登录方式, 需要通过url传递token, 这里模拟一次
+        let qs = location.search.split('&'), login_token;
+        qs.forEach((i) => {
+            let p = i.split('=');
+            if (p[0] == 'ticket') login_token = p[1]
+        });
 
-                let avatar = d.avatar ? d.avatar : (d.sex ?
-                    'http://www.9888.cn/img/man.png' :
-                    'http://www.9888.cn/img/woman.png');
-                this.setState({
-                    is_login: d.isLogin,
-                    username: d.userName,
-                    real_name: d.realName,
-                    avatar: avatar
-                });
-                // set current page is login or not. this is base function, very IMPORTANT!
-                $UserReady.fire(d.isLogin);
-            }.bind(this), 'json');
+        $.get(API_PATH + 'api/userState/v1/userState.json', {
+            token: login_token
+        }, function (data) {
+            if (data.code != 10000) throw 'got error ' + data.message;
+            let d = data.data;
+            let avatar = d.avatar ? d.avatar : (d.sex ?
+                'http://www.9888.cn/img/man.png' :
+                'http://www.9888.cn/img/woman.png');
+            this.setState({
+                is_login: d.isLogin,
+                username: d.userName,
+                real_name: d.realName,
+                avatar: avatar
+            });
+            // set current page is login or not. this is base function, very IMPORTANT!
+            $UserReady.fire(d.isLogin);
+        }.bind(this), 'json');
 
         // 获取用户未读消息数
         $.get(API_PATH + 'mesageCenter/refressSession.shtml', null, function (data) {
