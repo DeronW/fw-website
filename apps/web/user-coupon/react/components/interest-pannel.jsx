@@ -68,6 +68,7 @@ const InterestPanel = React.createClass({
            fn_load_data = InterestOverdueCouponList;
            fn_filter_data = InterestOverdueCouponFilter;
        } else if(this.state.tab_name == '已赠送'){
+           console.log("F")
            th_rows = [
                {title:'返息率', width: '50px'},
                {title:'最小投资金额(元)', width: '110px'},
@@ -217,7 +218,7 @@ let InterestUnusedCouponFilter = function (data) {
                 text: `${getLocationDate(item.issueTime)}至${getLocationDate(item.overdueTime)}`,
                 className:'moneyUnused3'
             }, {
-                text: item.remark
+                text: item.transferNumber >= 1 ?'好友赠送':item.remark
             }, {
                 text:item.transferNumber < 1 && item.couponTypeGivenNum == 1  ? '赠送' : null,
                 className: item.transferNumber < 1 && item.couponTypeGivenNum == 1 ?'moneyPresentBtn':'',

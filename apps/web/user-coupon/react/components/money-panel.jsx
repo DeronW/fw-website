@@ -71,12 +71,15 @@ const MoneyPanel = React.createClass({
             fn_load_data = MoneyOverdueCouponList;
             fn_filter_data = MoneyOverdueCouponFilter;
         } else if (this.state.tab_name == '已赠送') {
+            console.log("money");
             th_rows = [
-                {title: '面值(元)', width: '30px'},
-                {title: '最小投资金额(元)', width: '70px'},
-                {title: '可投标期限(元)', width: '70px'},
-                {title: '过期时间', width: '60px'},
-                {title: '备注', width: '60px'}
+                {title:'面值(元)', width: '50px'},
+                {title:'最小投资金额(元)', width: '110px'},
+                {title:'可投标期限(元)', width: '100px'},
+                {title:'有效期', width: '50px'},
+                {title:'赠送日期', width: '50px'},
+                {title:'赠送人', width: '50px'},
+                {title:'备注', width: '50px'}
             ];
             fn_load_data = MoneyPresentCouponList;
             fn_filter_data = MoneyPresentCouponFilter;
@@ -225,11 +228,11 @@ let MoneyUnusedCouponFilter = function (data) {
                 text: `${getLocationDate(item.issueTime)}至${getLocationDate(item.overdueTime)}`,
                 className: 'moneyUnused3'
             }, {
-                text: item.remark
+                text: item.transferNumber >= 1 ?'好友赠送':item.remark
             }, {
                 text: item.transferNumber < 1 && item.couponTypeGivenNum == 1 ? '赠送' : null,
                 className: item.transferNumber < 1 && item.couponTypeGivenNum == 1 ? 'moneyPresentBtn' : null,
-                clickHandler: item.transferNumber < 1 && item.couponTypeGivenNum == 1 ? () => showPopList('返现券', item.beanCount / 100, item.id) : null
+                clickHandler: item.transferNumber < 1 && item.couponTypeGivenNum == 1 ? () => showPopList('返现券',   `${item.beanCount / 100}`, item.id) : null
             }]
         })
     }
