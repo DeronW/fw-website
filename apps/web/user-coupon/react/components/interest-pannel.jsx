@@ -95,7 +95,7 @@ const InterestPanel = React.createClass({
                        <div>
                            即将过期 <em>{willExpireNumber}</em> 张
                            {willExpireAmount ? '（' : null}
-                           {willExpireAmount ? <em>${willExpireAmount}</em> : null}
+                           {willExpireAmount ? <em>{willExpireAmount}</em> : null}
                            {willExpireAmount ? '）' : null}
                        </div>
                    </div>

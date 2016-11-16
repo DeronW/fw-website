@@ -84,6 +84,7 @@ const PopList = React.createClass({
             success: function (data) {
                 if (data.data.businessResult) {
                     GlobalAlert('恭喜您，' + this.props.type + '赠送成功！');
+
                 } else {
                     GlobalConfirm(`抱歉，${data.message} ${this.props.type}赠送失败！`);
                 }
@@ -128,7 +129,12 @@ const PopList = React.createClass({
                 if (finalRole == 4) {
                     realNameValue = realName.substring(0, 1) + sexValue;
                 } else {
-                    realNameValue = realName.substring(0, 2) + "**" + realName.substring(realName.length - 3, realName.length);
+                    if(realName > 4){
+                        realNameValue = realName.substring(0, 1) + "**" + realName.substring(realName.length - 2, realName.length);
+                    }else{
+                        realNameValue = realName
+                    }
+
                 }
             } else if (realName != null) {
                 realNameValue = realName.substring(0, 1) + sexValue
