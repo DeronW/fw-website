@@ -61,23 +61,16 @@ const PopList = React.createClass({
     confirmPop: function () {
         if (this.state.selectedId) {
             ReactDOM.unmountComponentAtNode(document.getElementById('popList'));
-            let couponName = this.props.type, username = this.props.value;
+            let couponName = this.props.type, userValue = this.props.value;
             if (this.props.type == "返现券") {
-                GlobalConfirm(`您确定赠送%s元${couponName}给您的好友吗？`, username, this.presentCoupon)
+                GlobalConfirm('您确定赠送%s元'+couponName+'给您的好友吗？', userValue, this.presentCoupon)
             } else if (this.props.type == "返息券") {
-                GlobalConfirm(`您确定赠送${couponName}给您的好友%s吗？`, username, this.presentCoupon)
+                GlobalConfirm('您确定赠送%s'+couponName+'给您的好友吗？', userValue, this.presentCoupon)
             } else {
                 GlobalConfirm("没有确定返券类型")
             }
         } else {
             GlobalAlert('请选择一个好友');
-        }
-    },
-    judgePresentCoupon: function () {
-        if (this.state.user_list.length > 0) {
-            this.confirmPop()
-        } else {
-            GlobalAlert('抱歉，您暂无推荐好友，无法进行赠送。');
         }
     },
     presentCoupon: function () {
@@ -110,7 +103,7 @@ const PopList = React.createClass({
                     if (loginName.length <= 4) {
                         loginNameValue = loginName.substring(0, 1) + "**"
                     } else {
-                        loginNameValue = loginName.substring(0, 2) + "**" + loginName.substring(loginName.length - 2, loginName.length);
+                        loginNameValue = loginName.substring(0, 2) + "**" + loginName.substring(loginName.length - 3, loginName.length);
                     }
                 } else {
                     loginNameValue = loginName;
@@ -119,7 +112,7 @@ const PopList = React.createClass({
                 if (loginName.length <= 4) {
                     loginNameValue = loginName.substring(0, 1) + "**";
                 } else {
-                    loginNameValue = loginName.substring(0, 2) + "**" + loginName.substring(loginName.length - 2, loginName.length);
+                    loginNameValue = loginName.substring(0, 2) + "**" + loginName.substring(loginName.length - 3, loginName.length);
                 }
             } else {
                 loginNameValue = '--';
@@ -135,7 +128,7 @@ const PopList = React.createClass({
                 if (finalRole == 4) {
                     realNameValue = realName.substring(0, 1) + sexValue;
                 } else {
-                    realNameValue = realName
+                    realNameValue = realName.substring(0, 2) + "**" + realName.substring(realName.length - 3, realName.length);
                 }
             } else if (realName != null) {
                 realNameValue = realName.substring(0, 1) + sexValue
@@ -157,7 +150,7 @@ const PopList = React.createClass({
                     mobileValue = mobile
                 }
             } else if (mobile) {
-                mobileValue = `${mobile.substr(0, 3)}****${mobile.substr(7, 4)}`
+                mobileValue = `${mobile.substring(0, 3)}****${mobile.substring(7, 11)}`
             }
             return mobileValue
         };
@@ -214,7 +207,7 @@ const PopList = React.createClass({
                         </div>
                     </div>
                     <div className="listFooter">
-                        <div className="sendBtn footerBtn" onClick={this.judgePresentCoupon}>赠送</div>
+                        <div className="sendBtn footerBtn" onClick={this.confirmPop}>赠送</div>
                         <div className="cancelBtn footerBtn" onClick={this.closeHandler}>取消</div>
                     </div>
                 </div>
@@ -224,5 +217,23 @@ const PopList = React.createClass({
 });
 
 function showPopList(type, value, id) {
-    ReactDOM.render(<PopList type={type} value={value} id={id}/>, document.getElementById('popList'))
+    $.ajax({
+        url: API_PATH + 'api/parttimeFinancialer/v1/searchFriends.json',
+        data: {
+            containOneself: 0,
+            page: 1,
+            rows: 8
+        },
+        type: 'get',
+        success: (data) => {
+            console.log("是否有好友");
+            if(data.data.pageData){
+                ReactDOM.render(<PopList type={type} value={value} id={id}/>, document.getElementById('popList'))
+            }else{
+                GlobalAlert('抱歉，您暂无推荐好友，无法进行赠送。');
+            }
+        },
+        fail: (err) => GlobalAlert(err)
+    });
+
 }

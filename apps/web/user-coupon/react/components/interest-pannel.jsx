@@ -68,6 +68,7 @@ const InterestPanel = React.createClass({
            fn_load_data = InterestOverdueCouponList;
            fn_filter_data = InterestOverdueCouponFilter;
        } else if(this.state.tab_name == '已赠送'){
+           console.log("F")
            th_rows = [
                {title:'返息率', width: '50px'},
                {title:'最小投资金额(元)', width: '110px'},
