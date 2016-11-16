@@ -12,10 +12,10 @@ const HeaderStatusBar = React.createClass({
     componentDidMount: function () {
         // 获取用户登录信息
         // hack: 因为passport和主站的登录方式, 需要通过url传递token, 这里模拟一次
-        let qs = location.search.split('&'), login_token;
+        let qs = location.search.replace('?', '').split('&'), login_token = ' ';
         qs.forEach((i) => {
             let p = i.split('=');
-            if (p[0] == 'ticket') login_token = p[1]
+            if (p[0] == 'ticket') login_token = p[1].split('.')[0]
         });
 
         $.get(API_PATH + 'api/userState/v1/userState.json', {
