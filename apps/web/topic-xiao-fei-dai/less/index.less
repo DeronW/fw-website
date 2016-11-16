@@ -3,19 +3,36 @@
   padding: 0;
   font-family: "microsoft yahei";
 }
+
+.top-banner-position {
+  margin: 0 auto;
+  width: 900px;
+  height: 150px;
+  z-index: 1000000000;
+
+}
+
 .consumerCreditBox{
   background-color:#2b98e2;
   padding-bottom: 60px;
   .top{
-    position: relative;
-      a{
-        position: absolute;
-        top: 57px;
-        right: 314px;
-        width: 155px;
-        height: 88px;
-        background-color: transparent;
-      }
+    height: 449px;
+    background: url(../images/banner.jpg) no-repeat center;
+
+    .link-btn {
+      position: relative;
+      height: 449px;
+      display: block;
+    }
+
+    a {
+      display: block;
+      position: absolute;
+      top: 74px;
+      right: -32px;
+      width: 200px;
+      height: 130px;
+    }
   }
   .centerBox{
     width: 1140px;

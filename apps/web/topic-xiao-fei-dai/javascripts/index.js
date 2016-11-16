@@ -12,13 +12,18 @@ $(function () {
     });
     $("#nav").css({
         'position': 'relative',
-        "top": "361"
+        "top": "0"
     });
-    $(document).scroll(function () {
-        if ($(document).scrollTop() > 361) {
+
+    // $(window).scroll(function () {
+    //     var scrollT=$(document).scrollTop()||document.documentElement.scrollTop || document.body.scrollTop;
+    //     console.log(scrollT);
+    // });
+    $(window).scroll(function () {
+        if ($(window).scrollTop() > 569) {
             $("#nav").css({
                 "position": "fixed",
-                "top": 0,
+                "top": "0",
                 "width": "1140px",
                 "margin": "0 auto"
             });
@@ -26,7 +31,7 @@ $(function () {
         else {
             $("#nav").css({
                 'position': 'relative',
-                "top": "361"
+                "top": "0"
             });
         }
     });
@@ -55,27 +60,34 @@ $(function () {
     }
 
     var iTop = $(".top").outerHeight();
+
     var iH = $(".centerNav").height();
+
     $(".centerNav ul li.list1").click(function () {
-        starMove(document, {'scrollbar': iH + iTop-100});
+        //starMove(document, {'scrollbar': iH + iTop-100});
+        $(document).scrollTop(iH + iTop-100);
         $(this).children("a").addClass("on").parent().siblings().children("a").removeClass("on");
     });
     $(".centerNav ul li.list2").click(function () {
-        starMove(document, {'scrollbar': onesize1 + iH + iTop-70});
+        //starMove(document, {'scrollbar': onesize1 + iH + iTop-70});
+        $(document).scrollTop(onesize1 + iH + iTop-70);
         $(this).children("a").addClass("on").parent().siblings().children("a").removeClass("on");
     });
     $(".centerNav ul li.list3").click(function () {
-        starMove(document, {'scrollbar': onesize1 + onesize2 + iH + iTop - 30});
+        //starMove(document, {'scrollbar': onesize1 + onesize2 + iH + iTop - 30});
+        $(document).scrollTop(onesize1 + onesize2 + iH + iTop - 30);
         $(this).children("a").addClass("on").parent().siblings().children("a").removeClass("on");
 
     });
     $(".centerNav ul li.list4").click(function () {
-        starMove(document, {'scrollbar': onesize1 + onesize2 + onesize3 + iH + iTop - 30});
+        $(document).scrollTop(onesize1 + onesize2 + onesize3 + iH + iTop - 30);
+        //starMove(document, {'scrollbar': onesize1 + onesize2 + onesize3 + iH + iTop - 30});
         $(this).children("a").addClass("on").parent().siblings().children("a").removeClass("on");
 
     });
     $(".centerNav ul li.list5").click(function () {
-        starMove(document, {'scrollbar': onesize1 + onesize2 + onesize3 + onesize4 + iH + iTop - 30});
+        $(document).scrollTop(onesize1 + onesize2 + onesize3 + onesize4 + iH + iTop - 30);
+        //starMove(document, {'scrollbar': onesize1 + onesize2 + onesize3 + onesize4 + iH + iTop - 30});
         $(this).children("a").addClass("on").parent().siblings().children("a").removeClass("on");
     });
     function starMove(obj, oTarget) {
