@@ -1,7 +1,11 @@
 .partial-user-center-panel {
   width: 1000px;
+  display: table;
   box-sizing: border-box;
-  margin: 0 auto;
+  margin: 0 auto 40px;
+  border: 1px solid #ddd;
+
+  background: url('data:image/jpg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAAICAgICAgICAgICAgICAwQDAgIDBAUEBAQEBAUGBQUFBQUFBgYHBwgHBwYJCQoKCQkMDAwMDAwMDAwMDAwMDAz/2wBDAQMDAwUEBQkGBgkNCwkLDQ8ODg4ODw8MDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAz/wAARCAAPAKEDAREAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAAYJ/8QAFBABAAAAAAAAAAAAAAAAAAAAAP/EABYBAQEBAAAAAAAAAAAAAAAAAAACAf/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/AN5EKGgAAAAAAAAAAAAAAAAACDUleIUNAAAAAAAAAAAAAAAAAAEGpL//2Q==') repeat-y;
 
   .p2p_leftbar {
     width: 161px;
@@ -76,19 +80,7 @@
     height: 16px;
     background-position: -106px -124px !important
   }
-}
 
-.p2p_con {
-  width: 998px;
-  margin: 20px auto 40px;
-  border: 1px solid #ddd;
-  background: url('data:image/jpg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAAICAgICAgICAgICAgICAwQDAgIDBAUEBAQEBAUGBQUFBQUFBgYHBwgHBwYJCQoKCQkMDAwMDAwMDAwMDAwMDAz/2wBDAQMDAwUEBQkGBgkNCwkLDQ8ODg4ODw8MDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAz/wAARCAAPAKEDAREAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAAYJ/8QAFBABAAAAAAAAAAAAAAAAAAAAAP/EABYBAQEBAAAAAAAAAAAAAAAAAAACAf/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/AN5EKGgAAAAAAAAAAAAAAAAACDUleIUNAAAAAAAAAAAAAAAAAAEGpL//2Q==') repeat-y;
-  zoom: 1;
-  &:after {
-    display: block;
-    clear: both;
-    content: ""
-  }
   .p2p_leftbar {
     width: 161px;
     .per-head {
@@ -349,14 +341,14 @@
             display: inline-block;
             width: 16px;
             height: 16px;
-            background: url(../images/ico_p2p2.png) no-repeat;
+            background: url(../images/partial-user-panel/ico_p2p2.png) no-repeat;
             vertical-align: middle
           }
           .ico_p2p_left {
             display: inline-block;
             width: 16px;
             height: 16px;
-            background: url(../images/credit-left-icon.png) no-repeat;
+            background: url(../images/partial-user-panel/credit-left-icon.png) no-repeat;
             vertical-align: middle;
           }
           .gongfeicon {

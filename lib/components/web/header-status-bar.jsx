@@ -114,16 +114,13 @@ const HeaderStatusBar = React.createClass({
                     {this.state.is_login ? null : <a className="link" href="/orderUser/register.shtml">免费注册</a>}
                     {this.state.is_login ? null : separate_line}
                     {this.state.is_login ? null : <a className="link" href="/orderUser/login.shtml">立即登录</a>}
-
-                    <span className="separate-line"> </span>
-
+                    {separate_line}
                     <div className="header-status-bar-app">
                         <a href="/static/web/app-download/index.html">APP 客户端</a>
                         <a href="/static/web/app-download/index.html" className="hsb-qrcode">
-                            <img src="images/menu-app.png"/>
+                            <img src="images/global-header/menu-app.png"/>
                         </a>
                     </div>
-
                 </div>
             </div>
         )
