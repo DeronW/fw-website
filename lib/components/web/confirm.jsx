@@ -146,7 +146,7 @@
 
             if (values == null) {
                 values = [];
-            } else if (typeof(values) == 'string') {
+            } else if (typeof(values) == 'string' || typeof(values) == 'number') {
                 values = [values];
                 colors = [colors];
             }

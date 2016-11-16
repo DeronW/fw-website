@@ -232,7 +232,7 @@ let MoneyUnusedCouponFilter = function (data) {
             }, {
                 text: item.transferNumber < 1 && item.couponTypeGivenNum == 1 ? '赠送' : null,
                 className: item.transferNumber < 1 && item.couponTypeGivenNum == 1 ? 'moneyPresentBtn' : null,
-                clickHandler: item.transferNumber < 1 && item.couponTypeGivenNum == 1 ? () => showPopList('返现券',   `${item.beanCount / 100}`, item.id) : null
+                clickHandler: item.transferNumber < 1 && item.couponTypeGivenNum == 1 ? (cb) => showPopList('返现券',   item.beanCount / 100, item.id, cb) : null
             }]
         })
     }
