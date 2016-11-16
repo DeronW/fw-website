@@ -89,7 +89,7 @@ const PopList = React.createClass({
                     GlobalAlert('恭喜您，' + this.props.type + '赠送成功！');
                     this.props.callback && this.props.callback();
                 } else {
-                    GlobalConfirm(`抱歉，${data.message} ${this.props.type}赠送失败！`);
+                    GlobalConfirm(`抱歉，${this.props.type}赠送失败！`);
                 }
             }.bind(this)
         });
