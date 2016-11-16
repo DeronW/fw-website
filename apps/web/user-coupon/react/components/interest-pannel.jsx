@@ -222,7 +222,7 @@ let InterestUnusedCouponFilter = function (data) {
             }, {
                 text:item.transferNumber < 1 && item.couponTypeGivenNum == 1  ? '赠送' : null,
                 className: item.transferNumber < 1 && item.couponTypeGivenNum == 1 ?'moneyPresentBtn':'',
-                clickHandler: item.transferNumber < 1 && item.couponTypeGivenNum == 1 ? () => showPopList('返息券',`${item.backInterestRate}%`, item.id):null
+                clickHandler: item.transferNumber < 1 && item.couponTypeGivenNum == 1 ? (cb) => showPopList('返息券',`${item.backInterestRate}%`, item.id,cb):null
             }]
         })
     }
