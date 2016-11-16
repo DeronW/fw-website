@@ -218,7 +218,7 @@ let InterestUnusedCouponFilter = function (data) {
                 text: `${getLocationDate(item.issueTime)}至${getLocationDate(item.overdueTime)}`,
                 className:'moneyUnused3'
             }, {
-                text: item.remark
+                text: item.transferNumber >= 1 ?'好友赠送':item.remark
             }, {
                 text:item.transferNumber < 1 && item.couponTypeGivenNum == 1  ? '赠送' : null,
                 className: item.transferNumber < 1 && item.couponTypeGivenNum == 1 ?'moneyPresentBtn':'',

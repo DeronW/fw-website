@@ -228,11 +228,11 @@ let MoneyUnusedCouponFilter = function (data) {
                 text: `${getLocationDate(item.issueTime)}至${getLocationDate(item.overdueTime)}`,
                 className: 'moneyUnused3'
             }, {
-                text: item.remark
+                text: item.transferNumber >= 1 ?'好友赠送':item.remark
             }, {
                 text: item.transferNumber < 1 && item.couponTypeGivenNum == 1 ? '赠送' : null,
                 className: item.transferNumber < 1 && item.couponTypeGivenNum == 1 ? 'moneyPresentBtn' : null,
-                clickHandler: item.transferNumber < 1 && item.couponTypeGivenNum == 1 ? () => showPopList('返现券', item.beanCount / 100, item.id) : null
+                clickHandler: item.transferNumber < 1 && item.couponTypeGivenNum == 1 ? () => showPopList('返现券',   `${item.beanCount / 100}`, item.id) : null
             }]
         })
     }
