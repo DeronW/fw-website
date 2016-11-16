@@ -68,7 +68,6 @@ const InterestPanel = React.createClass({
            fn_load_data = InterestOverdueCouponList;
            fn_filter_data = InterestOverdueCouponFilter;
        } else if(this.state.tab_name == '已赠送'){
-           console.log("F")
            th_rows = [
                {title:'返息率', width: '50px'},
                {title:'最小投资金额(元)', width: '110px'},
@@ -88,20 +87,17 @@ const InterestPanel = React.createClass({
                <div className="containerCenterTitle">
                    <div className="centerTitleLeft centerTitleCom">
                        <div>
-                           可用返息券 <em>{availableNumber}</em> 张
+                           可用返息券 <em>{availableNumber?availableNumber:0}</em> 张
                        </div>
                    </div>
                    <div className="centerTitleCenter centerTitleCom">
                        <div>
-                           即将过期 <em>{willExpireNumber}</em> 张
-                           {willExpireAmount ? '（' : null}
-                           {willExpireAmount ? <em>{willExpireAmount}</em> : null}
-                           {willExpireAmount ? '）' : null}
+                           即将过期 <em>{willExpireNumber?willExpireNumber:0}</em> 张
                        </div>
                    </div>
                    <div className="centerTitleRight centerTitleCom">
                        <div>
-                           已使用 <em>{usedNumber}</em> 张
+                           已使用 <em>{usedNumber?usedNumber:0}</em> 张
                        </div>
                    </div>
                </div>
@@ -222,7 +218,7 @@ let InterestUnusedCouponFilter = function (data) {
             }, {
                 text:item.transferNumber < 1 && item.couponTypeGivenNum == 1  ? '赠送' : null,
                 className: item.transferNumber < 1 && item.couponTypeGivenNum == 1 ?'moneyPresentBtn':'',
-                clickHandler: item.transferNumber < 1 && item.couponTypeGivenNum == 1 ? () => showPopList('返息券',`${item.backInterestRate}%`, item.id):null
+                clickHandler: item.transferNumber < 1 && item.couponTypeGivenNum == 1 ? (cb) => showPopList('返息券',`${item.backInterestRate}%`, item.id,cb):null
             }]
         })
     }

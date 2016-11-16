@@ -9,7 +9,7 @@ const PopList = React.createClass({
             selectedId: null,
             isConfirm:false,
             staMoneyData: [],
-            staInterestData: [],
+            staInterestData: []
         }
     },
     componentDidMount: function () {
@@ -62,10 +62,9 @@ const PopList = React.createClass({
         })
     },
     confirmPop: function () {
+        this.closeHandler();
         if (this.state.selectedId) {
-            ReactDOM.unmountComponentAtNode(document.getElementById('popList'));
             let couponName = this.props.type, userValue = this.props.value;
-            console.log(userValue);
             if (this.props.type == "返现券") {
                 GlobalConfirm('您确定赠送%s元'+couponName+'给您的好友吗？', userValue, this.presentCoupon)
             } else if (this.props.type == "返息券") {
@@ -88,25 +87,10 @@ const PopList = React.createClass({
             success: function (data) {
                 if (data.data.businessResult) {
                     GlobalAlert('恭喜您，' + this.props.type + '赠送成功！');
-                    this.ajaxJudgeMoney();
+                    this.props.callback && this.props.callback();
                 } else {
                     GlobalConfirm(`抱歉，${data.message} ${this.props.type}赠送失败！`);
                 }
-            }.bind(this)
-        })
-    },
-    ajaxJudgeMoney: function () {
-        $.ajax({
-            url: API_PATH + 'api/coupon/v1/accountCouponStatistics.json',
-            data: {
-                couponType: 1
-            },
-            type: 'get',
-            success: function (data) {
-                this.setState({
-                    staMoneyData: data.data.couponAccount[0],
-                    isConfirm:true
-                })
             }.bind(this)
         });
     },
@@ -148,8 +132,8 @@ const PopList = React.createClass({
                 if (finalRole == 4) {
                     realNameValue = realName.substring(0, 1) + sexValue;
                 } else {
-                    if(realName > 4){
-                        realNameValue = realName.substring(0, 1) + "**" + realName.substring(realName.length - 2, realName.length);
+                    if(realName.length >= 8){
+                        realNameValue = realName.substring(0, 7) + "..." ;
                     }else{
                         realNameValue = realName
                     }
@@ -200,7 +184,6 @@ const PopList = React.createClass({
                 </div>
             </li>
         };
-        var _this = this;
         return (
             <div className="listPopBg">
                 <div className="listPop">
@@ -236,15 +219,12 @@ const PopList = React.createClass({
                         <div className="cancelBtn footerBtn" onClick={this.closeHandler}>取消</div>
                     </div>
                 </div>
-                {
-                    _this.state.isConfirm ? <MoneyPanel data={_this.state.staMoneyData} /> : null
-                }
             </div>
         )
     }
 });
 
-function showPopList(type, value, id) {
+function showPopList(type, value, id, cb) {
     $.ajax({
         url: API_PATH + 'api/parttimeFinancialer/v1/searchFriends.json',
         data: {
@@ -255,8 +235,8 @@ function showPopList(type, value, id) {
         type: 'get',
         success: (data) => {
             console.log("是否有好友");
-            if(data.data.pageData){
-                ReactDOM.render(<PopList type={type} value={value} id={id}/>, document.getElementById('popList'))
+            if(data.data.pageData.result.length>0){
+                ReactDOM.render(<PopList type={type} value={value} id={id} callback={cb}/>, document.getElementById('popList'))
             }else{
                 GlobalAlert('抱歉，您暂无推荐好友，无法进行赠送。');
             }

@@ -114,12 +114,12 @@
 
             if (values == null) {
                 values = [];
-            } else if (typeof(values) == 'string') {
+            } else if (typeof(values) == 'string' || typeof(values) == 'number') {
                 values = [values];
                 colors = [colors];
             }
             for (let i = 0; i < values.length; i++) {
-                placeholders.push(box(values[i], colors[i]))
+                placeholders.push(box(values[i].toString(), colors[i]))
             }
             return placeholders;
         },
