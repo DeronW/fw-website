@@ -19,7 +19,7 @@ const InterestPanel = React.createClass({
             if (data.code == 10000 && data.data.pageData){
                 this.setState({tab_name_list: ['未使用', '已使用', '已过期', '已赠送']})
             }else if(data.code == 63001){
-                location.href = 'https://passport.9888.cn/passport/login?sourceSite=jrgc&service=' + location.href;
+                location.href = 'https://passport.9888.cn/passport/login?sourceSite=jrgc';
             }
         }, 'json')
     },
@@ -143,7 +143,7 @@ let InterestUnusedCouponList = function (page, cb) {
             if (data.code == 10000) {
                 cb && cb(data.data.pageData)
             } else if(data.code == 63001){
-                location.href = 'https://passport.9888.cn/passport/login?sourceSite=jrgc&service=' + location.href;
+                location.href = 'https://passport.9888.cn/passport/login?sourceSite=jrgc';
             }
         }.bind(this)
     })
@@ -161,8 +161,8 @@ let InterestUsedCouponList = function (page, cb) {
         success: function (data) {
             if (data.code == 10000) {
                 cb && cb(data.data.pageData)
-            } else {
-                location.href = 'https://passport.9888.cn/passport/login?sourceSite=jrgc&service=' + location.href;
+            } else if(data.code == 63001){
+                location.href = 'https://passport.9888.cn/passport/login?sourceSite=jrgc';
             }
         }.bind(this)
     })
@@ -180,8 +180,8 @@ let InterestOverdueCouponList = function (page, cb) {
         success: function (data) {
             if (data.code == 10000) {
                 cb && cb(data.data.pageData)
-            } else {
-                location.href = 'https://passport.9888.cn/passport/login?sourceSite=jrgc&service=' + location.href;
+            } else if(data.code == 63001){
+                location.href = 'https://passport.9888.cn/passport/login?sourceSite=jrgc';
             }
         }.bind(this)
     })
@@ -199,8 +199,8 @@ let InterestPresentCouponList = function (page, cb) {
         success: function (data) {
             if (data.code == 10000) {
                 cb && cb(data.data.pageData)
-            } else {
-                location.href = 'https://passport.9888.cn/passport/login?sourceSite=jrgc&service=' + location.href;
+            } else if(data.code == 63001){
+                location.href = 'https://passport.9888.cn/passport/login?sourceSite=jrgc';
             }
         }.bind(this)
     })
