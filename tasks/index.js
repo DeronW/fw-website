@@ -1,6 +1,6 @@
 'use strict';
 
-var gulp = require('gulp');
+let gulp = require('gulp');
 
 const html = require('./html.js');
 const stylesheets = require('./stylesheets.js');
@@ -16,7 +16,7 @@ let COMMON_JAVASCRIPTS_TASK = {};
 // project_name 每次使用新项目时, 只需要更换项目名称
 module.exports = function generate_task(site_name, project_name, configs) {
 
-    var app_path = `apps/${site_name}/${project_name}/`,
+    let app_path = `apps/${site_name}/${project_name}/`,
         build_path = `build/${site_name}/${project_name}/`,
         public_path = 'public/',
         tmp_path = `build/${site_name}-tmp/`,
@@ -35,7 +35,7 @@ module.exports = function generate_task(site_name, project_name, configs) {
 
     let task_name = site_name + ':' + (CONFIG.cmd_prefix ? CONFIG.cmd_prefix + ':' : '') + project_name;
 
-    var less_files = [
+    let less_files = [
         `${lib_path}less/common.less`,
         `${lib_path}less/grid.less`,
         `${lib_path}less/header-status-bar.less`,
@@ -47,11 +47,11 @@ module.exports = function generate_task(site_name, project_name, configs) {
         `${app_path}less/index.less`
     ];
 
-    var jsx_files = CONFIG.include_components.map((i)=> `${lib_path}components/${i}`);
+    let jsx_files = CONFIG.include_components.map((i)=> `${lib_path}components/${i}`);
     jsx_files.push(`${app_path}react/components/*.jsx`);
     jsx_files.push(`${app_path}${CONFIG.main_jsx}`);
 
-    var common_javascript_files = [
+    let common_javascript_files = [
         `${lib_path}jquery-1.12.4.min.js`,
         `${lib_path}javascripts/web/common-functions.js`,
         `${lib_path}javascripts/web/interest-calculator.js`
