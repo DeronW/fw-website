@@ -84,8 +84,8 @@ let ExchangeUnusedCouponList = function (page, cb) {
         success: function (data) {
             if (data.code == 10000) {
                 cb && cb(data.data.pageData)
-            } else {
-                alert('API异常: ' + data.message)
+            } else if(data.code == 63001){
+                location.href = 'https://passport.9888.cn/passport/login?sourceSite=jrgc&service=' + location.href;
             }
         }.bind(this)
     })
@@ -103,8 +103,8 @@ let ExchangeUsedCouponList = function (page, cb) {
         success: function (data) {
             if (data.code == 10000) {
                 cb && cb(data.data.pageData)
-            } else {
-                alert('API异常: ' + data.message)
+            } else if(data.code == 63001){
+                location.href = 'https://passport.9888.cn/passport/login?sourceSite=jrgc&service=' + location.href;
             }
         }.bind(this)
     })
@@ -122,8 +122,8 @@ let ExchangeOverdueCouponList = function (page, cb) {
         success: function (data) {
             if (data.code == 10000) {
                 cb && cb(data.data.pageData)
-            } else {
-                alert('API异常: ' + data.message)
+            } else if(data.code == 63001){
+                location.href = 'https://passport.9888.cn/passport/login?sourceSite=jrgc&service=' + location.href;
             }
         }.bind(this)
     })

@@ -16,8 +16,11 @@ const MoneyPanel = React.createClass({
             status: 2,
             couponType: 1
         }, (data) => {
-            if (data.code == 10000 && data.data.pageData)
+            if (data.code == 10000 && data.data.pageData){
                 this.setState({tab_name_list: ['未使用', '已使用', '已过期', '已赠送']})
+            }else if(data.code == 63001){
+                location.href = 'https://passport.9888.cn/passport/login?sourceSite=jrgc&service=' + location.href;
+            }
         }, 'json')
     },
     render: function () {
@@ -145,8 +148,8 @@ let MoneyUnusedCouponList = function (page, cb) {
         success: function (data) {
             if (data.code == 10000) {
                 cb && cb(data.data.pageData)
-            } else {
-
+            } else if(data.code == 63001){
+                location.href = 'https://passport.9888.cn/passport/login?sourceSite=jrgc&service=' + location.href;
             }
         }.bind(this)
     })
@@ -164,6 +167,8 @@ let MoneyUsedCouponList = function (page, cb) {
         success: function (data) {
             if (data.code == 10000) {
                 cb && cb(data.data.pageData)
+            }else if(data.code == 63001){
+                location.href = 'https://passport.9888.cn/passport/login?sourceSite=jrgc&service=' + location.href;
             }
         }.bind(this)
     })
@@ -181,6 +186,8 @@ let MoneyOverdueCouponList = function (page, cb) {
         success: function (data) {
             if (data.code == 10000) {
                 cb && cb(data.data.pageData)
+            }else if(data.code == 63001){
+                location.href = 'https://passport.9888.cn/passport/login?sourceSite=jrgc&service=' + location.href;
             }
         }.bind(this)
     })
@@ -198,6 +205,8 @@ let MoneyPresentCouponList = function (page, cb) {
         success: function (data) {
             if (data.code == 10000) {
                 cb && cb(data.data.pageData)
+            }else if(data.code == 63001){
+                location.href = 'https://passport.9888.cn/passport/login?sourceSite=jrgc&service=' + location.href;
             }
         }.bind(this)
     })
@@ -205,8 +214,8 @@ let MoneyPresentCouponList = function (page, cb) {
 
 let MoneyUnusedCouponFilter = function (data) {
     return {
-        total_page: data.pagination && data.pagination.totalPage,
-        rows: (data.result && data.result).map((item)=> {
+        total_page: data&&data.pagination && data.pagination.totalPage,
+        rows: (data&&data.result && data.result || []).map((item)=> {
             return [{
                 text: item.beanCount / 100,
                 className: 'moneyUnused1'
@@ -231,8 +240,8 @@ let MoneyUnusedCouponFilter = function (data) {
 };
 let MoneyUsedCouponFilter = function (data) {
     return {
-        total_page: data.pagination && data.pagination.totalPage,
-        rows: (data.result && data.result).map((item)=> {
+        total_page: data && data.pagination && data.pagination.totalPage,
+        rows: (data && data.result && data.result || []).map((item)=> {
             return [{
                 text: item.beanCount / 100,
                 className: 'moneyUnused1'
@@ -246,15 +255,15 @@ let MoneyUsedCouponFilter = function (data) {
                 text: `${getLocationDate(item.usedTime)}   ${getTimesString(item.usedTime)}`,
                 className: 'moneyUsedTime'
             }, {
-                text: item.remark
+                text: item.transferNumber >= 1 ?'好友赠送':item.remark
             }]
         })
     }
 };
 let MoneyOverdueCouponFilter = function (data) {
     return {
-        total_page: data.pagination && data.pagination.totalPage,
-        rows: (data.result && data.result).map((item)=> {
+        total_page:data && data.pagination && data.pagination.totalPage,
+        rows: (data && data.result && data.result || []).map((item)=> {
             return [{
                 text: item.beanCount / 100,
                 className: 'moneyUnused1'
@@ -268,15 +277,15 @@ let MoneyOverdueCouponFilter = function (data) {
                 text: getLocationDate(item.overdueTime),
                 className: 'moneyUsedTime'
             }, {
-                text: item.remark
+                text: item.transferNumber >= 1 ?'好友赠送':item.remark
             }]
         })
     }
 };
 let MoneyPresentCouponFilter = function (data) {
     return {
-        total_page: data.pagination && data.pagination.totalPage,
-        rows: (data.result && data.result).map((item)=> {
+        total_page:data && data.pagination && data.pagination.totalPage,
+        rows: (data && data.result && data.result || []).map((item)=> {
             return [{
                 text: item.beanCount / 100,
                 className: 'moneyUnused1'
