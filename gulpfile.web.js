@@ -37,9 +37,10 @@ const WEB_APP_NAMES = [
 
 module.exports = function (gulp, generate_task, settings) {
 
-    WEB_APP_NAMES.forEach(function (i) {
+    WEB_APP_NAMES.forEach((i) => {
         let common_components = [
-            'web/header-status-bar.jsx', 'web/alert.jsx', 'web/confirm.jsx'
+            'web/header-status-bar.jsx', 'web/alert.jsx',
+            'web/confirm.jsx', 'circle-progress.jsx', 'web/invest-list.jsx'
         ];
         let common_js = [];
 
