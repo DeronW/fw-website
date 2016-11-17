@@ -65,9 +65,8 @@ const CenCont = React.createClass({
                         <div className="block1"><p>账户余额(元)</p><span>0.00</span><em></em></div>
                         <div className="block2"><p>账户资金(元)</p><span>0.00</span><em></em></div>
                         <div className="block2"><p>冻结资金(元)</p><span>0.00</span></div>
-                        <a></a>
-                        <a></a>
-                        <a></a>
+                        <a className="per-btn-style"></a>
+                        <a className="per-btn-style2"></a>
                     </div>
                 </div>
 
