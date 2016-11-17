@@ -17,9 +17,8 @@ const Coupon = React.createClass({
             },
             type: 'get',
             success: function (data) {
-                this.setState({
-                    staMoneyData: data.data.couponAccount[0]
-                })
+                let da = data.data.couponAccount ? data.data.couponAccount[0] : {};
+                this.setState({staMoneyData: da})
             }.bind(this)
         })
     },

@@ -161,7 +161,7 @@ let InterestUsedCouponList = function (page, cb) {
         success: function (data) {
             if (data.code == 10000) {
                 cb && cb(data.data.pageData)
-            } else {
+            } else if(data.code == 63001){
                 location.href = 'https://passport.9888.cn/passport/login?sourceSite=jrgc';
             }
         }.bind(this)
@@ -180,7 +180,7 @@ let InterestOverdueCouponList = function (page, cb) {
         success: function (data) {
             if (data.code == 10000) {
                 cb && cb(data.data.pageData)
-            } else {
+            } else if(data.code == 63001){
                 location.href = 'https://passport.9888.cn/passport/login?sourceSite=jrgc';
             }
         }.bind(this)
@@ -199,7 +199,7 @@ let InterestPresentCouponList = function (page, cb) {
         success: function (data) {
             if (data.code == 10000) {
                 cb && cb(data.data.pageData)
-            } else {
+            } else if(data.code == 63001){
                 location.href = 'https://passport.9888.cn/passport/login?sourceSite=jrgc';
             }
         }.bind(this)
