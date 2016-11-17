@@ -62,8 +62,8 @@ const PopList = React.createClass({
         })
     },
     confirmPop: function () {
-        this.closeHandler();
         if (this.state.selectedId) {
+            this.closeHandler();
             let couponName = this.props.type, userValue = this.props.value;
             if (this.props.type == "返现券") {
                 GlobalConfirm('您确定赠送%s元'+couponName+'给您的好友吗？', userValue, this.presentCoupon)
