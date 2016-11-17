@@ -149,7 +149,7 @@ let MoneyUnusedCouponList = function (page, cb) {
             if (data.code == 10000) {
                 cb && cb(data.data.pageData)
             } else if(data.code == 63001){
-                location.href = 'https://passport.9888.cn/passport/login?sourceSite=jrgc&service=' + location.href;
+                location.href = 'https://passport.9888.cn/passport/login?sourceSite=jrgc';
             }
         }.bind(this)
     })
@@ -168,7 +168,7 @@ let MoneyUsedCouponList = function (page, cb) {
             if (data.code == 10000) {
                 cb && cb(data.data.pageData)
             }else if(data.code == 63001){
-                location.href = 'https://passport.9888.cn/passport/login?sourceSite=jrgc&service=' + location.href;
+                location.href = 'https://passport.9888.cn/passport/login?sourceSite=jrgc';
             }
         }.bind(this)
     })
