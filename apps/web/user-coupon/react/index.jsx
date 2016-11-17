@@ -36,5 +36,5 @@ $(function () {
 });
 
 function gotoLogin() {
-    // location.href = 'https://passport.9888.cn/passport/login?sourceSite=jrgc';
+    location.href = 'https://passport.9888.cn/passport/login?sourceSite=jrgc';
 }
