@@ -65,11 +65,16 @@ const CenCont = React.createClass({
                         <div className="block1"><p>账户余额(元)</p><span>0.00</span><em></em></div>
                         <div className="block2"><p>账户资金(元)</p><span>0.00</span><em></em></div>
                         <div className="block2"><p>冻结资金(元)</p><span>0.00</span></div>
-                        <a className="per-btn-style"></a>
-                        <a className="per-btn-style2"></a>
+                        <a className="per-btn-style">充值</a>
+                        <a className="per-btn-style2">提现</a>
+                        <a onclick="validateForHsAccount()" className="check-huishang-account"><img src="./images/hs_bank.jpg"/>查看徽商存管账户</a>
+                    </div>
+                    <div class="per-other-box">
+                        <div><span></span><span></span></div>
+                        <div></div>
+                        <div></div>
                     </div>
                 </div>
-
             </div>
         );
 
