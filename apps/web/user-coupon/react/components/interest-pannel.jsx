@@ -16,8 +16,11 @@ const InterestPanel = React.createClass({
             status: 2,
             couponType: 2
         }, (data) => {
-            if (data.code == 10000 && data.data.pageData)
+            if (data.code == 10000 && data.data.pageData){
                 this.setState({tab_name_list: ['未使用', '已使用', '已过期', '已赠送']})
+            }else if(data.code == 63001){
+                gotoLogin();
+            }
         }, 'json')
     },
     render: function () {
@@ -139,8 +142,8 @@ let InterestUnusedCouponList = function (page, cb) {
         success: function (data) {
             if (data.code == 10000) {
                 cb && cb(data.data.pageData)
-            } else {
-                alert('API异常: ' + data.message)
+            } else if(data.code == 63001){
+                gotoLogin();
             }
         }.bind(this)
     })
@@ -158,8 +161,8 @@ let InterestUsedCouponList = function (page, cb) {
         success: function (data) {
             if (data.code == 10000) {
                 cb && cb(data.data.pageData)
-            } else {
-                alert('API异常: ' + data.message)
+            } else if(data.code == 63001){
+                gotoLogin();
             }
         }.bind(this)
     })
@@ -177,8 +180,8 @@ let InterestOverdueCouponList = function (page, cb) {
         success: function (data) {
             if (data.code == 10000) {
                 cb && cb(data.data.pageData)
-            } else {
-                alert('API异常: ' + data.message)
+            } else if(data.code == 63001){
+                gotoLogin();
             }
         }.bind(this)
     })
@@ -196,8 +199,8 @@ let InterestPresentCouponList = function (page, cb) {
         success: function (data) {
             if (data.code == 10000) {
                 cb && cb(data.data.pageData)
-            } else {
-                alert('API异常: ' + data.message)
+            } else if(data.code == 63001){
+                gotoLogin();
             }
         }.bind(this)
     })
@@ -205,8 +208,8 @@ let InterestPresentCouponList = function (page, cb) {
 
 let InterestUnusedCouponFilter = function (data) {
     return {
-        total_page: data.pagination && data.pagination.totalPage,
-        rows: (data.result && data.result).map((item) => {
+        total_page: data && data.pagination && data.pagination.totalPage,
+        rows: (data && data.result && data.result || []).map((item) => {
             return [{
                 text: `${item.backInterestRate}%`,
                 className: 'moneyUnused1'
@@ -231,8 +234,8 @@ let InterestUnusedCouponFilter = function (data) {
 };
 let InterestUsedCouponFilter = function (data) {
     return {
-        total_page: data.pagination && data.pagination.totalPage,
-        rows: (data.result && data.result).map((item) => {
+        total_page: data && data.pagination && data.pagination.totalPage,
+        rows: (data && data.result && data.result || []).map((item) => {
             return [{
                 text: `${item.backInterestRate}%`,
                 className: 'moneyUnused1'
@@ -246,15 +249,15 @@ let InterestUsedCouponFilter = function (data) {
                 text: `${getLocationDate(item.usedTime)}   ${getTimesString(item.usedTime)}`,
                 className: 'moneyUsedTime'
             }, {
-                text: item.remark
+                text: item.transferNumber >= 1 ? '好友赠送' : item.remark
             }]
         })
     }
 };
 let InterestOverdueCouponFilter = function (data) {
     return {
-        total_page: data.pagination && data.pagination.totalPage,
-        rows: (data.result && data.result).map((item) => {
+        total_page: data && data.pagination && data.pagination.totalPage,
+        rows: (data && data.result && data.result || []).map((item) => {
             return [{
                 text: `${item.backInterestRate}%`,
                 className: 'moneyUnused1'
@@ -268,15 +271,15 @@ let InterestOverdueCouponFilter = function (data) {
                 text: getLocationDate(item.overdueTime),
                 className: 'moneyUsedTime'
             }, {
-                text: item.remark
+                text: item.transferNumber >= 1 ? '好友赠送' : item.remark
             }]
         })
     }
 };
 let InterestPresentCouponFilter = function (data) {
     return {
-        total_page: data.pagination && data.pagination.totalPage,
-        rows: (data.result && data.result).map((item) => {
+        total_page: data && data.pagination && data.pagination.totalPage,
+        rows: (data && data.result && data.result || []).map((item) => {
             return [{
                 text: `${item.backInterestRate}%`,
                 className: 'moneyUnused1'

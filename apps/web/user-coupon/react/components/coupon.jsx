@@ -17,9 +17,8 @@ const Coupon = React.createClass({
             },
             type: 'get',
             success: function (data) {
-                this.setState({
-                    staMoneyData: data.data.couponAccount[0]
-                })
+                let da = data.data.couponAccount ? data.data.couponAccount[0] : {};
+                this.setState({staMoneyData: da})
             }.bind(this)
         })
     },
@@ -30,16 +29,6 @@ const Coupon = React.createClass({
         if (tab_name == '兑换券') {
             this.ajaxExchangeStatistics()
         } else {
-            // var m;
-            // if (tab_name == '返现券') {
-            //     m = 1;
-            // } else if (tab_name == '返息券') {
-            //     m = 2
-            // } else {
-            //     alert('标签切换异常');
-            //     return;
-            // }
-
             $.ajax({
                 url: API_PATH + 'api/coupon/v1/accountCouponStatistics.json',
                 data: {couponType: tab_name == '返现券' ? 1 : 2},

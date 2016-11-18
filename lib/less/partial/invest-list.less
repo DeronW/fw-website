@@ -1,4 +1,7 @@
-.invest {
+.global-invest-list {
+  width: 1140px;
+  display: table;
+  margin: 0 auto;
 
   .invest-title {
 
@@ -187,6 +190,29 @@
       height: 100%;
       position: relative;
 
+      .circle-progress {
+        position: relative;
+        width: 150px;
+        height: 140px;
+
+        svg {
+          position: absolute;
+          top: 20px;
+          left: 25px;
+        }
+
+        .text {
+          text-align: center;
+          font-size: 16px;
+          line-height: 30px;
+          color: #333;
+          position: absolute;
+          top: 56px;
+          left: 0;
+          right: 0;
+          bottom: 0;
+        }
+      }
       .rect-progress {
         width: 150px;
         margin-top: 55px;
@@ -240,5 +266,4 @@
       }
     }
   }
-
 }
