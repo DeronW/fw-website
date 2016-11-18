@@ -63,7 +63,6 @@ const MessagePanel = React.createClass({
 
         let message = (msg, index) => {
             let href = null;
-            console.log(msg.isUse)
             return (
                 <a key={index} className="msg-btn" href={href}>
                     <div className={msg.isUse == 'Y' ? 'icon-read' : 'icon-unread'}></div>
