@@ -40,7 +40,7 @@
                         $('#VIP-SPAN').html('VIP');
                     } else {
                         $('.vip-back-pc-l,.vip-back-pc-r,#VIP-SPAN').addClass('v');
-                        $('#VIP-SPAN').html('VIP' + arg);//vip等级
+                        $('#VIP-SPAN').html('VIP' + (arg - 1));//vip等级
                     }
                 }
             },
@@ -86,7 +86,10 @@
                 if ((arg.financialerStatus != null) && arg.financialerStatus == 3) {
                     $('#left16').show()
                 }
-            },
+                for (var i=0; i<$('.meun-left').eq(2).find('div').length; i++){
+                    if($('.meun-left').eq(2).find('div').eq(i).is(':visible')) $('.meun-left').eq(2).show();
+                }
+                },
             //导航栏高亮切换
             active: function () {
                 var url = location.href;
@@ -115,8 +118,7 @@
 
         $UserReady(function (is_login, user) {
             if (!is_login) {
-//                var next = 'http://' + location.hostname + location.pathname;
-                window.location.href = "http://passport.9888.cn/passport/login?sourceSite=jrgc"// &service=" + next;
+                window.location.href = "http://passport.9888.cn/passport/login?sourceSite=jrgc"
             } else {
                 var API_PATH = document.getElementById('api-path').value;
                 $.get(API_PATH + "/api/userState/v2/userState.json", null,
