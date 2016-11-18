@@ -62,9 +62,10 @@ const MessagePanel = React.createClass({
         let page, tab_bar, records;
 
         let message = (msg, index) => {
+            let href = null;
             return (
-                <a key={index} className="msg-btn">
-                    <img src="./images/icon-msg.png"/>
+                <a key={index} className="msg-btn" href={href}>
+                    <div className={msg.isUse == 'Y' ? 'icon-read' : 'icon-unread'}></div>
                     <div>
                         <b className="msg-title">{msg.title}</b>
                         <b className="msg-date"> {msg.createTime} </b>
@@ -76,10 +77,10 @@ const MessagePanel = React.createClass({
 
         tab_bar = (
             <div className="tab-bar">
-                {['全部消息', '未读消息', '已读消息'].map((n, index)=> {
+                {['全部消息', '未读消息', '已读消息'].map((n, index) => {
                     return (
                         <div key={index} className={this.state.tab == n ? "active" : null}
-                             onClick={()=>this.toggleTabHandler(n)}>
+                             onClick={() => this.toggleTabHandler(n)}>
                             {n}<i className="icon-bottom-angle"> </i>
                         </div>
                     )
@@ -91,19 +92,18 @@ const MessagePanel = React.createClass({
             page = (
                 <div className="pagination">
                     第{this.state.page}页, 共{this.state.total_page}页
-                    <a onClick={()=>this.loadPage('first')}>首页</a>
+                    <a onClick={() => this.loadPage('first')}>首页</a>
                     {this.state.page > 1 ?
-                        <a onClick={()=>this.loadPage('prev')}>上一页</a> : null }
+                        <a onClick={() => this.loadPage('prev')}>上一页</a> : null }
                     {this.state.page < this.state.total_page ?
-                        <a onClick={()=>this.loadPage('next')}>下一页</a> : null }
-                    <a onClick={()=>this.loadPage('last')}>末页</a>
+                        <a onClick={() => this.loadPage('next')}>下一页</a> : null }
+                    <a onClick={() => this.loadPage('last')}>末页</a>
                 </div>
             );
             records = this.state.msg_list.map(message);
         } else {
             records = <div className="no-message">暂无记录</div>
         }
-
 
         return (
             <div className="message-panel">
