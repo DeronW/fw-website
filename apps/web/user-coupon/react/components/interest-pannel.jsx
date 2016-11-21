@@ -217,7 +217,7 @@ let InterestUnusedCouponFilter = function (data) {
                 text: item.investMultip,
                 className: 'moneyUnused2'
             }, {
-                text: item.inverstPeriod == 0 ? '全场通用' : `≥${item.inverstPeriod}`,
+                text: item.inverstPeriod == 0 || item.inverstPeriod == null ? '全场通用' : `≥${item.inverstPeriod}`,
                 className: 'moneyUnused2'
             }, {
                 text: `${getLocationDate(item.issueTime)}至${getLocationDate(item.overdueTime)}`,
@@ -243,7 +243,7 @@ let InterestUsedCouponFilter = function (data) {
                 text: item.investMultip,
                 className: 'moneyUnused2'
             }, {
-                text: item.inverstPeriod == 0 ? '全场通用' : `≥${item.inverstPeriod}`,
+                text: item.inverstPeriod == 0 || item.inverstPeriod == null ? '全场通用' : `≥${item.inverstPeriod}`,
                 className: 'moneyUnused2'
             }, {
                 text: `${getLocationDate(item.usedTime)}   ${getTimesString(item.usedTime)}`,
@@ -265,7 +265,7 @@ let InterestOverdueCouponFilter = function (data) {
                 text: item.investMultip,
                 className: 'moneyUnused2'
             }, {
-                text: item.inverstPeriod == 0 ? '全场通用' : `≥${item.inverstPeriod}`,
+                text: item.inverstPeriod == 0 || item.inverstPeriod == null ? '全场通用' : `≥${item.inverstPeriod}`,
                 className: 'moneyUnused2'
             }, {
                 text: getLocationDate(item.overdueTime),
@@ -287,7 +287,7 @@ let InterestPresentCouponFilter = function (data) {
                 text: item.investMultip,
                 className: 'moneyUnused2'
             }, {
-                text: item.inverstPeriod == 0 ? '全场通用' : `≥${item.inverstPeriod}`,
+                text: item.inverstPeriod == 0 || item.inverstPeriod == null ? '全场通用' : `≥${item.inverstPeriod}`,
                 className: 'moneyUnused2'
             }, {
                 text: `${getLocationDate(item.issueTime)}至`,
