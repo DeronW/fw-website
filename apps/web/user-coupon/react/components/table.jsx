@@ -60,6 +60,7 @@ const Table = React.createClass({
                     <td key={cell_index} className={cell.className}>
                         <span onClick={()=>cell.clickHandler(this.reloadData)}>{cell.text}</span>
                         <em className="productStatus">{cell.content}</em>
+                        <p className="presentTime">{cell.time}</p>
                     </td>
                 )
             };

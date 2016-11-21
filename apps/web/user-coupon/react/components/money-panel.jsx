@@ -296,7 +296,8 @@ let MoneyPresentCouponFilter = function (data) {
                 text: item.inverstPeriod == 0 ? '全场通用' : `≥${item.inverstPeriod}`,
                 className: 'moneyUnused2'
             }, {
-                text: `${getLocationDate(item.issueTime)}至${getLocationDate(item.overdueTime)}`,
+                text: `${getLocationDate(item.issueTime)}至`,
+                time:`${getLocationDate(item.overdueTime)}`,
             }, {
                 text: getLocationDate(item.givenTime)
             }, {
