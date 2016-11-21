@@ -23,7 +23,7 @@ const LevelComplete = React.createClass({
         this.props.setPage('level')
     },
     showGiftPackageHandler: function () {
-        $.get(`${API_PATH}/9888/game/web/index.php`, {
+        $.get(`${API_PATH}/index.php`, {
             r: 'user/user-gift',
             uid: USER_ID,
             gameNo: GAME_NAME,

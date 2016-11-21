@@ -3,7 +3,7 @@ const Prepare = React.createClass({
         return {records: []}
     },
     componentDidMount: function () {
-        $.get(API_PATH + '/9888/game/web/index.php', {
+        $.get(API_PATH + '/index.php', {
             r: 'user/user-ranking',
             gameNo: GAME_NAME,
             passNum: this.props.level,
