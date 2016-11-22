@@ -30,7 +30,7 @@ const Content = React.createClass({
         this.refreshLevelList();
 
         // 获取带带奖品关卡列表
-        $.get(API_PATH + '/9888/game/web/index.php', {
+        $.get(API_PATH + '/index.php', {
             r: 'user/game-gift',
             gameNo: GAME_NAME
         }, function (data) {
@@ -47,7 +47,7 @@ const Content = React.createClass({
     },
     refreshLevelList: function () {
         // 获取已通过关卡列表
-        $.get(API_PATH + '/9888/game/web/index.php', {
+        $.get(API_PATH + '/index.php', {
             r: 'user/user-play',
             gameNo: GAME_NAME,
             uid: USER_ID
@@ -82,7 +82,7 @@ const Content = React.createClass({
         var start_count = [28, 30, 32, 34, 36, 38, 38, 42, 46, 52, 56, 60];
         // var start_count = [28, 6, 6, 34, 36, 38, 38, 42, 46, 52, 56, 60];
 
-        $.get(`${API_PATH}/9888/game/web/index.php`, {
+        $.get(`${API_PATH}/index.php`, {
             r: 'user/work-points',
             uid: USER_ID,
             gameNo: GAME_NAME,
@@ -166,7 +166,7 @@ const Content = React.createClass({
 });
 
 function calculateStar(level, seconds, cb) {
-    $.get(API_PATH + '/9888/game/web/index.php', {
+    $.get(API_PATH + '/index.php', {
         r: 'user/user-addres',
         gameNo: GAME_NAME,
         passNum: level,
@@ -184,7 +184,7 @@ function calculateStar(level, seconds, cb) {
 }
 
 $(function () {
-    $.get(API_PATH + '/9888/game/web/index.php?r=user/user-play', {},
+    $.get(API_PATH + '/index.php?r=user/user-play', {},
         function (data) {
             // const USER_ID = data.uid
         }, 'json');

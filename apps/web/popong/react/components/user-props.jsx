@@ -27,7 +27,7 @@ const UserProps = React.createClass({
         this.setState({value: Math.max(this.state.value - 1, 1)})
     },
     buyHandler: function () {
-        $.get(`${API_PATH}/9888/game/web/index.php?r=user/prop-buy`, {
+        $.get(`${API_PATH}/index.php?r=user/prop-buy`, {
             buyNum: this.state.value,
             gameNo: GAME_NAME,
             passNum: this.props.level,
@@ -38,7 +38,7 @@ const UserProps = React.createClass({
         }, 'json');
     },
     useHandler: function () {
-        $.get(`${API_PATH}/9888/game/web/index.php?r=user/prop-use`, {
+        $.get(`${API_PATH}/index.php?r=user/prop-use`, {
             gameNo: GAME_NAME,
             passNum: this.props.level,
             propId: this.state.id,
