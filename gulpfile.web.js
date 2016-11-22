@@ -14,7 +14,7 @@ const WEB_APP_NAMES = [
     'topic-yi-shou-bao',
     'topic-bu-mao-tong',
     'topic-xiao-fei-dai',
-	'topic-zun-xiang',
+    'topic-zun-xiang',
 
     // 专题说明页面
     'topic-annual-commision', // A码 用户返利规则 佣金说明
@@ -30,6 +30,7 @@ const WEB_APP_NAMES = [
     'user-center',//用户中心
     'user-coupon',//用户优惠券
     'user-messages', // 用户消息页面
+    'user-bean', // 用户工豆
 
     // 其他页面
     'statistics', // 实时交易统计
