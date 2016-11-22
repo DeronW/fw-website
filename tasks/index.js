@@ -13,15 +13,14 @@ const revision = require('./revision.js');
 
 let COMMON_JAVASCRIPTS_TASK = {};
 
-// project_name 每次使用新项目时, 只需要更换项目名称
-module.exports = function generate_task(site_name, project_name, configs) {
+module.exports = function generate_task(site_name, page_name, configs) {
 
-    let app_path = `apps/${site_name}/${project_name}/`,
-        build_path = `build/${site_name}/${project_name}/`,
+    let app_path = `apps/${site_name}/${page_name}/`,
+        build_path = `build/${site_name}/${page_name}/`,
         public_path = 'public/',
         tmp_path = `build/${site_name}-tmp/`,
         lib_path = 'lib/',
-        cdn_path = `cdn/${site_name}/${project_name}/`,
+        cdn_path = `cdn/${site_name}/${page_name}/`,
         CONFIG = Object.assign({
             debug: false,
             cmd_prefix: '', // 通用指令前缀，比如 pack:
@@ -33,7 +32,7 @@ module.exports = function generate_task(site_name, project_name, configs) {
             html_engine: 'swig'
         }, configs);
 
-    let task_name = site_name + ':' + (CONFIG.cmd_prefix ? CONFIG.cmd_prefix + ':' : '') + project_name;
+    let task_name = site_name + ':' + (CONFIG.cmd_prefix ? CONFIG.cmd_prefix + ':' : '') + page_name;
 
     let less_files = [
         `${lib_path}less/common.less`,
@@ -143,7 +142,7 @@ module.exports = function generate_task(site_name, project_name, configs) {
         gulp.watch(`lib/less/**/*.less`, gulp.parallel(compile_less));
     }
 
-    var common_javascripts = CONFIG.debug ? compile_common_javascripts : copy_common_javascripts;
+    let common_javascripts = CONFIG.debug ? compile_common_javascripts : copy_common_javascripts;
 
     gulp.task(task_name,
         gulp.series(
