@@ -65,7 +65,7 @@ const Table = React.createClass({
                 )
             };
             return (
-                <tr key={row_index}>
+                <tr key={row_index} className={"trCell"+row_index}>
                     {row.map(td)}
                 </tr>)
         };
