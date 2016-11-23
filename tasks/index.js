@@ -42,7 +42,6 @@ module.exports = function generate_task(site_name, page_name, configs) {
         `${lib_path}less/footer.less`,
         `${lib_path}less/sidebar-fn.less`,
         `${lib_path}less/not-support-ie6-ie7.less`,
-        `${lib_path}less/partial/user-center-panel.less`,
         `${app_path}less/index.less`
     ];
 
