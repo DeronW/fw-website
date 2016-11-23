@@ -72,17 +72,21 @@ const Table = React.createClass({
         };
 
         let pagination, empty_records;
+        // let totalbeans=
         if (rows.length) {
             pagination = (
                 <div className="pagination">
                     <div className="paginationPage">
+                        {/*<span className="totalBeans" style={{display:totalbeans}}>*/}
+                            {/*总记*/}
+                        {/*</span>*/}
                         第{page}页, 共{total_page}页
-                        {page > 1 ? <a onClick={() => this.switchPageHandler('first')}>首页</a> : null}
-                        {page > 1 ? <a onClick={() => this.switchPageHandler('prev')}>上一页</a> : null}
+                        {page > 1 ? <a  className="first" onClick={() => this.switchPageHandler('first')}>首页</a> : null}
+                        {page > 1 ? <a  className="prev" onClick={() => this.switchPageHandler('prev')}>上一页</a> : null}
                         {page < total_page ?
-                            <a onClick={() => this.switchPageHandler('next')}>下一页</a> : null}
+                            <a className="next" onClick={() => this.switchPageHandler('next')}>下一页</a> : null}
                         {page < total_page ?
-                            <a onClick={() => this.switchPageHandler('last')}>尾页</a> : null}
+                            <a  className="last" onClick={() => this.switchPageHandler('last')}>尾页</a> : null}
                     </div>
                 </div>
             );
@@ -93,7 +97,7 @@ const Table = React.createClass({
         console.log(this.state.th_rows)
 
         return (
-            <div>
+            <div className="tableContaner">
                 <table className="table-read-only">
                     <tbody>
                     <tr>{this.state.th_rows.map(th_cell)}</tr>
