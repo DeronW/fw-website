@@ -70,7 +70,7 @@ $(function(){
 		starMove(document,{'scrollbar':onesize1+onesize2+onesize3+iH+iTop})
 	});
 	$(".menue ul li.list5").click(function(){
-		starMove(document,{'scrollbar':onesize1+onesize2+onesize3+onesize4+iH+iTop})
+		starMove(document,{'scrollbar':onesize1+onesize2+onesize3+onesize4+iH+iTop+50})
 	});
 	
 	$(window).on("scroll resize",function(){

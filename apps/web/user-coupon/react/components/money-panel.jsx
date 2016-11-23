@@ -46,9 +46,9 @@ const MoneyPanel = React.createClass({
                 {title: '面值(元)', width: '14%'},
                 {title: '最小投资金额(元)', width: '18%'},
                 {title: '可投标期限(天)', width: '18%'},
-                {title: '有效期', width: '20%'},
-                {title: '备注', width: '16%'},
-                {title: '操作', width: '14%'}
+                {title: '有效期', width: '22%'},
+                {title: '备注', width: '14%'},
+                {title: '操作', width: '12%'}
             ];
             fn_load_data = MoneyUnusedCouponList;
             fn_filter_data = MoneyUnusedCouponFilter
@@ -79,7 +79,7 @@ const MoneyPanel = React.createClass({
                 {title: '可投标期限(天)', width: '16%'},
                 {title: '有效期', width: '16%'},
                 {title: '赠送日期', width: '12%'},
-                {title: '赠送人', width: '10%'},
+                {title: '赠送人', width: '12%'},
                 {title: '备注', width: '18%'}
             ];
             fn_load_data = MoneyPresentCouponList;

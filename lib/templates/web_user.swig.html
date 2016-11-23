@@ -14,56 +14,65 @@
         var methods = {
             //头像
             head: function (arg) {
-                var avatar = $('.head-kuang').find('div').removeClass('moren');
-                if (arg.headurl != null) {
-                    avatar.css("background", "url(" + arg.headurl + ") no-repeat");
+                var avatar = $(".ucp-avatar");
+                avatar.find(".default").addClass("hide");
+                if (arg.headurl) {
+                    avatar.find(".self-define").removeClass("hide").attr("src", arg.headurl)
                 } else {
-                    avatar.addClass(arg.sex == 1 ? 'man' : 'woman')
+                    arg.sex == 1 ?
+                        avatar.find(".male").removeClass("hide") :
+                        avatar.find(".female").removeClass("hide")
                 }
             },
             //名字
             name: function (arg1, arg2) {
-                $('.user-name').html(arg1.open_name || arg2.realName || '&nbsp;');
+                $('.user-name').text(arg1.open_name || arg2.realName || '&nbsp;');
             },
             //工厂码
-            wscode: function (arg1, arg2) {
-                if (arg1.open_name == null) {
-                    $('.ws-code').find('span').html(arg2.promotioncode);
-                } else {
-                    $('.ws-code').remove()
-                }
+            wscode: function (code) {
+                code ? $('.ws-code a').text(code) : $('.ws-code').remove()
             },
             //用户VIP等级
-            level: function (arg) {
-                if (arg) {
-                    if (arg == 1) {
-                        $('#VIP-SPAN').html('VIP');
-                    } else {
-                        $('.vip-back-pc-l,.vip-back-pc-r,#VIP-SPAN').addClass('v');
-                        $('#VIP-SPAN').html('VIP' + (arg - 1));//vip等级
-                    }
+            level: function (level) {
+                if (level > 1) {
+                    $(".ucp-angle").addClass("vip");
+                    $(".ucp-angle a").text('VIP' + (level - 1));
                 }
             },
             //是否绑定开通存管和设置交易密码
             state: function (arg1, arg2) {
+                var certPhoneTips = $('.ucp-user-state .cert-phone .tips');
                 if (arg2.mobile != null) {
-                    $('#bind_mobile_img').html('已完成手机绑定' + arg2.mobile.substring(0, 3) + '****' + arg2.mobile.substring(7, 11) + '，<a href="/depository/account/changePhoneOld.shtml" class="bls">修改</a>。 <span></span>')
+                    var html = '已完成手机绑定';
+                    html += arg2.mobile.substring(0, 3) + '****' + arg2.mobile.substring(7, 11);
+                    html += ' <a href="/depository/account/changePhoneOld.shtml" class="blue-color">修改</a>';
+                    html += '<span class="tips-icon-tail"></span>';
+                    certPhoneTips.html(html);
                 } else {
-                    $("#bind_mobile_img").remove()
+                    certPhoneTips.remove()
                 }
 
-                if ((arg1.openAccountStatus != null) && (arg1.openAccountStatus == 2 || arg1.openAccountStatus == 3 || arg1.openAccountStatus == 4 || arg1.openAccountStatus == 5)) {
-                    $('#open_account_img').removeClass('not').addClass('yes');
+                var certBank = $('.ucp-user-state .cert-bank');
+//                if ((arg1.openAccountStatus != null) && (arg1.openAccountStatus == 2 || arg1.openAccountStatus == 3 || arg1.openAccountStatus == 4 || arg1.openAccountStatus == 5)) {
+                if ([2, 3, 4, 5].indexOf(arg1.openAccountStatus) > -1) {
+                    certBank.removeClass('not').addClass('yes');
                 } else {
-                    $('#open_account_img').html('').append('<span class="ywc wyc chg">为确保资金安全，请尽快开通存管账户，<a href="${ctx}/depository/openAccount/toOpenAccount.shtml" class="bls">立即开户</a>。<span></span></span>');
+                    var html = '为确保资金安全，请尽快开通存管账户，';
+                    html += '<a href="/depository/openAccount/toOpenAccount.shtml" class="blue-color">立即开户</a>';
+                    html += '<span class="tips-icon-tail red"></span>';
+                    certBank.find('.tips').html(html);
                 }
 
+                var certPWD = $('.ucp-user-state .cert-pwd');
                 if ((arg1.openAccountStatus != null) && (arg1.openAccountStatus == 5)) {
-                    $('#bind_card_img').removeClass('not').addClass('yes0');
+                    certPWD.removeClass('not').addClass('pending');
                 } else if ((arg1.openAccountStatus != null) && (arg1.openAccountStatus == 4)) {
-                    $('#bind_card_img').removeClass('not').addClass('yes');
+                    certPWD.removeClass('not').addClass('yes');
                 } else {
-                    $('#bind_card_img').html('').append('<span class="ywc ctg chg">为确保资金安全，请尽快设置交易密码，<a href="${ctx}/depository/openAccount/toTradePwd.shtml" class="bls">立即设置</a>。<span></span></span>');
+                    var html = '为确保资金安全，请尽快设置交易密码，';
+                    html += '<a href="/depository/openAccount/toTradePwd.shtml" class="blue-color">立即设置</a>'
+                    html += '<span class="tips-icon-tail red"></span>';
+                    certPWD.find('.tips').html(html);
                 }
             },
             //左侧栏显示
@@ -86,10 +95,10 @@
                 if ((arg.financialerStatus != null) && arg.financialerStatus == 3) {
                     $('#left16').show()
                 }
-                for (var i=0; i<$('.left3').length; i++){
-                    if($('.left3').eq(i).is(':visible')) $('.meun-left3').show();
+                for (var i = 0; i < $('.left3').length; i++) {
+                    if ($('.left3').eq(i).is(':visible')) $('.meun-left3').show();
                 }
-                },
+            },
             //导航栏高亮切换
             active: function () {
                 var url = location.href;
@@ -124,10 +133,11 @@
                 $.get(API_PATH + "/api/userState/v2/userState.json", null,
                     function (data) {
                         var data = data.data, ou = data.orderUser;
+                        window._data = data;
                         methods.head(ou);
                         methods.name(data, ou);
-                        methods.wscode(data, ou);
-                        methods.level(data.userLevel);
+                        methods.wscode(data.open_name ? null : ou.promotioncode);
+                        if (data.userLevel) methods.level(data.userLevel);
                         methods.state(data, ou);
                         methods.left(data);
                         methods.active()
