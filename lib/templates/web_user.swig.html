@@ -78,50 +78,20 @@
             //左侧栏显示
             left: function (arg) {
                 if (!arg.is_companyagent) {
-                    $('#left5').show()
+                    $('#ucpLinkSymbol').removeClass('hide')
                 }
                 if (arg.borrowCount > 0 || arg.subrogationCount > 0 || arg.debtorsCount > 0) {
-                    $('#left9').show()
+                    $('#ucpLinkContract').removeClass('hide')
                 }
                 if (arg.borrowCount > 0) {
-                    $('#left10').show()
+                    $('#ucpLinkBorrow').removeClass('hide')
                 }
                 if (arg.subrogationCount > 0) {
-                    $('#left11').show()
+                    $('#ucpLinkTransfer').removeClass('hide')
                 }
                 if (arg.debtorsCount > 0) {
-                    $('#left12').show()
+                    $('#ucpLinkGuarantee').removeClass('hide')
                 }
-                if ((arg.financialerStatus != null) && arg.financialerStatus == 3) {
-                    $('#left16').show()
-                }
-                for (var i = 0; i < $('.left3').length; i++) {
-                    if ($('.left3').eq(i).is(':visible')) $('.meun-left3').show();
-                }
-            },
-            //导航栏高亮切换
-            active: function () {
-                var url = location.href;
-                var arr = url.split("/");
-                var page = arr[arr.length - 2];
-                var id = {
-                        'user-invest': 2,
-                        'payment-details': 3,
-                        'capital-flow': 4,
-                        'ws-code': 5,
-                        'red-paper': 6,
-                        'user-coupon': 7,
-                        'work-point': 'Credit',
-                        'work-bean': 8,
-                        'contract-manage': 9,
-                        'my-loan': 10,
-                        'subrogation': 11,
-                        'my-security': 12,
-                        'account-setting': 13,
-                        'bank-card': 14,
-                        'user-messages': 15
-                    }[page] || 1;
-                $('#left' + id).addClass('active')
             }
         };
 
@@ -140,7 +110,6 @@
                         if (data.userLevel) methods.level(data.userLevel);
                         methods.state(data, ou);
                         methods.left(data);
-                        methods.active()
                     }, 'json');
             }
         });
@@ -148,6 +117,11 @@
         $("#VIP-SPAN").click(function () {
             window.location.href = API_PATH + "/user/level/userLevel.shtml";
         });
+
+        $(".ucp-link").each(function () {
+            var e = $(this);
+            if (location.pathname == e.attr('href')) e.addClass("focus");
+        })
 
     })(jQuery, window, document);
 </script>

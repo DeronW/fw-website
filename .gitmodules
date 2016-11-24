@@ -1,3 +1,0 @@
-[submodule "common-lib"]
-	path = common-lib
-	url = http://10.10.100.106/front/common-lib.git
