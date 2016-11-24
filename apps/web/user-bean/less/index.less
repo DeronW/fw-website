@@ -20,6 +20,7 @@ ul{
   margin-bottom: 50px;
   border: 1px solid #ccc;
   border-top: 0 none;
+  font-size: 12px;
   .topRow{
     width: 100%;
     height: 38px;
@@ -61,7 +62,7 @@ ul{
       }
       .active{
         background-color: #fff;
-        border-bottom: 1px solid #81B6F8;
+        border-bottom: 2px solid #81B6F8;
         font-weight: bold;
       }
     }
@@ -81,6 +82,7 @@ ul{
   line-height: 45px;
   background-color: #f6f6f6;
   padding: 0 20px;
+  text-align: left;
   .des{
     padding: 0 20px 0 0 ;
     font-size: 12px;
@@ -93,13 +95,12 @@ ul{
 .tableContaner{
   width: 752px;
   margin: 30px 10px 50px 10px;
-  height: 385px;
+  height: 492px;
   position: relative;
 }
 .table-read-only{
   width: 752px;
   border: 1px solid #ccc;
-  //margin: 30px 10px 20px 10px;
   border-collapse: collapse;
   tr{
     height: 35px;
@@ -113,6 +114,7 @@ ul{
       border-collapse: collapse;
     }
     td{
+      height: 45px;
       border-bottom: 1px solid #ccc;
       border-right: 1px solid #ccc;
     }
@@ -135,12 +137,23 @@ ul{
   color: lightblue;
 }
 .pagination{
-  position: absolute;
-  bottom: -38px;
-  left: 50%;
-  margin-left: -130px;
+  //position: absolute;
+  //bottom: -38px;
+  //left: 50%;
+  //margin-left: -130px;
   text-align: center;
   .paginationPage{
+    margin: 10px 0;
+    .totalCount{
+      display: inline-block;
+      padding-right: 10px;
+      span{
+        padding-left: 5px;
+      }
+      .calculate{
+        font-weight:bold;
+      }
+    }
     a{
       display: inline-block;
       margin: 0 3px;
@@ -150,20 +163,32 @@ ul{
       padding: 3px 5px;
       cursor: pointer;
     }
+    .first:hover{
+      color: #f03b43 ;
+    }
     .last{
       border: 1px solid #ccc;
       padding: 3px 5px;
       cursor: pointer;
+    }
+    .last:hover{
+      color: #f03b43 ;
     }
     .prev{
       border: 1px solid #ccc;
       padding: 3px 5px;
       cursor: pointer;
     }
+    .prev:hover{
+      color: #f03b43 ;
+    }
     .next{
       border: 1px solid #ccc;
       padding: 3px 5px;
       cursor: pointer;
+    }
+    .next:hover{
+      color: #f03b43 ;
     }
   }
 }
