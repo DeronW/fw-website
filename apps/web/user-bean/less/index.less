@@ -1,5 +1,4 @@
 @import "../../../../lib/less/partial/user-center-panel.less";
-
 *{
   margin: 0;
   padding:0;
@@ -18,8 +17,10 @@ ul{
 }
 .topNav{
   width: 796px;
-  border-right: 0 none;
   margin-bottom: 50px;
+  border: 1px solid #ccc;
+  border-top: 0 none;
+  font-size: 12px;
   .topRow{
     width: 100%;
     height: 38px;
@@ -61,7 +62,7 @@ ul{
       }
       .active{
         background-color: #fff;
-        border-bottom: 1px solid #81B6F8;
+        border-bottom: 2px solid #81B6F8;
         font-weight: bold;
       }
     }
@@ -74,13 +75,14 @@ ul{
   }
 
 }
-.showInfo{
+.bean-info{
   width: 730px;
   margin: 20px auto;
   height: 45px;
   line-height: 45px;
   background-color: #f6f6f6;
   padding: 0 20px;
+  text-align: left;
   .des{
     padding: 0 20px 0 0 ;
     font-size: 12px;
@@ -90,743 +92,159 @@ ul{
     font-weight: bold;
   }
 }
-.detailsBox{
-  height: 40px;
-  //background-color: #ccc;
-  margin-top: 35px;
-  .detailHead{
+.tableContaner{
+  width: 752px;
+  margin: 30px 10px 50px 10px;
+  height: 492px;
+  position: relative;
+}
+.table-read-only{
+  width: 752px;
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  tr{
+    height: 35px;
+    text-align: center;
+
     th{
-      width: 200px;
       background-color: #f2f2f2;
-      height: 30px;
-      border-right: 1px solid #ccc;
+      font-weight: normal;
       border-bottom: 1px solid #ccc;
-    }
-    .tips{
-      width: 370px;
-    }
-    table{
-      border: 1px solid #ccc;
+      border-right: 1px solid #ccc;
       border-collapse: collapse;
     }
-    tr{
-      td{
-        color: #333;
-        font-size: 12px;
-        height: 45px;
-        line-height: 45px;
-        text-align: center;
-        border-right: 1px solid #ccc;
-        border-bottom: 1px solid #ccc;
+    td{
+      height: 45px;
+      border-bottom: 1px solid #ccc;
+      border-right: 1px solid #ccc;
+    }
+    td:last-child{
+      text-align: left;
+      padding-left: 10px;
+    }
+  }
+
+}
+.green{
+  color: green;
+  font-weight: bold;
+}
+.red{
+  color: red;
+  font-weight: bold;
+}
+.blue{
+  color: lightblue;
+}
+.pagination{
+  //position: absolute;
+  //bottom: -38px;
+  //left: 50%;
+  //margin-left: -130px;
+  text-align: center;
+  .paginationPage{
+    margin: 10px 0;
+    .totalCount{
+      display: inline-block;
+      padding-right: 10px;
+      span{
+        padding-left: 5px;
       }
-      .red{
-        color:red;
-        font-weight: bold;
+      .calculate{
+        font-weight:bold;
       }
-      .green{
-        color: green;
-        font-weight: bold;
-      }
+    }
+    a{
+      display: inline-block;
+      margin: 0 3px;
+    }
+    .first{
+      border: 1px solid #ccc;
+      padding: 3px 5px;
+      cursor: pointer;
+    }
+    .first:hover{
+      color: #f03b43 ;
+    }
+    .last{
+      border: 1px solid #ccc;
+      padding: 3px 5px;
+      cursor: pointer;
+    }
+    .last:hover{
+      color: #f03b43 ;
+    }
+    .prev{
+      border: 1px solid #ccc;
+      padding: 3px 5px;
+      cursor: pointer;
+    }
+    .prev:hover{
+      color: #f03b43 ;
+    }
+    .next{
+      border: 1px solid #ccc;
+      padding: 3px 5px;
+      cursor: pointer;
+    }
+    .next:hover{
+      color: #f03b43 ;
     }
   }
 }
-.pageBox{
-  width: 263px;
-  margin: 15px auto;
-  font-size: 12px;
-  span{
-    margin-right: 3px;
-  }
-  .firstPage{
-    border: 1px solid #ccc;
-    padding: 3px 5px;
-    cursor: pointer;
-  }
-  .lastPage{
-    border: 1px solid #ccc;
-    padding: 3px 5px;
-    cursor: pointer;
-  }
-  .prePage{
-    border: 1px solid #ccc;
-    padding: 3px 5px;
-    cursor: pointer;
-  }
-  .nextPage{
-    border: 1px solid #ccc;
-    padding: 3px 5px;
-    cursor: pointer;
-  }
+.checkLine{
+  width: 518px;
+  margin:20px 0 0 36px;
+  font-size: 14px;
 }
-
-
-//@import "common.less";
-//@import "table.less";
-//
-//ul, li, p {
-//  margin: 0;
-//  padding: 0;
-//}
-//
-//li {
-//  list-style: none;
-//}
-//
-//.couponContent {
-//  width: 797px;
-//  height: 1000px;
-//  //border: 1px solid @colorBorder;
-//  float: left;
-//  position: relative;
-//  margin-left: 20px;
-//  .couponTitle {
-//    display: block;
-//    position: absolute;
-//    right: 0px;
-//    height: 46px;
-//    line-height: 46px;
-//    font-size: @fontSize14;
-//    color: @color3;
-//    cursor: pointer;
-//  }
-//}
-//
-//.couponContainer {
-//  width: 798px;
-//  border: 1px solid #eaeaea;
-//  margin: 46px auto 0;
-//  .containerTop {
-//    height: 50px;
-//    background: @colorF2;
-//    div {
-//      width: 160px;
-//      height: 48px;
-//      float: left;
-//      background: @colorF2 url('../images/right.png') no-repeat right bottom;
-//      border-bottom: 2px solid @colorDb;
-//      border-right: 1px solid @colorDb;
-//      text-align: center;
-//      line-height: 50px;
-//      font-size: @fontSize16;
-//      color: @color6;
-//      cursor: pointer;
-//      &.active {
-//        border-top: 2px solid @color8c;
-//        border-bottom: transparent;
-//        background: @colorWhite;
-//      }
-//    }
-//  }
-//}
-//
-//.tabStyle {
-//  border-top: 2px solid red;
-//  border-bottom: transparent;
-//  background-color: #fff;
-//}
-//
-//;
-//
-//.containerCenter {
-//  em {
-//    font-style: normal;
-//  }
-//  .containerCenterTitle {
-//    height: 32px;
-//    padding-top: 18px;
-//    .centerTitleCom {
-//      height: 16px;
-//      float: left;
-//      padding: 0 20px;
-//      border-right: 1px solid #dcdcdc;
-//      line-height: 16px;
-//      font-size: @fontSize12;
-//      color: @color6;
-//    }
-//    .centerTitleLeft, .centerTitleRight {
-//      em {
-//        color: @color3;
-//      }
-//    }
-//    .centerTitleRight {
-//      border: transparent;
-//    }
-//    .centerTitleCenter {
-//      em {
-//        color: @colorEa;
-//      }
-//    }
-//  }
-//  .containerCenterList {
-//    margin: 0 10px 20px 10px;
-//    height: 26px;
-//    border-bottom: 2px solid @colorC;
-//    div {
-//      height: 26px;
-//      float: left;
-//      width: 130px;
-//      text-align: center;
-//      border-bottom: 2px solid @colorC;
-//      cursor: pointer;
-//    }
-//    .centerList {
-//      border-bottom: 2px solid @color8c;
-//    }
-//  }
-//  .containerRecord {
-//    min-height: 158px;
-//    height: 744px;
-//    position: relative;
-//    .haveCard {
-//      display: block;
-//    }
-//    .noHaveRecord {
-//      border-top: 1px solid #eaeaea;
-//      //border-bottom: 1px solid #eaeaea;
-//      height: 50px;
-//      position: relative;
-//      p {
-//        position: absolute;
-//        margin: auto;
-//        left: 0;
-//        right: 0;
-//        top: 90px;
-//        bottom: 0;
-//        width: 100px;
-//        height: 50px;
-//      }
-//
-//    }
-//  }
-//  .containerCenterTable {
-//    .tableTitle {
-//      height: 34px;
-//      border-top: 1px solid @colorF2;
-//      background: #fbfbf9;
-//      padding: 0 20px;
-//      font-size: @fontSize14;
-//      color: @color3;
-//      line-height: 34px;
-//    }
-//    .tableTitleTd {
-//      float: left;
-//      text-align: left;
-//      margin-right: 40px;
-//    }
-//    .tableTitleTd1 {
-//      width: 54px;
-//    }
-//    .tableTitleTd2 {
-//      width: 110px;
-//    }
-//    .tableTitleTd3 {
-//      width: 100px;
-//    }
-//    .tableTitleTd4 {
-//      width: 100px;
-//    }
-//    .tableTitleTd5 {
-//      width: 118px;
-//    }
-//    .tableTitleTd6 {
-//      width: 60px;
-//      text-align: center;
-//      margin-right: 0;
-//    }
-//    .tableContentItem {
-//      height: 35px;
-//      border-bottom: 1px dashed #eaeaea;
-//      font-size: @fontSize16;
-//      color: @color6;
-//      //display: table;
-//      padding: 20px;
-//      .tableTitleTd {
-//        //display: table-cell;
-//        //vertical-align: middle;
-//      }
-//      .tableTitleTd4 {
-//        width: 100px;
-//        color: @color9;
-//        font-size: @fontSize12;
-//      }
-//      .tableTitleTd5 {
-//        width: 108px;
-//        font-size: @fontSize12;
-//      }
-//      .tableTitleTd6 {
-//        width: 82px;
-//        height: 30px;
-//        margin: 0;
-//        line-height: 30px;
-//        color: @colorWhite;
-//        background: url('../images/sendBg.png') no-repeat;
-//        font-size: @fontSize14;
-//        cursor: pointer;
-//      }
-//    }
-//  }
-//  .containerCenterTable1 {
-//    .tableTitleTd5 {
-//      margin-left: 60px;
-//      margin-right: 0;
-//      text-align: right;
-//      width: 160px;
-//    }
-//    .tableContentItem {
-//      .tableTitleTd4 {
-//        line-height: 22px;
-//
-//      }
-//      .tableTitleTd5 {
-//        text-align: right;
-//        width: 160px;
-//        margin-left: 60px;
-//        line-height: 22px;
-//      }
-//    }
-//  }
-//  .containerCenterTable2 {
-//    .tableTitleTd {
-//      float: left;
-//      text-align: left;
-//      margin-right: 20px;
-//    }
-//    .tableTitleTd1 {
-//      width: 54px;
-//    }
-//    .tableTitleTd2 {
-//      width: 110px;
-//    }
-//    .tableTitleTd3 {
-//      width: 100px;
-//    }
-//    .tableTitleTd4 {
-//      width: 100px;
-//    }
-//    .tableTitleTd5 {
-//      width: 100px;
-//      line-height: 35px;
-//    }
-//    .tableTitleTd6 {
-//      width: 100px;
-//      margin-right: 0;
-//    }
-//    .tableTitleTd7 {
-//      width: 50px;
-//      margin-right: 0;
-//      margin-left: 30px;
-//      text-align: right;
-//    }
-//    .tableContentItem {
-//      .tableTitleTd5 {
-//        width: 100px;
-//        text-align: left;
-//      }
-//      .tableTitleTd6 {
-//        width: 82px;
-//        height: 30px;
-//        margin: 0;
-//        line-height: 30px;
-//        color: @color6;
-//        background: #fff;
-//        font-size: @fontSize14;
-//      }
-//      .tableTitleTd7 {
-//        font-size: 12px;
-//        width: 100px;
-//        margin-left: 0px;
-//        margin-right: 0;
-//        text-align: right;
-//      }
-//    }
-//  }
-//  .containerCenterTableExchange {
-//    .tableTitleTd {
-//      float: left;
-//      text-align: left;
-//      margin-right: 20px;
-//    }
-//    .tableTitleTd1 {
-//      width: 124px;
-//    }
-//    .tableTitleTd2 {
-//      width: 110px;
-//    }
-//    .tableTitleTd3 {
-//      text-align: right;
-//      width: 70px;
-//      margin-right: 50px;
-//    }
-//    .tableTitleTd4 {
-//      width: 100px;
-//    }
-//    .tableTitleTd5 {
-//      width: 100px;
-//      margin-right: 30px;
-//    }
-//    .tableTitleTd6 {
-//      width: 100px;
-//      margin-right: 0;
-//    }
-//  }
-//  .containerCenterTableExchange {
-//
-//    .tableContentItem {
-//      .tableTitleTd {
-//        font-size: 12px;
-//      }
-//      .tableTitleTd1 {
-//        span {
-//          color: @color8c;
-//        }
-//        em {
-//          color: #fc6455
-//        }
-//      }
-//      .tableTitleTd3 {
-//        color: #fc6455;
-//      }
-//      .tableTitleTd6 {
-//        width: 100px;
-//        height: 30px;
-//        margin: 0;
-//        line-height: 20px;
-//        color: #666;
-//        background: @colorWhite;
-//        font-size: @fontSize12;
-//        cursor: pointer;
-//      }
-//    }
-//  }
-//  .containerCenterTableExchange1, .containerCenterTableExchange2 {
-//    .tableContentItem {
-//      .tableTitleTd3 {
-//        color: #fc6455;
-//      }
-//    }
-//  }
-//  .containerPage {
-//    height: 60px;
-//    width: 206px;
-//    margin: auto;
-//    padding-top: 30px;
-//    color: @color6;
-//    font-size: @fontSize12;
-//
-//    .containerPageLeft {
-//      float: left;
-//      color: @color3;
-//      height: 24px;
-//      line-height: 24px;
-//      margin-top: 1px;
-//    }
-//    .containerPageStart {
-//      float: left;
-//      width: 50px;
-//      height: 24px;
-//      line-height: 24px;
-//      text-align: center;
-//      border: 1px solid @colorD9;
-//      margin-left: 4px;
-//    }
-//    .containerPageEnd {
-//      float: left;
-//      width: 50px;
-//      height: 24px;
-//      line-height: 24px;
-//      text-align: center;
-//      margin-left: 4px;
-//      border: 1px solid @colorD9;
-//    }
-//  }
-//}
-//
-//.totalPop {
-//  display: block;
-//  width: 100%;
-//  height: 100%;
-//  background: url('../images/bg.png');
-//  position: fixed;
-//  z-index: 100;
-//  left: 0;
-//  top: 0;
-//}
-//
-//.popContent {
-//  width: 340px;
-//  height: 214px;
-//  margin: auto;
-//  background: url('../images/popBg.png') no-repeat;
-//  position: absolute;
-//  left: 0;
-//  top: 0;
-//  right: 0;
-//  bottom: 0;
-//}
-//
-//.close {
-//  width: 16px;
-//  height: 16px;
-//  background: url('../images/close.png') no-repeat;
-//  position: absolute;
-//  right: 20px;
-//  top: 12px;
-//  cursor: pointer;
-//}
-//
-//.onePrompt {
-//  position: absolute;
-//  top: 80px;
-//  left: 0px;
-//  width: 340px;
-//  text-align: center;
-//  color: #333;
-//  font-size: 14px;
-//}
-//
-//.btn {
-//  position: absolute;
-//  top: 138px;
-//  left: 0px;
-//  width: 340px;
-//}
-//
-//.knowBtn {
-//  margin: auto;
-//  width: 100px;
-//  height: 34px;
-//  -webkit-border-radius: 4px;
-//  -moz-border-radius: 4px;
-//  -o-border-radius: 4px;
-//  -ms-border-radius: 4px;
-//  border-radius: 4px;
-//  background: #ea6f5d;
-//  color: #fff;
-//  font-size: 14px;
-//  line-height: 34px;
-//  text-align: center;
-//  cursor: pointer;
-//}
-//
-//.twoPrompt {
-//  position: absolute;
-//  top: 80px;
-//  left: 0px;
-//  width: 340px;
-//  text-align: center;
-//  color: #333;
-//  font-size: 14px;
-//}
-//
-//.twoPrompt em {
-//  color: #fb6455;
-//}
-//
-//.commonBtn {
-//  float: left;
-//  width: 140px;
-//  height: 34px;
-//  -webkit-border-radius: 4px;
-//  -moz-border-radius: 4px;
-//  -o-border-radius: 4px;
-//  -ms-border-radius: 4px;
-//  border-radius: 4px;
-//  background: #ea6f5d;
-//  color: #fff;
-//  font-size: 14px;
-//  line-height: 34px;
-//  text-align: center;
-//  cursor: pointer;
-//  margin-left: 20px;
-//}
-//
-//.rightBtn {
-//  background: #8ab5f5;
-//}
-//
-//.oneBtnPop {
-//  display: block;
-//}
-//
-//.twoBtnPop {
-//  display: block;
-//}
-//
-//.listPopBg {
-//  display: block;
-//  width: 100%;
-//  height: 100%;
-//  background: url('../images/bg.png');
-//  position: fixed;
-//  z-index: 100;
-//  left: 0;
-//  top: 0;
-//}
-//
-//.listPop {
-//  width: 600px;
-//  height: 480px;
-//  -webkit-border-radius: 4px;
-//  -moz-border-radius: 4px;
-//  -o-border-radius: 4px;
-//  -ms-border-radius: 4px;
-//  border-radius: 4px;
-//  background: #fff;
-//  margin: auto;
-//  position: absolute;
-//  left: 0;
-//  top: 0;
-//  right: 0;
-//  bottom: 0;
-//}
-//
-//.listTop {
-//  width: 600px;
+//.detailsBox{
 //  height: 40px;
-//  background: #efefef;
-//  border-top-left-radius: 4px;
-//  border-top-right-radius: 4px;
-//  line-height: 40px;
-//  border-bottom: 1px solid #ddd;
+//  //background-color: #ccc;
+//  margin-top: 35px;
+//  .detailHead{
+//    th{
+//      width: 200px;
+//      background-color: #f2f2f2;
+//      height: 30px;
+//      border-right: 1px solid #ccc;
+//      border-bottom: 1px solid #ccc;
+//    }
+//    .tips{
+//      width: 370px;
+//    }
+//    table{
+//      border: 1px solid #ccc;
+//      border-collapse: collapse;
+//    }
+//    tr{
+//      td{
+//        color: #333;
+//        font-size: 12px;
+//        height: 45px;
+//        line-height: 45px;
+//        text-align: center;
+//        border-right: 1px solid #ccc;
+//        border-bottom: 1px solid #ccc;
+//      }
+//      .red{
+//        color:red;
+//        font-weight: bold;
+//      }
+
+    //}
+  //}
 //}
-//
-//.topLeft {
-//  float: left;
-//  margin-left: 20px;
+//.pageBox{
+//  width: 263px;
+//  margin: 15px auto;
+//  font-size: 12px;
+//  span{
+//    margin-right: 3px;
+//  }
+
 //}
-//
-//.topClose {
-//  float: right;
-//  margin-right: 5px;
-//  margin-top: 6px;
-//  width: 65px;
-//  height: 26px;
-//  -webkit-border-radius: 4px;
-//  -moz-border-radius: 4px;
-//  -o-border-radius: 4px;
-//  -ms-border-radius: 4px;
-//  border-radius: 4px;
-//  text-align: center;
-//  line-height: 26px;
-//  border: 1px solid #cfcfcf;
-//  cursor: pointer;
-//}
-//
-//.listCenter {
-//  width: 100%;
-//  height: 376px;
-//  border-bottom: 1px solid #f1f1f1;
-//  position: relative;
-//}
-//
-//.centerTitle {
-//  height: 36px;
-//  width: 100%;
-//  background: #fbfbfb;
-//  border-bottom: 1px solid #f1f1f1;
-//}
-//
-//.centerCon {
-//  float: left;
-//  text-align: center;
-//  line-height: 36px;
-//  border-right: 1px solid #f1f1f1;
-//  color: #999999;
-//}
-//
-//.centerCon1 {
-//  width: 68px;
-//}
-//
-//.centerCon2 {
-//  width: 130px;
-//}
-//
-//.centerCon3 {
-//  width: 106px;
-//}
-//
-//.centerCon4 {
-//  width: 130px;
-//}
-//
-//.centerCon5 {
-//  width: 160px;
-//}
-//
-//.listCenter li .centerCon {
-//  height: 36px;
-//  color: #333;
-//  border-bottom: 1px solid #f1f1f1;
-//}
-//
-//.centerPage {
-//  position: absolute;
-//  left: 0;
-//  right: 0;
-//  bottom: 9px;
-//  width: 190px;
-//  margin: auto;
-//}
-//
-//.centerPage > div {
-//  float: left;
-//}
-//
-//.pageCurrent {
-//  color: #333;
-//  height: 22px;
-//  line-height: 22px;
-//}
-//
-//.pageCurrent p {
-//  display: inline-block;
-//}
-//
-//.pageHome {
-//  width: 48px;
-//  height: 22px;
-//  border: 1px solid #d9d9d9;
-//  color: #999999;
-//  margin: 0 5px 0 2px;
-//  text-align: center;
-//  line-height: 22px;
-//}
-//
-//.pageEnd {
-//  width: 48px;
-//  height: 22px;
-//  border: 1px solid #d9d9d9;
-//  color: #999999;
-//  text-align: center;
-//  line-height: 22px;
-//}
-//
-//.listFooter {
-//  width: 380px;
-//  height: 34px;
-//  margin: auto;
-//  position: absolute;
-//  bottom: 16px;
-//  left: 0;
-//  right: 0;
-//}
-//
-//.footerBtn {
-//  float: left;
-//  width: 170px;
-//  height: 34px;
-//  text-align: center;
-//  line-height: 34px;
-//  margin-left: 20px;
-//  background-color: #ea6f5d;
-//  color: #fff;
-//  -webkit-border-radius: 4px;
-//  -moz-border-radius: 4px;
-//  border-radius: 4px;
-//  cursor: pointer;
-//}
-//
-//.cancelBtn {
-//  background-color: #8ab5f5;
-//}
+
+
+
+
+
