@@ -12,7 +12,8 @@ const Table = React.createClass({
             page: 1,
             total_page: 1,
             th_rows: this.props.th_rows || [],
-            rows: []
+            rows: [],
+            bean_count:null
         }
     },
     switchPageHandler: function (type) {
@@ -35,7 +36,8 @@ const Table = React.createClass({
             if (filterData)
                 this.setState({
                     total_page: filterData.total_page,
-                    rows: filterData.rows
+                    rows: filterData.rows,
+                    bean_count:filterData.bean_count
                 })
         })
     },
@@ -72,14 +74,22 @@ const Table = React.createClass({
         };
 
         let pagination, empty_records;
-        // let totalbeans=
+        let bean_count;
+        console.log(this.state.bean_count);
+        if(this.state.bean_count) {
+            bean_count = (
+                <div className="totalCount">
+                    <span>总记{this.state.bean_count}个,</span>
+                    <span className="calculate">共计{this.state.bean_count/100}元</span>
+                </div>
+
+            )
+        }
         if (rows.length) {
             pagination = (
                 <div className="pagination">
                     <div className="paginationPage">
-                        {/*<span className="totalBeans" style={{display:totalbeans}}>*/}
-                            {/*总记*/}
-                        {/*</span>*/}
+                        {bean_count}
                         第{page}页, 共{total_page}页
                         {page > 1 ? <a  className="first" onClick={() => this.switchPageHandler('first')}>首页</a> : null}
                         {page > 1 ? <a  className="prev" onClick={() => this.switchPageHandler('prev')}>上一页</a> : null}

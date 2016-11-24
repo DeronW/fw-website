@@ -46,9 +46,13 @@ const Content = React.createClass({
             fnLoadData=Fn.IncomeLoadData;
             fnFilterData=Fn.IncomeFilterData;
         } else if (this.state.tabName == '工豆支出') {
-            th_rows = [{title: '日期'}, {title: '支出(个)'}, {title: '备注'}];
+            th_rows = [{title: '日期',width:"25%"}, {title: '支出(个)',width:"25%"}, {title: '备注',width:"50%"}];
+            fnLoadData=Fn.ExpendLoadData;
+            fnFilterData=Fn.ExpendFilterData;
         } else if (this.state.tabName == '已过期') {
-            th_rows = [{title: '日期'}, {title: '收入 / 支出(个)'}, {title: '有效期'}, {title: '备注'}];
+            th_rows = [{title: '日期',width:"25%"}, {title: '收入 / 支出(个)',width:"15%"}, {title: '有效期',width:"20%"}, {title: '备注',width:"40%"}];
+            fnLoadData=Fn.OverdateLoadData;
+            fnFilterData=Fn.OverdateFilterData;
         }
         let ch=(this.state.check==false)?"none":"block";
         console.log(this.state.check);
@@ -64,11 +68,11 @@ const Content = React.createClass({
                     <div className="on">我的工豆</div>
                 </div>
                 <div className="bean-info">
-                    <span className="des">可用工豆<b>{bean.usable}</b>个</span>
+                    <span className="des">可用工豆<b>{bean.usable}</b>个({bean.usable/100})元</span>
                     <span className="des">|</span>
-                    <span className="des">即将过期<span className="data">{bean.outdate}</span>个</span>
+                    <span className="des">即将过期<span className="data">{bean.outdate}</span>个({bean.outdate/100})元</span>
                     <span className="des">|</span>
-                    <span className="des">冻结中<span className="data">{bean.frozen}</span>个</span>
+                    <span className="des">冻结中<span className="data">{bean.frozen}</span>个({bean.frozen/100})元</span>
                 </div>
                 <div className="moneyItemContainer">
                     <div className="beanItem">
@@ -112,7 +116,9 @@ let Fn = {
             rows:10,
             page:page
         },function (data) {
-            callback(data.pageData)
+            let d = data.pageData;
+            d.bean_count = data.beanCount;
+            callback(d)
         },'json')
     },
     IncomeFilterData:function (data) {
@@ -127,7 +133,55 @@ let Fn = {
         );
         return {
             total_page: data.pagination.totalPage,
-            rows: rows
+            rows: rows,
+            bean_count:data.bean_count
+        }
+    },
+    ExpendLoadData:function (page,callback) {
+        $.get(API_PATH+'beans/expendBorrows.do',{
+            rows:10,
+            page:page
+        },function (data) {
+            let d = data.pageData;
+            d.bean_count=data.beanCount;
+            callback(d);
+        },'json');
+    },
+    ExpendFilterData:function (data) {
+        let rows = data.result.map((value)=>[
+            {text:value.createTime},
+            {text:(value.cashValue>0)?"+"+value.cashValue:value.cashValue,
+            className:value.cashValue>0?"red":"green"},
+            {text:value.remark}
+        ]);
+        return {
+            total_page:data.pagination.totalPage,
+            rows:rows,
+            bean_count:data.bean_count
+        }
+    },
+    OverdateLoadData:function (page,callback) {
+        $.get(API_PATH+'beans/overdueBorrows.do',{
+            rows:10,
+            page:page
+        },function (data) {
+            let d = data.pageData;
+            d.bean_count=data.beanCount;
+            callback(d);
+        },'json');
+    },
+    OverdateFilterData:function (data) {
+        let rows = data.result.map((value)=>[
+            {text:value.issueTime},
+            {text:(value.beanOverdue>0)?"+"+value.beanOverdue:value.beanOverdue,
+                className:value.beanOverdue>0?"red":"green"},
+            {text:value.overdueTime},
+            {text:value.remark}
+        ]);
+        return {
+            total_page:data.pagination.totalPage,
+            rows:rows,
+            bean_count:data.bean_count
         }
     }
 }
