@@ -2,7 +2,7 @@
 
 .partial-user-center-panel {
   width: 1000px;
-  min-height: 900px;
+  min-height: 1060px;
   display: table;
   position: relative;
   box-sizing: border-box;
@@ -15,8 +15,8 @@
   .ucp-left-nav {
     position: absolute;
     top: 0;
-    left: 0;
-    bottom: 0;
+    left: 1px;
+    bottom: 1px;
     width: 160px;
     float: left;
     background: #faf9f7;
@@ -257,59 +257,44 @@
     }
   }
 
-  .meun-left {
+  .ucp-horizon-line {
+    height: 1px;
+    margin: 5px 0;
+    background: #E0DFDD;
+  }
+
+  .ucp-link {
+    display: block;
+    width: 120px;
+    height: 50px;
+    line-height: 50px;
     text-align: left;
-    //margin-top: 10px;
-    border-top: 1px solid #E0DFDD;
+    padding-left: 40px;
 
-    .nav-tab {
-      cursor: pointer;
-      display: block;
+    span {
+      margin-left: 3px;
+    }
 
-      a {
-        display: inline-block;
-        font-size: 14px;
-        vertical-align: top;
-        height: 34px;
-        padding: 15px 0 0 40px;
-        //margin-top: 15px;
-        line-height: 18px;
-        width: 121px;
+    &.focus {
+      color: #71b0ff;
+      background: white;
+      border-top: 1px solid #dcdcdc;
+      border-left: 4px solid #84b6fd;
+      box-shadow: inset 1px -3px 3px #dcdcdc;
+      margin-left: -1px;
+    }
 
-        span {
-          display: inline-block;
-          margin-left: 4px;
-          color: #333;
-        }
-
-        .ucp-icon {
-          position: relative;
-          top: 2px;
-        }
-      }
-      &.active a {
+    &.hover-blue {
+      &:hover {
         color: #71b0ff;
-        background: white;
-        border-top: 1px solid #dcdcdc;
-        border-left: 4px solid #84b6fd;
-        box-shadow: inset 1px -3px 3px #dcdcdc;
-        margin-left: -1px;
-        width: 119px;
-      }
-      &.active span {
-        color: #71b0ff;
-      }
-      &:hover span {
-        color: #71b0ff;
+        background: #F2F2F2;
       }
     }
-  }
-  .menu-bot {
-    text-align: center;
-    border-top: 1px solid #e0dfdd;
-    margin-bottom: 10px;
-    img {
-      margin-top: 15px;
+    &.hover-red {
+      &:hover {
+        color: #FD7D7E;
+        background: #F2F2F2;
+      }
     }
   }
 }
