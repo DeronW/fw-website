@@ -1,8 +1,20 @@
 const Level = React.createClass({
     getInitialState: function () {
         return {
+            nickname: null,
             level_list: this.getExtendList(this.props.level_list)
         }
+    },
+
+    componentDidMount: function () {
+        if (!window.VISITOR)
+            $.get(API_PATH + 'index.php', {
+                r: 'user/get-nickname',
+                uid: USER_ID,
+                gameNo: GAME_NAME
+            }, function (data) {
+                console.log(data)
+            }, 'json')
     },
 
     componentWillReceiveProps: function (nextProps) {
@@ -62,16 +74,23 @@ const Level = React.createClass({
             )
         };
 
+        let nickname, nickname_modal;
+        if (window.VISITOR) {
+            nickname = <div className="btn-nickname" onClick={this.setNicknameHandler}>
+                用户昵称
+            </div>
+        }
+        if (this.state.reset_nickname) {
+            nickname_modal = <Level.Nickname name={this.state.nickname}
+                                             closeHandler={this.closeNickName}/>
+        }
+
         return <div className="level-list">
             <img className="header" src="images/level-list/header.png"/>
             <img className="footer" src="images/level-list/footer.png"/>
-            <div className="btn-nickname" onClick={this.setNicknameHandler}>
-                用户昵称
-            </div>
-
-            {this.state.reset_nickname ?
-                <Level.Nickname name={'xxx'} closeHandler={this.closeNickName}/> : null}
-            <div className="levels"> {this.state.level_list.map(level)} </div>
+            {nickname}
+            {nickname_modal}
+            <div className="levels">{this.state.level_list.map(level)}</div>
         </div>
     }
 });
@@ -84,7 +103,14 @@ Level.Nickname = React.createClass({
         this.props.closeHandler()
     },
     confirmHandler: function () {
-
+        $.post(API_PATH + 'index.php', {
+            r: 'user/edit-nickname',
+            uid: USER_ID,
+            gameNo: GAME_NAME,
+            nickname: this.state.name
+        }, function (data) {
+            if (data.code != 10000) alert(data.message)
+        }, 'json')
     },
     changeHandler: function (e) {
         let v = e.target.value;
