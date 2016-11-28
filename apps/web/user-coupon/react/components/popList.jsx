@@ -133,7 +133,7 @@ const PopList = React.createClass({
                     realNameValue = realName.substring(0, 1) + sexValue;
                 } else {
                     if(realName.length >= 8){
-                        realNameValue = realName.substring(0, 7) + "..." ;
+                        realNameValue = realName.substring(0, 6) + "..." ;
                     }else{
                         realNameValue = realName
                     }
