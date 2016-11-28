@@ -34,7 +34,12 @@ const WEB_APP_NAMES = [
 
     // 其他页面
     'statistics', // 实时交易统计
-    // 'popong',// 点点点游戏页
+    {
+        // 点点点游戏页
+        name: 'popong',
+        include_components: [],
+        include_common_js: []
+    }
 ];
 
 module.exports = function (gulp, generate_task, settings) {
@@ -55,11 +60,11 @@ module.exports = function (gulp, generate_task, settings) {
         generate_task('web', i, {
             api_path: "http://www.9888.cn/",
             cmd_prefix: 'pack',
-            cdn_prefix: '/static/web/' + i + '/',
+            cdn_prefix: `/static/web/${i.name || i}/`,
             include_components: common_components,
             include_common_js: common_js
         });
     });
 
-    gulp.task('build:web', gulp.series(WEB_APP_NAMES.map(name => `web:pack:${name}:revision`)));
+    gulp.task('build:web', gulp.series(WEB_APP_NAMES.map(page => `web:pack:${page.name || page}:revision`)));
 };
