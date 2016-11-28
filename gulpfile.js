@@ -21,8 +21,8 @@ const SETTINGS = Object.assign({}, require('./gulpfile.settings.default.js'), se
 require('./gulpfile.web.js')(gulp, gt, SETTINGS);
 
 //游戏
-// gt('web', 'popong', {
-//     api_path: "http://game.9888.cn/",
-//     cmd_prefix: 'pack',
-//     cdn_prefix: '/front/game/popong/'
-// });
+gt('web', 'popong', {
+    api_path: "http://game.9888.cn/",
+    cmd_prefix: 'pack',
+    cdn_prefix: '/front/game/popong/'
+});

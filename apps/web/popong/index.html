@@ -74,6 +74,8 @@
         });
     }
 
+    var gurl = 'http://game.9888.cn/index.php?r=games/game-notice&gameNo=0pn5m';
+
     function setShareFriend(gurl, iurl) {
         wx.onMenuShareAppMessage({
             title: "中了这个游戏的毒！求老司机带带我！！", // 分享标题
@@ -88,18 +90,29 @@
                 // 用户取消分享后执行的回调函数
             }
         });
+
+    }
+    function setShareFriendQuan(gurl, iurl) {
+        wx.onMenuShareTimeline({
+            title: '中了这个游戏的毒！求老司机带带我！！', // 分享标题
+            link: gurl, // 分享链接
+            imgUrl: iurl, // 分享图标
+            success: function () {
+                // 用户确认分享后执行的回调函数
+            },
+            cancel: function () {
+                // 用户取消分享后执行的回调函数
+            }
+        });
     }
 
-    //    getConfig:function(succb){
-    //        var para={};
-    //        var http=new Http();
-    //        var nurl= window.location.href;
-    //        var url=wxUrl+"weixin/jssdk/share?url="+nurl;
-    //        http.send(url,para,succb,1);
-    //    },这个是获取配置的
 
-    var nurl = window.location.href;
-    var url = wxUrl + "weixin/jssdk/share?url=" + nurl;
-
+    $.get('http://fore.9888.cn/weixin/jssdk/share', {
+        url: location.href
+    }, function (data) {
+        setWxConfig(false, data.appId, data.timestamp, data.nonceStr, data.signature);
+        setShareFriend()
+        setShareFriendQuan()
+    }, 'json')
 </script>
 </body>
