@@ -27,23 +27,34 @@ const UserProps = React.createClass({
         this.setState({value: Math.max(this.state.value - 1, 1)})
     },
     buyHandler: function () {
-        $.get(`${API_PATH}/index.php?r=user/prop-buy`, {
-            buyNum: this.state.value,
+        let params = {
             gameNo: GAME_NAME,
+            uid: USER_ID,
+            buyNum: this.state.value,
             passNum: this.props.level,
-            propId: this.state.id,
-            uid: USER_ID
-        }, (data)=> {
+            propId: this.state.id
+        };
+        params.nonce = getNonceStr();
+        let s = params.nonce + GAME_NAME + USER_ID + params.buyNum + params.passNum + params.propId + TOKEN;
+        params.gc_version = hex_sha1(s);
+
+        $.get(`${API_PATH}/index.php?r=user/prop-buy`, params, (data) => {
             alert(data.code == 10000 ? '购买成功' : '购买失败')
         }, 'json');
     },
     useHandler: function () {
-        $.get(`${API_PATH}/index.php?r=user/prop-use`, {
+        let params = {
             gameNo: GAME_NAME,
+            uid: USER_ID,
             passNum: this.props.level,
-            propId: this.state.id,
-            uid: USER_ID
-        }, (data)=> {
+            propId: this.state.id
+        };
+
+        params.nonce = getNonceStr();
+        let s = params.nonce + GAME_NAME + USER_ID + params.passNum + params.propId + TOKEN;
+        params.gc_version = hex_sha1(s);
+
+        $.get(`${API_PATH}index.php?r=user/prop-use`, params, (data) => {
             if (data.code == 10000) {
                 this.props.useCallback();
                 if (this.state.id == PROPS_NAME_IDS.refresh) {
@@ -96,25 +107,7 @@ const UserProps = React.createClass({
                     </div>
                 </div>
             );
-
         }
-
         return panel;
-    }
-});
-
-UserProps.BuySuccess = React.createClass({
-    render: function () {
-        return (
-            <div>sss</div>
-        )
-    }
-});
-
-UserProps.BuyFail = React.createClass({
-    render: function () {
-        return (
-            <div>sss</div>
-        )
     }
 });

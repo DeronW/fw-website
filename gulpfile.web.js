@@ -34,12 +34,8 @@ const WEB_APP_NAMES = [
 
     // 其他页面
     'statistics', // 实时交易统计
-    {
-        // 点点点游戏页
-        name: 'popong',
-        include_components: [],
-        include_common_js: []
-    }
+
+    'popong'
 ];
 
 module.exports = function (gulp, generate_task, settings) {

@@ -33,16 +33,20 @@
     </script>
     <script src="http://game.9888.cn/index.php?r=games/get-userid"></script>
     <script src="javascripts/hilo-standalone.js"></script>
+    <script src="javascripts/sha1.js"></script>
+    <script src="javascripts/illegal_words.js"></script>
     <script src="javascripts/Game.js"></script>
     <script src="javascripts/Asset.js"></script>
     <script src="javascripts/lib.js"></script>
     <script src="javascripts/bundle.js"></script>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 
 </head>
 
 <body>
 
 <input id="api-path" type="hidden" value="http://game.9888.cn/"/>
+<!--<input id="api-path" type="hidden" value="http://localhost/fake-api/"/>-->
 <div id="cnt"></div>
 <div id="game"></div>
 <script>
@@ -53,5 +57,49 @@
     //    document.body.addEventListener('touchstart', stopBubble);
     document.getElementById('game').addEventListener('touchmove', stopBubble);
     //    document.body.addEventListener('touchend', stopBubble);
+</script>
+
+<script>
+    function setWxConfig(debug, appid, timestamp, noncestr, signature) {
+        wx.config({
+            debug: debug,
+            appId: appid,
+            timestamp: timestamp,
+            nonceStr: noncestr,
+            signature: signature,
+            jsApiList: [
+                'onMenuShareTimeline',
+                'onMenuShareAppMessage'
+            ]
+        });
+    }
+
+    function setShareFriend(gurl, iurl) {
+        wx.onMenuShareAppMessage({
+            title: "中了这个游戏的毒！求老司机带带我！！", // 分享标题
+            desc: "我们爱战斗最后的大boss相当厉害呦！", // 分享描述
+            link: gurl, // 分享链接
+            imgUrl: iurl, // 分享图标
+            success: function () {
+                // 用户确认分享后执行的回调函数
+                //alert("喵喵感谢您！");
+            },
+            cancel: function () {
+                // 用户取消分享后执行的回调函数
+            }
+        });
+    }
+
+    //    getConfig:function(succb){
+    //        var para={};
+    //        var http=new Http();
+    //        var nurl= window.location.href;
+    //        var url=wxUrl+"weixin/jssdk/share?url="+nurl;
+    //        http.send(url,para,succb,1);
+    //    },这个是获取配置的
+
+    var nurl = window.location.href;
+    var url = wxUrl + "weixin/jssdk/share?url=" + nurl;
+
 </script>
 </body>

@@ -1,6 +1,8 @@
 const Level = React.createClass({
     getInitialState: function () {
-        return {level_list: this.getExtendList(this.props.level_list)}
+        return {
+            level_list: this.getExtendList(this.props.level_list)
+        }
     },
 
     componentWillReceiveProps: function (nextProps) {
@@ -33,6 +35,13 @@ const Level = React.createClass({
         }
     },
 
+    setNicknameHandler: function () {
+        this.setState({reset_nickname: true})
+    },
+    closeNickName: function () {
+        this.setState({reset_nickname: false})
+    },
+
     render: function () {
         let level = (item, index) => {
             var cn_bg = item.locked ? 'img-locked' : 'img-unlocked';
@@ -56,7 +65,44 @@ const Level = React.createClass({
         return <div className="level-list">
             <img className="header" src="images/level-list/header.png"/>
             <img className="footer" src="images/level-list/footer.png"/>
+            <div className="btn-nickname" onClick={this.setNicknameHandler}>
+                用户昵称
+            </div>
+
+            {this.state.reset_nickname ?
+                <Level.Nickname name={'xxx'} closeHandler={this.closeNickName}/> : null}
             <div className="levels"> {this.state.level_list.map(level)} </div>
         </div>
     }
 });
+
+Level.Nickname = React.createClass({
+    getInitialState: function () {
+        return {name: this.props.name}
+    },
+    closeHandler: function () {
+        this.props.closeHandler()
+    },
+    confirmHandler: function () {
+
+    },
+    changeHandler: function (e) {
+        let v = e.target.value;
+        if (v.length <= 12)
+            this.setState({name: v})
+    },
+    render: function () {
+
+        return (
+            <div className="nickname-panel">
+                <div className="modal">
+                    <a className="btn-close" onClick={this.closeHandler}></a>
+                    <input placeholder="请输入您的昵称" value={this.state.name} onChange={this.changeHandler}/>
+
+                    <a className="btn-cancel" onClick={this.closeHandler}></a>
+                    <a className="btn-confirm" onClick={this.confirmHandler}></a>
+                </div>
+            </div>
+        )
+    }
+})
