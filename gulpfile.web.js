@@ -35,7 +35,7 @@ const WEB_APP_NAMES = [
     // 其他页面
     'statistics', // 实时交易统计
 
-    'popong'
+    // 'popong'
 ];
 
 module.exports = function (gulp, generate_task, settings) {
