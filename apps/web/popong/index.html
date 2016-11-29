@@ -77,7 +77,7 @@
     var gurl = 'http://game.9888.cn/index.php?r=games/game-notice&gameNo=0pn5m';
     var iurl = 'http://game.9888.cn/static/frontend/game/axc/image/axc_share.jpg';
 
-    function setShareFriend(gurl, iurl) {
+    function setShareFriend() {
         wx.onMenuShareAppMessage({
             title: "听说你眼神比我好，手速还比我快，来比比？", // 分享标题
             desc: "在消除的世界里停不下来，已晕！", // 分享描述
@@ -92,7 +92,7 @@
             }
         });
     }
-    function setShareFriendQuan(gurl, iurl) {
+    function setShareFriendQuan() {
         wx.onMenuShareTimeline({
             title: '听说你眼神比我好，手速还比我快，来比比？', // 分享标题
             link: gurl, // 分享链接
@@ -110,7 +110,7 @@
     $.get('http://fore.9888.cn/weixin/jssdk/share', {
         url: location.href
     }, function (data) {
-        setWxConfig(false, data.appId, data.timestamp, data.nonceStr, data.signature);
+        setWxConfig(true, data.appId, data.timestamp, data.nonceStr, data.signature);
         setShareFriend()
         setShareFriendQuan()
     }, 'json')

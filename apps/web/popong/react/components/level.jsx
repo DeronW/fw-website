@@ -1,7 +1,9 @@
+window.__nickname = null;
+
 const Level = React.createClass({
     getInitialState: function () {
         return {
-            nickname: null,
+            nickname: window.__nickname,
             level_list: this.getExtendList(this.props.level_list)
         }
     },
@@ -13,7 +15,9 @@ const Level = React.createClass({
                 uid: USER_ID,
                 gameNo: GAME_NAME
             }, function (data) {
-                this.setState({nickname: data.data.nickname})
+                var name = data.data.nickname;
+                this.setState({nickname: name});
+                window.__nickname = name;
             }.bind(this), 'json')
     },
 
@@ -110,7 +114,6 @@ Level.Nickname = React.createClass({
         let params = {
             gameNo: GAME_NAME,
             uid: USER_ID,
-            // nickname: encodeURIComponent(this.state.name)
             nickname: this.state.name
         };
 
