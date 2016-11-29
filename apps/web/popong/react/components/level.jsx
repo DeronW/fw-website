@@ -13,8 +13,8 @@ const Level = React.createClass({
                 uid: USER_ID,
                 gameNo: GAME_NAME
             }, function (data) {
-                console.log(data)
-            }, 'json')
+                this.setState({nickname: data.data.nickname})
+            }.bind(this), 'json')
     },
 
     componentWillReceiveProps: function (nextProps) {
@@ -53,6 +53,9 @@ const Level = React.createClass({
     closeNickName: function () {
         this.setState({reset_nickname: false})
     },
+    updateNickname: function (n) {
+        this.setState({nickname: n})
+    },
 
     render: function () {
         let level = (item, index) => {
@@ -75,13 +78,11 @@ const Level = React.createClass({
         };
 
         let nickname, nickname_modal;
-        if (window.VISITOR) {
-            nickname = <div className="btn-nickname" onClick={this.setNicknameHandler}>
-                用户昵称
-            </div>
+        if (!window.VISITOR) {
+            nickname = <div className="btn-nickname" onClick={this.setNicknameHandler}>{this.state.nickname}</div>
         }
         if (this.state.reset_nickname) {
-            nickname_modal = <Level.Nickname name={this.state.nickname}
+            nickname_modal = <Level.Nickname name={this.state.nickname} updateNickname={this.updateNickname}
                                              closeHandler={this.closeNickName}/>
         }
 
@@ -103,14 +104,18 @@ Level.Nickname = React.createClass({
         this.props.closeHandler()
     },
     confirmHandler: function () {
-        $.post(API_PATH + 'index.php', {
-            r: 'user/edit-nickname',
+        $.post(API_PATH + 'index.php?r=user/edit-nickname', {
             uid: USER_ID,
             gameNo: GAME_NAME,
             nickname: this.state.name
         }, function (data) {
-            if (data.code != 10000) alert(data.message)
-        }, 'json')
+            if (data.code == 10000) {
+                this.props.updateNickname(this.state.name)
+            } else {
+                alert(data.message)
+            }
+            this.props.closeHandler()
+        }.bind(this), 'json')
     },
     changeHandler: function (e) {
         let v = e.target.value;
