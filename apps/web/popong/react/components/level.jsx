@@ -104,11 +104,20 @@ Level.Nickname = React.createClass({
         this.props.closeHandler()
     },
     confirmHandler: function () {
-        $.post(API_PATH + 'index.php?r=user/edit-nickname', {
-            uid: USER_ID,
+        if (ILLEGAL_NAMES.split('|').indexOf(this.state.name) > -1)
+            return alert('非法词汇, 请重新想一个名字');
+
+        let params = {
             gameNo: GAME_NAME,
-            nickname: this.state.name
-        }, function (data) {
+            uid: USER_ID,
+            nickname: encodeURIComponent(this.state.name)
+        };
+
+        params.nonce = getNonceStr();
+        let s = params.nonce + GAME_NAME + USER_ID + params.nickname + TOKEN;
+        params.gc_version = hex_sha1(s);
+
+        $.get(API_PATH + 'index.php?r=user/edit-nickname', params, function (data) {
             if (data.code == 10000) {
                 this.props.updateNickname(this.state.name)
             } else {
