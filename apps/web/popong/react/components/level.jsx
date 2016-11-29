@@ -110,12 +110,13 @@ Level.Nickname = React.createClass({
         let params = {
             gameNo: GAME_NAME,
             uid: USER_ID,
-            nickname: encodeURIComponent(this.state.name)
+            // nickname: encodeURIComponent(this.state.name)
+            nickname: this.state.name
         };
 
         params.nonce = getNonceStr();
         let s = params.nonce + GAME_NAME + USER_ID + params.nickname + TOKEN;
-        params.gc_version = hex_sha1(s);
+        params.gc_version = hex_sha1(utf16to8(s));
 
         $.get(API_PATH + 'index.php?r=user/edit-nickname', params, function (data) {
             if (data.code == 10000) {
