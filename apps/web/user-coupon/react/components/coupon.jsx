@@ -19,21 +19,9 @@ const Coupon = React.createClass({
             dataType:'json',
             success: function (data) {
                 let da = data.data&&data.data.couponAccount ? data.data.couponAccount[0] : {};
-                console.log(da);
                 this.setState({staMoneyData: da})
             }.bind(this)
         });
-        //$.ajaxExtend({
-        //    url: API_PATH + 'a.json',
-        //    type: 'get',
-        //    dataType:'json',
-        //    success: function (data) {
-        //        let da = data.data&&data.data.couponAccount ? data.data.couponAccount[0] : {};
-        //        console.log(da);
-        //        this.setState({staMoneyData: da});
-        //        this.successComplete(12)
-        //    }.bind(this)
-        //})
     },
     componentWillReceiveProps: function (nextProps) {
         this.ajaxCouponStatistics(nextProps.tab_name)
@@ -47,8 +35,10 @@ const Coupon = React.createClass({
                 data: {couponType: tab_name == '返现券' ? 1 : 2},
                 type: 'get',
                 success: function (data) {
-                    let d = data.data.couponAccount ? data.data.couponAccount[0] : {};
-                    this.setState({staInterestData: d})
+                    if(data.code == 10000){
+                        let d = data.data.couponAccount ? data.data.couponAccount[0] : {};
+                        this.setState({staInterestData: d})
+                    }
                 }.bind(this)
             })
         }
