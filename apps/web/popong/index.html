@@ -52,11 +52,12 @@
 <script>
     function stopBubble(event) {
         event.preventDefault();
-        event.stopPropagation();
+//        event.stopPropagation();
     }
     //    document.body.addEventListener('touchstart', stopBubble);
-    document.getElementById('game').addEventListener('touchmove', stopBubble);
+    //    document.getElementById('game').addEventListener('touchmove', stopBubble);
     //    document.body.addEventListener('touchend', stopBubble);
+    document.body.addEventListener('touchmove', stopBubble);
 </script>
 
 <script>
