@@ -134,6 +134,20 @@ body, html {
   top: 0;
   bottom: 0;
 
+  .btn-nickname {
+    top: 188px;
+    left: 50%;
+    margin-left: -215px;
+    width: 431px;
+    height: 94px;
+    position: absolute;
+    text-align: center;
+    font-size: 22px;
+    color: white;
+    line-height: 110px;
+    background: transparent url(../images/nickname/nickname.png) no-repeat;
+  }
+
   .header {
     width: 100%;
   }
@@ -150,7 +164,7 @@ body, html {
     display: block;
     overflow: scroll;
     position: absolute;
-    top: 230px;
+    top: 290px;
     bottom: 60px;
   }
 
@@ -265,6 +279,68 @@ body, html {
       background: transparent url('../images/star-3.png') no-repeat;
     }
 
+  }
+}
+
+.nickname-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  background: rgba(129, 220, 244, 0.5);
+
+  .modal {
+    width: 525px;
+    height: 467px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -235px;
+    margin-left: -262px;
+    background: transparent url(../images/nickname/bg.png) no-repeat;
+
+    .btn-close {
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      top: 45px;
+      right: -3px;
+    }
+
+    input {
+      height: 50px;
+      width: 300px;
+      border-radius: 8px;
+      background: #e0dede;
+      display: block;
+      margin: 160px auto 0;
+      padding-left: 10px;
+      font-size: 24px;
+      outline: 0;
+      border: 0;
+    }
+
+    .btn-cancel, .btn-confirm {
+      width: 166px;
+      height: 79px;
+      display: block;
+      position: absolute;
+      bottom: 50px;
+    }
+
+    .btn-cancel {
+      background: transparent url(../images/nickname/2.jpg) no-repeat;
+      right: 50%;
+      margin-right: 30px;
+    }
+
+    .btn-confirm {
+      background: transparent url(../images/nickname/1.png) no-repeat;
+      left: 50%;
+      margin-left: 30px;
+    }
   }
 }
 

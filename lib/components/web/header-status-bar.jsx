@@ -99,8 +99,8 @@ const HeaderStatusBar = React.createClass({
                         <a href="http://www.creditchina.hk/">中国信贷(08207.HK)</a>
                         旗下互联网金融平台
                     </div>
-                    <a className="link" href="http://bbs.9888.cn" target="_blank">工友之家</a>
-                    {separate_line}
+                    {/*<a className="link" href="http://bbs.9888.cn" target="_blank">工友之家</a>*/}
+                    {/*{separate_line}*/}
                     <a className="link" href="/static/web/notice-corporate-structure/index.html">信息披露</a>
                     {separate_line}
                     <div className="hsb-guide-nav">

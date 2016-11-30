@@ -14,6 +14,11 @@ const revision = require('./revision.js');
 let COMMON_JAVASCRIPTS_TASK = {};
 
 module.exports = function generate_task(site_name, page_name, configs) {
+    let singlePageCfg = {};
+    if (typeof(page_name) == 'object') {
+        singlePageCfg = page_name;
+        page_name = singlePageCfg.name
+    }
 
     let app_path = `apps/${site_name}/${page_name}/`,
         build_path = `build/${site_name}/${page_name}/`,
@@ -30,7 +35,7 @@ module.exports = function generate_task(site_name, page_name, configs) {
             include_common_js: [],
             main_jsx: 'react/index.jsx',
             html_engine: 'swig'
-        }, configs);
+        }, configs, singlePageCfg);
 
     let task_name = site_name + ':' + (CONFIG.cmd_prefix ? CONFIG.cmd_prefix + ':' : '') + page_name;
 
@@ -45,7 +50,7 @@ module.exports = function generate_task(site_name, page_name, configs) {
         `${app_path}less/index.less`
     ];
 
-    let jsx_files = CONFIG.include_components.map((i)=> `${lib_path}components/${i}`);
+    let jsx_files = CONFIG.include_components.map((i) => `${lib_path}components/${i}`);
     jsx_files.push(`${app_path}react/components/*.jsx`);
     jsx_files.push(`${app_path}${CONFIG.main_jsx}`);
 

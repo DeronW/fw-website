@@ -3,49 +3,167 @@
 {% block title %}金融工场是由北京凤凰信用管理有限公司（简称：凤凰信用）倾力打造的专注于小贷公司资产交易的P2P平台—上金融工场，圆财富梦想！{% endblock %}
 
 {% block content %}
-<div class="banner"></div>
-<div class="part1">
-   <span class="part1-tip1">年化佣金：固定1.25%返利</span>
-   <span class="part1-tip2">年化佣金：按照实际投资期限返利</span>
-</div>
-<div class="part2">
-    <div class="pic1"></div>
-    <div class="invest-period">
-        <span>30天及以下</span>
-        <span>31-90天</span>
-        <span>91-180天</span>
-        <span>181-360天</span>
-        <span>361-540天</span>
-        <span>541-720天</span>
+<div class="commission">
+    <div class="title">
     </div>
-    <div class="invest-period">
-        <span>0.25%</span>
-        <span>0.25%</span>
-        <span>0.75%</span>
-        <span>1.7%</span>
-        <span>1.7%</span>
-        <span>2.00%</span>
+    <div class="firstSection">
+        <span class="lastmonth">上月好友累投非等额标年化额越高<br/>（含自己投资）</span>
+        <span class="current">本月您的佣金比例越高</span>
+        <span class="benefit">单笔投资期限越长，得到的年化佣金越多</span>
+        <div class="tips">温馨提示：非等额标包括还款方式为一次性还本付息、按月付息到期还本和按天一次性还本付息的一次性还本标；<br/><span class="aline">等额标包括还款方式为按月等额还款和按季等额还款的标。</span></div>
     </div>
-</div>
-<div class="part3">
-    <div class="pic2"></div>
-    <div class="pic3"></div>
-    <!--<div class="compute-method">年化佣金=投资金额×(投资期限/360)×对应年化佣金比例</div>-->
-    <!--<div class="compute-data"><span>180天</span><span>10000元</span><span>0.75%</span></div>-->
-    <!--<div class="compute-formula">年化佣金=10000×(180/360)×0.75%=37.5元</div>-->
-    <!--<div class="compute-comparison">(1) 实际投资天数≤锁定期：</div>-->
-    <!--<div class="compute-comparison-info">年化佣金=投资金额×(锁定期天数/360)×对应年化佣金比例</div>-->
-    <!--<div class="compute-comparison-data table-margin-top1"><span>60-180天</span><span>36天提前回款</span><span>10000元</span><span>0.75%</span></div>-->
-    <!--<div class="compute-comparison-formula">年化佣金=10000×(<span>60</span>/360)×0.75%=12.5元</div>-->
-    <!--<div class="compute-comparison2">(2) 实际投资天数＞锁定期：</div>-->
-    <!--<div class="compute-comparison-info">年化佣金=锁定期年化佣金+剩余年化佣金=投资金额×(锁定期天数/360)×对应年化佣金比例+投资金额×(剩余天数/360)×对应年化佣金比例</div>-->
-    <!--<div class="compute-comparison-data table-margin-top2"><span>60-180天</span><span>106天</span><span>10000元</span><span>0.75%</span></div>-->
-    <!--<div class="compute-comparison-formula">年化佣金=锁定期年化佣金+剩余年化佣金=10000×(<span>60</span>/360)×10000×0.75%+10000×(<span>46</span>/360)×10000×0.75%=12.5+9.58=22.08元</div>-->
-
-</div>
-<div class="part4">
-    <div class="test-standard">
-        <span>A码人员标准</span><span>10万</span><span>6</span><span>30</span>
+    <div class="secondSection">
+        <img src="images/calculatetitle_03.jpg" class="countTitle">
+        <p class="titleline">投资非等额标和投资等额标，佣金比例计算标准不同。</p>
+        <div class="case">
+            <div class="casetitle">非等额标的A码返佣比例根据其上个月完成该种类标的好友年化投资额的多少，确定其本月佣金比例，每月一调整。</div>
+            <table class="casetable" border="0">
+                <tr class="fline">
+                    <th style="width: 248px">上月好友累投非等额标年化额<br/>（含自己投资）</th>
+                    <th>100000以下</th>
+                    <th>100000-499999</th>
+                    <th>500000-999999</th>
+                    <th>1000000-2999999</th>
+                    <th>3000000及以上</th>
+                </tr>
+                <tr class="sline">
+                    <td>本月年化佣金返利比例</td>
+                    <td>0.25%</td>
+                    <td>0.75%</td>
+                    <td>1.00%</td>
+                    <td>1.30%</td>
+                    <td>1.50%</td>
+                </tr>
+                <tr class="tline">
+                    <td>本月年化佣金返利比例</td>
+                    <td >
+                    </td>
+                </tr>
+            </table>
+            <div class="text">
+                <p>按天计算公式=单笔投资金额*投资期限（天）/360*本月对应的年化佣金比例</p>
+                <p>按月计算公式=单笔投资金额*投资期限（月）/12*本月对应的年化佣金比例</p>
+            </div>
+            <div class="caseleft">
+                <div class="up">
+                    某A码销售人员11月完成好友（含自己）累投非等额标的年化投资额为88万元，则12月份的佣金返利比例为1%，12月内好友单笔投资非等额标，其佣金返利举例如下
+                </div>
+                <table class="down">
+                    <tr class="one">
+                        <th style="width: 101px">投资期限</th>
+                        <th style="width: 114px">投资金额</th>
+                        <th style="width: 240px">佣金返利</th>
+                    </tr>
+                    <tr class="two">
+                        <td>180天</td>
+                        <td>10000元</td>
+                        <td>10000*180/360*1%=50元</td>
+                    </tr>
+                    <tr class="two">
+                        <td>8个月</td>
+                        <td>200000元</td>
+                        <td>200000*8/12*1%=1333.33元</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="caseright">
+                <div class="up">
+                    他在12月完成好友（含自己）累投非等额标的年化投资额为105万，则其在明年1月份的佣金返利比例为1.3%，明年1月内好友单笔投资非等额标，他的佣金返利举例如下
+                </div>
+                <table class="down">
+                    <tr class="one">
+                        <th style="width: 101px">投资期限</th>
+                        <th style="width: 114px">投资金额</th>
+                        <th style="width: 240px">佣金返利</th>
+                    </tr>
+                    <tr class="two">
+                        <td>180天</td>
+                        <td>10000元</td>
+                        <td>10000*180/360*1.3%=65元</td>
+                    </tr>
+                    <tr class="two">
+                        <td>8个月</td>
+                        <td>200000元</td>
+                        <td>200000*8/12*1.3%=1733.33元</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="casetwo">
+            <div class="desline">
+                等额标的A码返利比例固定为1%，但最终年化佣金需乘以0.56，且投资超过个18月标按18个月计算佣金。0.56为借款方占用投资方的资金使用率。
+            </div>
+            <table class="destable">
+                <tr class="desone">
+                    <th style="width: 233px;color:#ff4f4f;font-weight: bold">单笔投资期限</th>
+                    <th>所有期限</th>
+                </tr>
+                <tr class="destwo">
+                    <td style="color:#ff4f4f;font-weight: bold">年化佣金返利比例</td>
+                    <td style="line-height: 22px;">1%<br/><span style="color:#ff4f4f;font-weight: bold">（超过18个月标按18个月计算佣金）</span></td>
+                </tr>
+                <tr class="desthree">
+                    <td style="color:#ff4f4f;font-weight: bold">佣金返利计算公式</td>
+                    <td style="line-height: 22px;">
+                        计算公式=单笔投资金额*投资期限（月）/12*1%*0.56
+                    </td>
+                </tr>
+                <tr class="desfour">
+                    <td style="color:#ff4f4f;font-weight: bold">提示</td>
+                    <td>0.56为借款方占用投资方的资金使用率，超过18个月标按18个月计算佣金。</td>
+                </tr>
+            </table>
+            <div class="ptwopcase">
+                某A码销售人员，若好友单笔投资等额标，他的返利佣金举例如下
+            </div>
+            <table class="ptwoptable">
+                <tr>
+                    <th style="width:146px;">还款方式</th>
+                    <th style="width:120px;">投资期限</th>
+                    <th style="width:226px;">投资金额</th>
+                    <th style="width:262px;">佣金返利</th>
+                </tr>
+                <tr>
+                    <td>按月等额还款</td>
+                    <td>8个月</td>
+                    <td>200000元</td>
+                    <td>200000*8/12*1%*0.56=746.67元</td>
+                </tr>
+                <tr>
+                    <td>按季等额还款</td>
+                    <td>6个月</td>
+                    <td>100000元</td>
+                    <td>100000*6/12*1%*0.56=280元</td>
+                </tr>
+            </table>
+        </div>
+        <img src="images/doumei_03.png" class="doumei">
+    </div>
+    <div class="thirdSection">
+        <div class="prompt">
+            温馨提示：<br/>
+            1、投资债权转让标不计年化佣金；<br/>
+            2、灵活收益标投资起息后先发锁定期佣金返利，回款后再发剩余天数佣金返利；<br/>
+            3、最终返利取值四舍五入保留2位小数点；<br/>
+            4、佣金返利起息后以工豆形式发放。<br/>
+            5、此佣金返利标准，自2016年12月6日 00:00:00开始实施，即该时间后起息的标，其推荐人佣金返利都按新标准发放，反之按旧标准发放。
+        </div>
+    </div>
+    <div class="last">
+        <table class="lasttable">
+            <tr class="lastone">
+                <th style="width: 137px;">考核项目</th>
+                <th style="width: 222px;">月度年化交易额（元）</th>
+                <th style="width: 184px;">月度拉新下限（人）</th>
+                <th style="width: 200px;">月度拉新上限（人）</th>
+            </tr>
+            <tr class="lasttwo">
+                <td>A码人员标准</td>
+                <td>10万</td>
+                <td>5</td>
+                <td>30</td>
+            </tr>
+        </table>
     </div>
 </div>
 

@@ -5,6 +5,8 @@ const PROPS_NAME_IDS = {
     dismiss: 7
 };
 
+const TOKEN = '&%UGVTEEkjhiu68d54tgbmnvtrewW%WRDiy';
+
 const Content = React.createClass({
     getInitialState: function () {
         this._useCallback = null;
@@ -82,7 +84,7 @@ const Content = React.createClass({
         var start_count = [28, 30, 32, 34, 36, 38, 38, 42, 46, 52, 56, 60];
         // var start_count = [28, 6, 6, 34, 36, 38, 38, 42, 46, 52, 56, 60];
 
-        $.get(`${API_PATH}/index.php`, {
+        $.get(`${API_PATH}index.php`, {
             r: 'user/work-points',
             uid: USER_ID,
             gameNo: GAME_NAME,
@@ -166,15 +168,20 @@ const Content = React.createClass({
 });
 
 function calculateStar(level, seconds, cb) {
-    $.get(API_PATH + '/index.php', {
+    let params = {
         r: 'user/user-addres',
         gameNo: GAME_NAME,
+        uid: USER_ID,
         passNum: level,
-        score: seconds,
         time: seconds,
-        success: 1,
-        uid: USER_ID
-    }, function (data) {
+        score: seconds,
+        success: 1
+    };
+    params.nonce = getNonceStr();
+    let s = params.nonce + GAME_NAME + USER_ID + params.passNum + params.time + params.score + params.success + TOKEN;
+    params.gc_version = hex_sha1(s);
+
+    $.get(API_PATH + 'index.php', params, function (data) {
         if (data.code == 10000) {
             cb(data.data)
         } else {
@@ -184,10 +191,9 @@ function calculateStar(level, seconds, cb) {
 }
 
 $(function () {
-    $.get(API_PATH + '/index.php?r=user/user-play', {},
-        function (data) {
-            // const USER_ID = data.uid
-        }, 'json');
-
     window.ContentPanel = ReactDOM.render(<Content />, document.getElementById('cnt'));
 });
+
+function getNonceStr() {
+    return Math.random().toString().substr(2)
+}

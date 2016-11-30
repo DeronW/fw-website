@@ -33,25 +33,87 @@
     </script>
     <script src="http://game.9888.cn/index.php?r=games/get-userid"></script>
     <script src="javascripts/hilo-standalone.js"></script>
+    <script src="javascripts/sha1.js"></script>
+    <script src="javascripts/illegal_words.js"></script>
     <script src="javascripts/Game.js"></script>
     <script src="javascripts/Asset.js"></script>
     <script src="javascripts/lib.js"></script>
     <script src="javascripts/bundle.js"></script>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 
 </head>
 
 <body>
 
 <input id="api-path" type="hidden" value="http://game.9888.cn/"/>
+<!--<input id="api-path" type="hidden" value="http://localhost/fake-api/"/>-->
 <div id="cnt"></div>
 <div id="game"></div>
 <script>
     function stopBubble(event) {
         event.preventDefault();
-        event.stopPropagation();
+//        event.stopPropagation();
     }
     //    document.body.addEventListener('touchstart', stopBubble);
-    document.getElementById('game').addEventListener('touchmove', stopBubble);
+    //    document.getElementById('game').addEventListener('touchmove', stopBubble);
     //    document.body.addEventListener('touchend', stopBubble);
+    document.body.addEventListener('touchmove', stopBubble);
+</script>
+
+<script>
+    function setWxConfig(debug, appid, timestamp, noncestr, signature) {
+        wx.config({
+            debug: debug,
+            appId: appid,
+            timestamp: timestamp,
+            nonceStr: noncestr,
+            signature: signature,
+            jsApiList: [
+                'onMenuShareTimeline',
+                'onMenuShareAppMessage'
+            ]
+        });
+    }
+
+    var gurl = 'http://game.9888.cn/index.php?r=games/game-notice&gameNo=0pn5m';
+    var iurl = 'http://game.9888.cn/static/frontend/game/axc/image/axc_share.jpg';
+
+    function setShareFriend() {
+        wx.onMenuShareAppMessage({
+            title: "听说你眼神比我好，手速还比我快，来比比？", // 分享标题
+            desc: "在消除的世界里停不下来，已晕！", // 分享描述
+            link: gurl, // 分享链接
+            imgUrl: iurl, // 分享图标
+            success: function () {
+                // 用户确认分享后执行的回调函数
+                //alert("喵喵感谢您！");
+            },
+            cancel: function () {
+                // 用户取消分享后执行的回调函数
+            }
+        });
+    }
+    function setShareFriendQuan() {
+        wx.onMenuShareTimeline({
+            title: '听说你眼神比我好，手速还比我快，来比比？', // 分享标题
+            link: gurl, // 分享链接
+            imgUrl: iurl, // 分享图标
+            success: function () {
+                // 用户确认分享后执行的回调函数
+            },
+            cancel: function () {
+                // 用户取消分享后执行的回调函数
+            }
+        });
+    }
+
+
+    $.get('http://fore.9888.cn/weixin/jssdk/share', {
+        url: location.href
+    }, function (data) {
+        setWxConfig(true, data.appId, data.timestamp, data.nonceStr, data.signature);
+        setShareFriend()
+        setShareFriendQuan()
+    }, 'json')
 </script>
 </body>
