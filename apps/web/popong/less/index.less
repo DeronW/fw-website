@@ -17,6 +17,14 @@ body, html {
   height: 100%;
 }
 
+#game {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
 .content {
   position: absolute;
   z-index: 5;
@@ -289,7 +297,8 @@ body, html {
   right: 0;
   bottom: 0;
   z-index: 1;
-  background: rgba(129, 220, 244, 0.5);
+  //background: rgba(129, 220, 244, 0.5);
+  background: rgba(2, 115, 135, 0.9);
 
   .modal {
     width: 525px;
@@ -320,6 +329,13 @@ body, html {
       font-size: 24px;
       outline: 0;
       border: 0;
+    }
+
+    .name-limit {
+      color: #728ba3;
+      font-size: 20px;
+      margin: 5px auto;
+      text-align: center;
     }
 
     .btn-cancel, .btn-confirm {
@@ -385,6 +401,24 @@ body, html {
       margin: 0 auto 20px;
       position: relative;
       top: -5px;
+    }
+    .btn-gift {
+      display: block;
+      position: absolute;
+      left: 40px;
+      top: 225px;
+      background: transparent url(../images/level-complete/gift.jpg) no-repeat;
+      width: 83px;
+      height: 81px;
+    }
+    .btn-back-home {
+      display: block;
+      position: absolute;
+      right: 40px;
+      top: 225px;
+      background: transparent url(../images/level-home.png) no-repeat;
+      width: 83px;
+      height: 81px;
     }
   }
 

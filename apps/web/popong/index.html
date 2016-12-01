@@ -57,7 +57,7 @@
     //    document.body.addEventListener('touchstart', stopBubble);
     //    document.getElementById('game').addEventListener('touchmove', stopBubble);
     //    document.body.addEventListener('touchend', stopBubble);
-    document.body.addEventListener('touchmove', stopBubble);
+    document.getElementById('game').addEventListener('touchmove', stopBubble);
 </script>
 
 <script>
@@ -111,7 +111,7 @@
     $.get('http://fore.9888.cn/weixin/jssdk/share', {
         url: location.href
     }, function (data) {
-        setWxConfig(true, data.appId, data.timestamp, data.nonceStr, data.signature);
+        setWxConfig(false, data.appId, data.timestamp, data.nonceStr, data.signature);
         setShareFriend()
         setShareFriendQuan()
     }, 'json')

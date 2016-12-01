@@ -80,7 +80,7 @@ const LevelComplete = React.createClass({
                     <div className={"star star-" + this.state.star}></div>
                     <div className="score">用时: {time}</div>
                     {btn}
-                    <img className={this.state.has_gift ? "btn-level-list" : "btn-level-list alone"}
+                    <img className={this.state.has_gift && this.props.success ? "btn-level-list" : "btn-level-list alone"}
                          src="images/level-home.png" onClick={this.showLevelListHandler}/>
                     {this.state.has_gift && this.props.success?
                         <img className="btn-level-list" src="images/level-complete/gift.jpg"
