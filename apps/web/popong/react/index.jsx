@@ -46,6 +46,18 @@ const Content = React.createClass({
             }
             this.setState({level_list: level_list});
         }.bind(this), 'json')
+
+
+        window.onpopstate = function () {
+            var st = window.history.state;
+            console.log(st);
+            if (st && st.page) {
+                this.setPage(st.page)
+            } else {
+                this.setPage('start')
+            }
+        }.bind(this)
+
     },
     refreshLevelList: function () {
         // 获取已通过关卡列表
@@ -74,15 +86,16 @@ const Content = React.createClass({
         if (level > 3 && window.VISITOR) {
             // 达到一定关数好要求强制登录, 通过 visitor 判断是否为游客登录
             // http://game.9888.cn 域名下
-            location.href = '/front/game/popong/'
+            location.href = '/index.php?r=games/game-notice&gameNo=0pn5m'
         }
         this.setState({page: 'prepare', level: level}, () => {
             if (directly_play) this.playHandler();
         });
+        appendHistoryRecord('prepare');
     },
     playHandler: function () {
-        var start_count = [28, 30, 32, 34, 36, 38, 38, 42, 46, 52, 56, 60];
-        // var start_count = [28, 6, 6, 34, 36, 38, 38, 42, 46, 52, 56, 60];
+        var start_count = [28, 30, 32, 34, 36, 38, 38, 42, 46, 52, 56, 46];
+        // start_count = [6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6];
 
         $.get(`${API_PATH}index.php`, {
             r: 'user/work-points',
@@ -103,7 +116,8 @@ const Content = React.createClass({
         });
     },
     startGameHandler: function () {
-        this.setState({page: 'level'})
+        this.setState({page: 'level'});
+        appendHistoryRecord('level');
     },
     playGameHandler: function () {
         Game.initStage();
@@ -142,7 +156,9 @@ const Content = React.createClass({
         if (page == 'start') {
             cnt = <StartPage startGame={this.startGameHandler}/>
         } else if (page == 'prepare') {
-            cnt = <Prepare level={this.state.level} playHandler={this.playHandler}/>
+            let has_gift = this.state.level_list[this.state.level - 1].gift;
+            cnt = <Prepare level={this.state.level} has_gift={has_gift}
+                           playHandler={this.playHandler} setPage={this.setPage}/>
         } else if (page == 'props') {
             cnt = <UserProps setPage={this.setPage}
                              level={this.state.level}
@@ -196,4 +212,8 @@ $(function () {
 
 function getNonceStr() {
     return Math.random().toString().substr(2)
+}
+
+function appendHistoryRecord(page) {
+    history.pushState({page: page}, null, '?' + getNonceStr())
 }

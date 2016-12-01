@@ -143,6 +143,7 @@ Level.Nickname = React.createClass({
                     <a className="btn-close" onClick={this.closeHandler}></a>
                     <input placeholder="请输入您的昵称" value={this.state.name} onChange={this.changeHandler}/>
 
+                    <div className="name-limit">＊昵称长度不可超过12个字符</div>
                     <a className="btn-cancel" onClick={this.closeHandler}></a>
                     <a className="btn-confirm" onClick={this.confirmHandler}></a>
                 </div>

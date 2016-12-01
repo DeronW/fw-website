@@ -2,6 +2,9 @@ const Prepare = React.createClass({
     getInitialState: function () {
         return {records: []}
     },
+    backHomeHandler: function () {
+        this.props.setPage('level')
+    },
     componentDidMount: function () {
         $.get(API_PATH + '/index.php', {
             r: 'user/user-ranking',
@@ -47,6 +50,9 @@ const Prepare = React.createClass({
                     <img className="dou-ge" src="images/prepare/dou.png"/>
                     <img className="start" onClick={this.props.playHandler}
                          src="images/prepare/start.png"/>
+                    {this.props.has_gift ? <a className="btn-gift"
+                                              onClick={() => alert('通关后可在当前关卡使用道具礼包')}> </a> : null }
+                    <a className="btn-back-home" onClick={this.backHomeHandler}> </a>
                 </div>
                 <div className="ladder">
                     <div className="ladder-title">本关TOP10排行榜</div>
