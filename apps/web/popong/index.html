@@ -52,11 +52,12 @@
 <script>
     function stopBubble(event) {
         event.preventDefault();
-        event.stopPropagation();
+//        event.stopPropagation();
     }
     //    document.body.addEventListener('touchstart', stopBubble);
-    document.getElementById('game').addEventListener('touchmove', stopBubble);
+    //    document.getElementById('game').addEventListener('touchmove', stopBubble);
     //    document.body.addEventListener('touchend', stopBubble);
+    document.getElementById('game').addEventListener('touchmove', stopBubble);
 </script>
 
 <script>
@@ -75,11 +76,12 @@
     }
 
     var gurl = 'http://game.9888.cn/index.php?r=games/game-notice&gameNo=0pn5m';
+    var iurl = 'http://game.9888.cn/static/frontend/game/axc/image/axc_share.jpg';
 
-    function setShareFriend(gurl, iurl) {
+    function setShareFriend() {
         wx.onMenuShareAppMessage({
-            title: "中了这个游戏的毒！求老司机带带我！！", // 分享标题
-            desc: "我们爱战斗最后的大boss相当厉害呦！", // 分享描述
+            title: "听说你眼神比我好，手速还比我快，来比比？", // 分享标题
+            desc: "在消除的世界里停不下来，已晕！", // 分享描述
             link: gurl, // 分享链接
             imgUrl: iurl, // 分享图标
             success: function () {
@@ -90,11 +92,10 @@
                 // 用户取消分享后执行的回调函数
             }
         });
-
     }
-    function setShareFriendQuan(gurl, iurl) {
+    function setShareFriendQuan() {
         wx.onMenuShareTimeline({
-            title: '中了这个游戏的毒！求老司机带带我！！', // 分享标题
+            title: '听说你眼神比我好，手速还比我快，来比比？', // 分享标题
             link: gurl, // 分享链接
             imgUrl: iurl, // 分享图标
             success: function () {

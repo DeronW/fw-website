@@ -1,7 +1,9 @@
+window.__nickname = null;
+
 const Level = React.createClass({
     getInitialState: function () {
         return {
-            nickname: null,
+            nickname: window.__nickname,
             level_list: this.getExtendList(this.props.level_list)
         }
     },
@@ -13,8 +15,10 @@ const Level = React.createClass({
                 uid: USER_ID,
                 gameNo: GAME_NAME
             }, function (data) {
-                console.log(data)
-            }, 'json')
+                var name = data.data.nickname;
+                this.setState({nickname: name});
+                window.__nickname = name;
+            }.bind(this), 'json')
     },
 
     componentWillReceiveProps: function (nextProps) {
@@ -53,6 +57,9 @@ const Level = React.createClass({
     closeNickName: function () {
         this.setState({reset_nickname: false})
     },
+    updateNickname: function (n) {
+        this.setState({nickname: n})
+    },
 
     render: function () {
         let level = (item, index) => {
@@ -75,13 +82,11 @@ const Level = React.createClass({
         };
 
         let nickname, nickname_modal;
-        if (window.VISITOR) {
-            nickname = <div className="btn-nickname" onClick={this.setNicknameHandler}>
-                用户昵称
-            </div>
+        if (!window.VISITOR) {
+            nickname = <div className="btn-nickname" onClick={this.setNicknameHandler}>{this.state.nickname}</div>
         }
         if (this.state.reset_nickname) {
-            nickname_modal = <Level.Nickname name={this.state.nickname}
+            nickname_modal = <Level.Nickname name={this.state.nickname} updateNickname={this.updateNickname}
                                              closeHandler={this.closeNickName}/>
         }
 
@@ -103,14 +108,27 @@ Level.Nickname = React.createClass({
         this.props.closeHandler()
     },
     confirmHandler: function () {
-        $.post(API_PATH + 'index.php', {
-            r: 'user/edit-nickname',
-            uid: USER_ID,
+        if (ILLEGAL_NAMES.split('|').indexOf(this.state.name) > -1)
+            return alert('非法词汇, 请重新想一个名字');
+
+        let params = {
             gameNo: GAME_NAME,
+            uid: USER_ID,
             nickname: this.state.name
-        }, function (data) {
-            if (data.code != 10000) alert(data.message)
-        }, 'json')
+        };
+
+        params.nonce = getNonceStr();
+        let s = params.nonce + GAME_NAME + USER_ID + params.nickname + TOKEN;
+        params.gc_version = hex_sha1(utf16to8(s));
+
+        $.get(API_PATH + 'index.php?r=user/edit-nickname', params, function (data) {
+            if (data.code == 10000) {
+                this.props.updateNickname(this.state.name)
+            } else {
+                alert(data.message)
+            }
+            this.props.closeHandler()
+        }.bind(this), 'json')
     },
     changeHandler: function (e) {
         let v = e.target.value;
@@ -125,6 +143,7 @@ Level.Nickname = React.createClass({
                     <a className="btn-close" onClick={this.closeHandler}></a>
                     <input placeholder="请输入您的昵称" value={this.state.name} onChange={this.changeHandler}/>
 
+                    <div className="name-limit">＊昵称长度不可超过12个字符</div>
                     <a className="btn-cancel" onClick={this.closeHandler}></a>
                     <a className="btn-confirm" onClick={this.confirmHandler}></a>
                 </div>

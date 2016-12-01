@@ -203,7 +203,7 @@
         return str;
     }
 
-    function utf16to8(str)  {
+    window.utf16to8 = function(str)  {
         var out, i, len, c;
 
         out = "";

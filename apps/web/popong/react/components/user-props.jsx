@@ -40,6 +40,12 @@ const UserProps = React.createClass({
 
         $.get(`${API_PATH}/index.php?r=user/prop-buy`, params, (data) => {
             alert(data.code == 10000 ? '购买成功' : '购买失败')
+            if (data.code == 10000) {
+                this.setState({
+                    limitUse: this.state.limitUse + 1,
+                    limitBuy: this.state.limitBuy - 1
+                })
+            }
         }, 'json');
     },
     useHandler: function () {
@@ -62,7 +68,9 @@ const UserProps = React.createClass({
                 } else if (this.state.id == PROPS_NAME_IDS.tips) {
                     Game.audios.propsTips.play();
                 }
+                this.setState({limitUse: this.state.limitUse - 1})
             } else {
+                this.setState({limitUse: 0});
                 alert(data.message)
             }
         }, 'json');

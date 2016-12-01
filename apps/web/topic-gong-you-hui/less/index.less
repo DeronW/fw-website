@@ -1,0 +1,126 @@
+@import "common.less";
+p{
+  margin: 0;
+  padding: 0;
+}
+.containerBox{
+  width: 100%;
+  height: 100%;
+  background: @colorWhite;
+  .banner{
+    position: relative;
+    height: 300px;
+    width: 100%;
+    overflow: hidden;
+    .bannerImg{
+      position: absolute;
+      width: 1920px;
+      height: 300px;
+      left: 50%;
+      top: 0;
+      background: url(../images/banner.png) no-repeat top center;
+      margin-left: -960px;
+    }
+  }
+  .Question{
+    margin: auto;
+    width: @width;
+    padding-bottom: 100px;
+    .questionTitle{
+      width: 256px;
+      height: 50px;
+      margin: 98px auto 48px;
+      font-size: @fontSize34;
+      color: #333;
+    }
+    .questionContent{
+      text-indent: 2em;
+      font-size: @fontSize16;
+      color: @color4;
+      line-height: 30px;
+    }
+  }
+  .wealth {
+    width: 100%;
+    height: 1646px;
+    background: @colorF1;
+    .wealthBox{
+      width: @width;
+      margin: auto;
+      .wealthTitle{
+        display: block;
+        width: 300px;
+        font-size: @fontSize34;
+        color: @color3;
+        padding: 100px 0 48px 0;
+        margin: auto;
+        img{
+          display: inline-block;
+          margin-left: 10px;
+          vertical-align: middle;
+        }
+      }
+      .wealthContent{
+        .wealthContentPeople{
+          display: table;
+          width: 100%;
+          .person{
+            float: left;
+            width: 248px;
+            height: 320px;
+            text-align: center;
+            .name{
+              font-size: @fontSize20;
+              color: @color3;
+              margin: 20px 0 12px 0;
+            }
+            .job{
+              width: 80px;
+              height: 32px;
+              margin: auto;
+              text-align: center;
+              line-height: 32px;
+              color: @colorWhite;
+              font-size: @fontSize16;
+              background: url('../images/job.png') no-repeat;
+            }
+          }
+        }
+        .wealthContentText{
+          margin-top: 30px;
+          font-size: @fontSize16;
+          color: @color4;
+          margin-bottom: 40px;
+          p{
+            text-indent: 2em;
+            line-height: 30px;
+          }
+        }
+        .wealthContentPicture{
+          position: relative;
+          cursor: pointer;
+          .btn{
+            width: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            .leftBtn{
+              position: absolute;
+              left: 10px;
+            }
+            .rightBtn {
+              position: absolute;
+              right: 10px;
+            }
+          }
+          .picture{
+            width: 992px;
+            height: 558px;
+            margin: auto;
+          }
+        }
+      }
+    }
+  }
+}
+
