@@ -57,7 +57,8 @@ module.exports = function generate_task(site_name, page_name, configs) {
     let common_javascript_files = [
         `${lib_path}jquery-1.12.4.min.js`,
         `${lib_path}javascripts/web/common-functions.js`,
-        `${lib_path}javascripts/web/interest-calculator.js`
+        `${lib_path}javascripts/web/interest-calculator.js`,
+        `${lib_path}javascripts/web/ajax-extend.js`
     ];
     if (CONFIG.debug) {
         common_javascript_files.push(`${lib_path}react-0.14.8/react.js`);
