@@ -24,6 +24,7 @@ const WEB_APP_NAMES = [
     'guide-cookbook', // 玩赚攻略页
     'vip-prerogative', // 等级攻略页
     'notice-corporate-structure',// 信息披露页面
+    'topic-gong-you-hui',//工友会专题页
 
     // 重构页面
     //用户界面
