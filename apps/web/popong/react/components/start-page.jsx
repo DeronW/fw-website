@@ -11,6 +11,9 @@ const StartPage = React.createClass({
     guideToggleHandler: function () {
         this.setState({show_guide: !this.state.show_guide})
     },
+    backToCenterHandler: function () {
+        location.href = 'http://game.9888.cn/index.php?r=polymerization/info&tag=tag1'
+    },
     render: function () {
         let rule = null, guide = null;
         if (this.state.show_rule) {
@@ -48,6 +51,7 @@ const StartPage = React.createClass({
         }
         return <div className="start-page">
             <div className="start" onClick={this.props.startGame}></div>
+            <img className="btn-back-center" src="images/back-center.png" onClick={this.backToCenterHandler}/>
             <div className="rule" onClick={this.ruleToggleHandler}></div>
             <div className="guide" onClick={this.guideToggleHandler}></div>
             {rule}
