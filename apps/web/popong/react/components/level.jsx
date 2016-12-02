@@ -132,7 +132,7 @@ Level.Nickname = React.createClass({
     },
     changeHandler: function (e) {
         let v = e.target.value;
-        if (v.length <= 12)
+        if (str_length(v) <= 12)
             this.setState({name: v})
     },
     render: function () {
@@ -150,4 +150,20 @@ Level.Nickname = React.createClass({
             </div>
         )
     }
-})
+});
+
+function str_length(str) {
+    var byteLen = 0, len = str.length;
+    if (str) {
+        for (var i = 0; i < len; i++) {
+            if (str.charCodeAt(i) > 255) {
+                byteLen += 2;
+            } else {
+                byteLen++;
+            }
+        }
+        return byteLen;
+    } else {
+        return 0;
+    }
+}
