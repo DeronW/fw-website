@@ -41,10 +41,14 @@ const UserProps = React.createClass({
         $.get(`${API_PATH}/index.php?r=user/prop-buy`, params, (data) => {
             alert(data.code == 10000 ? '购买成功' : '购买失败')
             if (data.code == 10000) {
+
+                window.__t_props = this;
+                console.log(this.state);
                 this.setState({
                     limitUse: this.state.limitUse + 1,
                     limitBuy: this.state.limitBuy - 1
                 })
+                console.log(this.state.limitUse)
             }
         }, 'json');
     },
