@@ -10,7 +10,7 @@ const UserProps = React.createClass({
             score: prop.price,
             title: prop.prop_name,
             describe: prop.comment,
-            limitUse: Math.max(parseInt(prop.remainder_use), 0),
+            limitUse: Math.max(parseInt(prop.remainder_use) || 0, 0),
             limitBuy: prop.remainder_buy
         }
     },
