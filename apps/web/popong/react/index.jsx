@@ -97,12 +97,17 @@ const Content = React.createClass({
         var start_count = [28, 30, 32, 34, 36, 38, 38, 42, 46, 52, 56, 46];
         // start_count = [6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6];
 
-        $.get(`${API_PATH}index.php`, {
+        let params = {
             r: 'user/work-points',
-            uid: USER_ID,
             gameNo: GAME_NAME,
+            uid: USER_ID,
             passNum: this.state.level
-        }, (data) => {
+        }
+        params.nonce = getNonceStr();
+        let s = params.nonce + GAME_NAME + USER_ID + params.passNum + TOKEN;
+        params.gc_version = hex_sha1(s);
+
+        $.get(`${API_PATH}index.php`, params, (data) => {
             var propsOptions = data.data;
             Game.setLevel(start_count[this.state.level - 1], this.state.level, propsOptions);
             this.setState({page: 'game', propsOptions: propsOptions});
@@ -203,7 +208,7 @@ function calculateStar(level, seconds, cb) {
         } else {
             alert('FAIL:' + data.message)
         }
-    }.bind(this), 'json');
+    }, 'json');
 }
 
 $(function () {
