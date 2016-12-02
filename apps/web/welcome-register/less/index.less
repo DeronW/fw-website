@@ -1,0 +1,421 @@
+@import "./form.less";
+@import "../../../../lib/less/partial/invest-list.less";
+
+.clearfix::after {
+  display: block;
+  clear: both;
+  content: '';
+  visibility: hidden;
+  height: 0;
+
+}
+
+.clearfix {
+  zoom: 1;
+}
+
+.fl {
+  float: left;
+}
+
+.fr {
+  float: right;
+}
+
+.redbag1-down {
+  animation: re 1s;
+  animation-fill-mode: forwards;
+  transition: 2s;
+}
+
+.main {
+  //text-align: center;
+  .top {
+    width: 100%;
+    height: 300px;
+    position: relative;
+    .banner {
+      background: url("../images/banner.jpg") no-repeat center center;
+      height: 300px;
+    }
+
+  }
+  @keyframes frist {
+    0% {
+      left: 50px;
+      top: 40px;
+    }
+    100% {
+      left: -20px;
+      top: 0;
+    }
+  }
+  @keyframes re {
+    0% {
+      left: 0;
+      top: 0
+    }
+    100% {
+      left: 50px;
+      top: 40px
+    }
+  }
+  @keyframes second {
+    0% {
+      left: 80px;
+      top: 20px
+    }
+    100% {
+      left: 175px;
+      top: -10px;
+    }
+  }
+  .gift {
+    width: 100%;
+    background-color: #f1f6ff;
+    .bg-gift {
+      width: 1000px;
+      margin: 0 auto;
+      position: relative;
+      .giftTitle {
+        font-size: 30px;
+        color: #164478;
+        font-weight: 500;
+        text-align: center;
+        padding: 34px 0 16px 0;
+      }
+      .subgiftTitle {
+        text-align: center;
+        color: #747576;
+        font-size: 14px;
+      }
+      .cash {
+        padding: 30px 0 30px 0;
+        position: relative;
+        .cashred {
+          float: left;
+          width: 250px;
+          height: 203px;
+          text-align: center;
+          position: relative;
+
+          .redbag1, .redbag2 {
+
+          }
+
+          .redbag1 {
+            animation: frist 1s;
+            animation-fill-mode: forwards;
+
+          }
+          .redbag2 {
+            animation: second 1s;
+            animation-fill-mode: forwards;
+          }
+
+        }
+        .cashadd {
+          float: left;
+          position: relative;
+          top: 100px;
+          width: 125px;
+          text-align: center;
+        }
+      }
+
+    }
+  }
+  //优势模块
+  .advantage {
+    background-color: #3b4b7e;
+    height: 324px;
+    text-align: center;
+    .advantageTitle {
+      text-align: center;
+      .advantageText {
+        color: #fff;
+        font-size: 30px;
+        line-height: 38px;
+        padding: 34px 0 16px;
+      }
+    }
+    .advantageSelect {
+      padding-top: 15px;
+      padding-bottom: 15px;
+      text-align: center;
+      font-size: 14px;
+      line-height: 150%;
+      margin: 0 auto;
+      width: 1140px;
+      .selectItem {
+        float: left;
+        width: 180px;
+        margin-left: 10px;
+        .select-title {
+          font-size: 18px;
+          line-height: 36px;
+          color: #85b8f9;
+        }
+        .select-des {
+          font-size: 14px;
+          color: #bac4e7;
+        }
+      }
+    }
+
+  }
+
+  //收益部分
+  .earning {
+    height: 370px;
+    background: url("../images/l_line.jpg") repeat-x;
+
+    .earningMain {
+      width: 1140px;
+      margin: 0 auto;
+      height: 100px;
+      padding-top: 20px;
+      .earningItem {
+        width: 33.3%;
+        float: left;
+        .earningTitle {
+          font-size: 18px;
+          color: #4b4c4d;
+          text-align: center;
+          line-height: 48px;
+          padding: 10px 0;
+        }
+        .earningImg {
+          text-align: center;
+        }
+        .earningData {
+          margin: 0 auto;
+          height: 85px;
+          padding-top: 26px;
+          .earningdatabox {
+
+          }
+          .yibox {
+            text-align: center;
+            float: left;
+            position: relative;
+            height: 53px;
+            .money-number {
+              text-align: center;
+              position: relative;
+              width: 35px;
+              height: 53px;
+              margin: 5px 0 0 3px;
+              display: inline-block;
+              vertical-align: top;
+              background: url(../images/img_num.jpg) no-repeat;
+              line-height: 53px;
+              font-family: arial;
+              font-size: 47px;
+              color: #f9655a;
+              text-align: center;
+              em {
+                font-style: normal;
+                font-weight: 700;
+              }
+              strong {
+                position: absolute;
+                top: 25px;
+                left: 0px;
+                width: 35px;
+                height: 2px;
+                background: url("../images/bg_hengline.jpg") no-repeat;
+              }
+            }
+            .yizi {
+              padding-top: 30px;
+              display: inline-block;
+              font-size: 20px;
+              color: #666;
+            }
+          }
+        }
+      }
+
+    }
+  }
+
+  //滚动盒子模块
+  .scroll {
+    position: fixed;
+    bottom: 0;
+    z-index: 5;
+    width: 100%;
+    height: 80px;
+    min-width: 1000px;
+    background-color: #33435d;
+    opacity: 0.9;
+    .scrollBox {
+      width: 1000px;
+      margin: 0 auto;
+      text-align: center;
+      .scrollBoxLeft {
+        width: 280px;
+        float: left;
+        font-size: 14px;
+        line-height: 80px;
+        color: #fff;
+        vertical-align: middle;
+        .icon {
+          background: url("../images/logo_zgxd.png") no-repeat 0 0;
+          display: inline-block;
+          width: 18px;
+          height: 18px;
+          vertical-align: middle;
+        }
+
+      }
+      .scrollBoxRight {
+        width: 440px;
+        float: right;
+        .rightnow {
+          width: 195px;
+          height: 40px;
+          line-height: 40px;
+          font-size: 16px;
+          display: inline-block;
+          color: #fff;
+          background: #fb6456;
+          border-radius: 4px;
+          border: 1px solid #fb6456;
+          position: relative;
+          top: 20px;
+          left: 0;
+
+        }
+        .new {
+          display: inline-block;
+          width: 125px;
+          height: 40px;
+          font-size: 14px;
+          line-height: 40px;
+          text-align: center;
+          color: #a3c7ff;
+          border: 1px solid #a3c7ff;
+          border-radius: 4px;
+          position: relative;
+          top: 20px;
+          left: 0;
+          margin-left: 10px;
+        }
+      }
+    }
+  }
+
+  //tab选项卡
+
+  .tabTest {
+    width: 1000px;
+    margin: 0 auto;
+    height: 200px;
+    background-color: gray;
+    .titleBox {
+      ul {
+        width: 100%;
+        height: 30px;
+        list-style: none;
+        li {
+          float: left;
+          width: 33.3%;
+          text-align: center;
+          height: 30px;
+          line-height: 30px;
+          background-color: #fff;
+
+        }
+      }
+
+    }
+    .contentBox {
+      ul {
+        list-style: none;
+        li {
+          display: none;
+        }
+        li.current {
+          display: block;
+        }
+      }
+
+    }
+  }
+
+  //图片轮播部分
+  .pictureCarousel {
+    #banner {
+      position: relative;
+      width: 478px;
+      height: 286px;
+      border: 1px solid #666;
+      overflow: hidden;
+      margin: 0 auto;
+
+      #banner_list {
+        a {
+          position: absolute;
+          img {
+            border: 0 none;
+          }
+        }
+
+      }
+
+      #banner_bg {
+        position: absolute;
+        bottom: 0;
+        background-color: #000;
+        filter: Alpha(opacity=30);
+        opacity: 0.3;
+        z-index: 5;
+        height: 30px;
+        width: 100%;
+        cursor: pointer;
+      }
+
+      #banner_info {
+        position: absolute;
+        bottom: 0;
+        left: 15px;
+        cursor: pointer;
+        z-index: 6;
+        color: #fff;
+        height: 22px;
+      }
+
+      ul {
+        list-style: none;
+        position: absolute;
+        z-index: 7;
+        filter: Alpha(opacity=80);
+        opacity: 0.8;
+        margin: 0;
+        padding: 0;
+        bottom: 3px;
+        right: 5px;
+        border: 1px solid #fff;
+
+        li {
+          float: left;
+          display: block;
+          padding: 0 8px;
+          color: #fff;
+          background: #6f4f67;
+          cursor: pointer;
+          border: 1px solid #e5eaff;
+          background-color: #6f4f67;
+        }
+        li.on {
+          background-color: #900;
+        }
+      }
+
+    }
+
+  }
+}
+

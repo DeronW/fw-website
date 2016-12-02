@@ -9,8 +9,8 @@ const less = require('gulp-less');
 module.exports = less2css = function (src_path, build_path, name, debug) {
     return gulp.src(src_path)
         .pipe(changed(build_path))
-        .pipe(plumber())
         .pipe(less())
+        .pipe(plumber())
         .pipe(debug ? plugins.util.noop() : cssnano({zindex: false}))
         .pipe(concat(name))
         .pipe(gulp.dest(build_path));

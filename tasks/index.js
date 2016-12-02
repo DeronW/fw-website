@@ -1,6 +1,6 @@
 'use strict';
 
-var gulp = require('gulp');
+let gulp = require('gulp');
 
 const html = require('./html.js');
 const stylesheets = require('./stylesheets.js');
@@ -13,15 +13,19 @@ const revision = require('./revision.js');
 
 let COMMON_JAVASCRIPTS_TASK = {};
 
-// project_name 每次使用新项目时, 只需要更换项目名称
-module.exports = function generate_task(site_name, project_name, configs) {
+module.exports = function generate_task(site_name, page_name, configs) {
+    let singlePageCfg = {};
+    if (typeof(page_name) == 'object') {
+        singlePageCfg = page_name;
+        page_name = singlePageCfg.name
+    }
 
-    var app_path = `apps/${site_name}/${project_name}/`,
-        build_path = `build/${site_name}/${project_name}/`,
+    let app_path = `apps/${site_name}/${page_name}/`,
+        build_path = `build/${site_name}/${page_name}/`,
         public_path = 'public/',
         tmp_path = `build/${site_name}-tmp/`,
         lib_path = 'lib/',
-        cdn_path = `cdn/${site_name}/${project_name}/`,
+        cdn_path = `cdn/${site_name}/${page_name}/`,
         CONFIG = Object.assign({
             debug: false,
             cmd_prefix: '', // 通用指令前缀，比如 pack:
@@ -31,11 +35,11 @@ module.exports = function generate_task(site_name, project_name, configs) {
             include_common_js: [],
             main_jsx: 'react/index.jsx',
             html_engine: 'swig'
-        }, configs);
+        }, configs, singlePageCfg);
 
-    let task_name = site_name + ':' + (CONFIG.cmd_prefix ? CONFIG.cmd_prefix + ':' : '') + project_name;
+    let task_name = site_name + ':' + (CONFIG.cmd_prefix ? CONFIG.cmd_prefix + ':' : '') + page_name;
 
-    var less_files = [
+    let less_files = [
         `${lib_path}less/common.less`,
         `${lib_path}less/grid.less`,
         `${lib_path}less/header-status-bar.less`,
@@ -46,14 +50,15 @@ module.exports = function generate_task(site_name, project_name, configs) {
         `${app_path}less/index.less`
     ];
 
-    var jsx_files = CONFIG.include_components.map((i)=> `${lib_path}components/${i}`);
+    let jsx_files = CONFIG.include_components.map((i) => `${lib_path}components/${i}`);
     jsx_files.push(`${app_path}react/components/*.jsx`);
     jsx_files.push(`${app_path}${CONFIG.main_jsx}`);
 
-    var common_javascript_files = [
+    let common_javascript_files = [
         `${lib_path}jquery-1.12.4.min.js`,
-        `${lib_path}javascripts/eten/common-functions.js`,
-        `${lib_path}javascripts/eten/interest-calculator.js`
+        `${lib_path}javascripts/web/common-functions.js`,
+        `${lib_path}javascripts/web/interest-calculator.js`,
+        `${lib_path}javascripts/web/ajax-extend.js`
     ];
     if (CONFIG.debug) {
         common_javascript_files.push(`${lib_path}react-0.14.8/react.js`);
@@ -102,7 +107,7 @@ module.exports = function generate_task(site_name, project_name, configs) {
     }
 
     function compile_public_images() {
-        return copy([`${public_path}images/*`], `${build_path}images`)
+        return copy([`${public_path}images/**`], `${build_path}images`)
     }
 
     function copy_audios() {
@@ -142,7 +147,7 @@ module.exports = function generate_task(site_name, project_name, configs) {
         gulp.watch(`lib/less/**/*.less`, gulp.parallel(compile_less));
     }
 
-    var common_javascripts = CONFIG.debug ? compile_common_javascripts : copy_common_javascripts;
+    let common_javascripts = CONFIG.debug ? compile_common_javascripts : copy_common_javascripts;
 
     gulp.task(task_name,
         gulp.series(

@@ -1,0 +1,269 @@
+.global-invest-list {
+  width: 1140px;
+  display: table;
+  margin: 0 auto;
+
+  .invest-title {
+
+    font-size: 30px;
+    color: #164478;
+    line-height: 38px;
+    padding: 34px 0 16px;
+    text-align: center;
+  }
+
+  .invest-list {
+    border: solid 1px #eaeaea;
+    width: 1140px;
+    margin: 0 auto 20px;
+
+    .invest-item {
+      height: 140px;
+      position: relative;
+      border-bottom: solid 1px #eaeaea;
+    }
+    .invest-item-1 {
+      margin-left: 30px;
+      float: left;
+      width: 370px;
+      padding-top: 20px;
+
+      .product-name {
+        display: inline-block;
+        margin-left: 18px;
+        position: relative;
+        top: -9px;
+      }
+      .product-label {
+        display: inline-block;
+        font-size: 14px;
+        line-height: 16px;
+        margin: 0 10px 0 15px;
+        color: #fff;
+        white-space: nowrap;
+        border-radius: 3px;
+        padding: 2px 7px 3px 8px;
+        position: relative;
+        .rotate {
+          position: absolute;
+          top: -6px;
+          right: -26px;
+          transition: 1s cubic-bezier(0.86, 0, 0.07, 1);
+          transform: rotate(0deg);
+        }
+
+        .icon-label {
+          width: 30px;
+          height: 30px;
+          position: absolute;
+          z-index: 1;
+          top: -6px;
+          right: -26px;
+          background: transparent url('') no-repeat center center;
+        }
+
+        .icon-label-1 {
+          background-image: url(../images/product-label/bg-p1.png);
+        }
+        .icon-label-2 {
+          background-image: url(../images/product-label/bg-p2.png);
+        }
+        .icon-label-3 {
+          background-image: url(../images/product-label/bg-p3.png);
+        }
+        .icon-label-4 {
+          background-image: url(../images/product-label/bg-p4.png);
+        }
+        .icon-label-5 {
+          background-image: url(../images/product-label/bg-p5.png);
+        }
+        .icon-label-6 {
+          background-image: url(../images/product-label/bg-p6.png);
+        }
+
+        &:hover {
+          .rotate {
+            transform: rotate(360deg);
+          }
+        }
+      }
+      .icon {
+        width: 30px;
+        height: 30px;
+        display: inline-block;
+        background: transparent url('') no-repeat center center;
+        background-size: 100% !important;
+      }
+
+      .trade-mark-1 {
+        background-image: url(../images/trade-mark/proPic_1.png);
+      }
+      .trade-mark-2 {
+        background-image: url(../images/trade-mark/proPic_2.png);
+      }
+      .trade-mark-3 {
+        background-image: url(../images/trade-mark/proPic_3.png);
+      }
+      .trade-mark-4 {
+        background-image: url(../images/trade-mark/proPic_4.png);
+      }
+      .trade-mark-5 {
+        background-image: url(../images/trade-mark/proPic_5.png);
+      }
+      .trade-mark-6 {
+        background-image: url(../images/trade-mark/proPic_6.png);
+      }
+      .trade-mark-7 {
+        background-image: url(../images/trade-mark/proPic_7.png);
+      }
+      .trade-mark-8 {
+        background-image: url(../images/trade-mark/proPic_8.png);
+      }
+      .trade-mark-9 {
+        background-image: url(../images/trade-mark/proPic_9.png);
+      }
+      .trade-mark-10 {
+        background-image: url(../images/trade-mark/proPic_10.png);
+      }
+      .trade-mark-11 {
+        background-image: url(../images/trade-mark/proPic_11.png);
+      }
+      .trade-mark-12 {
+        background-image: url(../images/trade-mark/proPic_12.png);
+      }
+      .trade-mark-13 {
+        background-image: url(../images/trade-mark/proPic_13.png);
+      }
+      .trade-mark-14 {
+        background-image: url(../images/trade-mark/proPic_14.png);
+      }
+      .trade-mark-15 {
+        background-image: url(../images/trade-mark/proPic_15.png);
+      }
+      .trade-mark-16 {
+        background-image: url(../images/trade-mark/proPic_16.png);
+      }
+      .trade-mark-17 {
+        background-image: url(../images/trade-mark/proPic_17.png);
+      }
+
+      .tags {
+        margin: 8px 0;
+        .remain-day {
+          color: #fd4d4c;
+          font-size: 18px;
+        }
+        .tag {
+          display: inline-block;
+          font-size: 12px;
+          padding: 0 3px;
+          border-radius: 3px;
+          color: #666;
+          border: solid 1px #666666;
+          margin: 0 0px 0 7px;
+          line-height: 16px;
+          background: #fff;
+        }
+      }
+    }
+    .invest-item-2 {
+      float: left;
+      width: 290px;
+      padding-top: 55px;
+      color: #666666;
+      font-size: 14px;
+
+      .year-interest {
+        color: #f9655a;
+        font-size: 20px;
+        margin: 0 3px;
+      }
+
+      .info-img {
+        position: relative;
+        top: 3px;
+      }
+    }
+    .invest-item-3 {
+      float: left;
+      width: 150px;
+      height: 100%;
+      position: relative;
+
+      .circle-progress {
+        position: relative;
+        width: 150px;
+        height: 140px;
+
+        svg {
+          position: absolute;
+          top: 20px;
+          left: 25px;
+        }
+
+        .text {
+          text-align: center;
+          font-size: 16px;
+          line-height: 30px;
+          color: #333;
+          position: absolute;
+          top: 56px;
+          left: 0;
+          right: 0;
+          bottom: 0;
+        }
+      }
+      .rect-progress {
+        width: 150px;
+        margin-top: 55px;
+        height: 30px;
+        position: relative;
+        background: #d0d0d0;
+        border-radius: 3px;
+        overflow: hidden;
+
+        .red {
+          position: absolute;
+          top: 0;
+          left: 0;
+          bottom: 0;
+          width: 50%;
+          background: #f9655a;
+        }
+
+        .text {
+          text-align: center;
+          font-size: 16px;
+          line-height: 30px;
+          color: white;
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+        }
+      }
+    }
+    .invest-item-4 {
+      float: right;
+      width: 90px;
+      margin-right: 30px;
+      color: #666;
+      text-align: center;
+      padding-top: 48px;
+
+      a {
+        width: 91px;
+        background: #f9655a;
+        text-align: center;
+        height: 26px;
+        line-height: 26px;
+        font-size: 14px;
+        border-radius: 3px;
+        color: white;
+        display: block;
+        margin: 0 auto 5px;
+      }
+    }
+  }
+}
