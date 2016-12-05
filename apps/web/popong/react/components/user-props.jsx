@@ -10,7 +10,7 @@ const UserProps = React.createClass({
             score: prop.price,
             title: prop.prop_name,
             describe: prop.comment,
-            limitUse: parseInt(prop.remainder_use),
+            limitUse: Math.max(parseInt(prop.remainder_use) || 0, 0),
             limitBuy: prop.remainder_buy
         }
     },
@@ -68,7 +68,7 @@ const UserProps = React.createClass({
                 } else if (this.state.id == PROPS_NAME_IDS.tips) {
                     Game.audios.propsTips.play();
                 }
-                this.setState({limitUse: this.state.limitUse - 1})
+                this.setState({limitUse: Math.max(this.state.limitUse - 1, 0)})
             } else {
                 this.setState({limitUse: 0});
                 alert(data.message)

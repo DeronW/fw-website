@@ -47,7 +47,6 @@ const Content = React.createClass({
             this.setState({level_list: level_list});
         }.bind(this), 'json')
 
-
         window.onpopstate = function () {
             var st = window.history.state;
             console.log(st);
