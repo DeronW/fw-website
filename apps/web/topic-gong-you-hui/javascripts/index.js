@@ -16,7 +16,7 @@ $(function () {
         "./images/sma3.png"
     ];
     for(var i =0;i < wealthBigImgs.length;i++){
-        $(".wealthBigImg ul").append($("<li>").append($("<img>").attr("src",wealthBigImgs[i])))
+        $(".wealthBigImg ul").find('li').eq(i).find('img').attr('src',wealthBigImgs[i])
     }
     for(var i =0;i < wealthBigImgs.length;i++){
         $(".northBigImg ul").append($("<li>").append($("<img>").attr("src",wealthBigImgs[i])))
