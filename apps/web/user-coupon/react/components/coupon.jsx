@@ -22,7 +22,7 @@ const Coupon = React.createClass({
                 this.setState({staMoneyData: da})
             }.bind(this)
         });
-        //$.fwDeferredAjax({
+        //$.fwAjax({
         //    url: API_PATH + 'a.json',
         //    type: 'get',
         //    dataType:'json',
