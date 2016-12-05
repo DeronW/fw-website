@@ -10,27 +10,27 @@ const Coupon = React.createClass({
         })
     },
     componentDidMount: function () {
-        //$.ajax({
-        //    url: API_PATH + 'api/coupon/v1/accountCouponStatistics.json',
-        //    data:{
-        //      couponType:1
-        //    },
-        //    type: 'get',
-        //    dataType:'json',
-        //    success: function (data) {
-        //        let da = data.data&&data.data.couponAccount ? data.data.couponAccount[0] : {};
-        //        this.setState({staMoneyData: da})
-        //    }.bind(this)
-        //});
-        $.fwAjax({
-            url: API_PATH + 'a.json',
+        $.ajax({
+            url: API_PATH + 'api/coupon/v1/accountCouponStatistics.json',
+            data:{
+              couponType:1
+            },
             type: 'get',
             dataType:'json',
             success: function (data) {
-                let da = data.couponAccount ? data.couponAccount[0] : {};
+                let da = data.data&&data.data.couponAccount ? data.data.couponAccount[0] : {};
                 this.setState({staMoneyData: da})
             }.bind(this)
         });
+        //$.fwDeferredAjax({
+        //    url: API_PATH + 'a.json',
+        //    type: 'get',
+        //    dataType:'json',
+        //    success: function (data) {
+        //        let da = data.couponAccount ? data.couponAccount[0] : {};
+        //        this.setState({staMoneyData: da})
+        //    }.bind(this)
+        //});
     },
     componentWillReceiveProps: function (nextProps) {
         this.ajaxCouponStatistics(nextProps.tab_name)
