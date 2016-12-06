@@ -60,6 +60,9 @@ const Level = React.createClass({
     updateNickname: function (n) {
         this.setState({nickname: n})
     },
+    refreshHandler: function () {
+        location.reload()
+    },
 
     render: function () {
         let level = (item, index) => {
@@ -91,6 +94,7 @@ const Level = React.createClass({
         }
 
         return <div className="level-list">
+            <img className="btn-refresh" onClick={this.refreshHandler} src="images/level-list/button-back.png"/>
             <img className="header" src="images/level-list/header.png"/>
             <img className="footer" src="images/level-list/footer.png"/>
             {nickname}
