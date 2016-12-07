@@ -4,7 +4,6 @@ $(function () {
     $.ajax({
         type: "GET",
         async: false,
-        //url: "http://test/jsonp.php",
         url:"http://fore.9888.cn/cms/api/gyh_banner.php?key=0ca175b9c0f726a831d895e&id=28&callback=gyh1",
         dataType: "jsonp",
         jsonp: "callback",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
@@ -28,7 +27,6 @@ $(function () {
     $.ajax({
         type: "GET",
         async: false,
-        //url: "http://test/jsonp.php",
         url:"http://fore.9888.cn/cms/api/gyh_banner.php?key=0ca175b9c0f726a831d895e&id=29&callback=gyh2",
         dataType: "jsonp",
         jsonp: "callback",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
@@ -46,7 +44,6 @@ $(function () {
     $.ajax({
         type: "GET",
         async: false,
-        //url: "http://test/jsonp.php",
         url:"http://fore.9888.cn/cms/api/gyh_banner.php?key=0ca175b9c0f726a831d895e&id=30&callback=gyh3",
         dataType: "jsonp",
         jsonp: "callback",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
@@ -64,7 +61,6 @@ $(function () {
     $.ajax({
         type: "GET",
         async: false,
-        //url: "http://test/jsonp.php",
         url:"http://fore.9888.cn/cms/api/gyh_banner.php?key=0ca175b9c0f726a831d895e&id=31&callback=gyh4",
         dataType: "jsonp",
         jsonp: "callback",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
