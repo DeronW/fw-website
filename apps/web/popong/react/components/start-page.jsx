@@ -12,7 +12,8 @@ const StartPage = React.createClass({
         this.setState({show_guide: !this.state.show_guide})
     },
     backToCenterHandler: function () {
-        location.href = 'http://game.9888.cn/index.php?r=polymerization/info&tag=tag1'
+        // location.href = 'http://game.9888.cn/index.php?r=polymerization/info&tag=tag1'
+        location.href = 'http://mmall.9888.cn/static/mall/game/index.html?mallHead=true'
     },
     render: function () {
         let rule = null, guide = null;
