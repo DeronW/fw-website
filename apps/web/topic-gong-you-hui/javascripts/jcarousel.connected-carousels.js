@@ -11,10 +11,10 @@
             var target = connector(item, carouselStage);
             item.on('jcarouselcontrol:active', function() {
                     carouselNavigation.jcarousel('scrollIntoView', this);
-                    item.find('span').removeClass('layer')
+                    item.find('span').addClass('layer')
                 })
                 .on('jcarouselcontrol:inactive', function() {
-                    item.find('span').addClass('layer')
+                    item.find('span').removeClass('layer')
                 })
                 .jcarouselControl({
                     target: target,
@@ -62,10 +62,10 @@
             var target = connector(item, carouselStage);
             item.on('jcarouselcontrol:active', function() {
                 carouselNavigation.jcarousel('scrollIntoView', this);
-                item.find('span').removeClass('layer')
+                item.find('span').addClass('layer')
             })
                 .on('jcarouselcontrol:inactive', function() {
-                    item.find('span').addClass('layer')
+                    item.find('span').removeClass('layer')
                 })
                 .jcarouselControl({
                     target: target,
@@ -118,10 +118,10 @@
             var target = connector(item, carouselStage);
             item.on('jcarouselcontrol:active', function() {
                 carouselNavigation.jcarousel('scrollIntoView', this);
-                item.find('span').removeClass('layer')
+                item.find('span').addClass('layer')
             })
                 .on('jcarouselcontrol:inactive', function() {
-                    item.find('span').addClass('layer')
+                    item.find('span').removeClass('layer')
                 })
                 .jcarouselControl({
                     target: target,
