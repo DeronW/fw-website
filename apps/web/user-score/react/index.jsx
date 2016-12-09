@@ -53,8 +53,8 @@ const Content = React.createClass({
 });
 let Fn = {
     DetailLoadData: function (page, cb) {
-        $.get(API_PATH + 'beans/allBorrows.do', {
-            rows: 10,
+        $.post( 'http://www.9888.cn/api/credit/v1/dataList.json', {
+            limit: 10,
             page: page
         }, function (data) {
             cb(data.pageData)
@@ -62,10 +62,10 @@ let Fn = {
     },
     DetailFilterData: function (data) {
         let rows = data.result.map((i) => [{
-            text: i.createTime
+            text: i.createTimeString
         }, {
-            text: i.cashValue>0?("+"+i.cashValue):(i.cashValue),
-            className: i.cashValue > 0 ? 'red' : 'green'
+            text: i.cashAmount>0?("+"+i.cashValue):(i.cashValue),
+            className: i.cashAmount > 0 ? 'red' : 'green'
         }, {
             text: `(${i.waterTypeName})${i.remark}`
         }]);
