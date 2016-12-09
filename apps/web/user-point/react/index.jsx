@@ -9,6 +9,7 @@ const Content = React.createClass({
         this.setState({
             bean: {
                 usable: 1,
+                ouedate:0,
             }
         })
     },
@@ -39,7 +40,8 @@ const Content = React.createClass({
                     <div className="on">我的工分</div>
                 </div>
                 <div className="bean-info">
-                    <span className="des">我的工分<b>{bean.usable}</b>分</span>
+                    <span className="des">我的工分<b style={{padding:"0 3px"}}>{bean.usable}</b>分</span>
+                    <span className="des">即将过期<b style={{padding:"0 3px"}}>{bean.ouedate}</b>分</span>
                 </div>
                 <div className="moneyItemContainer">
                     <Table th_rows={th_rows} fnLoadData={fnLoadData} fnFilterData={fnFilterData}/>
