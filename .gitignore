@@ -3,6 +3,7 @@ gulpfile.settings.js
 .swp
 
 .idea
+.vscode
 .project
 npm-debug.log
 
