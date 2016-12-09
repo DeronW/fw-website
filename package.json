@@ -1,9 +1,11 @@
 {
   "name": "webapp",
+  "version": "1.0.1",
   "private": true,
   "dependencies": {
   },
   "devDependencies": {
+    "eslint": ">=3.11",
     "gulp": "gulpjs/gulp#4.0",
     "gulp-data": ">=1",
     "gulp-swig": ">=0.8",

@@ -141,6 +141,8 @@ p{
   font-size: @fontSize16;
 }
 /** Stage container **/
+
+
 .northEast{
   width: 1012px;
   margin: auto;
@@ -155,7 +157,7 @@ p{
   .northSea{
     width: 992px;
     .northSeaTitle{
-      font-size: @fontSize20;
+      font-size: @fontSize16;
       margin: 50px 0;
     }
   }
@@ -211,7 +213,28 @@ ul li {
   margin: 20px auto;
   position: relative;
 }
-
+.wealthSmallImg li span,.northSmallImg li span,.eastSmallImg li span{
+  display: block;
+  position: absolute;
+  width: 240px;
+  height: 135px;
+  left: 0;
+  top: 0;
+  background: rgba(0,0,0,0.5);
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#7F000000,endColorstr=#7F000000);
+}
+.wealthSmallImg li span:hover{
+  background: rgba(0,0,0,0);
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#19000000,endColorstr=#19000000);
+}
+.northSmallImg li span:hover{
+  background: rgba(0,0,0,0);
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#19000000,endColorstr=#19000000);
+}
+.eastSmallImg li span:hover{
+  background: rgba(0,0,0,0);
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#19000000,endColorstr=#19000000);
+}
 
 .connected-carousels a {
   color: #fff;
@@ -282,8 +305,8 @@ ul li {
   height: 135px;
   left: 0;
   top: 0;
-  background: rgba(0,0,0,0.5);
-  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#7F000000,endColorstr=#7F000000);
+  background: rgba(0,0,0,0);
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#19000000,endColorstr=#19000000);
 }
 
 .connected-carousels .prev-stage,
