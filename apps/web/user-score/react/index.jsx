@@ -2,16 +2,16 @@ const Content = React.createClass({
     getInitialState: function () {
         return {
             tabName: '工分明细',
-            bean: {}
+            bean:null,
         }
     },
     componentDidMount: function () {
-        this.setState({
-            bean: {
-                usable: 1,
-                ouedate:0,
-            }
-        })
+        var _this = this;
+        $.post(API_PATH +'api/credit/v1/dataList.json',
+            function (data) {
+            console.log(data.data.creditVo);
+            _this.setState({bean:data.data.creditVo});
+        }, 'json')
     },
     tabClickHandler: function (tab) {
         let n=(tab=="已获取")?true:false;
@@ -34,14 +34,15 @@ const Content = React.createClass({
             fnLoadData = Fn.DetailLoadData;
             fnFilterData = Fn.DetailFilterData;
          }
+
         return (
             <div className="topNav">
                 <div className="topRow">
                     <div className="on">我的工分</div>
                 </div>
                 <div className="bean-info">
-                    <span className="des">我的工分<b style={{padding:"0 3px"}}>{bean.usable}</b>分</span>
-                    <span className="des">即将过期<b style={{padding:"0 3px"}}>{bean.ouedate}</b>分</span>
+                    <span className="des">我的工分<b style={{padding:"0 3px"}}>{this.state.bean}</b>分</span>
+                    <span className="des">即将过期<b style={{padding:"0 3px"}}>{this.state.bean}</b>分</span>
                 </div>
                 <div className="moneyItemContainer">
                     <Table th_rows={th_rows} fnLoadData={fnLoadData} fnFilterData={fnFilterData}/>
@@ -53,28 +54,40 @@ const Content = React.createClass({
 });
 let Fn = {
     DetailLoadData: function (page, cb) {
-        $.post( 'http://www.9888.cn/api/credit/v1/dataList.json', {
+        $.post( API_PATH +'api/credit/v1/dataList.json', {
             limit: 10,
             page: page
         }, function (data) {
-            cb(data.pageData)
+            console.log(data);
+            if(data.data.pageData){
+                cb(data.data.pageData)
+            }
         }, 'json')
     },
     DetailFilterData: function (data) {
-        let rows = data.result.map((i) => [{
-            text: i.createTimeString
-        }, {
-            text: i.cashAmount>0?("+"+i.cashValue):(i.cashValue),
-            className: i.cashAmount > 0 ? 'red' : 'green'
-        }, {
-            text: `(${i.waterTypeName})${i.remark}`
-        }]);
-        return {
-            total_page: data.pagination.totalPage,
-            rows: rows
+        if(data){
+            let rows = data.result.map((i) => [{
+                text: i.createTimeString
+            }, {
+                text: i.cashAmount>0?("+"+i.cashAmount):(i.cashAmount),
+                className: i.cashAmount > 0 ? 'red' : 'green'
+            }, {
+                text: i.remark
+            }]);
+            return {
+                total_page: data.pagination.totalPage,
+                rows: rows
+            }
+        }else{
+            return{
+                rows:null
+            }
+
         }
+
     }
 }
+
 $(function () {
     ReactDOM.render(<HeaderStatusBar />, document.getElementById('header-status-bar'));
     ReactDOM.render(<Content />, document.getElementById('userContent'));

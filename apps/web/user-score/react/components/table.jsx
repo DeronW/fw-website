@@ -31,6 +31,7 @@ const Table = React.createClass({
         if (new_page) this.setState({page: new_page}, this.reloadData);
     },
     reloadData: function () {
+        // console.log(this.props.fnLoadData());
         this.props.fnLoadData && this.props.fnLoadData(this.state.page, (data) => {
             let filterData = this.props.fnFilterData && this.props.fnFilterData(data);
             if (filterData)
@@ -53,7 +54,6 @@ const Table = React.createClass({
     },
     render: function () {
         let {page, total_page, rows} = this.state;
-        console.log(rows);
         let th_cell = (t, index) => {
             return <th key={index} width={t.width}>{t.title}</th>
         };
@@ -73,7 +73,6 @@ const Table = React.createClass({
         };
         let pagination, empty_records;
         let bean_count;
-        console.log(this.state.bean_count);
         if(this.state.bean_count) {
             bean_count = (
                 <div className="totalCount">
@@ -100,7 +99,6 @@ const Table = React.createClass({
         } else {
             empty_records = <div className="emptyRecords">暂无记录</div>
         }
-        console.log(this.state.th_rows)
         return (
             <div className="tableContaner">
                 <table className="table-read-only">
