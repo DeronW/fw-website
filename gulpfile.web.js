@@ -55,7 +55,7 @@ module.exports = function (gulp, generate_task, settings) {
             include_common_js: common_js
         });
         generate_task('web', i, {
-            api_path: "http://www.9888.cn/",
+            api_path: "//www.9888.cn/",
             cmd_prefix: 'pack',
             cdn_prefix: `/static/web/${i.name || i}/`,
             include_components: common_components,
@@ -63,5 +63,5 @@ module.exports = function (gulp, generate_task, settings) {
         });
     });
 
-    gulp.task('build:web', gulp.series(WEB_APP_NAMES.map(page => `web:pack:${page.name || page}:revision`)));
+    gulp.task('build:web', gulp.series(WEB_APP_NAMES.map(i => `web:pack:${i.name || i}:revision`)));
 };
