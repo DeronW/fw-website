@@ -63,5 +63,5 @@ module.exports = function (gulp, generate_task, settings) {
         });
     });
 
-    gulp.task('build:web', gulp.series(WEB_APP_NAMES.map(page => `web:pack:${page.name || page}:revision`)));
+    gulp.task('build:web', gulp.series(WEB_APP_NAMES.map(i => `web:pack:${i.name || i}:revision`)));
 };
