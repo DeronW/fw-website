@@ -2,7 +2,7 @@ const Content = React.createClass({
     getInitialState: function () {
         return {
             tabName: '工分明细',
-            bean:null,
+            bean:{},
         }
     },
     componentDidMount: function () {
@@ -10,7 +10,7 @@ const Content = React.createClass({
         $.post(API_PATH +'api/credit/v1/dataList.json',
             function (data) {
             console.log(data.data.creditVo);
-            _this.setState({bean:data.data.creditVo});
+            _this.setState({bean:{usable:data.data.creditVo}});
         }, 'json')
     },
     tabClickHandler: function (tab) {
@@ -41,8 +41,8 @@ const Content = React.createClass({
                     <div className="on">我的工分</div>
                 </div>
                 <div className="bean-info">
-                    <span className="des">我的工分<b style={{padding:"0 3px"}}>{this.state.bean}</b>分</span>
-                    <span className="des">即将过期<b style={{padding:"0 3px"}}>{this.state.bean}</b>分</span>
+                    <span className="des">我的工分<b style={{padding:"0 3px"}}>{this.state.bean.usable}</b>分</span>
+                    <span className="des">即将过期<b style={{padding:"0 3px"}}>{this.state.bean.usable}</b>分</span>
                 </div>
                 <div className="moneyItemContainer">
                     <Table th_rows={th_rows} fnLoadData={fnLoadData} fnFilterData={fnFilterData}/>
