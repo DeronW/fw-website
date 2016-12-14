@@ -31,7 +31,6 @@ const Table = React.createClass({
         if (new_page) this.setState({page: new_page}, this.reloadData);
     },
     reloadData: function () {
-        // console.log(this.props.fnLoadData());
         this.props.fnLoadData && this.props.fnLoadData(this.state.page, (data) => {
             let filterData = this.props.fnFilterData && this.props.fnFilterData(data);
             if (filterData)
@@ -54,9 +53,11 @@ const Table = React.createClass({
     },
     render: function () {
         let {page, total_page, rows} = this.state;
+
         let th_cell = (t, index) => {
             return <th key={index} width={t.width}>{t.title}</th>
         };
+
         let tr = (row, row_index) => {
             let td = (cell, cell_index) => {
                 return (
@@ -71,13 +72,17 @@ const Table = React.createClass({
                     {row.map(td)}
                 </tr>)
         };
+
         let pagination, empty_records;
         let bean_count;
+        console.log(this.state.bean_count);
         if(this.state.bean_count) {
             bean_count = (
                 <div className="totalCount">
-                    <span>总计&nbsp;<b>{this.state.bean_count}</b>分</span>
+                    <span>总记{this.state.bean_count}个,</span>
+                    <span className="calculate">共计{this.state.bean_count/100}元</span>
                 </div>
+
             )
         }
         if (rows.length) {
@@ -98,6 +103,9 @@ const Table = React.createClass({
         } else {
             empty_records = <div className="emptyRecords">暂无记录</div>
         }
+
+        console.log(this.state.th_rows)
+
         return (
             <div className="tableContaner">
                 <table className="table-read-only">
