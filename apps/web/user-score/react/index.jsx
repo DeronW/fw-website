@@ -10,6 +10,7 @@ const Content = React.createClass({
         $.post(API_PATH +'api/credit/v1/dataList.json',
             function (data) {
             console.log(data.data.creditVo);
+            console.log(data.data.willExpireAmount);
             _this.setState({bean:{usable:data.data.creditVo,ouedate:data.data.willExpireAmount}});
         }, 'json')
     },
