@@ -50,9 +50,9 @@ module.exports = function (gulp, generate_task, settings) {
             `${proj}/confirm.jsx`, 'circle-progress.jsx', `${proj}/invest-list.jsx`
         ];
         let include_javascripts = [
-            `${lib_path}javascripts/web/common-functions.js`,
-            `${lib_path}javascripts/web/interest-calculator.js`,
-            `${lib_path}javascripts/web/ajax-extend.js`
+            `${proj}javascripts/web/common-functions.js`,
+            `${proj}javascripts/web/interest-calculator.js`,
+            `${proj}javascripts/web/ajax-extend.js`
         ];
         let include_less = [
             `${proj}/header-nav-bar.less`,
