@@ -53,10 +53,7 @@ module.exports = function generate_task(site_name, page_name, configs) {
     jsx_files.push(`${app_path}${CONFIG.main_jsx}`);
 
     let common_javascript_files = [
-        `${lib_path}jquery-1.12.4.min.js`,
-        `${lib_path}javascripts/web/common-functions.js`,
-        `${lib_path}javascripts/web/interest-calculator.js`,
-        `${lib_path}javascripts/web/ajax-extend.js`
+        `${lib_path}javascripts/jquery-1.12.4.min.js`
     ];
     if (CONFIG.debug) {
         common_javascript_files.push(`${lib_path}react-0.14.8/react.js`);
@@ -67,7 +64,7 @@ module.exports = function generate_task(site_name, page_name, configs) {
     }
 
     common_javascript_files = common_javascript_files.concat(
-        CONFIG.include_javascripts.map(file => `${lib_path}${file}`));
+        CONFIG.include_javascripts.map(i => `${lib_path}/javascripts/${i}`));
 
     function compile_html() {
         return html([`${app_path}index.html`], build_path, CONFIG.html_engine, {

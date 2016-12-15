@@ -9,7 +9,12 @@ module.exports = function (gulp, generate_task, settings) {
 
     WEB_APP_NAMES.forEach((i) => {
         let include_components = [];
-        let include_javascripts = [];
+        let include_javascripts = [
+            `${proj}/fw-fix-console.js`,
+            `${proj}/fw-common.js`,
+            `${proj}/fw-app.js`,
+            `${proj}/fw-pages.js`
+        ];
         let include_less = [
             `${proj}/reset.less`,
             `${proj}/header.less`
