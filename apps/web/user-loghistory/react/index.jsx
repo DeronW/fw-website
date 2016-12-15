@@ -3,7 +3,7 @@ const Content = React.createClass({
         return {
             tabName: '工豆明细',
             bean: {},
-            username:'rising'
+            username:'xiaoming'
         }
     },
 
@@ -25,36 +25,22 @@ const Content = React.createClass({
     render: function () {
         let {bean} = this.state;
 
-        let tab_list = ["工豆明细", "工豆收入", "工豆支出", "已过期"];
-
-        let tab = (value, index) => {
-            let cn = this.state.tabName == value ? "active" : null;
-            return (
-                <div className={cn} key={index} onClick={() => this.tabClickHandler(value) }>
-                    {value}
-                </div>
-            )
-        };
+        // let tab_list = ["工豆明细", "工豆收入", "工豆支出", "已过期"];
+        //
+        // let tab = (value, index) => {
+        //     let cn = this.state.tabName == value ? "active" : null;
+        //     return (
+        //         <div className={cn} key={index} onClick={() => this.tabClickHandler(value) }>
+        //             {value}
+        //         </div>
+        //     )
+        // };
         let th_rows = [], fnLoadData = () => null, fnFilterData = x => x;
         if (this.state.tabName == '工豆明细') {
-            th_rows = [{title: '日期'}, {title: '收入 / 支出(个)'}, {title: '备注'}];
+            th_rows = [{title: '登录时间'}, {title: '地点'}, {title: 'IP'},{title:"登录来源"},{title:"登出时间"}];
             fnLoadData = Fn.DetailLoadData;
             fnFilterData = Fn.DetailFilterData;
-        } else if (this.state.tabName == '工豆收入') {
-            th_rows = [{title: '日期'}, {title: '收入(个)'}, {title: '有效期'}, {title: '备注'}];
-            fnLoadData=Fn.IncomeLoadData;
-            fnFilterData=Fn.IncomeFilterData;
-        } else if (this.state.tabName == '工豆支出') {
-            th_rows = [{title: '日期',width:"25%"}, {title: '支出(个)',width:"25%"}, {title: '备注',width:"50%"}];
-            fnLoadData=Fn.ExpendLoadData;
-            fnFilterData=Fn.ExpendFilterData;
-        } else if (this.state.tabName == '已过期') {
-            th_rows = [{title: '日期',width:"25%"}, {title: '收入 / 支出(个)',width:"15%"}, {title: '有效期',width:"20%"}, {title: '备注',width:"40%"}];
-            fnLoadData=Fn.OverdateLoadData;
-            fnFilterData=Fn.OverdateFilterData;
         }
-        let ch=(this.state.check==false)?"none":"block";
-        console.log(this.state.check);
         return (
             <div className="topNav">
                 <div className="title">
@@ -63,7 +49,8 @@ const Content = React.createClass({
                 </div>
                 <div className="moneyItemContainer">
                     <div className="beanItem">
-                        1234124
+                        <span className="left">登录历史记录</span>
+                        <span className="right"><img src="images/return.png"/>返回账户设置</span>
                     </div>
                     <Table th_rows={th_rows} fnLoadData={fnLoadData} fnFilterData={fnFilterData}/>
                 </div>
@@ -90,6 +77,10 @@ let Fn = {
             className: i.cashValue > 0 ? 'red' : 'green'
         }, {
             text: `(${i.waterTypeName})${i.remark}`
+        },{
+            text:i.waterType
+        },{
+            text:i.waterTypeName
         }]);
 
         return {

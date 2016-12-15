@@ -53,11 +53,9 @@ const Table = React.createClass({
     },
     render: function () {
         let {page, total_page, rows} = this.state;
-
         let th_cell = (t, index) => {
             return <th key={index} width={t.width}>{t.title}</th>
         };
-
         let tr = (row, row_index) => {
             let td = (cell, cell_index) => {
                 return (
@@ -68,11 +66,10 @@ const Table = React.createClass({
                 )
             };
             return (
-                <tr key={row_index}>
+                <tr key={row_index} className={(row_index%2 ? "odd":"even")}>
                     {row.map(td)}
                 </tr>)
         };
-
         let pagination, empty_records;
         let bean_count;
         console.log(this.state.bean_count);
@@ -91,7 +88,7 @@ const Table = React.createClass({
                     <div className="paginationPage">
                         {bean_count}
                         第{page}页, 共{total_page}页
-                        {page > 1 ? <a  className="first" onClick={() => this.switchPageHandler('first')}>首页</a> : null}
+                        {page >= 1 ? <a  className="first" onClick={() => this.switchPageHandler('first')}>首页</a> : null}
                         {page > 1 ? <a  className="prev" onClick={() => this.switchPageHandler('prev')}>上一页</a> : null}
                         {page < total_page ?
                             <a className="next" onClick={() => this.switchPageHandler('next')}>下一页</a> : null}
