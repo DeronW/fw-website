@@ -114,7 +114,7 @@ $(function () {
 				else{
 					timetxt='12.27-1.5';week_arg_st='2016-12-27 00:00:00';week_arg_et='2017-01-05 23:59:59';
 				}
-				
+
 				$FW.Ajax({//邀请人数
 					url: '/api/activityPullNew/v1/pullNewCount.json',
 					method: 'post',
@@ -148,7 +148,7 @@ $(function () {
 					})
 				}
 				})
-			
+
 				//第一个排行榜时间参数
 				var month11 = new Date("2016/10/11 00:00:00").getTime();
 				var month12 = new Date("2016/11/07 23:59:59").getTime();
@@ -183,7 +183,7 @@ $(function () {
 					top1_arg_et0 ='2017-01-05 23:59:59';
 					ori_prize0 = 180000;
 				}
-				
+
                 showTop1(top1_arg_st0,top1_arg_et0,ori_prize0);//第一个排行榜显示数据
 				showTop2();
 		}
@@ -280,7 +280,7 @@ $(function () {
                 }
             })
 	}
-	
+
     function showTop2(){//第二个排行榜显示数据的方法
     $FW.Ajax({
         url: '/api/activityPullNew/v1/PullNewTopAndYearInvest.json',
@@ -361,7 +361,7 @@ $(function () {
         }
     })
 	}
-	
+
     $(document).on(clicks, ".over,.have_in_hand", function() {//点击活动周期切换月榜数据
         if($(this).attr('data-state')==1){
             top1_arg_st ='2016-10-11 00:00:00';
@@ -388,7 +388,7 @@ $(function () {
         $(".flog-box2").find('.down-page').off(clicks);$(".flog-box2").find('.up-page').off(clicks);
         showTop1(top1_arg_st,top1_arg_et,ori_prize);
      })
-	
+
     //邀友弹窗排行榜点击
     $(document).on(clicks, ".w-ago-btn,.w-ago", function(){
         $('.bgNotice,.notice').show();

@@ -42,27 +42,29 @@ const WEB_APP_NAMES = [
 
 module.exports = function (gulp, generate_task, settings) {
 
+    let proj = 'web';
+
     WEB_APP_NAMES.forEach((i) => {
         let include_components = [
-            'web/header-status-bar.jsx', 'web/alert.jsx',
-            'web/confirm.jsx', 'circle-progress.jsx', 'web/invest-list.jsx'
+            `${proj}/header-status-bar.jsx`, `${proj}/alert.jsx`,
+            `${proj}/confirm.jsx`, 'circle-progress.jsx', `${proj}/invest-list.jsx`
         ];
         let include_javascripts = [];
         let include_less = [
-            `web/header-nav-bar.less`,
-            `web/header-status-bar.less`,
-            `web/footer.less`,
-            `web/sidebar-fn.less`,
+            `${proj}/header-nav-bar.less`,
+            `${proj}/header-status-bar.less`,
+            `${proj}/footer.less`,
+            `${proj}/sidebar-fn.less`,
         ];
 
-        generate_task('web', i, {
+        generate_task(proj, i, {
             debug: true,
             api_path: settings.web.dev_api_path,
             include_components: include_components,
             include_javascripts: include_javascripts,
             include_less: include_less
         });
-        generate_task('web', i, {
+        generate_task(proj, i, {
             api_path: "//www.9888.cn/",
             cmd_prefix: 'pack',
             cdn_prefix: `/static/web/${i.name || i}/`,
@@ -72,5 +74,5 @@ module.exports = function (gulp, generate_task, settings) {
         });
     });
 
-    gulp.task('build:web', gulp.series(WEB_APP_NAMES.map(i => `web:pack:${i.name || i}:revision`)));
+    gulp.task(`build:${proj}`, gulp.series(WEB_APP_NAMES.map(i => `web:pack:${i.name || i}:revision`)));
 };
