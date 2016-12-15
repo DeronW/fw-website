@@ -3,7 +3,7 @@ const Content = React.createClass({
         return {
             tabName: '工豆明细',
             bean: {},
-            username:'xiaoming'
+            username:'xiaoming',
         }
     },
 
@@ -21,7 +21,6 @@ const Content = React.createClass({
         let n=(tab=="工豆收入")?true:false;
         this.setState({tabName: tab,check:n});
     },
-
     render: function () {
         let {bean} = this.state;
 
@@ -50,7 +49,10 @@ const Content = React.createClass({
                 <div className="moneyItemContainer">
                     <div className="beanItem">
                         <span className="left">登录历史记录</span>
-                        <span className="right"><img src="images/return.png"/>返回账户设置</span>
+                        <span className="right">
+                            <img src="images/return.png"/>
+                            返回账户设置
+                        </span>
                     </div>
                     <Table th_rows={th_rows} fnLoadData={fnLoadData} fnFilterData={fnFilterData}/>
                 </div>
