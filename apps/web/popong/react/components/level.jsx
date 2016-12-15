@@ -88,10 +88,10 @@ const Level = React.createClass({
         if (!window.VISITOR) {
             nickname = <div className="btn-nickname" onClick={this.setNicknameHandler}>{this.state.nickname}</div>
         }
-        if (this.state.reset_nickname) {
-            nickname_modal = <Level.Nickname name={this.state.nickname} updateNickname={this.updateNickname}
-                                             closeHandler={this.closeNickName}/>
-        }
+        // if (this.state.reset_nickname) {
+            // nickname_modal = <Level.Nickname name={this.state.nickname} updateNickname={this.updateNickname}
+                                            //  closeHandler={this.closeNickName}/>
+        // }
 
         return <div className="level-list">
             <img className="btn-refresh" onClick={this.refreshHandler} src="images/level-list/button-back.png"/>

@@ -23,16 +23,16 @@ const WEB_APP_NAMES = [
     'preservation', // 安全保障介绍页面
     'guide-cookbook', // 玩赚攻略页
     'vip-prerogative', // 等级攻略页
-    'notice-corporate-structure',// 信息披露页面
-    'topic-gong-you-hui',//工友会专题页
+    'notice-corporate-structure', // 信息披露页面
+    'topic-gong-you-hui', //工友会专题页
 
     // 重构页面
     //用户界面
-    'user-center',//用户中心
-    'user-coupon',//用户优惠券
+    'user-center', //用户中心
+    'user-coupon', //用户优惠券
     'user-messages', // 用户消息页面
     'user-bean', // 用户工豆
-    'user-score',//用户工分
+    'user-score', //用户工分
     // 其他页面
     'statistics', // 实时交易统计
 
@@ -42,24 +42,32 @@ const WEB_APP_NAMES = [
 module.exports = function (gulp, generate_task, settings) {
 
     WEB_APP_NAMES.forEach((i) => {
-        let common_components = [
+        let include_components = [
             'web/header-status-bar.jsx', 'web/alert.jsx',
             'web/confirm.jsx', 'circle-progress.jsx', 'web/invest-list.jsx'
         ];
-        let common_js = [];
+        let include_javascripts = [];
+        let include_less = [
+            `web/header-nav-bar.less`,
+            `web/header-status-bar.less`,
+            `web/footer.less`,
+            `web/sidebar-fn.less`,
+        ];
 
         generate_task('web', i, {
             debug: true,
             api_path: settings.web.dev_api_path,
-            include_components: common_components,
-            include_common_js: common_js
+            include_components: include_components,
+            include_javascripts: include_javascripts,
+            include_less: include_less
         });
         generate_task('web', i, {
             api_path: "//www.9888.cn/",
             cmd_prefix: 'pack',
             cdn_prefix: `/static/web/${i.name || i}/`,
-            include_components: common_components,
-            include_common_js: common_js
+            include_components: include_components,
+            include_javascripts: include_javascripts,
+            include_less: include_less
         });
     });
 

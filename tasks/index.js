@@ -15,7 +15,7 @@ let COMMON_JAVASCRIPTS_TASK = {};
 
 module.exports = function generate_task(site_name, page_name, configs) {
     let singlePageCfg = {};
-    if (typeof(page_name) == 'object') {
+    if (typeof (page_name) == 'object') {
         singlePageCfg = page_name;
         page_name = singlePageCfg.name
     }
@@ -32,7 +32,8 @@ module.exports = function generate_task(site_name, page_name, configs) {
             api_path: '',
             cdn_prefix: '',
             include_components: [],
-            include_common_js: [],
+            include_javascripts: [],
+            include_less: [],
             main_jsx: 'react/index.jsx',
             html_engine: 'swig'
         }, configs, singlePageCfg);
@@ -42,13 +43,10 @@ module.exports = function generate_task(site_name, page_name, configs) {
     let less_files = [
         `${lib_path}less/common.less`,
         `${lib_path}less/grid.less`,
-        `${lib_path}less/header-status-bar.less`,
-        `${lib_path}less/header-nav-bar.less`,
-        `${lib_path}less/footer.less`,
-        `${lib_path}less/sidebar-fn.less`,
-        `${lib_path}less/not-support-ie6-ie7.less`,
-        `${app_path}less/index.less`
+        `${lib_path}less/not-support-ie6-ie7.less`
     ];
+    less_files.push(...CONFIG.include_less.map(i => `${lib_path}less/${i}`));
+    less_files.push(`${app_path}less/index.less`);
 
     let jsx_files = CONFIG.include_components.map((i) => `${lib_path}components/${i}`);
     jsx_files.push(`${app_path}react/components/*.jsx`);
@@ -69,7 +67,7 @@ module.exports = function generate_task(site_name, page_name, configs) {
     }
 
     common_javascript_files = common_javascript_files.concat(
-        CONFIG.include_common_js.map(file => `${lib_path}${file}`));
+        CONFIG.include_javascripts.map(file => `${lib_path}${file}`));
 
     function compile_html() {
         return html([`${app_path}index.html`], build_path, CONFIG.html_engine, {
@@ -107,7 +105,7 @@ module.exports = function generate_task(site_name, page_name, configs) {
     }
 
     function compile_public_images() {
-        return copy([`${public_path}images/**`], `${build_path}images`)
+        return copy([`${public_path}/common/images/**`, `${public_path}/${site_name}/images/**`], `${build_path}images`)
     }
 
     function copy_audios() {
@@ -115,7 +113,7 @@ module.exports = function generate_task(site_name, page_name, configs) {
     }
 
     function compile_public_javascripts() {
-        return copy([`${public_path}javascripts/*`], `${build_path}javascripts`)
+        return copy([`${public_path}/common/javascripts/*.js`, `${public_path}/${site_name}/javascripts/*.js`], `${build_path}javascripts`)
     }
 
     function copy2cdn() {
