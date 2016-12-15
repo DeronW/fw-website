@@ -33,6 +33,7 @@ const WEB_APP_NAMES = [
     'user-messages', // 用户消息页面
     'user-bean', // 用户工豆
     'user-score', //用户工分
+    'user-loghistory', //用户登录日志页面
     // 其他页面
     'statistics', // 实时交易统计
 

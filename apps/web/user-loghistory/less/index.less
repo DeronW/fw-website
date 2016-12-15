@@ -1,0 +1,218 @@
+@import "../../../../lib/less/partial/user-center-panel.less";
+*{
+  margin: 0;
+  padding:0;
+}
+ul{
+  list-style: none;
+}
+#cnt{
+  width: 796px;
+  margin-left: 182px;
+  margin-top: 30px;
+  font-size: 14px;
+  border: 1px solid #e2e2e2;
+  height: 700px;
+  border-top: 0 none;
+}
+.topNav{
+  width: 796px;
+  margin-bottom: 50px;
+  border-top: 0 none;
+  font-size: 12px;
+    color: #333;
+    .title{
+      text-align: left;
+        font-size: 14px;
+        color: #333;
+        height: 40px;
+        line-height: 30px;
+        .redshow{
+            color: #f9655a;
+        }
+        .blueshow{
+            color: #71b0ff;
+        }
+    }
+  .moneyItemContainer{
+    width: 796px;
+    margin: 0 auto;
+    .beanItem{
+      width: 794px;
+      height: 50px;
+        line-height: 50px;
+      font-size: 16px;
+        border-top:3px solid #71b0ff;
+        background-color: #fbfbf9;
+        border-left: 1px solid #e2e2e2;
+        border-right: 1px solid #e2e2e2;
+      .left{
+          float: left;
+          color:#333;
+          padding-left: 26px;
+      }
+        .right{
+            float: right;
+            font-size: 14px;
+            color: #999;
+            padding-right: 26px;
+            cursor: pointer;
+            span{
+                vertical-align: middle;
+            }
+            img{
+                vertical-align: middle;
+                padding-right: 10px;
+            }
+        }
+        .right:hover{
+            color: #f9655a;
+        }
+    }
+  }
+  .details{
+    width: 100%;
+    height: 450px;
+    border:1px solid #e2e2e2;
+  }
+}
+.bean-info{
+  width: 730px;
+  margin: 20px auto;
+  height: 45px;
+  line-height: 45px;
+  background-color: #f6f6f6;
+  padding: 0 20px;
+  text-align: left;
+  .des{
+    padding: 0 20px 0 0 ;
+    font-size: 12px;
+  }
+  .data{
+    padding: 0 2px;
+    font-weight: bold;
+  }
+}
+.tableContaner{
+  width: 796px;
+  margin: 0px 0px 50px 0px;
+  height: 492px;
+  position: relative;
+}
+.odd{
+    background-color: #fbfbf9;
+}
+.table-read-only{
+  width: 796px;
+  border: 1px solid #e2e2e2;
+  border-collapse: collapse;
+
+  tr{
+    height: 35px;
+    text-align: center;
+
+    th{
+      font-weight: normal;
+      border-bottom: 1px solid #e2e2e2;
+      border-right: 1px solid #e2e2e2;
+      border-collapse: collapse;
+        background-color: #fbfbf9;
+    }
+    td{
+      height: 45px;
+      border-bottom: 1px solid #e2e2e2;
+      border-right: 1px solid #e2e2e2;
+    }
+    td:last-child{
+      text-align: left;
+      padding-left: 10px;
+    }
+  }
+}
+.green{
+  color: green;
+  font-weight: bold;
+}
+.red{
+  color: red;
+  font-weight: bold;
+}
+.blue{
+  color: lightblue;
+}
+.pagination{
+  text-align: center;
+    position: absolute;
+    bottom: -50px;
+    width: 100%;
+  .paginationPage{
+    margin: 25px 0 0 0;
+      .one{
+          width: 25px;
+          height:25px;
+          line-height: 25px;
+          background-color: #f2f2f2;
+          border:1px solid #ccc;
+      }
+    .totalCount{
+      display: inline-block;
+      padding-right: 10px;
+      span{
+        padding-left: 5px;
+      }
+      .calculate{
+        font-weight:bold;
+      }
+    }
+    a{
+      display: inline-block;
+      margin: 0 3px;
+    }
+    .first{
+      border: 1px solid #ccc;
+      padding: 3px 5px;
+      cursor: pointer;
+      background-color: #f2f2f2;
+    }
+    .first:hover{
+      color: #f03b43 ;
+    }
+    .last{
+      border: 1px solid #ccc;
+      padding: 3px 5px;
+      cursor: pointer;
+      background-color: #f2f2f2;
+    }
+    .last:hover{
+      color: #f03b43 ;
+    }
+    .prev{
+      border: 1px solid #ccc;
+      padding: 3px 5px;
+      cursor: pointer;
+      background-color: #f2f2f2;
+    }
+    .prev:hover{
+      color: #f03b43 ;
+    }
+    .next{
+      border: 1px solid #ccc;
+      padding: 3px 5px;
+      cursor: pointer;
+      background-color: #f2f2f2;
+    }
+    .next:hover{
+      color: #f03b43 ;
+    }
+  }
+}
+.checkLine{
+  width: 518px;
+  margin:20px 0 0 36px;
+  font-size: 14px;
+}
+
+
+
+
+

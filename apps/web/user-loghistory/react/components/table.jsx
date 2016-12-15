@@ -31,7 +31,6 @@ const Table = React.createClass({
         if (new_page) this.setState({page: new_page}, this.reloadData);
     },
     reloadData: function () {
-        // console.log(this.props.fnLoadData());
         this.props.fnLoadData && this.props.fnLoadData(this.state.page, (data) => {
             let filterData = this.props.fnFilterData && this.props.fnFilterData(data);
             if (filterData)
@@ -67,17 +66,20 @@ const Table = React.createClass({
                 )
             };
             return (
-                <tr key={row_index}>
+                <tr key={row_index} className={(row_index%2 ? "odd":"even")}>
                     {row.map(td)}
                 </tr>)
         };
         let pagination, empty_records;
         let bean_count;
+        console.log(this.state.bean_count);
         if(this.state.bean_count) {
             bean_count = (
                 <div className="totalCount">
-                    <span>总计&nbsp;<b>{this.state.bean_count}</b>分</span>
+                    <span>总记{this.state.bean_count}个,</span>
+                    <span className="calculate">共计{this.state.bean_count/100}元</span>
                 </div>
+
             )
         }
         if (rows.length) {
@@ -86,7 +88,7 @@ const Table = React.createClass({
                     <div className="paginationPage">
                         {bean_count}
                         第{page}页, 共{total_page}页
-                        {page > 1 ? <a  className="first" onClick={() => this.switchPageHandler('first')}>首页</a> : null}
+                        {page >= 1 ? <a  className="first" onClick={() => this.switchPageHandler('first')}>首页</a> : null}
                         {page > 1 ? <a  className="prev" onClick={() => this.switchPageHandler('prev')}>上一页</a> : null}
                         {page < total_page ?
                             <a className="next" onClick={() => this.switchPageHandler('next')}>下一页</a> : null}
@@ -98,6 +100,9 @@ const Table = React.createClass({
         } else {
             empty_records = <div className="emptyRecords">暂无记录</div>
         }
+
+        console.log(this.state.th_rows)
+
         return (
             <div className="tableContaner">
                 <table className="table-read-only">
