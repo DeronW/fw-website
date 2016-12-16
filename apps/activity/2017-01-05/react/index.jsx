@@ -10,9 +10,22 @@ const QuarterTable = React.createClass({
           type:"get",
           dataType:'json',
           success: function (data) {
-              console.log(data);
-          }
+              this.setState({
+                  quartData:data.data
+              })
+          }.bind(this)
       })
+    },
+    tdImgFun: function (key) {
+        var tdText = '';
+        if(key == 0){
+            tdText = 1
+        }else if(key == 1){
+            tdText = 2
+        }else{
+            tdText = key + 1
+        }
+        return tdText
     },
     render: function () {
         return(
@@ -27,7 +40,18 @@ const QuarterTable = React.createClass({
                         </tr>
                     </thead>
                     <tbody>
-
+                    {
+                        this.state.quartData.map((item,index) => {
+                            return(
+                                <tr key={index}>
+                                    <td className="tdImg">{this.tdImgFun(index)}</td>
+                                    <td>{item.number}</td>
+                                    <td>{item.money}</td>
+                                    <td>{item.price}</td>
+                                </tr>
+                            )
+                        })
+                    }
                     </tbody>
                 </table>
             </div>
