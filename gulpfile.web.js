@@ -19,7 +19,7 @@ const INCLUDE_LESS = [
 ];
 
 
-const WEB_APP_NAMES = [
+const APP_NAMES = [
     'guide', // 新手引导
     'app-download', // app 下载页面
     'welcome-register', // 推广用户注册落地页面
@@ -59,7 +59,7 @@ const WEB_APP_NAMES = [
 
 
 module.exports = function (gulp, generate_task, settings) {
-    WEB_APP_NAMES.forEach((i) => {
+    APP_NAMES.forEach((i) => {
         generate_task(PROJ, i, {
             debug: true,
             api_path: settings[PROJ].dev_api_path,
@@ -77,5 +77,5 @@ module.exports = function (gulp, generate_task, settings) {
         });
     });
 
-    gulp.task(`build:${PROJ}`, gulp.series(WEB_APP_NAMES.map(i => `${PROJ}:pack:${i.name||i}:revision`)));
+    gulp.task(`build:${PROJ}`, gulp.series(APP_NAMES.map(i => `${PROJ}:pack:${i.name||i}:revision`)));
 };

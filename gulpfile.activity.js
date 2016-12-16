@@ -15,13 +15,13 @@ const INCLUDE_LESS = [
     `${PROJ}/header.less`
 ]
 
-const WEB_APP_NAMES = [
+const APP_NAMES = [
     '2016-10-12',
     '2017-01-05'
 ];
 
 module.exports = function (gulp, generate_task, settings) {
-    WEB_APP_NAMES.forEach((i) => {
+    APP_NAMES.forEach((i) => {
         generate_task(PROJ, i, {
             debug: true,
             api_path: settings[PROJ].dev_api_path,
@@ -39,5 +39,5 @@ module.exports = function (gulp, generate_task, settings) {
         });
     });
 
-    gulp.task(`build:${PROJ}`, gulp.series(WEB_APP_NAMES.map(i => `${PROJ}:pack:${i.name||i}:revision`)));
+    gulp.task(`build:${PROJ}`, gulp.series(APP_NAMES.map(i => `${PROJ}:pack:${i.name||i}:revision`)));
 };
