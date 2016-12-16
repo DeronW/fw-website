@@ -11,7 +11,7 @@ const Content = React.createClass({
             bean: {
                 usable: 1,
                 outdate: 2,
-                frozen: 3
+                frozen: 3,
             }
         })
     },
@@ -72,11 +72,8 @@ let Fn = {
                 rows:[]
             }
         }
-
     },
 }
-
-
 $(function () {
     ReactDOM.render(<HeaderStatusBar />, document.getElementById('header-status-bar'));
     ReactDOM.render(<Content />, document.getElementById('userContent'));
