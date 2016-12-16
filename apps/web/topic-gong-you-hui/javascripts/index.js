@@ -216,6 +216,7 @@ $(function () {
                 var $title = $(".news .newsSmallTitle");
                 $title.eq(i).css('display','block').find('.newsOneTitle span').text(data[i].title);
                 $title.eq(i).find('.newsOneText span').text(data[i].desc);
+                $title.eq(i).find('.newsOneText a').attr("href",data[i].url);
             }
         },
         error: function(){

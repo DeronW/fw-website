@@ -1,7 +1,8 @@
 'use strict';
 
 const WEB_APP_NAMES = [
-    '2016-10-12'
+    '2016-10-12',
+    '2017-01-05'
 ];
 
 module.exports = function (gulp, generate_task, settings) {
