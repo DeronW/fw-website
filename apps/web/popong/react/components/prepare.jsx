@@ -20,7 +20,10 @@ const Prepare = React.createClass({
             var records = [], i, m;
             for (i = 0; i < (data.data.list || []).length; i++) {
                 m = data.data.list[i];
-                let avatar = 'images/prepare/avatar-' + (m.sex == 0 ? 'fe' : '') + 'male.png';
+                // let avatar = 'images/prepare/avatar-' + (m.sex == 0 ? 'fe' : '') + 'male.png';
+                let avatar = m.user_icon || 'images/prepare/avatar-default.png';
+                // if(m.user_icon) avatar = m.user_icon;
+
                 records.push({
                     avatar: avatar,
                     name: m.username,

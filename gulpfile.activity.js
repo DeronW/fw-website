@@ -13,8 +13,9 @@ module.exports = function (gulp, generate_task, settings) {
         let include_javascripts = [
             `${proj}/fw-fix-console.js`,
             `${proj}/fw-common.js`,
+            `${proj}/native-bridge-0.3.0.js`,
             `${proj}/fw-app.js`,
-            `${proj}/fw-pages.js`
+            `${proj}/fw-pages.js`,
         ];
         let include_less = [
             `${proj}/reset.less`,
