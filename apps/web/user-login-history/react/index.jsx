@@ -50,22 +50,29 @@ let Fn = {
         }, 'json')
     },
     DetailFilterData: function (data) {
-        let rows = data.result.map((i) => [{
-            text: i.createTime
-        }, {
-            text: i.cashValue > 0 ? ("+" + i.cashValue) : (i.cashValue),
-            className: i.cashValue > 0 ? 'red' : 'green'
-        }, {
-            text: i.remark
-        }, {
-            text: i.waterType
-        }, {
-            text: i.waterTypeName
-        }]);
-        return {
-            total_page: data.pagination.totalPage,
-            rows: rows
+        if(data){
+            let rows = data.result.map((i) => [{
+                text: i.createTime
+            }, {
+                text: i.cashValue > 0 ? ("+" + i.cashValue) : (i.cashValue),
+                className: i.cashValue > 0 ? 'red' : 'green'
+            }, {
+                text: i.remark
+            }, {
+                text: i.waterType
+            }, {
+                text: i.waterTypeName
+            }]);
+            return {
+                total_page: data.pagination.totalPage,
+                rows: rows
+            }
+        }else{
+            return{
+                rows:[]
+            }
         }
+
     },
 }
 
