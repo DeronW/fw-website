@@ -3,7 +3,8 @@ const QuarterTable = React.createClass({
       return({
           quartData:[],
           quartPage:2,
-          quartTotalPage:5
+          quartTotalPage:5,
+          quartTab:'上一页'
       })
     },
     componentDidMount: function () {
@@ -33,9 +34,11 @@ const QuarterTable = React.createClass({
     },
     switchPageHandler: function (type) {
       let {quartPage,quartTotalPage}=this.state ,new_page;
-      if(type == 'prev') {
+      if(type == '上一页') {
+          this.setState({quartTab:type});
           if(quartPage > 1) new_page = quartPage -1;
-      }else if(type == 'next'){
+      }else if(type == '下一页'){
+          this.setState({quartTab:type});
           if(quartPage < quartTotalPage) new_page = quartPage + 1;
       }
       if(new_page) this.setState({quartPage:new_page},this.ajaxPageHandle)
@@ -48,13 +51,11 @@ const QuarterTable = React.createClass({
             <div className="page">
                 {
                     ['上一页','下一页'].map((item,index) => {
-                        return <div key={index} className={this.state}>
-
-                        </div>
+                        return <div key={index}
+                                    className={this.state.quartTab == item ? 'selectPage':null}
+                                    onClick={()=>{this.switchPageHandler(item)}}>{item}</div>
                     })
                 }
-                <div onClick={()=>{this.switchPageHandler('prev')}}>上一页</div>
-                <div onClick={()=>{this.switchPageHandler('next')}}>下一页</div>
             </div>
         );
         return(
@@ -86,7 +87,9 @@ const QuarterTable = React.createClass({
                     }
                     </tbody>
                 </table>
-
+                {
+                    pageTab
+                }
             </div>
         )
     }
