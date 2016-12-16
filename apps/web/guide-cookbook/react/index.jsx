@@ -157,7 +157,6 @@ var Content = React.createClass({
                                 <a href="http://www.9888.cn/news/notice/1861.html?reloadworkpage=y" target="_blank"
                                    className="btn-link">完整邀友返利攻略></a>
                             </div>
-
                             <div className="info-block">
                                 <div className="list gift-list">
                                     <ul>
@@ -204,7 +203,6 @@ var Content = React.createClass({
                                     </div>
                                 </div>
                             </div>
-
                         </div>
 
                         <div className="b-back"></div>
