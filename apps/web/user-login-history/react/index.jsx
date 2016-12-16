@@ -3,10 +3,9 @@ const Content = React.createClass({
         return {
             tabName: '工豆明细',
             bean: {},
-            username:'xiaoming',
+            username: 'xiaoming',
         }
     },
-
     componentDidMount: function () {
         this.setState({
             bean: {
@@ -16,30 +15,12 @@ const Content = React.createClass({
             }
         })
     },
-
-    tabClickHandler: function (tab) {
-        let n=(tab=="工豆收入")?true:false;
-        this.setState({tabName: tab,check:n});
-    },
     render: function () {
         let {bean} = this.state;
-
-        // let tab_list = ["工豆明细", "工豆收入", "工豆支出", "已过期"];
-        //
-        // let tab = (value, index) => {
-        //     let cn = this.state.tabName == value ? "active" : null;
-        //     return (
-        //         <div className={cn} key={index} onClick={() => this.tabClickHandler(value) }>
-        //             {value}
-        //         </div>
-        //     )
-        // };
         let th_rows = [], fnLoadData = () => null, fnFilterData = x => x;
-        if (this.state.tabName == '工豆明细') {
-            th_rows = [{title: '登录时间'}, {title: '地点'}, {title: 'IP'},{title:"登录来源"},{title:"登出时间"}];
-            fnLoadData = Fn.DetailLoadData;
-            fnFilterData = Fn.DetailFilterData;
-        }
+        th_rows = [{title: '登录时间',width:'20%'}, {title: '地点',width:'15%'}, {title: 'IP',width:'25%'}, {title: "登录来源",width:'20%'}, {title: "登出时间",width:'20%'}];
+        fnLoadData = Fn.DetailLoadData;
+        fnFilterData = Fn.DetailFilterData;
         return (
             <div className="topNav">
                 <div className="title">
@@ -56,12 +37,9 @@ const Content = React.createClass({
                     </div>
                     <Table th_rows={th_rows} fnLoadData={fnLoadData} fnFilterData={fnFilterData}/>
                 </div>
-
-
             </div>)
     }
 });
-
 let Fn = {
     DetailLoadData: function (page, cb) {
         $.get(API_PATH + 'beans/allBorrows.do', {
@@ -75,94 +53,20 @@ let Fn = {
         let rows = data.result.map((i) => [{
             text: i.createTime
         }, {
-            text: i.cashValue>0?("+"+i.cashValue):(i.cashValue),
+            text: i.cashValue > 0 ? ("+" + i.cashValue) : (i.cashValue),
             className: i.cashValue > 0 ? 'red' : 'green'
         }, {
-            text: `(${i.waterTypeName})${i.remark}`
-        },{
-            text:i.waterType
-        },{
-            text:i.waterTypeName
+            text: i.remark
+        }, {
+            text: i.waterType
+        }, {
+            text: i.waterTypeName
         }]);
-
         return {
             total_page: data.pagination.totalPage,
             rows: rows
         }
     },
-    IncomeLoadData:function (page,callback) {
-        $.get(API_PATH+'beans/incomeBorrows.do',{
-            rows:10,
-            page:page
-        },function (data) {
-            let d = data.pageData;
-            d.bean_count = data.beanCount;
-            callback(d)
-        },'json')
-    },
-    IncomeFilterData:function (data) {
-        let rows=data.result.map((i)=>[
-            {text:i.issueTime},
-            {text: i.beanUsed>0?("+"+i.beanUsed):(i.beanUsed),
-                className: i.beanUsed > 0 ? 'red' : 'green'},
-            {text:i.overdueTime},
-            {text:i.remark}
-            ]
-
-        );
-        return {
-            total_page: data.pagination.totalPage,
-            rows: rows,
-            bean_count:data.bean_count
-        }
-    },
-    ExpendLoadData:function (page,callback) {
-        $.get(API_PATH+'beans/expendBorrows.do',{
-            rows:10,
-            page:page
-        },function (data) {
-            let d = data.pageData;
-            d.bean_count=data.beanCount;
-            callback(d);
-        },'json');
-    },
-    ExpendFilterData:function (data) {
-        let rows = data.result.map((value)=>[
-            {text:value.createTime},
-            {text:(value.cashValue>0)?"+"+value.cashValue:value.cashValue,
-            className:value.cashValue>0?"red":"green"},
-            {text:value.remark}
-        ]);
-        return {
-            total_page:data.pagination.totalPage,
-            rows:rows,
-            bean_count:data.bean_count
-        }
-    },
-    OverdateLoadData:function (page,callback) {
-        $.get(API_PATH+'beans/overdueBorrows.do',{
-            rows:10,
-            page:page
-        },function (data) {
-            let d = data.pageData;
-            d.bean_count=data.beanCount;
-            callback(d);
-        },'json');
-    },
-    OverdateFilterData:function (data) {
-        let rows = data.result.map((value)=>[
-            {text:value.issueTime},
-            {text:(value.beanOverdue>0)?"+"+value.beanOverdue:value.beanOverdue,
-                className:value.beanOverdue>0?"red":"green"},
-            {text:value.overdueTime},
-            {text:value.remark}
-        ]);
-        return {
-            total_page:data.pagination.totalPage,
-            rows:rows,
-            bean_count:data.bean_count
-        }
-    }
 }
 
 
