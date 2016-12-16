@@ -1,6 +1,25 @@
 'use strict';
 
-const WEB_APP_NAMES = [
+const PROJ = 'web';
+
+const INCLUDE_COMPONENTS = [
+    `${PROJ}/header-status-bar.jsx`, `${PROJ}/alert.jsx`,
+    `${PROJ}/confirm.jsx`, 'circle-progress.jsx', `${PROJ}/invest-list.jsx`
+];
+const INCLUDE_JAVASCRIPTS = [
+    `${PROJ}/common-functions.js`,
+    `${PROJ}/interest-calculator.js`,
+    `${PROJ}/ajax-extend.js`
+];
+const INCLUDE_LESS = [
+    `${PROJ}/header-nav-bar.less`,
+    `${PROJ}/header-status-bar.less`,
+    `${PROJ}/footer.less`,
+    `${PROJ}/sidebar-fn.less`,
+];
+
+
+const APP_NAMES = [
     'guide', // 新手引导
     'app-download', // app 下载页面
     'welcome-register', // 推广用户注册落地页面
@@ -32,51 +51,31 @@ const WEB_APP_NAMES = [
     'user-coupon', //用户优惠券
     'user-messages', // 用户消息页面
     'user-bean', // 用户工豆
-    'user-score',//用户工分
+    'user-score', //用户工分
     'user-login-history', //用户登录日志页面
     // 其他页面
     'statistics', // 实时交易统计
-
-    // 'popong'
 ];
 
+
 module.exports = function (gulp, generate_task, settings) {
-
-    let proj = 'web';
-
-    WEB_APP_NAMES.forEach((i) => {
-        let include_components = [
-            `${proj}/header-status-bar.jsx`, `${proj}/alert.jsx`,
-            `${proj}/confirm.jsx`, 'circle-progress.jsx', `${proj}/invest-list.jsx`
-        ];
-        let include_javascripts = [
-            `${proj}/common-functions.js`,
-            `${proj}/interest-calculator.js`,
-            `${proj}/ajax-extend.js`
-        ];
-        let include_less = [
-            `${proj}/header-nav-bar.less`,
-            `${proj}/header-status-bar.less`,
-            `${proj}/footer.less`,
-            `${proj}/sidebar-fn.less`,
-        ];
-
-        generate_task(proj, i, {
+    APP_NAMES.forEach(i => {
+        generate_task(PROJ, i, {
             debug: true,
-            api_path: settings.web.dev_api_path,
-            include_components: include_components,
-            include_javascripts: include_javascripts,
-            include_less: include_less
+            api_path: settings[PROJ].dev_api_path,
+            include_components: INCLUDE_COMPONENTS,
+            include_javascripts: INCLUDE_JAVASCRIPTS,
+            include_less: INCLUDE_LESS
         });
-        generate_task(proj, i, {
+        generate_task(PROJ, i, {
             api_path: "//www.9888.cn/",
             cmd_prefix: 'pack',
-            cdn_prefix: `/static/web/${i.name || i}/`,
-            include_components: include_components,
-            include_javascripts: include_javascripts,
-            include_less: include_less
+            cdn_prefix: `/static/${PROJ}/${i.name||i}/`,
+            include_components: INCLUDE_COMPONENTS,
+            include_javascripts: INCLUDE_JAVASCRIPTS,
+            include_less: INCLUDE_LESS
         });
     });
 
-    gulp.task(`build:${proj}`, gulp.series(WEB_APP_NAMES.map(i => `web:pack:${i.name || i}:revision`)));
+    gulp.task(`build:${PROJ}`, gulp.series(APP_NAMES.map(i => `${PROJ}:pack:${i.name||i}:revision`)));
 };
