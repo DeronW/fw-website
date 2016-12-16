@@ -43,7 +43,7 @@
 {% block content %}{% endblock %}
 {% include 'web/footer.swig.html' %}
 {% include 'web/sidebar-fn.swig.html' %}
-{% include 'web/not-support-ie6-ie7.swig.html' %}
+{% include 'partial/not-support-ie6-ie7.swig.html' %}
 
 <script src="javascripts/lib.js"></script>
 <script src="javascripts/bundle.js"></script>
@@ -51,7 +51,7 @@
 {% block js %}{% endblock %}
 
 {% if !DEBUG %}
-{% include 'web/tong_ji.swig.html' %}
+{% include 'web/tong-ji.swig.html' %}
 {% include 'web/qq-ke-fu.swig.html' %}
 {% endif %}
 </body>

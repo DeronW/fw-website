@@ -23,13 +23,13 @@ const WEB_APP_NAMES = [
     'preservation', // 安全保障介绍页面
     'guide-cookbook', // 玩赚攻略页
     'vip-prerogative', // 等级攻略页
-    'notice-corporate-structure',// 信息披露页面
-    'topic-gong-you-hui',//工友会专题页
+    'notice-corporate-structure', // 信息披露页面
+    'topic-gong-you-hui', //工友会专题页
 
     // 重构页面
     //用户界面
-    'user-center',//用户中心
-    'user-coupon',//用户优惠券
+    'user-center', //用户中心
+    'user-coupon', //用户优惠券
     'user-messages', // 用户消息页面
     'user-bean', // 用户工豆
     'user-score',//用户工分
@@ -42,27 +42,41 @@ const WEB_APP_NAMES = [
 
 module.exports = function (gulp, generate_task, settings) {
 
-    WEB_APP_NAMES.forEach((i) => {
-        let common_components = [
-            'web/header-status-bar.jsx', 'web/alert.jsx',
-            'web/confirm.jsx', 'circle-progress.jsx', 'web/invest-list.jsx'
-        ];
-        let common_js = [];
+    let proj = 'web';
 
-        generate_task('web', i, {
+    WEB_APP_NAMES.forEach((i) => {
+        let include_components = [
+            `${proj}/header-status-bar.jsx`, `${proj}/alert.jsx`,
+            `${proj}/confirm.jsx`, 'circle-progress.jsx', `${proj}/invest-list.jsx`
+        ];
+        let include_javascripts = [
+            `${proj}/common-functions.js`,
+            `${proj}/interest-calculator.js`,
+            `${proj}/ajax-extend.js`
+        ];
+        let include_less = [
+            `${proj}/header-nav-bar.less`,
+            `${proj}/header-status-bar.less`,
+            `${proj}/footer.less`,
+            `${proj}/sidebar-fn.less`,
+        ];
+
+        generate_task(proj, i, {
             debug: true,
             api_path: settings.web.dev_api_path,
-            include_components: common_components,
-            include_common_js: common_js
+            include_components: include_components,
+            include_javascripts: include_javascripts,
+            include_less: include_less
         });
-        generate_task('web', i, {
+        generate_task(proj, i, {
             api_path: "//www.9888.cn/",
             cmd_prefix: 'pack',
             cdn_prefix: `/static/web/${i.name || i}/`,
-            include_components: common_components,
-            include_common_js: common_js
+            include_components: include_components,
+            include_javascripts: include_javascripts,
+            include_less: include_less
         });
     });
 
-    gulp.task('build:web', gulp.series(WEB_APP_NAMES.map(i => `web:pack:${i.name || i}:revision`)));
+    gulp.task(`build:${proj}`, gulp.series(WEB_APP_NAMES.map(i => `web:pack:${i.name || i}:revision`)));
 };

@@ -1,0 +1,371 @@
+@headerHeight: 50px;
+
+.pc-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50px;
+  line-height: 50px;
+  background-color: black;
+  z-index: 1000;
+}
+
+.mobile-header {
+  display: none;
+  height: 80px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: black;
+  z-index: 100;
+
+  .back {
+    display: block;
+    float: left;
+    margin-left: 30px;
+    margin-top: 16px;
+  }
+
+  .link {
+    display: block;
+    float: right;
+    margin-right: 30px;
+    font-size: 24px;
+    color: white;
+    line-height: 80px;
+  }
+}
+
+.header-panel {
+  width: 1140px;
+  position: relative;
+  margin: 0 auto;
+  height: @headerHeight;
+
+  .nav-link {
+    margin-right: 20px;
+    height: 100%;
+    display: inline-block;
+    img {
+      margin-top: 13px;
+    }
+  }
+
+  .btn-link {
+    float: right;
+    padding: 0 10px;
+    color: white;
+    font-size: 14px;
+    display: inline-block;
+  }
+  .sep-line {
+    margin: 18px 5px 0;
+    width: 1px;
+    background: white;
+    float: right;
+    height: 14px;
+  }
+
+  .app-download-qrcode {
+    position: relative;
+
+    img {
+      position: absolute;
+      top: 42px;
+      left: -34px;
+      display: none;
+    }
+
+    &:hover {
+      img {
+        display: block;
+      }
+    }
+  }
+
+  .show-when-not-login {
+
+  }
+  .show-when-login {
+    display: none
+  }
+
+  .header-user {
+    display: inline-block;
+    margin: 0 5px;
+    padding: 0 8px;
+    position: relative;
+    cursor: pointer;
+    height: 50px;
+    line-height: 24px;
+    border: 1px solid transparent;
+    border-top: 0;
+
+    &:hover {
+      background: white;
+      color: #333;
+      //height: 36px;
+      border: 1px solid #aaa;
+      border-bottom: 1px solid white;
+      .header-user-panel {
+        display: block;
+      }
+      #header-username a{
+        color:#333
+      }
+    }
+
+    & > div {
+      display: inline-block;
+    }
+
+    #header-username a{
+      color:#fff;
+      &:hover {
+        color: #f9655a;
+      }
+    }
+    #header-realname a{
+      color:#333;
+    }
+    .arrow {
+      position: relative;
+      top: -3px;
+    }
+
+    .header-user-panel {
+      display: none;
+      position: absolute;
+      width: 240px;
+      height: 98px;
+      box-sizing: border-box;
+      padding: 15px;
+      border: 1px solid #aaa;
+      border-top: 0;
+      line-height: 20px;
+      //top: 48px;
+      top: 36px;
+      left: -1px;
+      font-size: 12px;
+      background: #fff;
+      color: #333;
+      z-index: 999;
+
+      .user-link {
+        width: 65px;
+        height: 65px;
+        float: left;
+        display: block;
+        img {
+          width: 100%;
+        }
+      }
+
+      .header-user-links {
+        margin-left: 72px;
+        a {
+          color: #5395e7;
+          &:hover {
+            color: #f03b43;
+          }
+        }
+      }
+
+      .btn-recharge {
+        display: inline-block;
+        width: 113px;
+        height: 24px;
+        background: #f9655a;
+        line-height: 24px;
+        text-align: center;
+        color: #fff !important;
+        border-radius: 2px;
+        &:hover{
+          color: #fff !important;
+        }
+      }
+    }
+  }
+}
+
+.yao-qing-you-li {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(1, 1, 0, 0.7);
+  filter: alpha(opacity=100);
+  z-index: 1000;
+
+  .yqyl-panel {
+    z-index: 100;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 812px;
+    height: 590px;
+    background-color: #fff;
+    border-radius: 10px;
+    margin-left: -406px;
+    margin-top: -295px;
+  }
+
+  .yqyl-title {
+    height: 40px;
+    line-height: 40px;
+    font-size: 14px;
+    padding: 0 0 0 20px;
+    color: #666;
+    border-bottom: 2px solid #85b8f8;
+    background-color: #efefef;
+    border-radius: 10px 10px 0 0;
+
+    .btn-close {
+      float: right;
+      margin-right: 20px;
+      font-size: 30px;
+      cursor: pointer;
+      color: #999;
+    }
+  }
+
+  .paragraph-title {
+    padding: 10px 0 0;
+    line-height: 28px;
+    color: #333;
+    font-size: 16px;
+    width: 732px;
+    margin: 0 auto;
+  }
+
+  .paragraph {
+    line-height: 28px;
+    color: #666;
+    font-size: 14px;
+    width: 732px;
+    margin: 0 auto;
+
+    span {
+      color: #fc6456;
+    }
+  }
+
+  .yqyl-table {
+    width: 732px;
+    margin: 1px auto;
+
+    display: table;
+  }
+
+  .voucher {
+    position: relative;
+    float: left;
+    width: 224px;
+    height: 103px;
+    background: url(../images/common-header-coupon-bg.png) no-repeat 0;
+    color: #fff;
+    text-align: center;
+
+    .voucher-title {
+      padding: 16px 0 11px;
+      height: 50px;
+      line-height: 48px;
+
+      span {
+        vertical-align: middle;
+      }
+
+      .voucher-title-a {
+        font-size: 24px;
+      }
+      .voucher-title-b {
+        font-size: 34px;
+      }
+      .voucher-title-c {
+        font-size: 20px;
+      }
+    }
+
+    .limit-text {
+      font-size: 14px;
+      height: 28px;
+      line-height: 28px;
+      color: #c36b1a;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
+  }
+
+  .light-color {
+    color: #999;
+    font-size: 12px;
+    line-height: 24px;
+    padding: 14px 0 0;
+    max-width: 732px;
+    margin: 0 auto;
+  }
+
+  //background: url(../images/common-header-coupon-bg.png);
+}
+
+@media screen and (max-width: 760px) {
+  .pc-header {
+    display: none;
+  }
+
+  .mobile-header {
+    display: block;
+  }
+
+  .yao-qing-you-li .yqyl-panel {
+    width: 680px;
+    height: 700px;
+    margin-top: -350px;
+    margin-left: -340px;
+
+    .yqyl-title {
+      height: 80px;
+      line-height: 80px;
+      font-size: 28px;
+
+      .btn-close {
+        font-size: 40px;
+        padding: 0 20px;
+      }
+    }
+
+    .yqyl-table {
+      width: 640px;
+      .light-color {
+        font-size: 14px;
+        text-align: center;
+      }
+    }
+
+    .paragraph-title {
+      font-size: 26px;
+      padding-left: 5%;
+    }
+    .paragraph {
+      font-size: 18px;
+      padding-left: 5%;
+      width:95%;
+    }
+
+    .voucher {
+      transform: scale(0.9);
+      width: 210px;
+    }
+
+    .light-color {
+      font-size: 16px;
+      padding-left: 5%;
+      width:95%;
+    }
+  }
+}

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<!--[if lt IE 8 ]>
+<html lang="zh-cn" class="not-support-ie6-7"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="target-densitydpi=device-dpi, width=720, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+    <title>{% block title %}{% endblock %}</title>
+    {% block css %}
+    <link type="text/css" rel="stylesheet" href="stylesheets/all.less.css"/>
+    {% block extra_css %}{% endblock %}
+    {% endblock %}
+
+    <!--[if lt IE 9]>
+    <script src='javascripts/es5-shim.min.js'></script>
+    <script src='javascripts/es5-sham.min.js'></script>
+    <script src='javascripts/json3.min.js'></script>
+    <script src='javascripts/es6-shim.min.js'></script>
+    <script src='javascripts/es6-sham.min.js'></script>
+    <![endif]-->
+    <!--[if gt IE 9]>
+    <script src='javascripts/clipboard.min.js'></script>
+    <![endif]-->
+    <!--[if !IE]><!--><script src='javascripts/clipboard.min.js'></script><!--<![endif]-->
+    {% block head_javascripts %}
+    <script src="javascripts/lib.js"></script>
+    <script src="javascripts/bundle.js"></script>
+    {% endblock %}
+</head>
+<body>
+
+<!--接口地址前缀,结尾需要添加斜线-->
+<input type="hidden" id="api-path" value="{{API_PATH}}"/>
+
+{% block header %}{% include './activity/header.swig.html' %}{% endblock %}
+
+{% block content %}{% endblock %}
+
+{% include './partial/not-support-ie6-ie7.swig.html' %}
+
+{% block javascripts %}{% endblock %}
+
+{% if !DEBUG %} {% include './activity/tong-ji.swig.html' %} {% endif %}
+</body>
+</html>
