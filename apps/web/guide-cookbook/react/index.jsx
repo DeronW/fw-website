@@ -190,7 +190,7 @@ var Content = React.createClass({
                                             <p className="text">温馨提示：</p>
                                             <p className="text">邀请了N名好友首投5000元，邀请人获50*N元返现券，邀越多赚越多，看看你人脉有多广！</p>
                                             <p className="text">
-                                                好友达VIP2及以上所赠返现券在好友注册后的第30天10:00（注册当天算第1天）,按好友注册30天内最高等级发放。</p>
+                                                好友达VIP2及以上所赠返现券在好友注册后的第30天10:00（注册当天算第1天）,按好友当时的等级发放。</p>
                                             <p className="text">相应好友投资返利可去 <a
                                                 href="http://www.9888.cn/factoryCode/info.shtml" target="_blank"
                                                 className="c-629df9">我的工场>工场码</a> 中查看。</p>
