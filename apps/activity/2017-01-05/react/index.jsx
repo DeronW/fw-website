@@ -1,7 +1,10 @@
 const QuarterTable = React.createClass({
     getInitialState: function () {
       return({
-          quartData:[]
+          quartData:[],
+          quartPage:2,
+          quartTotalPage:5,
+          quartTab:'上一页'
       })
     },
     componentDidMount: function () {
@@ -16,18 +19,45 @@ const QuarterTable = React.createClass({
           }.bind(this)
       })
     },
-    tdImgFun: function (key) {
+    isImgFun: function (key) {
         var tdText = '';
         if(key == 0){
-            tdText = 1
+            tdText = "./images/jin.png"
         }else if(key == 1){
-            tdText = 2
-        }else{
-            tdText = key + 1
+            tdText = "./images/yin.png"
+        }else if(key == 2){
+            tdText = "./images/tong.png"
+        } else{
+            tdText = 0
         }
         return tdText
     },
+    switchPageHandler: function (type) {
+      let {quartPage,quartTotalPage}=this.state ,new_page;
+      if(type == '上一页') {
+          this.setState({quartTab:type});
+          if(quartPage > 1) new_page = quartPage -1;
+      }else if(type == '下一页'){
+          this.setState({quartTab:type});
+          if(quartPage < quartTotalPage) new_page = quartPage + 1;
+      }
+      if(new_page) this.setState({quartPage:new_page},this.ajaxPageHandle)
+    },
+    ajaxPageHandle: function () {
+      console.log(this.state.quartPage)
+    },
     render: function () {
+        var pageTab = (
+            <div className="page">
+                {
+                    ['上一页','下一页'].map((item,index) => {
+                        return <div key={index}
+                                    className={this.state.quartTab == item ? 'selectPage':null}
+                                    onClick={()=>{this.switchPageHandler(item)}}>{item}</div>
+                    })
+                }
+            </div>
+        );
         return(
             <div className="quarter">
                 <table className="quarterTable">
@@ -44,9 +74,12 @@ const QuarterTable = React.createClass({
                         this.state.quartData.map((item,index) => {
                             return(
                                 <tr key={index}>
-                                    <td className="tdImg">{this.tdImgFun(index)}</td>
+                                    <td>{this.isImgFun(index) ? <img className="tdImg" src={this.isImgFun(index)}/> : <span className="tdSpan">{index+1}</span>}</td>
                                     <td>{item.number}</td>
-                                    <td>{item.money}</td>
+                                    <td>
+                                        {item.money}
+                                        {item.text ? <div>{item.text}</div>:null}
+                                    </td>
                                     <td>{item.price}</td>
                                 </tr>
                             )
@@ -54,6 +87,9 @@ const QuarterTable = React.createClass({
                     }
                     </tbody>
                 </table>
+                {
+                    pageTab
+                }
             </div>
         )
     }
