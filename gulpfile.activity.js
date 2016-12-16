@@ -25,7 +25,7 @@ module.exports = function (gulp, generate_task, settings) {
         let page_name = i.name || i; // 支持2中页面配置参数:string和object
         generate_task(PROJ, i, {
             debug: true,
-            api_path: settings.web.dev_api_path,
+            api_path: settings[PROJ].dev_api_path,
             include_components: INCLUDE_COMPONENTS,
             include_javascripts: INCLUDE_JAVASCRIPTS,
             include_less: INCLUDE_LESS
@@ -33,12 +33,12 @@ module.exports = function (gulp, generate_task, settings) {
         generate_task(PROJ, i, {
             api_path: "//www.9888.cn/",
             cmd_prefix: 'pack',
-            cdn_prefix: `/static/web/${page_name}/`,
+            cdn_prefix: `/static/${PROJ}/${page_name}/`,
             include_components: INCLUDE_COMPONENTS,
             include_javascripts: INCLUDE_JAVASCRIPTS,
             include_less: INCLUDE_LESS
         });
     });
 
-    gulp.task(`build:${PROJ}`, gulp.series(WEB_APP_NAMES.map(i => `activity:pack:${page_name}:revision`)));
+    gulp.task(`build:${PROJ}`, gulp.series(WEB_APP_NAMES.map(i => `${PROJ}:pack:${page_name}:revision`)));
 };
