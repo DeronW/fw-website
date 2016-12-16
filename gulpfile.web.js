@@ -1,5 +1,24 @@
 'use strict';
 
+const PROJ = 'web';
+
+const INCLUDE_COMPONENTS = [
+    `${PROJ}/header-status-bar.jsx`, `${PROJ}/alert.jsx`,
+    `${PROJ}/confirm.jsx`, 'circle-progress.jsx', `${PROJ}/invest-list.jsx`
+];
+const INCLUDE_JAVASCRIPTS = [
+    `${PROJ}/common-functions.js`,
+    `${PROJ}/interest-calculator.js`,
+    `${PROJ}/ajax-extend.js`
+];
+const INCLUDE_LESS = [
+    `${PROJ}/header-nav-bar.less`,
+    `${PROJ}/header-status-bar.less`,
+    `${PROJ}/footer.less`,
+    `${PROJ}/sidebar-fn.less`,
+];
+
+
 const WEB_APP_NAMES = [
     'guide', // 新手引导
     'app-download', // app 下载页面
@@ -40,43 +59,26 @@ const WEB_APP_NAMES = [
     // 'popong'
 ];
 
+
 module.exports = function (gulp, generate_task, settings) {
 
-    let proj = 'web';
-
     WEB_APP_NAMES.forEach((i) => {
-        let include_components = [
-            `${proj}/header-status-bar.jsx`, `${proj}/alert.jsx`,
-            `${proj}/confirm.jsx`, 'circle-progress.jsx', `${proj}/invest-list.jsx`
-        ];
-        let include_javascripts = [
-            `${proj}/common-functions.js`,
-            `${proj}/interest-calculator.js`,
-            `${proj}/ajax-extend.js`
-        ];
-        let include_less = [
-            `${proj}/header-nav-bar.less`,
-            `${proj}/header-status-bar.less`,
-            `${proj}/footer.less`,
-            `${proj}/sidebar-fn.less`,
-        ];
-
-        generate_task(proj, i, {
+        generate_task(PROJ, i, {
             debug: true,
             api_path: settings.web.dev_api_path,
-            include_components: include_components,
-            include_javascripts: include_javascripts,
-            include_less: include_less
+            include_components: INCLUDE_COMPONENTS,
+            include_javascripts: INCLUDE_JAVASCRIPTS,
+            include_less: INCLUDE_LESS
         });
-        generate_task(proj, i, {
+        generate_task(PROJ, i, {
             api_path: "//www.9888.cn/",
             cmd_prefix: 'pack',
             cdn_prefix: `/static/web/${i.name || i}/`,
-            include_components: include_components,
-            include_javascripts: include_javascripts,
-            include_less: include_less
+            include_components: INCLUDE_COMPONENTS,
+            include_javascripts: INCLUDE_JAVASCRIPTS,
+            include_less: INCLUDE_LESS
         });
     });
 
-    gulp.task(`build:${proj}`, gulp.series(WEB_APP_NAMES.map(i => `web:pack:${i.name || i}:revision`)));
+    gulp.task(`build:${PROJ}`, gulp.series(WEB_APP_NAMES.map(i => `web:pack:${i.name || i}:revision`)));
 };
