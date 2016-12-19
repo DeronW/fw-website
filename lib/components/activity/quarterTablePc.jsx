@@ -46,7 +46,7 @@ const QuarterTable = React.createClass({
         }else if(type == '下一页'){
             if(quartPage < quartTotalPage){
                 new_page = quartPage + 1;
-                if(quartPage <= quartTotalPage - 2){
+                if(quartPage < quartTotalPage - 1){
                     this.setState({quartTab:''})
                 }else{
                     this.setState({quartTab:'下一页'})
@@ -71,7 +71,7 @@ const QuarterTable = React.createClass({
             </div>
         );
         return(
-            <div className="quarter">
+            <div className="quarterTableContainer">
                 <table className="quarterTable">
                     <thead>
                     <tr>
@@ -86,7 +86,9 @@ const QuarterTable = React.createClass({
                         this.state.quartData.map((item,index) => {
                             return(
                                 <tr key={index}>
-                                    <td>{this.isImgFun(index) ? <img className="tdImg" src={this.isImgFun(index)}/> : <span className="tdSpan">{index+1}</span>}</td>
+                                    <td>{this.isImgFun(index) ? <img className="tdImg" src={this.isImgFun(index)}/>:<span className="twoSpan">{index+1}</span>}
+                                        {<span className="oneSpan">{item.name}</span>}
+                                    </td>
                                     <td>{item.number}</td>
                                     <td>
                                         {item.money}
