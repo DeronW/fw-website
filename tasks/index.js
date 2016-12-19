@@ -53,7 +53,7 @@ module.exports = function generate_task(site_name, page_name, configs) {
     jsx_files.push(`${app_path}${CONFIG.main_jsx}`);
 
     let common_javascript_files = [
-        `${lib_path}javascripts/jquery-1.12.4.min.js`
+        `${lib_path}javascripts/jquery-1.9.1.min.js` // jQuery 1.9 是兼容IE8的最后版本, 不能再升级
     ];
     if (CONFIG.debug) {
         common_javascript_files.push(`${lib_path}react-0.14.8/react.js`);
