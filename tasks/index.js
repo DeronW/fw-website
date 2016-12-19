@@ -53,7 +53,7 @@ module.exports = function generate_task(site_name, page_name, configs) {
     jsx_files.push(`${app_path}${CONFIG.main_jsx}`);
 
     let common_javascript_files = [
-        `${lib_path}javascripts/jquery-1.12.4.min.js`
+        `${lib_path}javascripts/jquery-1.11.3.min.js` // jQuery 1.8 是兼容IE8的稳定版本, 不能再升级
     ];
     if (CONFIG.debug) {
         common_javascript_files.push(`${lib_path}react-0.14.8/react.js`);
@@ -90,7 +90,8 @@ module.exports = function generate_task(site_name, page_name, configs) {
     }
 
     function compile_common_javascripts() {
-        return javascripts(common_javascript_files, `${build_path}javascripts`, 'lib.js', CONFIG.debug)
+        // 公共库 不进行 uglify, jQuery源码中使用了兼容IE8的语法, uglify会破坏兼容性写法
+        return javascripts(common_javascript_files, `${build_path}javascripts`, 'lib.js', true)
     }
 
     function copy_common_javascripts() {
@@ -163,8 +164,9 @@ module.exports = function generate_task(site_name, page_name, configs) {
         gulp.task(`${task_name}:revision`, gulp.series(task_name, copy2cdn, compile_revision));
 
     if (!CONFIG.debug && !COMMON_JAVASCRIPTS_TASK[site_name]) {
+        // 公共库 不进行 uglify, jQuery源码中使用了兼容IE8的语法, uglify会破坏兼容性写法
         gulp.task(`${site_name}:common_js`, gulp.series(
-            () => javascripts(common_javascript_files, tmp_path, 'lib.js')));
+            () => javascripts(common_javascript_files, tmp_path, 'lib.js', true)));
         COMMON_JAVASCRIPTS_TASK[site_name] = true;
     }
 };
