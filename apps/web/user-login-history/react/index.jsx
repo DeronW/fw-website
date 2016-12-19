@@ -25,15 +25,15 @@ const Content = React.createClass({
             <div className="topNav">
                 <div className="title">
                     <span className="redshow">{this.state.username}</span>
-                    , 您可以查看最近3个月的登录状况，若存在异常登录记录，请在核实后尽快“<a className="blueshow" href="#">修改密码</a>”以保障账号安全。
+                    , 您可以查看最近3个月的登录状况，若存在异常登录记录，请在核实后尽快“<a className="blueshow" href="http://www.9888.cn/depository/account/toModifPwd.shtml">修改密码</a>”以保障账号安全。
                 </div>
                 <div className="moneyItemContainer">
                     <div className="beanItem">
                         <span className="left">登录历史记录</span>
-                        <span className="right">
+                        <a className="right" href="http://www.9888.cn/depository/account/toAccountSetup.shtml">
                             <img src="images/return.png"/>
                             返回账户设置
-                        </span>
+                        </a>
                     </div>
                     <Table th_rows={th_rows} fnLoadData={fnLoadData} fnFilterData={fnFilterData}/>
                 </div>
