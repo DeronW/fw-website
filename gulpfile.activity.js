@@ -4,7 +4,10 @@ const PROJ = 'activity';
 
 const INCLUDE_COMPONENTS = [
     `${PROJ}/ladder.jsx`,
-    `${PROJ}/quartTable.jsx`,
+    `${PROJ}/quarterTablePc.jsx`,
+    `${PROJ}/quarterTableWap.jsx`,
+    `${PROJ}/monthTablePc.jsx`,
+    `${PROJ}/monthTableWap.jsx`,
 ];
 const INCLUDE_JAVASCRIPTS = [
     `${PROJ}/fw-fix-console.js`,
@@ -15,7 +18,11 @@ const INCLUDE_JAVASCRIPTS = [
 ];
 const INCLUDE_LESS = [
     `${PROJ}/reset.less`,
-    `${PROJ}/header.less`
+    `${PROJ}/header.less`,
+    `${PROJ}/quarterTablePc.less`,
+    `${PROJ}/quarterTableWap.less`,
+    `${PROJ}/monthTablePc.less`,
+    `${PROJ}/monthTableWap.less`,
 ];
 
 const APP_NAMES = [

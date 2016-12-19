@@ -2,7 +2,7 @@
 const Content = React.createClass({
    getInitialState: function () {
        return({
-           isMobile:true,
+           isMobile:false,
        })
    },
    componentDidMount:function(){
@@ -12,21 +12,12 @@ const Content = React.createClass({
        return(
            <div>
                {
-                   this.state.isMobile ? <MonthTable /> : <QuarterTable />
+                   this.state.isMobile ? <WapContainer/> : <PcContainer />
                }
            </div>
        )
    }
 });
-
-const MonthTable = React.createClass({
-   render: function () {
-       return(
-           <div className="mobileShow">34523454</div>
-       )
-   }
-});
-
 
 $(function () {
     ReactDOM.render(

@@ -1,11 +1,11 @@
-const MonthTable = React.createClass({
+const QuarterTableWap = React.createClass({
     getInitialState: function () {
       return({
           isIOS:false,
-          monthData:[],
-          monthPage:2,
-          monthTotalPage:5,
-          monthTab:'上一页',
+          quarterData:[],
+          page:2,
+          totalPage:5,
+          tab:'上一页',
       })
     },
     componentDidMount: function () {
@@ -15,7 +15,7 @@ const MonthTable = React.createClass({
             dataType:'json',
             success: function (data) {
                 this.setState({
-                    monthData:data.data,
+                    quarterData:data.data
                 })
             }.bind(this)
         })
@@ -34,27 +34,27 @@ const MonthTable = React.createClass({
       return elementText
     },
     pageTabHandle: function (item) {
-      this.setState({monthTab:item});
-      let {monthPage,monthTotalPage}=this.state,newPage;
+      this.setState({tab:item});
+      let {page,totalPage}=this.state,newPage;
       if(item == "上一页"){
-          if(monthPage > 1){
-              newPage = monthPage - 1;
-              if(monthPage > 2){
-                  this.setState({monthTab:''})
+          if(page > 1){
+              newPage = page - 1;
+              if(page > 2){
+                  this.setState({tab:''})
               }
           }
       }else if(item == "下一页"){
-          if(monthPage < monthTotalPage){
-              newPage = monthPage + 1;
-              if(monthPage < monthTotalPage - 1){
-                  this.setState({monthTab:''})
+          if(page < totalPage){
+              newPage = page + 1;
+              if(page < totalPage - 1){
+                  this.setState({tab:''})
               }
           }
       }
-      if(newPage) this.setState({monthPage:newPage},this.ajaxPage)
+      if(newPage) this.setState({page:newPage},this.ajaxPageHandle)
     },
-    ajaxPage: function () {
-        console.log(this.state.monthPage)
+    ajaxPageHandle: function () {
+        console.log(this.state.page)
     },
     render: function () {
         var iosStyle = {
@@ -65,15 +65,15 @@ const MonthTable = React.createClass({
               {
                   ['上一页','下一页'].map((item,index) => {
                       return <div key={index}
-                                  className={this.state.monthTab == item ? 'selectedDiv':null}
+                                  className={this.state.tab == item ? 'selectedDiv':null}
                                   onClick={() => {this.pageTabHandle(item)}}>{item}</div>
                   })
               }
           </div>
         );
         return(
-            <div className="monthTableContainer" style={iosStyle}>
-                <table className="monthTable">
+            <div className="quarterTableContainerWap" style={iosStyle}>
+                <table className="quarterTable">
                     <thead>
                     <tr>
                         <td>用户名</td>
@@ -84,7 +84,7 @@ const MonthTable = React.createClass({
                     </thead>
                     <tbody>
                     {
-                        this.state.monthData.map((item,index) => {
+                        this.state.quarterData.map((item,index) => {
                             return <tr key={index}>
                                 <td>{this.isImgFun(index) ? <img className="tdImg" src={this.isImgFun(index)}/>:<span className="twoSpan">{index+1}</span>}
                                     {<span className="oneSpan">{item.name}</span>}
