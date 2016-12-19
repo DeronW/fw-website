@@ -41,6 +41,7 @@ module.exports = function generate_task(site_name, page_name, configs) {
     let task_name = site_name + ':' + (CONFIG.cmd_prefix ? CONFIG.cmd_prefix + ':' : '') + page_name;
 
     let less_files = [
+        `${lib_path}less/colors.less`,
         `${lib_path}less/common.less`,
         `${lib_path}less/grid.less`,
         `${lib_path}less/not-support-ie6-ie7.less`
