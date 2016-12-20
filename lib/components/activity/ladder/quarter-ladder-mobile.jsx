@@ -1,4 +1,4 @@
-const QuarterTableWap = React.createClass({
+const QuarterLadderMobile = React.createClass({
     getInitialState: function () {
       return({
           isIOS:false,
@@ -29,7 +29,7 @@ const QuarterTableWap = React.createClass({
       }else if(key == 2){
           elementText = './images/tong.png'
       }else{
-          elementText = ''
+          return elementText
       }
       return elementText
     },
@@ -66,7 +66,7 @@ const QuarterTableWap = React.createClass({
         var iosStyle = {
           marginTop:this.state.isIOS ? '0':'78px'
         };
-        var pageTap = (
+        var page = (
           <div className="page">
               {
                   ['上一页','下一页'].map((item,index) => {
@@ -76,6 +76,25 @@ const QuarterTableWap = React.createClass({
                   })
               }
           </div>
+        );
+        let tBody = (
+            <tbody>
+            {
+                this.state.quarterData.map((item,index) => {
+                    return <tr key={index}>
+                        <td>{this.isImgFun(index) ? <img className="tdImg" src={this.isImgFun(index)}/>:<span className="twoSpan">{index+1}</span>}
+                            {<span className="oneSpan">{this.subNameFun(item.name)}</span>}
+                        </td>
+                        <td>{item.number}</td>
+                        <td>
+                            {this.fixedPriceFun(item.money)}
+                            {item.text ? <div>{item.text}</div>:null}
+                        </td>
+                        <td>{this.fixedPriceFun(item.price)}</td>
+                    </tr>
+                })
+            }
+            </tbody>
         );
         return(
             <div className="quarterTableContainerWap" style={iosStyle}>
@@ -88,26 +107,12 @@ const QuarterTableWap = React.createClass({
                         <td>奖金（元）</td>
                     </tr>
                     </thead>
-                    <tbody>
                     {
-                        this.state.quarterData.map((item,index) => {
-                            return <tr key={index}>
-                                <td>{this.isImgFun(index) ? <img className="tdImg" src={this.isImgFun(index)}/>:<span className="twoSpan">{index+1}</span>}
-                                    {<span className="oneSpan">{this.subNameFun(item.name)}</span>}
-                                </td>
-                                <td>{item.number}</td>
-                                <td>
-                                    {this.fixedPriceFun(item.money)}
-                                    {item.text ? <div>{item.text}</div>:null}
-                                </td>
-                                <td>{this.fixedPriceFun(item.price)}</td>
-                            </tr>
-                        })
+                        tBody
                     }
-                    </tbody>
                 </table>
                 {
-                    pageTap
+                    page
                 }
             </div>
         )

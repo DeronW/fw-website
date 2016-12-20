@@ -1,4 +1,4 @@
-const MonthTableWap = React.createClass({
+const MonthLadderMobile = React.createClass({
     getInitialState: function () {
       return{
           monthData:[],
@@ -60,7 +60,7 @@ const MonthTableWap = React.createClass({
         console.log(this.state.page)
     },
     render:function(){
-        var page = (
+        let page = (
           <div className="page">
               {
                   ['上一页','下一页'].map((item,index) => {
@@ -70,6 +70,26 @@ const MonthTableWap = React.createClass({
                   })
               }
           </div>
+        );
+        let tBody = (
+            <tbody>
+            {
+                this.state.monthData.map((item,index) => {
+                    return <tr key={index}>
+                        <td>
+                            {this.isImgFun(index)?<img className="tdImg" src={this.isImgFun(index)}/>:<span className="twoSpan">{index+1}</span>}
+                            {<span className="oneSpan">{this.subNameFun(item.name)}</span>}
+                        </td>
+                        <td>{item.number}</td>
+                        <td>
+                            {this.fixedPriceFun(item.money)}
+                            {item.text?<div>{item.text}</div>:null}
+                        </td>
+                        <td>{this.fixedPriceFun(item.price)}</td>
+                    </tr>
+                })
+            }
+            </tbody>
         );
         return (
             <div className="monthTableContainerWap">
@@ -82,24 +102,9 @@ const MonthTableWap = React.createClass({
                         <td>奖金（元）</td>
                     </tr>
                     </thead>
-                    <tbody>
                     {
-                        this.state.monthData.map((item,index) => {
-                            return <tr key={index}>
-                                <td>
-                                    {this.isImgFun(index)?<img className="tdImg" src={this.isImgFun(index)}/>:<span className="twoSpan">{index+1}</span>}
-                                    {<span className="oneSpan">{this.subNameFun(item.name)}</span>}
-                                </td>
-                                <td>{item.number}</td>
-                                <td>
-                                    {this.fixedPriceFun(item.money)}
-                                    {item.text?<div>{item.text}</div>:null}
-                                </td>
-                                <td>{this.fixedPriceFun(item.price)}</td>
-                            </tr>
-                        })
+                        tBody
                     }
-                    </tbody>
                 </table>
                 {
                     page

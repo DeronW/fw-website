@@ -2,9 +2,9 @@ const WapContainer = React.createClass({
     render: function () {
         return (
             <div>
-                <QuarterTableWap />
-                <MonthTableWap />
-                <WeekTableWap />
+                <QuarterLadderMobile />
+                <MonthLadderMobile />
+                <WeekLadderMobile />
             </div>
         );
     }
