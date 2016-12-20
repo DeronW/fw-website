@@ -32,6 +32,12 @@ const QuarterTablePc = React.createClass({
         }
         return tdText
     },
+    subNameFun: function (str) {
+        return str.substring(0,2)+"**"+str.substring(str.length-2,str.length);
+    },
+    fixedPriceFun: function (price) {
+        return price.toFixed(2)
+    },
     switchPageHandler: function (type) {
         this.setState({tab:type});
         let {page,totalPage}=this.state ,new_page;
@@ -84,14 +90,14 @@ const QuarterTablePc = React.createClass({
                             return(
                                 <tr key={index}>
                                     <td>{this.isImgFun(index) ? <img className="tdImg" src={this.isImgFun(index)}/>:<span className="twoSpan">{index+1}</span>}
-                                        {<span className="oneSpan">{item.name}</span>}
+                                        {<span className="oneSpan">{this.subNameFun(item.name)}</span>}
                                     </td>
                                     <td>{item.number}</td>
                                     <td>
-                                        {item.money}
+                                        {this.fixedPriceFun(item.money)}
                                         {item.text ? <div>{item.text}</div>:null}
                                     </td>
-                                    <td>{item.price}</td>
+                                    <td>{this.fixedPriceFun(item.price)}</td>
                                 </tr>
                             )
                         })

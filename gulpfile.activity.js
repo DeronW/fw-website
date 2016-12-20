@@ -8,6 +8,8 @@ const INCLUDE_COMPONENTS = [
     `${PROJ}/quarterTableWap.jsx`,
     `${PROJ}/monthTablePc.jsx`,
     `${PROJ}/monthTableWap.jsx`,
+    `${PROJ}/weekTablePc.jsx`,
+    `${PROJ}/weekTableWap.jsx`,
 ];
 const INCLUDE_JAVASCRIPTS = [
     `${PROJ}/fw-fix-console.js`,
@@ -23,6 +25,8 @@ const INCLUDE_LESS = [
     `${PROJ}/quarterTableWap.less`,
     `${PROJ}/monthTablePc.less`,
     `${PROJ}/monthTableWap.less`,
+    `${PROJ}/weekTablePc.less`,
+    `${PROJ}/weekTableWap.less`,
 ];
 
 const APP_NAMES = [

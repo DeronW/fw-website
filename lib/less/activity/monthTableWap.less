@@ -1,0 +1,64 @@
+.monthTableContainerWap{
+  width: 704px;
+  height: 500px;
+  margin: auto;
+  position: relative;
+  .monthTable{
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 0 2%;
+    width: 96%;
+    td{
+      text-align: center;
+    }
+    thead{
+      td{
+        height: 100px;
+      }
+    }
+    tbody{
+      td{
+        height: 32px;
+      }
+      .tdImg{
+        display: inline-block;
+        margin-top: 8px;
+        vertical-align: middle;
+      }
+      .oneSpan{
+        display: inline-block;
+        vertical-align: middle;
+        margin-left: 10px;
+      }
+      .twoSpan{
+        display: inline-block;
+        margin: auto;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: #f1f1f1;
+        text-align: center;
+        line-height: 20px;
+      }
+    }
+  }
+  .page{
+    position: absolute;
+    bottom: 20px;
+    left: 260px;
+    width: 200px;
+    text-align: center;
+    div{
+      float: left;
+      width: 60px;
+      height: 30px;
+      line-height: 30px;
+      border: 1px solid #4d4d4d;
+      margin-right: 20px;
+    }
+    .selectedDiv{
+      border: 1px solid transparent;
+    }
+  }
+}

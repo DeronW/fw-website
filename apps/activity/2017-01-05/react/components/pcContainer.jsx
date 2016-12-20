@@ -4,6 +4,7 @@ const PcContainer = React.createClass({
             <div className="pcContainer">
                 <QuarterTablePc />
                 <MonthTablePc />
+                <WeekTablePc />
             </div>
         )
     }

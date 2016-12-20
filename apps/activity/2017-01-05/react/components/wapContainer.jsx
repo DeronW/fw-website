@@ -1,9 +1,11 @@
 const WapContainer = React.createClass({
     render: function () {
-        return(
+        return (
             <div>
                 <QuarterTableWap />
+                <MonthTableWap />
+                <WeekTableWap />
             </div>
-        )
+        );
     }
 });
