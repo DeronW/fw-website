@@ -94,8 +94,8 @@ const MonthLadderPC = React.createClass({
             </tbody>
         );
         return (
-            <div className="monthTableContainerPc">
-                <table className="monthTable">
+            <div className="monthLadderContainerPC">
+                <table className="monthLadder">
                     <thead>
                     <tr>
                         <td>用户名</td>

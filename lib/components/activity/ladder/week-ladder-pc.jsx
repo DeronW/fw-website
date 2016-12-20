@@ -77,8 +77,8 @@ const WeekLadderPC = React.createClass({
             </tbody>
         );
         return(
-            <div className="weekTableContainerPc">
-                <table className="weekTable">
+            <div className="weekLadderContainerPC">
+                <table className="weekLadder">
                     <thead>
                     <tr>
                         <td>日期</td>

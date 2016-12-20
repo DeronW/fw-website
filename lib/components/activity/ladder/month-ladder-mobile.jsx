@@ -92,8 +92,8 @@ const MonthLadderMobile = React.createClass({
             </tbody>
         );
         return (
-            <div className="monthTableContainerWap">
-                <table className="monthTable">
+            <div className="monthLadderContainerMobile">
+                <table className="monthLadder">
                     <thead>
                     <tr>
                         <td>用户名</td>

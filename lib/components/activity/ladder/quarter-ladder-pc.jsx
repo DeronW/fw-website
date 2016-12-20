@@ -95,8 +95,8 @@ const QuarterLadderPC = React.createClass({
             </tbody>
         );
         return(
-            <div className="quarterTableContainerPc">
-                <table className="quarterTable">
+            <div className="quarterLadderContainerPC">
+                <table className="quarterLadder">
                     <thead>
                     <tr>
                         <td>用户名</td>

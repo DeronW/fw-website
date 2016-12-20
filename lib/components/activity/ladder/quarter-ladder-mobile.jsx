@@ -97,8 +97,8 @@ const QuarterLadderMobile = React.createClass({
             </tbody>
         );
         return(
-            <div className="quarterTableContainerWap" style={iosStyle}>
-                <table className="quarterTable">
+            <div className="quarterLadderContainerMobile" style={iosStyle}>
+                <table className="quarterLadder">
                     <thead>
                     <tr>
                         <td>用户名</td>
