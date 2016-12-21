@@ -108,7 +108,8 @@
     }
 
 
-    $.get('http://fore.9888.cn/weixin/jssdk/share', {
+    // $.get('http://fore.9888.cn/weixin/jssdk/share', {
+    $.get('http://game.9888.cn/index.php?r=games/getshare', {
         url: location.href
     }, function (data) {
         setWxConfig(false, data.appId, data.timestamp, data.nonceStr, data.signature);
