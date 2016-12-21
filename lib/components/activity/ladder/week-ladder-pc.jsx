@@ -38,14 +38,15 @@ const WeekLadderPC = React.createClass({
         console.log(this.state.page);
     },
     render:function(){
+        let pageImg = (item,index) => {
+            return <div key={index}
+                        className={this.state.tab == item ? "selectedPage":null}
+                        onClick={()=>{this.switchPageHandler(item)}}>{item}</div>
+        };
         let page = (
           <div className="page">
               {
-                  ['上一页','下一页'].map((item,index) => {
-                      return <div key={index}
-                                  className={this.state.tab == item ? "selectedDiv":null}
-                                  onClick={()=>{this.switchPageHandler(item)}}>{item}</div>
-                  })
+                  ['上一页','下一页'].map(pageImg)
               }
           </div>
         );
@@ -63,16 +64,17 @@ const WeekLadderPC = React.createClass({
             '3.17-3.23',
             '3.24-3.30',
         ];
+        let bodyImg = (item,index) => {
+            return <tr key={index}>
+                <td>{dateArr[index]}</td>
+                <td>{item.number}</td>
+                <td>{item.money}</td>
+            </tr>
+        };
         let tBody = (
             <tbody>
             {
-                this.state.weekData.map((item,index) => {
-                    return <tr key={index}>
-                        <td>{dateArr[index]}</td>
-                        <td>{item.number}</td>
-                        <td>{item.money}</td>
-                    </tr>
-                })
+                this.state.weekData.map(bodyImg)
             }
             </tbody>
         );

@@ -20,17 +20,9 @@ const MonthLadderPC = React.createClass({
         });
     },
     isImgFun: function (key) {
-      var elementText = '';
-      if(key == 0){
-          elementText = './images/jin.png'
-      }else if(key == 1){
-          elementText = './images/yin.png'
-      }else if(key == 2){
-          elementText = './images/tong.png'
-      }else{
-          return elementText
-      }
-      return elementText
+        var imgName = ['jin','yin','tong'];
+        var i = imgName[key]?`./images/${imgName[key]}.png`:null;
+        return i
     },
     subNameFun: function (str) {
         return str.substring(0,2)+"**"+str.substring(str.length-2,str.length);
@@ -62,34 +54,40 @@ const MonthLadderPC = React.createClass({
       console.log(this.state.page);
     },
     render:function(){
+        let pageImg = (item,index) => {
+            return <div key={index}
+                        className={this.state.tab == item ? 'selectedPage':null}
+                        onClick={()=>{this.pageTabHandle(item)}}>{item}</div>
+        };
         let page = (
           <div className="page">
               {
                   ['上一页','下一页'].map((item,index) => {
                       return <div key={index}
-                                  className={this.state.tab == item ? "selectedDiv":null}
+                                  className={this.state.tab == item ? "selectedPage":null}
                                   onClick={()=>{this.switchPageHandler(item)}}>{item}</div>
                   })
               }
           </div>
         );
+        let bodyImg = (item,index) => {
+            return <tr key={index}>
+                <td>
+                    {this.isImgFun(index)?<img className="tdImg" src={this.isImgFun(index)}/>:<span className="twoSpan">{index+1}</span>}
+                    {<span className="oneSpan">{this.subNameFun(item.name)}</span>}
+                </td>
+                <td>{item.number}</td>
+                <td>
+                    {this.fixedPriceFun(item.money)}
+                    {item.text?<div>{item.text}</div>:null}
+                </td>
+                <td>{this.fixedPriceFun(item.price)}</td>
+            </tr>
+        };
         let tBody = (
             <tbody>
             {
-                this.state.monthData.map((item,index) => {
-                    return <tr key={index}>
-                        <td>
-                            {this.isImgFun(index)?<img className="tdImg" src={this.isImgFun(index)}/>:<span className="twoSpan">{index+1}</span>}
-                            {<span className="oneSpan">{this.subNameFun(item.name)}</span>}
-                        </td>
-                        <td>{item.number}</td>
-                        <td>
-                            {this.fixedPriceFun(item.money)}
-                            {item.text?<div>{item.text}</div>:null}
-                        </td>
-                        <td>{this.fixedPriceFun(item.price)}</td>
-                    </tr>
-                })
+                this.state.monthData.map(bodyImg)
             }
             </tbody>
         );

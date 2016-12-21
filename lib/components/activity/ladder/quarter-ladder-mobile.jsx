@@ -1,102 +1,99 @@
 const QuarterLadderMobile = React.createClass({
     getInitialState: function () {
-      return({
-          isIOS:false,
-          quarterData:[],
-          page:2,
-          totalPage:5,
-          tab:'上一页',
-      })
+        return ({
+            isIOS: false,
+            quarterData: [],
+            page: 2,
+            totalPage: 5,
+            tab: '上一页',
+        })
     },
     componentDidMount: function () {
         $.ajax({
-            url:'./javascripts/list.json',
-            type:'get',
-            dataType:'json',
+            url: './javascripts/list.json',
+            type: 'get',
+            dataType: 'json',
             success: function (data) {
                 this.setState({
-                    quarterData:data.data
+                    quarterData: data.data
                 })
             }.bind(this)
         })
     },
     isImgFun: function (key) {
-      let elementText = '';
-      if(key == 0){
-          elementText = './images/jin.png'
-      }else if(key == 1){
-          elementText = './images/yin.png'
-      }else if(key == 2){
-          elementText = './images/tong.png'
-      }else{
-          return elementText
-      }
-      return elementText
+        var imgName = ['jin', 'yin', 'tong'];
+        var i = imgName[key] ? `./images/${imgName[key]}.png` : null;
+        return i
     },
     subNameFun: function (str) {
-        return str.substring(0,2)+"**"+str.substring(str.length-2,str.length);
+        return str.substring(0, 2) + "**" + str.substring(str.length - 2, str.length);
     },
     fixedPriceFun: function (price) {
         return price.toFixed(2)
     },
     pageTabHandle: function (type) {
-      this.setState({tab:type});
-      let {page,totalPage}=this.state,newPage;
-      if(type == "上一页"){
-          if(page > 1){
-              newPage = page - 1;
-              if(page > 2){
-                  this.setState({tab:''})
-              }
-          }
-      }else if(type == "下一页"){
-          if(page < totalPage){
-              newPage = page + 1;
-              if(page < totalPage - 1){
-                  this.setState({tab:''})
-              }
-          }
-      }
-      if(newPage) this.setState({page:newPage},this.ajaxPageHandle)
+        this.setState({tab: type});
+        let {page,totalPage}=this.state, newPage;
+        if (type == "上一页") {
+            if (page > 1) {
+                newPage = page - 1;
+                if (page > 2) {
+                    this.setState({tab: ''})
+                }
+            }
+        } else if (type == "下一页") {
+            if (page < totalPage) {
+                newPage = page + 1;
+                if (page < totalPage - 1) {
+                    this.setState({tab: ''})
+                }
+            }
+        }
+        if (newPage) this.setState({page: newPage}, this.ajaxPageHandle)
     },
     ajaxPageHandle: function () {
         console.log(this.state.page)
     },
     render: function () {
         var iosStyle = {
-          marginTop:this.state.isIOS ? '0':'78px'
+            marginTop: this.state.isIOS ? '0' : '78px'
+        };
+        let pageImg = (item, index) => {
+            return <div key={index}
+                        className={this.state.tab == item ? 'selectedPage':null}
+                        onClick={() => {this.pageTabHandle(item)}}>{item}</div>
         };
         var page = (
-          <div className="page">
-              {
-                  ['上一页','下一页'].map((item,index) => {
-                      return <div key={index}
-                                  className={this.state.tab == item ? 'selectedDiv':null}
-                                  onClick={() => {this.pageTabHandle(item)}}>{item}</div>
-                  })
-              }
-          </div>
+            <div className="page">
+                {
+                    ['上一页', '下一页'].map(pageImg)
+                }
+            </div>
         );
+        let bodyImg = (item, index) => {
+            return (
+                <tr key={index}>
+                    <td>{this.isImgFun(index) ? <img className="tdImg" src={this.isImgFun(index)}/> :
+                        <span className="twoSpan">{index + 1}</span>}
+                        {<span className="oneSpan">{this.subNameFun(item.name)}</span>}
+                    </td>
+                    <td>{item.number}</td>
+                    <td>
+                        {this.fixedPriceFun(item.money)}
+                        {item.text ? <div>{item.text}</div> : null}
+                    </td>
+                    <td>{this.fixedPriceFun(item.price)}</td>
+                </tr>
+            )
+        };
         let tBody = (
             <tbody>
             {
-                this.state.quarterData.map((item,index) => {
-                    return <tr key={index}>
-                        <td>{this.isImgFun(index) ? <img className="tdImg" src={this.isImgFun(index)}/>:<span className="twoSpan">{index+1}</span>}
-                            {<span className="oneSpan">{this.subNameFun(item.name)}</span>}
-                        </td>
-                        <td>{item.number}</td>
-                        <td>
-                            {this.fixedPriceFun(item.money)}
-                            {item.text ? <div>{item.text}</div>:null}
-                        </td>
-                        <td>{this.fixedPriceFun(item.price)}</td>
-                    </tr>
-                })
+                this.state.quarterData.map(bodyImg)
             }
             </tbody>
         );
-        return(
+        return (
             <div className="quarterLadderContainerMobile" style={iosStyle}>
                 <table className="quarterLadder">
                     <thead>

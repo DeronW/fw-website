@@ -9,12 +9,8 @@ const Content = React.createClass({
        this.setState({isMobile:navigator.userAgent.match(/Android|iPhone|iPad|Mobile/i) ? true : false})
    },
    render: function () {
-       let container = this.state.isMobile ? <WapContainer/> : <PcContainer />
-       return(
-           <div>
-               {container}
-           </div>
-       )
+       let container = this.state.isMobile ? <WapContainer/> : <PcContainer />;
+       return container
    }
 });
 
