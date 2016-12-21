@@ -4,7 +4,12 @@ const PROJ = 'activity';
 
 const INCLUDE_COMPONENTS = [
     `${PROJ}/ladder.jsx`,
-    `${PROJ}/quartTable.jsx`,
+    `${PROJ}/ladder/quarter-ladder-pc.jsx`,
+    `${PROJ}/ladder/quarter-ladder-mobile.jsx`,
+    `${PROJ}/ladder/month-ladder-pc.jsx`,
+    `${PROJ}/ladder/month-ladder-mobile.jsx`,
+    `${PROJ}/ladder/week-ladder-pc.jsx`,
+    `${PROJ}/ladder/week-ladder-mobile.jsx`,
 ];
 const INCLUDE_JAVASCRIPTS = [
     `${PROJ}/fw-fix-console.js`,
@@ -15,7 +20,13 @@ const INCLUDE_JAVASCRIPTS = [
 ];
 const INCLUDE_LESS = [
     `${PROJ}/reset.less`,
-    `${PROJ}/header.less`
+    `${PROJ}/header.less`,
+    `${PROJ}/ladder/quarter-ladder-pc.less`,
+    `${PROJ}/ladder/quarter-ladder-mobile.less`,
+    `${PROJ}/ladder/month-ladder-pc.less`,
+    `${PROJ}/ladder/month-ladder-mobile.less`,
+    `${PROJ}/ladder/week-ladder-pc.less`,
+    `${PROJ}/ladder/week-ladder-mobile.less`,
 ];
 
 const APP_NAMES = [

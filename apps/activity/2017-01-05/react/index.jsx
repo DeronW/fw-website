@@ -2,31 +2,17 @@
 const Content = React.createClass({
    getInitialState: function () {
        return({
-           isMobile:true,
+           isMobile:false,
        })
    },
    componentDidMount:function(){
        this.setState({isMobile:navigator.userAgent.match(/Android|iPhone|iPad|Mobile/i) ? true : false})
    },
    render: function () {
-       return(
-           <div>
-               {
-                   this.state.isMobile ? <MonthTable /> : <QuarterTable />
-               }
-           </div>
-       )
+       let container = this.state.isMobile ? <WapContainer/> : <PcContainer />;
+       return container
    }
 });
-
-const MonthTable = React.createClass({
-   render: function () {
-       return(
-           <div className="mobileShow">34523454</div>
-       )
-   }
-});
-
 
 $(function () {
     ReactDOM.render(

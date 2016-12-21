@@ -1,0 +1,65 @@
+.quarterLadderContainerPC{
+  width: 786px;
+  height: 500px;
+  margin: 58px auto 0;
+  position: relative;
+  .quarterLadder{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    thead{
+      td{
+        height: 100px;
+      }
+    }
+    tbody{
+      tr{
+        height: 38px;
+      }
+    }
+    td{
+      text-align: center;
+    }
+    .oneSpan{
+      display: inline-block;
+      vertical-align: middle;
+      margin-left: 10px;
+    }
+    .twoSpan{
+      display: inline-block;
+      margin: auto;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #f1f1f1;
+      text-align: center;
+      line-height: 20px;
+    }
+    .tdImg{
+      display: inline-block;
+      margin-top: 4px;
+      vertical-align: middle;
+    }
+  }
+  .page{
+    position: absolute;
+    left: 300px;
+    bottom: 0px;
+    width: 240px;
+    div{
+      float: left;
+      margin-right:26px;
+      cursor: pointer;
+      padding: 2px;
+      width: 80px;
+      height: 30px;
+      border: 1px solid #4d4d4e;
+      text-align: center;
+      line-height: 30px;
+    }
+    .selectedPage{
+      border: 1px solid transparent;
+    }
+  }
+}

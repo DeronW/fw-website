@@ -29,7 +29,6 @@
     <script src='javascripts/es6-shim.min.js'></script>
     <script src='javascripts/es6-sham.min.js'></script>
     <![endif]-->
-
 </head>
 <body>
 
@@ -43,6 +42,9 @@
 {% include 'web/sidebar-fn.swig.html' %}
 {% include 'partial/not-support-ie6-ie7.swig.html' %}
 
+
+<!--// jQuery 不能加入公共库中, 因为公共库的uglify过程破坏了jQuery源码中兼容IE8的语法 -->
+<script src="javascripts/jquery-1.11.3.min.js"></script>
 <script src="javascripts/lib.js"></script>
 <script src="javascripts/bundle.js"></script>
 
