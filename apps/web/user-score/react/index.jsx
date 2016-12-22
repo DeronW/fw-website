@@ -8,8 +8,8 @@ const Content = React.createClass({
     componentDidMount: function () {
         var _this = this;
         $.post(API_PATH +'api/credit/v1/dataList.json',{
-                limit: 10,
-                page: page
+                limit: 1,
+                page: 1
             },
             function (data) {
             console.log(data.data.creditVo);
