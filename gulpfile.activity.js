@@ -3,7 +3,6 @@
 const PROJ = 'activity';
 
 const INCLUDE_COMPONENTS = [
-    `${PROJ}/ladder.jsx`,
     `${PROJ}/ladder/quarter-ladder-pc.jsx`,
     `${PROJ}/ladder/quarter-ladder-mobile.jsx`,
     `${PROJ}/ladder/month-ladder-pc.jsx`,

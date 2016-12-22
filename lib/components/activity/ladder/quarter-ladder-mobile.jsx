@@ -1,24 +1,32 @@
 const QuarterLadderMobile = React.createClass({
     getInitialState: function () {
+        this.PRE_PAGE = 8;
         return ({
-            isIOS: false,
-            quarterData: [],
-            page: 2,
-            totalPage: 5,
+            totalData: [],
+            page: 1,
+            totalPage: 2,
             tab: '上一页',
+            isClick:true,
+            cursor: 0
         })
     },
     componentDidMount: function () {
         $.ajax({
             url: './javascripts/list.json',
-            type: 'get',
+            type: "get",
             dataType: 'json',
             success: function (data) {
-                this.setState({
-                    quarterData: data.data
-                })
+                var sData = data.data;
+                if (sData.length <= this.PRE_PAGE) {
+                    this.setState({totalPage: 1,isClick:false});
+                } else if (sData.length > this.PRE_PAGE && sData.length <= this.PRE_PAGE * 2) {
+                    this.setState({totalPage: 2,isClick:true})
+                } else if (sData.length > this.PRE_PAGE * 2 && sData.length <= this.PRE_PAGE * 3) {
+                    this.setState({totalPage: 3,isClick:true})
+                }
+                this.setState({totalData: sData})
             }.bind(this)
-        })
+        });
     },
     isImgFun: function (key) {
         var imgName = ['jin', 'yin', 'tong'];
@@ -31,28 +39,44 @@ const QuarterLadderMobile = React.createClass({
     fixedPriceFun: function (price) {
         return price.toFixed(2)
     },
-    pageTabHandle: function (type) {
+    switchPageHandler: function (type) {
         this.setState({tab: type});
-        let {page,totalPage}=this.state, newPage;
-        if (type == "上一页") {
+        let {page,totalPage}=this.state;
+        let cursor, min, new_page, len = this.state.totalData.length;
+        if (type == '上一页') {
+            if (len % this.PRE_PAGE) {
+                min = parseInt(len / this.PRE_PAGE) * this.PRE_PAGE
+            } else {
+                min = len - this.PRE_PAGE
+            }
+            cursor = this.state.cursor > 0 ? Math.min(min, this.state.cursor - this.PRE_PAGE) : 0;
+            this.setState({cursor: cursor});
             if (page > 1) {
-                newPage = page - 1;
+                new_page = page - 1;
+                this.setState({page: new_page});
                 if (page > 2) {
                     this.setState({tab: ''})
                 }
             }
-        } else if (type == "下一页") {
+        } else {
+            if (len % this.PRE_PAGE) {
+                min = parseInt(len / this.PRE_PAGE) * this.PRE_PAGE
+            } else {
+                min = len - this.PRE_PAGE
+            }
+            cursor = Math.min(min, this.state.cursor + this.PRE_PAGE);
+            this.setState({cursor: cursor});
             if (page < totalPage) {
-                newPage = page + 1;
+                new_page = page + 1;
+                this.setState({page: new_page});
                 if (page < totalPage - 1) {
                     this.setState({tab: ''})
                 }
             }
         }
-        if (newPage) this.setState({page: newPage}, this.ajaxPageHandle)
     },
-    ajaxPageHandle: function () {
-        console.log(this.state.page)
+    get_current_page: function () {
+        return this.state.totalData.slice(this.state.cursor, this.state.cursor + this.PRE_PAGE);
     },
     render: function () {
         var iosStyle = {
@@ -60,8 +84,8 @@ const QuarterLadderMobile = React.createClass({
         };
         let pageImg = (item, index) => {
             return <div key={index}
-                        className={this.state.tab == item ? 'selectedPage':null}
-                        onClick={() => {this.pageTabHandle(item)}}>{item}</div>
+                        className={this.state.isClick?(this.state.tab == item ? 'selectedPage':null):'selectedPage'}
+                        onClick={this.state.isClick?()=>{this.switchPageHandler(item)}:null}>{item}</div>
         };
         var page = (
             <div className="page">
@@ -71,6 +95,7 @@ const QuarterLadderMobile = React.createClass({
             </div>
         );
         let bodyImg = (item, index) => {
+            index += this.state.cursor;
             return (
                 <tr key={index}>
                     <td>{this.isImgFun(index) ? <img className="tdImg" src={this.isImgFun(index)}/> :
@@ -89,7 +114,7 @@ const QuarterLadderMobile = React.createClass({
         let tBody = (
             <tbody>
             {
-                this.state.quarterData.map(bodyImg)
+                this.get_current_page().map(bodyImg)
             }
             </tbody>
         );
