@@ -32,6 +32,7 @@ const Table = React.createClass({
     },
     reloadData: function () {
         this.props.fnLoadData && this.props.fnLoadData(this.state.page, (data) => {
+            // fnLnadData的回调函数
             let filterData = this.props.fnFilterData && this.props.fnFilterData(data);
             if (filterData)
                 this.setState({
@@ -79,7 +80,6 @@ const Table = React.createClass({
                     <span>总记{this.state.bean_count}个,</span>
                     <span className="calculate">共计{this.state.bean_count/100}元</span>
                 </div>
-
             )
         }
         if (rows.length) {
@@ -100,9 +100,7 @@ const Table = React.createClass({
         } else {
             empty_records = <div className="emptyRecords">暂无记录</div>
         }
-
         console.log(this.state.th_rows)
-
         return (
             <div className="tableContaner">
                 <table className="table-read-only">
