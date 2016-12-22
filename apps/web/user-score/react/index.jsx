@@ -70,7 +70,7 @@ let Fn = {
                 text: i.createTimeString
             }, {
                 text: i.cashAmount>0?("+"+i.cashAmount):(i.cashAmount),
-                className: i.cashAmount > 0 ? 'red' : 'green'
+                className: (i.cashAmount >= 0) ? 'red' : 'green'
             }, {
                 text: i.remark
             }]);

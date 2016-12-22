@@ -41,6 +41,7 @@ module.exports = function generate_task(site_name, page_name, configs) {
     let task_name = site_name + ':' + (CONFIG.cmd_prefix ? CONFIG.cmd_prefix + ':' : '') + page_name;
 
     let less_files = [
+        `${lib_path}less/colors.less`,
         `${lib_path}less/common.less`,
         `${lib_path}less/grid.less`,
         `${lib_path}less/not-support-ie6-ie7.less`
@@ -52,9 +53,7 @@ module.exports = function generate_task(site_name, page_name, configs) {
     jsx_files.push(`${app_path}react/components/*.jsx`);
     jsx_files.push(`${app_path}${CONFIG.main_jsx}`);
 
-    let common_javascript_files = [
-        `${lib_path}javascripts/jquery-1.12.4.min.js`
-    ];
+    let common_javascript_files = [];
     if (CONFIG.debug) {
         common_javascript_files.push(`${lib_path}react-0.14.8/react.js`);
         common_javascript_files.push(`${lib_path}react-0.14.8/react-dom.js`);

@@ -2,7 +2,15 @@
 
 const PROJ = 'activity';
 
-const INCLUDE_COMPONENTS = [];
+const INCLUDE_COMPONENTS = [
+    `${PROJ}/ladder.jsx`,
+    `${PROJ}/ladder/quarter-ladder-pc.jsx`,
+    `${PROJ}/ladder/quarter-ladder-mobile.jsx`,
+    `${PROJ}/ladder/month-ladder-pc.jsx`,
+    `${PROJ}/ladder/month-ladder-mobile.jsx`,
+    `${PROJ}/ladder/week-ladder-pc.jsx`,
+    `${PROJ}/ladder/week-ladder-mobile.jsx`,
+];
 const INCLUDE_JAVASCRIPTS = [
     `${PROJ}/fw-fix-console.js`,
     `${PROJ}/fw-common.js`,
@@ -12,12 +20,17 @@ const INCLUDE_JAVASCRIPTS = [
 ];
 const INCLUDE_LESS = [
     `${PROJ}/reset.less`,
-    `${PROJ}/header.less`
-]
+    `${PROJ}/header.less`,
+    `${PROJ}/ladder/quarter-ladder-pc.less`,
+    `${PROJ}/ladder/quarter-ladder-mobile.less`,
+    `${PROJ}/ladder/month-ladder-pc.less`,
+    `${PROJ}/ladder/month-ladder-mobile.less`,
+    `${PROJ}/ladder/week-ladder-pc.less`,
+    `${PROJ}/ladder/week-ladder-mobile.less`,
+];
 
 const APP_NAMES = [
-    '2016-10-12',
-    '2017-01-05'
+    '2017-01-05',
 ];
 
 module.exports = function (gulp, generate_task, settings) {

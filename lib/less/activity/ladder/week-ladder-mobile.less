@@ -1,0 +1,64 @@
+.weekLadderContainerMobile{
+  width: 400px;
+  height: 400px;
+  margin: auto;
+  position: relative;
+  .weekLadder{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    td{
+      text-align: center;
+    }
+    thead{
+      td{
+        height: 100px;
+      }
+    }
+    tbody{
+      td{
+        height: 30px;
+      }
+      .tdImg{
+        display: inline-block;
+        margin-top: 8px;
+        vertical-align: middle;
+      }
+      .oneSpan{
+        display: inline-block;
+        vertical-align: middle;
+        margin-left: 10px;
+      }
+      .twoSpan{
+        display: inline-block;
+        margin: auto;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: #f1f1f1;
+        text-align: center;
+        line-height: 20px;
+      }
+    }
+  }
+  .page{
+    width: 240px;
+    position: absolute;
+    bottom: 30px;
+    left: 80px;
+    div{
+      float: left;
+      width: 80px;
+      border: 1px solid #4d4d4d;
+      height: 30px;
+      text-align: center;
+      line-height: 30px;
+      margin-left: 20px;
+      cursor: pointer;
+    }
+    .selectedPage{
+      border: 1px solid transparent;
+    }
+  }
+}
