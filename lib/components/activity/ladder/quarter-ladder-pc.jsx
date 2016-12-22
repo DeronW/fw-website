@@ -7,7 +7,7 @@ const QuarterLadderPC = React.createClass({
             totalPage: 2,
             tab: '上一页',
             cursor: 0,
-            click:true,
+            isClick:true,
         })
     },
     componentDidMount: function () {
@@ -18,27 +18,15 @@ const QuarterLadderPC = React.createClass({
             success: function (data) {
                 var sData = data.data;
                 if (sData.length <= this.PRE_PAGE) {
-                    this.setState({totalPage: 1,click:false});
+                    this.setState({totalPage: 1,isClick:false});
                 } else if (sData.length > this.PRE_PAGE && sData.length <= this.PRE_PAGE * 2) {
-                    this.setState({totalPage: 2})
+                    this.setState({totalPage: 2,isClick:true})
                 } else if (sData.length > this.PRE_PAGE * 2 && sData.length <= this.PRE_PAGE * 3) {
-                    this.setState({totalPage: 3})
+                    this.setState({totalPage: 3,isClick:true})
                 }
                 this.setState({totalData: sData})
             }.bind(this)
         });
-        //$.get('./javascripts/list.json').then(data=>{
-        //    console.log(data);
-        //    var sData = data.data;
-        //    if (sData.length <= 8) {
-        //        this.setState({totalPage: 1})
-        //    } else if (sData.length > 8 && sData.length <= 16) {
-        //        this.setState({totalPage: 2})
-        //    } else if (sData.length > 16 && sData.length <= 24) {
-        //        this.setState({totalPage: 3})
-        //    }
-        //    this.setState({totalData: sData})
-        //})
     },
     isImgFun: function (key) {
         var imgName = ['jin', 'yin', 'tong'];
@@ -94,8 +82,8 @@ const QuarterLadderPC = React.createClass({
     render: function () {
         let pageImg = (item, index) => {
             return <div key={index}
-                        className={this.state.tab == item ? 'selectedPage':null}
-                        onClick={this.state.click?()=>{this.switchPageHandler(item)}:null}>{item}</div>
+                        className={this.state.isClick?(this.state.tab == item ? 'selectedPage':null):'selectedPage'}
+                        onClick={this.state.isClick?()=>{this.switchPageHandler(item)}:null}>{item}</div>
         };
         let page = (
             <div className="page">

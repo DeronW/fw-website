@@ -6,6 +6,7 @@ const WeekLadderMobile = React.createClass({
             page: 1,
             totalPage: 2,
             tab: '上一页',
+            isClick:true,
             cursor: 0
         })
     },
@@ -18,11 +19,11 @@ const WeekLadderMobile = React.createClass({
         }, (data) => {
             var sData = data.data;
             if (sData.length <= this.PRE_PAGE) {
-                this.setState({totalPage: 1})
+                this.setState({totalPage: 1,isClick:false})
             } else if (sData.length > this.PRE_PAGE && sData.length <= this.PRE_PAGE * 2) {
-                this.setState({totalPage: 2})
+                this.setState({totalPage: 2,isClick:true})
             } else if (sData.length > this.PRE_PAGE * 2 && sData.length <= this.PRE_PAGE * 3) {
-                this.setState({totalPage: 3})
+                this.setState({totalPage: 3,isClick:true})
             }
             this.setState({totalData: sData})
         }, "json")
@@ -84,8 +85,8 @@ const WeekLadderMobile = React.createClass({
     render: function () {
         let pageImg = (item, index) => {
             return <div key={index}
-                        className={this.state.tab == item ? "selectedPage":null}
-                        onClick={()=>{this.switchPageHandler(item)}}>{item}</div>
+                        className={this.state.isClick?(this.state.tab == item ? 'selectedPage':null):'selectedPage'}
+                        onClick={this.state.isClick?()=>{this.switchPageHandler(item)}:null}>{item}</div>
         };
         let page = (
             <div className="page">
