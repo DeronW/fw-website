@@ -20,6 +20,16 @@ em{
     top: 620px;
     right: 200px;
   }
+  .fire3{
+    position: absolute;
+    top: 1580px;
+    right: 200px;
+  }
+  .fire4{
+     position: absolute;
+     top: 1200px;
+    left: 240px;
+   }
   .pcBanner{
     height: 468px;
     width: 100%;
@@ -196,7 +206,7 @@ em{
   .pcQuarterPack{
     width: 1120px;
     margin: auto;
-    height: 600px;
+    height: 1550px;
     .quarterTitle{
       width: 660px;
       height: 102px;
@@ -296,6 +306,91 @@ em{
         color: #999;
         line-height: 20px;
       }
+    }
+  }
+  .pcActivityExplain{
+    width: 100%;
+    height: 550px;
+    margin: 50px 0 10px;
+    background: #463a87;
+    padding-top: 50px;
+    .ActivityExplainContent{
+      width: 1064px;
+      margin: auto;
+    }
+    .activityExplainTitle{
+      img{
+        vertical-align: middle;
+      }
+      span{
+        font-size: @font28;
+        color: @colorWhite;
+        display: inline-block;
+        vertical-align: middle;
+      }
+    }
+    .activityExplainText{
+      font-size: @font14;
+      color: @colorWhite;
+      line-height: 30px;
+      p{
+        width: 970px;
+      }
+    }
+  }
+  .pcFooterBar{
+    width: 100%;
+    height: 98px;
+    background: @colorBar;
+    position: fixed;
+    bottom: 0;
+    .footerBarContent{
+      width: 1084px;
+      margin: auto;
+      position: relative;
+      img{
+        top: -60px;
+        left: 0;
+        position: absolute;
+        z-index: 112;
+        width: 130px;
+        height: 150px;
+      }
+    }
+    .barText{
+      position: absolute;
+      left: 150px;
+      font-size: @font16;
+      color: @colorWhite;
+      height: 98px;
+      line-height: 98px;
+    }
+    a{
+      width: 156px;
+      height: 33px;
+      background: url("../images/btn.png") no-repeat;
+      text-align: center;
+      line-height: 30px;
+      color: @colorWhite;
+      font-size: @font14;
+      position: absolute;
+    }
+    .moreAward{
+      left: 500px;
+      top: 32px;
+    }
+    .howAward{
+      left: 700px;
+      top: 32px;
+    }
+    em{
+      cursor: pointer;
+      position: absolute;
+      top: 10px;
+      right: 100px;
+      width: 26px;
+      height: 26px;
+      background: url("../images/close.png") no-repeat;
     }
   }
 }
