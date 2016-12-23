@@ -18,6 +18,323 @@
         background: url("../images/mobileWeekTitle.png") no-repeat;
         margin: auto;
       }
+      .weekText{
+        width: 660px;
+        font-size: @font24;
+        color: @colorText;
+        margin: 32px auto 24px;
+        text-align: center;
+      }
+      .weekAward{
+        width: 702px;
+        height: 72px;
+        margin: auto;
+        text-align: center;
+        line-height: 72px;
+        color: @colorText;
+        font-size: @font24;
+        background: url("../images/mobileWeekText.png") no-repeat;
+        em{
+          color: @colorNum;
+        }
+      }
+      .weekBefore{
+        width: 302px;
+        height: 72px;
+        margin:30px auto ;
+        line-height: 72px;
+        text-align: center;
+        font-size: @font32;
+        color: @colorWhite;
+        background: url("../images/mobileWeekbefore.png") no-repeat;
+      }
+      .weekInvite{
+        width: 660px;
+        height: 824px;
+        background: url("../images/mobileWeekPerson.png") no-repeat;
+        margin: auto;
+      }
+      .weekRemind{
+        width: 660px;
+        margin: 40px auto 0;
+        text-align: center;
+        font-size: @font24;
+        color: @colorText;
+      }
+    }
+    .mobileMonthPack{
+      width: 100%;
+      .monthTitle{
+        width: 660px;
+        height: 122px;
+        margin: 100px auto 20px;
+        text-align: center;
+        background: url("../images/mobileMonthTitle.png") no-repeat;
+      }
+      .monthState{
+        width: 100%;
+        display: table;
+        margin: auto;
+        .monthStateCommon{
+          width: 220px;
+          height: 86px;
+          float: left;
+          background: url("../images/not.png") no-repeat;
+          color: @colorNot;
+          padding-top: 12px;
+          cursor: pointer;
+          margin-left: 20px;
+          .stateLeft {
+            width: 20px;
+            height: 62px;
+            float: left;
+            border-right: 2px solid @colorNot;
+            font-size: @font16;
+            margin: 0 5px 0 30px;
+            padding-right: 5px;
+          }
+          .stateRight {
+            float: left;
+            width: 130px;
+            text-align: center;
+            .stateCurrentMonth {
+              font-size: @font28;
+            }
+            .stateCurrentDate {
+              font-size: @font16;
+            }
+          }
+        }
+        .active{
+          height: 95px;
+          background:url("../images/start.png") no-repeat;
+          padding-top:20px;
+          color: @colorStart;
+          margin-top: -9px;
+          .stateLeft{
+            border-right: 2px solid @colorStart;
+          }
+        }
+        .end{
+          background:url("../images/end.png") no-repeat;
+          color: @colorEnd;
+          margin-top: 0;
+          padding-top:10px;
+          .stateLeft{
+            border-right: 2px solid @colorEnd;
+          }
+        }
+        .not{
+          background:url("../images/not.png") no-repeat;
+          color: @colorNot;
+          .stateLeft{
+            border-right: 2px solid @colorNot;
+          }
+        }
+      }
+      .monthCenter{
+        width: 100%;
+        display: table;
+      }
+      .monthGift{
+        width: 606px;
+        height: 616px;
+        margin:10px auto 0;
+        background: url("../images/mobileGift.png") no-repeat;
+        position: relative;
+        .monthGiftTitle{
+          width: 606px;
+          text-align: center;
+          color: @colorGift;
+          position: absolute;
+          top: 230px;
+          left: 15px;
+          line-height: 20px;
+          font-size: @font20;
+        }
+        .monthGiftNumber{
+          position: absolute;
+          top: 350px;
+          left: 262px;
+          color: @colorNum;
+          font-size: @font74;
+        }
+        .monthGiftText{
+          position: absolute;
+          bottom: 20px;
+          left: 15px;
+          color: @colorGiftText;
+          width: 606px;
+          text-align: center;
+          font-size: @font20;
+        }
+      }
+      .monthLadder {
+        width: 702px;
+        height: 690px;
+        margin: 40px auto 0;
+        padding-top: 1px;
+        background: url("../images/mobileMonthLadder.png") no-repeat;
+        position: relative;
+        .ladderText{
+          position: absolute;
+          top: 0;
+          left: 200px;
+        }
+        .ladderTitle{
+          width: 600px;
+          margin: 80px auto 20px;
+          text-align: center;
+          font-size: @font22;
+          color: @color6;
+          em{
+            color: @colorStart;
+          }
+        }
+      }
+      .monthExplain{
+        width: 702px;
+        height: 390px;
+        margin: 50px auto 100px;
+        background: url("../images/mobileMonthText.png") no-repeat;
+        font-size: @font24;
+        color: @colorWhite;
+        p{
+          padding: 26px 30px;
+          line-height: 40px;
+          em{
+            font-size: @font32;
+          }
+        }
+      }
+    }
+    .mobileQuarterPack{
+      width: 100%;
+      margin: auto;
+      //height: 2050px;
+      .quarterTitle{
+        width: 660px;
+        height: 122px;
+        margin: 0 auto 10px;
+        background: url("../images/mobileQuartTitle.png") no-repeat;
+      }
+      .quarterText{
+        width: 670px;
+        margin: auto;
+        text-align: center;
+        color: @colorQuarterT;
+        font-size: @font22;
+        line-height: 40px;
+      }
+      .quarterContent{
+        width: 100%;
+        height: 662px;
+        background: url("../images/mobileQuartGift.png") no-repeat;
+        margin-top: 106px;
+        position: relative;
+        color: @colorWhite;
+        .quarterNumLeft{
+          position: absolute;
+          left: 198px;
+          top: 145px;
+          font-size: @font20;
+          em{
+            font-size: @font60;
+          }
+        }
+        .quarterNumCenter{
+          position: absolute;
+          left: 530px;
+          top: 145px;
+          font-size: @font20;
+          em{
+            font-size: @font60;
+          }
+        }
+        .quarterNumRight{
+          position: absolute;
+          left: 358px;
+          top: 475px;
+          font-size: @font20;
+          em{
+            font-size: @font60;
+          }
+        }
+        .quarterTextLeft{
+          position: absolute;
+          top: 258px;
+          left: 100px;
+          width: 165px;
+          text-align: center;
+          color: #87c8ff;
+          font-size: @font16;
+        }
+        .quarterTextCenter{
+          position: absolute;
+          top: 258px;
+          left: 456px;
+          width: 165px;
+          text-align: center;
+          color: #ffa6f1;
+          font-size: @font16;
+        }
+        .quarterTextRight{
+          position: absolute;
+          left: 286px;
+          top: 585px;
+          width: 165px;
+          text-align: center;
+          color: #fed159;
+          font-size: @font16;
+        }
+      }
+      .quarterContain{
+        width: 702px;
+        height: 1620px;
+        margin: auto;
+        background: url("../images/mobileQuartLadder.png") no-repeat;
+        .quarterExplain{
+          position: absolute;
+          top: 486px;
+          left: 100px;
+          color: @color6;
+          width: 814px;
+          text-align: center;
+          em{
+            color: @colorQuarterExplain;
+          }
+        }
+        .quarterRemind{
+          width: 600px;
+          height: 60px;
+          background: url('../images/remind.png') no-repeat;
+          position: absolute;
+          left: 60px;
+          top: -80px;
+          color: @color6;
+          font-size: @font24;
+          em{
+            color: @colorQuarterExplain;
+          }
+          text-align: center;
+          line-height: 46px;
+        }
+        .quarterLadder{
+          position: absolute;
+          top: 442px;
+          //left: 100px;
+          width: 814px;
+          text-align: center;
+        }
+        .quarterFooter{
+          position: absolute;
+          top: 1130px;
+          left: 100px;
+          width: 814px;
+          color: #999;
+          line-height: 20px;
+        }
+      }
     }
   }
 }

@@ -1,6 +1,6 @@
+@import "ladderVariables.less";
 .monthLadderContainerMobile{
-  width: 704px;
-  height: 500px;
+  width: 610px;
   margin: auto;
   position: relative;
   .monthLadderMobile{
@@ -15,38 +15,50 @@
     thead{
       td{
         height: 100px;
+        font-size: @fontSize20;
+        color: @color3;
+      }
+      .tHeadTd3{
+        width: 140px;
       }
     }
     tbody{
       td{
-        height: 32px;
+        height: 52px;
+        font-size: @fontSize20;
+        color: @color6;
       }
       .tdImg{
         display: inline-block;
-        margin-top: 8px;
+        margin-top: -4px;
         vertical-align: middle;
       }
       .oneSpan{
         display: inline-block;
         vertical-align: middle;
         margin-left: 10px;
+        margin-top: -6px;
       }
       .twoSpan{
         display: inline-block;
         margin: auto;
-        width: 20px;
-        height: 20px;
+        width: 25px;
+        height: 25px;
         border-radius: 50%;
-        background: #f1f1f1;
+        background: @colorD4;
         text-align: center;
-        line-height: 20px;
+        line-height: 25px;
+        font-size: @fontSize16;
+      }
+      .bodyPrice{
+        color: @colorF4;
       }
     }
   }
   .page{
     position: absolute;
-    bottom: 20px;
-    left: 260px;
+    top: 400px;
+    left: 220px;
     width: 200px;
     text-align: center;
     div{
@@ -54,7 +66,7 @@
       width: 60px;
       height: 30px;
       line-height: 30px;
-      border: 1px solid #4d4d4d;
+      border: 1px solid @colorD4;
       margin-right: 20px;
     }
     .selectedPage{

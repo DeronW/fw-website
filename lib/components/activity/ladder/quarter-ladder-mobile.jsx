@@ -116,7 +116,7 @@ const QuarterLadderMobile = React.createClass({
             </tbody>
         );
         return (
-            <div className="quarterLadderContainerMobile" style={iosStyle}>
+            <div className="quarterLadderContainerMobile">
                 <table className="quarterLadder">
                     <thead>
                     <tr>

@@ -1,21 +1,8 @@
 
-const Content = React.createClass({
-   getInitialState: function () {
-       return({
-           isMobile:false,
-       })
-   },
-   componentDidMount:function(){
-       this.setState({isMobile:navigator.userAgent.match(/Android|iPhone|iPad|Mobile/i) ? true : false})
-   },
-   render: function () {
-       let container = this.state.isMobile ? <MobileContainer/> : <PcContainer />;
-       return container
-   }
+$(()=>{
+    let C = navigator.userAgent.match(/Android|iPhone|iPad|Mobile/i) ?
+        <MobileContainer/> :
+        <PcContainer />;
+    ReactDOM.render(C, document.getElementById("cnt"))
 });
 
-$(function () {
-    ReactDOM.render(
-        <Content />,document.getElementById("cnt")
-    );
-});
