@@ -3,7 +3,7 @@ const HeaderStatusBar = React.createClass({
         return {
             is_login: false,
             username: null,
-            real_name: null,
+            realname: null,
             avatar: null,
             msg_count: 0,
             showUserPop: false
@@ -21,19 +21,17 @@ const HeaderStatusBar = React.createClass({
         $.get(API_PATH + 'api/userState/v1/userState.json', {
             token: login_token
         }, function (data) {
-            if (data.code != 10000) throw 'got error ' + data.message;
-            let d = data.data;
-            let avatar = d.avatar ? d.avatar : (d.sex ?
-                'http://www.9888.cn/img/man.png' :
-                'http://www.9888.cn/img/woman.png');
+            if (data.code != 10000) throw `got error ${data.message}`;
+            let {avatar, sex, isLogin} = data.data, username = data.data.userName, realname = data.data.realName;
+            avatar = avatar || `http://www.9888.cn/img/${sex ? 'man' : 'woman'}.png`;
             this.setState({
-                is_login: d.isLogin,
-                username: d.userName,
-                real_name: d.realName,
+                is_login: isLogin,
+                username: username,
+                realname: realname,
                 avatar: avatar
             });
             // set current page is login or not. this is base function, very IMPORTANT!
-            $UserReady.fire(d.isLogin);
+            $UserReady.fire(isLogin, {username, realname, avatar});
         }.bind(this), 'json');
 
         // 获取用户未读消息数
@@ -61,7 +59,7 @@ const HeaderStatusBar = React.createClass({
                 <div className="login-user-state-pop">
                     <a href="/account/home.shtml"> <img src={this.state.avatar}/> </a>
                     <div className="text">
-                        <div> {this.state.real_name} </div>
+                        <div> {this.state.realname} </div>
                         <div>
                             <a href="/prdOrder/uinvest.shtml"> 我的投资 </a>
                             <span className="v-line"> &nbsp;|&nbsp; </span>
