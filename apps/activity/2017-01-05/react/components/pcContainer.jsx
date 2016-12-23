@@ -1,4 +1,9 @@
 const PcContainer = React.createClass({
+    getInitialState: function () {
+      return({
+          isRemind:false,
+      })
+    },
     render: function () {
         return (
             <div className="pcContainer">
@@ -10,7 +15,7 @@ const PcContainer = React.createClass({
                 <div className="pcWeekPack">
                     <div className="weekTitle"></div>
                     <div className="weekText">单周邀请有效好友人数达标，邀请人获不同级别的工豆奖励。</div>
-                    <div className="weekAward">请登录后，查看您的邀友数及可获工豆， 立即登录></div>
+                    <div className="weekAward">本周（1.6-1.12）内，您有效邀友<em>50</em>人，可获工豆<em>100</em>元。&nbsp;&nbsp;<div className="beforeWeek" onClick={()=>{this.getWeekLadder()}}>往周邀友奖励</div></div>
                     <div className="weekInvite"></div>
                     <div className="weekRemind">温馨提示： 每人按最高标准，仅可获得一个标准奖励。</div>
                 </div>
@@ -46,6 +51,7 @@ const PcContainer = React.createClass({
                             <div className="monthGiftText">按当月有效好友<br/> 累计年化投资额占比分配</div>
                         </div>
                         <div className="monthLadder">
+                            <img className="ladderText" src="./images/oneText.png" alt=""/>
                             <div className="ladderTitle">
                                 该月内，您有效邀友<em>300</em>人，有效好友累投年化<em>100,000,000</em>元，排名<em>5</em>，
                                 当前可分<em>5000,000.00</em>元奖金！
@@ -79,6 +85,10 @@ const PcContainer = React.createClass({
                         <div className="quarterTextRight">榜内有效好友累投<br/>年化总额≥4000万元</div>
                         <div className="quarterExplain">1.6-3.30，您有效邀友<em>300</em>人，有效好友累投年化<em>100,000,000</em>元，排名<em>5</em>，当前可分<em>5000,000.00</em>元奖金！
                         </div>
+                        {
+                            this.state.isRemind? <div className="quarterRemind">截止当前，榜内推荐人的有效好友累投年化总额为<em>5600</em>万元，单个推荐人可获该挡奖金！</div>:null
+                        }
+
                         <div className="quarterLadder">
                             {
                                 <QuarterLadderPC />

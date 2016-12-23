@@ -10,25 +10,31 @@ em{
   height: 100%;
   background: @colorBg;
   overflow-x: hidden;
+  position: relative;
+  z-index: 1;
   .fire1{
     position: absolute;
     top: 540px;
     left: 200px;
+    z-index: -1;
   }
   .fire2{
     position: absolute;
     top: 620px;
     right: 200px;
+    z-index: -1;
   }
   .fire3{
     position: absolute;
     top: 1580px;
     right: 200px;
+    z-index: -1;
   }
   .fire4{
      position: absolute;
      top: 1200px;
     left: 240px;
+    z-index: -1;
    }
   .pcBanner{
     height: 468px;
@@ -59,6 +65,14 @@ em{
       line-height: 36px;
       text-align: center;
       font-size: @font16;
+      em{
+        color: @colorNum;
+      }
+      .beforeWeek,a{
+        color: @colorNum;
+        display: inline-block;
+        cursor: pointer;
+      }
     }
     .weekInvite{
       width: 1006px;
@@ -133,8 +147,17 @@ em{
       .end{
         background:url("../images/end.png") no-repeat;
         color: @colorEnd;
+        margin-top: 0;
+        padding-top:10px;
         .stateLeft{
           border-right: 2px solid @colorEnd;
+        }
+      }
+      .not{
+        background:url("../images/not.png") no-repeat;
+        color: @colorNot;
+        .stateLeft{
+          border-right: 2px solid @colorNot;
         }
       }
     }
@@ -160,7 +183,7 @@ em{
       .monthGiftNumber{
         position: absolute;
         top: 230px;
-        left: 170px;
+        left: 168px;
         color: @colorNum;
         font-size: @font74;
       }
@@ -178,6 +201,12 @@ em{
       width: 580px;
       height: 490px;
       background: url("../images/monthLadder.png") no-repeat;
+      position: relative;
+      .ladderText{
+        position: absolute;
+        top: 0;
+        left: 200px;
+      }
       .ladderTitle{
         width: 460px;
         margin: 60px auto 20px;
@@ -290,6 +319,20 @@ em{
         em{
           color: @colorQuarterExplain;
         }
+      }
+      .quarterRemind{
+        width: 600px;
+        height: 60px;
+        background: url('../images/remind.png') no-repeat;
+        position: absolute;
+        left: 60px;
+        top: -80px;
+        color: @color6;
+        em{
+          color: @colorQuarterExplain;
+        }
+        text-align: center;
+        line-height: 46px;
       }
       .quarterLadder{
         position: absolute;
