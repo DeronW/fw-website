@@ -23,9 +23,8 @@ const HeaderStatusBar = React.createClass({
         }, function (data) {
             if (data.code != 10000) throw 'got error ' + data.message;
             let d = data.data;
-            let avatar = d.avatar ? d.avatar : (d.sex ?
-                'http://www.9888.cn/img/man.png' :
-                'http://www.9888.cn/img/woman.png');
+            let avatar = d.avatar || `http://www.9888.cn/img/${parseInt(d.sex) ? 'man' : 'woman'}.png`;
+
             this.setState({
                 is_login: d.isLogin,
                 username: d.userName,
