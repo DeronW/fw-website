@@ -1,6 +1,6 @@
 const QuarterLadderPC = React.createClass({
     getInitialState: function () {
-        this.PRE_PAGE = 8;
+        this.PRE_PAGE = 10;
         return ({
             totalData: [],
             page: 1,
@@ -103,9 +103,9 @@ const QuarterLadderPC = React.createClass({
                     <td>{item.number}</td>
                     <td>
                         {this.fixedPriceFun(item.money)}
-                        {item.text ? <div>{item.text}</div> : null}
+                        {item.text ? <em className="limit">({item.text})</em> : null}
                     </td>
-                    <td>{this.fixedPriceFun(item.price)}</td>
+                    <td className="tdPrice">{this.fixedPriceFun(item.price)}</td>
                 </tr>
             )
         };
@@ -119,7 +119,7 @@ const QuarterLadderPC = React.createClass({
         );
         return (
             <div className="quarterLadderContainerPC">
-                <table className="quarterLadder">
+                <table className="quarterLadderPc">
                     <thead>
                     <tr>
                         <td>用户名</td>

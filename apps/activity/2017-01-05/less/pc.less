@@ -1,0 +1,396 @@
+@import "variables.less";
+.pc-header{
+  background: #19162d !important;
+}
+em{
+  font-style: normal;
+}
+.pcContainer{
+  width: 100%;
+  height: 100%;
+  background: @colorBg;
+  overflow-x: hidden;
+  .fire1{
+    position: absolute;
+    top: 540px;
+    left: 200px;
+  }
+  .fire2{
+    position: absolute;
+    top: 620px;
+    right: 200px;
+  }
+  .fire3{
+    position: absolute;
+    top: 1580px;
+    right: 200px;
+  }
+  .fire4{
+     position: absolute;
+     top: 1200px;
+    left: 240px;
+   }
+  .pcBanner{
+    height: 468px;
+    width: 100%;
+  }
+  .pcWeekPack{
+    width: 1024px;
+    height: 618px;
+    margin: auto;
+    color: @colorText;
+    .weekTitle{
+      width: 660px;
+      height: 102px;
+      margin: auto;
+      background: url("../images/weekTitle.png") no-repeat;
+    }
+    .weekText{
+      width: 660px;
+      margin: auto;
+      text-align: center;
+      font-size: @font18;
+    }
+    .weekAward{
+      width: 756px;
+      height: 36px;
+      margin: 20px auto;
+      background: url("../images/textBg.png") no-repeat;
+      line-height: 36px;
+      text-align: center;
+      font-size: @font16;
+    }
+    .weekInvite{
+      width: 1006px;
+      height: 284px;
+      margin: 40px auto 20px;
+      background: url("../images/weekPerson.png") no-repeat;
+    }
+    .weekRemind{
+      width: 660px;
+      margin: auto;
+      text-align: center;
+      font-size: @font14;
+    }
+  }
+  .pcMonthPack{
+    width: 1024px;
+    margin: auto;
+    .monthTitle{
+      width: 660px;
+      height: 102px;
+      margin: auto;
+      background: url("../images/monthTitle.png") no-repeat;
+    }
+    .monthState{
+      width: 780px;
+      margin: 20px auto;
+      display: table;
+      .monthStateCommon {
+        width: 220px;
+        height: 86px;
+        margin-right: 58px;
+        float: left;
+        background: url("../images/not.png") no-repeat;
+        color: @colorNot;
+        padding-top: 10px;
+        cursor: pointer;
+        .stateLeft {
+          width: 20px;
+          height: 62px;
+          float: left;
+          border-right: 2px solid @colorNot;
+          font-size: @font16;
+          margin: 0 5px 0 30px;
+          padding-right: 5px;
+        }
+        .stateRight {
+          float: left;
+          width: 130px;
+          text-align: center;
+          .stateCurrentMonth {
+            font-size: @font28;
+          }
+          .stateCurrentDate {
+            font-size: @font16;
+          }
+        }
+      }
+      .monthStateCommonRight{
+        margin-right: 0;
+      }
+      .active{
+        width: 220px;
+        height: 95px;
+        background:url("../images/start.png") no-repeat;
+        padding-top:20px;
+        color: @colorStart;
+        margin-top: -9px;
+        .stateLeft{
+          border-right: 2px solid @colorStart;
+        }
+      }
+      .end{
+        background:url("../images/end.png") no-repeat;
+        color: @colorEnd;
+        .stateLeft{
+          border-right: 2px solid @colorEnd;
+        }
+      }
+    }
+    .monthCenter{
+      width: 100%;
+      display: table;
+    }
+    .monthGift{
+      float: left;
+      width: 430px;
+      height: 437px;
+      background: url("../images/monthGift.png") no-repeat;
+      position: relative;
+      .monthGiftTitle{
+        width: 308px;
+        text-align: center;
+        color: @colorGift;
+        position: absolute;
+        top: 150px;
+        left: 70px;
+        line-height: 20px;
+      }
+      .monthGiftNumber{
+        position: absolute;
+        top: 230px;
+        left: 170px;
+        color: @colorNum;
+        font-size: @font74;
+      }
+      .monthGiftText{
+        position: absolute;
+        bottom: 20px;
+        left: 70px;
+        color: @colorGiftText;
+        width: 308px;
+        text-align: center;
+      }
+    }
+    .monthLadder {
+      float: right;
+      width: 580px;
+      height: 490px;
+      background: url("../images/monthLadder.png") no-repeat;
+      .ladderTitle{
+        width: 460px;
+        margin: 60px auto 20px;
+        text-align: center;
+        font-size: @font14;
+        color: @color6;
+        line-height: 24px;
+        em{
+          color: @colorStart;
+        }
+      }
+    }
+    .monthExplain{
+      width: 978px;
+      height: 157px;
+      margin: 50px auto 100px;
+      background: url("../images/monthText.png") no-repeat;
+      font-size: @font14;
+      color: @colorWhite;
+      p{
+        padding: 16px 30px;
+        line-height: 24px;
+      }
+    }
+  }
+  .pcQuarterPack{
+    width: 1120px;
+    margin: auto;
+    height: 1550px;
+    .quarterTitle{
+      width: 660px;
+      height: 102px;
+      margin: 0 auto 10px;
+      background: url("../images/quarterTitle.png") no-repeat;
+    }
+    .quarterText{
+      width: 100%;
+      text-align: center;
+      color: @colorQuarterT;
+      font-size: @font18;
+    }
+    .quarterContent{
+      width: 100%;
+      height: 1280px;
+      background: url("../images/quarterLadder.png") no-repeat;
+      margin-top: 106px;
+      position: relative;
+      color: @colorWhite;
+      .quarterNumLeft{
+        position: absolute;
+        left: 230px;
+        top: 112px;
+        font-size: @font20;
+        em{
+          font-size: @font50;
+        }
+      }
+      .quarterNumCenter{
+        position: absolute;
+        left: 520px;
+        top: 112px;
+        font-size: @font20;
+        em{
+          font-size: @font50;
+        }
+      }
+      .quarterNumRight{
+        position: absolute;
+        left: 832px;
+        top: 112px;
+        font-size: @font20;
+        em{
+          font-size: @font50;
+        }
+      }
+      .quarterTextLeft{
+        position: absolute;
+        top: 208px;
+        left: 120px;
+        width: 165px;
+        text-align: center;
+        color: #87c8ff;
+        font-size: @font14;
+      }
+      .quarterTextCenter{
+        position: absolute;
+        top: 208px;
+        left: 436px;
+        width: 165px;
+        text-align: center;
+        color: #ffa6f1;
+        font-size: @font14;
+      }
+      .quarterTextRight{
+        position: absolute;
+        top: 208px;
+        left: 750px;
+        width: 165px;
+        text-align: center;
+        color: #fed159;
+        font-size: @font14;
+      }
+      .quarterExplain{
+        position: absolute;
+        top: 486px;
+        left: 100px;
+        color: @color6;
+        width: 814px;
+        text-align: center;
+        em{
+          color: @colorQuarterExplain;
+        }
+      }
+      .quarterLadder{
+        position: absolute;
+        top: 442px;
+        left: 100px;
+        width: 814px;
+        text-align: center;
+      }
+      .quarterFooter{
+        position: absolute;
+        top: 1130px;
+        left: 100px;
+        width: 814px;
+        color: #999;
+        line-height: 20px;
+      }
+    }
+  }
+  .pcActivityExplain{
+    width: 100%;
+    height: 550px;
+    margin: 50px 0 10px;
+    background: #463a87;
+    padding-top: 50px;
+    .ActivityExplainContent{
+      width: 1064px;
+      margin: auto;
+    }
+    .activityExplainTitle{
+      img{
+        vertical-align: middle;
+      }
+      span{
+        font-size: @font28;
+        color: @colorWhite;
+        display: inline-block;
+        vertical-align: middle;
+      }
+    }
+    .activityExplainText{
+      font-size: @font14;
+      color: @colorWhite;
+      line-height: 30px;
+      p{
+        width: 970px;
+      }
+    }
+  }
+  .pcFooterBar{
+    width: 100%;
+    height: 98px;
+    background: @colorBar;
+    position: fixed;
+    bottom: 0;
+    .footerBarContent{
+      width: 1084px;
+      margin: auto;
+      position: relative;
+      img{
+        top: -60px;
+        left: 0;
+        position: absolute;
+        z-index: 112;
+        width: 130px;
+        height: 150px;
+      }
+    }
+    .barText{
+      position: absolute;
+      left: 150px;
+      font-size: @font16;
+      color: @colorWhite;
+      height: 98px;
+      line-height: 98px;
+    }
+    a{
+      width: 156px;
+      height: 33px;
+      background: url("../images/btn.png") no-repeat;
+      text-align: center;
+      line-height: 30px;
+      color: @colorWhite;
+      font-size: @font14;
+      position: absolute;
+    }
+    .moreAward{
+      left: 500px;
+      top: 32px;
+    }
+    .howAward{
+      left: 700px;
+      top: 32px;
+    }
+    em{
+      cursor: pointer;
+      position: absolute;
+      top: 10px;
+      right: 100px;
+      width: 26px;
+      height: 26px;
+      background: url("../images/close.png") no-repeat;
+    }
+  }
+}

@@ -1,9 +1,9 @@
+
 .monthLadderContainerPC{
-  width: 515px;
-  height: 500px;
+  width: 446px;
   margin: auto;
   position: relative; 
-  .monthLadder{
+  .monthLadderPc{
     position: absolute;
     top: 0;
     left: 0;
@@ -13,12 +13,19 @@
     }
     thead{
       td{
-        height: 100px;
+        height: 50px;
+        color: #333;
+        font-size: 16px;
+        width: 120px;
+      }
+      .tHeadTd3{
+        width: 180px;
+        
       }
     }
     tbody{
       td{
-        height: 32px;
+        height: 36px;
       }
       .tdImg{
         display: inline-block;
@@ -36,25 +43,31 @@
         width: 20px;
         height: 20px;
         border-radius: 50%;
-        background: #f1f1f1;
+        background: #d4d4d4;
+        color: #fff;
         text-align: center;
         line-height: 20px;
       }
+      .bodyPrice{
+        color: #f00;
+      }
     }
   }
+
   .page{
     width: 240px;
     position: absolute;
-    top: 440px;
-    left: 130px;
+    top: 270px;
+    left: 150px;
     div{
       float: left;
-      width: 80px;
-      border: 1px solid #4d4d4d;
-      height: 30px;
+      width: 60px;
+      border: 1px solid #d5d5d5;
+      height: 24px;
       text-align: center;
-      line-height: 30px;
-      margin-left: 20px;
+      line-height: 24px;
+      margin-left: 10px;
+      color: #666;
       cursor: pointer;
     }
     .selectedPage{

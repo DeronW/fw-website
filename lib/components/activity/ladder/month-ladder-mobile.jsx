@@ -115,7 +115,7 @@ const MonthLadderMobile = React.createClass({
         );
         return (
             <div className="monthLadderContainerMobile">
-                <table className="monthLadder">
+                <table className="monthLadderMobile">
                     <thead>
                     <tr>
                         <td>用户名</td>

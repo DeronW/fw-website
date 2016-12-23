@@ -1,25 +1,36 @@
 .quarterLadderContainerPC{
   width: 786px;
-  height: 500px;
+  height: 600px;
   margin: 58px auto 0;
   position: relative;
-  .quarterLadder{
+  .quarterLadderPc{
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     thead{
       td{
-        height: 100px;
+        height: 72px;
+        color: #333;
+        font-size: 16px;
       }
     }
     tbody{
       tr{
-        height: 38px;
+        height: 46px;
       }
     }
     td{
       text-align: center;
+      color: #666;
+    }
+    .limit{
+      color: #999;
+      display: inline-block;
+      margin-left: 10px;
+    }
+    .tdPrice{
+      color: #ff5050;
     }
     .oneSpan{
       display: inline-block;
@@ -32,34 +43,37 @@
       width: 20px;
       height: 20px;
       border-radius: 50%;
-      background: #f1f1f1;
+      background: #d4d4d4;
       text-align: center;
       line-height: 20px;
+      color: #fff;
     }
     .tdImg{
       display: inline-block;
-      margin-top: 4px;
       vertical-align: middle;
     }
   }
   .page{
     position: absolute;
-    left: 300px;
+    left: 320px;
     bottom: 0px;
     width: 240px;
     div{
       float: left;
-      margin-right:26px;
+      margin-right:10px;
       cursor: pointer;
       padding: 2px;
-      width: 80px;
-      height: 30px;
-      border: 1px solid #4d4d4e;
+      width: 60px;
+      height: 26px;
+      border: 1px solid #dbdbdb;
       text-align: center;
-      line-height: 30px;
+      line-height: 26px;
+      color: #999;
+      background: #f6f6f6;
     }
     .selectedPage{
       border: 1px solid transparent;
+      background: #fff;
     }
   }
 }
