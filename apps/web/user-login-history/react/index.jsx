@@ -3,17 +3,14 @@ const Content = React.createClass({
         return {
             tabName: '工豆明细',
             bean: {},
-            username: 'xiaoming',
+            username: null,
         }
     },
     componentDidMount: function () {
-        this.setState({
-            bean: {
-                usable: 1,
-                outdate: 2,
-                frozen: 3,
-            }
-        })
+        var _this=this;
+        $UserReady(function(is_login, user){
+            _this.setState({username:user.username});
+        });
     },
     render: function () {
         let {bean} = this.state;
@@ -54,8 +51,8 @@ let Fn = {
             let rows = data.result.map((i) => [{
                 text: i.createTime
             }, {
-                text: i.cashValue > 0 ? ("+" + i.cashValue) : (i.cashValue),
-                className: i.cashValue > 0 ? 'red' : 'green'
+                text: i.cashValue,
+                className: i.cashValue,
             }, {
                 text: i.remark
             }, {
