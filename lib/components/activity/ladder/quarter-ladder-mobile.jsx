@@ -6,7 +6,7 @@ const QuarterLadderMobile = React.createClass({
             page: 1,
             totalPage: 2,
             tab: '上一页',
-            isClick:true,
+            isClick: true,
             cursor: 0
         })
     },
@@ -18,11 +18,11 @@ const QuarterLadderMobile = React.createClass({
             success: function (data) {
                 var sData = data.data;
                 if (sData.length <= this.PRE_PAGE) {
-                    this.setState({totalPage: 1,isClick:false});
+                    this.setState({totalPage: 1, isClick: false});
                 } else if (sData.length > this.PRE_PAGE && sData.length <= this.PRE_PAGE * 2) {
-                    this.setState({totalPage: 2,isClick:true})
+                    this.setState({totalPage: 2, isClick: true})
                 } else if (sData.length > this.PRE_PAGE * 2 && sData.length <= this.PRE_PAGE * 3) {
-                    this.setState({totalPage: 3,isClick:true})
+                    this.setState({totalPage: 3, isClick: true})
                 }
                 this.setState({totalData: sData})
             }.bind(this)
@@ -79,9 +79,6 @@ const QuarterLadderMobile = React.createClass({
         return this.state.totalData.slice(this.state.cursor, this.state.cursor + this.PRE_PAGE);
     },
     render: function () {
-        var iosStyle = {
-            marginTop: this.state.isIOS ? '0' : '78px'
-        };
         let pageImg = (item, index) => {
             return <div key={index}
                         className={this.state.isClick?(this.state.tab == item ? 'selectedPage':null):'selectedPage'}
@@ -119,7 +116,7 @@ const QuarterLadderMobile = React.createClass({
             </tbody>
         );
         return (
-            <div className="quarterLadderContainerMobile" style={iosStyle}>
+            <div className="quarterLadderContainerMobile">
                 <table className="quarterLadder">
                     <thead>
                     <tr>

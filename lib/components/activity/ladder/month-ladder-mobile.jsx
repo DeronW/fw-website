@@ -1,6 +1,6 @@
 const MonthLadderMobile = React.createClass({
     getInitialState: function () {
-        this.PRE_PAGE = 8;
+        this.PRE_PAGE = 5;
         return ({
             totalData: [],
             page: 1,
@@ -101,9 +101,8 @@ const MonthLadderMobile = React.createClass({
                 <td>{item.number}</td>
                 <td>
                     {this.fixedPriceFun(item.money)}
-                    {item.text?<div>{item.text}</div>:null}
                 </td>
-                <td>{this.fixedPriceFun(item.price)}</td>
+                <td className="bodyPrice">{this.fixedPriceFun(item.price)}</td>
             </tr>
         };
         let tBody = (
@@ -120,7 +119,7 @@ const MonthLadderMobile = React.createClass({
                     <tr>
                         <td>用户名</td>
                         <td>有效邀友数</td>
-                        <td>好友累计年化投资额（元）</td>
+                        <td className="tHeadTd3">好友累计年化投资额（元）</td>
                         <td>奖金（元）</td>
                     </tr>
                     </thead>

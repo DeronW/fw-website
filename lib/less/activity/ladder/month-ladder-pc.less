@@ -1,4 +1,4 @@
-
+@import "ladderVariables.less";
 .monthLadderContainerPC{
   width: 446px;
   margin: auto;
@@ -14,13 +14,12 @@
     thead{
       td{
         height: 50px;
-        color: #333;
-        font-size: 16px;
+        color: @color3;
+        font-size: @fontSize16;
         width: 120px;
       }
       .tHeadTd3{
         width: 180px;
-        
       }
     }
     tbody{
@@ -43,13 +42,13 @@
         width: 20px;
         height: 20px;
         border-radius: 50%;
-        background: #d4d4d4;
-        color: #fff;
+        background: @colorD4;
+        color: @colorWhite;
         text-align: center;
         line-height: 20px;
       }
       .bodyPrice{
-        color: #f00;
+        color: @colorF4;
       }
     }
   }
