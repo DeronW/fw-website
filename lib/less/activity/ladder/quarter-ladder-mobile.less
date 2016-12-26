@@ -1,7 +1,8 @@
+@import "ladderVariables.less";
 .quarterLadderContainerMobile{
   margin: auto;
   width: 700px;
-  height: 600px;
+  height: 1120px;
   position: relative;
   .quarterLadder{
     padding: 0 2%;
@@ -14,12 +15,17 @@
     }
     thead{
       td{
-        height: 100px;
+        height: 120px;
+        color: @color3;
+        font-size: @fontSize24;
+        width: 120px;
       }
     }
     tbody{
       td{
-        height: 48px;
+        height: 72px;
+        color: @color6;
+        font-size: @fontSize22;
       }
       .oneSpan{
         display: inline-block;
@@ -41,24 +47,36 @@
         margin-top: 4px;
         vertical-align: middle;
       }
+      .tdPriceLimit{
+        font-size: @fontSize18;
+        color: @color9;
+      }
+      .tdMoney{
+        color: @colorF4;
+      }
     }
   }
   .page{
     position: absolute;
-    bottom: 0;
-    left: 280px;
-    width: 200px;
+    bottom: 30px;
+    left: 240px;
+    width: 400px;
     text-align: center;
+    font-size: @fontSize20;
+    color: @color9;
     div{
       float: left;
-      width: 60px;
-      height: 30px;
-      line-height: 30px;
-      border: 1px solid #4d4d4d;
+      width: 104px;
+      height: 40px;
+      line-height: 40px;
+      border: 1px solid @colorBorder;
       margin-right: 20px;
+      background: @colorPageBg;
     }
     .selectedPage{
       border: 1px solid transparent;
+      background: @colorWhite;
+
     }
   }
 }

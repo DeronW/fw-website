@@ -1,6 +1,6 @@
 const QuarterLadderMobile = React.createClass({
     getInitialState: function () {
-        this.PRE_PAGE = 8;
+        this.PRE_PAGE = 10;
         return ({
             totalData: [],
             page: 1,
@@ -37,6 +37,7 @@ const QuarterLadderMobile = React.createClass({
         return str.substring(0, 2) + "**" + str.substring(str.length - 2, str.length);
     },
     fixedPriceFun: function (price) {
+        if(price == 0) return 0;
         return price.toFixed(2)
     },
     switchPageHandler: function (type) {
@@ -102,9 +103,9 @@ const QuarterLadderMobile = React.createClass({
                     <td>{item.number}</td>
                     <td>
                         {this.fixedPriceFun(item.money)}
-                        {item.text ? <div>{item.text}</div> : null}
+                        {item.text ? <div className="tdPriceLimit">({item.text})</div> : null}
                     </td>
-                    <td>{this.fixedPriceFun(item.price)}</td>
+                    <td className={this.fixedPriceFun(item.price)?"tdMoney":null}>{this.fixedPriceFun(item.price)}</td>
                 </tr>
             )
         };
