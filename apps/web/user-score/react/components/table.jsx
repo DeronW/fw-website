@@ -31,7 +31,6 @@ const Table = React.createClass({
         if (new_page) this.setState({page: new_page}, this.reloadData);
     },
     reloadData: function () {
-        // console.log(this.props.fnLoadData());
         this.props.fnLoadData && this.props.fnLoadData(this.state.page, (data) => {
             let filterData = this.props.fnFilterData && this.props.fnFilterData(data);
             if (filterData)
