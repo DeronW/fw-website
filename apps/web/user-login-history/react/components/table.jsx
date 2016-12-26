@@ -55,12 +55,12 @@ const Table = React.createClass({
     render: function () {
         let {page, total_page, rows} = this.state;
         let th_cell = (t, index) => {
-            return <th key={index} width={t.width}>{t.title}</th>
+            return <th key={index} width={t.width} className={index==4?"last":null}>{t.title}</th>
         };
         let tr = (row, row_index) => {
             let td = (cell, cell_index) => {
                 return (
-                    <td key={cell_index} className={cell.className}>
+                    <td key={cell_index} className={cell_index==4?"last":null}>
                         <span onClick={() => cell.clickHandler(this.reloadData)}>{cell.text}</span>
                         <em className="productStatus">{cell.content}</em>
                     </td>
@@ -73,7 +73,6 @@ const Table = React.createClass({
         };
         let pagination, empty_records;
         let bean_count;
-        console.log(this.state.bean_count);
         if(this.state.bean_count) {
             bean_count = (
                 <div className="totalCount">
@@ -100,7 +99,6 @@ const Table = React.createClass({
         } else {
             empty_records = <div className="emptyRecords">暂无记录</div>
         }
-        console.log(this.state.th_rows)
         return (
             <div className="tableContaner">
                 <table className="table-read-only">
