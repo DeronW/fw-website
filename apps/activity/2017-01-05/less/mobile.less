@@ -149,7 +149,7 @@
           position: absolute;
           top: 230px;
           left: 15px;
-          line-height: 20px;
+          line-height: 24px;
           font-size: @font20;
         }
         .monthGiftNumber{
@@ -230,7 +230,7 @@
         width: 100%;
         height: 662px;
         background: url("../images/mobileQuartGift.png") no-repeat;
-        margin-top: 106px;
+        margin-top: 136px;
         position: relative;
         color: @colorWhite;
         .quarterNumLeft{
@@ -287,54 +287,312 @@
           color: #fed159;
           font-size: @font16;
         }
-      }
-      .quarterContain{
-        width: 702px;
-        height: 1620px;
-        margin: auto;
-        background: url("../images/mobileQuartLadder.png") no-repeat;
-        .quarterExplain{
-          position: absolute;
-          top: 486px;
-          left: 100px;
-          color: @color6;
-          width: 814px;
-          text-align: center;
-          em{
-            color: @colorQuarterExplain;
-          }
-        }
         .quarterRemind{
-          width: 600px;
-          height: 60px;
-          background: url('../images/remind.png') no-repeat;
+          width: 700px;
+          height: 137px;
+          padding: 20px 5px 10px;
           position: absolute;
-          left: 60px;
-          top: -80px;
           color: @color6;
           font-size: @font24;
           em{
             color: @colorQuarterExplain;
           }
           text-align: center;
-          line-height: 46px;
+          line-height: 36px;
+        }
+        .quarterRemind1{
+          background: url('../images/mobileRemind1.png') no-repeat;
+          left: 0;
+          top: -130px;
+        }
+        .quarterRemind2{
+          background: url('../images/mobileRemind2.png') no-repeat;
+          left: 5px;
+          top: -130px;
+        }
+        .quarterRemind3{
+          left: 5px;
+          top: 160px;
+          background: url('../images/mobileRemind3.png') no-repeat;
+        }
+        .quarterRemindNot{
+          width: 700px;
+          height: 137px;
+          padding: 20px 5px 10px 5px;
+          background: url('../images/mobileRemindNot.png') no-repeat;
+          position: absolute;
+          left: 5px;
+          top: -130px;
+          color: @color6;
+          font-size: @font24;
+          em{
+            color: @colorQuarterExplain;
+          }
+          text-align: center;
+          line-height: 36px;
+        }
+      }
+      .quarterContain{
+        width: 702px;
+        height: 1620px;
+        margin: 40px auto 70px;
+        background: url("../images/mobileQuartLadder.png") no-repeat;
+        position: relative;
+        .quarterExplain{
+          position: absolute;
+          top: 176px;
+          left: 30px;
+          color: @color6;
+          width: 640px;
+          height: 136px;
+          text-align: center;
+          line-height: 40px;
+          font-size: @font24;
+          em{
+            color: @colorQuarterExplain;
+          }
         }
         .quarterLadder{
           position: absolute;
-          top: 442px;
-          //left: 100px;
-          width: 814px;
+          top: 142px;
           text-align: center;
         }
         .quarterFooter{
           position: absolute;
-          top: 1130px;
-          left: 100px;
-          width: 814px;
+          top: 1300px;
+          left: 20px;
+          width: 660px;
           color: #999;
-          line-height: 20px;
+          line-height: 34px;
+          font-size: @font20;
         }
       }
     }
   }
+  .appleInc{
+    width: 512px;
+    text-align: center;
+    font-size: @font26;
+    color: @colorWhite;
+    margin: 0 auto 200px;
+  }
+  .mobileBar{
+    width: 100%;
+    height: 140px;
+    background: #3b3369;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    .mobileLogo{
+      float: left;
+      position: absolute;
+      top: -20px;
+      left: 20px;
+    }
+    .mobileBarCenter{
+      float: left;
+      position: absolute;
+      top: 20px;
+      left: 120px;
+      width: 556px;
+      text-align: center;
+      font-size: @font24;
+      color: @colorWhite;
+      .mobileBarAward{
+        width: 252px;
+        height: 52px;
+        line-height: 52px;
+        text-align: center;
+        background: url("../images/mobileBtn.png") no-repeat;
+        position: absolute;
+        top:40px;
+      }
+      .mobileBarFriend{
+        width: 252px;
+        height: 52px;
+        line-height: 52px;
+        text-align: center;
+        background: url("../images/mobileBtn.png") no-repeat;
+        position: absolute;
+        top:40px;
+        left: 280px;
+      }
+    }
+    .mobileClose{
+      float: right;
+      margin: 10px 20px;
+    }
+  }
+  .mobileNotice{
+    width: 100%;
+    height: 100%;
+    background: url("../images/noticeBg.png");
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: block;
+    z-index: 100;
+    .mobileNoticeContentNo{
+      width: 702px;
+      height: 692px;
+      background:url("../images/wapNotice.png") no-repeat;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
+      .noticeClose{
+         width: 60px;
+         height: 60px;
+         background: transparent;
+         position: absolute;
+         right: 4px;
+         top: 4px;
+         cursor: pointer;
+       }
+      .noticeText{
+        width: 556px;
+        margin: 90px auto 0;
+        font-size: @font24;
+        color: @color6;
+        text-align: center;
+        line-height: 34px;
+        em{
+          color: @colorQuarterExplain;
+        }
+      }
+      .login{
+        display: block;
+        width: 320px;
+        height: 72px;
+        line-height: 72px;
+        text-align: center;
+        position: absolute;
+        right: 194px;
+        top: 294px;
+        font-size: @font32;
+        color: @colorWhite;
+      }
+      .noticeRemind{
+        width: 440px;
+        text-align: center;
+        font-size: @font24;
+        color: @color6;
+        position: absolute;
+        right: 130px;
+        top: 420px;
+        em{
+          color: @colorQuarterExplain;
+        }
+      }
+    }
+    .moreNew{
+      display: block;
+      width: 324px;
+      text-align: center;
+      font-size: @font32;
+      color: @colorWhite;
+      position: absolute;
+      right: 190px;
+      top: 534px;
+    }
+    .mobileNoticeContentLogin{
+      width: 702px;
+      height: 692px;
+      background:url("../images/wapNoticeLogin.png") no-repeat;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
+      font-size: @font24;
+      .noticeClose{
+        width: 56px;
+        height: 56px;
+        background: transparent;
+        position: absolute;
+        right: 0;
+        top: 0;
+        cursor: pointer;
+      }
+      .noticeText1{
+        position: absolute;
+        top: 110px;
+        left: 142px;
+        color: @color6;
+      }
+      .noticeCode{
+        position: absolute;
+        top: 160px;
+        left: 142px;
+        width: 200px;
+        text-align: center;
+        font-size: @font30;
+        color: @color6;
+      }
+      .noticeText2{
+        position: absolute;
+        top: 214px;
+        left: 142px;
+        color: @color6;
+      }
+      .noticeLink{
+        position: absolute;
+        top: 254px;
+        left: 142px;
+        width:486px;
+        text-align: center;
+        font-size: @font14;
+        color: @colorLink;
+      }
+      .copyCode{
+        position: absolute;
+        top: 300px;
+        left: 148px;
+        width:200px;
+        text-align: center;
+        color: @colorWhite;
+      }
+      .noticeRemind{
+        width: 442px;
+        height: 48px;
+        text-align: center;
+        color: @color6;
+        position: absolute;
+        right: 130px;
+        top: 420px;
+        em,a{
+          color: @colorQuarterExplain;
+        }
+        a{
+          display: inline-block;
+          margin-left: 20px;
+        }
+      }
+    }
+    .mobileNoticeWeekLadder{
+      padding-top: 100px;
+      width: 580px;
+      height: 492px;
+      background:url("../images/weekLadder.png") no-repeat;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
+      .noticeClose{
+        width: 56px;
+        height: 56px;
+        background: transparent;
+        position: absolute;
+        right: 0;
+        top: 0;
+        cursor: pointer;
+      }
+    }
+  }
+
 }

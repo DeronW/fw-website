@@ -114,7 +114,7 @@ const WeekLadderMobile = React.createClass({
             return <tr key={index}>
                 <td>{dateArr[index]}</td>
                 <td>{item.number}</td>
-                <td>{this.getAwardHandle(item.number)}</td>
+                <td className={item.number !== 0?"bodyAward":null}>{this.getAwardHandle(item.number)}</td>
             </tr>
         };
         let tBody = (

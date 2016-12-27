@@ -1,9 +1,4 @@
 const PcContainer = React.createClass({
-    getInitialState: function () {
-      return({
-          isRemind:false,
-      })
-    },
     render: function () {
         return (
             <div className="pcContainer">
@@ -15,7 +10,7 @@ const PcContainer = React.createClass({
                 <div className="pcWeekPack">
                     <div className="weekTitle"></div>
                     <div className="weekText">单周邀请有效好友人数达标，邀请人获不同级别的工豆奖励。</div>
-                    <div className="weekAward">本周（1.6-1.12）内，您有效邀友<em>50</em>人，可获工豆<em>100</em>元。&nbsp;&nbsp;<div className="beforeWeek" onClick={()=>{this.getWeekLadder()}}>往周邀友奖励</div></div>
+                    <div className="weekAward"></div>
                     <div className="weekInvite"></div>
                     <div className="weekRemind">温馨提示： 每人按最高标准，仅可获得一个标准奖励。</div>
                 </div>
@@ -81,14 +76,12 @@ const PcContainer = React.createClass({
                         <div className="quarterNumCenter"><em>1.3</em>%</div>
                         <div className="quarterNumRight"><em>1.8</em>%</div>
                         <div className="quarterTextLeft">榜内有效好友累投<br/>年化总额≥4000万元</div>
-                        <div className="quarterTextCenter">榜内有效好友累投<br/>年化总额≥4000万元</div>
-                        <div className="quarterTextRight">榜内有效好友累投<br/>年化总额≥4000万元</div>
-                        <div className="quarterExplain">1.6-3.30，您有效邀友<em>300</em>人，有效好友累投年化<em>100,000,000</em>元，排名<em>5</em>，当前可分<em>5000,000.00</em>元奖金！
+                        <div className="quarterTextCenter">榜内有效好友累投<br/>年化总额≥5000万元</div>
+                        <div className="quarterTextRight">榜内有效好友累投<br/>年化总额≥6000万元</div>
+                        <div className="quarterExplain">1.6-3.30，您有效邀友<em></em>人，有效好友累投年化<em></em>元，排名<em></em>，当前可分<em></em>元奖金！
                         </div>
-                        {
-                            this.state.isRemind? <div className="quarterRemind">截止当前，榜内推荐人的有效好友累投年化总额为<em>5600</em>万元，单个推荐人可获该挡奖金！</div>:null
-                        }
-
+                        <div className="quarterRemind">截止当前，榜内推荐人的有效好友累投年化总额为<em>5600</em>万元，单个推荐人可获该挡奖金！</div>
+                        <div className="quarterRemindNot hidden">截止当前，榜内推荐人的有效好友累投年化总额为<em>5600</em>万元，暂未达到中奖档位，大家继续加油哦！</div>
                         <div className="quarterLadder">
                             {
                                 <QuarterLadderPC />
@@ -127,9 +120,39 @@ const PcContainer = React.createClass({
                     <div className="footerBarContent">
                         <img src="./images/logo.png" alt=""/>
                         <div className="barText">朋友多，这些奖励还觉得不够？</div>
-                        <a href="#"  className="moreAward">更多邀友奖励</a>
-                        <a href="#" className="howAward">如何邀友</a>
-                        <em></em>
+                        <a className="moreAward">更多邀友奖励</a>
+                        <a className="howAward">如何邀友</a>
+                        <em className="barClose"></em>
+                    </div>
+                </div>
+                <div className="pcMovePerson">
+                    <div className="movePersonText">有效好友标准：<em>好友注册7天内累投年化额≥1000元</em>才算一个有效邀请。   温馨提示：投资等额标，超过18个月按18个月计算年化</div>
+                </div>
+                <div className="pcNotice hidden">
+                    <div className="pcNoticeContentNo hidden">
+                        <div className="noticeClose"></div>
+                        <div className="noticeText">请好友用您的工场码，<em>注册7天内达到VIP1及以上（即累投年化额≥1000元）</em>，且投资<br/>等额标时，超过18个月按18个月计算年化，才算一个有效邀请。<br/>
+                            登录后查看我的工场码<br/>
+                            还没有工场码？注册即可拥有。</div>
+                        <a className="login" href="https://passport.9888.cn/passport/login">登录注册</a>
+                        <div className="noticeRemind">
+                            新手注册即送<em>120</em>元，首投最高送<em>150</em>元，邀请好友首投再得<em>50</em>元!<a href="http://www.9888.cn/news/notice/1861.html">更多新手秘笈></a>
+                        </div>
+                    </div>
+                    <div className="pcNoticeContentLogin hidden">
+                        <div className="noticeClose"></div>
+                        <div className="noticeText1">请好友注册或投资时填写我的工场码</div>
+                        <div className="noticeCode">A354545</div>
+                        <div className="noticeText2">复制以下链接，发送给好友！</div>
+                        <div className="noticeLink">http://passport.9888.cn/pp-web2/register/phone.do?gcm=A677004</div>
+                        <div className="copyCode">复制链接</div>
+                        <div className="noticeRemind">
+                            新手注册即送<em>120</em>元，首投最高送<em>150</em>元，邀请好友首投再得<em>50</em>元!<a href="http://www.9888.cn/news/notice/1861.html">更多新手秘笈></a>
+                        </div>
+                    </div>
+                    <div className="pcNoticeWeekLadder hidden">
+                        <div className="noticeClose"></div>
+                        <WeekLadderPC />
                     </div>
                 </div>
             </div>

@@ -1,4 +1,7 @@
 const MobileContainer = React.createClass({
+    ajaxMonth: function () {
+      console.log("sd")
+    },
     render: function () {
         return (
             <div className="mobileContainer">
@@ -8,14 +11,14 @@ const MobileContainer = React.createClass({
                     <div className="weekText">单周邀请有效好友人数达标，邀请人获不同级别的工豆奖励。</div>
                     <div className="weekAward">本周（1.6-1.12）内，您有效邀友<em>50</em>人，可获工豆<em>100</em>元。
                     </div>
-                    <div className="weekBefore" onClick={()=>{this.getWeekLadder()}}>往周邀友奖励</div>
+                    <div className="weekBefore">往周邀友奖励</div>
                     <div className="weekInvite"></div>
                     <div className="weekRemind">温馨提示： 每人按最高标准，仅可获得一个标准奖励。</div>
                 </div>
                 <div className="mobileMonthPack">
                     <div className="monthTitle"></div>
                     <div className="monthState">
-                        <div className="monthStateCommon active">
+                        <div className="monthStateCommon active" onClick={()=>{this.ajaxMonth()}}>
                             <div className="stateLeft">进行中</div>
                             <div className="stateRight">
                                 <div className="stateCurrentMonth">1月</div>
@@ -74,10 +77,65 @@ const MobileContainer = React.createClass({
                         <div className="quarterNumCenter"><em>1.3</em></div>
                         <div className="quarterNumRight"><em>1.8</em></div>
                         <div className="quarterTextLeft">榜内有效好友累投<br/>年化总额≥4000万元</div>
-                        <div className="quarterTextCenter">榜内有效好友累投<br/>年化总额≥4000万元</div>
-                        <div className="quarterTextRight">榜内有效好友累投<br/>年化总额≥4000万元</div>
+                        <div className="quarterTextCenter">榜内有效好友累投<br/>年化总额≥5000万元</div>
+                        <div className="quarterTextRight">榜内有效好友累投<br/>年化总额≥6000万元</div>
                         <div className="quarterRemind">截止当前，榜内推荐人的有效好友累投年化总额为<em>5600</em>万元，单个推荐人可获该挡奖金！</div>
 
+                    </div>
+                    <div className="quarterContain">
+                        <div className="quarterExplain">1.6-3.30，您有效邀友<em>300</em>人，有效好友累投年化<em>100,000,000</em>元，排名<em>5</em>，当前可分<em>5000,000.00</em>元奖金！</div>
+                        <div className="quarterLadder">
+                            <QuarterLadderMobile />
+                        </div>
+                        <div className="quarterFooter">温馨提示：<br/>
+                            1. 以上数据实时更新，请以活动结束时间数据为准，排名顺序：符合获奖资格的好友累投年化额>符合获奖资格的有效邀友数>不符合
+                            获奖资格的好友累投年化额>不符合获奖资格的有效邀友数；<br/>
+                            2、投资等额标时，投资超过18个月标按18个月计算年化投资额；且最终奖金需再*0.56，0.56为借款方占用投资方的资金使用率。<br/>
+                            3、案例说明：榜内30名推荐人的有效好友累投年化总额为5600万，则单个推荐人可获奖金为其有效好友累投年化额*1.3%。
+                        </div>
+                    </div>
+                </div>
+                <div className="appleInc">以上活动由金融工场主办 与Apple Inc. 无关</div>
+                <div className="mobileBar">
+                    <img className="mobileLogo" src="./images/mobileLogo.png" alt=""/>
+                    <div className="mobileBarCenter">
+                        <div className="barCenterTop">朋友多，这些奖励还觉得不够？</div>
+                        <div className="mobileBarAward">更多邀友奖励</div>
+                        <div className="mobileBarFriend">如何邀友</div>
+                    </div>
+                    <img src="./images/mobileClose.png" alt="" className="mobileClose"/>
+                </div>
+                <div className="mobileNotice hidden">
+                    <div className="mobileNoticeContentNo hidden">
+                        <div className="noticeClose"></div>
+                        <div className="noticeText">请好友用您的工场码，<em>注册7天内达到VIP1及以上（即累投年化额≥1000元）</em>，且投资<br/>等额标时，超过18个月按18个月计算年化，才算一个有效邀请。<br/>
+                            登录后查看我的工场码<br/>
+                            还没有工场码？注册即可拥有。</div>
+                        <a className="login">登录注册</a>
+                        <div className="noticeRemind">
+                            新手注册即送<em>120</em>元，首投最高送<em>150</em>元，邀请好友首投再得<em>50</em>元!
+                        </div>
+                        <a className="moreNew" href="http://mp.weixin.qq.com/s?__biz=MjM5MjQwMjcyNA==&mid=507798032&idx=1&sn=6593ce9f7358486685b84006fa3c2fff&scene=0#wechat_redirect">更多新手秘笈></a>
+                    </div>
+                    <div className="mobileNoticeContentLogin hidden">
+                        <div className="noticeClose"></div>
+                        <div className="noticeText1">请好友注册或投资时填写我的工场码</div>
+                        <div className="noticeCode">A354545</div>
+                        <div className="noticeText2">复制以下链接，发送给好友！</div>
+                        <div className="noticeLink">http://passport.9888.cn/pp-web2/register/phone.do?gcm=A677004</div>
+                        <div className="copyCode">复制链接</div>
+                        <div className="noticeRemind">
+                            新手注册即送<em>120</em>元，首投最高送<em>150</em>元，邀请好友首投再得<em>50</em>元!
+                        </div>
+                        <a className="moreNew" href="http://mp.weixin.qq.com/s?__biz=MjM5MjQwMjcyNA==&mid=507798032&idx=1&sn=6593ce9f7358486685b84006fa3c2fff&scene=0#wechat_redirect">更多新手秘笈></a>
+                    </div>
+                    <div className="mobileNoticeWeekLadder hidden">
+                        <div className="noticeClose"></div>
+                        <WeekLadderMobile />
+                    </div>
+                    <div className="mobileNoticeWeekLadder hidden">
+                        <div className="noticeClose"></div>
+                        <WeekLadderMobile />
                     </div>
                 </div>
             </div>
