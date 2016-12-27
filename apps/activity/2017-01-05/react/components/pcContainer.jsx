@@ -1,4 +1,12 @@
 const PcContainer = React.createClass({
+    getInitialState: function () {
+      return({
+          month:1
+      })
+    },
+    ajaxMonth: function (n) {
+        this.setState({month:n})
+    },
     render: function () {
         return (
             <div className="pcContainer">
@@ -17,21 +25,21 @@ const PcContainer = React.createClass({
                 <div className="pcMonthPack">
                     <div className="monthTitle"></div>
                     <div className="monthState">
-                        <div className="monthStateCommon active">
+                        <div className="monthStateCommon active"  onClick={()=>{this.ajaxMonth(1)}}>
                             <div className="stateLeft">进行中</div>
                             <div className="stateRight">
                                 <div className="stateCurrentMonth">1月</div>
                                 <div className="stateCurrentDate">01.06 ~ 02.02</div>
                             </div>
                         </div>
-                        <div className="monthStateCommon">
+                        <div className="monthStateCommon" onClick={()=>{this.ajaxMonth(2)}}>
                             <div className="stateLeft">未开始</div>
                             <div className="stateRight">
                                 <div className="stateCurrentMonth">2月</div>
                                 <div className="stateCurrentDate">02.03 ~ 03.02</div>
                             </div>
                         </div>
-                        <div className="monthStateCommon monthStateCommonRight">
+                        <div className="monthStateCommon monthStateCommonRight" onClick={()=>{this.ajaxMonth(3)}}>
                             <div className="stateLeft">未开始</div>
                             <div className="stateRight">
                                 <div className="stateCurrentMonth">3月</div>
@@ -48,12 +56,10 @@ const PcContainer = React.createClass({
                         <div className="monthLadder">
                             <img className="ladderText" src="./images/oneText.png" alt=""/>
                             <div className="ladderTitle">
-                                该月内，您有效邀友<em>300</em>人，有效好友累投年化<em>100,000,000</em>元，排名<em>5</em>，
-                                当前可分<em>5000,000.00</em>元奖金！
                             </div>
                             <div className="ladderContent">
                                 {
-                                    <MonthLadderPC />
+                                    <MonthLadderPC month={this.state.month}/>
                                 }
                             </div>
                         </div>
@@ -68,9 +74,8 @@ const PcContainer = React.createClass({
                 </div>
                 <div className="pcQuarterPack">
                     <div className="quarterTitle"></div>
-                    <div className="quarterText">1.6 -
-                        3.30，根据榜内推荐人的有效好友累投年化总额（不含自身），推荐人可获不同级别奖金。榜内有效邀友数≥100人且有效好友累投年化额≥100万元的工友才可获奖。
-                    </div>
+                    <div className="quarterText">
+                        1.6-3.30，全榜30名推荐人的有效好友累投年化总额（不含自身）达到对应礼包标准，平台开启新春特奖。推荐人（有效好友≥100人且有效好友累投年化额≥100万元）奖金为推荐人活动期间的有效好友累投年化额*对应奖金比例。</div>
                     <div className="quarterContent">
                         <div className="quarterNumLeft"><em>1</em>%</div>
                         <div className="quarterNumCenter"><em>1.3</em>%</div>
@@ -81,7 +86,7 @@ const PcContainer = React.createClass({
                         <div className="quarterExplain">1.6-3.30，您有效邀友<em></em>人，有效好友累投年化<em></em>元，排名<em></em>，当前可分<em></em>元奖金！
                         </div>
                         <div className="quarterRemind">截止当前，榜内推荐人的有效好友累投年化总额为<em>5600</em>万元，单个推荐人可获该挡奖金！</div>
-                        <div className="quarterRemindNot hidden">截止当前，榜内推荐人的有效好友累投年化总额为<em>5600</em>万元，暂未达到中奖档位，大家继续加油哦！</div>
+                        <div className="quarterRemindNot hidden">截止当前，榜内推荐人的有效好友累投年化总额为<em>5600</em>万元，暂未开启新春特奖，大家继续加油哦！</div>
                         <div className="quarterLadder">
                             {
                                 <QuarterLadderPC />
@@ -131,7 +136,7 @@ const PcContainer = React.createClass({
                 <div className="pcNotice hidden">
                     <div className="pcNoticeContentNo hidden">
                         <div className="noticeClose"></div>
-                        <div className="noticeText">请好友用您的工场码，<em>注册7天内达到VIP1及以上（即累投年化额≥1000元）</em>，且投资<br/>等额标时，超过18个月按18个月计算年化，才算一个有效邀请。<br/>
+                        <div className="noticeText">请好友用您的工场码，<em>好友注册7天内累投年化额≥1000元</em>，且投资<br/>等额标时，超过18个月按18个月计算年化，才算一个有效邀请。<br/>
                             登录后查看我的工场码<br/>
                             还没有工场码？注册即可拥有。</div>
                         <a className="login" href="https://passport.9888.cn/passport/login">登录注册</a>
@@ -144,8 +149,8 @@ const PcContainer = React.createClass({
                         <div className="noticeText1">请好友注册或投资时填写我的工场码</div>
                         <div className="noticeCode">A354545</div>
                         <div className="noticeText2">复制以下链接，发送给好友！</div>
-                        <div className="noticeLink">http://passport.9888.cn/pp-web2/register/phone.do?gcm=A677004</div>
-                        <div className="copyCode">复制链接</div>
+                        <div className="noticeLink" id="copy-value">http://passport.9888.cn/pp-web2/register/phone.do?gcm=A677004</div>
+                        <div className="copyCode" data-clipboard-action="copy" data-clipboard-target="#copy-value" >复制链接</div>
                         <div className="noticeRemind">
                             新手注册即送<em>120</em>元，首投最高送<em>150</em>元，邀请好友首投再得<em>50</em>元!<a href="http://www.9888.cn/news/notice/1861.html">更多新手秘笈></a>
                         </div>

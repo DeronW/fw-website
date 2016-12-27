@@ -12,7 +12,15 @@ const MonthLadderPC = React.createClass({
     },
     componentDidMount: function () {
         $.ajax({
-            url: './javascripts/list.json',
+            url: API_PATH+'/api/activityPullNew/v2/PullNewTopAndYearInvest.json',
+            data:{
+                dataCount:20,
+                totalBaseAmt:1000,
+                endDate:'2017-3-30',
+                startDate:'2017-1-6',
+                startTotalCount:50,
+                startTotalInvest:50
+            },
             type: "get",
             dataType: 'json',
             success: function (data) {
@@ -36,8 +44,25 @@ const MonthLadderPC = React.createClass({
     subNameFun: function (str) {
         return str.substring(0,2)+"**"+str.substring(str.length-2,str.length);
     },
-    fixedPriceFun: function (price) {
-        return price.toFixed(2)
+    fixedPrice: function (total) {
+        return total.toFixed(2)
+    },
+    fixedPriceFun: function (i) {
+        let monthPrice = 120000;
+        let totalData = this.state.totalData;
+        if(totalData.totalYearInvest == 0||totalData.topList[i].totalall<100||totalData.topList[i].total<500000){
+            return '暂无奖金'
+        }else {
+            if(this.props.month == 1){
+                monthPrice = 120000;
+            }else if(this.props.month == 2){
+                monthPrice = 150000;
+            }else{
+                monthPrice = 180000;
+            }
+        }
+        return ((data.data.topList[i].total) / (data.data.totalYearInvest) * monthPrice).toFixed(2);
+
     },
     switchPageHandler: function (type) {
         this.setState({tab: type});
@@ -96,13 +121,13 @@ const MonthLadderPC = React.createClass({
             return <tr key={index}>
                 <td>
                     {this.isImgFun(index)?<img className="tdImg" src={this.isImgFun(index)}/>:<span className="twoSpan">{index+1}</span>}
-                    {<span className="oneSpan">{this.subNameFun(item.name)}</span>}
+                    {<span className="oneSpan">{this.subNameFun(item.loginName)}</span>}
                 </td>
-                <td>{item.number}</td>
+                <td>{item.totalall}</td>
                 <td>
-                    {this.fixedPriceFun(item.money)}
+                    {this.fixedPrice(item.total)}
                 </td>
-                <td className="bodyPrice">{this.fixedPriceFun(item.price)}</td>
+                <td className="bodyPrice">{this.fixedPriceFun(index)}</td>
             </tr>
         };
         let tBody = (

@@ -12,11 +12,19 @@ const QuarterLadderPC = React.createClass({
     },
     componentDidMount: function () {
         $.ajax({
-            url: './javascripts/list.json',
+            url: API_PATH+'/api/activityPullNew/v2/PullNewTopAndYearInvest.json',
+            data:{
+                dataCount:30,
+                totalBaseAmt:1000,
+                endDate:'2017-3-30',
+                startDate:'2017-1-6',
+                startTotalCount:0,
+                startTotalInvest:0
+            },
             type: "get",
             dataType: 'json',
             success: function (data) {
-                var sData = data.data;
+                var sData = data.data.topList;
                 if (sData.length <= this.PRE_PAGE) {
                     this.setState({totalPage: 1,isClick:false});
                 } else if (sData.length > this.PRE_PAGE && sData.length <= this.PRE_PAGE * 2) {
@@ -36,7 +44,22 @@ const QuarterLadderPC = React.createClass({
     subNameFun: function (str) {
         return str.substr(0, 2) + "**" + str.substr(str.length - 2, 2);
     },
-    fixedPriceFun: function (price) {
+    fixedPrice: function (total) {
+        return total.toFixed(2)
+    },
+    fixedPriceFun: function (total, totalLimit) {
+        let price = 0;
+        let p = 0.01;
+        if (total >= 4000000 && total < 5000000) {
+            p = 0.01;
+        } else if (total >= 5000000 && total < 6000000) {
+            p = 0.013;
+        } else if (total >= 6000000) {
+            p = 0.018;
+        } else {
+            return '暂无奖金'
+        }
+        price = totalLimit * 0.01 * 0.0056 + (total - totalLimit) * 0.01;
         return price.toFixed(2)
     },
     switchPageHandler: function (type) {
@@ -100,12 +123,12 @@ const QuarterLadderPC = React.createClass({
                         <span className="twoSpan">{index + 1}</span>}
                         {<span className="oneSpan">{this.subNameFun(item.name)}</span>}
                     </td>
-                    <td>{item.number}</td>
+                    <td>{item.totalall}</td>
                     <td>
-                        {this.fixedPriceFun(item.money)}
-                        {item.text ? <em className="limit">({item.text})</em> : null}
+                        {this.fixedPrice(item.money)}
+                        {<em className="limit">({item.total4})</em>}
                     </td>
-                    <td className="tdPrice">{this.fixedPriceFun(item.price)}</td>
+                    <td className={this.fixedPriceFun(item.totalall,item.total4) !== '暂无奖金'?"tdPrice":null}>{this.fixedPriceFun(item.totalall,item.total4)}</td>
                 </tr>
             )
         };
