@@ -49,7 +49,7 @@ $(function () {
         toggleYaoQingYouLi();
     });
     //弹窗登录
-    var loginUrl = 'http://www.9888.cn/api/activityPullNew/pullnewParty.do?id=18';
+    var loginUrl = 'http://www.9888.cn/api/activityPullNew/pullnewParty.do?id=19';
     $(".mobileNoticeContentNo .login").on("click", function () {
         $FW.gotoSpecialPage("登录", loginUrl);
     });
