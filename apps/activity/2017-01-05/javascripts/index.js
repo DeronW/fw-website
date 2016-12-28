@@ -95,7 +95,7 @@ $(function () {
                 if (totalYearInvest == 0 || pullNewCount < 100 || myFriendYearInvest < 500000) {
                     chartsText = `<div>1.6-3.30，您有效邀友 <em>${pullNewCount}</em> 人，好友累计年化投资<em>${myFriendYearInvest}</em>排名<em>${rankNum}</em>，当前无奖金可分，要努力哦！`;
                 } else {
-                    price = fixedPriceFun(totalYearInvest,myFriendYearInvest);
+                    var price = fixedPriceFun(totalYearInvest,myFriendYearInvest);
                     chartsText = `<div>1.6-3.30，您有效邀友 <em>${pullNewCount}</em> 人，好友累计年化投资<em>${myFriendYearInvest}</em>排名<em>${rankNum}</em>，当前可分得<em>${price}</em>元奖金！`;
                 }
                 $('.pcQuarterPack .quarterExplain,.mobileQuarterPack .quarterExplain').html(chartsText);
