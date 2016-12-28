@@ -254,7 +254,7 @@ $(function () {
             startDate: week_arg_st,
             endDate: week_arg_et,
             totalBaseAmt: 1000,
-        }, (data)=> {
+        }, function(data){
             $UserReady(function (is_login, user) {
                 if (is_login) {
                     var dataCount = data.data.pullNewCount || 0;
@@ -298,7 +298,7 @@ $(function () {
             $(".weekBefore").on("click", function () {
                 $(".mobileNotice,.mobileNotice .mobileNoticeWeekLadder").removeClass('hidden');
             });
-        }, 'json');
+        }.bind(this), 'json');
 
         //月份切换
         var month_1 = $(".monthStateCommon").eq(0);
