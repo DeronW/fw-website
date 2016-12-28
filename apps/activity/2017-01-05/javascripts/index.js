@@ -41,8 +41,8 @@ $(function () {
         $FW.gotoSpecialPage("登录", loginUrl);
     });
     var fixedPriceFun = function (total, totalLimit) {
-        let price = 0;
-        let p = 0.01;
+        var price = 0;
+        var p = 0.01;
         if (total >= 4000000 && total < 5000000) {
             p = 0.01;
         } else if (total >= 5000000 && total < 6000000) {
