@@ -6,6 +6,10 @@ const Content = React.createClass({
             username: null,
             check:false,
             phoneNumer:'188****0339',
+            value:"",
+            text:null,
+            check:false,
+            time:5,
         }
     },
     componentDidMount: function () {
@@ -14,10 +18,41 @@ const Content = React.createClass({
         //     _this.setState({username:user.username});
         // });
     },
-    tabClickHandlerOne:function () {
+    changeEvent:function (event) {
         this.setState({
-            tabName:'设置新银行预留手机号',
+            value:event.target.value,
         })
+    },
+    gainNumberHandler:function () {
+        this.setState({
+            check:true,
+        });
+        let _this =this;
+        let timer= setInterval(function () {
+            _this.setState({
+                time:_this.state.time-1,
+            });
+            console.log(_this.state.time);
+            if(_this.state.time==-1){
+                clearInterval(timer);
+                _this.setState({
+                    time:5,
+                    check:false,
+                });
+            }
+        },1000);
+
+    },
+    tabClickHandlerOne:function () {
+        // console.log(this.state.value);
+        if(this.state.value==""){
+            GlobalAlert("验证码不能为空");
+        }else{
+            this.setState({
+                tabName:'设置新银行预留手机号',
+            })
+        }
+
     },
     tabClickHandlerTwo:function () {
         this.setState({
@@ -25,6 +60,7 @@ const Content = React.createClass({
         })
     },
     render: function () {
+        let value = this.state.value;
         let {bean} = this.state;
         let tab_rows = ['验证注册手机号','设置新银行预留手机号','完成'];
         let tab_item = (value,index)=>{
@@ -35,7 +71,7 @@ const Content = React.createClass({
                 <span className="done"><img src="images/done.png"/></span>:
                 <span className="number">{index+1}</span>
 
-            console.log(index,  tabName, tab_rows,tab_rows.indexOf(tabName));
+            // console.log(index,  tabName, tab_rows,tab_rows.indexOf(tabName));
 
             return(
                 <li key={index} className={tabName==value?"active":null}>
@@ -46,12 +82,24 @@ const Content = React.createClass({
         };
         let show;
         let section;
+        let verificationCode=(<span>获取验证码</span>);
+        let code=<span>请{this.state.time}s后重试</span>;
+        let correct;
+        let tips;
+        this.state.check?tips =<div className="tips">已向{this.state.phoneNumer}发送短信验证码</div>:null;
+        if(this.state.check){
+            correct=code;
+        }else{
+            correct=verificationCode;
+        }
         if(this.state.tabName=="验证注册手机号"){
             section=(<div className="firstContent">
                 <div className="mainbox">
                     <div className="linef">注册手机号：<input type="text" value={this.state.phoneNumer} readOnly="true" /></div>
-                    <div className="lines">手机验证码：<input type="text"/><span className="gainNumber">获取验证码</span></div>
-                    <div className="tips">已向{this.state.phoneNumer}发送短信验证码</div>
+                    <div className="lines">手机验证码：<input type="text" value={value} onChange={this.changeEvent}/><span className="gainNumber" onClick={()=>{this.gainNumberHandler()}}>{correct}</span></div>
+                    <div>{value}</div>
+                    {tips}
+                    {/*<div className="tips">已向{this.state.phoneNumer}发送短信验证码</div>*/}
                     <div className="next" onClick={() => this.tabClickHandlerOne()}>下一步</div>
                 </div>
             </div>)
@@ -59,7 +107,7 @@ const Content = React.createClass({
             section=(<div className="secondContent">
                 <div className="mainbox">
                     <div className="linef">新银行预留手机号：<input type="text"/></div>
-                    <div className="lines">手机验证码：<input type="text"/><span className="gainNumber">获取验证码</span></div>
+                    <div className="lines">手机验证码：<input type="text"/><span className="gainNumber">{verificationCode}</span></div>
                     <div className="tips">已向{this.state.phoneNumer}发送短信验证码</div>
                     <div className="next" onClick={() => this.tabClickHandlerTwo()}>下一步</div>
                 </div>
@@ -92,7 +140,6 @@ const Content = React.createClass({
                     </div>
                     {section}
                 </div>
-
             </div>)
     }
 });
