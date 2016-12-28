@@ -6,43 +6,74 @@ const MonthLadderPC = React.createClass({
             page: 1,
             totalPage: 2,
             tab: '上一页',
-            isClick:true,
+            isClick: true,
             cursor: 0
         })
     },
     componentDidMount: function () {
+        var febStart = new Date("2017/2/3").getTime();
+        var marStart = new Date("2017/3/3").getTime();
+        var startDate = '2017-1-6';
+        var endDate = '2017-2-2';
+        $.get(API_PATH + " /api/userState/v1/timestamp.json", function (data) {
+            var currentTime = data.timestamp;
+            if(currentTime < febStart){
+                startDate = '2017-1-6';
+                endDate = '2017-2-2';
+            }else if(currentTime < marStart){
+                startDate = '2017-2-3';
+                endDate = '2017-3-2';
+            }else{
+                startDate = '2017-3-3';
+                endDate = '2017-3-30';
+            }
+            this.ajaxPullNewInvest(startDate,endDate)
+        }.bind(this), 'json');
+    },
+    componentWillReceiveProps: function (nextProps) {
+        let month = nextProps.month;
+        if(month == 1){
+            this.ajaxPullNewInvest('2017-1-6','2017-2-2')
+        }else if(month == 2){
+            this.ajaxPullNewInvest('2017-2-3','2017-3-2')
+        }else{
+            this.ajaxPullNewInvest('2017-3-3','2017-3-30')
+        }
+    },
+    ajaxPullNewInvest: function (startDate,endDate) {
         $.ajax({
-            url: API_PATH+'/api/activityPullNew/v2/PullNewTopAndYearInvest.json',
-            data:{
-                dataCount:20,
-                totalBaseAmt:1000,
-                endDate:'2017-3-30',
-                startDate:'2017-1-6',
-                startTotalCount:50,
-                startTotalInvest:50
+            url: API_PATH + '/api/activityPullNew/v2/PullNewTopAndYearInvest.json',
+            data: {
+                dataCount: 20,
+                totalBaseAmt: 1000,
+                startDate: startDate,
+                endDate: endDate,
+                startTotalCount: 50,
+                startTotalInvest: 50
             },
             type: "get",
             dataType: 'json',
             success: function (data) {
                 var sData = data.data;
-                if (sData.length <= this.PRE_PAGE) {
-                    this.setState({totalPage: 1,isClick:false});
-                } else if (sData.length > this.PRE_PAGE && sData.length <= this.PRE_PAGE * 2) {
-                    this.setState({totalPage: 2,isClick:true})
-                } else if (sData.length > this.PRE_PAGE * 2 && sData.length <= this.PRE_PAGE * 3) {
-                    this.setState({totalPage: 3,isClick:true})
+                var len = sData.length || [];
+                if (len <= this.PRE_PAGE) {
+                    this.setState({totalPage: 1, isClick: false});
+                } else if (len > this.PRE_PAGE && sData.length <= this.PRE_PAGE * 2) {
+                    this.setState({totalPage: 2, isClick: true})
+                } else if (len > this.PRE_PAGE * 2 && len <= this.PRE_PAGE * 3) {
+                    this.setState({totalPage: 3, isClick: true})
                 }
                 this.setState({totalData: sData})
             }.bind(this)
         });
     },
     isImgFun: function (key) {
-        var imgName = ['jin','yin','tong'];
-        var i = imgName[key]?`./images/${imgName[key]}.png`:null;
+        var imgName = ['jin', 'yin', 'tong'];
+        var i = imgName[key] ? `./images/${imgName[key]}.png` : null;
         return i
     },
     subNameFun: function (str) {
-        return str.substring(0,2)+"**"+str.substring(str.length-2,str.length);
+        return str.substring(0, 2) + "**" + str.substring(str.length - 2, str.length);
     },
     fixedPrice: function (total) {
         return total.toFixed(2)
@@ -50,14 +81,14 @@ const MonthLadderPC = React.createClass({
     fixedPriceFun: function (i) {
         let monthPrice = 120000;
         let totalData = this.state.totalData;
-        if(totalData.totalYearInvest == 0||totalData.topList[i].totalall<100||totalData.topList[i].total<500000){
+        if (totalData.totalYearInvest == 0 || totalData.topList[i].totalall < 100 || totalData.topList[i].total < 500000) {
             return '暂无奖金'
-        }else {
-            if(this.props.month == 1){
+        } else {
+            if (this.props.month == 1) {
                 monthPrice = 120000;
-            }else if(this.props.month == 2){
+            } else if (this.props.month == 2) {
                 monthPrice = 150000;
-            }else{
+            } else {
                 monthPrice = 180000;
             }
         }
@@ -103,24 +134,25 @@ const MonthLadderPC = React.createClass({
     get_current_page: function () {
         return this.state.totalData.slice(this.state.cursor, this.state.cursor + this.PRE_PAGE);
     },
-    render:function(){
-        let pageImg = (item,index) => {
+    render: function () {
+        let pageImg = (item, index) => {
             return <div key={index}
                         className={this.state.isClick?(this.state.tab == item ? 'selectedPage':null):'selectedPage'}
                         onClick={this.state.isClick?()=>{this.switchPageHandler(item)}:null}>{item}</div>
         };
         let page = (
-          <div className="page">
-              {
-                  ['上一页','下一页'].map(pageImg)
-              }
-          </div>
+            <div className="page">
+                {
+                    ['上一页', '下一页'].map(pageImg)
+                }
+            </div>
         );
-        let bodyImg = (item,index) => {
+        let bodyImg = (item, index) => {
             index += this.state.cursor;
             return <tr key={index}>
                 <td>
-                    {this.isImgFun(index)?<img className="tdImg" src={this.isImgFun(index)}/>:<span className="twoSpan">{index+1}</span>}
+                    {this.isImgFun(index) ? <img className="tdImg" src={this.isImgFun(index)}/> :
+                        <span className="twoSpan">{index + 1}</span>}
                     {<span className="oneSpan">{this.subNameFun(item.loginName)}</span>}
                 </td>
                 <td>{item.totalall}</td>

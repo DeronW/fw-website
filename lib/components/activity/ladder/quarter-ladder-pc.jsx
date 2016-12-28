@@ -24,7 +24,7 @@ const QuarterLadderPC = React.createClass({
             type: "get",
             dataType: 'json',
             success: function (data) {
-                var sData = data.data.topList;
+                var sData = data.data.topList || [];
                 if (sData.length <= this.PRE_PAGE) {
                     this.setState({totalPage: 1,isClick:false});
                 } else if (sData.length > this.PRE_PAGE && sData.length <= this.PRE_PAGE * 2) {

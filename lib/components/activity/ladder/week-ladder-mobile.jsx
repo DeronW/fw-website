@@ -18,7 +18,7 @@ const WeekLadderMobile = React.createClass({
             '2017-02-24,2017-03-02 23:59:59;2017-03-03,2017-03-09 23:59:59;2017-03-10,2017-03-16 23:59:59;2017-03-17,2017-03-23 23:59:59;2017-03-24,2017-03-30 23:59:59',
             totalBaseAmt:1000,
         }, (data) => {
-            var sData = data.data.countList;
+            var sData = data.data.countList || [];
             if (sData.length <= this.PRE_PAGE) {
                 this.setState({totalPage: 1,isClick:false})
             } else if (sData.length > this.PRE_PAGE && sData.length <= this.PRE_PAGE * 2) {
@@ -117,7 +117,6 @@ const WeekLadderMobile = React.createClass({
             let currentDate = new Date().toLocaleDateString().split('/').slice(1).join('.');
 
             if(dateArr[index].split('-')[0] <= currentDate) {
-                console.log(2.3 < currentDate);
                 t = this.getAwardHandle(item);
                 n = item;
             } else {

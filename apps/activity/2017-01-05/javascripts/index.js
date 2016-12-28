@@ -40,13 +40,9 @@ $(function () {
     $(".mobileNoticeContentNo .login").on("click", function () {
         $FW.gotoSpecialPage("登录", loginUrl);
     });
-    $UserReady(function (is_login, user) {
-        if (is_login) {
-            $(".weekAward").html("往周邀请奖励")
-        }
-    });
+    
     //季排行榜
-
+    //API_PATH + '/api/activityPullNew/v2/PullNewTopAndYearInvest.json'
     $.get(API_PATH + '/api/activityPullNew/v2/PullNewTopAndYearInvest.json', {
         dataCount: 30,
         totalBaseAmt: 1000,
@@ -65,8 +61,9 @@ $(function () {
             $(".pcQuarterPack .quarterRemind").css({
                 left: left + "px",
                 top: top + "px"
-            });
-            $(".mobileQuarterPack .quarterRemind").addClass(className)
+            }).removeClass("hidden").addClass(className);
+            $(".mobileQuarterPack .quarterRemind").addClass(className);
+            $(".pcQuarterPack  .quarterRemindNot").addClass("hidden");
         }
 
         if (totalYearInvest >= 40000000 && totalYearInvest < 50000000) {
@@ -76,8 +73,6 @@ $(function () {
         } else if (totalYearInvest >= 60000000) {
             pcTotalMove(680, -80, "quarterRemind3");
         } else {
-            $(".pcQuarterPack .quarterRemind").addClass("hidden");
-            $(".pcQuarterPack  .quarterRemindNot").removeClass("hidden");
             $(".mobileQuarterPack .quarterRemind").addClass("quarterRemindNot").html("截止当前，榜内推荐人的有效好友累投年化总额为<em>5600</em>万元，暂未开启新春特奖，大家加油哦！")
         }
         $(".mobileQuarterPack .quarterRemind em,.pcQuarterPack .quarterRemind em,.pcQuarterPack  .quarterRemindNot em").html(totalYearInvest / 10000);
@@ -102,7 +97,7 @@ $(function () {
         });
     }.bind(this), 'json');
     //月排行榜
-    function monthChange(arg1,arg2,arg3){
+    function monthChange(arg1, arg2, arg3) {
         $.get(API_PATH + '/api/activityPullNew/v2/PullNewTopAndYearInvest.json', {
             dataCount: 20,
             totalBaseAmt: 1000,
@@ -125,7 +120,8 @@ $(function () {
             }
             $UserReady(function (is_login, data) {
                 if (is_login) {
-                    $('.ladderTitle').html(titText);
+                    $('.pcMonthPack .ladderTitle').html(titText);
+                    $('.mobileMonthPack .ladderTitle').html(titText);
                 } else {
                     var pcTitText = '<div class="monthNoLogin">请登录后，查看您的邀友排名及可获奖金 ，</div> <div class="monthLogin">立即登录></div>';
                     var mobileTitText = '<div class="monthNoLogin">请登录后，<br/>查看您的邀友排名及可获奖金</div> <div class="monthLogin">立即登录></div>';
@@ -260,11 +256,11 @@ $(function () {
             $UserReady(function (is_login, user) {
                 if (is_login) {
                     var dataCount = data.data.pullNewCount || 0;
-                    var score = 0,pcWeekText,mobileWeekText,beforeText;
-                    if(nowTime < week21){
+                    var score = 0, pcWeekText, mobileWeekText, beforeText;
+                    if (nowTime < week21) {
                         beforeText = '';
                         $(".weekBefore").addClass("hidden");
-                    }else{
+                    } else {
                         beforeText = '<div class="beforeWeek" >往周邀友奖励</div>';
                         $(".weekBefore").html("往周邀友奖励");
                     }
@@ -316,7 +312,8 @@ $(function () {
         if (nowTime < febStart) {
             month_1.addClass('active').find(".stateLeft").text("进行中").siblings().removeClass('active');
             $(".monthStateCommon:gt(0)").addClass('not');
-            monthChange(janStart,janEnd,120000);
+
+            monthChange(janStart, janEnd, 120000);
         } else if (nowTime < marStart) {
             month_2.addClass('active').find(".stateLeft").text("进行中").siblings().removeClass('active');
             month_1.addClass("end").find(".stateLeft").text("已结束");
@@ -324,7 +321,8 @@ $(function () {
             $(".monthGiftNumber").text(15);
             $(".pcMonthPack .monthLadder .ladderText").attr("src", "./images/twoText.png");
             $(".mobileMonthPack .monthLadder .ladderText").attr("src", "./images/mobileTwo.png");
-            monthChange(febStart,febEnd,150000);
+
+            monthChange(febStart, febEnd, 150000);
             month_1.click(function () {
                 fn($(this), 12, 'oneText.png', 'mobileOne.png')
             });
@@ -337,7 +335,8 @@ $(function () {
             $(".monthGiftNumber").text(18);
             $(".pcMonthPack .monthLadder .ladderText").attr("src", "./images/threeText.png");
             $(".mobileMonthPack .monthLadder .ladderText").attr("src", "./images/mobileThree.png");
-            monthChange(marStart,marEnd,180000);
+
+            monthChange(marStart, marEnd, 180000);
             month_1.click(function () {
                 fn($(this), 12, 'oneText.png', 'mobileOne.png')
             });
