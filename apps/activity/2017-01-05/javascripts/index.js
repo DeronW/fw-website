@@ -40,57 +40,117 @@ $(function () {
     $(".mobileNoticeContentNo .login").on("click", function () {
         $FW.gotoSpecialPage("登录", loginUrl);
     });
+    var fixedPriceFun = function (total, totalLimit) {
+        var price = 0;
+        var p = 0.01;
+        if (total >= 4000000 && total < 5000000) {
+            p = 0.01;
+        } else if (total >= 5000000 && total < 6000000) {
+            p = 0.013;
+        } else if (total >= 6000000) {
+            p = 0.018;
+        } else {
+            return '暂无奖金'
+        }
+        price = totalLimit * 0.01 * 0.0056 + (total - totalLimit) * 0.01;
+        return price.toFixed(2)
+    };
+    //季排行榜
+    //API_PATH + '/api/activityPullNew/v2/PullNewTopAndYearInvest.json'
+    $.get(API_PATH + '/api/activityPullNew/v2/PullNewTopAndYearInvest.json', {
+        dataCount: 30,
+        totalBaseAmt: 1000,
+        endDate: '2017-3-30',
+        startDate: '2017-1-6',
+        startTotalCount: 0,
+        startTotalInvest: 0
+    }, function (data) {
+        var price, chartsText;
+        var rankNum = data.data.rankNum || '30+';//当前用户排名
+        var pullNewCount = data.data.pullNewCount || 0;//有效邀请人数
+        var myFriendYearInvest = data.data.myFriendYearInvest || 0;
+        var totalYearInvest = data.data.totalYearInvest;
 
-    $.get('./javascripts/month.json', function (data) {
-        var rank = 0;
-        let sData = data.data;
-        let totalInvest = data.data.totalYearInvest;
-
-        if (totalInvest >= 40000000 && totalInvest < 50000000) {
+        function pcTotalMove(left, top, className) {
             $(".pcQuarterPack .quarterRemind").css({
-                left: 60 + "px",
-                top: -80 + "px"
-            });
-            $(".mobileQuarterPack .quarterRemind").addClass("quarterRemind1")
-        } else if (totalInvest >= 50000000 && totalInvest<60000000) {
-            $(".pcQuarterPack .quarterRemind").css({
-                left: 360 + "px",
-                top: -80 + "px"
-            });
-            $(".mobileQuarterPack .quarterRemind").addClass("quarterRemind2")
-        }else if(totalInvest >= 60000000){
-            $(".pcQuarterPack .quarterRemind").css({
-                left: 680 + "px",
-                top: -80 + "px"
-            });
-            $(".mobileQuarterPack .quarterRemind").addClass("quarterRemind3")
-        }else{
-            $(".pcQuarterPack .quarterRemind").addClass("hidden");
-            $(".pcQuarterPack  .quarterRemindNot").removeClass("hidden");
-            $(".mobileQuarterPack .quarterRemind").addClass("quarterRemindNot").html("截止当前，榜内推荐人的有效好友累投年化总额为<em>5600</em>万元，暂未达到中奖档位，大家继续加油哦！")
+                left: left + "px",
+                top: top + "px"
+            }).removeClass("hidden").addClass(className);
+            $(".mobileQuarterPack .quarterRemind").addClass(className);
+            $(".pcQuarterPack  .quarterRemindNot").addClass("hidden");
         }
 
-        $(".pcQuarterPack .quarterRemind em,.pcQuarterPack .quarterRemindNot em").html(totalInvest/10000);
-        $(".mobileQuarterPack .quarterRemind em,.mobileQuarterPack .quarterRemindNot em").html(totalInvest/10000);
-        let $em = $(".pcQuarterPack .quarterExplain em,.mobileQuarterPack .quarterExplain em");
-        $em.eq(0).text(sData.pullNewCount);
-        $em.eq(1).text(sData.myFriendYearInvest);
-        $em.eq(2).text(sData.rankNum || "30+");
-        $em.eq(3).text(sData.totalYearInvest);
+        if (totalYearInvest >= 40000000 && totalYearInvest < 50000000) {
+            pcTotalMove(60, -80, "quarterRemind1");
+        } else if (totalYearInvest >= 50000000 && totalYearInvest < 60000000) {
+            pcTotalMove(360, -80, "quarterRemind2");
+        } else if (totalYearInvest >= 60000000) {
+            pcTotalMove(680, -80, "quarterRemind3");
+        } else {
+            $(".mobileQuarterPack .quarterRemind").addClass("quarterRemindNot").html("截止当前，榜内推荐人的有效好友累投年化总额为<em>5600</em>万元，暂未开启新春特奖，大家加油哦！")
+        }
+        $(".mobileQuarterPack .quarterRemind em,.pcQuarterPack .quarterRemind em,.pcQuarterPack  .quarterRemindNot em").html(totalYearInvest / 10000);
+        $UserReady(function (is_login, user) {
+            if (is_login) {
+                if (totalYearInvest == 0 || pullNewCount < 100 || myFriendYearInvest < 500000) {
+                    chartsText = "<div>1.6-3.30，您有效邀友 <em>"+pullNewCount+"</em> 人，好友累计年化投资<em>"+myFriendYearInvest+"</em>排名<em>"+rankNum+"</em>，当前无奖金可分，要努力哦！";
+                } else {
+                    price = fixedPriceFun(totalYearInvest,myFriendYearInvest);
+                    chartsText = "<div>1.6-3.30，您有效邀友 <em>"+pullNewCount+"</em> 人，好友累计年化投资<em>"+myFriendYearInvest+"</em>排名<em>"+rankNum+"</em>，当前可分得<em>"+price+"</em>元奖金！";
+                }
+                $('.pcQuarterPack .quarterExplain,.mobileQuarterPack .quarterExplain').html(chartsText);
+            } else {
+                var pcChartsText = '<div class="quarterNoLoginText">请登录后，查看您的邀友排名及可获奖金</div> <div class="quarterLogin">立即登录></div>'
+                var mobileChartsText = '<div class="quarterNoLoginText">请登录后，<br/>查看您的邀友排名及可获奖金</div> <div class="quarterLogin">立即登录></div>'
+                $('.pcQuarterPack .quarterExplain').html(pcChartsText);
+                $('.mobileQuarterPack .quarterExplain').html(mobileChartsText);
+                $(".quarterLogin").on("click", function () {
+                    $FW.gotoSpecialPage("登录", loginUrl);
+                });
+            }
+        });
+    }.bind(this), 'json');
+    //月排行榜
+    function monthChange(arg1, arg2, arg3) {
+        $.get(API_PATH + '/api/activityPullNew/v2/PullNewTopAndYearInvest.json', {
+            dataCount: 20,
+            totalBaseAmt: 1000,
+            startDate: arg1,
+            endDate: arg2,
+            startTotalCount: 50,
+            startTotalInvest: 50
+        }, function (data) {
+            var titText;
+            var rankNum = data.data.rankNum || '20+';//当前用户排名
+            var pullNewCount = data.data.pullNewCount || 0;//有效邀请人数
+            var myFriendYearInvest = data.data.myFriendYearInvest;
+            var totalYearInvest = data.data.totalYearInvest;
+            var prize;
+            (totalYearInvest == 0 || pullNewCount < 100 || myFriendYearInvest < 500000) ? prize = 0 : prize = ((myFriendYearInvest / totalYearInvest) * arg3).toFixed(2);
+            if (totalYearInvest == 0 || pullNewCount < 100 || myFriendYearInvest < 500000) {
+                titText = '该月内，您有效邀友 <em>' + pullNewCount + '</em> 人，好友累计年化投资 <em>' + myFriendYearInvest + '</em> 元，排名 <em>' + rankNum + '</em>，当前无奖金可分，要努力哦！';
+            } else {
+                titText = '该月内，您有效邀友 <em>' + pullNewCount + '</em> 人，好友累计年化投资 <em>' + myFriendYearInvest + '</em> 元，排名 <em>' + rankNum + '</em>，当前可分得 <em>' + prize + ' </em>元奖金！';
+            }
+            $UserReady(function (is_login, user) {
+                if (is_login) {
+                    $('.ladderTitle').html(titText);
+                } else {
+                    var pcTitText = '<div class="monthNoLogin">请登录后，查看您的邀友排名及可获奖金 ，</div> <div class="monthLogin">立即登录></div>';
+                    var mobileTitText = '<div class="monthNoLogin">请登录后，<br/>查看您的邀友排名及可获奖金</div> <div class="monthLogin">立即登录></div>';
+                    $('.pcMonthPack .ladderTitle').html(pcTitText);
+                    $('.mobileMonthPack .ladderTitle').html(mobileTitText);
+                    $(".monthLogin").on('click', function () {
+                        $FW.gotoSpecialPage("登录", loginUrl);
+                    })
+                }
+            });
 
-        //移动端提示
+        }.bind(this), 'json');
+    }
 
-    }, 'json');
-
-    var janStart = new Date("2017/1/6").getTime();
-    var janEnd = new Date("2017/2/2 23:59:59").getTime();
     var febStart = new Date("2017/2/3").getTime();
-    var febEnd = new Date("2017/3/2 23:59:59").getTime();
     var marStart = new Date("2017/3/3").getTime();
-    var marEnd = new Date("2017/3/30 23:59:59").getTime();
-    var $month = $(".monthStateCommon");
-    var oneWeekStart = new Date("2017/1/6").getTime();
-    var oneWeekEnd = new Date("2017/1/12 23:59:59").getTime();
     //顶部邀请奖励，根据不同周显示不同数据
     var week11 = new Date("2017/1/6 00:00:00").getTime();
     var week12 = new Date("2017/1/12 23:59:59").getTime();
@@ -116,10 +176,10 @@ $(function () {
     var week112 = new Date("2017/3/23 23:59:59").getTime();
     var week121 = new Date("2017/3/24 00:00").getTime();
     var week122 = new Date("2017/3/30 23:59:59").getTime();
-
-
+    //时间戳
     //API_PATH+"/api/userState/v1/timestamp.json"
-    $.get("./javascripts/time.json", function (data) {
+    //"./javascripts/time.json"
+    $.get(API_PATH+"/api/userState/v1/timestamp.json", function (data) {
         var nowTime = data.data.timestamp;
         var timeText, week_arg_st, week_arg_et;
         if (nowTime < week12) {
@@ -182,100 +242,114 @@ $(function () {
             week_arg_st = '2017/3/24';
             week_arg_et = '2017/3/30';
         }
-        //API_PATH+/api/activityPullNew/v2/pullNewCount.json
-        //,{
-        //    startDate: week_arg_st,
-        //        endDate: week_arg_et,
-        //        totalBaseAmt: 1000,
-        //}
-        $.get("./javascripts/count.json", (data)=> {
+        var clipboard = new Clipboard('.copyCode');//复制功能
+        clipboard.on('success', function (e) {
+            alert('复制成功');
+        });
+        clipboard.on('error', function (e) {
+            alert('复制失败');
+        });
+        //拉新人数
+        $.get(API_PATH + "/api/activityPullNew/v2/pullNewCount.json", {
+            startDate: week_arg_st,
+            endDate: week_arg_et,
+            totalBaseAmt: 1000,
+        }, function(data){
             $UserReady(function (is_login, user) {
                 if (is_login) {
                     var dataCount = data.data.pullNewCount || 0;
-                    var score = 0;
-                    var beforeText = '<div class="beforeWeek" >往周邀友奖励</div>';
+                    var score = 0, pcWeekText, mobileWeekText, beforeText;
+                    if (nowTime < week21) {
+                        beforeText = '';
+                        $(".weekBefore").addClass("hidden");
+                    } else {
+                        beforeText = '<div class="beforeWeek" >往周邀友奖励</div>';
+                        $(".weekBefore").html("往周邀友奖励");
+                    }
                     if (dataCount >= 5) score = dataCount * 10;
                     if (dataCount >= 10) score = dataCount * 12;
                     if (dataCount >= 30) score = dataCount * 15;
                     if (dataCount >= 50) score = dataCount * 18;
                     if (dataCount < 5) {
-                        weekText = '本周（' + timeText + '）内，您有效邀友 <em>' + dataCount + '</em> 人，暂未获得工豆奖励，加油哦！' + beforeText;
+                        pcWeekText = '本周（' + timeText + '）内，您有效邀友 <em>' + dataCount + '</em> 人，暂未获得工豆奖励，加油哦！' + beforeText;
+                        mobileWeekText = '本周（' + timeText + '）内，您有效邀友 <em>' + dataCount + '</em> 人，暂未获得工豆奖励，加油哦！';
                     } else {
-                        weekText = '本周（' + timeText + '）内，您有效邀友 <em>' + dataCount + '</em> 人，可获工豆 <em>' + score + '</em> 元 ！' + beforeText;
+                        pcWeekText = '本周（' + timeText + '）内，您有效邀友 <em>' + dataCount + '</em> 人，可获工豆 <em>' + score + '</em> 元 ！' + beforeText;
+                        mobileWeekText = '本周（' + timeText + '）内，您有效邀友 <em>' + dataCount + '</em> 人，可获工豆 <em>' + score + '</em> 元 ！';
                     }
-                    $(".pcWeekPack .weekAward").html(weekText);
+
+                    $(".pcWeekPack .weekAward").html(pcWeekText);
+                    $(".mobileWeekPack .weekAward").html(mobileWeekText);
                     $(".noticeCode").html(user.userCode);
                     $(".noticeLink").html('http://passport.9888.cn/pp-web2/register/phone.do?gcm=' + user.userCode);
                 } else {
                     $(".pcWeekPack .weekAward").html('请登录后，查看您的邀友数及可获工豆， <a href="https://passport.9888.cn/passport/login">立即登录></a>');
+                    $(".mobileWeekPack .weekAward").html('请登录后，查看您的邀友数及可获工豆');
+                    $(".weekBefore").addClass('hidden');
+                    $(".weekLogin").removeClass('hidden').html('立即登录').on("click", function () {
+                        $FW.gotoSpecialPage('登录', loginUrl);
+                    });
                 }
             });
+            //往周邀友奖励
             $(".beforeWeek").on("click", function () {
                 $(".pcNotice,.pcNotice .pcNoticeWeekLadder").removeClass('hidden');
             });
             $(".weekBefore").on("click", function () {
                 $(".mobileNotice,.mobileNotice .mobileNoticeWeekLadder").removeClass('hidden');
             });
-        }, 'json');
+        }.bind(this), 'json');
 
-        if (nowTime >= janStart && nowTime <= janEnd) {
-            $month.eq(0).addClass('active').find(".stateLeft").text("进行中").siblings().removeClass('active');
+        //月份切换
+        var month_1 = $(".monthStateCommon").eq(0);
+        var month_2 = $(".monthStateCommon").eq(1);
+        var month_3 = $(".monthStateCommon").eq(2);
+
+        var fn = function (_this, n, pcImg, mobileImg) {
+            _this.removeClass('end').addClass('active').siblings().removeClass('active').addClass("end");
+            $(".monthGiftNumber").text(n);
+            $(".pcMonthPack .monthLadder .ladderText").attr("src", "./images/" + pcImg);
+            $(".mobileMonthPack .monthLadder .ladderText").attr("src", "./images/" + mobileImg);
+        };
+        if (nowTime < febStart) {
+            month_1.addClass('active').find(".stateLeft").text("进行中").siblings().removeClass('active');
             $(".monthStateCommon:gt(0)").addClass('not');
-        } else if (nowTime >= febStart && nowTime <= febEnd) {
-            $month.eq(1).addClass('active').find(".stateLeft").text("进行中").siblings().removeClass('active');
-            $month.eq(0).addClass("end").find(".stateLeft").text("已结束");
-            $month.eq(2).addClass("not").find(".stateLeft").text("未开始");
+
+            monthChange('2017-1-6', '201-2-2', 120000);
+        } else if (nowTime < marStart) {
+            month_2.addClass('active').find(".stateLeft").text("进行中").siblings().removeClass('active');
+            month_1.addClass("end").find(".stateLeft").text("已结束");
+            month_3.addClass("not").find(".stateLeft").text("未开始");
             $(".monthGiftNumber").text(15);
             $(".pcMonthPack .monthLadder .ladderText").attr("src", "./images/twoText.png");
             $(".mobileMonthPack .monthLadder .ladderText").attr("src", "./images/mobileTwo.png");
-            febMonthClick();
-        } else if (nowTime >= marStart && nowTime <= marEnd) {
-            $month.eq(2).addClass('active').find(".stateLeft").text("进行中").siblings().removeClass('active');
+
+            monthChange('2017-2-3', '2017-3-2', 150000);
+            month_1.click(function () {
+                fn($(this), 12, 'oneText.png', 'mobileOne.png')
+            });
+            month_2.click(function () {
+                fn($(this), 15, 'twoText.png', 'mobileTwo.png')
+            });
+        } else {
+            month_3.addClass('active').find(".stateLeft").text("进行中").siblings().removeClass('active');
             $(".monthStateCommon:lt(2)").addClass("end").find(".stateLeft").text("已结束");
             $(".monthGiftNumber").text(18);
             $(".pcMonthPack .monthLadder .ladderText").attr("src", "./images/threeText.png");
             $(".mobileMonthPack .monthLadder .ladderText").attr("src", "./images/mobileThree.png");
-            marMonthClick();
+
+            monthChange('2017-3-3', '2017-3-30', 180000);
+            month_1.click(function () {
+                fn($(this), 12, 'oneText.png', 'mobileOne.png')
+            });
+            month_2.click(function () {
+                fn($(this), 15, 'twoText.png', 'mobileTwo.png')
+            });
+            month_3.click(function () {
+                fn($(this), 18, 'threeText.png', 'mobileThree.png')
+            });
         }
     }.bind(this), 'json');
-    var febMonthClick = function () {
-        $month.eq(0).on("click", function () {
-            $(this).removeClass('end').addClass('active').siblings().removeClass('active').addClass("end");
-            $(".monthGiftNumber").text(12);
-            $(".pcMonthPack .monthLadder .ladderText").attr("src", "./images/oneText.png");
-            $(".mobileMonthPack .monthLadder .ladderText").attr("src", "./images/mobileOne.png");
-        });
-        $month.eq(1).on("click", function () {
-            $(this).removeClass('end').addClass('active').siblings().removeClass('active').addClass("end");
-            $(".monthGiftNumber").text(15);
-            $(".pcMonthPack .monthLadder .ladderText").attr("src", "./images/twoText.png");
-            $(".mobileMonthPack .monthLadder .ladderText").attr("src", "./images/mobileTwo.png");
-        });
-    };
-    var marMonthClick = function () {
-        $month.eq(0).on("click", function () {
-            $(this).removeClass('end').addClass('active').siblings().removeClass('active').addClass("end");
-            $(".monthGiftNumber").text(12);
-            $(".pcMonthPack .monthLadder .ladderText").attr("src", "./images/oneText.png");
-            $(".mobileMonthPack .monthLadder .ladderText").attr("src", "./images/mobileOne.png");
-        });
-        $month.eq(1).on("click", function () {
-            $(this).removeClass('end').addClass('active').siblings().removeClass('active').addClass("end");
-            $(".monthGiftNumber").text(15);
-            $(".pcMonthPack .monthLadder .ladderText").attr("src", "./images/twoText.png");
-            $(".mobileMonthPack .monthLadder .ladderText").attr("src", "./images/mobileTwo.png");
-        });
-        $month.eq(2).on("click", function () {
-            $(this).removeClass('end').addClass('active').siblings().removeClass('active').addClass("end");
-            $(".monthGiftNumber").text(18);
-            $(".pcMonthPack .monthLadder .ladderText").attr("src", "./images/threeText.png");
-            $(".mobileMonthPack .monthLadder .ladderText").attr("src", "./images/mobileThree.png");
-        });
-    };
-    //$(".beforeWeek").on("click", function () {
-    //    showWeekLadder();
-    //});
-
 });
 
 //function showWeekLadder() {
