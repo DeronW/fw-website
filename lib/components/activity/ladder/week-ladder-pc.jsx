@@ -7,11 +7,13 @@ const WeekLadderPC = React.createClass({
             totalPage: 2,
             tab: '上一页',
             isClick:true,
-            cursor: 0
+            cursor: 0,
+            currentDate:0
         })
     },
     componentDidMount: function () {
-        $.get(API_PATH+'/api/activityPullNew/v2/PullNewCountByTimeline.json', {
+        this.ajaxTime();
+        $.get(API_PATH+'api/activityPullNew/v2/PullNewCountByTimeline.json', {
             timeline: '2017-01-06,2017-01-12 23:59:59;2016-1-13,2017-01-19 23:59:59;2017-01-20,2017-01-26 23:59:59;' +
             '2017-01-27,2017-02-02 23:59:59;2017-02-03,2017-02-09 23:59:59;2017-02-10,2017-02-16 23:59:59;2017-02-17,2017-02-23 23:59:59;' +
             '2017-02-24,2017-03-02 23:59:59;2017-03-03,2017-03-09 23:59:59;2017-03-10,2017-03-16 23:59:59;2017-03-17,2017-03-23 23:59:59;2017-03-24,2017-03-30 23:59:59',
@@ -83,11 +85,11 @@ const WeekLadderPC = React.createClass({
         return this.state.totalData.slice(this.state.cursor, this.state.cursor + this.PRE_PAGE);
     },
     ajaxTime: function () {
-        $.get(API_PATH+'/api/userState/v1/timestamp.json', function (data) {
-            var currentDate = new Date(data.data.timestamp).toLocaleDateString().split('/').slice(1).join('.');
+        $.get(API_PATH+'api/userState/v1/timestamp.json', function (data) {
+           var currentDate = new Date(data.data.timestamp).toLocaleDateString().split('/').slice(1).join('.');
+           this.setState({currentDate:currentDate})
         }.bind(this),'json');
     },
-
     render: function () {
         let pageImg = (item, index) => {
             return <div key={index}
@@ -119,12 +121,8 @@ const WeekLadderPC = React.createClass({
             index += this.state.cursor;
             let t;
             let n;
-            let currentDate = new Date().toLocaleDateString().split('/').slice(1).join('.');
-            //$.get(API_PATH+'/api/userState/v1/timestamp.json', function (data) {
-            //    currentDate = new Date(data.data.timestamp).toLocaleDateString().split('/').slice(1).join('.');
-            //}.bind(this),'json');
-            //console.log(currentDate);
-            if(dateArr[index].split('-')[0] < currentDate) {
+            console.log(this.state.currentDate);
+            if(dateArr[index].split('-')[0] < this.state.currentDate) {
                 t = this.getAwardHandle(item);
                 n = item;
             } else {
