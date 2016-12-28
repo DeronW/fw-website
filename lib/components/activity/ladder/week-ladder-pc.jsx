@@ -85,10 +85,20 @@ const WeekLadderPC = React.createClass({
         return this.state.totalData.slice(this.state.cursor, this.state.cursor + this.PRE_PAGE);
     },
     ajaxTime: function () {
-        $.get(API_PATH+'api/userState/v1/timestamp.json', function (data) {
-           var currentDate = new Date(data.data.timestamp).toLocaleDateString().split('/').slice(1).join('.');
+        this.getServerTimestamp(function (timestamp) {
+           var currentDate = new Date(timestamp).toLocaleDateString().split('/').slice(1).join('.');
            this.setState({currentDate:currentDate})
-        }.bind(this),'json');
+        }.bind(this));
+    },
+    getServerTimestamp:function(callback){
+        var ts = $getDebugParams().timestamp;
+        if(ts) {
+            callback(ts)
+        } else {
+            $.get(API_PATH+"api/userState/v1/timestamp.json", function (data) {
+                callback(data.data.timestamp)
+            }, 'json')
+        }
     },
     render: function () {
         let pageImg = (item, index) => {
@@ -121,7 +131,9 @@ const WeekLadderPC = React.createClass({
             index += this.state.cursor;
             let t;
             let n;
-            console.log(this.state.currentDate);
+            console.log(typeof dateArr[index].split('-')[0]);
+            console.log(typeof this.state.currentDate);
+            console.log(dateArr[index].split('-')[0] < this.state.currentDate);
             if(dateArr[index].split('-')[0] < this.state.currentDate) {
                 t = this.getAwardHandle(item);
                 n = item;
