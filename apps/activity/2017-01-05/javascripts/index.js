@@ -74,7 +74,7 @@ $(function () {
     };
     //季排行榜
     //API_PATH + '/api/activityPullNew/v2/PullNewTopAndYearInvest.json'
-    $.get(API_PATH + '/api/activityPullNew/v2/PullNewTopAndYearInvest.json', {
+    $.get(API_PATH + 'api/activityPullNew/v2/PullNewTopAndYearInvest.json', {
         dataCount: 30,
         totalBaseAmt: 1000,
         endDate: '2017-3-30',
@@ -135,7 +135,7 @@ $(function () {
     }.bind(this), 'json');
     //月排行榜
     function monthChange(arg1, arg2, arg3) {
-        $.get(API_PATH + '/api/activityPullNew/v2/PullNewTopAndYearInvest.json', {
+        $.get(API_PATH + 'api/activityPullNew/v2/PullNewTopAndYearInvest.json', {
             dataCount: 20,
             totalBaseAmt: 1000,
             startDate: arg1,
@@ -445,7 +445,7 @@ $(function () {
             alert('复制失败');
         });
         //拉新人数
-        $.get(API_PATH + "/api/activityPullNew/v2/pullNewCount.json", {
+        $.get(API_PATH + "api/activityPullNew/v2/pullNewCount.json", {
             startDate: week_arg_st,
             endDate: week_arg_et,
             totalBaseAmt: 1000,
@@ -503,8 +503,8 @@ $(function () {
         var fn = function (_this, n, pcImg, mobileImg) {
             _this.removeClass('end').addClass('active').siblings().removeClass('active').addClass("end");
             $(".monthGiftNumber").text(n);
-            $(".pcMonthPack .monthLadder .ladderText").attr("src", "./images/" + pcImg);
-            $(".mobileMonthPack .monthLadder .ladderText").attr("src", "./images/" + mobileImg);
+            $(".pcMonthPack .monthLadder .ladderText").attr("src", "images/" + pcImg);
+            $(".mobileMonthPack .monthLadder .ladderText").attr("src", "images/" + mobileImg);
         };
         if (nowTime < febStart) {
             month_1.addClass('active').find(".stateLeft").text("进行中").siblings().removeClass('active');
@@ -516,8 +516,8 @@ $(function () {
             month_1.addClass("end").find(".stateLeft").text("已结束");
             month_3.addClass("not").find(".stateLeft").text("未开始");
             $(".monthGiftNumber").text(15);
-            $(".pcMonthPack .monthLadder .ladderText").attr("src", "./images/twoText.png");
-            $(".mobileMonthPack .monthLadder .ladderText").attr("src", "./images/mobileTwo.png");
+            $(".pcMonthPack .monthLadder .ladderText").attr("src", "images/twoText.png");
+            $(".mobileMonthPack .monthLadder .ladderText").attr("src", "images/mobileTwo.png");
 
             monthChange('2017-2-3', '2017-3-2', 150000);
             month_1.click(function () {
@@ -530,8 +530,8 @@ $(function () {
             month_3.addClass('active').find(".stateLeft").text("进行中").siblings().removeClass('active');
             $(".monthStateCommon:lt(2)").addClass("end").find(".stateLeft").text("已结束");
             $(".monthGiftNumber").text(18);
-            $(".pcMonthPack .monthLadder .ladderText").attr("src", "./images/threeText.png");
-            $(".mobileMonthPack .monthLadder .ladderText").attr("src", "./images/mobileThree.png");
+            $(".pcMonthPack .monthLadder .ladderText").attr("src", "images/threeText.png");
+            $(".mobileMonthPack .monthLadder .ladderText").attr("src", "images/mobileThree.png");
 
             monthChange('2017-3-3', '2017-3-30', 180000);
             month_1.click(function () {

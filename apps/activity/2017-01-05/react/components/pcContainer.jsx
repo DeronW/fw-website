@@ -55,7 +55,7 @@ const PcContainer = React.createClass({
                             <div className="monthGiftText">按当月有效好友<br/> 累计年化投资额占比分配</div>
                         </div>
                         <div className="monthLadder">
-                            <img className="ladderText" src="./images/oneText.png" alt=""/>
+                            <img className="ladderText" src="images/oneText.png" alt=""/>
                             <div className="ladderTitle"></div>
                             <div className="ladderContent">
                                 {
@@ -123,7 +123,7 @@ const PcContainer = React.createClass({
                 </div>
                 <div className="pcFooterBar">
                     <div className="footerBarContent">
-                        <img src="./images/logo.png" alt=""/>
+                        <img src="images/logo.png" alt=""/>
                         <div className="barText">朋友多，这些奖励还觉得不够？</div>
                         <a className="moreAward">更多邀友奖励</a>
                         <a className="howAward">如何邀友</a>
