@@ -1,11 +1,7 @@
 
-function getDebugTimestamp(){
-    var params = $getDebugParams();
-    return params.debug && params.timestamp;
-}
 
 function getServerTimestamp(callback){
-    var ts = getDebugTimestamp();
+    var ts = $getDebugParams().timestamp;
     if(ts) {
         callback(ts)
     } else {
