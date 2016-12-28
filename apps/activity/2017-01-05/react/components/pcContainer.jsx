@@ -1,11 +1,12 @@
 const PcContainer = React.createClass({
     getInitialState: function () {
       return({
-          month:1
+          startDate:'2017-1-6',
+          endDate:'2017-2-2'
       })
     },
-    ajaxMonth: function (n) {
-        this.setState({month:n})
+    ajaxMonth: function (start,end) {
+        this.setState({startDate:start,endDate:end})
     },
     render: function () {
         return (
@@ -58,7 +59,7 @@ const PcContainer = React.createClass({
                             <div className="ladderTitle"></div>
                             <div className="ladderContent">
                                 {
-                                    <MonthLadderPC month={this.state.month}/>
+                                    <MonthLadderPC/>
                                 }
                             </div>
                         </div>

@@ -40,7 +40,21 @@ $(function () {
     $(".mobileNoticeContentNo .login").on("click", function () {
         $FW.gotoSpecialPage("登录", loginUrl);
     });
-    
+    var fixedPriceFun = function (total, totalLimit) {
+        let price = 0;
+        let p = 0.01;
+        if (total >= 4000000 && total < 5000000) {
+            p = 0.01;
+        } else if (total >= 5000000 && total < 6000000) {
+            p = 0.013;
+        } else if (total >= 6000000) {
+            p = 0.018;
+        } else {
+            return '暂无奖金'
+        }
+        price = totalLimit * 0.01 * 0.0056 + (total - totalLimit) * 0.01;
+        return price.toFixed(2)
+    };
     //季排行榜
     //API_PATH + '/api/activityPullNew/v2/PullNewTopAndYearInvest.json'
     $.get(API_PATH + '/api/activityPullNew/v2/PullNewTopAndYearInvest.json', {
@@ -78,11 +92,11 @@ $(function () {
         $(".mobileQuarterPack .quarterRemind em,.pcQuarterPack .quarterRemind em,.pcQuarterPack  .quarterRemindNot em").html(totalYearInvest / 10000);
         $UserReady(function (is_login, user) {
             if (is_login) {
-                (totalYearInvest == 0 || pullNewCount < 100 || myFriendYearInvest < 500000) ? prize = 0 : prize = ((myFriendYearInvest / totalYearInvest) * 300000).toFixed(2);
                 if (totalYearInvest == 0 || pullNewCount < 100 || myFriendYearInvest < 500000) {
                     chartsText = `<div>1.6-3.30，您有效邀友 <em>${pullNewCount}</em> 人，好友累计年化投资<em>${myFriendYearInvest}</em>排名<em>${rankNum}</em>，当前无奖金可分，要努力哦！`;
                 } else {
-                    chartsText = `<div>1.6-3.30，您有效邀友 <em>${pullNewCount}</em> 人，好友累计年化投资<em>${myFriendYearInvest}</em>排名<em>${rankNum}</em>，当前可分得<em>${prize}</em>元奖金！`;
+                    price = fixedPriceFun(totalYearInvest,myFriendYearInvest);
+                    chartsText = `<div>1.6-3.30，您有效邀友 <em>${pullNewCount}</em> 人，好友累计年化投资<em>${myFriendYearInvest}</em>排名<em>${rankNum}</em>，当前可分得<em>${price}</em>元奖金！`;
                 }
                 $('.pcQuarterPack .quarterExplain,.mobileQuarterPack .quarterExplain').html(chartsText);
             } else {
@@ -101,8 +115,8 @@ $(function () {
         $.get(API_PATH + '/api/activityPullNew/v2/PullNewTopAndYearInvest.json', {
             dataCount: 20,
             totalBaseAmt: 1000,
-            startDate: 'arg1',
-            endDate: 'arg2',
+            startDate: arg1,
+            endDate: arg2,
             startTotalCount: 50,
             startTotalInvest: 50
         }, function (data) {
@@ -120,8 +134,7 @@ $(function () {
             }
             $UserReady(function (is_login, data) {
                 if (is_login) {
-                    $('.pcMonthPack .ladderTitle').html(titText);
-                    $('.mobileMonthPack .ladderTitle').html(titText);
+                    $('.ladderTitle').html(titText);
                 } else {
                     var pcTitText = '<div class="monthNoLogin">请登录后，查看您的邀友排名及可获奖金 ，</div> <div class="monthLogin">立即登录></div>';
                     var mobileTitText = '<div class="monthNoLogin">请登录后，<br/>查看您的邀友排名及可获奖金</div> <div class="monthLogin">立即登录></div>';
@@ -136,14 +149,8 @@ $(function () {
         }.bind(this), 'json');
     }
 
-    var janStart = new Date("2017/1/6").getTime();
-    var janEnd = new Date("2017/2/2 23:59:59").getTime();
     var febStart = new Date("2017/2/3").getTime();
-    var febEnd = new Date("2017/3/2 23:59:59").getTime();
     var marStart = new Date("2017/3/3").getTime();
-    var marEnd = new Date("2017/3/30 23:59:59").getTime();
-    var oneWeekStart = new Date("2017/1/6").getTime();
-    var oneWeekEnd = new Date("2017/1/12 23:59:59").getTime();
     //顶部邀请奖励，根据不同周显示不同数据
     var week11 = new Date("2017/1/6 00:00:00").getTime();
     var week12 = new Date("2017/1/12 23:59:59").getTime();
@@ -171,7 +178,8 @@ $(function () {
     var week122 = new Date("2017/3/30 23:59:59").getTime();
     //时间戳
     //API_PATH+"/api/userState/v1/timestamp.json"
-    $.get("./javascripts/time.json", function (data) {
+    //"./javascripts/time.json"
+    $.get(API_PATH+"/api/userState/v1/timestamp.json", function (data) {
         var nowTime = data.data.timestamp;
         var timeText, week_arg_st, week_arg_et;
         if (nowTime < week12) {
@@ -242,12 +250,6 @@ $(function () {
             alert('复制失败');
         });
         //拉新人数
-        //API_PATH+/api/activityPullNew/v2/pullNewCount.json
-        //,{
-        //    startDate: week_arg_st,
-        //        endDate: week_arg_et,
-        //        totalBaseAmt: 1000,
-        //}
         $.get(API_PATH + "/api/activityPullNew/v2/pullNewCount.json", {
             startDate: week_arg_st,
             endDate: week_arg_et,
@@ -313,7 +315,7 @@ $(function () {
             month_1.addClass('active').find(".stateLeft").text("进行中").siblings().removeClass('active');
             $(".monthStateCommon:gt(0)").addClass('not');
 
-            monthChange(janStart, janEnd, 120000);
+            monthChange('2017-1-6', '201-2-2', 120000);
         } else if (nowTime < marStart) {
             month_2.addClass('active').find(".stateLeft").text("进行中").siblings().removeClass('active');
             month_1.addClass("end").find(".stateLeft").text("已结束");
@@ -322,7 +324,7 @@ $(function () {
             $(".pcMonthPack .monthLadder .ladderText").attr("src", "./images/twoText.png");
             $(".mobileMonthPack .monthLadder .ladderText").attr("src", "./images/mobileTwo.png");
 
-            monthChange(febStart, febEnd, 150000);
+            monthChange('2017-2-3', '2017-3-2', 150000);
             month_1.click(function () {
                 fn($(this), 12, 'oneText.png', 'mobileOne.png')
             });
@@ -336,7 +338,7 @@ $(function () {
             $(".pcMonthPack .monthLadder .ladderText").attr("src", "./images/threeText.png");
             $(".mobileMonthPack .monthLadder .ladderText").attr("src", "./images/mobileThree.png");
 
-            monthChange(marStart, marEnd, 180000);
+            monthChange('2017-3-3', '2017-3-30', 180000);
             month_1.click(function () {
                 fn($(this), 12, 'oneText.png', 'mobileOne.png')
             });

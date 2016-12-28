@@ -11,7 +11,6 @@ const WeekLadderPC = React.createClass({
         })
     },
     componentDidMount: function () {
-        //API_PATH+'/api/activityPullNew/v2/PullNewCountByTimeline.json'
         $.get(API_PATH+'/api/activityPullNew/v2/PullNewCountByTimeline.json', {
             timeline: '2017-01-06,2017-01-12 23:59:59;2016-1-13,2017-01-19 23:59:59;2017-01-20,2017-01-26 23:59:59;' +
             '2017-01-27,2017-02-02 23:59:59;2017-02-03,2017-02-09 23:59:59;2017-02-10,2017-02-16 23:59:59;2017-02-17,2017-02-23 23:59:59;' +
@@ -83,6 +82,14 @@ const WeekLadderPC = React.createClass({
     get_current_page: function () {
         return this.state.totalData.slice(this.state.cursor, this.state.cursor + this.PRE_PAGE);
     },
+    ajaxTime: function () {
+        var currentDate;
+        $.get(API_PATH+'/api/userState/v1/timestamp.json', function (data) {
+            currentDate = new Date(data.data.timestamp).toLocaleDateString().split('/').slice(1).join('.');
+            return currentDate
+        }.bind(this),'json');
+    },
+
     render: function () {
         let pageImg = (item, index) => {
             return <div key={index}
@@ -115,6 +122,10 @@ const WeekLadderPC = React.createClass({
             let t;
             let n;
             let currentDate = new Date().toLocaleDateString().split('/').slice(1).join('.');
+            //$.get(API_PATH+'/api/userState/v1/timestamp.json', function (data) {
+            //    currentDate = new Date(data.data.timestamp).toLocaleDateString().split('/').slice(1).join('.');
+            //}.bind(this),'json');
+            //console.log(currentDate);
             if(dateArr[index].split('-')[0] < currentDate) {
                 t = this.getAwardHandle(item);
                 n = item;

@@ -115,7 +115,6 @@ const WeekLadderMobile = React.createClass({
             let t;
             let n;
             let currentDate = new Date().toLocaleDateString().split('/').slice(1).join('.');
-
             if(dateArr[index].split('-')[0] <= currentDate) {
                 t = this.getAwardHandle(item);
                 n = item;
