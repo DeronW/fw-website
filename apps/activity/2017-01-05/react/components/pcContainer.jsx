@@ -26,21 +26,21 @@ const PcContainer = React.createClass({
                 <div className="pcMonthPack">
                     <div className="monthTitle"></div>
                     <div className="monthState">
-                        <div className="monthStateCommon active"  onClick={()=>{this.ajaxMonth(1)}}>
+                        <div className="monthStateCommon active"  onClick={()=>{this.ajaxMonth('2017-1-6','2017-2-2')}}>
                             <div className="stateLeft">进行中</div>
                             <div className="stateRight">
                                 <div className="stateCurrentMonth">1月</div>
                                 <div className="stateCurrentDate">01.06 ~ 02.02</div>
                             </div>
                         </div>
-                        <div className="monthStateCommon" onClick={()=>{this.ajaxMonth(2)}}>
+                        <div className="monthStateCommon" onClick={()=>{this.ajaxMonth('2017-2-3','2017-3-2')}}>
                             <div className="stateLeft">未开始</div>
                             <div className="stateRight">
                                 <div className="stateCurrentMonth">2月</div>
                                 <div className="stateCurrentDate">02.03 ~ 03.02</div>
                             </div>
                         </div>
-                        <div className="monthStateCommon monthStateCommonRight" onClick={()=>{this.ajaxMonth(3)}}>
+                        <div className="monthStateCommon monthStateCommonRight" onClick={()=>{this.ajaxMonth('2017-3-3','2017-3-30')}}>
                             <div className="stateLeft">未开始</div>
                             <div className="stateRight">
                                 <div className="stateCurrentMonth">3月</div>
@@ -59,7 +59,7 @@ const PcContainer = React.createClass({
                             <div className="ladderTitle"></div>
                             <div className="ladderContent">
                                 {
-                                    <MonthLadderPC/>
+                                    <MonthLadderPC startDate={this.state.startDate} endDate={this.state.endState}/>
                                 }
                             </div>
                         </div>
@@ -116,7 +116,7 @@ const PcContainer = React.createClass({
                             6.百万奖金活动奖励将于活动结束后7个工作日内，统一发放至邀请人的工场账户；<br/>
                             7.金融工场有权随时随机抽查邀请人所推荐好友的真实性，一旦发现存在好友用虚假手机号注册、好友对注册金融工场账户不知情及非好友真实意愿等造假和欺骗行为，则立即清除虚假好友的统计数据并回收相关奖励，且保留追究由此给金融工场带来的一切损失的权利；<br/>
                             8.活动最终解释权归金融工场所有，活动详情致电客服热线咨询：400-0322-988。<br/>
-                            以上活动由金融工场主办 与Apple Inc. 无关
+                            声明：以上活动由金融工场主办 与Apple Inc. 无关
                             </p>
                         </div>
                     </div>
@@ -139,7 +139,7 @@ const PcContainer = React.createClass({
                         <div className="noticeText">请好友用您的工场码，<em>好友注册7天内累投年化额≥1000元</em>，且投资<br/>等额标时，超过18个月按18个月计算年化，才算一个有效邀请。<br/>
                             登录后查看我的工场码<br/>
                             还没有工场码？注册即可拥有。</div>
-                        <a className="login" href="https://passport.9888.cn/passport/login">登录注册</a>
+                        <a className="login">登录注册</a>
                         <div className="noticeRemind">
                             新手注册即送<em>120</em>元，首投最高送<em>150</em>元，邀请好友首投再得<em>50</em>元!<a href="http://www.9888.cn/news/notice/1861.html">更多新手秘笈></a>
                         </div>

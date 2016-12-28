@@ -31,14 +31,7 @@ const MonthLadderPC = React.createClass({
         }.bind(this), 'json');
     },
     componentWillReceiveProps: function (nextProps) {
-        let month = nextProps.month;
-        if(month == 1){
-            this.ajaxPullNewInvest('2017-1-6','2017-2-2')
-        }else if(month == 2){
-            this.ajaxPullNewInvest('2017-2-3','2017-3-2')
-        }else{
-            this.ajaxPullNewInvest('2017-3-3','2017-3-30')
-        }
+        this.ajaxPullNewInvest(nextProps.startDate,nextProps.endDate)
     },
     ajaxPullNewInvest: function (startDate,endDate) {
         $.ajax({

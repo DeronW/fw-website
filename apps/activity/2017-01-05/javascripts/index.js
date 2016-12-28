@@ -474,7 +474,10 @@ $(function () {
                     $(".noticeCode").html(user.userCode);
                     $(".noticeLink").html('http://passport.9888.cn/pp-web2/register/phone.do?gcm=' + user.userCode);
                 } else {
-                    $(".pcWeekPack .weekAward").html('请登录后，查看您的邀友数及可获工豆， <a href="https://passport.9888.cn/passport/login">立即登录></a>');
+                    $(".pcWeekPack .weekAward").html('请登录后，查看您的邀友数及可获工豆， <a>立即登录></a>');
+                    $(".pcWeekPack .weekAward a").on("click", function () {
+                        $FW.gotoSpecialPage('登录', loginUrl);
+                    });
                     $(".mobileWeekPack .weekAward").html('请登录后，查看您的邀友数及可获工豆');
                     $(".weekBefore").addClass('hidden');
                     $(".weekLogin").removeClass('hidden').html('立即登录').on("click", function () {

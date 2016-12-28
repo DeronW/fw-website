@@ -83,10 +83,8 @@ const WeekLadderPC = React.createClass({
         return this.state.totalData.slice(this.state.cursor, this.state.cursor + this.PRE_PAGE);
     },
     ajaxTime: function () {
-        var currentDate;
         $.get(API_PATH+'/api/userState/v1/timestamp.json', function (data) {
-            currentDate = new Date(data.data.timestamp).toLocaleDateString().split('/').slice(1).join('.');
-            return currentDate
+            var currentDate = new Date(data.data.timestamp).toLocaleDateString().split('/').slice(1).join('.');
         }.bind(this),'json');
     },
 
