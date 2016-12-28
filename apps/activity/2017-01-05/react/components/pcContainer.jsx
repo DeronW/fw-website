@@ -11,10 +11,10 @@ const PcContainer = React.createClass({
     render: function () {
         return (
             <div className="pcContainer">
-                <div className="fire1"><img src="./images/fire1.png" alt=""/></div>
-                <div className="fire2"><img src="./images/fire2.png" alt=""/></div>
-                <div className="fire3"><img src="./images/fire3.png" alt=""/></div>
-                <div className="fire4"><img src="./images/fire1.png" alt=""/></div>
+                <div className="fire1"><img src="images/fire1.png" alt=""/></div>
+                <div className="fire2"><img src="images/fire2.png" alt=""/></div>
+                <div className="fire3"><img src="images/fire3.png" alt=""/></div>
+                <div className="fire4"><img src="images/fire1.png" alt=""/></div>
                 <div className="pcBanner"></div>
                 <div className="pcWeekPack">
                     <div className="weekTitle"></div>
@@ -103,7 +103,7 @@ const PcContainer = React.createClass({
                 <div className="pcActivityExplain">
                     <div className="ActivityExplainContent">
                         <div className="activityExplainTitle">
-                            <img src="./images/explain.png" alt=""/>
+                            <img src="images/explain.png" alt=""/>
                             <span>活动说明</span>
                         </div>
                         <div className="activityExplainText">
@@ -115,7 +115,8 @@ const PcContainer = React.createClass({
                             5.月度奖金工豆奖励将于每月结束后7个工作日内，统一发放至邀请人的工场账户；春节期间的活动奖励将顺延至2月4日后7个工作日内发放。<br/>
                             6.百万奖金活动奖励将于活动结束后7个工作日内，统一发放至邀请人的工场账户；<br/>
                             7.金融工场有权随时随机抽查邀请人所推荐好友的真实性，一旦发现存在好友用虚假手机号注册、好友对注册金融工场账户不知情及非好友真实意愿等造假和欺骗行为，则立即清除虚假好友的统计数据并回收相关奖励，且保留追究由此给金融工场带来的一切损失的权利；<br/>
-                            8.活动最终解释权归金融工场所有，活动详情致电客服热线咨询：400-0322-988。
+                            8.活动最终解释权归金融工场所有，活动详情致电客服热线咨询：400-0322-988。<br/>
+                            9.以上活动由金融工场主办 与Apple Inc. 无关
                             </p>
                         </div>
                     </div>

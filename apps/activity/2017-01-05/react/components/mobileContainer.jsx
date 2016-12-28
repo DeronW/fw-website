@@ -52,7 +52,7 @@ const MobileContainer = React.createClass({
                             <div className="monthGiftText">按当月有效好友<br/> 累计年化投资额占比分配</div>
                         </div>
                         <div className="monthLadder">
-                            <img className="ladderText" src="./images/mobileOne.png" alt=""/>
+                            <img className="ladderText" src="images/mobileOne.png" alt=""/>
                             <div className="ladderTitle"></div>
                             <div className="ladderContent">
                                 {
@@ -98,13 +98,13 @@ const MobileContainer = React.createClass({
                 </div>
                 <div className="appleInc">以上活动由金融工场主办 与Apple Inc. 无关</div>
                 <div className="mobileBar">
-                    <img className="mobileLogo" src="./images/mobileLogo.png" alt=""/>
+                    <img className="mobileLogo" src="images/mobileLogo.png" alt=""/>
                     <div className="mobileBarCenter">
                         <div className="barCenterTop">朋友多，这些奖励还觉得不够？</div>
                         <div className="mobileBarAward">更多邀友奖励</div>
                         <div className="mobileBarFriend">如何邀友</div>
                     </div>
-                    <img src="./images/mobileClose.png" alt="" className="mobileClose"/>
+                    <img src="images/mobileClose.png" alt="" className="mobileClose"/>
                 </div>
                 <div className="mobileNotice hidden">
                     <div className="mobileNoticeContentNo hidden">
