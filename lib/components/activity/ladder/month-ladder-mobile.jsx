@@ -12,13 +12,23 @@ const MonthLadderMobile = React.createClass({
             cursor: 0
         })
     },
+    getServerTimestamp:function(callback){
+        var ts = $getDebugParams().timestamp;
+        if(ts) {
+            callback(ts)
+        } else {
+            $.get(API_PATH+"api/userState/v1/timestamp.json", function (data) {
+                callback(data.data.timestamp)
+            }, 'json')
+        }
+    },
     componentDidMount: function () {
         var febStart = new Date("2017/2/3").getTime();
         var marStart = new Date("2017/3/3").getTime();
         var startDate = '2017-1-6';
         var endDate = '2017-2-2';
-        $.get(API_PATH + " /api/userState/v1/timestamp.json", function (data) {
-            var currentTime = data.timestamp;
+        this.getServerTimestamp(function (timestamp) {
+            var currentTime = timestamp;
             if (currentTime < febStart) {
                 startDate = '2017-1-6';
                 endDate = '2017-2-2';
@@ -30,7 +40,7 @@ const MonthLadderMobile = React.createClass({
                 endDate = '2017-3-30';
             }
             this.ajaxPullNewInvest(startDate, endDate)
-        }.bind(this), 'json');
+        }.bind(this))
     },
     componentWillReceiveProps: function (nextProps) {
         let month = nextProps.month;
@@ -90,13 +100,13 @@ const MonthLadderMobile = React.createClass({
                 monthPrice = 180000;
             }
         }
-        return ((data.data.topList[i].total) / (data.data.totalYearInvest) * monthPrice).toFixed(2);
+        return ((totalData.topList[i].total) / (totalData.totalYearInvest) * monthPrice).toFixed(2);
 
     },
     switchPageHandler: function (type) {
         this.setState({tab: type});
         let {page,totalPage}=this.state;
-        let cursor, min, new_page, len = this.state.totalData.length;
+        let cursor, min, new_page, len = this.state.totalData.topList.length;
         if (type == '上一页') {
             if (len % this.PRE_PAGE) {
                 min = parseInt(len / this.PRE_PAGE) * this.PRE_PAGE

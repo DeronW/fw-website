@@ -27,7 +27,7 @@ const MonthLadderPC = React.createClass({
         var marStart = new Date("2017/3/3").getTime();
         var startDate = '2017-1-6';
         var endDate = '2017-2-2';
-        getServerTimestamp(function (timestamp) {
+        this.getServerTimestamp(function (timestamp) {
             var currentTime = timestamp;
             if (currentTime < febStart) {
                 startDate = '2017-1-6';

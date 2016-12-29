@@ -7,11 +7,12 @@ const WeekLadderMobile = React.createClass({
             totalPage: 2,
             tab: '上一页',
             isClick:true,
-            cursor: 0
+            cursor: 0,
+            currentDate:0
         })
     },
     componentDidMount: function () {
-        //API_PATH+'/api/activityPullNew/v2/PullNewCountByTimeline.json'
+        this.ajaxTime();
         $.get(API_PATH+'/api/activityPullNew/v2/PullNewCountByTimeline.json',{
             timeline:'2017-01-06,2017-01-12 23:59:59;2016-1-13,2017-01-19 23:59:59;2017-01-20,2017-01-26 23:59:59;' +
             '2017-01-27,2017-02-02 23:59:59;2017-02-03,2017-02-09 23:59:59;2017-02-10,2017-02-16 23:59:59;2017-02-17,2017-02-23 23:59:59;' +
@@ -90,6 +91,22 @@ const WeekLadderMobile = React.createClass({
     get_current_page: function () {
         return this.state.totalData.slice(this.state.cursor, this.state.cursor + this.PRE_PAGE);
     },
+    ajaxTime: function () {
+        this.getServerTimestamp(function (timestamp) {
+            var currentDate = new Date(timestamp).toLocaleDateString().split('/').slice(1).join('.');
+            this.setState({currentDate:currentDate})
+        }.bind(this));
+    },
+    getServerTimestamp:function(callback){
+        var ts = $getDebugParams().timestamp;
+        if(ts) {
+            callback(ts)
+        } else {
+            $.get(API_PATH+"api/userState/v1/timestamp.json", function (data) {
+                callback(data.data.timestamp)
+            }, 'json')
+        }
+    },
     render: function () {
         let pageImg = (item, index) => {
             return <div key={index}
@@ -121,8 +138,12 @@ const WeekLadderMobile = React.createClass({
             index += this.state.cursor;
             let t;
             let n;
-            let currentDate = new Date().toLocaleDateString().split('/').slice(1).join('.');
-            if(dateArr[index].split('-')[0] <= currentDate) {
+            var d = dateArr[index].split('-')[0];
+            var cd = this.state.currentDate;
+            console.log(d);
+            console.log(cd);
+            console.log(String(d) < String(cd));
+            if(String(d) < String(cd)) {
                 t = this.getAwardHandle(item);
                 n = item;
             } else {
