@@ -108,15 +108,15 @@ $(function () {
                     if (totalYearInvest >= 4000000 && totalYearInvest < 5000000) {
                         p = 0.01;
                         price = myEqualFriendYearInvest * p * 0.56 + (myFriendYearInvest - myEqualFriendYearInvest) * p;
-                        chartsText = "<div>1.6-3.30，您有效邀友 <em>"+pullNewCount+"</em> 人，有效好友累投年化<em>"+myFriendYearInvest+"</em>排名<em>"+rankNum+"</em>，当前可分得<em>"+price+"</em>元奖金！";
+                        chartsText = "<div>1.6-3.30，您有效邀友 <em>"+pullNewCount+"</em> 人，有效好友累投年化<em>"+myFriendYearInvest+"</em>排名<em>"+rankNum+"</em>，当前可分得<em>"+price.toFixed(2)+"</em>元奖金！";
                     } else if (totalYearInvest >= 5000000 && totalYearInvest < 6000000) {
                         p = 0.013;
                         price = myEqualFriendYearInvest * p * 0.56 + (myFriendYearInvest - myEqualFriendYearInvest) * p;
-                        chartsText = "<div>1.6-3.30，您有效邀友 <em>"+pullNewCount+"</em> 人，有效好友累投年化<em>"+myFriendYearInvest+"</em>排名<em>"+rankNum+"</em>，当前可分得<em>"+price+"</em>元奖金！";
+                        chartsText = "<div>1.6-3.30，您有效邀友 <em>"+pullNewCount+"</em> 人，有效好友累投年化<em>"+myFriendYearInvest+"</em>排名<em>"+rankNum+"</em>，当前可分得<em>"+price.toFixed(2)+"</em>元奖金！";
                     } else if (totalYearInvest >= 6000000) {
                         p = 0.018;
                         price = myEqualFriendYearInvest * p * 0.56 + (myFriendYearInvest - myEqualFriendYearInvest) * p;
-                        chartsText = "<div>1.6-3.30，您有效邀友 <em>"+pullNewCount+"</em> 人，有效好友累投年化<em>"+myFriendYearInvest+"</em>排名<em>"+rankNum+"</em>，当前可分得<em>"+price+"</em>元奖金！";
+                        chartsText = "<div>1.6-3.30，您有效邀友 <em>"+pullNewCount+"</em> 人，有效好友累投年化<em>"+myFriendYearInvest+"</em>排名<em>"+rankNum+"</em>，当前可分得<em>"+price.toFixed(2)+"</em>元奖金！";
                     }
                 }
                 $('.pcQuarterPack .quarterExplain,.mobileQuarterPack .quarterExplain').html(chartsText);
