@@ -3,7 +3,7 @@ const MonthLadderMobile = React.createClass({
         this.PRE_PAGE = 5;
         return ({
             totalData: {
-                topList:[]
+                topList: []
             },
             page: 1,
             totalPage: 2,
@@ -69,10 +69,8 @@ const MonthLadderMobile = React.createClass({
             }.bind(this)
         });
     },
-    isImgFun: function (key) {
-        var imgName = ['jin', 'yin', 'tong'];
-        var i = imgName[key] ? `images/${imgName[key]}.png` : null;
-        return i
+    isImgFun: function (index) {
+        return ['images/jin.png', 'images/yin.png', 'images/tong.png'][index]
     },
     fixedPrice: function (total) {
         return total.toFixed(2)
@@ -188,7 +186,8 @@ const MonthLadderMobile = React.createClass({
                     this.state.totalData.topList.length ? page : null
                 }
                 {
-                    this.state.totalData.topList.length ? null : <div className="monthLadderPcNot">人气王还在堵车，马上就来</div>
+                    this.state.totalData.topList.length ? null :
+                        <div className="monthLadderMobileNot">人气王还在堵车，马上就来</div>
                 }
             </div>
         )

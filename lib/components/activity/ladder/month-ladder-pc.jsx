@@ -73,10 +73,8 @@ const MonthLadderPC = React.createClass({
             }.bind(this)
         });
     },
-    isImgFun: function (key) {
-        var imgName = ['jin', 'yin', 'tong'];
-        var i = imgName[key] ? `images/${imgName[key]}.png` : null;
-        return i
+    isImgFun: function (index) {
+        return ['images/jin.png', 'images/yin.png', 'images/tong.png'][index]
     },
     subNameFun: function (str) {
         return str.substring(0, 2) + "**" + str.substring(str.length - 2, str.length);

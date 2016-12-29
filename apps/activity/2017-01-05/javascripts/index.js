@@ -352,8 +352,8 @@ $(function () {
         var fn = function (_this, n, pcImg, mobileImg) {
             _this.removeClass('end').addClass('active').siblings().removeClass('active').addClass("end");
             $(".monthGiftNumber").text(n);
-            $(".pcMonthPack .monthLadder .ladderText").attr("src", "images/" + pcImg);
-            $(".mobileMonthPack .monthLadder .ladderText").attr("src", "images/" + mobileImg);
+            $(".pcMonthPack .monthLadder .ladderText").attr("src", pcImg);
+            $(".mobileMonthPack .monthLadder .ladderText").attr("src", mobileImg);
         };
         if (nowTime < febStart) {
             month_1.addClass('active').find(".stateLeft").text("进行中").siblings().removeClass('active');
@@ -370,10 +370,10 @@ $(function () {
 
             monthChange('2017-2-3', '2017-3-2', 150000);
             month_1.click(function () {
-                fn($(this), 12, 'onetext.png', 'mobileOne.png')
+                fn($(this), 12, 'images/onetext.png', 'images/mobileOne.png')
             });
             month_2.click(function () {
-                fn($(this), 15, 'twoText.png', 'mobileTwo.png')
+                fn($(this), 15, 'images/twoText.png', 'images/mobileTwo.png')
             });
         } else {
             month_3.addClass('active').find(".stateLeft").text("进行中").siblings().removeClass('active');
@@ -384,13 +384,13 @@ $(function () {
 
             monthChange('2017-3-3', '2017-3-30', 180000);
             month_1.click(function () {
-                fn($(this), 12, 'onetext.png', 'mobileOne.png')
+                fn($(this), 12, 'images/onetext.png', 'images/mobileOne.png')
             });
             month_2.click(function () {
-                fn($(this), 15, 'twoText.png', 'mobileTwo.png')
+                fn($(this), 15, 'images/twoText.png', 'images/mobileTwo.png')
             });
             month_3.click(function () {
-                fn($(this), 18, 'threeText.png', 'mobileThree.png')
+                fn($(this), 18, 'images/threeText.png', 'images/mobileThree.png')
             });
         }
     }.bind(this))
