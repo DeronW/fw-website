@@ -102,7 +102,7 @@ $(function () {
             if (is_login) {
                 //100人改为3人 1百万改为10万
                 var price = 0;
-                chartsText = "<div>1.6-3.30，您有效邀友 <em>"+pullNewCount+"</em> 人，有效好友累投年化<em>"+myFriendYearInvest+"</em>排名<em>"+rankNum+"</em>，当前无奖金可分，要努力哦！";
+                chartsText = "<div>1.6-3.30，您有效邀友 <em>"+pullNewCount+"</em> 人，有效好友累投年化<em>"+myFriendYearInvest+"</em>元，排名<em>"+rankNum+"</em>，当前暂无奖金可分，加油哦！";
                 if (totalYearInvest != 0 || pullNewCount > 3 || myFriendYearInvest > 100000) {
                     var p = 0.01;
                     if (totalYearInvest >= 4000000 && totalYearInvest < 5000000) {
