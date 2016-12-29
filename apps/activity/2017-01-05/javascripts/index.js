@@ -82,8 +82,12 @@ $(function () {
         var pullNewCount = data.data.pullNewCount || 0;//有效邀请人数
         var myFriendYearInvest = data.data.myFriendYearInvest || 0;
         var totalYearInvest = data.data.totalYearInvest;
-        var  myEqualFriendYearInvest = data.data. myEqualFriendYearInvest;
-
+        var  myEqualFriendYearInvest = data.data. myEqualFriendYearInvest;//等额
+        var topList = data.data.topList;
+        if(topList.length){
+            $(".quarterLadder").removeClass('hidden');
+            $(".quarterLadderNot").addClass('hidden');
+        }
         function pcTotalMove(left, top, className) {
             $(".pcQuarterPack .quarterRemind").css({
                 left: left + "px",
@@ -144,7 +148,9 @@ $(function () {
             var pullNewCount = data.data.pullNewCount || 0;//有效邀请人数
             var myFriendYearInvest = data.data.myFriendYearInvest;
             var totalYearInvest = data.data.totalYearInvest;
+            var topList = data.data.topList;
             var prize;
+
             (totalYearInvest == 0 || pullNewCount < 100 || myFriendYearInvest < 500000) ? prize = 0 : prize = ((myFriendYearInvest / totalYearInvest) * arg3).toFixed(2);
             if (totalYearInvest == 0 || pullNewCount < 100 || myFriendYearInvest < 500000) {
                 titText = '该月内，您有效邀友 <em>' + pullNewCount + '</em> 人，有效好友累投年化 <em>' + myFriendYearInvest + '</em> 元，排名 <em>' + rankNum + '</em>，当前无奖金可分，要努力哦！';
@@ -164,7 +170,10 @@ $(function () {
                     })
                 }
             });
-
+            if(topList.length){
+                $(".ladderContent").removeClass('hidden');
+                $(".ladderContentNot").addClass('hidden');
+            }
         }.bind(this), 'json');
     }
 

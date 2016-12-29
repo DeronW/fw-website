@@ -57,7 +57,10 @@ const PcContainer = React.createClass({
                         <div className="monthLadder">
                             <img className="ladderText" src="images/oneText.png" alt=""/>
                             <div className="ladderTitle"></div>
-                            <div className="ladderContent">
+                            <div className="ladderContentNot">
+                                人气王还在堵车，马上就来！
+                            </div>
+                            <div className="ladderContent hidden">
                                 {
                                     <MonthLadderPC startDate={this.state.startDate} endDate={this.state.endState}/>
                                 }
@@ -86,7 +89,10 @@ const PcContainer = React.createClass({
                         <div className="quarterExplain">1.6-3.30，您有效邀友<em></em>人，有效好友累投年化<em></em>元，排名<em></em>，当前可分<em></em>元奖金！</div>
                         <div className="quarterRemind hidden">截止当前，榜内推荐人的有效好友累投年化总额为<em>0</em>万元，单个推荐人可获该挡奖金！</div>
                         <div className="quarterRemindNot">截止当前，榜内推荐人的有效好友累投年化总额为<em>0</em>万元，暂未开启新春特奖，大家继续加油哦！</div>
-                        <div className="quarterLadder">
+                        <div className="quarterLadderNot">
+                            人气王还在堵车，马上就来！
+                        </div>
+                        <div className="quarterLadder hidden">
                             {
                                 <QuarterLadderPC />
                             }
