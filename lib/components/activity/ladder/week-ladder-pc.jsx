@@ -6,14 +6,14 @@ const WeekLadderPC = React.createClass({
             page: 1,
             totalPage: 2,
             tab: '上一页',
-            isClick:true,
+            isClick: true,
             cursor: 0,
-            currentDate:0
+            currentDate: 0
         })
     },
     componentDidMount: function () {
         this.ajaxTime();
-        $.get(API_PATH+'api/activityPullNew/v2/PullNewCountByTimeline.json', {
+        $.get(API_PATH + 'api/activityPullNew/v2/PullNewCountByTimeline.json', {
             timeline: '2017-01-06,2017-01-12 23:59:59;2016-1-13,2017-01-19 23:59:59;2017-01-20,2017-01-26 23:59:59;' +
             '2017-01-27,2017-02-02 23:59:59;2017-02-03,2017-02-09 23:59:59;2017-02-10,2017-02-16 23:59:59;2017-02-17,2017-02-23 23:59:59;' +
             '2017-02-24,2017-03-02 23:59:59;2017-03-03,2017-03-09 23:59:59;2017-03-10,2017-03-16 23:59:59;2017-03-17,2017-03-23 23:59:59;2017-03-24,2017-03-30 23:59:59',
@@ -21,11 +21,11 @@ const WeekLadderPC = React.createClass({
         }, (data) => {
             var sData = data.data.countList || [];
             if (sData.length <= this.PRE_PAGE) {
-                this.setState({totalPage: 1,isClick:false})
+                this.setState({totalPage: 1, isClick: false})
             } else if (sData.length > this.PRE_PAGE && sData.length <= this.PRE_PAGE * 2) {
-                this.setState({totalPage: 2,isClick:true})
+                this.setState({totalPage: 2, isClick: true})
             } else if (sData.length > this.PRE_PAGE * 2 && sData.length <= this.PRE_PAGE * 3) {
-                this.setState({totalPage: 3,isClick:true})
+                this.setState({totalPage: 3, isClick: true})
             }
             this.setState({totalData: sData})
         }, "json");
@@ -94,16 +94,16 @@ const WeekLadderPC = React.createClass({
     },
     ajaxTime: function () {
         this.getServerTimestamp(function (timestamp) {
-           var currentDate = new Date(timestamp).toLocaleDateString().split('/').slice(1).join('.');
-           this.setState({currentDate:currentDate})
+            var currentDate = new Date(timestamp).toLocaleDateString().split('/').slice(1).join('.');
+            this.setState({currentDate: currentDate})
         }.bind(this));
     },
-    getServerTimestamp:function(callback){
+    getServerTimestamp: function (callback) {
         var ts = $getDebugParams().timestamp;
-        if(ts) {
+        if (ts) {
             callback(ts)
         } else {
-            $.get(API_PATH+"api/userState/v1/timestamp.json", function (data) {
+            $.get(API_PATH + "api/userState/v1/timestamp.json", function (data) {
                 callback(data.data.timestamp)
             }, 'json')
         }
@@ -135,16 +135,32 @@ const WeekLadderPC = React.createClass({
             '3.17-3.23',
             '3.24-3.30',
         ];
+
+        function compareDate(a, b) {
+            var arr1 = a.toString().split(".");
+            var arr2 = b.toString().split(".");
+            if (arr1[1].length == 1) {
+                a = arr1[0] + '.0' + arr1[1];
+            }
+            if(arr2[1].length == 1){
+                b = arr2[0] + '.0' + arr2[1];
+            }
+            console.log(a);
+            console.log(b);
+            return a < b
+        };
+
         let bodyImg = (item, index) => {
             index += this.state.cursor;
             let t;
             let n;
             var d = dateArr[index].split('-')[0];
             var cd = this.state.currentDate;
-            console.log(d);
-            console.log(cd);
-            console.log(String(d) < String(cd));
-            if(String(d) < String(cd)) {
+            //console.log(d);
+            //console.log(cd);
+            //console.log(String(d) < String(cd));
+            //if(String(d) < String(cd)) {
+            if (compareDate(d, cd)) {
                 t = this.getAwardHandle(item);
                 n = item;
             } else {

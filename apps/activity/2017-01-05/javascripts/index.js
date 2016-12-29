@@ -202,7 +202,14 @@ $(function () {
             }
         }.bind(this), 'json');
     }
-
+    //复制功能
+    var clipboard = new Clipboard('.copyCode');//复制功能
+    clipboard.on('success', function (e) {
+        alert('复制成功');
+    });
+    clipboard.on('error', function (e) {
+        alert('复制失败');
+    });
     var febStart = new Date("2017/2/3").getTime();
     var marStart = new Date("2017/3/3").getTime();
     //顶部邀请奖励，根据不同周显示不同数据
@@ -230,6 +237,8 @@ $(function () {
     var week112 = new Date("2017/3/23 23:59:59").getTime();
     var week121 = new Date("2017/3/24 00:00").getTime();
     var week122 = new Date("2017/3/30 23:59:59").getTime();
+    //判断在哪周
+
     //时间戳
     getServerTimestamp(function (timestamp) {
         var nowTime = timestamp;
@@ -294,13 +303,7 @@ $(function () {
             week_arg_st = '2017/3/24';
             week_arg_et = '2017/3/30';
         }
-        var clipboard = new Clipboard('.copyCode');//复制功能
-        clipboard.on('success', function (e) {
-            alert('复制成功');
-        });
-        clipboard.on('error', function (e) {
-            alert('复制失败');
-        });
+
         //拉新人数
         $.get(API_PATH + "api/activityPullNew/v2/pullNewCount.json", {
             startDate: week_arg_st,
