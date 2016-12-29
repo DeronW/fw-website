@@ -38,13 +38,15 @@ const QuarterLadderPC = React.createClass({
     },
     isImgFun: function (key) {
         var imgName = ['jin', 'yin', 'tong'];
-        var i = imgName[key] ? `./images/${imgName[key]}.png` : null;
+        var i = imgName[key] ? `images/${imgName[key]}.png` : null;
         return i
     },
     subNameFun: function (str) {
+        if(!str) return;
         return str.substr(0, 2) + "**" + str.substr(str.length - 2, 2);
     },
     fixedPrice: function (total) {
+        if(!total) return;
         return total.toFixed(2)
     },
     fixedPriceFun: function (total, totalLimit) {
@@ -126,8 +128,8 @@ const QuarterLadderPC = React.createClass({
                     </td>
                     <td>{item.totalall}</td>
                     <td>
-                        {this.fixedPrice(item.money)}
-                        {<em className="limit">({item.total4})</em>}
+                        {this.fixedPrice(item.total)}
+                        {<em className="limit">(含等额标{item.total4})</em>}
                     </td>
                     <td className={this.fixedPriceFun(item.totalall,item.total4) !== '暂无奖金'?"tdPrice":null}>{this.fixedPriceFun(item.totalall,item.total4)}</td>
                 </tr>

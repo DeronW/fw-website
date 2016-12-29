@@ -126,7 +126,7 @@ const QuarterLadderMobile = React.createClass({
                     <td>{item.totalall}</td>
                     <td>
                         {this.fixedPrice(item.total)}
-                        {<div className="tdPriceLimit">({item.total4})</div>}
+                        {<div className="tdPriceLimit">(含等额标{item.total4})</div>}
                     </td>
                     <td className={this.fixedPriceFun(item.totalall,item.total4) !== '暂无奖金'?"tdMoney":null}>{this.fixedPriceFun(item.totalall,item.total4)}</td>
                 </tr>
