@@ -175,7 +175,7 @@ const MonthLadderMobile = React.createClass({
                     <tr>
                         <td>用户名</td>
                         <td>有效邀友数</td>
-                        <td className="tHeadTd3">好友累计年化投资额（元）</td>
+                        <td className="tHeadTd3">有效好友累投年化额（元）</td>
                         <td>奖金（元）</td>
                     </tr>
                     </thead>

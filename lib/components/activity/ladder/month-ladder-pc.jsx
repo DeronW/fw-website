@@ -169,7 +169,7 @@ const MonthLadderPC = React.createClass({
                     <tr>
                         <td>用户名</td>
                         <td>有效邀请数</td>
-                        <td className="tHeadTd3">好友累计<br/>年化投资额（元）</td>
+                        <td className="tHeadTd3">有效好友<br/>累投年化额（元）</td>
                         <td>奖金（元）</td>
                     </tr>
                     </thead>

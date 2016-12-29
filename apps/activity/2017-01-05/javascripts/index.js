@@ -50,11 +50,10 @@ $(function () {
     });
     //弹窗登录
     var loginUrl = 'http://www.9888.cn/api/activityPullNew/pullnewParty.do?id=19';
-    $(".mobileNoticeContentNo .login").on("click", function () {
+    $(".mobileNoticeContentNo .login,.pcNoticeContentNo .login").on("click", function () {
         $FW.gotoSpecialPage("登录", loginUrl);
     });
-    var fixedPriceFun = function (total, totalLimit) {
-        var price = 0;
+    var fixedPriceFun = function (total,equalTotal, totalLimit) {
         var p = 0.01;
         if (total >= 4000000 && total < 5000000) {
             p = 0.01;
@@ -65,7 +64,7 @@ $(function () {
         } else {
             return '暂无奖金'
         }
-        price = totalLimit * 0.01 * 0.0056 + (total - totalLimit) * 0.01;
+        var price = equalTotal * p * 0.0056 + (totalLimit - totalLimit) * p;
         return price.toFixed(2)
     };
     //季排行榜
@@ -83,6 +82,7 @@ $(function () {
         var pullNewCount = data.data.pullNewCount || 0;//有效邀请人数
         var myFriendYearInvest = data.data.myFriendYearInvest || 0;
         var totalYearInvest = data.data.totalYearInvest;
+        var  myEqualFriendYearInvest = data.data. myEqualFriendYearInvest;
 
         function pcTotalMove(left, top, className) {
             $(".pcQuarterPack .quarterRemind").css({
@@ -114,7 +114,7 @@ $(function () {
                 if (totalYearInvest == 0 || pullNewCount < 100 || myFriendYearInvest < 500000) {
                     chartsText = "<div>1.6-3.30，您有效邀友 <em>"+pullNewCount+"</em> 人，有效好友累投年化<em>"+myFriendYearInvest+"</em>排名<em>"+rankNum+"</em>，当前无奖金可分，要努力哦！";
                 } else {
-                    price = fixedPriceFun(totalYearInvest,myFriendYearInvest);
+                    price = fixedPriceFun(totalYearInvest,myEqualFriendYearInvest,myFriendYearInvest);
                     chartsText = "<div>1.6-3.30，您有效邀友 <em>"+pullNewCount+"</em> 人，有效好友累投年化<em>"+myFriendYearInvest+"</em>排名<em>"+rankNum+"</em>，当前可分得<em>"+price+"</em>元奖金！";
                 }
                 $('.pcQuarterPack .quarterExplain,.mobileQuarterPack .quarterExplain').html(chartsText);
@@ -301,7 +301,7 @@ $(function () {
                     $(".noticeLink").html('http://passport.9888.cn/pp-web2/register/phone.do?gcm=' + user.userCode);
                 } else {
                     $(".pcWeekPack .weekAward").html('请登录后，查看您的邀友数及可获工豆， <a>立即登录></a>');
-                    $(".pcWeekPack .weekAward a").on("click", function () {
+                    $(".pcWeekPack .weekAward").on("click", function () {
                         $FW.gotoSpecialPage('登录', loginUrl);
                     });
                     $(".mobileWeekPack .weekAward").html('请登录后，查看您的邀友数及可获工豆');

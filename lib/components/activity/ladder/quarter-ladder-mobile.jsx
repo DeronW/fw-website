@@ -59,7 +59,7 @@ const QuarterLadderMobile = React.createClass({
         } else {
             return '暂无奖金'
         }
-        price = totalLimit * 0.01 * 0.0056 + (total - totalLimit) * 0.01;
+        price = totalLimit * p * 0.0056 + (total - totalLimit) * p;
         return price.toFixed(2)
     },
     switchPageHandler: function (type) {
@@ -145,7 +145,7 @@ const QuarterLadderMobile = React.createClass({
                     <tr>
                         <td>用户名</td>
                         <td>有效邀友数</td>
-                        <td>好友累计年化投资额（元）</td>
+                        <td>有效好友累投年化额（元）</td>
                         <td>奖金（元）</td>
                     </tr>
                     </thead>

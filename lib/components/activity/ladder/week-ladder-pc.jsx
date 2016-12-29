@@ -131,9 +131,6 @@ const WeekLadderPC = React.createClass({
             index += this.state.cursor;
             let t;
             let n;
-            console.log(typeof dateArr[index].split('-')[0]);
-            console.log(typeof this.state.currentDate);
-            console.log(dateArr[index].split('-')[0] < this.state.currentDate);
             if(dateArr[index].split('-')[0] < this.state.currentDate) {
                 t = this.getAwardHandle(item);
                 n = item;
