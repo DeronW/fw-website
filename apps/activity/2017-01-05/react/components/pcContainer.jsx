@@ -131,7 +131,7 @@ const PcContainer = React.createClass({
                     </div>
                 </div>
                 <div className="pcMovePerson">
-                    <div className="movePersonText">有效好友标准：<em>好友注册7天内累投年化额≥1000元</em>才算一个有效邀请。   温馨提示：投资等额标，超过18个月按18个月计算年化</div>
+                    <div className="movePersonText">有效好友标准：<em>好友注册7天内累投年化额≥1000元</em>才算一个有效邀请。   温馨提示：投资等额标，超过18个月按18个月计算年化额</div>
                 </div>
                 <div className="pcNotice hidden">
                     <div className="pcNoticeContentNo hidden">
