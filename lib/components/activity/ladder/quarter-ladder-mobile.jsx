@@ -151,11 +151,14 @@ const QuarterLadderMobile = React.createClass({
                     </tr>
                     </thead>
                     {
-                        tBody
+                        this.state.totalData.length ? tBody : null
                     }
                 </table>
                 {
-                    page
+                    this.state.totalData.length ? page : null
+                }
+                {
+                    this.state.totalData.length ? null : <div className="quarterLadderMobileNot">人气王还在堵车，马上就来</div>
                 }
             </div>
         )

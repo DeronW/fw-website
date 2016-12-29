@@ -36,14 +36,8 @@ const QuarterLadderPC = React.createClass({
             }.bind(this)
         });
     },
-    isImgFun: function (key) {
-        var imgName = ['jin', 'yin', 'tong'];
-        var i = imgName[key] ? `images/${imgName[key]}.png` : null;
-        return i
-    },
-    subNameFun: function (str) {
-        if(!str) return;
-        return str.substr(0, 2) + "**" + str.substr(str.length - 2, 2);
+    isImgFun: function (index) {
+        return ['images/jin.png', 'images/yin.png', 'images/tong.png'][index]
     },
     fixedPrice: function (total) {
         if(!total) return;

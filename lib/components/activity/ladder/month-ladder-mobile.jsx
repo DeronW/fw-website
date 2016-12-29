@@ -74,9 +74,6 @@ const MonthLadderMobile = React.createClass({
         var i = imgName[key] ? `images/${imgName[key]}.png` : null;
         return i
     },
-    subNameFun: function (str) {
-        return str.substring(0, 2) + "**" + str.substring(str.length - 2, str.length);
-    },
     fixedPrice: function (total) {
         return total.toFixed(2)
     },
@@ -156,7 +153,7 @@ const MonthLadderMobile = React.createClass({
                 <td>
                     {this.isImgFun(index) ? <img className="tdImg" src={this.isImgFun(index)}/> :
                         <span className="twoSpan">{index + 1}</span>}
-                    {<span className="oneSpan">{this.subNameFun(item.loginName)}</span>}
+                    {<span className="oneSpan">{item.loginName}</span>}
                 </td>
                 <td>{item.totalall}</td>
                 <td>
@@ -184,11 +181,14 @@ const MonthLadderMobile = React.createClass({
                     </tr>
                     </thead>
                     {
-                        tBody
+                        this.state.totalData.topList.length ? tBody : null
                     }
                 </table>
                 {
-                    page
+                    this.state.totalData.topList.length ? page : null
+                }
+                {
+                    this.state.totalData.topList.length ? null : <div className="monthLadderPcNot">人气王还在堵车，马上就来</div>
                 }
             </div>
         )
