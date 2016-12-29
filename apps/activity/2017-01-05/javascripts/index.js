@@ -53,7 +53,7 @@ $(function () {
     $(".mobileNoticeContentNo .login,.pcNoticeContentNo .login").on("click", function () {
         $FW.gotoSpecialPage("登录", loginUrl);
     });
-    var fixedPriceFun = function (total,equalTotal, totalLimit) {
+    var fixedPriceFun = function (total,equalTotal, friendInvest) {
         var p = 0.01;
         if (total >= 4000000 && total < 5000000) {
             p = 0.01;
@@ -62,9 +62,9 @@ $(function () {
         } else if (total >= 6000000) {
             p = 0.018;
         } else {
-            return '暂无奖金'
+            return '0'
         }
-        var price = equalTotal * p * 0.56 + (totalLimit - totalLimit) * p;
+        var price = equalTotal * p * 0.56 + (friendInvest - equalTotal) * p;
         return price.toFixed(2)
     };
     //季排行榜奖金总额显示位置
@@ -101,10 +101,18 @@ $(function () {
         $UserReady(function (is_login, user) {
             if (is_login) {
                 //100人改为3人 1百万改为10万
-                if (totalYearInvest == 0 || pullNewCount < 3 || myFriendYearInvest < 100000) {
-                    chartsText = "<div>1.6-3.30，您有效邀友 <em>"+pullNewCount+"</em> 人，有效好友累投年化<em>"+myFriendYearInvest+"</em>排名<em>"+rankNum+"</em>，当前无奖金可分，要努力哦！";
-                } else {
-                    price = fixedPriceFun(totalYearInvest,myEqualFriendYearInvest,myFriendYearInvest);
+                var price = 0;
+                chartsText = "<div>1.6-3.30，您有效邀友 <em>"+pullNewCount+"</em> 人，有效好友累投年化<em>"+myFriendYearInvest+"</em>排名<em>"+rankNum+"</em>，当前无奖金可分，要努力哦！";
+                if (totalYearInvest != 0 || pullNewCount > 3 || myFriendYearInvest > 100000) {
+                    var p = 0.01;
+                    if (totalYearInvest >= 4000000 && totalYearInvest < 5000000) {
+                        p = 0.01;
+                    } else if (totalYearInvest >= 5000000 && totalYearInvest < 6000000) {
+                        p = 0.013;
+                    } else if (totalYearInvest >= 6000000) {
+                        p = 0.018;
+                    }
+                    price = myEqualFriendYearInvest * p * 0.56 + (myFriendYearInvest - myEqualFriendYearInvest) * p;
                     chartsText = "<div>1.6-3.30，您有效邀友 <em>"+pullNewCount+"</em> 人，有效好友累投年化<em>"+myFriendYearInvest+"</em>排名<em>"+rankNum+"</em>，当前可分得<em>"+price+"</em>元奖金！";
                 }
                 $('.pcQuarterPack .quarterExplain,.mobileQuarterPack .quarterExplain').html(chartsText);
@@ -129,7 +137,7 @@ $(function () {
         startTotalCount: 0,
         startTotalInvest: 0
     }, function (data) {
-        var price, chartsText;
+        var price = 0, chartsText = '';
         var rankNum = data.data.rankNum || '30+';//当前用户排名
         var pullNewCount = data.data.pullNewCount || 0;//有效邀请人数
         var myFriendYearInvest = data.data.myFriendYearInvest || 0;
@@ -307,17 +315,23 @@ $(function () {
                         $(".weekBefore").html("往周邀友奖励");
                     }
                     //上线时更改为正式条件
-                    if (dataCount >= 2 && dataCount <= 3) score = dataCount * 10;
-                    if (dataCount >= 4 && dataCount <= 5) score = dataCount * 12;
-                    if (dataCount >= 6 && dataCount <= 7) score = dataCount * 15;
-                    if (dataCount >= 8) score = dataCount * 18;
-                    if (dataCount < 5) {
+                    if(dataCount < 2){
                         pcWeekText = '本周（' + timeText + '）内，您有效邀友 <em>' + dataCount + '</em> 人，暂未获得工豆奖励，加油哦！' + beforeText;
                         mobileWeekText = '本周（' + timeText + '）内，您有效邀友 <em>' + dataCount + '</em> 人，暂未获得工豆奖励，加油哦！';
-                    } else {
+                    }else{
+                        if (dataCount >= 2 && dataCount <= 3) {
+                            score = dataCount * 10;
+                        }else if (dataCount >= 4 && dataCount <= 5) {
+                            score = dataCount * 12;
+                        }else if (dataCount >= 6 && dataCount <= 7) {
+                            score = dataCount * 15;
+                        }else if (dataCount >= 8) {
+                            score = dataCount * 18;
+                        }
                         pcWeekText = '本周（' + timeText + '）内，您有效邀友 <em>' + dataCount + '</em> 人，可获工豆 <em>' + score + '</em> 元 ！' + beforeText;
                         mobileWeekText = '本周（' + timeText + '）内，您有效邀友 <em>' + dataCount + '</em> 人，可获工豆 <em>' + score + '</em> 元 ！';
                     }
+
 
                     $(".pcWeekPack .weekAward").html(pcWeekText);
                     $(".mobileWeekPack .weekAward").html(mobileWeekText);
