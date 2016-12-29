@@ -124,7 +124,7 @@ const QuarterLadderPC = React.createClass({
                 <tr key={index}>
                     <td>{this.isImgFun(index) ? <img className="tdImg" src={this.isImgFun(index)}/> :
                         <span className="twoSpan">{index + 1}</span>}
-                        {<span className="oneSpan">{this.subNameFun(item.name)}</span>}
+                        {<span className="oneSpan">{item.loginName}</span>}
                     </td>
                     <td>{item.totalall}</td>
                     <td>

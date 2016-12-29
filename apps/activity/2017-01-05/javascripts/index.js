@@ -359,7 +359,7 @@ $(function () {
             month_1.addClass('active').find(".stateLeft").text("进行中").siblings().removeClass('active');
             $(".monthStateCommon:gt(0)").addClass('not');
 
-            monthChange('2017-1-6', '201-2-2', 120000);
+            monthChange('2017-1-6', '2017-2-2', 120000);
         } else if (nowTime < marStart) {
             month_2.addClass('active').find(".stateLeft").text("进行中").siblings().removeClass('active');
             month_1.addClass("end").find(".stateLeft").text("已结束");
@@ -370,7 +370,7 @@ $(function () {
 
             monthChange('2017-2-3', '2017-3-2', 150000);
             month_1.click(function () {
-                fn($(this), 12, 'oneText.png', 'mobileOne.png')
+                fn($(this), 12, 'onetext.png', 'mobileOne.png')
             });
             month_2.click(function () {
                 fn($(this), 15, 'twoText.png', 'mobileTwo.png')
@@ -384,7 +384,7 @@ $(function () {
 
             monthChange('2017-3-3', '2017-3-30', 180000);
             month_1.click(function () {
-                fn($(this), 12, 'oneText.png', 'mobileOne.png')
+                fn($(this), 12, 'onetext.png', 'mobileOne.png')
             });
             month_2.click(function () {
                 fn($(this), 15, 'twoText.png', 'mobileTwo.png')

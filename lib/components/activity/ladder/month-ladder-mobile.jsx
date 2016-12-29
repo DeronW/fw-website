@@ -2,7 +2,9 @@ const MonthLadderMobile = React.createClass({
     getInitialState: function () {
         this.PRE_PAGE = 5;
         return ({
-            totalData: [],
+            totalData: {
+                topList:[]
+            },
             page: 1,
             totalPage: 2,
             tab: '上一页',
@@ -48,14 +50,14 @@ const MonthLadderMobile = React.createClass({
                 totalBaseAmt: 1000,
                 startDate: startDate,
                 endDate: endDate,
-                startTotalCount: 50,
-                startTotalInvest: 50
+                startTotalCount: 2,
+                startTotalInvest: 50000
             },
             type: "get",
             dataType: 'json',
             success: function (data) {
                 var sData = data.data;
-                var len = sData.length || [];
+                var len = sData.topList.length || [];
                 if (len <= this.PRE_PAGE) {
                     this.setState({totalPage: 1, isClick: false});
                 } else if (len > this.PRE_PAGE && sData.length <= this.PRE_PAGE * 2) {
@@ -69,7 +71,7 @@ const MonthLadderMobile = React.createClass({
     },
     isImgFun: function (key) {
         var imgName = ['jin', 'yin', 'tong'];
-        var i = imgName[key] ? `./images/${imgName[key]}.png` : null;
+        var i = imgName[key] ? `images/${imgName[key]}.png` : null;
         return i
     },
     subNameFun: function (str) {
@@ -133,7 +135,7 @@ const MonthLadderMobile = React.createClass({
         }
     },
     get_current_page: function () {
-        return this.state.totalData.slice(this.state.cursor, this.state.cursor + this.PRE_PAGE);
+        return this.state.totalData.topList.slice(this.state.cursor, this.state.cursor + this.PRE_PAGE);
     },
     render: function () {
         let pageImg = (item, index) => {

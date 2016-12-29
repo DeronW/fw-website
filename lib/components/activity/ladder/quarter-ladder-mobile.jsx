@@ -38,7 +38,7 @@ const QuarterLadderMobile = React.createClass({
     },
     isImgFun: function (key) {
         var imgName = ['jin', 'yin', 'tong'];
-        var i = imgName[key] ? `./images/${imgName[key]}.png` : null;
+        var i = imgName[key] ? `images/${imgName[key]}.png` : null;
         return i
     },
     subNameFun: function (str) {
@@ -121,7 +121,7 @@ const QuarterLadderMobile = React.createClass({
                 <tr key={index}>
                     <td>{this.isImgFun(index) ? <img className="tdImg" src={this.isImgFun(index)}/> :
                         <span className="twoSpan">{index + 1}</span>}
-                        {<span className="oneSpan">{this.subNameFun(item.loginName)}</span>}
+                        {<span className="oneSpan">{item.loginName}</span>}
                     </td>
                     <td>{item.totalall}</td>
                     <td>

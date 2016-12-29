@@ -2,7 +2,9 @@ const MonthLadderPC = React.createClass({
     getInitialState: function () {
         this.PRE_PAGE = 5;
         return ({
-            totalData: [],
+            totalData: {
+                topList:[]
+            },
             page: 1,
             totalPage: 2,
             tab: '上一页',
@@ -10,13 +12,23 @@ const MonthLadderPC = React.createClass({
             cursor: 0
         })
     },
+    getServerTimestamp:function(callback){
+        var ts = $getDebugParams().timestamp;
+        if(ts) {
+            callback(ts)
+        } else {
+            $.get(API_PATH+"api/userState/v1/timestamp.json", function (data) {
+                callback(data.data.timestamp)
+            }, 'json')
+        }
+    },
     componentDidMount: function () {
         var febStart = new Date("2017/2/3").getTime();
         var marStart = new Date("2017/3/3").getTime();
         var startDate = '2017-1-6';
         var endDate = '2017-2-2';
-        $.get(API_PATH + " /api/userState/v1/timestamp.json", function (data) {
-            var currentTime = data.timestamp;
+        getServerTimestamp(function (timestamp) {
+            var currentTime = timestamp;
             if (currentTime < febStart) {
                 startDate = '2017-1-6';
                 endDate = '2017-2-2';
@@ -28,12 +40,13 @@ const MonthLadderPC = React.createClass({
                 endDate = '2017-3-30';
             }
             this.ajaxPullNewInvest(startDate, endDate)
-        }.bind(this), 'json');
+        }.bind(this))
     },
     componentWillReceiveProps: function (nextProps) {
         this.ajaxPullNewInvest(nextProps.startDate, nextProps.endDate)
     },
     ajaxPullNewInvest: function (startDate, endDate) {
+        //需要修改
         $.ajax({
             url: API_PATH + '/api/activityPullNew/v2/PullNewTopAndYearInvest.json',
             data: {
@@ -41,14 +54,14 @@ const MonthLadderPC = React.createClass({
                 totalBaseAmt: 1000,
                 startDate: startDate,
                 endDate: endDate,
-                startTotalCount: 50,
-                startTotalInvest: 50
+                startTotalCount: 2,
+                startTotalInvest: 50000
             },
             type: "get",
             dataType: 'json',
             success: function (data) {
-                var sData = data.data;
-                var len = sData.length || [];
+                var sData = data.data || [];
+                var len = sData.topList.length;
                 if (len <= this.PRE_PAGE) {
                     this.setState({totalPage: 1, isClick: false});
                 } else if (len > this.PRE_PAGE && sData.length <= this.PRE_PAGE * 2) {
@@ -62,7 +75,7 @@ const MonthLadderPC = React.createClass({
     },
     isImgFun: function (key) {
         var imgName = ['jin', 'yin', 'tong'];
-        var i = imgName[key] ? `./images/${imgName[key]}.png` : null;
+        var i = imgName[key] ? `images/${imgName[key]}.png` : null;
         return i
     },
     subNameFun: function (str) {
@@ -126,9 +139,12 @@ const MonthLadderPC = React.createClass({
         }
     },
     get_current_page: function () {
-        return this.state.totalData.slice(this.state.cursor, this.state.cursor + this.PRE_PAGE);
+        return this.state.totalData.topList.slice(this.state.cursor, this.state.cursor + this.PRE_PAGE);
     },
     render: function () {
+        if(this.state.totalData.length){
+            console.log("有")
+        }
         let pageImg = (item, index) => {
             return <div key={index}
                         className={this.state.isClick?(this.state.tab == item ? 'selectedPage':null):'selectedPage'}
@@ -175,14 +191,14 @@ const MonthLadderPC = React.createClass({
                     </tr>
                     </thead>
                     {
-                        this.state.totalData.length ? tBody : null
+                        this.state.totalData.topList.length ? tBody : null
                     }
                 </table>
                 {
-                    this.state.totalData.length ? page : null
+                    this.state.totalData.topList.length ? page : null
                 }
                 {
-                    this.state.totalData.length ? null : <div className="monthLadderPcNot">人气王还在堵车，马上就来</div>
+                    this.state.totalData.topList.length ? null : <div className="monthLadderPcNot">人气王还在堵车，马上就来</div>
                 }
             </div>
         )

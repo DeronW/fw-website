@@ -55,7 +55,7 @@ const PcContainer = React.createClass({
                             <div className="monthGiftText">按当月有效好友<br/> 累计年化投资额占比分配</div>
                         </div>
                         <div className="monthLadder">
-                            <img className="ladderText" src="images/oneText.png" alt=""/>
+                            <img className="ladderText" src="images/onetext.png" alt=""/>
                             <div className="ladderTitle"></div>
                             <div className="ladderContent">
                                 {
