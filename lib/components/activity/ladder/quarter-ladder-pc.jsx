@@ -48,6 +48,7 @@ const QuarterLadderPC = React.createClass({
         return total.toFixed(2)
     },
     fixedPriceFun: function (total, totalLimit) {
+        //4千万改为4百万
         let price = 0;
         let p = 0.01;
         if (total >= 4000000 && total < 5000000) {
@@ -59,7 +60,7 @@ const QuarterLadderPC = React.createClass({
         } else {
             return '暂无奖金'
         }
-        price = totalLimit * p * 0.0056 + (total - totalLimit) * p;
+        price = totalLimit * p * 0.56 + (total - totalLimit) * p;
         return price.toFixed(2)
     },
     switchPageHandler: function (type) {
@@ -152,11 +153,14 @@ const QuarterLadderPC = React.createClass({
                     </tr>
                     </thead>
                     {
-                        tBody
+                        this.state.totalData.length ? tBody : null
                     }
                 </table>
                 {
-                    page
+                    this.state.totalData.length ? page : null
+                }
+                {
+                    this.state.totalData.length ? null : <div className="quarterLadderPcNot">人气王还在堵车，马上就来</div>
                 }
             </div>
         )

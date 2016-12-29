@@ -17,23 +17,23 @@ const MonthLadderPC = React.createClass({
         var endDate = '2017-2-2';
         $.get(API_PATH + " /api/userState/v1/timestamp.json", function (data) {
             var currentTime = data.timestamp;
-            if(currentTime < febStart){
+            if (currentTime < febStart) {
                 startDate = '2017-1-6';
                 endDate = '2017-2-2';
-            }else if(currentTime < marStart){
+            } else if (currentTime < marStart) {
                 startDate = '2017-2-3';
                 endDate = '2017-3-2';
-            }else{
+            } else {
                 startDate = '2017-3-3';
                 endDate = '2017-3-30';
             }
-            this.ajaxPullNewInvest(startDate,endDate)
+            this.ajaxPullNewInvest(startDate, endDate)
         }.bind(this), 'json');
     },
     componentWillReceiveProps: function (nextProps) {
-        this.ajaxPullNewInvest(nextProps.startDate,nextProps.endDate)
+        this.ajaxPullNewInvest(nextProps.startDate, nextProps.endDate)
     },
-    ajaxPullNewInvest: function (startDate,endDate) {
+    ajaxPullNewInvest: function (startDate, endDate) {
         $.ajax({
             url: API_PATH + '/api/activityPullNew/v2/PullNewTopAndYearInvest.json',
             data: {
@@ -74,7 +74,8 @@ const MonthLadderPC = React.createClass({
     fixedPriceFun: function (i) {
         let monthPrice = 120000;
         let totalData = this.state.totalData;
-        if (totalData.totalYearInvest == 0 || totalData.topList[i].totalall < 100 || totalData.topList[i].total < 500000) {
+        //50人改为2人 50万改为5万
+        if (totalData.totalYearInvest == 0 || totalData.topList[i].totalall < 2 || totalData.topList[i].total < 50000) {
             return '暂无奖金'
         } else {
             if (this.props.month == 1) {
@@ -174,11 +175,14 @@ const MonthLadderPC = React.createClass({
                     </tr>
                     </thead>
                     {
-                        tBody
+                        this.state.totalData.length ? tBody : null
                     }
                 </table>
                 {
-                    page
+                    this.state.totalData.length ? page : null
+                }
+                {
+                    this.state.totalData.length ? null : <div className="monthLadderPcNot">人气王还在堵车，马上就来</div>
                 }
             </div>
         )

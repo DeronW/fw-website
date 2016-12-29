@@ -66,19 +66,26 @@ const WeekLadderMobile = React.createClass({
         }
     },
     getAwardHandle: function (count) {
-        var award = 0;
-        if (count >= 5 && count <= 9) {
-            award = count * 10;
-        } else if (count >= 10 && count <= 29) {
-            award = count * 12;
-        } else if (count >= 30 && count <= 49) {
-            award = count * 15;
-        } else if (count >= 50) {
-            award = count * 18;
-        } else {
-            return award
-        }
-        return award
+        //上线时更改
+        var score = 0;
+        if (count >= 2 && count <= 3) score = count * 10;
+        if (count >= 4 && count <= 5) score = count * 12;
+        if (count >= 6 && count <= 7) score = count * 15;
+        if (count >= 8) score = count * 18;
+        return score
+        //var award = 0;
+        //if (count >= 5 && count <= 9) {
+        //    award = count * 10;
+        //} else if (count >= 10 && count <= 29) {
+        //    award = count * 12;
+        //} else if (count >= 30 && count <= 49) {
+        //    award = count * 15;
+        //} else if (count >= 50) {
+        //    award = count * 18;
+        //} else {
+        //    return award
+        //}
+        //return award
     },
     get_current_page: function () {
         return this.state.totalData.slice(this.state.cursor, this.state.cursor + this.PRE_PAGE);

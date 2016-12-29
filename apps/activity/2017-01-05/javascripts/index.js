@@ -64,9 +64,61 @@ $(function () {
         } else {
             return '暂无奖金'
         }
-        var price = equalTotal * p * 0.0056 + (totalLimit - totalLimit) * p;
+        var price = equalTotal * p * 0.56 + (totalLimit - totalLimit) * p;
         return price.toFixed(2)
     };
+    //季排行榜奖金总额显示位置
+    function totalMove(left, top, className) {
+        $(".pcQuarterPack .quarterRemind").css({
+            left: left + "px",
+            top: top + "px"
+        }).removeClass("hidden").addClass(className);
+        $(".mobileQuarterPack .quarterRemind").addClass(className);
+        $(".pcQuarterPack  .quarterRemindNot").addClass("hidden");
+    }
+    //季排行榜奖金总额
+    function totalShowText(totalYearInvest){
+        $UserReady(function (is_login,user) {
+            //4千万改为4百万
+            if(is_login){
+                if (totalYearInvest >= 4000000 && totalYearInvest < 5000000) {
+                    totalMove(60, -80, "quarterRemind1");
+                } else if (totalYearInvest >= 5000000 && totalYearInvest < 6000000) {
+                    totalMove(360, -80, "quarterRemind2");
+                } else if (totalYearInvest >= 6000000) {
+                    totalMove(680, -80, "quarterRemind3");
+                } else {
+                    $(".mobileQuarterPack .quarterRemind").addClass("quarterRemindNot").html("截止当前，榜内推荐人的有效好友累投年化总额为<em>0</em>万元，暂未开启新春特奖，大家加油哦！")
+                }
+                $(".mobileQuarterPack .quarterRemind em,.pcQuarterPack .quarterRemind em,.pcQuarterPack  .quarterRemindNot em").html(totalYearInvest / 10000);
+            }else{
+                $(".mobileQuarterPack .quarterRemind,.pcQuarterPack  .quarterRemindNot").addClass("hidden")
+            }
+        });
+    }
+    //列表头部邀友文字
+    function quarterTopText(totalYearInvest,pullNewCount,myFriendYearInvest,rankNum,myEqualFriendYearInvest,chartsText){
+        $UserReady(function (is_login, user) {
+            if (is_login) {
+                //100人改为3人 1百万改为10万
+                if (totalYearInvest == 0 || pullNewCount < 3 || myFriendYearInvest < 100000) {
+                    chartsText = "<div>1.6-3.30，您有效邀友 <em>"+pullNewCount+"</em> 人，有效好友累投年化<em>"+myFriendYearInvest+"</em>排名<em>"+rankNum+"</em>，当前无奖金可分，要努力哦！";
+                } else {
+                    price = fixedPriceFun(totalYearInvest,myEqualFriendYearInvest,myFriendYearInvest);
+                    chartsText = "<div>1.6-3.30，您有效邀友 <em>"+pullNewCount+"</em> 人，有效好友累投年化<em>"+myFriendYearInvest+"</em>排名<em>"+rankNum+"</em>，当前可分得<em>"+price+"</em>元奖金！";
+                }
+                $('.pcQuarterPack .quarterExplain,.mobileQuarterPack .quarterExplain').html(chartsText);
+            } else {
+                var pcChartsText = '<div class="quarterNoLoginText">请登录后，查看您的邀友排名及可获奖金</div> <div class="quarterLogin">立即登录></div>'
+                var mobileChartsText = '<div class="quarterNoLoginText">请登录后，<br/>查看您的邀友排名及可获奖金</div> <div class="quarterLogin">立即登录></div>'
+                $('.pcQuarterPack .quarterExplain').html(pcChartsText);
+                $('.mobileQuarterPack .quarterExplain').html(mobileChartsText);
+                $(".quarterLogin").on("click", function () {
+                    $FW.gotoSpecialPage("登录", loginUrl);
+                });
+            }
+        });
+    }
     //季排行榜
     //API_PATH + '/api/activityPullNew/v2/PullNewTopAndYearInvest.json'
     $.get(API_PATH + 'api/activityPullNew/v2/PullNewTopAndYearInvest.json', {
@@ -84,55 +136,17 @@ $(function () {
         var totalYearInvest = data.data.totalYearInvest;
         var  myEqualFriendYearInvest = data.data. myEqualFriendYearInvest;//等额
         var topList = data.data.topList;
+        //列表不为空时
         if(topList.length){
             $(".quarterLadder").removeClass('hidden');
             $(".quarterLadderNot").addClass('hidden');
         }
-        function pcTotalMove(left, top, className) {
-            $(".pcQuarterPack .quarterRemind").css({
-                left: left + "px",
-                top: top + "px"
-            }).removeClass("hidden").addClass(className);
-            $(".mobileQuarterPack .quarterRemind").addClass(className);
-            $(".pcQuarterPack  .quarterRemindNot").addClass("hidden");
-        }
-        $UserReady(function (is_login,user) {
-            if(is_login){
-                if (totalYearInvest >= 40000000 && totalYearInvest < 50000000) {
-                    pcTotalMove(60, -80, "quarterRemind1");
-                } else if (totalYearInvest >= 50000000 && totalYearInvest < 60000000) {
-                    pcTotalMove(360, -80, "quarterRemind2");
-                } else if (totalYearInvest >= 60000000) {
-                    pcTotalMove(680, -80, "quarterRemind3");
-                } else {
-                    $(".mobileQuarterPack .quarterRemind").addClass("quarterRemindNot").html("截止当前，榜内推荐人的有效好友累投年化总额为<em>5600</em>万元，暂未开启新春特奖，大家加油哦！")
-                }
-                $(".mobileQuarterPack .quarterRemind em,.pcQuarterPack .quarterRemind em,.pcQuarterPack  .quarterRemindNot em").html(totalYearInvest / 10000);
-            }else{
-                $(".mobileQuarterPack .quarterRemind,.pcQuarterPack  .quarterRemindNot").addClass("hidden")
-            }
-        });
+        totalShowText(totalYearInvest);
+        quarterTopText(totalYearInvest,pullNewCount,myFriendYearInvest,rankNum,myEqualFriendYearInvest,chartsText)
 
-        $UserReady(function (is_login, user) {
-            if (is_login) {
-                if (totalYearInvest == 0 || pullNewCount < 100 || myFriendYearInvest < 500000) {
-                    chartsText = "<div>1.6-3.30，您有效邀友 <em>"+pullNewCount+"</em> 人，有效好友累投年化<em>"+myFriendYearInvest+"</em>排名<em>"+rankNum+"</em>，当前无奖金可分，要努力哦！";
-                } else {
-                    price = fixedPriceFun(totalYearInvest,myEqualFriendYearInvest,myFriendYearInvest);
-                    chartsText = "<div>1.6-3.30，您有效邀友 <em>"+pullNewCount+"</em> 人，有效好友累投年化<em>"+myFriendYearInvest+"</em>排名<em>"+rankNum+"</em>，当前可分得<em>"+price+"</em>元奖金！";
-                }
-                $('.pcQuarterPack .quarterExplain,.mobileQuarterPack .quarterExplain').html(chartsText);
-            } else {
-                var pcChartsText = '<div class="quarterNoLoginText">请登录后，查看您的邀友排名及可获奖金</div> <div class="quarterLogin">立即登录></div>'
-                var mobileChartsText = '<div class="quarterNoLoginText">请登录后，<br/>查看您的邀友排名及可获奖金</div> <div class="quarterLogin">立即登录></div>'
-                $('.pcQuarterPack .quarterExplain').html(pcChartsText);
-                $('.mobileQuarterPack .quarterExplain').html(mobileChartsText);
-                $(".quarterLogin").on("click", function () {
-                    $FW.gotoSpecialPage("登录", loginUrl);
-                });
-            }
-        });
     }.bind(this), 'json');
+
+
     //月排行榜
     function monthChange(arg1, arg2, arg3) {
         $.get(API_PATH + 'api/activityPullNew/v2/PullNewTopAndYearInvest.json', {
@@ -140,8 +154,8 @@ $(function () {
             totalBaseAmt: 1000,
             startDate: arg1,
             endDate: arg2,
-            startTotalCount: 50,
-            startTotalInvest: 50
+            startTotalCount: 2,
+            startTotalInvest: 50000
         }, function (data) {
             var titText;
             var rankNum = data.data.rankNum || '20+';//当前用户排名
@@ -150,9 +164,9 @@ $(function () {
             var totalYearInvest = data.data.totalYearInvest;
             var topList = data.data.topList;
             var prize;
-
-            (totalYearInvest == 0 || pullNewCount < 100 || myFriendYearInvest < 500000) ? prize = 0 : prize = ((myFriendYearInvest / totalYearInvest) * arg3).toFixed(2);
-            if (totalYearInvest == 0 || pullNewCount < 100 || myFriendYearInvest < 500000) {
+            //请求参数参数startTotalCount 50改2 startTotalInvest 500000改5更改，500000改5,50改2
+            (totalYearInvest == 0 || pullNewCount < 2 || myFriendYearInvest < 50000) ? prize = 0 : prize = ((myFriendYearInvest / totalYearInvest) * arg3).toFixed(2);
+            if (totalYearInvest == 0 || pullNewCount < 2 || myFriendYearInvest < 50000) {
                 titText = '该月内，您有效邀友 <em>' + pullNewCount + '</em> 人，有效好友累投年化 <em>' + myFriendYearInvest + '</em> 元，排名 <em>' + rankNum + '</em>，当前无奖金可分，要努力哦！';
             } else {
                 titText = '该月内，您有效邀友 <em>' + pullNewCount + '</em> 人，有效好友累投年化 <em>' + myFriendYearInvest + '</em> 元，排名 <em>' + rankNum + '</em>，当前可分得 <em>' + prize + ' </em>元奖金！';
@@ -292,10 +306,11 @@ $(function () {
                         beforeText = '<div class="beforeWeek" >往周邀友奖励</div>';
                         $(".weekBefore").html("往周邀友奖励");
                     }
-                    if (dataCount >= 5) score = dataCount * 10;
-                    if (dataCount >= 10) score = dataCount * 12;
-                    if (dataCount >= 30) score = dataCount * 15;
-                    if (dataCount >= 50) score = dataCount * 18;
+                    //上线时更改为正式条件
+                    if (dataCount >= 2 && dataCount <= 3) score = dataCount * 10;
+                    if (dataCount >= 4 && dataCount <= 5) score = dataCount * 12;
+                    if (dataCount >= 6 && dataCount <= 7) score = dataCount * 15;
+                    if (dataCount >= 8) score = dataCount * 18;
                     if (dataCount < 5) {
                         pcWeekText = '本周（' + timeText + '）内，您有效邀友 <em>' + dataCount + '</em> 人，暂未获得工豆奖励，加油哦！' + beforeText;
                         mobileWeekText = '本周（' + timeText + '）内，您有效邀友 <em>' + dataCount + '</em> 人，暂未获得工豆奖励，加油哦！';
