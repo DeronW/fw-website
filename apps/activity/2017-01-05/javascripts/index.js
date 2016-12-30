@@ -132,7 +132,6 @@ $(function () {
         });
     }
     //季排行榜
-    //API_PATH + '/api/activityPullNew/v2/PullNewTopAndYearInvest.json'
     $.get(API_PATH + 'api/activityPullNew/v2/PullNewTopAndYearInvest.json', {
         dataCount: 30,
         totalBaseAmt: 1000,
@@ -141,7 +140,7 @@ $(function () {
         startTotalCount: 0,
         startTotalInvest: 0
     }, function (data) {
-        var price = 0, chartsText = '';
+        var chartsText = '';
         var rankNum = data.data.rankNum || '30+';//当前用户排名
         var pullNewCount = data.data.pullNewCount || 0;//有效邀请人数
         var myFriendYearInvest = data.data.myFriendYearInvest || 0;
@@ -158,9 +157,31 @@ $(function () {
 
     }.bind(this), 'json');
 
-
+    //月排行榜头部文字显示
+    function monthTitleShow(titText,rankNum,pullNewCount,myFriendYearInvest,totalYearInvest,arg3,prize){
+        //请求参数参数startTotalCount 50改2 startTotalInvest 500000改5更改，500000改5,50改2
+        if (totalYearInvest == 0 || pullNewCount < 2 || myFriendYearInvest < 50000) {
+            titText = '该月内，您有效邀友 <em>' + pullNewCount + '</em> 人，有效好友累投年化 <em>' + myFriendYearInvest + '</em> 元，排名 <em>' + rankNum + '</em>，当前无奖金可分，要努力哦！';
+        } else {
+            prize = ((myFriendYearInvest / totalYearInvest) * arg3).toFixed(2);
+            titText = '该月内，您有效邀友 <em>' + pullNewCount + '</em> 人，有效好友累投年化 <em>' + myFriendYearInvest + '</em> 元，排名 <em>' + rankNum + '</em>，当前可分得 <em>' + prize + ' </em>元奖金！';
+        }
+        $UserReady(function (is_login, user) {
+            if (is_login) {
+                $('.ladderTitle').html(titText);
+            } else {
+                var pcTitText = '<div class="monthNoLogin">请登录后，查看您的邀友排名及可获奖金 ，</div> <div class="monthLogin">立即登录></div>';
+                var mobileTitText = '<div class="monthNoLogin">请登录后，<br/>查看您的邀友排名及可获奖金</div> <div class="monthLogin">立即登录></div>';
+                $('.pcMonthPack .ladderTitle').html(pcTitText);
+                $('.mobileMonthPack .ladderTitle').html(mobileTitText);
+                $(".monthLogin").on('click', function () {
+                    $FW.gotoSpecialPage("登录", loginUrl);
+                })
+            }
+        });
+    }
     //月排行榜
-    function monthChange(arg1, arg2, arg3) {
+    function monthLadderShow(arg1, arg2, arg3) {
         $.get(API_PATH + 'api/activityPullNew/v2/PullNewTopAndYearInvest.json', {
             dataCount: 20,
             totalBaseAmt: 1000,
@@ -169,33 +190,14 @@ $(function () {
             startTotalCount: 2,
             startTotalInvest: 50000
         }, function (data) {
-            var titText;
+            var titText = '';
             var rankNum = data.data.rankNum || '20+';//当前用户排名
             var pullNewCount = data.data.pullNewCount || 0;//有效邀请人数
             var myFriendYearInvest = data.data.myFriendYearInvest;
             var totalYearInvest = data.data.totalYearInvest;
             var topList = data.data.topList;
-            var prize;
-            //请求参数参数startTotalCount 50改2 startTotalInvest 500000改5更改，500000改5,50改2
-            (totalYearInvest == 0 || pullNewCount < 2 || myFriendYearInvest < 50000) ? prize = 0 : prize = ((myFriendYearInvest / totalYearInvest) * arg3).toFixed(2);
-            if (totalYearInvest == 0 || pullNewCount < 2 || myFriendYearInvest < 50000) {
-                titText = '该月内，您有效邀友 <em>' + pullNewCount + '</em> 人，有效好友累投年化 <em>' + myFriendYearInvest + '</em> 元，排名 <em>' + rankNum + '</em>，当前无奖金可分，要努力哦！';
-            } else {
-                titText = '该月内，您有效邀友 <em>' + pullNewCount + '</em> 人，有效好友累投年化 <em>' + myFriendYearInvest + '</em> 元，排名 <em>' + rankNum + '</em>，当前可分得 <em>' + prize + ' </em>元奖金！';
-            }
-            $UserReady(function (is_login, user) {
-                if (is_login) {
-                    $('.ladderTitle').html(titText);
-                } else {
-                    var pcTitText = '<div class="monthNoLogin">请登录后，查看您的邀友排名及可获奖金 ，</div> <div class="monthLogin">立即登录></div>';
-                    var mobileTitText = '<div class="monthNoLogin">请登录后，<br/>查看您的邀友排名及可获奖金</div> <div class="monthLogin">立即登录></div>';
-                    $('.pcMonthPack .ladderTitle').html(pcTitText);
-                    $('.mobileMonthPack .ladderTitle').html(mobileTitText);
-                    $(".monthLogin").on('click', function () {
-                        $FW.gotoSpecialPage("登录", loginUrl);
-                    })
-                }
-            });
+            var prize = 0;
+            monthTitleShow(titText,rankNum,pullNewCount,myFriendYearInvest,totalYearInvest,arg3,prize);
             if(topList.length){
                 $(".ladderContent").removeClass('hidden');
                 $(".ladderContentNot").addClass('hidden');
@@ -210,9 +212,9 @@ $(function () {
     clipboard.on('error', function (e) {
         alert('复制失败');
     });
+    //顶部邀请奖励，根据不同周显示不同数据
     var febStart = new Date("2017/2/3").getTime();
     var marStart = new Date("2017/3/3").getTime();
-    //顶部邀请奖励，根据不同周显示不同数据
     var week11 = new Date("2017/1/6 00:00:00").getTime();
     var week12 = new Date("2017/1/12 23:59:59").getTime();
     var week21 = new Date("2017/1/13 00:00").getTime();
@@ -237,8 +239,119 @@ $(function () {
     var week112 = new Date("2017/3/23 23:59:59").getTime();
     var week121 = new Date("2017/3/24 00:00").getTime();
     var week122 = new Date("2017/3/30 23:59:59").getTime();
-    //判断在哪周
+    //判断在不同周的拉新人数
+    function judgeWeekPerson(nowTime,timeText, week_arg_st, week_arg_et){
+        $.get(API_PATH + "api/activityPullNew/v2/pullNewCount.json", {
+            startDate: week_arg_st,
+            endDate: week_arg_et,
+            totalBaseAmt: 1000,
+        }, function(data){
+            $UserReady(function (is_login, user) {
+                if (is_login) {
+                    var dataCount = data.data.pullNewCount || 0;
+                    var score = 0, pcWeekText, mobileWeekText, beforeText;
+                    if (nowTime < week21) {
+                        beforeText = '';
+                        //移动端往周邀友奖励按钮隐藏
+                        $(".weekBefore").addClass("hidden");
+                    } else {
+                        beforeText = '<div class="beforeWeek" >往周邀友奖励</div>';
+                        //移动端往周邀友奖励按钮显示
+                        $(".weekBefore").html("往周邀友奖励");
+                    }
+                    //上线时更改为正式条件
+                    if(dataCount < 2){
+                        pcWeekText = '本周（' + timeText + '）内，您有效邀友 <em>' + dataCount + '</em> 人，暂未获得工豆奖励，加油哦！' + beforeText;
+                        mobileWeekText = '本周（' + timeText + '）内，您有效邀友 <em>' + dataCount + '</em> 人，暂未获得工豆奖励，加油哦！';
+                    }else{
+                        if (dataCount >= 2 && dataCount <= 3) {
+                            score = dataCount * 10;
+                        }else if (dataCount >= 4 && dataCount <= 5) {
+                            score = dataCount * 12;
+                        }else if (dataCount >= 6 && dataCount <= 7) {
+                            score = dataCount * 15;
+                        }else if (dataCount >= 8) {
+                            score = dataCount * 18;
+                        }
+                        pcWeekText = '本周（' + timeText + '）内，您有效邀友 <em>' + dataCount + '</em> 人，可获工豆 <em>' + score + '</em> 元 ！' + beforeText;
+                        mobileWeekText = '本周（' + timeText + '）内，您有效邀友 <em>' + dataCount + '</em> 人，可获工豆 <em>' + score + '</em> 元 ！';
+                    }
 
+                    $(".pcWeekPack .weekAward").html(pcWeekText);
+                    $(".mobileWeekPack .weekAward").html(mobileWeekText);
+                    $(".noticeCode").html(user.userCode);
+                    $(".noticeLink").html('http://passport.9888.cn/pp-web2/register/phone.do?gcm=' + user.userCode);
+                } else {
+                    $(".pcWeekPack .weekAward").html('请登录后，查看您的邀友数及可获工豆， <a>立即登录></a>').on("click", function () {
+                        $FW.gotoSpecialPage('登录', loginUrl);
+                    });
+                    $(".mobileWeekPack .weekAward").html('请登录后，查看您的邀友数及可获工豆');
+                    $(".weekBefore").addClass('hidden');
+                    $(".weekLogin").removeClass('hidden').html('立即登录').on("click", function () {
+                        $FW.gotoSpecialPage('登录', loginUrl);
+                    });
+                }
+            });
+            //往周邀友奖励
+            $(".beforeWeek").on("click", function () {
+                $(".pcNotice,.pcNotice .pcNoticeWeekLadder").removeClass('hidden');
+            });
+            $(".weekBefore").on("click", function () {
+                $(".mobileNotice,.mobileNotice .mobileNoticeWeekLadder").removeClass('hidden');
+            });
+        }.bind(this), 'json');
+    }
+    //月份变换
+    var fn = function (_this, n, pcImg, mobileImg) {
+        _this.removeClass('end').addClass('active').siblings().removeClass('active').addClass("end");
+        $(".monthGiftNumber").text(n);
+        $(".pcMonthPack .monthLadder .ladderText").attr("src", pcImg);
+        $(".mobileMonthPack .monthLadder .ladderText").attr("src", mobileImg);
+    };
+    //月份显示及点击切换
+    function monthClickChange(nowTime){
+        var month_1 = $(".monthStateCommon").eq(0);
+        var month_2 = $(".monthStateCommon").eq(1);
+        var month_3 = $(".monthStateCommon").eq(2);
+        if (nowTime < febStart) {
+            month_1.addClass('active').find(".stateLeft").text("进行中").siblings().removeClass('active');
+            $(".monthStateCommon:gt(0)").addClass('not');
+
+            monthLadderShow('2017-1-6', '2017-2-2', 120000);
+        } else if (nowTime < marStart) {
+            month_2.addClass('active').find(".stateLeft").text("进行中").siblings().removeClass('active');
+            month_1.addClass("end").find(".stateLeft").text("已结束");
+            month_3.addClass("not").find(".stateLeft").text("未开始");
+            $(".monthGiftNumber").text(15);
+            $(".pcMonthPack .monthLadder .ladderText").attr("src", "images/twoText.png");
+            $(".mobileMonthPack .monthLadder .ladderText").attr("src", "images/mobileTwo.png");
+
+            monthLadderShow('2017-2-3', '2017-3-2', 150000);
+            month_1.click(function () {
+                fn($(this), 12, 'images/onetext.png', 'images/mobileOne.png')
+            });
+            month_2.click(function () {
+                fn($(this), 15, 'images/twoText.png', 'images/mobileTwo.png')
+            });
+        } else {
+            month_3.addClass('active').find(".stateLeft").text("进行中").siblings().removeClass('active');
+            $(".monthStateCommon:lt(2)").addClass("end").find(".stateLeft").text("已结束");
+            $(".monthGiftNumber").text(18);
+            $(".pcMonthPack .monthLadder .ladderText").attr("src", "images/threeText.png");
+            $(".mobileMonthPack .monthLadder .ladderText").attr("src", "images/mobileThree.png");
+
+            monthLadderShow('2017-3-3', '2017-3-30', 180000);
+            month_1.click(function () {
+                fn($(this), 12, 'images/onetext.png', 'images/mobileOne.png')
+            });
+            month_2.click(function () {
+                fn($(this), 15, 'images/twoText.png', 'images/mobileTwo.png')
+            });
+            month_3.click(function () {
+                fn($(this), 18, 'images/threeText.png', 'images/mobileThree.png')
+            });
+        }
+    }
     //时间戳
     getServerTimestamp(function (timestamp) {
         var nowTime = timestamp;
@@ -305,120 +418,10 @@ $(function () {
         }
 
         //拉新人数
-        $.get(API_PATH + "api/activityPullNew/v2/pullNewCount.json", {
-            startDate: week_arg_st,
-            endDate: week_arg_et,
-            totalBaseAmt: 1000,
-        }, function(data){
-            $UserReady(function (is_login, user) {
-                if (is_login) {
-                    var dataCount = data.data.pullNewCount || 0;
-                    var score = 0, pcWeekText, mobileWeekText, beforeText;
-                    if (nowTime < week21) {
-                        beforeText = '';
-                        $(".weekBefore").addClass("hidden");
-                    } else {
-                        beforeText = '<div class="beforeWeek" >往周邀友奖励</div>';
-                        $(".weekBefore").html("往周邀友奖励");
-                    }
-                    //上线时更改为正式条件
-                    if(dataCount < 2){
-                        pcWeekText = '本周（' + timeText + '）内，您有效邀友 <em>' + dataCount + '</em> 人，暂未获得工豆奖励，加油哦！' + beforeText;
-                        mobileWeekText = '本周（' + timeText + '）内，您有效邀友 <em>' + dataCount + '</em> 人，暂未获得工豆奖励，加油哦！';
-                    }else{
-                        if (dataCount >= 2 && dataCount <= 3) {
-                            score = dataCount * 10;
-                        }else if (dataCount >= 4 && dataCount <= 5) {
-                            score = dataCount * 12;
-                        }else if (dataCount >= 6 && dataCount <= 7) {
-                            score = dataCount * 15;
-                        }else if (dataCount >= 8) {
-                            score = dataCount * 18;
-                        }
-                        pcWeekText = '本周（' + timeText + '）内，您有效邀友 <em>' + dataCount + '</em> 人，可获工豆 <em>' + score + '</em> 元 ！' + beforeText;
-                        mobileWeekText = '本周（' + timeText + '）内，您有效邀友 <em>' + dataCount + '</em> 人，可获工豆 <em>' + score + '</em> 元 ！';
-                    }
-
-
-                    $(".pcWeekPack .weekAward").html(pcWeekText);
-                    $(".mobileWeekPack .weekAward").html(mobileWeekText);
-                    $(".noticeCode").html(user.userCode);
-                    $(".noticeLink").html('http://passport.9888.cn/pp-web2/register/phone.do?gcm=' + user.userCode);
-                } else {
-                    $(".pcWeekPack .weekAward").html('请登录后，查看您的邀友数及可获工豆， <a>立即登录></a>');
-                    $(".pcWeekPack .weekAward").on("click", function () {
-                        $FW.gotoSpecialPage('登录', loginUrl);
-                    });
-                    $(".mobileWeekPack .weekAward").html('请登录后，查看您的邀友数及可获工豆');
-                    $(".weekBefore").addClass('hidden');
-                    $(".weekLogin").removeClass('hidden').html('立即登录').on("click", function () {
-                        $FW.gotoSpecialPage('登录', loginUrl);
-                    });
-                }
-            });
-            //往周邀友奖励
-            $(".beforeWeek").on("click", function () {
-                $(".pcNotice,.pcNotice .pcNoticeWeekLadder").removeClass('hidden');
-            });
-            $(".weekBefore").on("click", function () {
-                $(".mobileNotice,.mobileNotice .mobileNoticeWeekLadder").removeClass('hidden');
-            });
-        }.bind(this), 'json');
-
+        judgeWeekPerson(nowTime,timeText, week_arg_st, week_arg_et);
         //月份切换
-        var month_1 = $(".monthStateCommon").eq(0);
-        var month_2 = $(".monthStateCommon").eq(1);
-        var month_3 = $(".monthStateCommon").eq(2);
-
-        var fn = function (_this, n, pcImg, mobileImg) {
-            _this.removeClass('end').addClass('active').siblings().removeClass('active').addClass("end");
-            $(".monthGiftNumber").text(n);
-            $(".pcMonthPack .monthLadder .ladderText").attr("src", pcImg);
-            $(".mobileMonthPack .monthLadder .ladderText").attr("src", mobileImg);
-        };
-        if (nowTime < febStart) {
-            month_1.addClass('active').find(".stateLeft").text("进行中").siblings().removeClass('active');
-            $(".monthStateCommon:gt(0)").addClass('not');
-
-            monthChange('2017-1-6', '2017-2-2', 120000);
-        } else if (nowTime < marStart) {
-            month_2.addClass('active').find(".stateLeft").text("进行中").siblings().removeClass('active');
-            month_1.addClass("end").find(".stateLeft").text("已结束");
-            month_3.addClass("not").find(".stateLeft").text("未开始");
-            $(".monthGiftNumber").text(15);
-            $(".pcMonthPack .monthLadder .ladderText").attr("src", "images/twoText.png");
-            $(".mobileMonthPack .monthLadder .ladderText").attr("src", "images/mobileTwo.png");
-
-            monthChange('2017-2-3', '2017-3-2', 150000);
-            month_1.click(function () {
-                fn($(this), 12, 'images/onetext.png', 'images/mobileOne.png')
-            });
-            month_2.click(function () {
-                fn($(this), 15, 'images/twoText.png', 'images/mobileTwo.png')
-            });
-        } else {
-            month_3.addClass('active').find(".stateLeft").text("进行中").siblings().removeClass('active');
-            $(".monthStateCommon:lt(2)").addClass("end").find(".stateLeft").text("已结束");
-            $(".monthGiftNumber").text(18);
-            $(".pcMonthPack .monthLadder .ladderText").attr("src", "images/threeText.png");
-            $(".mobileMonthPack .monthLadder .ladderText").attr("src", "images/mobileThree.png");
-
-            monthChange('2017-3-3', '2017-3-30', 180000);
-            month_1.click(function () {
-                fn($(this), 12, 'images/onetext.png', 'images/mobileOne.png')
-            });
-            month_2.click(function () {
-                fn($(this), 15, 'images/twoText.png', 'images/mobileTwo.png')
-            });
-            month_3.click(function () {
-                fn($(this), 18, 'images/threeText.png', 'images/mobileThree.png')
-            });
-        }
+        monthClickChange(nowTime)
     }.bind(this))
 
 });
 
-//function showWeekLadder() {
-//    ReactDOM.render(<WeekLadderPC />, document.getElementById("wl"));
-//    //ReactDOM.render(<WeekLadderPC />, document.getElementById("week"));
-//}
