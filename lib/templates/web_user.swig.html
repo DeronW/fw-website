@@ -100,7 +100,7 @@
                 window.location.href = "http://passport.9888.cn/passport/login?sourceSite=jrgc"
             } else {
                 var API_PATH = document.getElementById('api-path').value;
-                $.get(API_PATH + "/api/userState/v2/userState.json", null,
+                $.get(API_PATH + "/api/userState/v1/userState.json", null,
                     function (data) {
                         var data = data.data, ou = data.orderUser;
                         window._data = data;
