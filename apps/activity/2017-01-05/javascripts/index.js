@@ -1,11 +1,9 @@
-
-
-function getServerTimestamp(callback){
+function getServerTimestamp(callback) {
     var ts = $getDebugParams().timestamp;
-    if(ts) {
+    if (ts) {
         callback(ts)
     } else {
-        $.get(API_PATH+"api/userState/v1/timestamp.json", function (data) {
+        $.get(API_PATH + "api/userState/v1/timestamp.json", function (data) {
             callback(data.data.timestamp)
         }, 'json')
     }
@@ -15,24 +13,24 @@ $(function () {
     var app = navigator.userAgent.match(/FinancialWorkshop/i) ? true : false;
     if (app)$('.mobileContainer').css('margin-top', '0');
     //pc端底部如何邀友
-    $(".howAward").on("click", function () {
-        $UserReady(function (is_login, user) {
+    $UserReady(function (is_login, user) {
+        $(".howAward").on("click", function () {
             if (is_login) {
                 $(".pcNotice,.pcNotice .pcNoticeContentLogin").removeClass('hidden');
             } else {
                 $(".pcNotice,.pcNotice .pcNoticeContentNo").removeClass('hidden')
             }
-        });
+        })
     });
     //移动端底部如何邀友
-    $(".mobileBarFriend").on('click', function () {
-        $UserReady(function (is_login, user) {
+    $UserReady(function (is_login, user) {
+        $(".mobileBarFriend").on('click', function () {
             if (is_login) {
                 $(".mobileNotice,.mobileNoticeContentLogin").removeClass('hidden');
             } else {
                 $(".mobileNotice,.mobileNotice .mobileNoticeContentNo").removeClass('hidden')
             }
-        });
+        })
     });
     //弹窗关闭按钮
     $(".noticeClose").on("click", function () {
@@ -64,46 +62,48 @@ $(function () {
         $(".mobileQuarterPack .quarterRemind").addClass(className);
         $(".pcQuarterPack  .quarterRemindNot").addClass("hidden");
     }
+
     //季排行榜奖金总额
-    function totalQuarterShowText(totalYearInvest){
-        $UserReady(function (is_login,user) {
+    function totalQuarterShowText(totalYearInvest) {
+        $UserReady(function (is_login, user) {
             //4千万改为4百万
-            if(is_login){
-                if (totalYearInvest >= 4000000 && totalYearInvest < 5000000) {
-                    totalMove(60, -80, "quarterRemind1");
-                } else if (totalYearInvest >= 5000000 && totalYearInvest < 6000000) {
-                    totalMove(360, -80, "quarterRemind2");
-                } else if (totalYearInvest >= 6000000) {
-                    totalMove(680, -80, "quarterRemind3");
-                } else {
+            if (is_login) {
+                if (totalYearInvest < 4000000) {
                     $(".mobileQuarterPack .quarterRemind").addClass("quarterRemindNot").html("截止当前，榜内工友的有效好友累投年化总额为<em>0</em>万元，暂未开启新春特奖，大家加油哦！")
+                } else if (totalYearInvest < 5000000) {
+                    totalMove(60, -80, "quarterRemind1");
+                } else if (totalYearInvest < 6000000) {
+                    totalMove(360, -80, "quarterRemind2");
+                } else {
+                    totalMove(680, -80, "quarterRemind3");
                 }
                 $(".mobileQuarterPack .quarterRemind em,.pcQuarterPack .quarterRemind em,.pcQuarterPack  .quarterRemindNot em").html((totalYearInvest / 10000).toFixed(2));
-            }else{
+            } else {
                 $(".mobileQuarterPack .quarterRemind,.pcQuarterPack  .quarterRemindNot").addClass("hidden")
             }
         });
     }
+
     //季榜可以上榜文字显示
-    function quarterTopTextCb(pullNewCount,myEqualFriendYearInvest,myFriendYearInvest,rankNum,p){
+    function quarterTopTextCb(pullNewCount, myEqualFriendYearInvest, myFriendYearInvest, rankNum, p) {
         var price = myEqualFriendYearInvest * p * 0.56 + (myFriendYearInvest - myEqualFriendYearInvest) * p;
-        return "<div>1.6-3.30，您有效邀友 <em>"+pullNewCount+"</em> 人，有效好友累投年化<em>"+myFriendYearInvest+"</em>排名<em>"+rankNum+"</em>，当前可分得<em>"+price.toFixed(2)+"</em>元奖金！";
+        return "<div>1.6-3.30，您有效邀友 <em>" + pullNewCount + "</em> 人，有效好友累投年化<em>" + myFriendYearInvest + "</em>排名<em>" + rankNum + "</em>，当前可分得<em>" + price.toFixed(2) + "</em>元奖金！";
     }
+
     //月榜列表头部邀友文字
-    function quarterTopText(totalYearInvest,pullNewCount,myFriendYearInvest,rankNum,myEqualFriendYearInvest,callback){
+    function quarterTopText(totalYearInvest, pullNewCount, myFriendYearInvest, rankNum, myEqualFriendYearInvest, callback) {
         $UserReady(function (is_login, user) {
             if (is_login) {
                 //100人改为3人 1百万改为10万
                 var chartsText = '';
-                console.log(callback(pullNewCount,myEqualFriendYearInvest,myFriendYearInvest,rankNum,0.01));
-                chartsText = "<div>1.6-3.30，您有效邀友 <em>"+pullNewCount+"</em> 人，有效好友累投年化<em>"+myFriendYearInvest+"</em>元，排名<em>"+rankNum+"</em>，当前暂无奖金可分，加油哦！";
+                chartsText = "<div>1.6-3.30，您有效邀友 <em>" + pullNewCount + "</em> 人，有效好友累投年化<em>" + myFriendYearInvest + "</em>元，排名<em>" + rankNum + "</em>，当前暂无奖金可分，加油哦！";
                 if (totalYearInvest != 0 || pullNewCount > 3 || myFriendYearInvest > 100000) {
                     if (totalYearInvest >= 4000000 && totalYearInvest < 5000000) {
-                        chartsText = callback(pullNewCount,myEqualFriendYearInvest,myFriendYearInvest,rankNum,0.01);
+                        chartsText = callback(pullNewCount, myEqualFriendYearInvest, myFriendYearInvest, rankNum, 0.01);
                     } else if (totalYearInvest >= 5000000 && totalYearInvest < 6000000) {
-                        chartsText = callback(pullNewCount,myEqualFriendYearInvest,myFriendYearInvest,rankNum,0.013);
+                        chartsText = callback(pullNewCount, myEqualFriendYearInvest, myFriendYearInvest, rankNum, 0.013);
                     } else if (totalYearInvest >= 6000000) {
-                        chartsText = callback(pullNewCount,myEqualFriendYearInvest,myFriendYearInvest,rankNum,0.018);
+                        chartsText = callback(pullNewCount, myEqualFriendYearInvest, myFriendYearInvest, rankNum, 0.018);
                     }
                 }
                 $('.pcQuarterPack .quarterExplain,.mobileQuarterPack .quarterExplain').html(chartsText);
@@ -118,6 +118,7 @@ $(function () {
             }
         });
     }
+
     //季排行榜
     $.get(API_PATH + 'api/activityPullNew/v2/PullNewTopAndYearInvest.json', {
         dataCount: 30,
@@ -131,20 +132,20 @@ $(function () {
         var pullNewCount = data.data.pullNewCount || 0;//有效邀请人数
         var myFriendYearInvest = data.data.myFriendYearInvest || 0;
         var totalYearInvest = data.data.totalYearInvest;
-        var  myEqualFriendYearInvest = data.data. myEqualFriendYearInvest;//等额
+        var myEqualFriendYearInvest = data.data.myEqualFriendYearInvest;//等额
         var topList = data.data.topList;
         //列表不为空时
-        if(topList.length){
+        if (topList.length) {
             $(".quarterLadder").removeClass('hidden');
             $(".quarterLadderNot").addClass('hidden');
         }
         totalQuarterShowText(totalYearInvest);
-        quarterTopText(totalYearInvest,pullNewCount,myFriendYearInvest,rankNum,myEqualFriendYearInvest,quarterTopTextCb)
+        quarterTopText(totalYearInvest, pullNewCount, myFriendYearInvest, rankNum, myEqualFriendYearInvest, quarterTopTextCb)
 
     }.bind(this), 'json');
 
     //月排行榜头部文字显示
-    function monthTitleShow(titText,rankNum,pullNewCount,myFriendYearInvest,totalYearInvest,arg3,prize){
+    function monthTitleShow(titText, rankNum, pullNewCount, myFriendYearInvest, totalYearInvest, arg3, prize) {
         //请求参数参数startTotalCount 50改2 startTotalInvest 500000改5更改，500000改5,50改2
         if (totalYearInvest == 0 || pullNewCount < 2 || myFriendYearInvest < 50000) {
             titText = '该月内，您有效邀友 <em>' + pullNewCount + '</em> 人，有效好友累投年化 <em>' + myFriendYearInvest + '</em> 元，排名 <em>' + rankNum + '</em>，当前无奖金可分，要努力哦！';
@@ -166,6 +167,7 @@ $(function () {
             }
         });
     }
+
     //月排行榜
     function monthLadderShow(arg1, arg2, arg3) {
         $.get(API_PATH + 'api/activityPullNew/v2/PullNewTopAndYearInvest.json', {
@@ -183,13 +185,14 @@ $(function () {
             var totalYearInvest = data.data.totalYearInvest;
             var topList = data.data.topList;
             var prize = 0;
-            monthTitleShow(titText,rankNum,pullNewCount,myFriendYearInvest,totalYearInvest,arg3,prize);
-            if(topList.length){
+            monthTitleShow(titText, rankNum, pullNewCount, myFriendYearInvest, totalYearInvest, arg3, prize);
+            if (topList.length) {
                 $(".ladderContent").removeClass('hidden');
                 $(".ladderContentNot").addClass('hidden');
             }
         }.bind(this), 'json');
     }
+
     //复制功能
     var clipboard = new Clipboard('.copyCode');//复制功能
     clipboard.on('success', function (e) {
@@ -198,40 +201,37 @@ $(function () {
     clipboard.on('error', function (e) {
         alert('复制失败');
     });
+    //var weekTime = 7 * 24 *60 * 60;
+    //var startTime = new Date("2017/1/6 00:00:00").getTime();
+    //var weekList = [];
+    //for(var i = 0; i < 12; i++) {
+    //    weekList.push(starttime + weektime)
+    //}
+    //weekList[0]
+
     //顶部邀请奖励，根据不同周显示不同数据
     var febStart = new Date("2017/2/3").getTime();
     var marStart = new Date("2017/3/3").getTime();
-    var week11 = new Date("2017/1/6 00:00:00").getTime();
-    var week12 = new Date("2017/1/12 23:59:59").getTime();
     var week21 = new Date("2017/1/13 00:00").getTime();
-    var week22 = new Date("2017/1/19 23:59:59").getTime();
-    var week31 = new Date("2017/1/20 00:00").getTime();
-    var week32 = new Date("2017/1/26 23:59:59").getTime();
-    var week41 = new Date("2017/1/27 00:00").getTime();
-    var week42 = new Date("2017/2/2 23:59:59").getTime();
-    var week51 = new Date("2017/2/3 00:00").getTime();
-    var week52 = new Date("2017/2/9 23:59:59").getTime();
-    var week61 = new Date("2017/2/10 00:00").getTime();
-    var week62 = new Date("2017/2/16 23:59:59").getTime();
-    var week71 = new Date("2017/2/17 00:00").getTime();
-    var week72 = new Date("2017/2/23 23:59:59").getTime();
-    var week81 = new Date("2017/2/24 00:00").getTime();
-    var week82 = new Date("2017/3/2 23:59:59").getTime();
-    var week91 = new Date("2017/3/3 00:00").getTime();
-    var week92 = new Date("2017/3/9 23:59:59").getTime();
-    var week101 = new Date("2017/3/10 00:00").getTime();
-    var week102 = new Date("2017/3/16 23:59:59").getTime();
-    var week111 = new Date("2017/3/17 00:00").getTime();
-    var week112 = new Date("2017/3/23 23:59:59").getTime();
-    var week121 = new Date("2017/3/24 00:00").getTime();
-    var week122 = new Date("2017/3/30 23:59:59").getTime();
+    //var week31 = new Date("2017/1/20 00:00:00").getTime();
+    //var week41 = new Date("2017/1/27 00:00:00").getTime();
+    //var week51 = new Date("2017/2/3 00:00:00").getTime();
+    //var week61 = new Date("2017/2/10 00:00").getTime();
+    //var week71 = new Date("2017/2/17 00:00").getTime();
+    //var week81 = new Date("2017/2/24 00:00").getTime();
+    //var week91 = new Date("2017/3/3 00:00").getTime();
+    //var week101 = new Date("2017/3/10 00:00").getTime();
+    //var week111 = new Date("2017/3/17 00:00").getTime();
+    //var week121 = new Date("2017/3/24 00:00").getTime();
+
+
     //判断在不同周的拉新人数
-    function judgeWeekPerson(nowTime,timeText, week_arg_st, week_arg_et){
+    function judgeWeekPerson(nowTime, timeText, week_arg_st, week_arg_et) {
         $.get(API_PATH + "api/activityPullNew/v2/pullNewCount.json", {
             startDate: week_arg_st,
             endDate: week_arg_et,
             totalBaseAmt: 1000,
-        }, function(data){
+        }, function (data) {
             $UserReady(function (is_login, user) {
                 if (is_login) {
                     var dataCount = data.data.pullNewCount || 0;
@@ -246,17 +246,17 @@ $(function () {
                         $(".weekBefore").html("往周邀友奖励");
                     }
                     //上线时更改为正式条件
-                    if(dataCount < 2){
+                    if (dataCount < 2) {
                         pcWeekText = '本周（' + timeText + '）内，您有效邀友 <em>' + dataCount + '</em> 人，暂未获得工豆奖励，加油哦！' + beforeText;
                         mobileWeekText = '本周（' + timeText + '）内，您有效邀友 <em>' + dataCount + '</em> 人，暂未获得工豆奖励，加油哦！';
-                    }else{
+                    } else {
                         if (dataCount <= 3) {
                             score = dataCount * 10;
-                        }else if (dataCount <= 5) {
+                        } else if (dataCount <= 5) {
                             score = dataCount * 12;
-                        }else if (dataCount <= 7) {
+                        } else if (dataCount <= 7) {
                             score = dataCount * 15;
-                        }else if (dataCount >= 8) {
+                        } else if (dataCount >= 8) {
                             score = dataCount * 18;
                         }
                         pcWeekText = '本周（' + timeText + '）内，您有效邀友 <em>' + dataCount + '</em> 人，可获工豆 <em>' + score + '</em> 元 ！' + beforeText;
@@ -287,6 +287,7 @@ $(function () {
             });
         }.bind(this), 'json');
     }
+
     //月份变换
     var fn = function (_this, n, pcImg, mobileImg) {
         _this.removeClass('end').addClass('active').siblings().removeClass('active').addClass("end");
@@ -295,7 +296,7 @@ $(function () {
         $(".mobileMonthPack .monthLadder .ladderText").attr("src", mobileImg);
     };
     //月份显示及点击切换
-    function monthClickChange(nowTime){
+    function monthClickChange(nowTime) {
         var month_1 = $(".monthStateCommon").eq(0);
         var month_2 = $(".monthStateCommon").eq(1);
         var month_3 = $(".monthStateCommon").eq(2);
@@ -338,76 +339,72 @@ $(function () {
             });
         }
     }
+
+    var weekTime = 7 * 24 * 60 * 60 * 1000;
+    var startTime = new Date("2017/1/6 00:00:00").getTime();
+    var weekList = [];
+    for (var i = 0; i < 12; i++) {
+        weekList.push((startTime += weekTime));
+    }
     //时间戳
     getServerTimestamp(function (timestamp) {
         var nowTime = timestamp;
         var timeText, week_arg_st, week_arg_et;
-        if (nowTime < week12) {
+        if (nowTime < weekList[0]) {
             timeText = '1.6-1.12';
             week_arg_st = '2017/1/6';
             week_arg_et = '2017/1/12';
-        }
-        else if (week21 < nowTime && nowTime < week22) {
+        } else if (nowTime >= weekList[0] && nowTime < weekList[1]) {
             timeText = '1.13-1.19';
             week_arg_st = '2017/1/13';
             week_arg_et = '2017/1/19';
-        }
-        else if (week31 < nowTime && nowTime < week32) {
+        } else if (nowTime >= weekList[1] && nowTime < weekList[2]) {
             timeText = '1.20-1.26';
             week_arg_st = '2017/1/20';
             week_arg_et = '2017/1/26';
-        }
-        else if (week41 < nowTime && nowTime < week42) {
+        } else if (nowTime >= weekList[2] && nowTime < weekList[3]) {
             timeText = '1.27-2.2';
             week_arg_st = '2017/1/27';
             week_arg_et = '2017/2/2';
-        }
-        else if (week51 < nowTime && nowTime < week52) {
+        } else if (nowTime >= weekList[3] && nowTime < weekList[4]) {
             timeText = '2.3-2.9';
             week_arg_st = '2017/2/3';
             week_arg_et = '2017/2/9';
-        }
-        else if (week61 < nowTime && nowTime < week62) {
+        } else if (nowTime >= weekList[4] && nowTime < weekList[5]) {
             timeText = '2.10-2.16';
             week_arg_st = '2017/2/10';
             week_arg_et = '2017/2/16';
-        }
-        else if (week71 < nowTime && nowTime < week72) {
+        } else if (nowTime >= weekList[5] && nowTime < weekList[6]) {
             timeText = '2.17-2.23';
             week_arg_st = '2017/2/17';
             week_arg_et = '2017/2/23';
-        }
-        else if (week81 < nowTime && nowTime < week82) {
+        } else if (nowTime >= weekList[6] && nowTime < weekList[7]) {
             timeText = '2.24-3.2';
             week_arg_st = '2017/2/24';
             week_arg_et = '2017/3/2';
-        }
-        else if (week91 < nowTime && nowTime < week92) {
+        } else if (nowTime >= weekList[7] && nowTime < weekList[8]) {
             timeText = '3.3-3.9';
             week_arg_st = '2017/3/3';
             week_arg_et = '2017/3/9';
-        }
-        else if (week101 < nowTime && nowTime < week102) {
+        } else if (nowTime >= weekList[8] && nowTime < weekList[9]) {
             timeText = '3.10-3.16';
             week_arg_st = '2017/3/10';
             week_arg_et = '2017/3/16';
-        }
-        else if (week111 < nowTime && nowTime < week112) {
+        } else if (nowTime >= weekList[9] && nowTime < weekList[10]) {
             timeText = '3.17-3.23';
             week_arg_st = '2017/3/17';
             week_arg_et = '2017/3/23';
-        }
-        else {
+        } else {
+
             timeText = '3.24-3.30';
             week_arg_st = '2017/3/24';
             week_arg_et = '2017/3/30';
         }
 
         //拉新人数
-        judgeWeekPerson(nowTime,timeText, week_arg_st, week_arg_et);
+        judgeWeekPerson(nowTime, timeText, week_arg_st, week_arg_et);
         //月份切换
         monthClickChange(nowTime)
     }.bind(this))
-
 });
 
