@@ -85,7 +85,7 @@ const PcContainer = React.createClass({
                         <div className="quarterTextRight">榜内有效好友累投<br/>年化总额≥6000万元</div>
                         <div className="quarterExplain">1.6-3.30，您有效邀友<em></em>人，有效好友累投年化<em></em>元，排名<em></em>，当前可分<em></em>元奖金！</div>
                         <div className="quarterRemind hidden">截止当前，榜内推荐人的有效好友累投年化总额为<em>0</em>万元，单个推荐人可获该挡奖金！</div>
-                        <div className="quarterRemindNot">截止当前，榜内推荐人的有效好友累投年化总额为<em>0</em>万元，暂未开启新春特奖，大家继续加油哦！</div>
+                        <div className="quarterRemindNot">截止当前，榜内工友的有效好友累投年化总额为<em>0</em>万元，暂未开启新春特奖，大家加油哦！</div>
                         <div className="quarterLadder">
                             {
                                 <QuarterLadderPC />
