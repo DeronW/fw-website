@@ -68,13 +68,13 @@ const WeekLadderMobile = React.createClass({
     },
     getAwardHandle: function (count) {
         //上线时更改
-        var score = 0;
+        var score = '暂无奖金';
         if (count >= 2 && count <= 3) score = count * 10;
         if (count >= 4 && count <= 5) score = count * 12;
         if (count >= 6 && count <= 7) score = count * 15;
         if (count >= 8) score = count * 18;
         return score
-        //var award = 0;
+        //var award = '暂无奖金';
         //if (count >= 5 && count <= 9) {
         //    award = count * 10;
         //} else if (count >= 10 && count <= 29) {
@@ -164,8 +164,8 @@ const WeekLadderMobile = React.createClass({
             }
             return <tr key={index}>
                 <td>{dateArr[index]}</td>
-                <td>{n}</td>
-                <td className="bodyAward">{t}</td>
+                <td className={n=='未开始'?null:"bodyAward"}>{n}</td>
+                <td className={t=='未开始'||t=='暂无奖金'?null:"bodyAward"}>{t}</td>
             </tr>
         };
         let tBody = (

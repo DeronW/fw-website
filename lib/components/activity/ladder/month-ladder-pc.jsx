@@ -3,7 +3,7 @@ const MonthLadderPC = React.createClass({
         this.PRE_PAGE = 5;
         return ({
             totalData: {
-                topList:[]
+                topList: []
             },
             page: 1,
             totalPage: 2,
@@ -12,12 +12,12 @@ const MonthLadderPC = React.createClass({
             cursor: 0
         })
     },
-    getServerTimestamp:function(callback){
+    getServerTimestamp: function (callback) {
         var ts = $getDebugParams().timestamp;
-        if(ts) {
+        if (ts) {
             callback(ts)
         } else {
-            $.get(API_PATH+"api/userState/v1/timestamp.json", function (data) {
+            $.get(API_PATH + "api/userState/v1/timestamp.json", function (data) {
                 callback(data.data.timestamp)
             }, 'json')
         }
@@ -140,9 +140,6 @@ const MonthLadderPC = React.createClass({
         return this.state.totalData.topList.slice(this.state.cursor, this.state.cursor + this.PRE_PAGE);
     },
     render: function () {
-        if(this.state.totalData.length){
-            console.log("有")
-        }
         let pageImg = (item, index) => {
             return <div key={index}
                         className={this.state.isClick?(this.state.tab == item ? 'selectedPage':null):'selectedPage'}
@@ -167,7 +164,7 @@ const MonthLadderPC = React.createClass({
                 <td>
                     {this.fixedPrice(item.total)}
                 </td>
-                <td className="bodyPrice">{this.fixedPriceFun(index)}</td>
+                <td className={this.fixedPriceFun(index) == '暂无奖金'?null:"bodyPrice"}>{this.fixedPriceFun(index)}</td>
             </tr>
         };
         let tBody = (

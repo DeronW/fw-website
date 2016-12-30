@@ -1,11 +1,12 @@
 const MobileContainer = React.createClass({
     getInitialState: function () {
         return({
-            month:1
+            startDate:'2017-1-6',
+            endDate:'2017-2-2'
         })
     },
-    ajaxMonth: function (n) {
-        this.setState({month:n})
+    ajaxMonth: function (start,end) {
+        this.setState({startDate:start,endDate:end})
     },
     render: function () {
         return (
@@ -23,21 +24,21 @@ const MobileContainer = React.createClass({
                 <div className="mobileMonthPack">
                     <div className="monthTitle"></div>
                     <div className="monthState">
-                        <div className="monthStateCommon active" onClick={()=>{this.ajaxMonth(1)}}>
+                        <div className="monthStateCommon active" onClick={()=>{this.ajaxMonth('2017-1-6','2017-2-2')}}>
                             <div className="stateLeft">进行中</div>
                             <div className="stateRight">
                                 <div className="stateCurrentMonth">1月</div>
                                 <div className="stateCurrentDate">01.06 ~ 02.02</div>
                             </div>
                         </div>
-                        <div className="monthStateCommon" onClick={()=>{this.ajaxMonth(2)}}>
+                        <div className="monthStateCommon" onClick={()=>{this.ajaxMonth('2017-2-3','2017-3-2')}}>
                             <div className="stateLeft">未开始</div>
                             <div className="stateRight">
                                 <div className="stateCurrentMonth">2月</div>
                                 <div className="stateCurrentDate">02.03 ~ 03.02</div>
                             </div>
                         </div>
-                        <div className="monthStateCommon" onClick={()=>{this.ajaxMonth(3)}}>
+                        <div className="monthStateCommon" onClick={()=>{this.ajaxMonth('2017-3-3','2017-3-30')}}>
                             <div className="stateLeft">未开始</div>
                             <div className="stateRight">
                                 <div className="stateCurrentMonth">3月</div>
@@ -56,7 +57,7 @@ const MobileContainer = React.createClass({
                             <div className="ladderTitle"></div>
                             <div className="ladderContent">
                                 {
-                                    <MonthLadderMobile />
+                                    <MonthLadderMobile startDate={this.state.startDate} endDate={this.state.endState}/>
                                 }
                             </div>
                         </div>

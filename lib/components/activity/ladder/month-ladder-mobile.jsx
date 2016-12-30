@@ -43,14 +43,7 @@ const MonthLadderMobile = React.createClass({
         }.bind(this))
     },
     componentWillReceiveProps: function (nextProps) {
-        let month = nextProps.month;
-        if (month == 1) {
-            this.ajaxPullNewInvest('2017-1-6', '2017-2-2')
-        } else if (month == 2) {
-            this.ajaxPullNewInvest('2017-2-3', '2017-3-2')
-        } else {
-            this.ajaxPullNewInvest('2017-3-3', '2017-3-30')
-        }
+        this.ajaxPullNewInvest(nextProps.startDate, nextProps.endDate)
     },
     ajaxPullNewInvest: function (startDate, endDate) {
         $.ajax({
@@ -167,7 +160,7 @@ const MonthLadderMobile = React.createClass({
                 <td>
                     {this.fixedPrice(item.total)}
                 </td>
-                <td className="bodyPrice">{this.fixedPriceFun(index)}</td>
+                <td className={this.fixedPriceFun(index) == '暂无奖金'?null:"bodyPrice"}>{this.fixedPriceFun(index)}</td>
             </tr>
         };
         let tBody = (
