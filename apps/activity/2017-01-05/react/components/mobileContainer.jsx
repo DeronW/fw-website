@@ -1,12 +1,12 @@
 const MobileContainer = React.createClass({
     getInitialState: function () {
-        return({
-            startDate:'2017-1-6',
-            endDate:'2017-2-2'
+        return ({
+            startDate: '2017-1-6',
+            endDate: '2017-2-2'
         })
     },
-    ajaxMonth: function (start,end) {
-        this.setState({startDate:start,endDate:end})
+    ajaxMonth: function (start, end) {
+        this.setState({startDate: start, endDate: end})
     },
     render: function () {
         return (
@@ -54,6 +54,7 @@ const MobileContainer = React.createClass({
                         </div>
                         <div className="monthLadder">
                             <img className="ladderText" src="images/mobileOne.png" alt=""/>
+
                             <div className="ladderTitle"></div>
                             <div className="ladderContent">
                                 {
@@ -74,7 +75,7 @@ const MobileContainer = React.createClass({
                     <div className="quarterTitle"></div>
                     <div className="quarterText">
                         1.6-3.30，全榜30名推荐人的有效好友累投年化总额（不含自身）达到对应礼包标准，平台开启新春特奖。推荐人（有效好友≥100人且有效好友累投年化额≥100万元）奖金为推荐人活动期间的有效好友累投年化额*对应奖金比例。
-                     </div>
+                    </div>
                     <div className="quarterContent">
                         <div className="quarterNumLeft"><em>1</em></div>
                         <div className="quarterNumCenter"><em>1.3</em></div>
@@ -100,6 +101,7 @@ const MobileContainer = React.createClass({
                 <div className="appleInc">以上活动由金融工场主办 与Apple Inc. 无关</div>
                 <div className="mobileBar">
                     <img className="mobileLogo" src="images/mobileLogo.png" alt=""/>
+
                     <div className="mobileBarCenter">
                         <div className="barCenterTop">朋友多，这些奖励还觉得不够？</div>
                         <div className="mobileBarAward">更多邀友奖励</div>
@@ -112,24 +114,32 @@ const MobileContainer = React.createClass({
                         <div className="noticeClose"></div>
                         <div className="noticeText">请好友用您的工场码，<em>好友注册7天内累投年化额≥1000元</em>，且投资<br/>等额标时，超过18个月按18个月计算年化，才算一个有效邀请。<br/>
                             登录后查看我的工场码<br/>
-                            还没有工场码？注册即可拥有。</div>
+                            还没有工场码？注册即可拥有。
+                        </div>
                         <a className="login">登录注册</a>
+
                         <div className="noticeRemind">
                             新手注册即送<em>120</em>元，首投最高送<em>150</em>元，邀请好友首投再得<em>50</em>元!
                         </div>
-                        <a className="moreNew" href="http://mp.weixin.qq.com/s?__biz=MjM5MjQwMjcyNA==&mid=507798032&idx=1&sn=6593ce9f7358486685b84006fa3c2fff&scene=0#wechat_redirect">更多新手秘笈></a>
+                        <a className="moreNew"
+                           href="http://mp.weixin.qq.com/s?__biz=MjM5MjQwMjcyNA==&mid=507798032&idx=1&sn=6593ce9f7358486685b84006fa3c2fff&scene=0#wechat_redirect">更多新手秘笈></a>
                     </div>
                     <div className="mobileNoticeContentLogin hidden">
                         <div className="noticeClose"></div>
                         <div className="noticeText1">请好友注册或投资时填写我的工场码</div>
                         <div className="noticeCode">A354545</div>
                         <div className="noticeText2">复制以下链接，发送给好友！</div>
-                        <div className="noticeLink" id="copy-value">http://passport.9888.cn/pp-web2/register/phone.do?gcm=A677004</div>
-                        <div className="copyCode" data-clipboard-action="copy" data-clipboard-target="#copy-value" >复制链接</div>
+                        <div className="noticeLink" id="copy-value">
+                            http://passport.9888.cn/pp-web2/register/phone.do?gcm=A677004
+                        </div>
+                        <div className="copyCode" data-clipboard-action="copy" data-clipboard-target="#copy-value">
+                            复制链接
+                        </div>
                         <div className="noticeRemind">
                             新手注册即送<em>120</em>元，首投最高送<em>150</em>元，邀请好友首投再得<em>50</em>元!
                         </div>
-                        <a className="moreNew" href="http://mp.weixin.qq.com/s?__biz=MjM5MjQwMjcyNA==&mid=507798032&idx=1&sn=6593ce9f7358486685b84006fa3c2fff&scene=0#wechat_redirect">更多新手秘笈></a>
+                        <a className="moreNew"
+                           href="http://mp.weixin.qq.com/s?__biz=MjM5MjQwMjcyNA==&mid=507798032&idx=1&sn=6593ce9f7358486685b84006fa3c2fff&scene=0#wechat_redirect">更多新手秘笈></a>
                     </div>
                     <div className="mobileNoticeWeekLadder hidden">
                         <div className="noticeClose"></div>

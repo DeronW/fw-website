@@ -12,12 +12,12 @@ const MonthLadderMobile = React.createClass({
             cursor: 0
         })
     },
-    getServerTimestamp:function(callback){
+    getServerTimestamp: function (callback) {
         var ts = $getDebugParams().timestamp;
-        if(ts) {
+        if (ts) {
             callback(ts)
         } else {
-            $.get(API_PATH+"api/userState/v1/timestamp.json", function (data) {
+            $.get(API_PATH + "api/userState/v1/timestamp.json", function (data) {
                 callback(data.data.timestamp)
             }, 'json')
         }
