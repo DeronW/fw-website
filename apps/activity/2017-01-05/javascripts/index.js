@@ -12,6 +12,8 @@ function getServerTimestamp(callback){
 }
 
 $(function () {
+    var app = navigator.userAgent.match(/FinancialWorkshop/i) ? true : false;
+    if (app)$('.mobileContainer').css('margin-top', '0');
     //pc端底部如何邀友
     $(".howAward").on("click", function () {
         $UserReady(function (is_login, user) {
@@ -53,20 +55,6 @@ $(function () {
     $(".mobileNoticeContentNo .login,.pcNoticeContentNo .login").on("click", function () {
         $FW.gotoSpecialPage("登录", loginUrl);
     });
-    var fixedPriceFun = function (total,equalTotal, friendInvest) {
-        var p = 0.01;
-        if (total >= 4000000 && total < 5000000) {
-            p = 0.01;
-        } else if (total >= 5000000 && total < 6000000) {
-            p = 0.013;
-        } else if (total >= 6000000) {
-            p = 0.018;
-        } else {
-            return '0'
-        }
-        var price = equalTotal * p * 0.56 + (friendInvest - equalTotal) * p;
-        return price.toFixed(2)
-    };
     //季排行榜奖金总额显示位置
     function totalMove(left, top, className) {
         $(".pcQuarterPack .quarterRemind").css({
@@ -77,7 +65,7 @@ $(function () {
         $(".pcQuarterPack  .quarterRemindNot").addClass("hidden");
     }
     //季排行榜奖金总额
-    function totalShowText(totalYearInvest){
+    function totalQuarterShowText(totalYearInvest){
         $UserReady(function (is_login,user) {
             //4千万改为4百万
             if(is_login){
@@ -96,27 +84,26 @@ $(function () {
             }
         });
     }
-    //列表头部邀友文字
-    function quarterTopText(totalYearInvest,pullNewCount,myFriendYearInvest,rankNum,myEqualFriendYearInvest,chartsText){
+    //季榜可以上榜文字显示
+    function quarterTopTextCb(pullNewCount,myEqualFriendYearInvest,myFriendYearInvest,rankNum,p){
+        var price = myEqualFriendYearInvest * p * 0.56 + (myFriendYearInvest - myEqualFriendYearInvest) * p;
+        return "<div>1.6-3.30，您有效邀友 <em>"+pullNewCount+"</em> 人，有效好友累投年化<em>"+myFriendYearInvest+"</em>排名<em>"+rankNum+"</em>，当前可分得<em>"+price.toFixed(2)+"</em>元奖金！";
+    }
+    //月榜列表头部邀友文字
+    function quarterTopText(totalYearInvest,pullNewCount,myFriendYearInvest,rankNum,myEqualFriendYearInvest,callback){
         $UserReady(function (is_login, user) {
             if (is_login) {
                 //100人改为3人 1百万改为10万
-                var price = 0;
+                var chartsText = '';
+                console.log(callback(pullNewCount,myEqualFriendYearInvest,myFriendYearInvest,rankNum,0.01));
                 chartsText = "<div>1.6-3.30，您有效邀友 <em>"+pullNewCount+"</em> 人，有效好友累投年化<em>"+myFriendYearInvest+"</em>元，排名<em>"+rankNum+"</em>，当前暂无奖金可分，加油哦！";
                 if (totalYearInvest != 0 || pullNewCount > 3 || myFriendYearInvest > 100000) {
-                    var p = 0.01;
                     if (totalYearInvest >= 4000000 && totalYearInvest < 5000000) {
-                        p = 0.01;
-                        price = myEqualFriendYearInvest * p * 0.56 + (myFriendYearInvest - myEqualFriendYearInvest) * p;
-                        chartsText = "<div>1.6-3.30，您有效邀友 <em>"+pullNewCount+"</em> 人，有效好友累投年化<em>"+myFriendYearInvest+"</em>排名<em>"+rankNum+"</em>，当前可分得<em>"+price.toFixed(2)+"</em>元奖金！";
+                        chartsText = callback(pullNewCount,myEqualFriendYearInvest,myFriendYearInvest,rankNum,0.01);
                     } else if (totalYearInvest >= 5000000 && totalYearInvest < 6000000) {
-                        p = 0.013;
-                        price = myEqualFriendYearInvest * p * 0.56 + (myFriendYearInvest - myEqualFriendYearInvest) * p;
-                        chartsText = "<div>1.6-3.30，您有效邀友 <em>"+pullNewCount+"</em> 人，有效好友累投年化<em>"+myFriendYearInvest+"</em>排名<em>"+rankNum+"</em>，当前可分得<em>"+price.toFixed(2)+"</em>元奖金！";
+                        chartsText = callback(pullNewCount,myEqualFriendYearInvest,myFriendYearInvest,rankNum,0.013);
                     } else if (totalYearInvest >= 6000000) {
-                        p = 0.018;
-                        price = myEqualFriendYearInvest * p * 0.56 + (myFriendYearInvest - myEqualFriendYearInvest) * p;
-                        chartsText = "<div>1.6-3.30，您有效邀友 <em>"+pullNewCount+"</em> 人，有效好友累投年化<em>"+myFriendYearInvest+"</em>排名<em>"+rankNum+"</em>，当前可分得<em>"+price.toFixed(2)+"</em>元奖金！";
+                        chartsText = callback(pullNewCount,myEqualFriendYearInvest,myFriendYearInvest,rankNum,0.018);
                     }
                 }
                 $('.pcQuarterPack .quarterExplain,.mobileQuarterPack .quarterExplain').html(chartsText);
@@ -140,7 +127,6 @@ $(function () {
         startTotalCount: 0,
         startTotalInvest: 0
     }, function (data) {
-        var chartsText = '';
         var rankNum = data.data.rankNum || '30+';//当前用户排名
         var pullNewCount = data.data.pullNewCount || 0;//有效邀请人数
         var myFriendYearInvest = data.data.myFriendYearInvest || 0;
@@ -152,8 +138,8 @@ $(function () {
             $(".quarterLadder").removeClass('hidden');
             $(".quarterLadderNot").addClass('hidden');
         }
-        totalShowText(totalYearInvest);
-        quarterTopText(totalYearInvest,pullNewCount,myFriendYearInvest,rankNum,myEqualFriendYearInvest,chartsText)
+        totalQuarterShowText(totalYearInvest);
+        quarterTopText(totalYearInvest,pullNewCount,myFriendYearInvest,rankNum,myEqualFriendYearInvest,quarterTopTextCb)
 
     }.bind(this), 'json');
 
@@ -264,11 +250,11 @@ $(function () {
                         pcWeekText = '本周（' + timeText + '）内，您有效邀友 <em>' + dataCount + '</em> 人，暂未获得工豆奖励，加油哦！' + beforeText;
                         mobileWeekText = '本周（' + timeText + '）内，您有效邀友 <em>' + dataCount + '</em> 人，暂未获得工豆奖励，加油哦！';
                     }else{
-                        if (dataCount >= 2 && dataCount <= 3) {
+                        if (dataCount <= 3) {
                             score = dataCount * 10;
-                        }else if (dataCount >= 4 && dataCount <= 5) {
+                        }else if (dataCount <= 5) {
                             score = dataCount * 12;
-                        }else if (dataCount >= 6 && dataCount <= 7) {
+                        }else if (dataCount <= 7) {
                             score = dataCount * 15;
                         }else if (dataCount >= 8) {
                             score = dataCount * 18;
