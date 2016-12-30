@@ -94,8 +94,8 @@ const WeekLadderPC = React.createClass({
     },
     ajaxTime: function () {
         this.getServerTimestamp(function (timestamp) {
-            var currentDate = new Date(timestamp).toLocaleDateString().split('/').slice(1).join('.');
-            this.setState({currentDate: currentDate})
+            //var currentDate = new Date(timestamp).toLocaleDateString().split('/').slice(1).join('.');
+            this.setState({currentDate: timestamp})
         }.bind(this));
     },
     getServerTimestamp: function (callback) {
@@ -122,45 +122,43 @@ const WeekLadderPC = React.createClass({
             </div>
         );
         let dateArr = [
-            '1.6-1.12',
+            '1.06-1.12',
             '1.13-1.19',
             '1.20-1.26',
-            '1.27-2.2',
-            '2.3-2.9',
+            '1.27-2.02',
+            '2.03-2.09',
             '2.10-2.16',
             '2.17-2.23',
-            '2.24-3.2',
-            '3.3-3.9',
+            '2.24-3.02',
+            '3.03-3.09',
             '3.10-3.16',
             '3.17-3.23',
             '3.24-3.30',
         ];
 
-        function compareDate(a, b) {
-            var arr1 = a.toString().split(".");
-            var arr2 = b.toString().split(".");
-            if (arr1[1].length == 1) {
-                a = arr1[0] + '.0' + arr1[1];
+        function getNowFormatDate(timestamp) {
+            var date = new Date(timestamp);
+            var symbol = ".";
+            var month = date.getMonth() + 1;
+            var strDate = date.getDate();
+            //if (month >= 1 && month <= 9) {
+            //    month = "0" + month;
+            //}
+            if (strDate >= 0 && strDate <= 9) {
+                strDate = "0" + strDate;
             }
-            if(arr2[1].length == 1){
-                b = arr2[0] + '.0' + arr2[1];
-            }
-            console.log(a);
-            console.log(b);
-            return a < b
-        };
-
+            return month + symbol + strDate;
+        }
+        function compareDate(a,b){
+            return a < getNowFormatDate(b)
+        }
         let bodyImg = (item, index) => {
             index += this.state.cursor;
             let t;
             let n;
             var d = dateArr[index].split('-')[0];
             var cd = this.state.currentDate;
-            //console.log(d);
-            //console.log(cd);
-            //console.log(String(d) < String(cd));
-            //if(String(d) < String(cd)) {
-            if (compareDate(d, cd)) {
+            if (compareDate(d,cd)) {
                 t = this.getAwardHandle(item);
                 n = item;
             } else {
