@@ -201,28 +201,11 @@ $(function () {
     clipboard.on('error', function (e) {
         alert('复制失败');
     });
-    //var weekTime = 7 * 24 *60 * 60;
-    //var startTime = new Date("2017/1/6 00:00:00").getTime();
-    //var weekList = [];
-    //for(var i = 0; i < 12; i++) {
-    //    weekList.push(starttime + weektime)
-    //}
-    //weekList[0]
 
     //顶部邀请奖励，根据不同周显示不同数据
     var febStart = new Date("2017/2/3").getTime();
     var marStart = new Date("2017/3/3").getTime();
     var week21 = new Date("2017/1/13 00:00").getTime();
-    //var week31 = new Date("2017/1/20 00:00:00").getTime();
-    //var week41 = new Date("2017/1/27 00:00:00").getTime();
-    //var week51 = new Date("2017/2/3 00:00:00").getTime();
-    //var week61 = new Date("2017/2/10 00:00").getTime();
-    //var week71 = new Date("2017/2/17 00:00").getTime();
-    //var week81 = new Date("2017/2/24 00:00").getTime();
-    //var week91 = new Date("2017/3/3 00:00").getTime();
-    //var week101 = new Date("2017/3/10 00:00").getTime();
-    //var week111 = new Date("2017/3/17 00:00").getTime();
-    //var week121 = new Date("2017/3/24 00:00").getTime();
 
 
     //判断在不同周的拉新人数
