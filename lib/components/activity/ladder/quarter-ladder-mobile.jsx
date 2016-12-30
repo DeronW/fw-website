@@ -113,6 +113,11 @@ const QuarterLadderMobile = React.createClass({
                 }
             </div>
         );
+        var td4Style = {
+            textAlign : 'right',
+            width:'100px',
+            paddingRight:'20px'
+        };
         let bodyImg = (item, index) => {
             index += this.state.cursor;
             return (
@@ -126,7 +131,7 @@ const QuarterLadderMobile = React.createClass({
                         {this.fixedPrice(item.total)}
                         {<div className="tdPriceLimit">(含等额标{item.total4})</div>}
                     </td>
-                    <td className={this.fixedPriceFun(item.totalall,item.total4) == '暂无奖金'?null:"tdMoney"}>{this.fixedPriceFun(item.totalall,item.total4)}</td>
+                    <td style={td4Style} className={this.fixedPriceFun(item.totalall,item.total4) == '暂无奖金'?null:"tdMoney"}>{this.fixedPriceFun(item.totalall,item.total4)}</td>
                 </tr>
             )
         };
