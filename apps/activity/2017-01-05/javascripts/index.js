@@ -336,52 +336,51 @@ $(function () {
         if (nowTime < weekList[0]) {
             timeText = '1.6-1.12';
             week_arg_st = '2017-1-6';
-            week_arg_et = '2017-1-12';
+            week_arg_et = '2017-1-12 23:59:59';
         } else if (nowTime >= weekList[0] && nowTime < weekList[1]) {
             timeText = '1.13-1.19';
             week_arg_st = '2017-1-13';
-            week_arg_et = '2017-1-19';
+            week_arg_et = '2017-1-19 23:59:59';
         } else if (nowTime >= weekList[1] && nowTime < weekList[2]) {
             timeText = '1.20-1.26';
             week_arg_st = '2017-1-20';
-            week_arg_et = '2017-1-26';
+            week_arg_et = '2017-1-26 23:59:59';
         } else if (nowTime >= weekList[2] && nowTime < weekList[3]) {
             timeText = '1.27-2.2';
             week_arg_st = '2017-1-27';
-            week_arg_et = '2017-2-2';
+            week_arg_et = '2017-2-2 23:59:59';
         } else if (nowTime >= weekList[3] && nowTime < weekList[4]) {
             timeText = '2.3-2.9';
             week_arg_st = '2017-2-3';
-            week_arg_et = '2017-2-9';
+            week_arg_et = '2017-2-9 23:59:59';
         } else if (nowTime >= weekList[4] && nowTime < weekList[5]) {
             timeText = '2.10-2.16';
             week_arg_st = '2017-2-10';
-            week_arg_et = '2017-2-16';
+            week_arg_et = '2017-2-16 23:59:59';
         } else if (nowTime >= weekList[5] && nowTime < weekList[6]) {
             timeText = '2.17-2.23';
             week_arg_st = '2017-2-17';
-            week_arg_et = '2017-2-23';
+            week_arg_et = '2017-2-23 23:59:59';
         } else if (nowTime >= weekList[6] && nowTime < weekList[7]) {
             timeText = '2.24-3.2';
             week_arg_st = '2017-2-24';
-            week_arg_et = '2017-3-2';
+            week_arg_et = '2017-3-2 23:59:59';
         } else if (nowTime >= weekList[7] && nowTime < weekList[8]) {
             timeText = '3.3-3.9';
             week_arg_st = '2017-3-3';
-            week_arg_et = '2017-3-9';
+            week_arg_et = '2017-3-9 23:59:59';
         } else if (nowTime >= weekList[8] && nowTime < weekList[9]) {
             timeText = '3.10-3.16';
             week_arg_st = '2017-3-10';
-            week_arg_et = '2017-3-16';
+            week_arg_et = '2017-3-16 23:59:59';
         } else if (nowTime >= weekList[9] && nowTime < weekList[10]) {
             timeText = '3.17-3.23';
             week_arg_st = '2017-3-17';
-            week_arg_et = '2017-3-23';
+            week_arg_et = '2017-3-23 23:59:59';
         } else {
-
             timeText = '3.24-3.30';
             week_arg_st = '2017-3-24';
-            week_arg_et = '2017-3-30';
+            week_arg_et = '2017-3-30 23:59:59';
         }
 
         //拉新人数
