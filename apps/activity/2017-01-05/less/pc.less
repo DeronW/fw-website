@@ -2,6 +2,9 @@
 .pc-header{
   background: url("../images/noticeBg.png");
 }
+body{
+  font-size: 14px;
+}
 em{
   font-style: normal;
 }
@@ -48,7 +51,7 @@ em{
   .pcWeekPack{
     width: 1024px;
     height: 618px;
-    margin: 600px auto 0;
+    margin: 580px auto 0;
     color: @colorText;
     position: relative;
     z-index: 2;
@@ -260,7 +263,9 @@ em{
       background: url("../images/quarterTitle.png") no-repeat;
     }
     .quarterText{
-      width: 100%;
+      width: 90%;
+      margin: auto;
+      line-height: 30px;
       text-align: center;
       color: @colorQuarterT;
       font-size: @font18;
@@ -360,7 +365,7 @@ em{
         }
       }
       .quarterRemindNot{
-        width: 600px;
+        width: 702px;
         height: 60px;
         background: url('../images/notRemind.png') no-repeat;
         position: absolute;
@@ -479,23 +484,23 @@ em{
   }
   .pcMovePerson{
     width: 133px;
-    height: 113px;
+    height: 123px;
     position: fixed;
-    top: 540px;
-    right: 160px;
+    bottom: 100px;
+    right: 140px;
     background: url("../images/gif.gif") no-repeat;
-    //z-index: -1;
+    z-index: 2;
     cursor: pointer;
     .movePersonText{
-      width: 427px;
-      height: 65px;
+      width: 468px;
+      height: 95px;
       background: url("../images/pcMove.png") no-repeat;
       position: absolute;
-      left: -200px;
-      top: -110px;
+      right:-150px;
+      top: -90px;
       font-size: @font14;
       color: @color6;
-      padding: 20px 10px 10px 30px;
+      padding: 10px 10px 10px 5px;
       display: none;
       em{
         color: @colorQuarterExplain;
@@ -657,7 +662,7 @@ em{
       height: 492px;
       background:url("../images/weekLadder.png") no-repeat;
       position: absolute;
-      top: 0;
+      top: 100px;
       bottom: 0;
       left: 0;
       right: 0;
@@ -674,4 +679,26 @@ em{
     }
   }
 
+}
+.ladderContentNot{
+  width: 440px;
+  height: 300px;
+  margin: auto;
+  text-align: center;
+  line-height: 300px;
+  font-size: @font24;
+  color: @color6;
+}
+.quarterLadderNot{
+  width: 890px;
+  height: 500px;
+  margin: auto;
+  background: @colorWhite;
+  position: absolute;
+  top: 560px;
+  left: 72PX;
+  font-size: @font50;
+  text-align: center;
+  color: @color6;
+  line-height: 500px;
 }

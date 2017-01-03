@@ -1,3 +1,4 @@
+@import "ladderVariables.less";
 .quarterLadderContainerPC{
   width: 786px;
   height: 600px;
@@ -11,7 +12,7 @@
     thead{
       td{
         height: 72px;
-        color: #333;
+        color: @color3;
         font-size: 16px;
       }
     }
@@ -22,7 +23,7 @@
     }
     td{
       text-align: center;
-      color: #666;
+      color: @color6;
     }
     .limit{
       color: #999;
@@ -44,7 +45,7 @@
       width: 20px;
       height: 20px;
       border-radius: 50%;
-      background: #d4d4d4;
+      background: @colorD4;
       text-align: center;
       line-height: 20px;
       color: #fff;
@@ -76,5 +77,16 @@
       border: 1px solid transparent;
       background: #fff;
     }
+  }
+  .quarterLadderPcNot{
+    position: absolute;
+    top: 70px;
+    left: -44px;
+    color:@color6;;
+    width: 894px;
+    height: 500px;
+    background: @colorWhite;
+    font-size: 50px;
+    line-height: 500px;
   }
 }

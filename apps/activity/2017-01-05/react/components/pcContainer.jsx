@@ -11,10 +11,10 @@ const PcContainer = React.createClass({
     render: function () {
         return (
             <div className="pcContainer">
-                <div className="fire1"><img src="./images/fire1.png" alt=""/></div>
-                <div className="fire2"><img src="./images/fire2.png" alt=""/></div>
-                <div className="fire3"><img src="./images/fire3.png" alt=""/></div>
-                <div className="fire4"><img src="./images/fire1.png" alt=""/></div>
+                <div className="fire1"><img src="images/fire1.png" alt=""/></div>
+                <div className="fire2"><img src="images/fire2.png" alt=""/></div>
+                <div className="fire3"><img src="images/fire3.png" alt=""/></div>
+                <div className="fire4"><img src="images/fire1.png" alt=""/></div>
                 <div className="pcBanner"></div>
                 <div className="pcWeekPack">
                     <div className="weekTitle"></div>
@@ -26,21 +26,21 @@ const PcContainer = React.createClass({
                 <div className="pcMonthPack">
                     <div className="monthTitle"></div>
                     <div className="monthState">
-                        <div className="monthStateCommon active"  onClick={()=>{this.ajaxMonth(1)}}>
+                        <div className="monthStateCommon active"  onClick={()=>{this.ajaxMonth('2017-1-6','2017-2-2')}}>
                             <div className="stateLeft">进行中</div>
                             <div className="stateRight">
                                 <div className="stateCurrentMonth">1月</div>
                                 <div className="stateCurrentDate">01.06 ~ 02.02</div>
                             </div>
                         </div>
-                        <div className="monthStateCommon" onClick={()=>{this.ajaxMonth(2)}}>
+                        <div className="monthStateCommon" onClick={()=>{this.ajaxMonth('2017-2-3','2017-3-2')}}>
                             <div className="stateLeft">未开始</div>
                             <div className="stateRight">
                                 <div className="stateCurrentMonth">2月</div>
                                 <div className="stateCurrentDate">02.03 ~ 03.02</div>
                             </div>
                         </div>
-                        <div className="monthStateCommon monthStateCommonRight" onClick={()=>{this.ajaxMonth(3)}}>
+                        <div className="monthStateCommon monthStateCommonRight" onClick={()=>{this.ajaxMonth('2017-3-3','2017-3-30')}}>
                             <div className="stateLeft">未开始</div>
                             <div className="stateRight">
                                 <div className="stateCurrentMonth">3月</div>
@@ -55,11 +55,11 @@ const PcContainer = React.createClass({
                             <div className="monthGiftText">按当月有效好友<br/> 累计年化投资额占比分配</div>
                         </div>
                         <div className="monthLadder">
-                            <img className="ladderText" src="./images/oneText.png" alt=""/>
+                            <img className="ladderText" src="images/onetext.png" alt=""/>
                             <div className="ladderTitle"></div>
                             <div className="ladderContent">
                                 {
-                                    <MonthLadderPC/>
+                                    <MonthLadderPC startDate={this.state.startDate} endDate={this.state.endState}/>
                                 }
                             </div>
                         </div>
@@ -85,7 +85,7 @@ const PcContainer = React.createClass({
                         <div className="quarterTextRight">榜内有效好友累投<br/>年化总额≥6000万元</div>
                         <div className="quarterExplain">1.6-3.30，您有效邀友<em></em>人，有效好友累投年化<em></em>元，排名<em></em>，当前可分<em></em>元奖金！</div>
                         <div className="quarterRemind hidden">截止当前，榜内推荐人的有效好友累投年化总额为<em>0</em>万元，单个推荐人可获该挡奖金！</div>
-                        <div className="quarterRemindNot">截止当前，榜内推荐人的有效好友累投年化总额为<em>0</em>万元，暂未开启新春特奖，大家继续加油哦！</div>
+                        <div className="quarterRemindNot">截止当前，榜内工友的有效好友累投年化总额为<em>0</em>万元，暂未开启新春特奖，大家加油哦！</div>
                         <div className="quarterLadder">
                             {
                                 <QuarterLadderPC />
@@ -103,7 +103,7 @@ const PcContainer = React.createClass({
                 <div className="pcActivityExplain">
                     <div className="ActivityExplainContent">
                         <div className="activityExplainTitle">
-                            <img src="./images/explain.png" alt=""/>
+                            <img src="images/explain.png" alt=""/>
                             <span>活动说明</span>
                         </div>
                         <div className="activityExplainText">
@@ -115,14 +115,15 @@ const PcContainer = React.createClass({
                             5.月度奖金工豆奖励将于每月结束后7个工作日内，统一发放至邀请人的工场账户；春节期间的活动奖励将顺延至2月4日后7个工作日内发放。<br/>
                             6.百万奖金活动奖励将于活动结束后7个工作日内，统一发放至邀请人的工场账户；<br/>
                             7.金融工场有权随时随机抽查邀请人所推荐好友的真实性，一旦发现存在好友用虚假手机号注册、好友对注册金融工场账户不知情及非好友真实意愿等造假和欺骗行为，则立即清除虚假好友的统计数据并回收相关奖励，且保留追究由此给金融工场带来的一切损失的权利；<br/>
-                            8.活动最终解释权归金融工场所有，活动详情致电客服热线咨询：400-0322-988。
+                            8.活动最终解释权归金融工场所有，活动详情致电客服热线咨询：400-0322-988。<br/>
+                            声明：以上活动由金融工场主办 与Apple Inc. 无关
                             </p>
                         </div>
                     </div>
                 </div>
                 <div className="pcFooterBar">
                     <div className="footerBarContent">
-                        <img src="./images/logo.png" alt=""/>
+                        <img src="images/logo.png" alt=""/>
                         <div className="barText">朋友多，这些奖励还觉得不够？</div>
                         <a className="moreAward">更多邀友奖励</a>
                         <a className="howAward">如何邀友</a>
@@ -130,7 +131,7 @@ const PcContainer = React.createClass({
                     </div>
                 </div>
                 <div className="pcMovePerson">
-                    <div className="movePersonText">有效好友标准：<em>好友注册7天内累投年化额≥1000元</em>才算一个有效邀请。   温馨提示：投资等额标，超过18个月按18个月计算年化</div>
+                    <div className="movePersonText">有效好友标准：<em>好友注册7天内累投年化额≥1000元</em>才算一个有效邀请。   温馨提示：投资等额标，超过18个月按18个月计算年化额</div>
                 </div>
                 <div className="pcNotice hidden">
                     <div className="pcNoticeContentNo hidden">
@@ -138,7 +139,7 @@ const PcContainer = React.createClass({
                         <div className="noticeText">请好友用您的工场码，<em>好友注册7天内累投年化额≥1000元</em>，且投资<br/>等额标时，超过18个月按18个月计算年化，才算一个有效邀请。<br/>
                             登录后查看我的工场码<br/>
                             还没有工场码？注册即可拥有。</div>
-                        <a className="login" href="https://passport.9888.cn/passport/login">登录注册</a>
+                        <a className="login">登录注册</a>
                         <div className="noticeRemind">
                             新手注册即送<em>120</em>元，首投最高送<em>150</em>元，邀请好友首投再得<em>50</em>元!<a href="http://www.9888.cn/news/notice/1861.html">更多新手秘笈></a>
                         </div>

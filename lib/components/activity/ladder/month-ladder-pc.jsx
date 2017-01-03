@@ -2,7 +2,9 @@ const MonthLadderPC = React.createClass({
     getInitialState: function () {
         this.PRE_PAGE = 5;
         return ({
-            totalData: [],
+            totalData: {
+                topList: []
+            },
             page: 1,
             totalPage: 2,
             tab: '上一页',
@@ -10,37 +12,41 @@ const MonthLadderPC = React.createClass({
             cursor: 0
         })
     },
+    getServerTimestamp: function (callback) {
+        var ts = $getDebugParams().timestamp;
+        if (ts) {
+            callback(ts)
+        } else {
+            $.get(API_PATH + "api/userState/v1/timestamp.json", function (data) {
+                callback(data.data.timestamp)
+            }, 'json')
+        }
+    },
     componentDidMount: function () {
         var febStart = new Date("2017/2/3").getTime();
         var marStart = new Date("2017/3/3").getTime();
         var startDate = '2017-1-6';
         var endDate = '2017-2-2';
-        $.get(API_PATH + " /api/userState/v1/timestamp.json", function (data) {
-            var currentTime = data.timestamp;
-            if(currentTime < febStart){
+        this.getServerTimestamp(function (timestamp) {
+            var currentTime = timestamp;
+            if (currentTime < febStart) {
                 startDate = '2017-1-6';
                 endDate = '2017-2-2';
-            }else if(currentTime < marStart){
+            } else if (currentTime < marStart) {
                 startDate = '2017-2-3';
                 endDate = '2017-3-2';
-            }else{
+            } else {
                 startDate = '2017-3-3';
                 endDate = '2017-3-30';
             }
-            this.ajaxPullNewInvest(startDate,endDate)
-        }.bind(this), 'json');
+            this.ajaxPullNewInvest(startDate, endDate)
+        }.bind(this))
     },
     componentWillReceiveProps: function (nextProps) {
-        let month = nextProps.month;
-        if(month == 1){
-            this.ajaxPullNewInvest('2017-1-6','2017-2-2')
-        }else if(month == 2){
-            this.ajaxPullNewInvest('2017-2-3','2017-3-2')
-        }else{
-            this.ajaxPullNewInvest('2017-3-3','2017-3-30')
-        }
+        this.ajaxPullNewInvest(nextProps.startDate, nextProps.endDate)
     },
-    ajaxPullNewInvest: function (startDate,endDate) {
+    ajaxPullNewInvest: function (startDate, endDate) {
+        //需要修改
         $.ajax({
             url: API_PATH + '/api/activityPullNew/v2/PullNewTopAndYearInvest.json',
             data: {
@@ -48,14 +54,14 @@ const MonthLadderPC = React.createClass({
                 totalBaseAmt: 1000,
                 startDate: startDate,
                 endDate: endDate,
-                startTotalCount: 50,
-                startTotalInvest: 50
+                startTotalCount: 2,
+                startTotalInvest: 50000
             },
             type: "get",
             dataType: 'json',
             success: function (data) {
-                var sData = data.data;
-                var len = sData.length || [];
+                var sData = data.data || [];
+                var len = sData.topList.length;
                 if (len <= this.PRE_PAGE) {
                     this.setState({totalPage: 1, isClick: false});
                 } else if (len > this.PRE_PAGE && sData.length <= this.PRE_PAGE * 2) {
@@ -67,10 +73,8 @@ const MonthLadderPC = React.createClass({
             }.bind(this)
         });
     },
-    isImgFun: function (key) {
-        var imgName = ['jin', 'yin', 'tong'];
-        var i = imgName[key] ? `./images/${imgName[key]}.png` : null;
-        return i
+    isImgFun: function (index) {
+        return ['images/jin.png', 'images/yin.png', 'images/tong.png'][index]
     },
     subNameFun: function (str) {
         return str.substring(0, 2) + "**" + str.substring(str.length - 2, str.length);
@@ -81,7 +85,8 @@ const MonthLadderPC = React.createClass({
     fixedPriceFun: function (i) {
         let monthPrice = 120000;
         let totalData = this.state.totalData;
-        if (totalData.totalYearInvest == 0 || totalData.topList[i].totalall < 100 || totalData.topList[i].total < 500000) {
+        //50人改为2人 50万改为5万
+        if (totalData.totalYearInvest == 0 || totalData.topList[i].totalall < 2 || totalData.topList[i].total < 50000) {
             return '暂无奖金'
         } else {
             if (this.props.month == 1) {
@@ -92,7 +97,7 @@ const MonthLadderPC = React.createClass({
                 monthPrice = 180000;
             }
         }
-        return ((data.data.topList[i].total) / (data.data.totalYearInvest) * monthPrice).toFixed(2);
+        return ((totalData.topList[i].total) / (totalData.totalYearInvest) * monthPrice).toFixed(2);
 
     },
     switchPageHandler: function (type) {
@@ -132,7 +137,7 @@ const MonthLadderPC = React.createClass({
         }
     },
     get_current_page: function () {
-        return this.state.totalData.slice(this.state.cursor, this.state.cursor + this.PRE_PAGE);
+        return this.state.totalData.topList.slice(this.state.cursor, this.state.cursor + this.PRE_PAGE);
     },
     render: function () {
         let pageImg = (item, index) => {
@@ -159,7 +164,7 @@ const MonthLadderPC = React.createClass({
                 <td>
                     {this.fixedPrice(item.total)}
                 </td>
-                <td className="bodyPrice">{this.fixedPriceFun(index)}</td>
+                <td className={this.fixedPriceFun(index) == '暂无奖金'?null:"bodyPrice"}>{this.fixedPriceFun(index)}</td>
             </tr>
         };
         let tBody = (
@@ -176,16 +181,19 @@ const MonthLadderPC = React.createClass({
                     <tr>
                         <td>用户名</td>
                         <td>有效邀请数</td>
-                        <td className="tHeadTd3">好友累计<br/>年化投资额（元）</td>
+                        <td className="tHeadTd3">有效好友<br/>累投年化额（元）</td>
                         <td>奖金（元）</td>
                     </tr>
                     </thead>
                     {
-                        tBody
+                        this.state.totalData.topList.length ? tBody : null
                     }
                 </table>
                 {
-                    page
+                    this.state.totalData.topList.length ? page : null
+                }
+                {
+                    this.state.totalData.topList.length ? null : <div className="monthLadderPcNot">人气王还在堵车，马上就来</div>
                 }
             </div>
         )

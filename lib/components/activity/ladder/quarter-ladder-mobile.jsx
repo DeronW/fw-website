@@ -36,10 +36,8 @@ const QuarterLadderMobile = React.createClass({
             }.bind(this)
         });
     },
-    isImgFun: function (key) {
-        var imgName = ['jin', 'yin', 'tong'];
-        var i = imgName[key] ? `./images/${imgName[key]}.png` : null;
-        return i
+    isImgFun: function (index) {
+        return ['images/jin.png', 'images/yin.png', 'images/tong.png'][index]
     },
     subNameFun: function (str) {
         return str.substring(0, 2) + "**" + str.substring(str.length - 2, str.length);
@@ -48,6 +46,7 @@ const QuarterLadderMobile = React.createClass({
         return total.toFixed(2)
     },
     fixedPriceFun: function (total, totalLimit) {
+        //4千万改为4百万
         let price = 0;
         let p = 0.01;
         if (total >= 4000000 && total < 5000000) {
@@ -59,7 +58,7 @@ const QuarterLadderMobile = React.createClass({
         } else {
             return '暂无奖金'
         }
-        price = totalLimit * 0.01 * 0.0056 + (total - totalLimit) * 0.01;
+        price = totalLimit * p * 0.56 + (total - totalLimit) * p;
         return price.toFixed(2)
     },
     switchPageHandler: function (type) {
@@ -114,20 +113,25 @@ const QuarterLadderMobile = React.createClass({
                 }
             </div>
         );
+        var td4Style = {
+            textAlign : 'right',
+            width:'100px',
+            paddingRight:'20px'
+        };
         let bodyImg = (item, index) => {
             index += this.state.cursor;
             return (
                 <tr key={index}>
                     <td>{this.isImgFun(index) ? <img className="tdImg" src={this.isImgFun(index)}/> :
                         <span className="twoSpan">{index + 1}</span>}
-                        {<span className="oneSpan">{this.subNameFun(item.loginName)}</span>}
+                        {<span className="oneSpan">{item.loginName}</span>}
                     </td>
                     <td>{item.totalall}</td>
                     <td>
                         {this.fixedPrice(item.total)}
-                        {<div className="tdPriceLimit">({item.total4})</div>}
+                        {<div className="tdPriceLimit">(含等额标{item.total4})</div>}
                     </td>
-                    <td className={this.fixedPriceFun(item.totalall,item.total4) !== '暂无奖金'?"tdMoney":null}>{this.fixedPriceFun(item.totalall,item.total4)}</td>
+                    <td style={td4Style} className={this.fixedPriceFun(item.totalall,item.total4) == '暂无奖金'?null:"tdMoney"}>{this.fixedPriceFun(item.totalall,item.total4)}</td>
                 </tr>
             )
         };
@@ -145,16 +149,19 @@ const QuarterLadderMobile = React.createClass({
                     <tr>
                         <td>用户名</td>
                         <td>有效邀友数</td>
-                        <td>好友累计年化投资额（元）</td>
+                        <td>有效好友累投年化额（元）</td>
                         <td>奖金（元）</td>
                     </tr>
                     </thead>
                     {
-                        tBody
+                        this.state.totalData.length ? tBody : null
                     }
                 </table>
                 {
-                    page
+                    this.state.totalData.length ? page : null
+                }
+                {
+                    this.state.totalData.length ? null : <div className="quarterLadderMobileNot">人气王还在堵车，马上就来</div>
                 }
             </div>
         )
