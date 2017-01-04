@@ -3,7 +3,7 @@ const MonthLadderPC = React.createClass({
         this.PRE_PAGE = 5;
         return ({
             totalData: {
-                topList: []
+                topList:[]
             },
             page: 1,
             totalPage: 2,
@@ -60,13 +60,13 @@ const MonthLadderPC = React.createClass({
             type: "get",
             dataType: 'json',
             success: function (data) {
-                var sData = data.data || [];
+                var sData = data.data || {};
                 var len = sData.topList.length;
                 if (len <= this.PRE_PAGE) {
                     this.setState({totalPage: 1, isClick: false});
                 } else if (len > this.PRE_PAGE && sData.length <= this.PRE_PAGE * 2) {
                     this.setState({totalPage: 2, isClick: true})
-                } else if (len > this.PRE_PAGE * 2 && len <= this.PRE_PAGE * 3) {
+                } else {
                     this.setState({totalPage: 3, isClick: true})
                 }
                 this.setState({totalData: sData})
@@ -75,9 +75,6 @@ const MonthLadderPC = React.createClass({
     },
     isImgFun: function (index) {
         return ['images/jin.png', 'images/yin.png', 'images/tong.png'][index]
-    },
-    subNameFun: function (str) {
-        return str.substring(0, 2) + "**" + str.substring(str.length - 2, str.length);
     },
     fixedPrice: function (total) {
         return total.toFixed(2)
@@ -103,7 +100,7 @@ const MonthLadderPC = React.createClass({
     switchPageHandler: function (type) {
         this.setState({tab: type});
         let {page,totalPage}=this.state;
-        let cursor, min, new_page, len = this.state.totalData.length;
+        let cursor, min, new_page, len = this.state.totalData.topList.length;
         if (type == '上一页') {
             if (len % this.PRE_PAGE) {
                 min = parseInt(len / this.PRE_PAGE) * this.PRE_PAGE
@@ -158,7 +155,7 @@ const MonthLadderPC = React.createClass({
                 <td>
                     {this.isImgFun(index) ? <img className="tdImg" src={this.isImgFun(index)}/> :
                         <span className="twoSpan">{index + 1}</span>}
-                    {<span className="oneSpan">{this.subNameFun(item.loginName)}</span>}
+                    {<span className="oneSpan">{item.loginName}</span>}
                 </td>
                 <td>{item.totalall}</td>
                 <td>

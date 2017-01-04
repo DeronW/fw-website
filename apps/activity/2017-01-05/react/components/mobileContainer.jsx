@@ -5,8 +5,27 @@ const MobileContainer = React.createClass({
             endDate: '2017-2-2'
         })
     },
-    ajaxMonth: function (start, end) {
-        this.setState({startDate: start, endDate: end})
+    ajaxMonth: function (start,end) {
+        var febStart = new Date(start).getTime();
+        var marStart = new Date(end).getTime();
+        this.ajaxGetServerTimestamp(function (timestamp) {
+            var nowTime = timestamp;
+            if(nowTime > marStart){
+                this.setState({startDate:start,endDate:end})
+            }else if(nowTime > febStart){
+                this.setState({startDate:start,endDate:end})
+            }
+        }.bind(this))
+    },
+    ajaxGetServerTimestamp:function(callback) {
+        var ts = $getDebugParams().timestamp;
+        if (ts) {
+            callback(ts)
+        } else {
+            $.get(API_PATH + "api/userState/v1/timestamp.json", function (data) {
+                callback(data.data.timestamp)
+            }, 'json')
+        }
     },
     render: function () {
         return (
@@ -109,10 +128,13 @@ const MobileContainer = React.createClass({
                     </div>
                     <img src="images/mobileClose.png" alt="" className="mobileClose"/>
                 </div>
+                <div className="mobilePerson">
+                    <div className="mobilePersonText hidden">有效好友标准：<em>好友注册7天内累投年化额≥1000元</em>才算一个有效邀请。温馨提示：投资等额标，超过18个月按18个月计算年化额。 </div>
+                </div>
                 <div className="mobileNotice hidden">
                     <div className="mobileNoticeContentNo hidden">
                         <div className="noticeClose"></div>
-                        <div className="noticeText">请好友用您的工场码，<em>好友注册7天内累投年化额≥1000元</em>，且投资<br/>等额标时，超过18个月按18个月计算年化，才算一个有效邀请。<br/>
+                        <div className="noticeText">请好友用您的工场码，<em>好友注册7天内累投年化额≥1000元</em>，且投资等额标时，超过18个月按18个月计算年化，才算一个有效邀请。<br/>
                             登录后查看我的工场码<br/>
                             还没有工场码？注册即可拥有。
                         </div>
@@ -129,10 +151,10 @@ const MobileContainer = React.createClass({
                         <div className="noticeText1">请好友注册或投资时填写我的工场码</div>
                         <div className="noticeCode">A354545</div>
                         <div className="noticeText2">复制以下链接，发送给好友！</div>
-                        <div className="noticeLink" id="copy-value">
+                        <div className="noticeLink" id="copy-value-mobile">
                             http://passport.9888.cn/pp-web2/register/phone.do?gcm=A677004
                         </div>
-                        <div className="copyCode" data-clipboard-action="copy" data-clipboard-target="#copy-value">
+                        <div className="copyCode" data-clipboard-action="copy" data-clipboard-target="#copy-value-mobile">
                             复制链接
                         </div>
                         <div className="noticeRemind">

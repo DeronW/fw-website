@@ -53,6 +53,14 @@ $(function () {
     $(".mobileNoticeContentNo .login,.pcNoticeContentNo .login").on("click", function () {
         $FW.gotoSpecialPage("登录", loginUrl);
     });
+    //移动端有效邀友判断
+    $(".mobilePerson").on("click", function () {
+        $(".mobilePersonText").removeClass('hidden');
+        return false;
+    });
+    $('body').on('click', function () {
+        $(".mobilePersonText").addClass('hidden');
+    });
     //季排行榜奖金总额显示位置
     function totalMove(left, top, className) {
         $(".pcQuarterPack .quarterRemind").css({
@@ -196,6 +204,7 @@ $(function () {
     //复制功能
     var clipboard = new Clipboard('.copyCode');//复制功能
     clipboard.on('success', function (e) {
+
         alert('复制成功');
     });
     clipboard.on('error', function (e) {
