@@ -135,7 +135,7 @@ const MobileContainer = React.createClass({
                     <div className="mobileNoticeContentNo hidden">
                         <div className="noticeClose"></div>
                         <div className="noticeText">请好友用您的工场码，<em>好友注册7天内累投年化额≥1000元</em>，且投资等额标时，超过18个月按18个月计算年化，才算一个有效邀请。<br/>
-                            登录后查看我的工场码<br/>
+                            登录后查看我的工场码。<br/>
                             还没有工场码？注册即可拥有。
                         </div>
                         <a className="login">登录注册</a>

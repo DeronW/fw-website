@@ -85,9 +85,10 @@ const MonthLadderPC = React.createClass({
         var febStart = new Date("2017/2/3").getTime();
         var marStart = new Date("2017/3/3").getTime();
         let monthPrice = 0;
+        var money = 0;
         let totalData = this.state.totalData;
         //50人改为2人 50万改为5万
-        if (totalData.topList[i].totalall < 2 && totalData.topList[i].total < 50000) {
+        if (totalData.topList[i].totalall < 2 || totalData.topList[i].total < 50000) {
             return '暂无奖金'
         } else {
             if (this.state.currentTime < febStart || this.props.startDate == '2017-1-6') {
@@ -97,8 +98,8 @@ const MonthLadderPC = React.createClass({
             } else{
                 monthPrice = 180000;
             }
+            money = ((totalData.topList[i].total) / (totalData.totalYearInvest)) * monthPrice;
         }
-        var money = ((totalData.topList[i].total) / (totalData.totalYearInvest)) * monthPrice;
         return money.toFixed(2);
     },
     switchPageHandler: function (type) {
