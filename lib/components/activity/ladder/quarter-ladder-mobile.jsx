@@ -7,7 +7,8 @@ const QuarterLadderMobile = React.createClass({
             totalPage: 2,
             tab: '上一页',
             isClick: true,
-            cursor: 0
+            cursor: 0,
+            totalYearInvestAll:0,
         })
     },
     componentDidMount: function () {
@@ -32,7 +33,10 @@ const QuarterLadderMobile = React.createClass({
                 } else if (sData.length > this.PRE_PAGE * 2 && sData.length <= this.PRE_PAGE * 3) {
                     this.setState({totalPage: 3, isClick: true})
                 }
-                this.setState({totalData: sData})
+                this.setState({
+                    totalData: sData,
+                    totalYearInvestAll:data.data.totalYearInvestAll
+                })
             }.bind(this)
         });
     },
@@ -45,17 +49,17 @@ const QuarterLadderMobile = React.createClass({
     fixedPrice: function (total) {
         return total.toFixed(2)
     },
-    fixedPriceFun: function (total,totalLimit,totalall) {
+    fixedPriceFun: function (total, totalLimit,totalall) {
         //4千万改为4百万 ,3人，10万都要改
-        let {totalYearInvest} = this.state;
+        let {totalYearInvest,totalYearInvestAll} = this.state;
         let price = 0;
         let p = 0.01;
         if(totalall >= 3 && total >= 100000){
-            if (totalYearInvest >= 4000000 && totalYearInvest < 5000000) {
+            if (totalYearInvestAll >= 4000000 && totalYearInvestAll < 5000000) {
                 p = 0.01;
-            } else if (totalYearInvest >= 5000000 && totalYearInvest < 6000000) {
+            } else if (totalYearInvestAll >= 5000000 && totalYearInvestAll < 6000000) {
                 p = 0.013;
-            } else if (totalYearInvest >= 6000000) {
+            } else if (totalYearInvestAll >= 6000000) {
                 p = 0.018;
             }else{
                 return '暂无奖金'

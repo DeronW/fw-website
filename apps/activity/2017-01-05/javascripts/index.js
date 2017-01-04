@@ -13,10 +13,7 @@ $(function () {
     var app = navigator.userAgent.match(/FinancialWorkshop/i) ? true : false;
     if (app)$('.mobileContainer').css('margin-top', '0');
 
-    if(navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion .split(";")[1].replace(/[ ]/g,"")=="MSIE6.0" || navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion .split(";")[1].replace(/[ ]/g,"")=="MSIE7.0" || navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion .split(";")[1].replace(/[ ]/g,"")=="MSIE8.0" || navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion .split(";")[1].replace(/[ ]/g,"")=="MSIE9.0")
-    {
-        $(".copyCode").html('请手动复制');
-    }
+
     //pc端底部如何邀友
     $UserReady(function (is_login, user) {
         $(".howAward").on("click", function () {
@@ -300,7 +297,7 @@ $(function () {
         var month_3 = $(".monthStateCommon").eq(2);
         if (nowTime < febStart) {
             month_1.addClass('active').find(".stateLeft").text("进行中").siblings().removeClass('active');
-            $(".monthStateCommon:gt(0)").addClass('not').css("cursor",'default');
+            $(".monthStateCommon:gt(0)").addClass('not');
             monthLadderShow('2017-1-6', '2017-2-2 23:59:59', 120000);
         } else if (nowTime < marStart) {
             month_2.addClass('active').find(".stateLeft").text("进行中").siblings().removeClass('active');
@@ -408,5 +405,11 @@ $(function () {
         //月份切换
         monthClickChange(nowTime)
     }.bind(this))
+    if(navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion .split(";")[1].replace(/[ ]/g,"")=="MSIE6.0" || navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion .split(";")[1].replace(/[ ]/g,"")=="MSIE7.0" || navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion .split(";")[1].replace(/[ ]/g,"")=="MSIE8.0" || navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion .split(";")[1].replace(/[ ]/g,"")=="MSIE9.0")
+    {
+        $(".copyCode").on('click', function () {
+            alert("您的浏览器版本过低, 请手动复制")
+        });
+    }
 });
 

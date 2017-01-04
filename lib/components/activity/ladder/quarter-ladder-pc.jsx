@@ -9,7 +9,7 @@ const QuarterLadderPC = React.createClass({
             cursor: 0,
             isClick:true,
             totalYearInvestAll:0,
-            totalYearInvest:0,
+
         })
     },
     componentDidMount: function () {
@@ -37,7 +37,6 @@ const QuarterLadderPC = React.createClass({
                 }
                 this.setState({
                     totalData: sData,
-                    totalYearInvest:data.data.totalYearInvest,
                     totalYearInvestAll:data.data.totalYearInvestAll
                 })
             }.bind(this)
