@@ -54,7 +54,7 @@ $(function () {
         $toggleYaoQingYouLi();
     });
     //弹窗登录
-    var loginUrl = 'http://www.9888.cn/api/activityPullNew/pullnewParty.do?id=19';
+    var loginUrl = location.protocol + '//www.9888.cn/api/activityPullNew/pullnewParty.do?id=19';
     $(".mobileNoticeContentNo .login,.pcNoticeContentNo .login").on("click", function () {
         $FW.gotoSpecialPage("登录", loginUrl);
     });
@@ -111,7 +111,7 @@ $(function () {
                 //100人改为3人 1百万改为10万
                 var chartsText = '';
                 chartsText = "<div>1.6-3.30，您有效邀友 <em>" + pullNewCount + "</em> 人，有效好友累投年化 <em>" + myFriendYearInvest + "</em> 元，排名 <em>" + rankNum + "</em>，当前暂无奖金可分，加油哦！";
-                if (totalYearInvest != 0 && pullNewCount > 3 && myFriendYearInvest > 100000) {
+                if (pullNewCount > 3 && myFriendYearInvest > 100000) {
                     if (totalYearInvest >= 4000000 && totalYearInvest < 5000000) {
                         chartsText = callback(pullNewCount, myEqualFriendYearInvest, myFriendYearInvest, rankNum, 0.01);
                     } else if (totalYearInvest >= 5000000 && totalYearInvest < 6000000) {
@@ -263,7 +263,7 @@ $(function () {
                     $(".pcWeekPack .weekAward").html(pcWeekText);
                     $(".mobileWeekPack .weekAward").html(mobileWeekText);
                     $(".noticeCode").html(user.userCode);
-                    $(".noticeLink").html('http://passport.9888.cn/pp-web2/register/phone.do?gcm=' + user.userCode);
+                    $(".noticeLink").html('https://passport.9888.cn/pp-web2/register/phone.do?gcm=' + user.userCode);
                 } else {
                     $(".pcWeekPack .weekAward").html('请登录后，查看您的邀友数及可获工豆， <a>立即登录></a>').on("click", function () {
                         $FW.gotoSpecialPage('登录', loginUrl);
