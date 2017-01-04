@@ -1,12 +1,31 @@
 const PcContainer = React.createClass({
     getInitialState: function () {
       return({
-          startDate:'2017-1-6',
-          endDate:'2017-2-2'
+          startDate:'',
+          endDate:'',
       })
     },
     ajaxMonth: function (start,end) {
-        this.setState({startDate:start,endDate:end})
+        var febStart = new Date(start).getTime();
+        var marStart = new Date(end).getTime();
+        this.ajaxGetServerTimestamp(function (timestamp) {
+            var nowTime = timestamp;
+            if(nowTime > marStart){
+                this.setState({startDate:start,endDate:end})
+            }else if(nowTime > febStart){
+                this.setState({startDate:start,endDate:end})
+            }
+        }.bind(this))
+    },
+    ajaxGetServerTimestamp:function(callback) {
+        var ts = $getDebugParams().timestamp;
+        if (ts) {
+            callback(ts)
+        } else {
+            $.get(API_PATH + "api/userState/v1/timestamp.json", function (data) {
+                callback(data.data.timestamp)
+            }, 'json')
+        }
     },
     render: function () {
         return (
@@ -149,8 +168,8 @@ const PcContainer = React.createClass({
                         <div className="noticeText1">请好友注册或投资时填写我的工场码</div>
                         <div className="noticeCode">A354545</div>
                         <div className="noticeText2">复制以下链接，发送给好友！</div>
-                        <div className="noticeLink" id="copy-value">http://passport.9888.cn/pp-web2/register/phone.do?gcm=A677004</div>
-                        <div className="copyCode" data-clipboard-action="copy" data-clipboard-target="#copy-value" >复制链接</div>
+                        <div className="noticeLink" id="copy-value-pc">http://passport.9888.cn/pp-web2/register/phone.do?gcm=A677004</div>
+                        <div className="copyCode" data-clipboard-action="copy" data-clipboard-target="#copy-value-pc" >复制链接</div>
                         <div className="noticeRemind">
                             新手注册即送<em>120</em>元，首投最高送<em>150</em>元，邀请好友首投再得<em>50</em>元!<a href="http://www.9888.cn/news/notice/1861.html">更多新手秘笈></a>
                         </div>

@@ -45,17 +45,22 @@ const QuarterLadderMobile = React.createClass({
     fixedPrice: function (total) {
         return total.toFixed(2)
     },
-    fixedPriceFun: function (total, totalLimit) {
-        //4千万改为4百万
+    fixedPriceFun: function (total,totalLimit,totalall) {
+        //4千万改为4百万 ,3人，10万都要改
+        let {totalYearInvest} = this.state;
         let price = 0;
         let p = 0.01;
-        if (total >= 4000000 && total < 5000000) {
-            p = 0.01;
-        } else if (total >= 5000000 && total < 6000000) {
-            p = 0.013;
-        } else if (total >= 6000000) {
-            p = 0.018;
-        } else {
+        if(totalall >= 3 && total >= 100000){
+            if (totalYearInvest >= 4000000 && totalYearInvest < 5000000) {
+                p = 0.01;
+            } else if (totalYearInvest >= 5000000 && totalYearInvest < 6000000) {
+                p = 0.013;
+            } else if (totalYearInvest >= 6000000) {
+                p = 0.018;
+            }else{
+                return '暂无奖金'
+            }
+        }else {
             return '暂无奖金'
         }
         price = totalLimit * p * 0.56 + (total - totalLimit) * p;
@@ -113,6 +118,11 @@ const QuarterLadderMobile = React.createClass({
                 }
             </div>
         );
+        var td4Style = {
+            textAlign : 'right',
+            width:'100px',
+            paddingRight:'20px'
+        };
         let bodyImg = (item, index) => {
             index += this.state.cursor;
             return (
@@ -126,7 +136,7 @@ const QuarterLadderMobile = React.createClass({
                         {this.fixedPrice(item.total)}
                         {<div className="tdPriceLimit">(含等额标{item.total4})</div>}
                     </td>
-                    <td className={this.fixedPriceFun(item.totalall,item.total4) == '暂无奖金'?null:"tdMoney"}>{this.fixedPriceFun(item.totalall,item.total4)}</td>
+                    <td style={td4Style} className={this.fixedPriceFun(item.total,item.total4,item.totalall) == '暂无奖金'?null:"tdPrice"}>{this.fixedPriceFun(item.total,item.total4,item.totalall)}</td>
                 </tr>
             )
         };

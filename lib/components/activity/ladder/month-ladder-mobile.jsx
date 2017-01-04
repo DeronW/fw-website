@@ -65,7 +65,7 @@ const MonthLadderMobile = React.createClass({
                     this.setState({totalPage: 1, isClick: false});
                 } else if (len > this.PRE_PAGE && sData.length <= this.PRE_PAGE * 2) {
                     this.setState({totalPage: 2, isClick: true})
-                } else if (len > this.PRE_PAGE * 2 && len <= this.PRE_PAGE * 3) {
+                } else{
                     this.setState({totalPage: 3, isClick: true})
                 }
                 this.setState({totalData: sData})
@@ -93,8 +93,8 @@ const MonthLadderMobile = React.createClass({
                 monthPrice = 180000;
             }
         }
-        return ((totalData.topList[i].total) / (totalData.totalYearInvest) * monthPrice).toFixed(2);
-
+        var money = ((totalData.topList[i].total) / (totalData.totalYearInvest)) * monthPrice;
+        return money.toFixed(2);
     },
     switchPageHandler: function (type) {
         this.setState({tab: type});
@@ -116,6 +116,7 @@ const MonthLadderMobile = React.createClass({
                 }
             }
         } else {
+            console.log("xiaa")
             if (len % this.PRE_PAGE) {
                 min = parseInt(len / this.PRE_PAGE) * this.PRE_PAGE
             } else {

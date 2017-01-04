@@ -2,6 +2,9 @@
 .pc-header{
   background: url("../images/noticeBg.png");
 }
+body{
+  font-size: 14px;
+}
 em{
   font-style: normal;
 }
@@ -48,7 +51,7 @@ em{
   .pcWeekPack{
     width: 1024px;
     height: 618px;
-    margin: 600px auto 0;
+    margin: 580px auto 0;
     color: @colorText;
     position: relative;
     z-index: 2;
@@ -260,7 +263,9 @@ em{
       background: url("../images/quarterTitle.png") no-repeat;
     }
     .quarterText{
-      width: 100%;
+      width: 90%;
+      margin: auto;
+      line-height: 30px;
       text-align: center;
       color: @colorQuarterT;
       font-size: @font18;
@@ -360,7 +365,7 @@ em{
         }
       }
       .quarterRemindNot{
-        width: 600px;
+        width: 702px;
         height: 60px;
         background: url('../images/notRemind.png') no-repeat;
         position: absolute;
@@ -478,12 +483,12 @@ em{
     }
   }
   .pcMovePerson{
-    width: 133px;
-    height: 123px;
+    width: 143px;
+    height: 133px;
     position: fixed;
-    bottom: 100px;
-    right: 140px;
-    background: url("../images/gif.gif") no-repeat;
+    bottom: 200px;
+    right: 100px;
+    background: url("../images/gif.png") no-repeat;
     z-index: 2;
     cursor: pointer;
     .movePersonText{
@@ -491,11 +496,11 @@ em{
       height: 95px;
       background: url("../images/pcMove.png") no-repeat;
       position: absolute;
-      right:-150px;
+      right:-80px;
       top: -90px;
       font-size: @font14;
       color: @color6;
-      padding: 10px 10px 10px 5px;
+      padding: 16px 10px 10px 5px;
       display: none;
       em{
         color: @colorQuarterExplain;
