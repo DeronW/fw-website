@@ -46,7 +46,7 @@ $(function () {
     });
     //底部邀友弹窗
     $(".moreAward,.mobileBarAward").on("click", function () {
-        toggleYaoQingYouLi();
+        $toggleYaoQingYouLi();
     });
     //弹窗登录
     var loginUrl = 'http://www.9888.cn/api/activityPullNew/pullnewParty.do?id=19';
