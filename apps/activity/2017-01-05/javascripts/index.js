@@ -8,7 +8,7 @@ function getServerTimestamp(callback) {
         }, 'json')
     }
 }
-alert("2ds342gg3")
+//alert("2ds342gg3")
 $(function () {
     var app = navigator.userAgent.match(/FinancialWorkshop/i) ? true : false;
     if (app)$('.mobileContainer').css('margin-top', '0');
