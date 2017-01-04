@@ -98,7 +98,7 @@ $(function () {
         return "<div>1.6-3.30，您有效邀友 <em>" + pullNewCount + "</em> 人，有效好友累投年化 <em>" + myFriendYearInvest + "</em> 元，排名 <em>" + rankNum + "</em>，当前可分得<em>" + price.toFixed(2) + "</em>元奖金！";
     }
 
-    //月榜列表头部邀友文字
+    //季榜列表头部邀友文字
     function quarterTopText(totalYearInvest, pullNewCount, myFriendYearInvest, rankNum, myEqualFriendYearInvest, callback) {
         $UserReady(function (is_login, user) {
             if (is_login) {

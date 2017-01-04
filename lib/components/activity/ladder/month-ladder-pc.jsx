@@ -94,8 +94,8 @@ const MonthLadderPC = React.createClass({
                 monthPrice = 180000;
             }
         }
-        return ((totalData.topList[i].total) / (totalData.totalYearInvest) * monthPrice).toFixed(2);
-
+        var money = ((totalData.topList[i].total) / (totalData.totalYearInvest)) * monthPrice;
+        return money.toFixed(2);
     },
     switchPageHandler: function (type) {
         this.setState({tab: type});
