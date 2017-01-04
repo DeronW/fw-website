@@ -150,13 +150,7 @@ const MobileContainer = React.createClass({
                         <div className="noticeClose"></div>
                         <div className="noticeText1">请好友注册或投资时填写我的工场码</div>
                         <div className="noticeCode">A354545</div>
-                        <div className="noticeText2">复制以下链接，发送给好友！</div>
-                        <div className="noticeLink" id="copy-value-mobile">
-                            http://passport.9888.cn/pp-web2/register/phone.do?gcm=A677004
-                        </div>
-                        <div className="copyCode" data-clipboard-action="copy" data-clipboard-target="#copy-value-mobile">
-                            复制链接
-                        </div>
+
                         <div className="noticeRemind">
                             新手注册即送<em>120</em>元，首投最高送<em>150</em>元，邀请好友首投再得<em>50</em>元!
                         </div>

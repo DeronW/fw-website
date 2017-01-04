@@ -1,8 +1,8 @@
 const PcContainer = React.createClass({
     getInitialState: function () {
       return({
-          startDate:'2017-1-6',
-          endDate:'2017-2-2',
+          startDate:'',
+          endDate:'',
       })
     },
     ajaxMonth: function (start,end) {

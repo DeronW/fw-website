@@ -8,10 +8,15 @@ function getServerTimestamp(callback) {
         }, 'json')
     }
 }
-
+alert("2ds342gg3")
 $(function () {
     var app = navigator.userAgent.match(/FinancialWorkshop/i) ? true : false;
     if (app)$('.mobileContainer').css('margin-top', '0');
+
+    if(navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion .split(";")[1].replace(/[ ]/g,"")=="MSIE6.0" || navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion .split(";")[1].replace(/[ ]/g,"")=="MSIE7.0" || navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion .split(";")[1].replace(/[ ]/g,"")=="MSIE8.0" || navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion .split(";")[1].replace(/[ ]/g,"")=="MSIE9.0")
+    {
+        $(".copyCode").html('请手动复制');
+    }
     //pc端底部如何邀友
     $UserReady(function (is_login, user) {
         $(".howAward").on("click", function () {
@@ -61,6 +66,7 @@ $(function () {
     $('body').on('click', function () {
         $(".mobilePersonText").addClass('hidden');
     });
+
     //季排行榜奖金总额显示位置
     function totalMove(left, top, className) {
         $(".pcQuarterPack .quarterRemind").css({
@@ -105,7 +111,7 @@ $(function () {
                 //100人改为3人 1百万改为10万
                 var chartsText = '';
                 chartsText = "<div>1.6-3.30，您有效邀友 <em>" + pullNewCount + "</em> 人，有效好友累投年化 <em>" + myFriendYearInvest + "</em> 元，排名 <em>" + rankNum + "</em>，当前暂无奖金可分，加油哦！";
-                if (totalYearInvest != 0 || pullNewCount > 3 || myFriendYearInvest > 100000) {
+                if (totalYearInvest != 0 && pullNewCount > 3 && myFriendYearInvest > 100000) {
                     if (totalYearInvest >= 4000000 && totalYearInvest < 5000000) {
                         chartsText = callback(pullNewCount, myEqualFriendYearInvest, myFriendYearInvest, rankNum, 0.01);
                     } else if (totalYearInvest >= 5000000 && totalYearInvest < 6000000) {
@@ -155,7 +161,7 @@ $(function () {
     //月排行榜头部文字显示
     function monthTitleShow(titText, rankNum, pullNewCount, myFriendYearInvest, totalYearInvest, arg3, prize) {
         //请求参数参数startTotalCount 50改2 startTotalInvest 500000改5更改，500000改5,50改2
-        if (totalYearInvest == 0 || pullNewCount < 2 || myFriendYearInvest < 50000) {
+        if (pullNewCount < 2 && myFriendYearInvest < 50000) {
             titText = '该月内，您有效邀友 <em>' + pullNewCount + '</em> 人，有效好友累投年化 <em>' + myFriendYearInvest + '</em> 元，排名 <em>' + rankNum + '</em>，当前无奖金可分，要努力哦！';
         } else {
             prize = ((myFriendYearInvest / totalYearInvest) * arg3).toFixed(2);
@@ -204,7 +210,6 @@ $(function () {
     //复制功能
     var clipboard = new Clipboard('.copyCode');//复制功能
     clipboard.on('success', function (e) {
-
         alert('复制成功');
     });
     clipboard.on('error', function (e) {
@@ -344,19 +349,19 @@ $(function () {
         var timeText, week_arg_st, week_arg_et;
         if (nowTime < weekList[0]) {
             timeText = '1.6-1.12';
-            week_arg_st = '2017-1-6';
+            week_arg_st = '2017-1-6 00:00:00';
             week_arg_et = '2017-1-12 23:59:59';
         } else if (nowTime >= weekList[0] && nowTime < weekList[1]) {
             timeText = '1.13-1.19';
-            week_arg_st = '2017-1-13';
+            week_arg_st = '2017-1-13 00:00:00';
             week_arg_et = '2017-1-19 23:59:59';
         } else if (nowTime >= weekList[1] && nowTime < weekList[2]) {
             timeText = '1.20-1.26';
-            week_arg_st = '2017-1-20';
+            week_arg_st = '2017-1-20 00:00:00';
             week_arg_et = '2017-1-26 23:59:59';
         } else if (nowTime >= weekList[2] && nowTime < weekList[3]) {
             timeText = '1.27-2.2';
-            week_arg_st = '2017-1-27';
+            week_arg_st = '2017-1-27 00:00:00';
             week_arg_et = '2017-2-2 23:59:59';
         } else if (nowTime >= weekList[3] && nowTime < weekList[4]) {
             timeText = '2.3-2.9';
@@ -364,31 +369,31 @@ $(function () {
             week_arg_et = '2017-2-9 23:59:59';
         } else if (nowTime >= weekList[4] && nowTime < weekList[5]) {
             timeText = '2.10-2.16';
-            week_arg_st = '2017-2-10';
+            week_arg_st = '2017-2-10 00:00:00';
             week_arg_et = '2017-2-16 23:59:59';
         } else if (nowTime >= weekList[5] && nowTime < weekList[6]) {
             timeText = '2.17-2.23';
-            week_arg_st = '2017-2-17';
+            week_arg_st = '2017-2-17 00:00:00';
             week_arg_et = '2017-2-23 23:59:59';
         } else if (nowTime >= weekList[6] && nowTime < weekList[7]) {
             timeText = '2.24-3.2';
-            week_arg_st = '2017-2-24';
+            week_arg_st = '2017-2-24 00:00:00';
             week_arg_et = '2017-3-2 23:59:59';
         } else if (nowTime >= weekList[7] && nowTime < weekList[8]) {
             timeText = '3.3-3.9';
-            week_arg_st = '2017-3-3';
+            week_arg_st = '2017-3-3 00:00:00';
             week_arg_et = '2017-3-9 23:59:59';
         } else if (nowTime >= weekList[8] && nowTime < weekList[9]) {
             timeText = '3.10-3.16';
-            week_arg_st = '2017-3-10';
+            week_arg_st = '2017-3-10 00:00:00';
             week_arg_et = '2017-3-16 23:59:59';
         } else if (nowTime >= weekList[9] && nowTime < weekList[10]) {
             timeText = '3.17-3.23';
-            week_arg_st = '2017-3-17';
+            week_arg_st = '2017-3-17 00:00:00';
             week_arg_et = '2017-3-23 23:59:59';
         } else {
             timeText = '3.24-3.30';
-            week_arg_st = '2017-3-24';
+            week_arg_st = '2017-3-24 00:00:00';
             week_arg_et = '2017-3-30 23:59:59';
         }
 

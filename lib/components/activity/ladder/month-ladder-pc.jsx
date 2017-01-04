@@ -9,17 +9,20 @@ const MonthLadderPC = React.createClass({
             totalPage: 2,
             tab: '上一页',
             isClick: true,
-            cursor: 0
+            cursor: 0,
+            currentTime:0,
         })
     },
     getServerTimestamp: function (callback) {
         var ts = $getDebugParams().timestamp;
         if (ts) {
+            this.setState({currentTime:ts});
             callback(ts)
         } else {
             $.get(API_PATH + "api/userState/v1/timestamp.json", function (data) {
+                this.setState({currentTime:data.data.timestamp});
                 callback(data.data.timestamp)
-            }, 'json')
+            }.bind(this), 'json')
         }
     },
     componentDidMount: function () {
@@ -28,11 +31,10 @@ const MonthLadderPC = React.createClass({
         var startDate = '2017-1-6';
         var endDate = '2017-2-2';
         this.getServerTimestamp(function (timestamp) {
-            var currentTime = timestamp;
-            if (currentTime < febStart) {
+            if (timestamp < febStart) {
                 startDate = '2017-1-6';
                 endDate = '2017-2-2';
-            } else if (currentTime < marStart) {
+            } else if (timestamp < marStart) {
                 startDate = '2017-2-3';
                 endDate = '2017-3-2';
             } else {
@@ -48,7 +50,7 @@ const MonthLadderPC = React.createClass({
     ajaxPullNewInvest: function (startDate, endDate) {
         //需要修改
         $.ajax({
-            url: API_PATH + '/api/activityPullNew/v2/PullNewTopAndYearInvest.json',
+            url: API_PATH + 'api/activityPullNew/v2/PullNewTopAndYearInvest.json',
             data: {
                 dataCount: 20,
                 totalBaseAmt: 1000,
@@ -80,17 +82,19 @@ const MonthLadderPC = React.createClass({
         return total.toFixed(2)
     },
     fixedPriceFun: function (i) {
-        let monthPrice = 120000;
+        var febStart = new Date("2017/2/3").getTime();
+        var marStart = new Date("2017/3/3").getTime();
+        let monthPrice = 0;
         let totalData = this.state.totalData;
         //50人改为2人 50万改为5万
         if (totalData.totalYearInvest == 0 || totalData.topList[i].totalall < 2 || totalData.topList[i].total < 50000) {
             return '暂无奖金'
         } else {
-            if (this.props.month == 1) {
+            if (this.state.currentTime < febStart || this.props.startDate == '2017-1-6') {
                 monthPrice = 120000;
-            } else if (this.props.month == 2) {
+            } else if (this.state.currentTime < marStart || this.props.startDate == '2017-2-3') {
                 monthPrice = 150000;
-            } else {
+            } else{
                 monthPrice = 180000;
             }
         }
