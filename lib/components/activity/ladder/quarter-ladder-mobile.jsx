@@ -12,6 +12,7 @@ const QuarterLadderMobile = React.createClass({
         })
     },
     componentDidMount: function () {
+        //4千万改为4百万 ,3人，10万都要改
         $.ajax({
             url: API_PATH + '/api/activityPullNew/v2/PullNewTopAndYearInvest.json',
             data: {
@@ -19,8 +20,8 @@ const QuarterLadderMobile = React.createClass({
                 totalBaseAmt: 1000,
                 endDate: '2017-3-30',
                 startDate: '2017-1-6',
-                startTotalCount: 0,
-                startTotalInvest: 0
+                startTotalCount: 3,
+                startTotalInvest: 100000
             },
             type: "get",
             dataType: 'json',
