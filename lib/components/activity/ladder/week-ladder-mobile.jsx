@@ -147,7 +147,7 @@ const WeekLadderMobile = React.createClass({
             return month + symbol + strDate;
         }
         function compareDate(a,b){
-            return a = getNowFormatDate(b)
+            return a <= getNowFormatDate(b)
         }
         let bodyImg = (item, index) => {
             index += this.state.cursor;

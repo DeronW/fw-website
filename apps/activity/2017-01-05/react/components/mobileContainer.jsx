@@ -1,8 +1,8 @@
 const MobileContainer = React.createClass({
     getInitialState: function () {
         return ({
-            startDate: '2017-1-6',
-            endDate: '2017-2-2'
+            startDate: '',
+            endDate: ''
         })
     },
     ajaxMonth: function (start,end) {
@@ -77,7 +77,7 @@ const MobileContainer = React.createClass({
                             <div className="ladderTitle"></div>
                             <div className="ladderContent">
                                 {
-                                    <MonthLadderMobile startDate={this.state.startDate} endDate={this.state.endState}/>
+                                    <MonthLadderMobile startDate={this.state.startDate} endDate={this.state.endDate}/>
                                 }
                             </div>
                         </div>

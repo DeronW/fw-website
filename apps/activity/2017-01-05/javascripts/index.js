@@ -56,9 +56,10 @@ $(function () {
         $FW.gotoSpecialPage("登录", loginUrl);
     });
     //移动端有效邀友判断
-    $(".mobilePerson").on("touchmove", function (e) {
+    $(".mobilePerson").on("click", function (e) {
         $(".mobilePersonText").removeClass('hidden');
         e.preventDefault();
+        return false
     });
     $('body').on('click', function () {
         $(".mobilePersonText").addClass('hidden');

@@ -94,7 +94,6 @@ const WeekLadderPC = React.createClass({
     },
     ajaxTime: function () {
         this.getServerTimestamp(function (timestamp) {
-            //var currentDate = new Date(timestamp).toLocaleDateString().split('/').slice(1).join('.');
             this.setState({currentDate: timestamp})
         }.bind(this));
     },
