@@ -118,7 +118,6 @@ const MonthLadderMobile = React.createClass({
                 }
             }
         } else {
-            console.log("xiaa")
             if (len % this.PRE_PAGE) {
                 min = parseInt(len / this.PRE_PAGE) * this.PRE_PAGE
             } else {

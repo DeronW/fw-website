@@ -28,11 +28,11 @@ const QuarterLadderMobile = React.createClass({
             success: function (data) {
                 var sData = data.data.topList || [];
                 if (sData.length <= this.PRE_PAGE) {
-                    this.setState({totalPage: 1, isClick: false});
+                    this.setState({totalPage: 1,isClick:false});
                 } else if (sData.length > this.PRE_PAGE && sData.length <= this.PRE_PAGE * 2) {
-                    this.setState({totalPage: 2, isClick: true})
+                    this.setState({totalPage: 2,isClick:true})
                 } else if (sData.length > this.PRE_PAGE * 2 && sData.length <= this.PRE_PAGE * 3) {
-                    this.setState({totalPage: 3, isClick: true})
+                    this.setState({totalPage: 3,isClick:true})
                 }
                 this.setState({
                     totalData: sData,
@@ -48,6 +48,7 @@ const QuarterLadderMobile = React.createClass({
         return str.substring(0, 2) + "**" + str.substring(str.length - 2, str.length);
     },
     fixedPrice: function (total) {
+        if(!total) return;
         return total.toFixed(2)
     },
     fixedPriceFun: function (total, totalLimit,totalall) {
