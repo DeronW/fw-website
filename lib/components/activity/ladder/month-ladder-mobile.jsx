@@ -95,7 +95,7 @@ const MonthLadderMobile = React.createClass({
                 monthPrice = 180000;
             }
         }
-        var money = ((totalData.topList[i].total) / (totalData.totalYearInvest)) * monthPrice;
+        var money = ((totalData.topList[i].total) / (totalData.totalYearInvestAll)) * monthPrice;
         return money.toFixed(2);
     },
     switchPageHandler: function (type) {
