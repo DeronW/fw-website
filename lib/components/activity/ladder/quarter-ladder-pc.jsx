@@ -8,21 +8,21 @@ const QuarterLadderPC = React.createClass({
             tab: '上一页',
             cursor: 0,
             isClick:true,
+            totalYearInvestAll:0,
             totalYearInvest:0,
-            pullNewCount:0,
-            myFriendYearInvest:0,
         })
     },
     componentDidMount: function () {
+        //上线时需要修改为100人 1000000
         $.ajax({
             url: API_PATH+'/api/activityPullNew/v2/PullNewTopAndYearInvest.json',
             data:{
                 dataCount:30,
                 totalBaseAmt:1000,
-                endDate:'2017-3-30',
+                endDate:'2017-3-30 23:59:59',
                 startDate:'2017-1-6',
-                startTotalCount:0,
-                startTotalInvest:0
+                startTotalCount:3,
+                startTotalInvest:100000
             },
             type: "get",
             dataType: 'json',
@@ -35,7 +35,11 @@ const QuarterLadderPC = React.createClass({
                 } else if (sData.length > this.PRE_PAGE * 2 && sData.length <= this.PRE_PAGE * 3) {
                     this.setState({totalPage: 3,isClick:true})
                 }
-                this.setState({totalData: sData,totalYearInvest:data.data.totalYearInvest})
+                this.setState({
+                    totalData: sData,
+                    totalYearInvest:data.data.totalYearInvest,
+                    totalYearInvestAll:data.data.totalYearInvestAll
+                })
             }.bind(this)
         });
     },
@@ -48,15 +52,15 @@ const QuarterLadderPC = React.createClass({
     },
     fixedPriceFun: function (total, totalLimit,totalall) {
         //4千万改为4百万 ,3人，10万都要改
-        let {totalYearInvest} = this.state;
+        let {totalYearInvest,totalYearInvestAll} = this.state;
         let price = 0;
         let p = 0.01;
         if(totalall >= 3 && total >= 100000){
-            if (totalYearInvest >= 4000000 && totalYearInvest < 5000000) {
+            if (totalYearInvestAll >= 4000000 && totalYearInvestAll < 5000000) {
                 p = 0.01;
-            } else if (totalYearInvest >= 5000000 && totalYearInvest < 6000000) {
+            } else if (totalYearInvestAll >= 5000000 && totalYearInvestAll < 6000000) {
                 p = 0.013;
-            } else if (totalYearInvest >= 6000000) {
+            } else if (totalYearInvestAll >= 6000000) {
                 p = 0.018;
             }else{
                 return '暂无奖金'

@@ -29,14 +29,14 @@ const MonthLadderPC = React.createClass({
         var febStart = new Date("2017/2/3").getTime();
         var marStart = new Date("2017/3/3").getTime();
         var startDate = '2017-1-6';
-        var endDate = '2017-2-2';
+        var endDate = '2017-2-2 23:59:59';
         this.getServerTimestamp(function (timestamp) {
             if (timestamp < febStart) {
                 startDate = '2017-1-6';
-                endDate = '2017-2-2';
+                endDate = '2017-2-2 23:59:59';
             } else if (timestamp < marStart) {
                 startDate = '2017-2-3';
-                endDate = '2017-3-2';
+                endDate = '2017-3-2 23:59:59';
             } else {
                 startDate = '2017-3-3';
                 endDate = '2017-3-30';

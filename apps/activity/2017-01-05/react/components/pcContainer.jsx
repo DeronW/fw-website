@@ -45,21 +45,21 @@ const PcContainer = React.createClass({
                 <div className="pcMonthPack">
                     <div className="monthTitle"></div>
                     <div className="monthState">
-                        <div className="monthStateCommon active"  onClick={()=>{this.ajaxMonth('2017-1-6','2017-2-2')}}>
+                        <div className="monthStateCommon active"  onClick={()=>{this.ajaxMonth('2017-1-6','2017-2-2 23:59:59')}}>
                             <div className="stateLeft">进行中</div>
                             <div className="stateRight">
                                 <div className="stateCurrentMonth">1月</div>
                                 <div className="stateCurrentDate">01.06 ~ 02.02</div>
                             </div>
                         </div>
-                        <div className="monthStateCommon" onClick={()=>{this.ajaxMonth('2017-2-3','2017-3-2')}}>
+                        <div className="monthStateCommon" onClick={()=>{this.ajaxMonth('2017-2-3','2017-3-2 23:59:59')}}>
                             <div className="stateLeft">未开始</div>
                             <div className="stateRight">
                                 <div className="stateCurrentMonth">2月</div>
                                 <div className="stateCurrentDate">02.03 ~ 03.02</div>
                             </div>
                         </div>
-                        <div className="monthStateCommon monthStateCommonRight" onClick={()=>{this.ajaxMonth('2017-3-3','2017-3-30')}}>
+                        <div className="monthStateCommon monthStateCommonRight" onClick={()=>{this.ajaxMonth('2017-3-3','2017-3-30 23:59:59')}}>
                             <div className="stateLeft">未开始</div>
                             <div className="stateRight">
                                 <div className="stateCurrentMonth">3月</div>
@@ -78,7 +78,7 @@ const PcContainer = React.createClass({
                             <div className="ladderTitle"></div>
                             <div className="ladderContent">
                                 {
-                                    <MonthLadderPC startDate={this.state.startDate} endDate={this.state.endState}/>
+                                    <MonthLadderPC startDate={this.state.startDate} endDate={this.state.endDate}/>
                                 }
                             </div>
                         </div>

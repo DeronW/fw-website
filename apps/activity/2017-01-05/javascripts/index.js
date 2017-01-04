@@ -137,15 +137,16 @@ $(function () {
     $.get(API_PATH + 'api/activityPullNew/v2/PullNewTopAndYearInvest.json', {
         dataCount: 30,
         totalBaseAmt: 1000,
-        endDate: '2017-3-30',
+        endDate: '2017-3-30 23:59:59',
         startDate: '2017-1-6',
-        startTotalCount: 0,
-        startTotalInvest: 0
+        startTotalCount: 3,
+        startTotalInvest: 100000
     }, function (data) {
         var rankNum = data.data.rankNum || '30+';//当前用户排名
         var pullNewCount = data.data.pullNewCount || 0;//有效邀请人数
         var myFriendYearInvest = data.data.myFriendYearInvest || 0;
         var totalYearInvest = data.data.totalYearInvest;
+        var totalYearInvestAll = data.data.totalYearInvestAll;
         var myEqualFriendYearInvest = data.data.myEqualFriendYearInvest;//等额
         var topList = data.data.topList;
         //列表不为空时
@@ -153,8 +154,8 @@ $(function () {
             $(".quarterLadder").removeClass('hidden');
             $(".quarterLadderNot").addClass('hidden');
         }
-        totalQuarterShowText(totalYearInvest);
-        quarterTopText(totalYearInvest, pullNewCount, myFriendYearInvest, rankNum, myEqualFriendYearInvest, quarterTopTextCb)
+        totalQuarterShowText(totalYearInvestAll);
+        quarterTopText(totalYearInvestAll, pullNewCount, myFriendYearInvest, rankNum, myEqualFriendYearInvest, quarterTopTextCb)
 
     }.bind(this), 'json');
 
@@ -311,10 +312,12 @@ $(function () {
 
             monthLadderShow('2017-2-3', '2017-3-2 23:59:59', 150000);
             month_1.click(function () {
-                fn($(this), 12, 'images/onetext.png', 'images/mobileOne.png')
+                fn($(this), 12, 'images/onetext.png', 'images/mobileOne.png');
+                monthLadderShow('2017-1-6', '2017-2-2 23:59:59', 120000);
             });
             month_2.click(function () {
-                fn($(this), 15, 'images/twoText.png', 'images/mobileTwo.png')
+                fn($(this), 15, 'images/twoText.png', 'images/mobileTwo.png');
+                monthLadderShow('2017-2-3', '2017-3-2 23:59:59', 150000);
             });
         } else {
             month_3.addClass('active').find(".stateLeft").text("进行中").siblings().removeClass('active');
@@ -325,13 +328,17 @@ $(function () {
 
             monthLadderShow('2017-3-3', '2017-3-30 23:59:59', 180000);
             month_1.click(function () {
-                fn($(this), 12, 'images/onetext.png', 'images/mobileOne.png')
+                fn($(this), 12, 'images/onetext.png', 'images/mobileOne.png');
+                monthLadderShow('2017-1-6', '2017-2-2 23:59:59', 120000);
+
             });
             month_2.click(function () {
-                fn($(this), 15, 'images/twoText.png', 'images/mobileTwo.png')
+                fn($(this), 15, 'images/twoText.png', 'images/mobileTwo.png');
+                monthLadderShow('2017-2-3', '2017-3-2 23:59:59', 150000);
             });
             month_3.click(function () {
-                fn($(this), 18, 'images/threeText.png', 'images/mobileThree.png')
+                fn($(this), 18, 'images/threeText.png', 'images/mobileThree.png');
+                monthLadderShow('2017-3-3', '2017-3-30 23:59:59', 180000);
             });
         }
     }
