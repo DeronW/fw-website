@@ -299,9 +299,8 @@ $(function () {
         var month_3 = $(".monthStateCommon").eq(2);
         if (nowTime < febStart) {
             month_1.addClass('active').find(".stateLeft").text("进行中").siblings().removeClass('active');
-            $(".monthStateCommon:gt(0)").addClass('not');
-
-            monthLadderShow('2017-1-6', '2017-2-2', 120000);
+            $(".monthStateCommon:gt(0)").addClass('not').css("cursor",'default');
+            monthLadderShow('2017-1-6', '2017-2-2 23:59:59', 120000);
         } else if (nowTime < marStart) {
             month_2.addClass('active').find(".stateLeft").text("进行中").siblings().removeClass('active');
             month_1.addClass("end").find(".stateLeft").text("已结束");
@@ -310,7 +309,7 @@ $(function () {
             $(".pcMonthPack .monthLadder .ladderText").attr("src", "images/twoText.png");
             $(".mobileMonthPack .monthLadder .ladderText").attr("src", "images/mobileTwo.png");
 
-            monthLadderShow('2017-2-3', '2017-3-2', 150000);
+            monthLadderShow('2017-2-3', '2017-3-2 23:59:59', 150000);
             month_1.click(function () {
                 fn($(this), 12, 'images/onetext.png', 'images/mobileOne.png')
             });
@@ -324,7 +323,7 @@ $(function () {
             $(".pcMonthPack .monthLadder .ladderText").attr("src", "images/threeText.png");
             $(".mobileMonthPack .monthLadder .ladderText").attr("src", "images/mobileThree.png");
 
-            monthLadderShow('2017-3-3', '2017-3-30', 180000);
+            monthLadderShow('2017-3-3', '2017-3-30 23:59:59', 180000);
             month_1.click(function () {
                 fn($(this), 12, 'images/onetext.png', 'images/mobileOne.png')
             });
