@@ -45,6 +45,7 @@ const MonthLadderPC = React.createClass({
         }.bind(this))
     },
     componentWillReceiveProps: function (nextProps) {
+        console.log(nextProps);
         this.ajaxPullNewInvest(nextProps.startDate, nextProps.endDate)
     },
     ajaxPullNewInvest: function (startDate, endDate) {

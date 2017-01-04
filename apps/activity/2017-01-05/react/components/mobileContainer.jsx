@@ -28,6 +28,7 @@ const MobileContainer = React.createClass({
         }
     },
     render: function () {
+        var _this = this;
         return (
             <div className="mobileContainer">
                 <div className="mobileBanner"></div>
@@ -43,21 +44,21 @@ const MobileContainer = React.createClass({
                 <div className="mobileMonthPack">
                     <div className="monthTitle"></div>
                     <div className="monthState">
-                        <div className="monthStateCommon active" onClick={()=>{this.ajaxMonth('2017-1-6','2017-2-2')}}>
+                        <div className="monthStateCommon active" onClick={function(){_this.ajaxMonth('2017-1-6','2017-2-2')}}>
                             <div className="stateLeft">进行中</div>
                             <div className="stateRight">
                                 <div className="stateCurrentMonth">1月</div>
                                 <div className="stateCurrentDate">01.06 ~ 02.02</div>
                             </div>
                         </div>
-                        <div className="monthStateCommon" onClick={()=>{this.ajaxMonth('2017-2-3','2017-3-2')}}>
+                        <div className="monthStateCommon" onClick={function(){_this.ajaxMonth('2017-2-3','2017-3-2')}}>
                             <div className="stateLeft">未开始</div>
                             <div className="stateRight">
                                 <div className="stateCurrentMonth">2月</div>
                                 <div className="stateCurrentDate">02.03 ~ 03.02</div>
                             </div>
                         </div>
-                        <div className="monthStateCommon" onClick={()=>{this.ajaxMonth('2017-3-3','2017-3-30')}}>
+                        <div className="monthStateCommon" onClick={function(){_this.ajaxMonth('2017-3-3','2017-3-30')}}>
                             <div className="stateLeft">未开始</div>
                             <div className="stateRight">
                                 <div className="stateCurrentMonth">3月</div>
