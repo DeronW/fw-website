@@ -125,7 +125,8 @@ const QuarterLadderPC = React.createClass({
         );
         var td4Style = {
           textAlign : 'right',
-          width:'80px'
+          width:'80px',
+          paddingRight:'20px'
         };
         let bodyImg = (item, index) => {
             index += this.state.cursor;

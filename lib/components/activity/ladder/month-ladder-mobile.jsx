@@ -45,7 +45,7 @@ const MonthLadderMobile = React.createClass({
         }.bind(this))
     },
     componentWillReceiveProps: function (nextProps) {
-        console.log(234);
+        alert(nextProps.startDate);
         this.ajaxPullNewInvest(nextProps.startDate, nextProps.endDate);
     },
     ajaxPullNewInvest: function (startDate, endDate) {

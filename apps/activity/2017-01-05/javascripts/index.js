@@ -87,7 +87,7 @@ $(function () {
                 } else if (totalYearInvest < 6000000) {
                     totalMove(360, -80, "quarterRemind2");
                 } else {
-                    totalMove(680, -80, "quarterRemind3");
+                    totalMove(620, -80, "quarterRemind3");
                 }
                 $(".mobileQuarterPack .quarterRemind em,.pcQuarterPack .quarterRemind em,.pcQuarterPack  .quarterRemindNot em").html((totalYearInvest / 10000).toFixed(2));
             } else {
