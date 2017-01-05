@@ -164,7 +164,7 @@ const MobileContainer = React.createClass({
                         <WeekLadderMobile />
                     </div>
                 </div>
-                <div className="mobileNoStart">
+                <div className="mobileNoStart hidden">
                     <div className="mobileNoStartImg"></div>
                 </div>
             </div>

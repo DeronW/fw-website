@@ -354,9 +354,9 @@ $(function () {
         //遮罩层
 
         var startTime = new Date("2017/1/6 00:00:00").getTime();
-        if(nowTime >= startTime){
-            $(".pcNoStart").addClass('hidden');
-            $(".mobileNoStart").addClass('hidden');
+        if(nowTime < startTime){
+            $(".pcNoStart").removeClass('hidden');
+            $(".mobileNoStart").removeClass('hidden');
         }
         if (nowTime < weekList[0]) {
             timeText = '1.6-1.12';

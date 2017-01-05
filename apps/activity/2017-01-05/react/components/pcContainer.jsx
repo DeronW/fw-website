@@ -178,7 +178,7 @@ const PcContainer = React.createClass({
                         <WeekLadderPC />
                     </div>
                 </div>
-                <div className="pcNoStart">
+                <div className="pcNoStart hidden">
                     <div className="pcNoStartImg"></div>
                 </div>
             </div>
