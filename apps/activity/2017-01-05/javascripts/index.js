@@ -83,11 +83,11 @@ $(function () {
                 if (totalYearInvest < 4000000) {
                     $(".mobileQuarterPack .quarterRemind").addClass("quarterRemindNot").html("截止当前，榜内工友的有效好友累投年化总额为<em>0</em>万元，暂未开启新春特奖，大家加油哦！")
                 } else if (totalYearInvest < 5000000) {
-                    totalMove(60, -80, "quarterRemind1");
+                    totalMove(10, -80, "quarterRemind1");
                 } else if (totalYearInvest < 6000000) {
-                    totalMove(360, -80, "quarterRemind2");
+                    totalMove(310, -80, "quarterRemind2");
                 } else {
-                    totalMove(620, -80, "quarterRemind3");
+                    totalMove(600, -80, "quarterRemind3");
                 }
                 $(".mobileQuarterPack .quarterRemind em,.pcQuarterPack .quarterRemind em,.pcQuarterPack  .quarterRemindNot em").html((totalYearInvest / 10000).toFixed(2));
             } else {
@@ -121,7 +121,7 @@ $(function () {
                 $('.pcQuarterPack .quarterExplain,.mobileQuarterPack .quarterExplain').html(chartsText);
             } else {
                 var pcChartsText = '<div class="quarterNoLoginText">请登录后，查看您的邀友排名及可获奖金，</div> <div class="quarterLogin">立即登录></div>'
-                var mobileChartsText = '<div class="quarterNoLoginText">请登录后，<br/>查看您的邀友排名及可获奖金，</div> <div class="quarterLogin">立即登录></div>'
+                var mobileChartsText = '<div class="quarterNoLoginText">请登录后，<br/>查看您的邀友排名及可获奖金</div> <div class="quarterLogin">立即登录></div>'
                 $('.pcQuarterPack .quarterExplain').html(pcChartsText);
                 $('.mobileQuarterPack .quarterExplain').html(mobileChartsText);
                 $(".quarterLogin").on("click", function () {

@@ -6,7 +6,6 @@ const PcContainer = React.createClass({
       })
     },
     ajaxMonth: function (start,end) {
-        console.log(start);
         var febStart = new Date(start).getTime();
         var marStart = new Date(end).getTime();
         this.getServerTimestamp(function (timestamp) {
