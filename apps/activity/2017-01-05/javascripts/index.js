@@ -352,9 +352,12 @@ $(function () {
         var nowTime = timestamp;
         var timeText, week_arg_st, week_arg_et;
         //遮罩层
-        //if(nowTime >= startTime){
-        //    $(".pcNoStart").addClass('hidden');
-        //}
+
+        var startTime = new Date("2017/1/6 00:00:00").getTime();
+        if(nowTime >= startTime){
+            $(".pcNoStart").addClass('hidden');
+            $(".mobileNoStart").addClass('hidden');
+        }
         if (nowTime < weekList[0]) {
             timeText = '1.6-1.12';
             week_arg_st = '2017-1-6 00:00:00';
