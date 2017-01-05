@@ -45,8 +45,8 @@ const MonthLadderPC = React.createClass({
         }.bind(this))
     },
     componentWillReceiveProps: function (nextProps) {
-        console.log(nextProps);
-        this.ajaxPullNewInvest(nextProps.startDate, nextProps.endDate)
+        console.log(234);
+        this.ajaxPullNewInvest(nextProps.startDate, nextProps.endDate);
     },
     ajaxPullNewInvest: function (startDate, endDate) {
         //需要修改
@@ -183,7 +183,7 @@ const MonthLadderPC = React.createClass({
                     <thead>
                     <tr>
                         <td>用户名</td>
-                        <td>有效邀请数</td>
+                        <td>有效邀友数</td>
                         <td className="tHeadTd3">有效好友<br/>累投年化额（元）</td>
                         <td>奖金（元）</td>
                     </tr>

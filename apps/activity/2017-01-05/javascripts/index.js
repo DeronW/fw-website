@@ -120,8 +120,8 @@ $(function () {
                 }
                 $('.pcQuarterPack .quarterExplain,.mobileQuarterPack .quarterExplain').html(chartsText);
             } else {
-                var pcChartsText = '<div class="quarterNoLoginText">请登录后，查看您的邀友排名及可获奖金</div> <div class="quarterLogin">立即登录></div>'
-                var mobileChartsText = '<div class="quarterNoLoginText">请登录后，<br/>查看您的邀友排名及可获奖金</div> <div class="quarterLogin">立即登录></div>'
+                var pcChartsText = '<div class="quarterNoLoginText">请登录后，查看您的邀友排名及可获奖金，</div> <div class="quarterLogin">立即登录></div>'
+                var mobileChartsText = '<div class="quarterNoLoginText">请登录后，<br/>查看您的邀友排名及可获奖金，</div> <div class="quarterLogin">立即登录></div>'
                 $('.pcQuarterPack .quarterExplain').html(pcChartsText);
                 $('.mobileQuarterPack .quarterExplain').html(mobileChartsText);
                 $(".quarterLogin").on("click", function () {
@@ -160,7 +160,7 @@ $(function () {
     //月排行榜头部文字显示
     function monthTitleShow(titText, rankNum, pullNewCount, myFriendYearInvest, totalYearInvest, arg3, prize) {
         //请求参数参数startTotalCount 50改2 startTotalInvest 500000改5更改，500000改5,50改2
-        if (pullNewCount < 2 && myFriendYearInvest < 50000) {
+        if (pullNewCount < 2 || myFriendYearInvest < 50000) {
             titText = '该月内，您有效邀友 <em>' + pullNewCount + '</em> 人，有效好友累投年化 <em>' + myFriendYearInvest + '</em> 元，排名 <em>' + rankNum + '</em>，当前无奖金可分，要努力哦！';
         } else {
             prize = ((myFriendYearInvest / totalYearInvest) * arg3).toFixed(2);

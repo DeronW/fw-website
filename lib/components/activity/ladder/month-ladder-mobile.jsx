@@ -9,17 +9,20 @@ const MonthLadderMobile = React.createClass({
             totalPage: 2,
             tab: '上一页',
             isClick: true,
-            cursor: 0
+            cursor: 0,
+            currentTime:0,
         })
     },
     getServerTimestamp: function (callback) {
         var ts = $getDebugParams().timestamp;
         if (ts) {
-            callback(ts)
+            callback(ts);
+            this.setState({currentTime:ts});
         } else {
             $.get(API_PATH + "api/userState/v1/timestamp.json", function (data) {
+                this.setState({currentTime:data.data.timestamp});
                 callback(data.data.timestamp)
-            }, 'json')
+            }.bind(this), 'json')
         }
     },
     componentDidMount: function () {
@@ -82,6 +85,7 @@ const MonthLadderMobile = React.createClass({
         var febStart = new Date("2017/2/3").getTime();
         var marStart = new Date("2017/3/3").getTime();
         let monthPrice = 0;
+        var money = 0;
         let totalData = this.state.totalData;
         //50人改为2人 50万改为5万
         if (totalData.topList[i].totalall < 2 || totalData.topList[i].total < 50000) {
@@ -94,8 +98,8 @@ const MonthLadderMobile = React.createClass({
             } else{
                 monthPrice = 180000;
             }
+            money = ((totalData.topList[i].total) / (totalData.totalYearInvest)) * monthPrice;
         }
-        var money = ((totalData.topList[i].total) / (totalData.totalYearInvest)) * monthPrice;
         return money.toFixed(2);
     },
     switchPageHandler: function (type) {
