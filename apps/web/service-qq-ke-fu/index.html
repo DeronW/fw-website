@@ -1,15 +1,21 @@
-{% extends '../../../lib/templates/web_base.swig.html' %}
-
-{% block content %}
-    <h2 style="text-align: center; margin: 150px auto 200px">欢迎使用QQ客服</h2>
+{% extends '../../../lib/templates/web_base.swig.html' %} {% block content %}
+<div style="text-align: center; margin: 150px auto 200px">
+    欢迎使用QQ客服
+    <p>如果没有自动打开QQ, 请联系金融工场电话客服</p>
+</div>
 {% endblock %}
-
 
 {% block javascripts %}
 
 <script>
-$(function(){
-    $("#qq-ke-fu-1").click()
-})
+    $(function () {
+        window.__lazy_load_qq_wpa_click_timer = setInterval(function () {
+            var e = $("#qq-ke-fu-1");
+            if(e.data("qq-ke-fu-ready")) {
+                e.click();
+                clearInterval(window.__lazy_load_qq_wpa_click_timer)
+            }
+        }, 1000)
+    })
 </script>
 {% endblock %}
