@@ -1,48 +1,111 @@
 const MonthLadderMobile = React.createClass({
     getInitialState: function () {
-        this.PRE_PAGE = 8;
+        this.PRE_PAGE = 5;
         return ({
-            totalData: [],
+            totalData: {
+                topList: []
+            },
             page: 1,
             totalPage: 2,
             tab: '上一页',
-            isClick:true,
-            cursor: 0
+            isClick: true,
+            cursor: 0,
+            currentTime:0,
         })
     },
+    getServerTimestamp: function (callback) {
+        var ts = $getDebugParams().timestamp;
+        if (ts) {
+            this.setState({currentTime:ts});
+            callback(ts)
+        } else {
+            $.get(API_PATH + "api/userState/v1/timestamp.json", function (data) {
+                this.setState({currentTime:data.data.timestamp});
+                callback(data.data.timestamp)
+            }.bind(this), 'json')
+        }
+    },
     componentDidMount: function () {
+        var febStart = new Date("2017/2/3").getTime();
+        var marStart = new Date("2017/3/3").getTime();
+        var startDate = '2017-1-6';
+        var endDate = '2017-2-2 23:59:59';
+        this.getServerTimestamp(function (timestamp) {
+            if (timestamp < febStart) {
+                startDate = '2017-1-6';
+                endDate = '2017-2-2 23:59:59';
+            } else if (timestamp < marStart) {
+                startDate = '2017-2-3';
+                endDate = '2017-3-2 23:59:59';
+            } else {
+                startDate = '2017-3-3';
+                endDate = '2017-3-30';
+            }
+            this.ajaxPullNewInvest(startDate, endDate)
+        }.bind(this))
+    },
+    componentWillReceiveProps: function (nextProps) {
+        this.ajaxPullNewInvest(nextProps.startDate, nextProps.endDate);
+    },
+    ajaxPullNewInvest: function (startDate, endDate) {
         $.ajax({
-            url: './javascripts/list.json',
+            url: API_PATH + '/api/activityPullNew/v2/PullNewTopAndYearInvest.json',
+            data: {
+                dataCount: 20,
+                totalBaseAmt: 1000,
+                startDate: startDate,
+                endDate: endDate,
+                startTotalCount: 50,
+                startTotalInvest: 500000
+            },
             type: "get",
             dataType: 'json',
             success: function (data) {
                 var sData = data.data;
-                if (sData.length <= this.PRE_PAGE) {
-                    this.setState({totalPage: 1,isClick:false});
-                } else if (sData.length > this.PRE_PAGE && sData.length <= this.PRE_PAGE * 2) {
-                    this.setState({totalPage: 2,isClick:true})
-                } else if (sData.length > this.PRE_PAGE * 2 && sData.length <= this.PRE_PAGE * 3) {
-                    this.setState({totalPage: 3,isClick:true})
+                var len = sData.topList.length || [];
+                if (len <= this.PRE_PAGE) {
+                    this.setState({totalPage: 1, isClick: false});
+                } else if (len > this.PRE_PAGE && sData.length <= this.PRE_PAGE * 2) {
+                    this.setState({totalPage: 2, isClick: true})
+                } else if (len > this.PRE_PAGE && sData.length <= this.PRE_PAGE * 3) {
+                    this.setState({totalPage: 3, isClick: true})
+                }else{
+                    this.setState({totalPage: 4, isClick: true})
                 }
                 this.setState({totalData: sData})
             }.bind(this)
         });
     },
-    isImgFun: function (key) {
-        var imgName = ['jin','yin','tong'];
-        var i = imgName[key]?`./images/${imgName[key]}.png`:null;
-        return i
+    isImgFun: function (index) {
+        return ['images/jin.png', 'images/yin.png', 'images/tong.png'][index]
     },
-    subNameFun: function (str) {
-        return str.substring(0,2)+"**"+str.substring(str.length-2,str.length);
+    fixedPrice: function (total) {
+        return total.toFixed(2)
     },
-    fixedPriceFun: function (price) {
-        return price.toFixed(2)
+    fixedPriceFun: function (i) {
+        var febStart = new Date("2017/2/3").getTime();
+        var marStart = new Date("2017/3/3").getTime();
+        let monthPrice = 0;
+        var money = 0;
+        let totalData = this.state.totalData;
+        if (totalData.topList[i].totalall < 50 || totalData.topList[i].total < 500000) {
+            return '暂无奖金'
+        } else {
+            if (this.state.currentTime < febStart || this.props.startDate == '2017-1-6') {
+                monthPrice = 120000;
+            } else if (this.state.currentTime < marStart || this.props.startDate == '2017-2-3') {
+                monthPrice = 150000;
+            } else{
+                monthPrice = 180000;
+            }
+            money = ((totalData.topList[i].total) / (totalData.totalYearInvest)) * monthPrice;
+        }
+        return money.toFixed(2);
     },
     switchPageHandler: function (type) {
         this.setState({tab: type});
         let {page,totalPage}=this.state;
-        let cursor, min, new_page, len = this.state.totalData.length;
+        let cursor, min, new_page, len = this.state.totalData.topList.length;
         if (type == '上一页') {
             if (len % this.PRE_PAGE) {
                 min = parseInt(len / this.PRE_PAGE) * this.PRE_PAGE
@@ -76,34 +139,34 @@ const MonthLadderMobile = React.createClass({
         }
     },
     get_current_page: function () {
-        return this.state.totalData.slice(this.state.cursor, this.state.cursor + this.PRE_PAGE);
+        return this.state.totalData.topList.slice(this.state.cursor, this.state.cursor + this.PRE_PAGE);
     },
-    render:function(){
-        let pageImg = (item,index) => {
+    render: function () {
+        let pageImg = (item, index) => {
             return <div key={index}
                         className={this.state.isClick?(this.state.tab == item ? 'selectedPage':null):'selectedPage'}
                         onClick={this.state.isClick?()=>{this.switchPageHandler(item)}:null}>{item}</div>
         };
         let page = (
-          <div className="page">
-              {
-                  ['上一页','下一页'].map(pageImg)
-              }
-          </div>
+            <div className="page">
+                {
+                    ['上一页', '下一页'].map(pageImg)
+                }
+            </div>
         );
-        let bodyImg = (item,index) => {
+        let bodyImg = (item, index) => {
             index += this.state.cursor;
             return <tr key={index}>
                 <td>
-                    {this.isImgFun(index)?<img className="tdImg" src={this.isImgFun(index)}/>:<span className="twoSpan">{index+1}</span>}
-                    {<span className="oneSpan">{this.subNameFun(item.name)}</span>}
+                    {this.isImgFun(index) ? <img className="tdImg" src={this.isImgFun(index)}/> :
+                        <span className="twoSpan">{index + 1}</span>}
+                    {<span className="oneSpan">{item.loginName}</span>}
                 </td>
-                <td>{item.number}</td>
+                <td>{item.totalall}</td>
                 <td>
-                    {this.fixedPriceFun(item.money)}
-                    {item.text?<div>{item.text}</div>:null}
+                    {this.fixedPrice(item.total)}
                 </td>
-                <td>{this.fixedPriceFun(item.price)}</td>
+                <td className={this.fixedPriceFun(index) == '暂无奖金'?null:"bodyPrice"}>{this.fixedPriceFun(index)}</td>
             </tr>
         };
         let tBody = (
@@ -115,21 +178,25 @@ const MonthLadderMobile = React.createClass({
         );
         return (
             <div className="monthLadderContainerMobile">
-                <table className="monthLadder">
+                <table className="monthLadderMobile">
                     <thead>
                     <tr>
                         <td>用户名</td>
                         <td>有效邀友数</td>
-                        <td>好友累计年化投资额（元）</td>
+                        <td className="tHeadTd3">有效好友累投年化额（元）</td>
                         <td>奖金（元）</td>
                     </tr>
                     </thead>
                     {
-                        tBody
+                        this.state.totalData.topList.length ? tBody : null
                     }
                 </table>
                 {
-                    page
+                    this.state.totalData.topList.length ? page : null
+                }
+                {
+                    this.state.totalData.topList.length ? null :
+                        <div className="monthLadderMobileNot">人气王还在堵车，马上就来</div>
                 }
             </div>
         )

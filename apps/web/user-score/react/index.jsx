@@ -12,8 +12,6 @@ const Content = React.createClass({
                 page: 1
             },
             function (data) {
-            console.log(data.data.creditVo);
-            console.log(data.data.willExpireAmount);
             _this.setState({bean:{usable:data.data.creditVo,ouedate:data.data.willExpireAmount}});
         }, 'json')
     },
@@ -61,7 +59,6 @@ let Fn = {
             limit: 10,
             page: page
         }, function (data) {
-            console.log(data);
             if(data.data.pageData){
                 cb(data.data.pageData)
             }

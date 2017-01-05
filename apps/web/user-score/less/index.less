@@ -1,57 +1,56 @@
 @import "../../../../lib/less/web/partial/user-center-panel.less";
-*{
-  margin: 0;
-  padding:0;
+@import "variables.less";
+
+#userContent {
+  margin: 20px 0 0 180px;
 }
-ul{
-  list-style: none;
-}
-#cnt{
+
+#cnt {
   width: 796px;
-  margin-left: 182px;
-  margin-top: 30px;
-  font-size: 14px;
-  border: 1px solid #ccc;
   height: 700px;
+  margin: 30px 0 0 182px;
+  font-size: @fontsizeNormal;
+  border: 1px solid @colorC;
   border-top: 0 none;
 }
-.topNav{
+
+.topNav {
   width: 796px;
   margin-bottom: 50px;
-  border: 1px solid #ccc;
+  border: 1px solid @colorC;
   border-top: 0 none;
-  font-size: 12px;
-  .topRow{
+  font-size: @fontSizeSmall;
+  .topRow {
     width: 100%;
     height: 38px;
-    border-bottom: 1px solid #ccc;
-    div{
-      width:128px;
+    border-bottom: 1px solid @colorC;
+    div {
+      width: 128px;
       float: left;
       height: 38px;
       cursor: pointer;
       text-align: center;
       line-height: 38px;
     }
-    .on{
-      background-color: #fff;
-      border-top: 1px solid #ccc;
-      border-right: 1px solid #ccc;
+    .on {
+      background-color: @colorWhite;
+      border-top: 1px solid @colorC;
+      border-right: 1px solid @colorC;
       border-bottom: 0 none;
-      border-radius:  2px 5px 0 0;
-      color: #444;
+      border-radius: 2px 5px 0 0;
+      color: @color6;
       font-weight: bold;
     }
   }
-  .moneyItemContainer{
+  .moneyItemContainer {
     width: 770px;
     margin: 0 auto;
-    .beanItem{
+    .beanItem {
       width: 100%;
       height: 40px;
-      font-size: 12px;
-      border-bottom: 1px solid #ccc;
-      div{
+      font-size: @fontSizeSmall;
+      border-bottom: 1px solid @colorC;
+      div {
         float: left;
         width: 118px;
         height: 40px;
@@ -59,153 +58,162 @@ ul{
         line-height: 40px;
         cursor: pointer;
       }
-      .active{
-        background-color: #fff;
-        border-bottom: 2px solid #81B6F8;
+      .active {
+        background-color: @colorWhite;
+        border-bottom: 2px solid @color8c;
         font-weight: bold;
       }
     }
   }
-  .details{
+  .details {
     width: 100%;
     height: 450px;
-    border:1px solid #ccc;
+    border: 1px solid @colorC;
   }
-  .hider{
+  .hider {
     width: 100px;
     height: 40px;
-    background-color: #fff;
+    background-color: @colorWhite;
     position: absolute;
     top: 18px;
     right: 0;
   }
 }
-.bean-info{
+
+.bean-info {
   width: 730px;
   margin: 20px auto;
   height: 45px;
   line-height: 45px;
-  background-color: #f6f6f6;
+  background-color: @colorF2;
   padding: 0 20px;
   text-align: left;
-  .des{
-    padding: 0 20px 0 0 ;
+  .des {
+    padding: 0 20px 0 0;
     font-size: 12px;
   }
-  .data{
+  .data {
     padding: 0 2px;
     font-weight: bold;
   }
 }
-.tableContaner{
+
+.tableContaner {
   width: 752px;
   margin: 20px 10px 50px 10px;
-  height: 492px;
   position: relative;
 }
-.table-read-only{
+
+.table-read-only {
   width: 752px;
-  border: 1px solid #ccc;
+  border: 1px solid @colorC;
   border-collapse: collapse;
-  tr{
+  margin:0;
+  padding:0;
+  tr {
     height: 35px;
     text-align: center;
-    th{
-      background-color: #f2f2f2;
+    th {
+      background-color: @colorF2;
       font-weight: normal;
-      border-bottom: 1px solid #ccc;
-      border-right: 1px solid #ccc;
+      border-bottom: 1px solid @colorC;
+      border-right: 1px solid @colorC;
       border-collapse: collapse;
     }
-    td{
+    td {
       height: 45px;
-      border-bottom: 1px solid #ccc;
-      border-right: 1px solid #ccc;
+      border-bottom: 1px solid @colorC;
+      border-right: 1px solid @colorC;
     }
-    td:last-child{
+    td:last-child {
       text-align: left;
       padding-left: 10px;
     }
   }
 }
-.green{
+
+.green {
   color: green;
   font-weight: bold;
 }
-.red{
+
+.red {
   color: red;
   font-weight: bold;
 }
-.blue{
-  color: #74b2ff;
+
+.blue {
+  color: @color8c;
 }
-.pagination{
+
+.pagination {
   width: 100%;
   position: absolute;
-  bottom:-48px;
+  bottom: -48px;
   text-align: center;
-  .paginationPage{
+  .paginationPage {
     margin: 10px 0;
-    .totalCount{
+    .totalCount {
       display: inline-block;
       padding-right: 10px;
-      span{
+      span {
         padding-left: 5px;
       }
-      .calculate{
-        font-weight:bold;
+      .calculate {
+        font-weight: bold;
       }
     }
-    a{
+    a {
       display: inline-block;
       margin: 0 3px;
     }
-    .first{
-      border: 1px solid #ccc;
+    .first {
+      border: 1px solid @colorC;
       padding: 3px 5px;
       cursor: pointer;
-      background-color: #f2f2f2;
+      background-color: @colorF2;
       border-radius: 3px;
-      margin:0 3px;
+      margin: 0 3px;
     }
-    .first:hover{
-      color: #f03b43 ;
+    .first:hover {
+      color: @colorRed;
     }
-    .last{
-      border: 1px solid #ccc;
+    .last {
+      border: 1px solid @colorC;
       padding: 3px 5px;
       cursor: pointer;
-      background-color: #f2f2f2;
+      background-color: @colorF2;
       border-radius: 3px;
-      margin:0 3px;
+      margin: 0 3px;
     }
-    .last:hover{
-      color: #f03b43 ;
+    .last:hover {
+      color: @colorRed;
     }
-    .prev{
-      border: 1px solid #ccc;
+    .prev {
+      border: 1px solid @colorC;
       padding: 3px 5px;
       cursor: pointer;
-      background-color: #f2f2f2;
+      background-color: @colorF2;
       border-radius: 3px;
-      margin:0 3px;
+      margin: 0 3px;
     }
-    .prev:hover{
-      color: #f03b43 ;
+    .prev:hover {
+      color: @colorRed;
     }
-    .next{
-      border: 1px solid #ccc;
+    .next {
+      border: 1px solid @colorC;
       padding: 3px 5px;
       cursor: pointer;
-      background-color: #f2f2f2;
+      background-color: @colorF2;
       border-radius: 3px;
-      margin:0 3px;
+      margin: 0 3px;
     }
-    .next:hover{
-      color: #f03b43 ;
+    .next:hover {
+      color: @colorRed;
     }
   }
 }
-.emptyRecords{
-    margin:110px 0;
+
+.emptyRecords {
+  margin: 110px 0;
 }

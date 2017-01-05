@@ -1,24 +1,28 @@
+@import "ladderVariables.less";
 .weekLadderContainerMobile{
-  width: 400px;
+  width: 420px;
   height: 400px;
   margin: auto;
   position: relative;
-  .weekLadder{
+  .weekLadderMobile{
     position: absolute;
     left: 0;
     top: 0;
     width: 100%;
     td{
       text-align: center;
+      font-size: @fontSize20;
     }
     thead{
       td{
-        height: 100px;
+        height: 50px;
+        color: @color3;
       }
     }
     tbody{
       td{
-        height: 30px;
+        height: 34px;
+        color: @color6;
       }
       .tdImg{
         display: inline-block;
@@ -40,22 +44,26 @@
         text-align: center;
         line-height: 20px;
       }
+      .bodyAward{
+        color: @colorF4;
+      }
     }
   }
   .page{
     width: 240px;
     position: absolute;
-    bottom: 30px;
-    left: 80px;
+    bottom: 80px;
+    left: 130px;
     div{
       float: left;
-      width: 80px;
-      border: 1px solid #4d4d4d;
-      height: 30px;
+      width: 62px;
+      border: 1px solid @colorD4;
+      height: 25px;
       text-align: center;
-      line-height: 30px;
-      margin-left: 20px;
+      line-height: 25px;
+      margin-left: 10px;
       cursor: pointer;
+      @colorWhite: #fff;
     }
     .selectedPage{
       border: 1px solid transparent;

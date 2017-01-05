@@ -53,6 +53,7 @@ const APP_NAMES = [
     'user-bean', // 用户工豆
     'user-score', //用户工分
     'user-login-history', //用户登录日志页面
+    'user-bank-phone',//用户预留手机号页面
     // 其他页面
     'statistics', // 实时交易统计
 ];

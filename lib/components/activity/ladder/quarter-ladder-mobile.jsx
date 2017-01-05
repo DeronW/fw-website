@@ -1,22 +1,31 @@
 const QuarterLadderMobile = React.createClass({
     getInitialState: function () {
-        this.PRE_PAGE = 8;
+        this.PRE_PAGE = 10;
         return ({
             totalData: [],
             page: 1,
             totalPage: 2,
             tab: '上一页',
-            isClick:true,
-            cursor: 0
+            isClick: true,
+            cursor: 0,
+            totalYearInvestAll:0,
         })
     },
     componentDidMount: function () {
         $.ajax({
-            url: './javascripts/list.json',
+            url: API_PATH + '/api/activityPullNew/v2/PullNewTopAndYearInvest.json',
+            data: {
+                dataCount: 30,
+                totalBaseAmt: 1000,
+                endDate: '2017-3-30',
+                startDate: '2017-1-6',
+                startTotalCount: 100,
+                startTotalInvest: 1000000
+            },
             type: "get",
             dataType: 'json',
             success: function (data) {
-                var sData = data.data;
+                var sData = data.data.topList || [];
                 if (sData.length <= this.PRE_PAGE) {
                     this.setState({totalPage: 1,isClick:false});
                 } else if (sData.length > this.PRE_PAGE && sData.length <= this.PRE_PAGE * 2) {
@@ -24,19 +33,41 @@ const QuarterLadderMobile = React.createClass({
                 } else if (sData.length > this.PRE_PAGE * 2 && sData.length <= this.PRE_PAGE * 3) {
                     this.setState({totalPage: 3,isClick:true})
                 }
-                this.setState({totalData: sData})
+                this.setState({
+                    totalData: sData,
+                    totalYearInvestAll:data.data.totalYearInvestAll
+                })
             }.bind(this)
         });
     },
-    isImgFun: function (key) {
-        var imgName = ['jin', 'yin', 'tong'];
-        var i = imgName[key] ? `./images/${imgName[key]}.png` : null;
-        return i
+    isImgFun: function (index) {
+        return ['images/jin.png', 'images/yin.png', 'images/tong.png'][index]
     },
     subNameFun: function (str) {
         return str.substring(0, 2) + "**" + str.substring(str.length - 2, str.length);
     },
-    fixedPriceFun: function (price) {
+    fixedPrice: function (total) {
+        if(!total) return;
+        return total.toFixed(2)
+    },
+    fixedPriceFun: function (total, totalLimit,totalall) {
+        let {totalYearInvest,totalYearInvestAll} = this.state;
+        let price = 0;
+        let p = 0.01;
+        if(totalall >= 100 && total >= 1000000){
+            if (totalYearInvestAll >= 40000000 && totalYearInvestAll < 50000000) {
+                p = 0.01;
+            } else if (totalYearInvestAll >= 50000000 && totalYearInvestAll < 60000000) {
+                p = 0.013;
+            } else if (totalYearInvestAll >= 60000000) {
+                p = 0.018;
+            }else{
+                return '暂无奖金'
+            }
+        }else {
+            return '暂无奖金'
+        }
+        price = totalLimit * p * 0.56 + (total - totalLimit) * p;
         return price.toFixed(2)
     },
     switchPageHandler: function (type) {
@@ -79,9 +110,6 @@ const QuarterLadderMobile = React.createClass({
         return this.state.totalData.slice(this.state.cursor, this.state.cursor + this.PRE_PAGE);
     },
     render: function () {
-        var iosStyle = {
-            marginTop: this.state.isIOS ? '0' : '78px'
-        };
         let pageImg = (item, index) => {
             return <div key={index}
                         className={this.state.isClick?(this.state.tab == item ? 'selectedPage':null):'selectedPage'}
@@ -94,20 +122,25 @@ const QuarterLadderMobile = React.createClass({
                 }
             </div>
         );
+        var td4Style = {
+            textAlign : 'right',
+            width:'100px',
+            paddingRight:'20px'
+        };
         let bodyImg = (item, index) => {
             index += this.state.cursor;
             return (
                 <tr key={index}>
                     <td>{this.isImgFun(index) ? <img className="tdImg" src={this.isImgFun(index)}/> :
                         <span className="twoSpan">{index + 1}</span>}
-                        {<span className="oneSpan">{this.subNameFun(item.name)}</span>}
+                        {<span className="oneSpan">{item.loginName}</span>}
                     </td>
-                    <td>{item.number}</td>
+                    <td>{item.totalall}</td>
                     <td>
-                        {this.fixedPriceFun(item.money)}
-                        {item.text ? <div>{item.text}</div> : null}
+                        {this.fixedPrice(item.total)}
+                        {<div className="tdPriceLimit">(含等额标{item.total4})</div>}
                     </td>
-                    <td>{this.fixedPriceFun(item.price)}</td>
+                    <td style={td4Style} className={this.fixedPriceFun(item.total,item.total4,item.totalall) == '暂无奖金'?null:"tdPrice"}>{this.fixedPriceFun(item.total,item.total4,item.totalall)}</td>
                 </tr>
             )
         };
@@ -119,22 +152,25 @@ const QuarterLadderMobile = React.createClass({
             </tbody>
         );
         return (
-            <div className="quarterLadderContainerMobile" style={iosStyle}>
-                <table className="quarterLadder">
+            <div className="quarterLadderContainerMobile">
+                <table className="quarterLadderMobile">
                     <thead>
                     <tr>
                         <td>用户名</td>
                         <td>有效邀友数</td>
-                        <td>好友累计年化投资额（元）</td>
+                        <td>有效好友累投年化额（元）</td>
                         <td>奖金（元）</td>
                     </tr>
                     </thead>
                     {
-                        tBody
+                        this.state.totalData.length ? tBody : null
                     }
                 </table>
                 {
-                    page
+                    this.state.totalData.length ? page : null
+                }
+                {
+                    this.state.totalData.length ? null : <div className="quarterLadderMobileNot">人气王还在堵车，马上就来</div>
                 }
             </div>
         )
