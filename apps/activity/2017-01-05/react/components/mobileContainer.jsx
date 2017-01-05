@@ -6,8 +6,9 @@ const MobileContainer = React.createClass({
         })
     },
     ajaxMonth: function (start,end) {
-        var startTime = new Date(start).getTime();
         this.getServerTimestamp(function (timestamp) {
+            var changeStart = start.replace(/-/g,'/');
+            var startTime = new Date(changeStart).getTime();
             if(timestamp > startTime){
                 this.setState({startDate:start,endDate:end})
             }

@@ -6,16 +6,14 @@ const PcContainer = React.createClass({
       })
     },
     ajaxMonth: function (start,end) {
-        var febStart = new Date(start).getTime();
-        var marStart = new Date(end).getTime();
         this.getServerTimestamp(function (timestamp) {
-            var nowTime = timestamp;
-            if(nowTime > marStart){
-                this.setState({startDate:start,endDate:end})
-            }else if(nowTime > febStart){
+            var changeStart = start.replace(/-/g,'/');
+            var startTime = new Date(changeStart).getTime();
+            if(timestamp > startTime){
                 this.setState({startDate:start,endDate:end})
             }
         }.bind(this))
+
     },
     getServerTimestamp:function(callback) {
         var ts = $getDebugParams().timestamp;
