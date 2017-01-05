@@ -48,7 +48,6 @@ const MonthLadderPC = React.createClass({
         this.ajaxPullNewInvest(nextProps.startDate, nextProps.endDate);
     },
     ajaxPullNewInvest: function (startDate, endDate) {
-        //需要修改
         $.ajax({
             url: API_PATH + 'api/activityPullNew/v2/PullNewTopAndYearInvest.json',
             data: {
@@ -56,8 +55,8 @@ const MonthLadderPC = React.createClass({
                 totalBaseAmt: 1000,
                 startDate: startDate,
                 endDate: endDate,
-                startTotalCount: 2,
-                startTotalInvest: 50000
+                startTotalCount: 50,
+                startTotalInvest: 500000
             },
             type: "get",
             dataType: 'json',
@@ -89,8 +88,7 @@ const MonthLadderPC = React.createClass({
         let monthPrice = 0;
         var money = 0;
         let totalData = this.state.totalData;
-        //50人改为2人 50万改为5万
-        if (totalData.topList[i].totalall < 2 || totalData.topList[i].total < 50000) {
+        if (totalData.topList[i].totalall < 50 || totalData.topList[i].total < 500000) {
             return '暂无奖金'
         } else {
             if (this.state.currentTime < febStart || this.props.startDate == '2017-1-6') {

@@ -55,8 +55,8 @@ const MonthLadderMobile = React.createClass({
                 totalBaseAmt: 1000,
                 startDate: startDate,
                 endDate: endDate,
-                startTotalCount: 2,
-                startTotalInvest: 50000
+                startTotalCount: 50,
+                startTotalInvest: 500000
             },
             type: "get",
             dataType: 'json',
@@ -88,8 +88,7 @@ const MonthLadderMobile = React.createClass({
         let monthPrice = 0;
         var money = 0;
         let totalData = this.state.totalData;
-        //50人改为2人 50万改为5万
-        if (totalData.topList[i].totalall < 2 || totalData.topList[i].total < 50000) {
+        if (totalData.topList[i].totalall < 50 || totalData.topList[i].total < 500000) {
             return '暂无奖金'
         } else {
             if (this.state.currentTime < febStart || this.props.startDate == '2017-1-6') {

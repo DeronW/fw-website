@@ -8,7 +8,6 @@ function getServerTimestamp(callback) {
         }, 'json')
     }
 }
-//alert("2ds342gg3")
 $(function () {
     var app = navigator.userAgent.match(/FinancialWorkshop/i) ? true : false;
     if (app)$('.mobileContainer').css('margin-top', '0');
@@ -78,13 +77,12 @@ $(function () {
     //季排行榜奖金总额
     function totalQuarterShowText(totalYearInvest) {
         $UserReady(function (is_login, user) {
-            //4千万改为4百万
             if (is_login) {
-                if (totalYearInvest < 4000000) {
+                if (totalYearInvest < 40000000) {
                     $(".mobileQuarterPack .quarterRemind").addClass("quarterRemindNot").html("截止当前，榜内工友的有效好友累投年化总额为<em>0</em>万元，暂未开启新春特奖，大家加油哦！")
-                } else if (totalYearInvest < 5000000) {
+                } else if (totalYearInvest < 50000000) {
                     totalMove(10, -80, "quarterRemind1");
-                } else if (totalYearInvest < 6000000) {
+                } else if (totalYearInvest < 60000000) {
                     totalMove(310, -80, "quarterRemind2");
                 } else {
                     totalMove(600, -80, "quarterRemind3");
@@ -106,15 +104,14 @@ $(function () {
     function quarterTopText(totalYearInvest, pullNewCount, myFriendYearInvest, rankNum, myEqualFriendYearInvest, callback) {
         $UserReady(function (is_login, user) {
             if (is_login) {
-                //100人改为3人 1百万改为10万
                 var chartsText = '';
                 chartsText = "<div>1.6-3.30，您有效邀友 <em>" + pullNewCount + "</em> 人，有效好友累投年化 <em>" + myFriendYearInvest + "</em> 元，排名 <em>" + rankNum + "</em>，当前暂无奖金可分，加油哦！";
-                if (pullNewCount > 3 && myFriendYearInvest > 100000) {
-                    if (totalYearInvest >= 4000000 && totalYearInvest < 5000000) {
+                if (pullNewCount > 100 && myFriendYearInvest > 1000000) {
+                    if (totalYearInvest >= 40000000 && totalYearInvest < 50000000) {
                         chartsText = callback(pullNewCount, myEqualFriendYearInvest, myFriendYearInvest, rankNum, 0.01);
-                    } else if (totalYearInvest >= 5000000 && totalYearInvest < 6000000) {
+                    } else if (totalYearInvest >= 50000000 && totalYearInvest < 60000000) {
                         chartsText = callback(pullNewCount, myEqualFriendYearInvest, myFriendYearInvest, rankNum, 0.013);
-                    } else if (totalYearInvest >= 6000000) {
+                    } else if (totalYearInvest >= 60000000) {
                         chartsText = callback(pullNewCount, myEqualFriendYearInvest, myFriendYearInvest, rankNum, 0.018);
                     }
                 }
@@ -137,8 +134,8 @@ $(function () {
         totalBaseAmt: 1000,
         endDate: '2017-3-30 23:59:59',
         startDate: '2017-1-6',
-        startTotalCount: 3,
-        startTotalInvest: 100000
+        startTotalCount: 100,
+        startTotalInvest: 1000000
     }, function (data) {
         var rankNum = data.data.rankNum || '30+';//当前用户排名
         var pullNewCount = data.data.pullNewCount || 0;//有效邀请人数
@@ -159,8 +156,7 @@ $(function () {
 
     //月排行榜头部文字显示
     function monthTitleShow(titText, rankNum, pullNewCount, myFriendYearInvest, totalYearInvest, arg3, prize) {
-        //请求参数参数startTotalCount 50改2 startTotalInvest 500000改5更改，500000改5,50改2
-        if (pullNewCount < 2 || myFriendYearInvest < 50000) {
+        if (pullNewCount < 50 || myFriendYearInvest < 500000) {
             titText = '该月内，您有效邀友 <em>' + pullNewCount + '</em> 人，有效好友累投年化 <em>' + myFriendYearInvest + '</em> 元，排名 <em>' + rankNum + '</em>，当前无奖金可分，要努力哦！';
         } else {
             prize = ((myFriendYearInvest / totalYearInvest) * arg3).toFixed(2);
@@ -188,8 +184,8 @@ $(function () {
             totalBaseAmt: 1000,
             startDate: arg1,
             endDate: arg2,
-            startTotalCount: 2,
-            startTotalInvest: 50000
+            startTotalCount: 50,
+            startTotalInvest: 500000
         }, function (data) {
             var titText = '';
             var rankNum = data.data.rankNum || '20+';//当前用户排名
@@ -241,18 +237,17 @@ $(function () {
                         //移动端往周邀友奖励按钮显示
                         $(".weekBefore").html("往周邀友奖励");
                     }
-                    //上线时更改为正式条件
-                    if (dataCount < 2) {
+                    if (dataCount < 5) {
                         pcWeekText = '本周（' + timeText + '）内，您有效邀友 <em>' + dataCount + '</em> 人，暂未获得工豆奖励，加油哦！' + beforeText;
                         mobileWeekText = '本周（' + timeText + '）内，您有效邀友 <em>' + dataCount + '</em> 人，暂未获得工豆奖励，加油哦！';
                     } else {
-                        if (dataCount <= 3) {
+                        if (dataCount <= 9) {
                             score = dataCount * 10;
-                        } else if (dataCount <= 5) {
+                        } else if (dataCount <= 29) {
                             score = dataCount * 12;
-                        } else if (dataCount <= 7) {
+                        } else if (dataCount <= 49) {
                             score = dataCount * 15;
-                        } else if (dataCount >= 8) {
+                        } else if (dataCount >= 50) {
                             score = dataCount * 18;
                         }
                         pcWeekText = '本周（' + timeText + '）内，您有效邀友 <em>' + dataCount + '</em> 人，可获工豆 <em>' + score + '</em> 元 ！' + beforeText;
