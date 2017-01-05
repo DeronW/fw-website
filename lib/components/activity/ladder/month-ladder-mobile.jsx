@@ -16,8 +16,8 @@ const MonthLadderMobile = React.createClass({
     getServerTimestamp: function (callback) {
         var ts = $getDebugParams().timestamp;
         if (ts) {
-            callback(ts);
             this.setState({currentTime:ts});
+            callback(ts)
         } else {
             $.get(API_PATH + "api/userState/v1/timestamp.json", function (data) {
                 this.setState({currentTime:data.data.timestamp});
@@ -29,15 +29,14 @@ const MonthLadderMobile = React.createClass({
         var febStart = new Date("2017/2/3").getTime();
         var marStart = new Date("2017/3/3").getTime();
         var startDate = '2017-1-6';
-        var endDate = '2017-2-2';
+        var endDate = '2017-2-2 23:59:59';
         this.getServerTimestamp(function (timestamp) {
-            var currentTime = timestamp;
-            if (currentTime < febStart) {
+            if (timestamp < febStart) {
                 startDate = '2017-1-6';
-                endDate = '2017-2-2';
-            } else if (currentTime < marStart) {
+                endDate = '2017-2-2 23:59:59';
+            } else if (timestamp < marStart) {
                 startDate = '2017-2-3';
-                endDate = '2017-3-2';
+                endDate = '2017-3-2 23:59:59';
             } else {
                 startDate = '2017-3-3';
                 endDate = '2017-3-30';
@@ -46,7 +45,8 @@ const MonthLadderMobile = React.createClass({
         }.bind(this))
     },
     componentWillReceiveProps: function (nextProps) {
-        this.ajaxPullNewInvest(nextProps.startDate, nextProps.endDate)
+        console.log(234);
+        this.ajaxPullNewInvest(nextProps.startDate, nextProps.endDate);
     },
     ajaxPullNewInvest: function (startDate, endDate) {
         $.ajax({
