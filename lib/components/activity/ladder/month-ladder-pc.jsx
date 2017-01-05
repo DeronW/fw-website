@@ -68,8 +68,10 @@ const MonthLadderPC = React.createClass({
                     this.setState({totalPage: 1, isClick: false});
                 } else if (len > this.PRE_PAGE && sData.length <= this.PRE_PAGE * 2) {
                     this.setState({totalPage: 2, isClick: true})
-                } else {
+                } else if (len > this.PRE_PAGE && sData.length <= this.PRE_PAGE * 3) {
                     this.setState({totalPage: 3, isClick: true})
+                }else{
+                    this.setState({totalPage: 4, isClick: true})
                 }
                 this.setState({totalData: sData})
             }.bind(this)
