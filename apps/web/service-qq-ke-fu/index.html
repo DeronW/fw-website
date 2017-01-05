@@ -1,14 +1,15 @@
-{% extends '../../../lib/templates/web_base.swig.html' %} {% block content %}
-<div style="text-align: center; margin: 150px auto 200px">
+{% extends '../../../lib/templates/web_base.swig.html' %}
+
+{% block content %}
+<div class="qq-panel">
     欢迎使用
-    <a id="qq-ke-fu-3">QQ客服</a>
-    <p>如果没有自动打开QQ, 请联系金融工场电话客服: <a href="">400-0322-988</a></p>
+    <a id="qq-ke-fu-3" title="点击打开QQ聊天窗口">QQ客服(请点击)</a>
+    <p>如果没有打开QQ, 请拨打金融工场电话客服: <a href="tel:400-0322-988">400-0322-988</a></p>
 </div>
 
 {% endblock %}
 
 {% block javascripts %}
-
 <script>
     $(function () {
         window.__lazy_load_qq_wpa_click_timer = setInterval(function () {
