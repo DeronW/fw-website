@@ -17,6 +17,10 @@ const Content = React.createClass({
         // $UserReady(function(is_login, user){
         //     _this.setState({username:user.username});
         // });
+        $.post(API_PATH + '/api/recharge/v1/getUserRegPhone.json',
+            function (data) {
+            console.log(data);
+        }, 'json')
     },
     changeEvent: function (event) {
         this.setState({
@@ -53,7 +57,6 @@ const Content = React.createClass({
         }
     },
     tabClickHandlerOne: function () {
-        // console.log(this.state.value);
         if (this.state.value == "") {
             GlobalAlert("验证码不能为空");
         } else {
@@ -78,6 +81,8 @@ const Content = React.createClass({
     tabClickHandlerTwo: function () {
         if (this.state.newphoneNum == "") {
             GlobalAlert("请输入新的预留手机号");
+        } else if(!(/^1(3|4|5|7|8)\d{9}$/.test (this.state.newphoneNum))){
+            GlobalAlert("手机号不合法");
         } else if (this.state.phoneVerify == "") {
             GlobalAlert("请输入验证码");
         } else {
@@ -148,7 +153,6 @@ const Content = React.createClass({
                     </div>
                     <div>{phoneVerify}</div>
                     {tips}
-                    {voice}
                     <div className="next" onClick={() => this.tabClickHandlerTwo()}>下一步</div>
                 </div>
             </div>);
