@@ -68,7 +68,7 @@ const PcContainer = React.createClass({
                     </div>
                     <div className="monthCenter">
                         <div className="monthGift">
-                            <div className="monthGiftTitle">该月内，有效邀友数≥50人且有效好友累投<br/> 年化额（不含自身）≥50万元的前20名工友，可获分</div>
+                            <div className="monthGiftTitle">该月内，有效邀友数≥50人且有效好友累投年<br/>化额（不含自身）≥50万元的前20名工友，可获分</div>
                             <div className="monthGiftNumber">12</div>
                             <div className="monthGiftText">按当月有效好友<br/> 累计年化投资额占比分配</div>
                         </div>
