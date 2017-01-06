@@ -9,32 +9,34 @@ const MonthLadderMobile = React.createClass({
             totalPage: 2,
             tab: '上一页',
             isClick: true,
-            cursor: 0
+            cursor: 0,
+            currentTime:0,
         })
     },
     getServerTimestamp: function (callback) {
         var ts = $getDebugParams().timestamp;
         if (ts) {
+            this.setState({currentTime:ts});
             callback(ts)
         } else {
             $.get(API_PATH + "api/userState/v1/timestamp.json", function (data) {
+                this.setState({currentTime:data.data.timestamp});
                 callback(data.data.timestamp)
-            }, 'json')
+            }.bind(this), 'json')
         }
     },
     componentDidMount: function () {
         var febStart = new Date("2017/2/3").getTime();
         var marStart = new Date("2017/3/3").getTime();
         var startDate = '2017-1-6';
-        var endDate = '2017-2-2';
+        var endDate = '2017-2-2 23:59:59';
         this.getServerTimestamp(function (timestamp) {
-            var currentTime = timestamp;
-            if (currentTime < febStart) {
+            if (timestamp < febStart) {
                 startDate = '2017-1-6';
-                endDate = '2017-2-2';
-            } else if (currentTime < marStart) {
+                endDate = '2017-2-2 23:59:59';
+            } else if (timestamp < marStart) {
                 startDate = '2017-2-3';
-                endDate = '2017-3-2';
+                endDate = '2017-3-2 23:59:59';
             } else {
                 startDate = '2017-3-3';
                 endDate = '2017-3-30';
@@ -43,7 +45,7 @@ const MonthLadderMobile = React.createClass({
         }.bind(this))
     },
     componentWillReceiveProps: function (nextProps) {
-        this.ajaxPullNewInvest(nextProps.startDate, nextProps.endDate)
+        this.ajaxPullNewInvest(nextProps.startDate, nextProps.endDate);
     },
     ajaxPullNewInvest: function (startDate, endDate) {
         $.ajax({
@@ -53,8 +55,8 @@ const MonthLadderMobile = React.createClass({
                 totalBaseAmt: 1000,
                 startDate: startDate,
                 endDate: endDate,
-                startTotalCount: 2,
-                startTotalInvest: 50000
+                startTotalCount: 50,
+                startTotalInvest: 500000
             },
             type: "get",
             dataType: 'json',
@@ -65,8 +67,10 @@ const MonthLadderMobile = React.createClass({
                     this.setState({totalPage: 1, isClick: false});
                 } else if (len > this.PRE_PAGE && sData.length <= this.PRE_PAGE * 2) {
                     this.setState({totalPage: 2, isClick: true})
-                } else if (len > this.PRE_PAGE * 2 && len <= this.PRE_PAGE * 3) {
+                } else if (len > this.PRE_PAGE && sData.length <= this.PRE_PAGE * 3) {
                     this.setState({totalPage: 3, isClick: true})
+                }else{
+                    this.setState({totalPage: 4, isClick: true})
                 }
                 this.setState({totalData: sData})
             }.bind(this)
@@ -79,22 +83,24 @@ const MonthLadderMobile = React.createClass({
         return total.toFixed(2)
     },
     fixedPriceFun: function (i) {
-        let monthPrice = 120000;
+        var febStart = new Date("2017/2/3").getTime();
+        var marStart = new Date("2017/3/3").getTime();
+        let monthPrice = 0;
+        var money = 0;
         let totalData = this.state.totalData;
-        //50人改为2人 50万改为5万
-        if (totalData.totalYearInvest == 0 || totalData.topList[i].totalall < 2 || totalData.topList[i].total < 50000) {
+        if (totalData.topList[i].totalall < 50 || totalData.topList[i].total < 500000) {
             return '暂无奖金'
         } else {
-            if (this.props.month == 1) {
+            if (this.state.currentTime < febStart || this.props.startDate == '2017-1-6') {
                 monthPrice = 120000;
-            } else if (this.props.month == 2) {
+            } else if (this.state.currentTime < marStart || this.props.startDate == '2017-2-3') {
                 monthPrice = 150000;
-            } else {
+            } else{
                 monthPrice = 180000;
             }
+            money = ((totalData.topList[i].total) / (totalData.totalYearInvest)) * monthPrice;
         }
-        return ((totalData.topList[i].total) / (totalData.totalYearInvest) * monthPrice).toFixed(2);
-
+        return money.toFixed(2);
     },
     switchPageHandler: function (type) {
         this.setState({tab: type});

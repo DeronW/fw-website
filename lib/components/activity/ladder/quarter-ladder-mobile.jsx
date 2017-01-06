@@ -7,7 +7,8 @@ const QuarterLadderMobile = React.createClass({
             totalPage: 2,
             tab: '上一页',
             isClick: true,
-            cursor: 0
+            cursor: 0,
+            totalYearInvestAll:0,
         })
     },
     componentDidMount: function () {
@@ -18,21 +19,24 @@ const QuarterLadderMobile = React.createClass({
                 totalBaseAmt: 1000,
                 endDate: '2017-3-30',
                 startDate: '2017-1-6',
-                startTotalCount: 0,
-                startTotalInvest: 0
+                startTotalCount: 100,
+                startTotalInvest: 1000000
             },
             type: "get",
             dataType: 'json',
             success: function (data) {
                 var sData = data.data.topList || [];
                 if (sData.length <= this.PRE_PAGE) {
-                    this.setState({totalPage: 1, isClick: false});
+                    this.setState({totalPage: 1,isClick:false});
                 } else if (sData.length > this.PRE_PAGE && sData.length <= this.PRE_PAGE * 2) {
-                    this.setState({totalPage: 2, isClick: true})
+                    this.setState({totalPage: 2,isClick:true})
                 } else if (sData.length > this.PRE_PAGE * 2 && sData.length <= this.PRE_PAGE * 3) {
-                    this.setState({totalPage: 3, isClick: true})
+                    this.setState({totalPage: 3,isClick:true})
                 }
-                this.setState({totalData: sData})
+                this.setState({
+                    totalData: sData,
+                    totalYearInvestAll:data.data.totalYearInvestAll
+                })
             }.bind(this)
         });
     },
@@ -43,19 +47,24 @@ const QuarterLadderMobile = React.createClass({
         return str.substring(0, 2) + "**" + str.substring(str.length - 2, str.length);
     },
     fixedPrice: function (total) {
+        if(!total) return;
         return total.toFixed(2)
     },
-    fixedPriceFun: function (total, totalLimit) {
-        //4千万改为4百万
+    fixedPriceFun: function (total, totalLimit,totalall) {
+        let {totalYearInvest,totalYearInvestAll} = this.state;
         let price = 0;
         let p = 0.01;
-        if (total >= 4000000 && total < 5000000) {
-            p = 0.01;
-        } else if (total >= 5000000 && total < 6000000) {
-            p = 0.013;
-        } else if (total >= 6000000) {
-            p = 0.018;
-        } else {
+        if(totalall >= 100 && total >= 1000000){
+            if (totalYearInvestAll >= 40000000 && totalYearInvestAll < 50000000) {
+                p = 0.01;
+            } else if (totalYearInvestAll >= 50000000 && totalYearInvestAll < 60000000) {
+                p = 0.013;
+            } else if (totalYearInvestAll >= 60000000) {
+                p = 0.018;
+            }else{
+                return '暂无奖金'
+            }
+        }else {
             return '暂无奖金'
         }
         price = totalLimit * p * 0.56 + (total - totalLimit) * p;
@@ -131,7 +140,7 @@ const QuarterLadderMobile = React.createClass({
                         {this.fixedPrice(item.total)}
                         {<div className="tdPriceLimit">(含等额标{item.total4})</div>}
                     </td>
-                    <td style={td4Style} className={this.fixedPriceFun(item.totalall,item.total4) == '暂无奖金'?null:"tdMoney"}>{this.fixedPriceFun(item.totalall,item.total4)}</td>
+                    <td style={td4Style} className={this.fixedPriceFun(item.total,item.total4,item.totalall) == '暂无奖金'?null:"tdPrice"}>{this.fixedPriceFun(item.total,item.total4,item.totalall)}</td>
                 </tr>
             )
         };

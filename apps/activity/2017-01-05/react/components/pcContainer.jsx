@@ -1,14 +1,32 @@
 const PcContainer = React.createClass({
     getInitialState: function () {
       return({
-          startDate:'2017-1-6',
-          endDate:'2017-2-2'
+          startDate:'',
+          endDate:'',
       })
     },
     ajaxMonth: function (start,end) {
-        this.setState({startDate:start,endDate:end})
+        this.getServerTimestamp(function (timestamp) {
+            var changeStart = start.replace(/-/g,'/');
+            var startTime = new Date(changeStart).getTime();
+            if(timestamp > startTime){
+                this.setState({startDate:start,endDate:end})
+            }
+        }.bind(this))
+
+    },
+    getServerTimestamp:function(callback) {
+        var ts = $getDebugParams().timestamp;
+        if (ts) {
+            callback(ts)
+        } else {
+            $.get(API_PATH + "api/userState/v1/timestamp.json", function (data) {
+                callback(data.data.timestamp)
+            }, 'json')
+        }
     },
     render: function () {
+        var _this = this;
         return (
             <div className="pcContainer">
                 <div className="fire1"><img src="images/fire1.png" alt=""/></div>
@@ -26,21 +44,21 @@ const PcContainer = React.createClass({
                 <div className="pcMonthPack">
                     <div className="monthTitle"></div>
                     <div className="monthState">
-                        <div className="monthStateCommon active"  onClick={()=>{this.ajaxMonth('2017-1-6','2017-2-2')}}>
+                        <div className="monthStateCommon active"  onClick={function(){_this.ajaxMonth('2017-1-6','2017-2-2 23:59:59')}}>
                             <div className="stateLeft">进行中</div>
                             <div className="stateRight">
                                 <div className="stateCurrentMonth">1月</div>
                                 <div className="stateCurrentDate">01.06 ~ 02.02</div>
                             </div>
                         </div>
-                        <div className="monthStateCommon" onClick={()=>{this.ajaxMonth('2017-2-3','2017-3-2')}}>
+                        <div className="monthStateCommon" onClick={function(){_this.ajaxMonth('2017-2-3','2017-3-2 23:59:59')}}>
                             <div className="stateLeft">未开始</div>
                             <div className="stateRight">
                                 <div className="stateCurrentMonth">2月</div>
                                 <div className="stateCurrentDate">02.03 ~ 03.02</div>
                             </div>
                         </div>
-                        <div className="monthStateCommon monthStateCommonRight" onClick={()=>{this.ajaxMonth('2017-3-3','2017-3-30')}}>
+                        <div className="monthStateCommon monthStateCommonRight" onClick={function(){_this.ajaxMonth('2017-3-3','2017-3-30 23:59:59')}}>
                             <div className="stateLeft">未开始</div>
                             <div className="stateRight">
                                 <div className="stateCurrentMonth">3月</div>
@@ -50,7 +68,7 @@ const PcContainer = React.createClass({
                     </div>
                     <div className="monthCenter">
                         <div className="monthGift">
-                            <div className="monthGiftTitle">该月内，有效邀友数≥50人且有效好友累投<br/> 年化额（不含自身）≥50万元的前20名工友，可获分</div>
+                            <div className="monthGiftTitle">该月内，有效邀友数≥50人且有效好友累投年<br/>化额（不含自身）≥50万元的前20名工友，可获分</div>
                             <div className="monthGiftNumber">12</div>
                             <div className="monthGiftText">按当月有效好友<br/> 累计年化投资额占比分配</div>
                         </div>
@@ -59,7 +77,7 @@ const PcContainer = React.createClass({
                             <div className="ladderTitle"></div>
                             <div className="ladderContent">
                                 {
-                                    <MonthLadderPC startDate={this.state.startDate} endDate={this.state.endState}/>
+                                    <MonthLadderPC startDate={this.state.startDate} endDate={this.state.endDate}/>
                                 }
                             </div>
                         </div>
@@ -131,13 +149,13 @@ const PcContainer = React.createClass({
                     </div>
                 </div>
                 <div className="pcMovePerson">
-                    <div className="movePersonText">有效好友标准：<em>好友注册7天内累投年化额≥1000元</em>才算一个有效邀请。   温馨提示：投资等额标，超过18个月按18个月计算年化额</div>
+                    <div className="movePersonText">有效好友标准：<em>好友注册7天内累投年化额≥1000元</em>才算一个有效邀请。 <br/>  温馨提示：投资等额标，超过18个月按18个月计算年化额</div>
                 </div>
                 <div className="pcNotice hidden">
                     <div className="pcNoticeContentNo hidden">
                         <div className="noticeClose"></div>
                         <div className="noticeText">请好友用您的工场码，<em>好友注册7天内累投年化额≥1000元</em>，且投资<br/>等额标时，超过18个月按18个月计算年化，才算一个有效邀请。<br/>
-                            登录后查看我的工场码<br/>
+                            登录后查看我的工场码。<br/>
                             还没有工场码？注册即可拥有。</div>
                         <a className="login">登录注册</a>
                         <div className="noticeRemind">
@@ -149,8 +167,8 @@ const PcContainer = React.createClass({
                         <div className="noticeText1">请好友注册或投资时填写我的工场码</div>
                         <div className="noticeCode">A354545</div>
                         <div className="noticeText2">复制以下链接，发送给好友！</div>
-                        <div className="noticeLink" id="copy-value">http://passport.9888.cn/pp-web2/register/phone.do?gcm=A677004</div>
-                        <div className="copyCode" data-clipboard-action="copy" data-clipboard-target="#copy-value" >复制链接</div>
+                        <div className="noticeLink" id="copy-value-pc">http://passport.9888.cn/pp-web2/register/phone.do?gcm=A677004</div>
+                        <div className="copyCode" data-clipboard-action="copy" data-clipboard-target="#copy-value-pc" >复制链接</div>
                         <div className="noticeRemind">
                             新手注册即送<em>120</em>元，首投最高送<em>150</em>元，邀请好友首投再得<em>50</em>元!<a href="http://www.9888.cn/news/notice/1861.html">更多新手秘笈></a>
                         </div>
@@ -159,6 +177,9 @@ const PcContainer = React.createClass({
                         <div className="noticeClose"></div>
                         <WeekLadderPC />
                     </div>
+                </div>
+                <div className="pcNoStart hidden">
+                    <div className="pcNoStartImg"></div>
                 </div>
             </div>
         );

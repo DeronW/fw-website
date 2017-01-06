@@ -8,6 +8,8 @@ const QuarterLadderPC = React.createClass({
             tab: '上一页',
             cursor: 0,
             isClick:true,
+            totalYearInvestAll:0,
+
         })
     },
     componentDidMount: function () {
@@ -16,10 +18,10 @@ const QuarterLadderPC = React.createClass({
             data:{
                 dataCount:30,
                 totalBaseAmt:1000,
-                endDate:'2017-3-30',
+                endDate:'2017-3-30 23:59:59',
                 startDate:'2017-1-6',
-                startTotalCount:0,
-                startTotalInvest:0
+                startTotalCount:100,
+                startTotalInvest:1000000
             },
             type: "get",
             dataType: 'json',
@@ -32,7 +34,10 @@ const QuarterLadderPC = React.createClass({
                 } else if (sData.length > this.PRE_PAGE * 2 && sData.length <= this.PRE_PAGE * 3) {
                     this.setState({totalPage: 3,isClick:true})
                 }
-                this.setState({totalData: sData})
+                this.setState({
+                    totalData: sData,
+                    totalYearInvestAll:data.data.totalYearInvestAll
+                })
             }.bind(this)
         });
     },
@@ -43,17 +48,21 @@ const QuarterLadderPC = React.createClass({
         if(!total) return;
         return total.toFixed(2)
     },
-    fixedPriceFun: function (total, totalLimit) {
-        //4千万改为4百万
+    fixedPriceFun: function (total, totalLimit,totalall) {
+        let {totalYearInvest,totalYearInvestAll} = this.state;
         let price = 0;
         let p = 0.01;
-        if (total >= 4000000 && total < 5000000) {
-            p = 0.01;
-        } else if (total >= 5000000 && total < 6000000) {
-            p = 0.013;
-        } else if (total >= 6000000) {
-            p = 0.018;
-        } else {
+        if(totalall >= 100 && total >= 1000000){
+            if (totalYearInvestAll >= 40000000 && totalYearInvestAll < 50000000) {
+                p = 0.01;
+            } else if (totalYearInvestAll >= 50000000 && totalYearInvestAll < 60000000) {
+                p = 0.013;
+            } else if (totalYearInvestAll >= 60000000) {
+                p = 0.018;
+            }else{
+                return '暂无奖金'
+            }
+        }else {
             return '暂无奖金'
         }
         price = totalLimit * p * 0.56 + (total - totalLimit) * p;
@@ -114,7 +123,8 @@ const QuarterLadderPC = React.createClass({
         );
         var td4Style = {
           textAlign : 'right',
-          width:'80px'
+          width:'80px',
+          paddingRight:'20px'
         };
         let bodyImg = (item, index) => {
             index += this.state.cursor;
@@ -129,7 +139,7 @@ const QuarterLadderPC = React.createClass({
                         {this.fixedPrice(item.total)}
                         {<em className="limit">(含等额标{item.total4})</em>}
                     </td>
-                    <td style={td4Style} className={this.fixedPriceFun(item.totalall,item.total4) == '暂无奖金'?null:"tdPrice"}>{this.fixedPriceFun(item.totalall,item.total4)}</td>
+                    <td style={td4Style} className={this.fixedPriceFun(item.total,item.total4,item.totalall) == '暂无奖金'?null:"tdPrice"}>{this.fixedPriceFun(item.total,item.total4,item.totalall)}</td>
                 </tr>
             )
         };
