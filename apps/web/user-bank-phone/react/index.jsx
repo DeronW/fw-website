@@ -2,7 +2,7 @@ const Content = React.createClass({
     getInitialState: function () {
         return {
             tabName: '验证注册手机号',
-            phoneNumer: '188****0339',
+            phoneNumer: null,
             value: "",
             check: false,
             time: 5,
@@ -10,16 +10,20 @@ const Content = React.createClass({
             phoneVerify: "",
             voice: false,
             voicecheck: false,
+            valid:false,
         }
     },
     componentDidMount: function () {
-        // var _this=this;
+        var _this=this;
         // $UserReady(function(is_login, user){
         //     _this.setState({username:user.username});
         // });
         $.post(API_PATH + '/api/recharge/v1/getUserRegPhone.json',
             function (data) {
-            console.log(data);
+            console.log(data.data.regPhone);
+            _this.setState({
+                phoneNumer:data.data.regPhone,
+            })
         }, 'json')
     },
     changeEvent: function (event) {
@@ -47,22 +51,98 @@ const Content = React.createClass({
                 });
             }
         }, 1000);
+        $.post(API_PATH + '/api/recharge/v1/sendVerifyRegPhoneSms.json',{
+                isVms:"VSMS"
+            },
+            function (data) {
+                console.log(data.data.remainCount);
+                GlobalAlert("尊敬的客户，您还有"+data.data.remainCount+"次机会获取验证码");
+            }, 'json');
 
+    },
+    gainNumberHandlerTwo:function () {
+        this.setState({
+            check: true,
+            voicecheck: false,
+        });
+        let _this = this;
+        let timer = setInterval(function () {
+            _this.setState({
+                time: _this.state.time - 1,
+            });
+            console.log(_this.state.time);
+            if (_this.state.time == -1) {
+                clearInterval(timer);
+                _this.setState({
+                    time: 5,
+                    check: false,
+                    voice: true,
+                });
+            }
+        }, 1000);
+        $.post(API_PATH + '/api/recharge/v1/sendChangeBankPhoneSms.json',{
+                isVms:"VSMS",
+                bankPhone:_this.state.newphoneNum,
+            },
+            function (data) {
+                console.log(data.data.remainCount);
+                if(data.code==63031){
+                    GlobalAlert(data.message);
+                }else if(data.code==63032){
+                    GlobalAlert(data.message);
+                }else if(data.code==63029){
+                    GlobalAlert(data.message);
+                }else if(data.code==63030){
+                    GlobalAlert(data.message);
+                }else if(data.code==63035){
+                    GlobalAlert(data.message);
+                }else if(data.code==10000){
+                    _this.setState({
+                        valid:true,
+                    });
+                    GlobalAlert("尊敬的客户，您还有"+data.data.remainCount+"次机会获取验证码");
+                }
+
+            }, 'json');
     },
     voiceHandler: function () {
         if (this.state.voice) {
+            $.post(API_PATH + '/api/recharge/v1/sendVerifyRegPhoneSms.json',{
+                    isVms:"VMS"
+                },
+                function (data) {
+                    console.log(data.data.remainCount);
+                    GlobalAlert("尊敬的客户，您还有"+data.data.remainCount+"次机会获取验证码");
+                }, 'json');
             this.setState({
                 voicecheck: true,
             })
         }
     },
     tabClickHandlerOne: function () {
-        if (this.state.value == "") {
+        let _this=this;
+        if(this.state.value == "") {
             GlobalAlert("验证码不能为空");
         } else {
-            this.setState({
-                tabName: '设置新银行预留手机号',
-            })
+            $.post(API_PATH + '/api/recharge/v1/doVerifyRegPhone.json',{
+                    validateCode:_this.state.value,
+                },
+                function (data) {
+                    if(data.code == 63032) {
+                        GlobalAlert(data.message);
+                    } else if (data.code == 63001 ) {
+                        GlobalAlert(data.message);
+                    } else if(data.code==63028){
+                        GlobalAlert(data.message);
+                    } else if(data.code==63034){
+                        GlobalAlert(data.message);
+                    } else if(data.code==10000){
+                        _this.setState({
+
+                            tabName: '设置新银行预留手机号',
+                        });
+                    }
+                }, 'json');
         }
 
     },
@@ -115,8 +195,8 @@ const Content = React.createClass({
         let verificationCode = (<span>获取验证码</span>);
         let code = <span>请{this.state.time}s后重试</span>;
         this.state.check ? tips = <div className="tips">
-            已向{this.state.phoneNumer}发送短信验证码</div> : ( this.state.voice ? (this.state.voicecheck ? voice =
-            <div className="tips">已向{this.state.phoneNumer}发送语音验证码，请注意收听</div> : voice =
+            已向{this.state.newphoneNum==""?this.state.phoneNumer:this.state.newphoneNum}发送短信验证码</div> : ( this.state.voice ? (this.state.voicecheck ? voice =
+            <div className="tips">已向{this.state.newphoneNum==""?this.state.phoneNumer:this.state.newphoneNum}发送语音验证码，请注意收听</div> : voice =
             <div className="tips">若获取不到，请<span className="link" onClick={this.voiceHandler}>点击这里</span>，获取语音验证码
             </div>) : null);
         if (this.state.check) {
@@ -148,7 +228,7 @@ const Content = React.createClass({
                     <div className="lines">手机验证码：<input type="text" value={phoneVerify}
                                                         onChange={this.phoneVerifyHandler}/><span className="gainNumber"
                                                                                                   onClick={() => {
-                                                                                                      this.gainNumberHandler()
+                                                                                                      this.gainNumberHandlerTwo()
                                                                                                   }}>{correct}</span>
                     </div>
                     <div>{phoneVerify}</div>
