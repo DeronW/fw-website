@@ -63,7 +63,13 @@ $(function () {
     $('body').on('touchend', function () {
         $(".mobilePersonText").addClass('hidden');
     });
-
+    //移动端活动说明
+    $(".mobileActivityExplain").on("click", function () {
+       $(".mobileNoticeActivity").removeClass('hidden')
+    });
+    $(".mobileActivityClose").on("click", function () {
+        $(".mobileNoticeActivity").addClass('hidden')
+    });
     //季排行榜奖金总额显示位置
     function totalMove(left, top, className) {
         $(".pcQuarterPack .quarterRemind").css({

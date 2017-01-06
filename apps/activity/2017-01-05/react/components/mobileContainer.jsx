@@ -29,6 +29,21 @@ const MobileContainer = React.createClass({
         return (
             <div className="mobileContainer">
                 <div className="mobileBanner"></div>
+                <div className="mobileActivityExplain">活动说明</div>
+                <div className="mobileNoticeActivity hidden">
+                    <div className="mobileActivityClose"></div>
+                    <div className="explain">活动说明</div>
+                    <div className="explainText">
+                        1.活动期间，若被邀请人首次投资选择债权转让项目，则该被邀请的好友不计入邀请人奖励统计；且投资人投资债权转让项目，该笔投资不享受活动福利；<br/>
+                        2.非等额标包括还款方式为一次性还本付息、按月付息到期还本和按天一次性还本付息的一次性还本标；等额标包括还款方式为按月等额还款和按季等额还款的标。<br/>
+                        3.有效好友标准：好友注册7天内累投年化额≥1000元才算一个有效邀请，其中投资等额标，超过18个月按18个月计算年化。统计有效好友数时不含自己。<br/>
+                        4.周邀请任务工豆奖励于每周结束后3个工作日内，统一发放至邀请人的工场账户；春节期间的活动奖励将顺延至2.4后3个工作日内发放。<br/>
+                        5.月度奖金工豆奖励将于每月结束后7个工作日内，统一发放至邀请人的工场账户；春节期间的活动奖励将顺延至2.4后7个工作日内发放。<br/>
+                        6.百万奖金活动奖励将于活动结束后7个工作日内，统一发放至邀请人的工场账户；<br/>
+                        7.金融工场有权随时随机抽查邀请人所推荐好友的真实性，一旦发现存在好友用虚假手机号注册、好友对注册金融工场账户不知情及非好友真实意愿等造假和欺骗行为，则立即清除虚假好友的统计数据并回收相关奖励，且保留追究由此给金融工场带来的一切损失的权利；<br/>
+                        8.活动最终解释权归金融工场所有，活动详情致电客服热线咨询：400-0322-988。
+                    </div>
+                </div>
                 <div className="mobileWeekPack">
                     <div className="weekTitle"></div>
                     <div className="weekText">单周邀请有效好友人数达标，邀请人获不同级别的工豆奖励。</div>
