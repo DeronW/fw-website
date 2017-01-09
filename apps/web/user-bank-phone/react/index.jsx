@@ -53,8 +53,8 @@ const Content = React.createClass({
         }, 1000);
         if (this.state.disable) {
             $.post(API_PATH + '/api/recharge/v1/sendVerifyRegPhoneSms.json', {
-                    isVms: "VSMS"
-                },
+                isVms: "VSMS"
+            },
                 function (data) {
                     console.log(data.data.remainCount);
                     if (data.code == 63001) {
@@ -98,8 +98,8 @@ const Content = React.createClass({
             if (this.state.tabName == "验证注册手机号") {
                 if (this.state.disable) {
                     $.post(API_PATH + '/api/recharge/v1/sendVerifyRegPhoneSms.json', {
-                            isVms: "VMS"
-                        },
+                        isVms: "VMS"
+                    },
                         function (data) {
                             console.log(data.data.remainCount);
                             if (data.code == 63001) {
@@ -133,8 +133,8 @@ const Content = React.createClass({
             } else if (this.state.tabName == "设置新银行预留手机号") {
                 if (this.state.cannot) {
                     $.post(API_PATH + '/api/recharge/v1/sendChangeBankPhoneSms.json', {
-                            isVms: "VMS"
-                        },
+                        isVms: "VMS"
+                    },
                         function (data) {
                             console.log(data.data.remainCount);
                             if (data.code == 63001) {
@@ -177,8 +177,8 @@ const Content = React.createClass({
             GlobalAlert("验证码不能为空");
         } else {
             $.post(API_PATH + '/api/recharge/v1/doVerifyRegPhone.json', {
-                    validateCode: _this.state.value,
-                },
+                validateCode: _this.state.value,
+            },
                 function (data) {
                     if (data.code == 63032) {
                         GlobalAlert(data.message);
@@ -203,9 +203,9 @@ const Content = React.createClass({
         let _this = this;
         if (this.state.cannot) {
             $.post(API_PATH + '/api/recharge/v1/sendChangeBankPhoneSms.json', {
-                    isVms: "VSMS",
-                    bankPhone: _this.state.newphoneNum,
-                },
+                isVms: "VSMS",
+                bankPhone: _this.state.newphoneNum,
+            },
                 function (data) {
                     console.log(data.data.remainCount);
                     if (data.code == 63031) {
@@ -269,9 +269,9 @@ const Content = React.createClass({
             GlobalAlert("请输入验证码");
         } else {
             $.post(API_PATH + '/api/recharge/v1/doChangeBankPhone.json', {
-                    bankPhone: _this.state.newphoneNum,
-                    validateCode: _this.state.phoneVerify,
-                },
+                bankPhone: _this.state.newphoneNum,
+                validateCode: _this.state.phoneVerify,
+            },
                 function (data) {
                     if (data.code == 63032) {
                         GlobalAlert(data.message);
@@ -317,7 +317,7 @@ const Content = React.createClass({
             let {tabName} = this.state;
             let show = this.state.show;
             let icon = index < tab_rows.indexOf(tabName) ?
-                <span className="done"><img src="images/done.png"/></span> :
+                <span className="done"><img src="images/done.png" /></span> :
                 <span className="number">{index + 1}</span>
             return (
                 <li key={index} className={tabName == value ? "active" : null}>
@@ -330,11 +330,11 @@ const Content = React.createClass({
         let verificationCode = (<span>获取验证码</span>);
         let code = <span>请{this.state.time}s后重试</span>;
         this.state.check ? tips = <div className="tips">
-            已向{this.state.newphoneNum == "" ? this.state.phoneNumer : this.state.newphoneNum}发送短信验证码</div> : ( this.state.voice ? (this.state.voicecheck ? voice =
-            <div className="tips">已向{this.state.newphoneNum == "" ? this.state.phoneNumer : this.state.newphoneNum}发送语音验证码，请注意收听</div> : voice =
-            <div className="tips">若获取不到，请<span className="link" onClick={() => {
-                this.voiceHandler()
-            }}>点击这里</span>，获取语音验证码
+            已向{this.state.newphoneNum == "" ? this.state.phoneNumer : this.state.newphoneNum}发送短信验证码</div> : (this.state.voice ? (this.state.voicecheck ? voice =
+                <div className="tips">已向{this.state.newphoneNum == "" ? this.state.phoneNumer : this.state.newphoneNum}发送语音验证码，请注意收听</div> : voice =
+                <div className="tips">若获取不到，请<span className="link" onClick={() => {
+                    this.voiceHandler()
+                } }>点击这里</span>，获取语音验证码
             </div>) : null);
         if (this.state.check) {
             correct = code;
@@ -344,12 +344,12 @@ const Content = React.createClass({
         if (this.state.tabName == "验证注册手机号") {
             section = (<div className="firstContent">
                 <div className="mainbox">
-                    <div className="linef">注册手机号：<input type="text" value={this.state.phoneNumer} readOnly="true"/>
+                    <div className="linef">注册手机号：<input type="text" value={this.state.phoneNumer} readOnly="true" />
                     </div>
-                    <div className="lines">手机验证码：<input type="text" value={value} onChange={this.changeEvent}/><span
+                    <div className="lines">手机验证码：<input type="text" value={value} onChange={this.changeEvent} /><span
                         className="gainNumber" onClick={() => {
-                        this.gainNumberHandler()
-                    }}>{correct}</span></div>
+                            this.gainNumberHandler()
+                        } }>{correct}</span></div>
                     <div>{value}</div>
                     {tips}
                     {voice}
@@ -359,14 +359,14 @@ const Content = React.createClass({
         } else if (this.state.tabName == "设置新银行预留手机号") {
             section = (<div className="secondContent">
                 <div className="mainbox">
-                    <div className="linef">新银行预留手机号：<input type="text" value={newvalue} onChange={this.newNumHandler}/>
+                    <div className="linef">新银行预留手机号：<input type="text" value={newvalue} onChange={this.newNumHandler} />
                     </div>
                     <div>{newvalue}</div>
                     <div className="lines">手机验证码：<input type="text" value={phoneVerify}
-                                                        onChange={this.phoneVerifyHandler}/><span className="gainNumber"
-                                                                                                  onClick={() => {
-                                                                                                      this.gainNumberHandlerTwo()
-                                                                                                  }}>{correct}</span>
+                        onChange={this.phoneVerifyHandler} /><span className="gainNumber"
+                            onClick={() => {
+                                this.gainNumberHandlerTwo()
+                            } }>{correct}</span>
                     </div>
                     <div>{phoneVerify}</div>
                     {tips}
@@ -377,7 +377,7 @@ const Content = React.createClass({
         } else if (this.state.tabName == "完成") {
             section = (<div className="thirdContent">
                 <div className="markedWords">
-                    <img src="images/success.png" alt=""/>
+                    <img src="images/success.png" alt="" />
                     恭喜您，手机号修改成功！
                 </div>
                 <a className="return" href="#">
@@ -391,7 +391,7 @@ const Content = React.createClass({
                     <div className="beanItem">
                         <span className="left">修改银行预留手机号</span>
                         <a className="right" href="http://www.9888.cn/depository/account/toAccountSetup.shtml">
-                            <img src="images/return.png"/>
+                            <img src="images/return.png" />
                             返回
                         </a>
                     </div>
@@ -405,7 +405,63 @@ const Content = React.createClass({
             </div>)
     }
 });
+
+const Panel = React.createClass({
+    getInitialState: function () {
+        return { step: 1 }
+    },
+    nextStepHandler: function(){
+        this.setState({step: this.state.step + 1})
+    },
+    render: function () {
+
+        let {step} = this.state, section;
+
+        let tab_rows = ['验证注册手机号', '设置新银行预留手机号', '完成'];
+        let tab_item = (value, index) => {
+            let icon = index < step - 1 ?
+                <span className="done"><img src="images/done.png" /></span> :
+                <span className="number">{index + 1}</span>
+            return (
+                <li key={index} className={index == step - 1 ? "active" : null}>
+                    {icon}
+                    {value}
+                </li>
+            )
+        };
+
+        if (step == 1) {
+            section = <StepOne nextStepHandler={this.nextStepHandler} />
+        } else if (step == 2) {
+            section = <StepTwo />
+        } else if (step == 3) {
+            section = <StepThree />
+        }
+
+        // return step_panel;
+        return (
+            <div className="topNav">
+                <div className="moneyItemContainer">
+                    <div className="beanItem">
+                        <span className="left">修改银行预留手机号</span>
+                        <a className="right" href="http://www.9888.cn/depository/account/toAccountSetup.shtml">
+                            <img src="images/return.png" />
+                            返回
+                        </a>
+                    </div>
+                    <div className="tabContainer">
+                        <ul className="tabUl">
+                            {tab_rows.map(tab_item)}
+                        </ul>
+                    </div>
+                    {section}
+                </div>
+            </div>
+        )
+    }
+})
+
 $(function () {
     ReactDOM.render(<HeaderStatusBar />, document.getElementById('header-status-bar'));
-    ReactDOM.render(<Content />, document.getElementById('userContent'));
+    ReactDOM.render(<Panel />, document.getElementById('userContent'));
 });
