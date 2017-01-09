@@ -11,7 +11,6 @@
 <script>
     'use strict';
     (function ($, window, document, undefined) {
-
         var methods = {
             //头像
             head: function (arg) {
@@ -54,7 +53,6 @@
                 }
 
                 var certBank = $('.ucp-user-state .cert-bank');
-//                if ((arg1.openAccountStatus != null) && (arg1.openAccountStatus == 2 || arg1.openAccountStatus == 3 || arg1.openAccountStatus == 4 || arg1.openAccountStatus == 5)) {
                 if ([2, 3, 4, 5].indexOf(arg1.openAccountStatus) > -1) {
                     certBank.removeClass('not').addClass('yes');
                 } else {
