@@ -55,7 +55,6 @@ const APP_NAMES = [
     'user-login-history', //用户登录日志页面
 
     // 其他页面
-    // 'service-qq-ke-fu', // qq客服跳转页面, qq客服暂时不支持https
     'statistics', // 实时交易统计
 ];
 
