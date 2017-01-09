@@ -5,26 +5,25 @@ const Content = React.createClass({
             phoneNumer: null,
             value: "",
             check: false,
-            time: 5,
+            time: 2,
             newphoneNum: "",
             phoneVerify: "",
             voice: false,
             voicecheck: false,
-            valid:false,
+            valid: false,
+            disable: true,
+            cannot:true,
         }
     },
     componentDidMount: function () {
-        var _this=this;
-        // $UserReady(function(is_login, user){
-        //     _this.setState({username:user.username});
-        // });
+        var _this = this;
         $.post(API_PATH + '/api/recharge/v1/getUserRegPhone.json',
             function (data) {
-            console.log(data.data.regPhone);
-            _this.setState({
-                phoneNumer:data.data.regPhone,
-            })
-        }, 'json')
+                console.log(data.data.regPhone);
+                _this.setState({
+                    phoneNumer: data.data.regPhone,
+                })
+            }, 'json')
     },
     changeEvent: function (event) {
         this.setState({
@@ -32,9 +31,9 @@ const Content = React.createClass({
         })
     },
     gainNumberHandler: function () {
+        console.log(1111);
         this.setState({
             check: true,
-            voicecheck: false,
         });
         let _this = this;
         let timer = setInterval(function () {
@@ -45,105 +44,245 @@ const Content = React.createClass({
             if (_this.state.time == -1) {
                 clearInterval(timer);
                 _this.setState({
-                    time: 5,
+                    time: 2,
                     check: false,
                     voice: true,
+                    voicecheck: false,
                 });
             }
         }, 1000);
-        $.post(API_PATH + '/api/recharge/v1/sendVerifyRegPhoneSms.json',{
-                isVms:"VSMS"
-            },
-            function (data) {
-                console.log(data.data.remainCount);
-                GlobalAlert("尊敬的客户，您还有"+data.data.remainCount+"次机会获取验证码");
-            }, 'json');
-
-    },
-    gainNumberHandlerTwo:function () {
-        this.setState({
-            check: true,
-            voicecheck: false,
-        });
-        let _this = this;
-        let timer = setInterval(function () {
-            _this.setState({
-                time: _this.state.time - 1,
-            });
-            console.log(_this.state.time);
-            if (_this.state.time == -1) {
-                clearInterval(timer);
-                _this.setState({
-                    time: 5,
-                    check: false,
-                    voice: true,
-                });
-            }
-        }, 1000);
-        $.post(API_PATH + '/api/recharge/v1/sendChangeBankPhoneSms.json',{
-                isVms:"VSMS",
-                bankPhone:_this.state.newphoneNum,
-            },
-            function (data) {
-                console.log(data.data.remainCount);
-                if(data.code==63031){
-                    GlobalAlert(data.message);
-                }else if(data.code==63032){
-                    GlobalAlert(data.message);
-                }else if(data.code==63029){
-                    GlobalAlert(data.message);
-                }else if(data.code==63030){
-                    GlobalAlert(data.message);
-                }else if(data.code==63035){
-                    GlobalAlert(data.message);
-                }else if(data.code==10000){
-                    _this.setState({
-                        valid:true,
-                    });
-                    GlobalAlert("尊敬的客户，您还有"+data.data.remainCount+"次机会获取验证码");
-                }
-
-            }, 'json');
-    },
-    voiceHandler: function () {
-        if (this.state.voice) {
-            $.post(API_PATH + '/api/recharge/v1/sendVerifyRegPhoneSms.json',{
-                    isVms:"VMS"
+        if (this.state.disable) {
+            $.post(API_PATH + '/api/recharge/v1/sendVerifyRegPhoneSms.json', {
+                    isVms: "VSMS"
                 },
                 function (data) {
                     console.log(data.data.remainCount);
-                    GlobalAlert("尊敬的客户，您还有"+data.data.remainCount+"次机会获取验证码");
+                    if (data.code == 63001) {
+                        GlobalAlert(data.message);
+                    } else if (data.code == 63028) {
+                        GlobalAlert(data.message);
+                    } else if (data.code == 63029) {
+                        GlobalAlert(data.message);
+                    } else if (data.code == 63030) {
+                        GlobalAlert(data.message);
+                    } else if (data.code == 60000) {
+                        GlobalAlert(data.message);
+                    } else if (data.code == 10000) {
+                        if (data.data.remainCount > 0) {
+                            GlobalAlert("尊敬的客户，您还有" + data.data.remainCount + "次机会获取验证码");
+                        } else {
+                            GlobalAlert("尊敬的客户，您今日的机会已用完。");
+                            _this.setState({
+                                check: false,
+                                disable: false,
+                            });
+                        }
+                    }
                 }, 'json');
+
+        } else {
+            this.setState({
+                check: false,
+            });
+            GlobalAlert("尊敬的客户，您今日的机会已用完。");
+        }
+
+    },
+    voiceHandler: function () {
+        console.log("voiceHandler");
+        let _this = this;
+        if (this.state.voice) {
             this.setState({
                 voicecheck: true,
-            })
+            });
+            if (this.state.disable) {
+                $.post(API_PATH + '/api/recharge/v1/sendVerifyRegPhoneSms.json', {
+                        isVms: "VMS"
+                    },
+                    function (data) {
+                        console.log(data.data.remainCount);
+                        if (data.code == 63001) {
+                            GlobalAlert(data.message);
+                        } else if (data.code == 63028) {
+                            GlobalAlert(data.message);
+                        } else if (data.code == 63029) {
+                            GlobalAlert(data.message);
+                        } else if (data.code == 63030) {
+                            GlobalAlert(data.message);
+                        } else if (data.code == 60000) {
+                            GlobalAlert(data.message);
+                        } else if (data.code == 10000) {
+                            if (data.data.remainCount > 0) {
+                                GlobalAlert("尊敬的客户，您还有" + data.data.remainCount + "次机会获取验证码");
+                            } else {
+                                GlobalAlert("尊敬的客户，您今日的机会已用完。");
+                                _this.setState({
+                                    check: false,
+                                    disable: false,
+                                });
+                            }
+                        }
+                    }, 'json');
+            } else {
+                this.setState({
+                    check: false,
+                });
+                GlobalAlert("尊敬的客户，您今日的机会已用完。");
+            }
         }
     },
     tabClickHandlerOne: function () {
-        let _this=this;
-        if(this.state.value == "") {
+        let _this = this;
+        if (this.state.value == "") {
             GlobalAlert("验证码不能为空");
         } else {
-            $.post(API_PATH + '/api/recharge/v1/doVerifyRegPhone.json',{
-                    validateCode:_this.state.value,
+            $.post(API_PATH + '/api/recharge/v1/doVerifyRegPhone.json', {
+                    validateCode: _this.state.value,
                 },
                 function (data) {
-                    if(data.code == 63032) {
+                    if (data.code == 63032) {
                         GlobalAlert(data.message);
-                    } else if (data.code == 63001 ) {
+                    } else if (data.code == 63001) {
                         GlobalAlert(data.message);
-                    } else if(data.code==63028){
+                    } else if (data.code == 63028) {
                         GlobalAlert(data.message);
-                    } else if(data.code==63034){
+                    } else if (data.code == 63034) {
                         GlobalAlert(data.message);
-                    } else if(data.code==10000){
+                    } else if (data.code == 10000) {
                         _this.setState({
-
+                            voice: false,
                             tabName: '设置新银行预留手机号',
                         });
                     }
                 }, 'json');
         }
+
+    },
+    gainNumberHandlerTwo: function () {
+        let _this = this;
+        this.setState({
+            check:true,
+        })
+            let timer = setInterval(function () {
+                _this.setState({
+                    time: _this.state.time - 1,
+                });
+                console.log(_this.state.time);
+                if (_this.state.time == -1) {
+                    clearInterval(timer);
+                    _this.setState({
+                        time: 2,
+                        check: false,
+                    });
+                }
+            }, 1000);
+        if(this.state.cannot){
+            $.post(API_PATH + '/api/recharge/v1/sendChangeBankPhoneSms.json', {
+                    isVms: "VSMS",
+                    bankPhone: _this.state.newphoneNum,
+                },
+                function (data) {
+                    console.log(data.data.remainCount);
+                    if (data.code == 63031) {
+                        GlobalAlert(data.message);
+                    } else if (data.code == 63032) {
+                        GlobalAlert(data.message);
+                    } else if (data.code == 63029) {
+                        GlobalAlert(data.message);
+                    } else if (data.code == 63030) {
+                        GlobalAlert(data.message);
+                    } else if (data.code == 63035) {
+                        GlobalAlert(data.message);
+                    } else if (data.code == 10000) {
+
+                        if (data.data.remainCount > 0) {
+                            GlobalAlert("尊敬的客户，您还有" + data.data.remainCount + "次机会获取验证码");
+                        } else {
+                            _this.setState({
+                                cannot:false,
+                            });
+                            GlobalAlert("尊敬的客户，您今日的次数已用完。");
+                        }
+
+                    }
+
+                }, 'json');
+        }else{
+            this.setState({
+                check: false,
+            });
+            GlobalAlert("尊敬的客户，您今日的次数已用完。");
+        }
+
+    },
+    // voiceHandlerTwo:function () {
+    //     $.post(API_PATH + '/api/recharge/v1/sendChangeBankPhoneSms.json', {
+    //             isVms: "VMS",
+    //             bankPhone: _this.state.newphoneNum,
+    //         },
+    //         function (data) {
+    //             console.log(data.data.remainCount);
+    //             if (data.code == 63031) {
+    //                 GlobalAlert(data.message);
+    //             } else if (data.code == 63032) {
+    //                 GlobalAlert(data.message);
+    //             } else if (data.code == 63029) {
+    //                 GlobalAlert(data.message);
+    //             } else if (data.code == 63030) {
+    //                 GlobalAlert(data.message);
+    //             } else if (data.code == 63035) {
+    //                 GlobalAlert(data.message);
+    //             } else if (data.code == 10000) {
+    //                 if(data.data.remainCount>0){
+    //                     GlobalAlert("尊敬的客户，您还有" + data.data.remainCount + "次机会获取验证码");
+    //                     _this.setState({
+    //                         check: true,
+    //                         voicecheck: false,
+    //                         valid: true,
+    //                         voice: true,
+    //                     });
+    //                 }else{
+    //                     GlobalAlert("尊敬的客户，您今日的次数已用完。");
+    //                 }
+    //
+    //             }
+    //
+    //         }, 'json');
+    // },
+    tabClickHandlerTwo: function () {
+        let _this = this;
+        if (this.state.newphoneNum == "") {
+            GlobalAlert("请输入新的预留手机号");
+        } else if (!(/^1(3|4|5|7|8)\d{9}$/.test(this.state.newphoneNum))) {
+            GlobalAlert("手机号不合法");
+        } else if (this.state.phoneVerify == "") {
+            GlobalAlert("请输入验证码");
+        } else {
+            $.post(API_PATH + '/api/recharge/v1/doChangeBankPhone.json', {
+                    bankPhone: _this.state.newphoneNum,
+                    validateCode: _this.state.phoneVerify,
+                },
+                function (data) {
+                    if (data.code == 63032) {
+                        GlobalAlert(data.message);
+                    } else if (data.code == 63001) {
+                        GlobalAlert(data.message);
+                    } else if (data.code == 63028) {
+                        GlobalAlert(data.message);
+                    } else if (data.code == 63034) {
+                        GlobalAlert(data.message);
+                    } else if (data.code == 10000) {
+                        _this.setState({
+                            voice: false,
+                            tabName: '完成',
+                        });
+                    }
+                }, 'json');
+        }
+        // this.setState({
+        //     tabName: '完成',
+        // })
+
 
     },
     newNumHandler: function (event) {
@@ -158,20 +297,7 @@ const Content = React.createClass({
             phoneVerify: phoneVerify,
         });
     },
-    tabClickHandlerTwo: function () {
-        if (this.state.newphoneNum == "") {
-            GlobalAlert("请输入新的预留手机号");
-        } else if(!(/^1(3|4|5|7|8)\d{9}$/.test (this.state.newphoneNum))){
-            GlobalAlert("手机号不合法");
-        } else if (this.state.phoneVerify == "") {
-            GlobalAlert("请输入验证码");
-        } else {
-            this.setState({
-                tabName: '完成',
-            })
-        }
 
-    },
     render: function () {
         let newvalue = this.state.newphoneNum;
         let phoneVerify = this.state.phoneVerify;
@@ -191,13 +317,15 @@ const Content = React.createClass({
                 </li>
             )
         };
-        let show,section,correct,tips,voice;
+        let show, section, correct, tips, voice;
         let verificationCode = (<span>获取验证码</span>);
         let code = <span>请{this.state.time}s后重试</span>;
         this.state.check ? tips = <div className="tips">
-            已向{this.state.newphoneNum==""?this.state.phoneNumer:this.state.newphoneNum}发送短信验证码</div> : ( this.state.voice ? (this.state.voicecheck ? voice =
-            <div className="tips">已向{this.state.newphoneNum==""?this.state.phoneNumer:this.state.newphoneNum}发送语音验证码，请注意收听</div> : voice =
-            <div className="tips">若获取不到，请<span className="link" onClick={this.voiceHandler}>点击这里</span>，获取语音验证码
+            已向{this.state.newphoneNum == "" ? this.state.phoneNumer : this.state.newphoneNum}发送短信验证码</div> : ( this.state.voice ? (this.state.voicecheck ? voice =
+            <div className="tips">已向{this.state.newphoneNum == "" ? this.state.phoneNumer : this.state.newphoneNum}发送语音验证码，请注意收听</div> : voice =
+            <div className="tips">若获取不到，请<span className="link" onClick={() => {
+                this.voiceHandler()
+            }}>点击这里</span>，获取语音验证码
             </div>) : null);
         if (this.state.check) {
             correct = code;
@@ -233,6 +361,7 @@ const Content = React.createClass({
                     </div>
                     <div>{phoneVerify}</div>
                     {tips}
+                    {voice}
                     <div className="next" onClick={() => this.tabClickHandlerTwo()}>下一步</div>
                 </div>
             </div>);
