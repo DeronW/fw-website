@@ -6,6 +6,7 @@ gulpfile.settings.js
 .vscode
 .project
 npm-debug.log
+npm-debug.log*
 
 cdn
 build

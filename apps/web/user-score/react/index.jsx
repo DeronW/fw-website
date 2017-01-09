@@ -48,7 +48,6 @@ const Content = React.createClass({
                 <div className="moneyItemContainer">
                     <Table th_rows={th_rows} fnLoadData={fnLoadData} fnFilterData={fnFilterData}/>
                 </div>
-                <div className="hider"></div>
             </div>
         );
     }
