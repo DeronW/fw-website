@@ -5,41 +5,40 @@ const StepOne = React.createClass({
             sms_code: null,
             counting: null,
             sms_call: false,
-            voice_call: false
+            voice_call: false,
         }
     },
     componentDidMount: function () {
         $.post(API_PATH + '/api/recharge/v1/getUserRegPhone.json',
-            (data) => this.setState({ phone: data.data.regPhone }), 'json')
+            (data) => this.setState({phone: data.data.regPhone}), 'json')
     },
     codeChangeHandler: function (e) {
-        this.setState({ sms_code: e.target.value })
+        this.setState({sms_code: e.target.value})
     },
     gainNumberHandler: function (e) {
-        this.setState({ sms_call: true, voice_call: false });
-        this.startCountingDown();
+        this.setState({sms_call: true, voice_call: false});
         this.getSMSCode();
     },
     startCountingDown: function () {
-        this.setState({ counting: 3 }, this.startCountingTimer);
+        this.setState({counting: 3}, this.startCountingTimer);
     },
     startCountingTimer: function () {
         this._timer = setInterval(() => {
-            this.setState({ counting: this.state.counting - 1 });
+            this.setState({counting: this.state.counting - 1});
             if (this.state.counting <= 0) {
                 clearInterval(this._timer);
-                this.setState({ couting: null });
+                this.setState({couting: null});
             }
         }, 1000)
     },
     makeVoiceHandler: function () {
-        this.setState({ voice_call: true });
+        this.setState({voice_call: true});
         this.getPhoneVerifyMessage('VMS')
     },
     getSMSCode: function () {
-        this.getPhoneVerifyMessage('VSMS')
+        this.getPhoneVerifyMessage('VSMS', this.startCountingDown.bind(this))
     },
-    getPhoneVerifyMessage: function (type) {
+    getPhoneVerifyMessage: function (type, successCallback) {
         $.post(`${API_PATH}/api/recharge/v1/sendVerifyRegPhoneSms.json`, {
             isVms: type
         }, (data) => {
@@ -47,17 +46,23 @@ const StepOne = React.createClass({
             if (data.code == 10000) {
                 txt = data.data.remainCount > 0 ?
                     `尊敬的客户，您还有${data.data.remainCount}次机会获取验证码` :
-                    '尊敬的客户，您今日的机会已用完'
+                    '尊敬的客户，您今日的机会已用完';
+                successCallback && successCallback()
+            } else if (data.code == 51022) {
+                this.setState({sms_call: false, voice_call: false});
+                txt = '尊敬的客户，您今日的机会已用完';
+
             }
             GlobalAlert(txt);
         }, 'json');
+
+
     },
     nextStepHandler: function () {
-
-                this.props.nextStepHandler()
-return
+        // this.props.nextStepHandler()
+        // return
         $.post(API_PATH + '/api/recharge/v1/doVerifyRegPhone.json', {
-            validateCode: _this.state.value,
+            validateCode: this.state.sms_code,
         }, (data) => {
             if (data.code == 10000) {
                 this.props.nextStepHandler()
@@ -91,9 +96,9 @@ return
         return (
             <div className="firstContent">
                 <div className="mainbox">
-                    <div className="linef">注册手机号： <span>{phone}</span> </div>
+                    <div className="linef">注册手机号： <span className="linefNum">{phone}</span></div>
                     <div className="lines">手机验证码：
-                        <input type="text" value={sms_code} onChange={this.codeChangeHandler} />
+                        <input type="text" value={sms_code} onChange={this.codeChangeHandler}/>
                         <span className="gainNumber" onClick={this.gainNumberHandler}>{btn_text}</span>
                     </div>
                     {tips}
