@@ -17,7 +17,7 @@
             head: function (arg) {
                 var avatar = $(".ucp-avatar");
                 avatar.find(".default").addClass("hide");
-                if (arg.headurl) {
+                if (arg&&arg.headurl) {
                     avatar.find(".self-define").removeClass("hide").attr("src", arg.headurl)
                 } else {
                     arg.sex == 1 ?
