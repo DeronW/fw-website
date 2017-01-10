@@ -35,7 +35,7 @@ const Panel = React.createClass({
                 <div className="moneyItemContainer">
                     <div className="beanItem">
                         <span className="left">修改银行预留手机号</span>
-                        <a className="right" href="http://www.9888.cn/depository/account/toAccountSetup.shtml">
+                        <a className="right" href="https://www.9888.cn/depository/recharge/toQRecharge.shtml" target="_self">
                             <img src="images/return.png" />
                             返回
                         </a>
