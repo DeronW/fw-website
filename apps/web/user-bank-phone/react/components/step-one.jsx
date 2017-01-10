@@ -16,7 +16,7 @@ const StepOne = React.createClass({
         this.setState({sms_code: e.target.value})
     },
     gainNumberHandler: function (e) {
-        // this.setState({sms_call: true, voice_call: false});
+        this.setState({sms_call: true, voice_call: false});
         this.getSMSCode();
     },
     startCountingDown: function () {
