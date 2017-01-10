@@ -5,46 +5,49 @@ const StepTwo = React.createClass({
             counting: null,
             sms_call: false,
             voice_call: false,
-            newphone:null,
+            newphone: null,
         }
     },
     componentDidMount: function () {
 
     },
     codeChangeHandler: function (e) {
-        this.setState({ sms_code: e.target.value })
+        this.setState({sms_code: e.target.value})
     },
-    newphonevalue:function (e) {
-        this.setState({newphone:e.target.value});
+    newphonevalue: function (e) {
+        this.setState({newphone: e.target.value});
     },
     gainNumberHandler: function (e) {
-        this.setState({ sms_call: true, voice_call: false });
+        // this.setState({ sms_call: true, voice_call: false });
         // this.startCountingDown();
         this.getSMSCode();
     },
     startCountingDown: function () {
-        this.setState({ counting: 3 }, this.startCountingTimer);
+        this.setState({counting: 60}, this.startCountingTimer);
     },
     startCountingTimer: function () {
         this._timer = setInterval(() => {
-            this.setState({ counting: this.state.counting - 1 });
+            this.setState({counting: this.state.counting - 1});
             if (this.state.counting <= 0) {
                 clearInterval(this._timer);
-                this.setState({ couting: null });
+                this.setState({couting: null});
             }
         }, 1000)
     },
     makeVoiceHandler: function () {
-        this.setState({ voice_call: true });
-        this.getPhoneVerifyMessage('VMS')
+        this.setState({voice_call: true});
+        this.getPhoneVerifyMessage('VMS');
+    },
+    reset: function () {
+        this.setState(this.setState({sms_call: true, voice_call: false}));
     },
     getSMSCode: function () {
-        this.getPhoneVerifyMessage('VSMS', this.startCountingDown.bind(this))
+        this.getPhoneVerifyMessage('VSMS', this.startCountingDown.bind(this), this.reset.bind(this));
     },
-    getPhoneVerifyMessage: function (type,successCallback) {
-        let _this=this;
+    getPhoneVerifyMessage: function (type, successCallback, resetcallback) {
+        let _this = this;
         $.post(`${API_PATH}/api/recharge/v1/sendChangeBankPhoneSms.json`, {
-            bankPhone:_this.state.newphone,
+            bankPhone: _this.state.newphone,
             isVms: type
         }, (data) => {
             let txt = data.message;
@@ -52,19 +55,19 @@ const StepTwo = React.createClass({
                 txt = data.data.remainCount > 0 ?
                     `尊敬的客户，您还有${data.data.remainCount}次机会获取验证码` :
                     '尊敬的客户，您今日的机会已用完'
-                successCallback&&successCallback();
-                // this.setState({ sms_call: true, voice_call: false});
-            }else if(data.code==51022){
+                successCallback && successCallback();
+                resetcallback && resetcallback();
+            } else if (data.code == 51022) {
                 this.setState({sms_call: false, voice_call: false});
-                txt="尊敬的客户，您今日的机会已用完";
+                txt = "尊敬的客户，您今日的机会已用完";
             }
             GlobalAlert(txt);
         }, 'json');
     },
     nextStepHandler: function () {
         $.post(API_PATH + '/api/recharge/v1/doChangeBankPhone.json', {
-            bankPhone:this.state.newphone,
-            validateCode:this.state.sms_code,
+            bankPhone: this.state.newphone,
+            validateCode: this.state.sms_code,
         }, (data) => {
             if (data.code == 10000) {
                 this.props.nextStepHandler()
@@ -74,7 +77,7 @@ const StepTwo = React.createClass({
         }, 'json');
     },
     render: function () {
-        let {phone, counting, sms_code, voice_call, sms_call,newphone} = this.state;
+        let {phone, counting, sms_code, voice_call, sms_call, newphone} = this.state;
         let btn_text = counting ? `${counting}秒` : '获取验证码';
         let tips;
 
@@ -98,9 +101,13 @@ const StepTwo = React.createClass({
         return (
             <div className="firstContent">
                 <div className="mainbox">
-                    <div className="linef" style={{margin:"0 0 20px -14px"}}>新预留手机号： <input type="text" className="linefNum" value={newphone} onChange={this.newphonevalue}></input> </div>
+                    <div className="linef" style={{margin: "0 0 20px -14px"}}>新预留手机号： <input type="text"
+                                                                                             className="linefNum"
+                                                                                             value={newphone}
+                                                                                             onChange={this.newphonevalue}></input>
+                    </div>
                     <div className="lines">手机验证码：
-                        <input type="text" value={sms_code} onChange={this.codeChangeHandler} />
+                        <input type="text" value={sms_code} onChange={this.codeChangeHandler}/>
                         <span className="gainNumber" onClick={this.gainNumberHandler}>{btn_text}</span>
                     </div>
                     {tips}

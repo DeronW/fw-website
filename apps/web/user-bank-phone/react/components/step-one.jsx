@@ -16,11 +16,11 @@ const StepOne = React.createClass({
         this.setState({sms_code: e.target.value})
     },
     gainNumberHandler: function (e) {
-        this.setState({sms_call: true, voice_call: false});
+        // this.setState({sms_call: true, voice_call: false});
         this.getSMSCode();
     },
     startCountingDown: function () {
-        this.setState({counting: 3}, this.startCountingTimer);
+        this.setState({counting: 60}, this.startCountingTimer);
     },
     startCountingTimer: function () {
         this._timer = setInterval(() => {
@@ -47,11 +47,10 @@ const StepOne = React.createClass({
                 txt = data.data.remainCount > 0 ?
                     `尊敬的客户，您还有${data.data.remainCount}次机会获取验证码` :
                     '尊敬的客户，您今日的机会已用完';
-                successCallback && successCallback()
+                successCallback && successCallback();
             } else if (data.code == 51022) {
                 this.setState({sms_call: false, voice_call: false});
                 txt = '尊敬的客户，您今日的机会已用完';
-
             }
             GlobalAlert(txt);
         }, 'json');
