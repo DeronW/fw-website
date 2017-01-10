@@ -130,21 +130,7 @@ let ExchangeOverdueCouponList = function (page, cb) {
 };
 
 let ExchangeCouponFilter = function (data) {
-    var productName = function (isDelete,status) {
-        var statusValue = "（未上架）";
-        if( '0' == isDelete){
 
-            if('0' == status){
-                statusValue = "（未上架）";
-            }else if('2' == status){
-                statusValue = "（已下架）";
-            }
-
-        }else{
-            statusValue = "（失效）";
-        }
-        return statusValue
-    };
     var source = function (source) {
         var sourceValue = "市场活动";
         if(source =='1' ){
@@ -163,7 +149,6 @@ let ExchangeCouponFilter = function (data) {
         rows: (data.result && data.result).map((item)=> {
             return [{
                 text: item.productName ,
-                content:productName(item.isDelete,item.status),
                 className:'exchangeName'
             }, {
                 text: item.productNumber
