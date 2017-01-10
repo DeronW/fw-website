@@ -3,7 +3,7 @@
 {% block content %}
 <div class="partial-user-center-panel">
     <div class="ucp-left-nav-bg"></div>
-    <div class="ucp-right-panel"> {% block user_content %}{% endblock %} </div>
+    <div class="ucp-right-panel"> {% block user_content %}{% endblock %}</div>
     {% include './web/partial/user-center-panel.swig.html' %}
 </div>
 {% endblock %}
@@ -17,13 +17,18 @@
             head: function (arg) {
                 var avatar = $(".ucp-avatar");
                 avatar.find(".default").addClass("hide");
-                if (arg&&arg.headurl) {
-                    avatar.find(".self-define").removeClass("hide").attr("src", arg.headurl)
+                if (!arg) {
+                    avatar.find(".male").removeClass("hide")
                 } else {
-                    arg.sex == 1 ?
-                        avatar.find(".male").removeClass("hide") :
-                        avatar.find(".female").removeClass("hide")
+                    if (arg.headurl) {
+                        avatar.find(".self-define").removeClass("hide").attr("src", arg.headurl)
+                    } else {
+                        arg.sex == 1 ?
+                            avatar.find(".male").removeClass("hide") :
+                            avatar.find(".female").removeClass("hide")
+                    }
                 }
+
             },
             //名字
             name: function (arg1, arg2) {
