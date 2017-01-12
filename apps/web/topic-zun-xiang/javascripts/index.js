@@ -43,7 +43,7 @@ $(function(){
 			}
 		},15)
 	};
-	var onesize1,onesize2,onesize3,onesize4,onesize5;
+	var onesize1,onesize2,onesize3,onesize4,onesize5,onesize7;
 	getHeight();
 	$(".more_link").click(function(){
 		getHeight();
@@ -54,6 +54,7 @@ $(function(){
 		onesize3=$(".block3").height();
 		onesize4=$(".block4").height();
 		onesize5=$(".block5").height();
+		onesize7=$(".block7").height();
 	}
 	var iTop=$(".head-top").outerHeight();
 	var iH=$(".top1").height();
@@ -67,10 +68,10 @@ $(function(){
 		starMove(document,{'scrollbar':onesize1+onesize2+iH+iTop})
 	});
 	$(".menue ul li.list4").click(function(){
-		starMove(document,{'scrollbar':onesize1+onesize2+onesize3+iH+iTop})
+		starMove(document,{'scrollbar':onesize1+onesize2+onesize3+onesize7+iH+iTop})
 	});
 	$(".menue ul li.list5").click(function(){
-		starMove(document,{'scrollbar':onesize1+onesize2+onesize3+onesize4+iH+iTop+50})
+		starMove(document,{'scrollbar':onesize1+onesize2+onesize3+onesize7+onesize4+iH+iTop})
 	});
 	
 	$(window).on("scroll resize",function(){
@@ -103,51 +104,56 @@ $(function(){
 		}
 	})
 	
-	$(window).on("resize",function(){
-		toSize();
-	})
-	toSize();
-	function toSize(){
-		$(".agency_list").css("left",0);
-	}
-	var iNum=0;
-	var timer=null;
-	var onesize=$(".agency_list li").eq(0).width(); // 一个运动单位的长度就是一个LI的宽度
-	$(".agency_list").css("width",onesize*$(".agency_list li").size()); // 动态计算UL的宽度
-	$(".circle").find("a").click(function(){
-		iNum=$(this).index();
-		fnclear();  // 重新分配A的class函数
-		$(".agency_list").stop().animate({left:-iNum*onesize});
-	})
-	function fnclear(){
-		$(".circle").find("a").attr("class","");
-		$(".circle").find("a").eq(iNum).attr("class","on");
-	}
-	
-	clearInterval(timer);
-	timer=setInterval(autoplay,1000);
-	function autoplay(){  // 自动播放函数
-		iNum++;
-		console.log($(".agency_list li").size());
-		if(iNum<$(".agency_list li").size()){
-			fnclear();
-			$(".agency_list").stop().animate({left:-iNum*onesize});
-		}else{
 
-			iNum=0;
-			fnclear();
-			$(".agency_list li").eq(0).css("position","relative").css("left",$(".agency_list li").size()*$(".agency_list li").eq(0).width());
-			$(".agency_list").stop().animate({left:-$(".agency_list li").size()*onesize},function(){
-				$(".agency_list li").eq(0).css("position","static");
-				$(".agency_list").css("left",0);
-			});
-		}
-	}
-	$(".agency").mouseover(function(){
-		clearInterval(timer);
-	});
-	$(".agency").mouseout(function(){
-		clearInterval(timer);
-		timer=setInterval(autoplay,3000);
-	})
+    function fn(obj) {
+        $(window).on("resize", function () {
+            toSize();
+        })
+        toSize();
+        function toSize() {
+            obj.find("ul").css("left", 0);
+        }
+
+        var iNum = 0;
+        var timer = null;
+        var onesize = obj.find("ul li").eq(0).width(); // 一个运动单位的长度就是一个LI的宽度
+        obj.find("ul").css("width", onesize * obj.find("ul li").size()); // 动态计算UL的宽度
+        obj.find("div").find("a").click(function () {
+            iNum = $(this).index();
+            fnclear();  // 重新分配A的class函数
+            obj.find("ul").stop().animate({left: -iNum * onesize});
+        })
+        function fnclear() {
+            obj.find("div").find("a").attr("class", "");
+            obj.find("div").find("a").eq(iNum).attr("class", "on");
+        }
+
+        clearInterval(timer);
+        timer = setInterval(autoplay, 3000);
+        function autoplay() {  // 自动播放函数
+            iNum++;
+            if (iNum < obj.find("ul li").size()) {
+                fnclear();
+                obj.find("ul").stop().animate({left: -iNum * onesize});
+            } else {
+                iNum = 0;
+                fnclear();
+                obj.find("ul li").eq(0).css("position", "relative").css("left", obj.find("ul li").size() * obj.find("ul li").eq(0).width());
+                obj.find("ul").stop().animate({left: -obj.find("ul li").size() * onesize}, function () {
+                    obj.find("ul li").eq(0).css("position", "static");
+                    obj.find("ul").css("left", 0);
+                });
+            }
+        }
+
+        obj.mouseover(function () {
+            clearInterval(timer);
+        });
+        obj.mouseout(function () {
+            clearInterval(timer);
+            timer = setInterval(autoplay, 3000);
+        })
+
+    }
+    fn($(".agency"))
 })
