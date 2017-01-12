@@ -12,9 +12,12 @@ ul, li {
   margin: 0;
   padding: 0
 }
-
+h1,h2,h3,h4,h5,h6{
+  font-weight: normal;
+}
 .tc {
-  text-align: center
+  text-align: center;
+  //padding-bottom: 30px;
 }
 
 .ft1 {
@@ -42,7 +45,11 @@ img {
 }
 
 .dis {
-  display: none
+  display: block;
+  text-align: center;
+  color: #e7962a;
+  font-size: 30px;
+  font-weight: normal;
 }
 
 .top_event, .main_event {
@@ -52,8 +59,16 @@ img {
 
 .top1 {
   height: 331px;
-  background: #2a6aaa url(../images/top_banner.jpg) no-repeat 50% 0;
-  position: relative
+  background: #2a6aaa url(../images/banner.png) no-repeat 50% 0;
+  position: relative;
+  .now_invest{
+    position: absolute;
+    top: 136px;
+    right:480px;
+    width: 70px;
+    height: 70px;
+    cursor: pointer;
+  }
 }
 
 .main_event {
@@ -166,27 +181,30 @@ img {
 
 .section {
   width: 1140px;
-  margin: 0 auto;
+  margin: -20px auto;
   position: relative;
   z-index: 100;
-  background: #ffffff
+  background: #ffffff;
+  padding-top: 1px;
+  h2{
+    margin: 50px 0 0 60px;
+  }
 }
 
 .project_info {
-  width: 956px;
+  width: 1030px;
   margin: 0 auto;
+  border-bottom:1px dashed #dddddd;
 }
 
 .project_info h3 {
-  font-weight: bold;
   color: #555;
-  padding: 20px 0;
-  font-size: 20px;
+  font-size: 30px;
 }
 
 .info_p{
   line-height: 24px;
-  padding: 0 55px;
+  padding: 0 32px;
   margin-top: 15px;
   color: #777!important;
   font-size: 14px;
@@ -200,7 +218,7 @@ img {
 .advantage {
   display: block;
   overflow: hidden;
-  padding: 0px 0px 14px 150px;
+  padding: 0 0 50px 60px;
 }
 
 .advantage li {
@@ -208,10 +226,9 @@ img {
   float: left;
   font-size: 14px;
   color: #777;
-  width: 403px;
+  width: 443px;
   margin-bottom: 8px;
   line-height: 22px;
-  font-weight: bold;
 }
 
 .advantage li em {
@@ -224,13 +241,27 @@ img {
 }
 
 .project_info.nopp {
-  padding: 40px 0 50px
+  padding: 40px 0 50px;
+  border-bottom: transparent;
 }
-
+.block1{
+  height: 1310px;
+}
+.block2{
+  height: 560px;
+}
+.block2 h2 {
+  img{
+    margin: 20px 0 30px;
+  }
+}
+.block3{
+  height: 1240px;
+}
 .block3 .invest1 {
-  width: 953px;
-  height: 648px;
-  background: url(../images/pic_info4_1.jpg) no-repeat 0 0;
+  width: 952px;
+  height: 557px;
+  background: url(../images/example.png) no-repeat 0 0;
   margin: 0 auto
 }
 
@@ -244,82 +275,98 @@ img {
 .block3 .btn_invest {
   display: block;
   width: 473px;
-  height: 67px;
+  height: 77px;
   position: absolute;
   bottom: 1px;
-  right: 5px;
-  z-index: 10
+  right: 0px;
+  z-index: 10;
+  cursor: pointer;
 }
 
-.agency {
+.example {
   width: 956px;
-  height: 990px;
-  margin: 0 auto;
+  height: 600px;
+  margin: 40px auto 0;
   overflow: hidden;
   position: relative
 }
 
-.agency_list {
+.example_list {
   position: absolute;
-  top: 0px;
-  left: 0px
+  top: 0;
+  left: 0;
 }
 
-.agency li {
+.example li {
   display: block;
   float: left;
   width: 956px
 }
 
-.agency li h3 {
+.example li h3 {
   width: 150px;
   height: 30px;
   background: url(../images/sp_btn.png) no-repeat 0 0;
   margin: 24px auto 14px;
 }
 
-.agency li.ag1 h3 {
+.example li.ag1 h3 {
   background-position: 0 -60px;
 }
 
-.agency li.ag2 h3 {
+.example li.ag2 h3 {
   background-position: 0 -113px;
   width: 122px
 }
 
-.agency li.ag3 h3 {
+.example li.ag3 h3 {
   background-position: 0 -169px;
   width: 122px
 }
 
-.agency li h4 {
+.example li h4 {
   color: #36485c;
   font-size: 24px;
   font-weight: bold;
   text-align: center
 }
 
-.agency li p, .moment .message p {
+.example li p, .moment .message p {
   font-size: 14px;
   color: #777;
 }
 
-.agency li p {
+.example li p {
   width: 843px;
   margin: 0 auto
 }
 
 .moment .message p {
-  line-height: 26px
+  line-height: 26px;
+  width: 930px;
 }
+.agency{width:956px;height:293px;margin:10px auto 0;overflow:hidden;position:relative}
+.agency_list{position:absolute;top:0px;left:0px}
+.agency li{display:block;float:left;width:956px}
+.agency li h3{height:30px;background:url(../images/sp_btn.png) no-repeat 0 0;margin:24px auto 22px}
+.agency li.ag1 h3{background-position:0 -60px;width:415px}
+.agency li.ag2 h3{background-position:0 -113px;width:358px}
+.agency li.ag3 h3{background-position:0 -169px;width:120px}
+.agency li h4{color:#36485c;font-size:24px;font-weight:bold;text-align:center}
+.agency li p,.moment .message p{font-size:14px;color:#777}
+.agency li p{width:956px;margin:0 auto}
+.moment .message p{line-height:26px;padding-left: 38px}
+.agency .circle{position:absolute;bottom:20px;left:50%;width:100px;height:30px;margin-left:-50px}
+.agency .circle a,.anli .circle a{display:inline-block;width:13px;height:13px;border-radius:10px;border:1px solid #dbdbdb;background:#fff;margin-left:10px}
+.agency .circle a.on,.anli .circle a.on{background:#dbdbdb}
 
-.block4 p {
-  line-height: 24px
+.block7 p {
+  line-height: 24px;
 }
 
 .circle {
   position: absolute;
-  bottom: 20px;
+  bottom: 40px;
   left: 50%;
   width: 64px;
   height: 30px;
@@ -341,21 +388,19 @@ img {
 }
 
 .mm_area {
-  width: 872px;
-  margin: 38px auto 0;
+  width: 1000px;
+  margin: 18px auto 0;
   padding-bottom: 12px
 }
 
 .moment {
   width: 100%;
-  padding-bottom: 45px;
-  margin: 0px 0 0 0px;
   position: relative;
   line-height: 22px
 }
 
 .block5 .moment {
-  padding-bottom: 15px;
+  //padding-bottom: 15px;
 }
 
 .block5 .moment .message h3 {
@@ -376,6 +421,9 @@ img {
 .moment.last .line {
   background: #fff
 }
+.mm_area .moment.last{
+  padding-bottom: 20px !important;
+}
 
 .moment .icon {
   width: 22px;
@@ -386,21 +434,33 @@ img {
   display: inline-block;
   margin: 0 15px 0 0;
   float: left;
-  top: 0px
+  top: 2px
 }
 
 .moment .message {
   display: inline-block;
   vertical-align: top;
   overflow: hidden;
-  width: 815px
+  width: 980px;
+  margin-left: 10px;
 }
 
 .moment .message h3 {
   font-size: 22px;
-  font-weight: bold;
+  font-weight: normal;
   color: #e7962a;
-  margin-bottom: 10px
+}
+.moment .message5 h3{
+  font-style: normal;
+  line-height: 0;
+}
+.moment .message5 p{
+  line-height: 20px;
+}
+.moment .message6 p{
+  height: 110px;
+  width: 970px;
+  padding-left: 4px;
 }
 
 .top_innner {
@@ -428,6 +488,7 @@ img {
   background: url(../images/sp_btn.png) no-repeat;
   padding-left: 7px;
   margin-bottom: 20px;
+  margin-left: 30px;
 }
 
 .more_link:hover {
