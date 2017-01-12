@@ -18,8 +18,6 @@ const StepTwo = React.createClass({
         this.setState({newphone: e.target.value});
     },
     gainNumberHandler: function (e) {
-        // this.setState({ sms_call: true, voice_call: false });
-        // this.startCountingDown();
         this.getSMSCode();
     },
     startCountingDown: function () {
@@ -35,11 +33,13 @@ const StepTwo = React.createClass({
         }, 1000)
     },
     makeVoiceHandler: function () {
-        this.setState({voice_call: true});
-        this.getPhoneVerifyMessage('VMS');
+        this.getPhoneVerifyMessage('VMS', this.voiceReset.bind(this));
     },
     reset: function () {
         this.setState(this.setState({sms_call: true, voice_call: false}));
+    },
+    voiceReset: function () {
+        this.setState({voice_call: true});
     },
     getSMSCode: function () {
         this.getPhoneVerifyMessage('VSMS', this.startCountingDown.bind(this), this.reset.bind(this));
@@ -52,7 +52,7 @@ const StepTwo = React.createClass({
         }, (data) => {
             let txt = data.message;
             if (data.code == 10000) {
-                txt = data.data.remainCount > 0 ?
+                txt = data.data.remainCount >= 0 ?
                     `尊敬的客户，您还有${data.data.remainCount}次机会获取验证码` :
                     '尊敬的客户，您今日的机会已用完'
                 successCallback && successCallback();

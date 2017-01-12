@@ -16,7 +16,6 @@ const StepOne = React.createClass({
         this.setState({sms_code: e.target.value})
     },
     gainNumberHandler: function (e) {
-        this.setState({sms_call: true, voice_call: false});
         this.getSMSCode();
     },
     startCountingDown: function () {
@@ -31,23 +30,29 @@ const StepOne = React.createClass({
             }
         }, 1000)
     },
-    makeVoiceHandler: function () {
+    reset: function () {
+        this.setState(this.setState({sms_call: true, voice_call: false}));
+    },
+    voiceReset: function () {
         this.setState({voice_call: true});
-        this.getPhoneVerifyMessage('VMS')
+    },
+    makeVoiceHandler: function () {
+        this.getPhoneVerifyMessage('VMS', this.voiceReset.bind(this));
     },
     getSMSCode: function () {
-        this.getPhoneVerifyMessage('VSMS', this.startCountingDown.bind(this))
+        this.getPhoneVerifyMessage('VSMS', this.startCountingDown.bind(this), this.reset.bind(this))
     },
-    getPhoneVerifyMessage: function (type, successCallback) {
+    getPhoneVerifyMessage: function (type, successCallback, resetcallback) {
         $.post(`${API_PATH}/api/recharge/v1/sendVerifyRegPhoneSms.json`, {
             isVms: type
         }, (data) => {
             let txt = data.message;
             if (data.code == 10000) {
-                txt = data.data.remainCount > 0 ?
+                txt = data.data.remainCount >= 0 ?
                     `尊敬的客户，您还有${data.data.remainCount}次机会获取验证码` :
                     '尊敬的客户，您今日的机会已用完';
                 successCallback && successCallback();
+                resetcallback && resetcallback();
             } else if (data.code == 51022) {
                 this.setState({sms_call: false, voice_call: false});
                 txt = '尊敬的客户，您今日的机会已用完';
