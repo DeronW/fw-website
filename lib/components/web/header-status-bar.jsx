@@ -99,6 +99,8 @@ const HeaderStatusBar = React.createClass({
                     </div>
                     {/*<a className="link" href="http://bbs.9888.cn" target="_blank">工友之家</a>*/}
                     {/*{separate_line}*/}
+                    <a className="link" href="https://bbs.9888.cn/">工友之家</a>
+                    {separate_line}
                     <a className="link" href="/static/web/notice-corporate-structure/index.html">信息披露</a>
                     {separate_line}
                     <div className="hsb-guide-nav">
@@ -110,14 +112,14 @@ const HeaderStatusBar = React.createClass({
                     </div>
                     {separate_line}
                     <a className="link" href="/mesageCenter/msssageList.shtml?messageType=1">
-                        消息中心
+                        消息
                         {msg}
                     </a>
                     {separate_line}
                     {this.state.is_login && this.state.username ? user_state : null}
-                    {this.state.is_login ? null : <a className="link" href="/orderUser/register.shtml">免费注册</a>}
+                    {this.state.is_login ? null : <a className="link" href="/orderUser/register.shtml">注册</a>}
                     {this.state.is_login ? null : separate_line}
-                    {this.state.is_login ? null : <a className="link" href="/orderUser/login.shtml">立即登录</a>}
+                    {this.state.is_login ? null : <a className="link" href="/orderUser/login.shtml">登录</a>}
                     {separate_line}
                     <div className="header-status-bar-app">
                         <a href="/static/web/app-download/index.html">APP 客户端</a>
