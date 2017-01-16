@@ -61,13 +61,15 @@ img {
   height: 331px;
   background: #2a6aaa url(../images/banner.png) no-repeat 50% 0;
   position: relative;
+  z-index: 100;
   .now_invest{
     position: absolute;
     top: 136px;
     right:480px;
-    width: 70px;
+    width: 80px;
     height: 70px;
     cursor: pointer;
+    z-index: 1000;
   }
 }
 
@@ -165,7 +167,7 @@ img {
   background-position: 0 -346px
 }
 
-.menue li.list6 a:hover span, .menue li.list5 a.on span {
+.menue li.list6 a:hover span, .menue li.list6 a.on span {
   background-position: 0 -380px
 }
 
@@ -474,8 +476,9 @@ img {
   width: 280px;
   height: 90px;
   position: absolute;
-  right: 13px;
-  bottom: 97px;
+  right: 333px;
+  bottom: 107px;
+  z-index: 1000;
 }
 
 .more_link {
