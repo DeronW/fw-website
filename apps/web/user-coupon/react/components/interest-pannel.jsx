@@ -91,8 +91,7 @@ const InterestPanel = React.createClass({
         }
 
         return (
-            <div className="containerCenter">
-
+            <div className="containerCenter returnCoupon">
                 <div className="containerCenterTitle">
                     <div className="centerTitleLeft centerTitleCom">
                         <div>
@@ -118,6 +117,11 @@ const InterestPanel = React.createClass({
                 <div className="containerRecord">
                     <Table th_rows={th_rows} fnFilterData={fn_filter_data} fnLoadData={fn_load_data}/>
                 </div>
+                <div className="warmPrompt">
+                    温馨提示：<br/>
+                    1、返息券投资完成后，额外返息以工豆形式返入工豆账户，可继续投资使用；<br/>
+                    2、投资有锁定天数的灵活收益项目，使用返息券后仅发锁定天数内产生的额外收益；<br/>
+                    3、投资按月/季等额还款的项目，最终返息需乘以0.56，0.56为借款方占用投资方的资金使用率。</div>
             </div>
         )
     }
