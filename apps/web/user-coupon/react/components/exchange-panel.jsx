@@ -149,7 +149,8 @@ let ExchangeCouponFilter = function (data) {
         rows: (data.result && data.result).map((item)=> {
             return [{
                 text: item.productName ,
-                className:'exchangeName'
+                className:'exchangeName',
+                clickProductLink:()=>(location.href='https://mall.9888.cn/detail/item_detail.shtm?bizNo='+item.productNumber)
             }, {
                 text: item.productNumber
             }, {
