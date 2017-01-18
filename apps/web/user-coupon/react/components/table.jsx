@@ -58,7 +58,7 @@ const Table = React.createClass({
             let td = (cell, cell_index) => {
                 return (
                     <td key={cell_index} className={cell.className}>
-                        <span onClick={cell.clickProductLink?()=>cell.clickProductLink():()=>cell.clickHandler(this.reloadData)}>{cell.text}</span>
+                        {cell.clickProductLink?<a href={cell.clickProductLink} target="_blank">{cell.text}</a>:<span onClick={()=>cell.clickHandler(this.reloadData)}>{cell.text}</span>}
                         <p className="presentTime">{cell.time}</p>
                     </td>
                 )

@@ -150,7 +150,7 @@ let ExchangeCouponFilter = function (data) {
             return [{
                 text: item.productName ,
                 className:'exchangeName',
-                clickProductLink:()=>(location.href='https://mall.9888.cn/detail/item_detail.shtm?bizNo='+item.productNumber)
+                clickProductLink:'https://mall.9888.cn/detail/item_detail.shtm?bizNo='+item.productNumber
             }, {
                 text: item.productNumber
             }, {
