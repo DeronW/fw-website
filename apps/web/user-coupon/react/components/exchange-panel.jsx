@@ -96,7 +96,7 @@ let ExchangeUsedCouponList = function (page, cb) {
         url: API_PATH + 'api/coupon/v1/ticketList.json',
         data: {
             page: page,
-            limit: 8,
+            rows: 8,
             status: 1
         },
         type: 'get',
@@ -115,7 +115,7 @@ let ExchangeOverdueCouponList = function (page, cb) {
         url: API_PATH + 'api/coupon/v1/ticketList.json',
         data: {
             page: page,
-            limit: 8,
+            rows: 8,
             status: 2
         },
         type: 'get',
@@ -149,7 +149,8 @@ let ExchangeCouponFilter = function (data) {
         rows: (data.result && data.result).map((item)=> {
             return [{
                 text: item.productName ,
-                className:'exchangeName'
+                className:'exchangeName',
+                clickProductLink:'https://mall.9888.cn/detail/item_detail.shtm?bizNo='+item.productNumber
             }, {
                 text: item.productNumber
             }, {
