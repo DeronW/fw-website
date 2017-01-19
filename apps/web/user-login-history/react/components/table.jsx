@@ -13,7 +13,7 @@ const Table = React.createClass({
             total_page: 1,
             th_rows: this.props.th_rows || [],
             rows: [],
-            bean_count:null
+            bean_count: null
         }
     },
     switchPageHandler: function (type) {
@@ -28,7 +28,7 @@ const Table = React.createClass({
         } else if (type == 'next') {
             if (page < total_page) new_page = page + 1;
         }
-        if (new_page) this.setState({page: new_page}, this.reloadData);
+        if (new_page) this.setState({ page: new_page }, this.reloadData);
     },
     reloadData: function () {
         this.props.fnLoadData && this.props.fnLoadData(this.state.page, (data) => {
@@ -38,7 +38,7 @@ const Table = React.createClass({
                 this.setState({
                     total_page: filterData.total_page,
                     rows: filterData.rows,
-                    bean_count:filterData.bean_count
+                    bean_count: filterData.bean_count
                 })
         })
     },
@@ -55,47 +55,43 @@ const Table = React.createClass({
     render: function () {
         let {page, total_page, rows} = this.state;
         let th_cell = (t, index) => {
-            return <th key={index} width={t.width} className={index==4?"last":null}>{t.title}</th>
+            return <th key={index} width={t.width} className={index == 4 ? "last" : null}>{t.title}</th>
         };
         let tr = (row, row_index) => {
             let td = (cell, cell_index) => {
                 return (
-                    <td key={cell_index} className={cell_index==4?"last":null}>
+                    <td key={cell_index} className={cell_index == 4 ? "last" : null}>
                         <span onClick={() => cell.clickHandler(this.reloadData)}>{cell.text}</span>
                         <em className="productStatus">{cell.content}</em>
                     </td>
                 )
             };
             return (
-                <tr key={row_index} className={(row_index%2 ? "odd":"even")}>
+                <tr key={row_index} className={(row_index % 2 ? "odd" : "even")}>
                     {row.map(td)}
                 </tr>)
         };
         let pagination, empty_records;
         let bean_count;
-        if(this.state.bean_count) {
-            bean_count = (
-                <div className="totalCount">
-                    <span>总记{this.state.bean_count}个,</span>
-                    <span className="calculate">共计{this.state.bean_count/100}元</span>
-                </div>
-            )
+        if (this.state.bean_count) {
+            bean_count = <div className="totalCount">
+                <span>总记{this.state.bean_count}个,</span>
+                <span className="calculate">共计{this.state.bean_count / 100}元</span>
+            </div>
         }
         if (rows.length) {
-            pagination = (
-                <div className="pagination">
-                    <div className="paginationPage">
-                        {bean_count}
-                        第{page}页, 共{total_page}页
-                        {page >= 1 ? <a  className="first" onClick={() => this.switchPageHandler('first')}>首页</a> : null}
-                        {page > 1 ? <a  className="prev" onClick={() => this.switchPageHandler('prev')}>上一页</a> : null}
-                        {page < total_page ?
-                            <a className="next" onClick={() => this.switchPageHandler('next')}>下一页</a> : null}
-                        {page < total_page ?
-                            <a  className="last" onClick={() => this.switchPageHandler('last')}>尾页</a> : null}
-                    </div>
+            pagination = <div className="pagination">
+                <div className="paginationPage">
+                    {bean_count}
+                    第{page}页, 共{total_page}页
+                        {page >= 1 ? <a className="first" onClick={() => this.switchPageHandler('first')}>首页</a> : null}
+                    {page > 1 ? <a className="prev" onClick={() => this.switchPageHandler('prev')}>上一页</a> : null}
+                    {page < total_page ?
+                        <a className="next" onClick={() => this.switchPageHandler('next')}>下一页</a> : null}
+                    {page < total_page ?
+                        <a className="last" onClick={() => this.switchPageHandler('last')}>尾页</a> : null}
                 </div>
-            );
+            </div>;
         } else {
             empty_records = <div className="emptyRecords">暂无记录</div>
         }
@@ -103,8 +99,8 @@ const Table = React.createClass({
             <div className="tableContaner">
                 <table className="table-read-only">
                     <tbody>
-                    <tr>{this.state.th_rows.map(th_cell)}</tr>
-                    {this.state.rows.map(tr)}
+                        <tr>{this.state.th_rows.map(th_cell)}</tr>
+                        {this.state.rows.map(tr)}
                     </tbody>
                 </table>
                 {empty_records}

@@ -25,10 +25,10 @@ const Table = React.createClass({
         } else if (type == 'next') {
             if (page < total_page) new_page = page + 1;
         }
-        if (new_page) this.setState({page: new_page}, this.reloadData);
+        if (new_page) this.setState({ page: new_page }, this.reloadData);
     },
     reloadData: function () {
-        this.props.fnLoadData && this.props.fnLoadData(this.state.page, (data)=> {
+        this.props.fnLoadData && this.props.fnLoadData(this.state.page, (data) => {
             let filterData = this.props.fnFilterData && this.props.fnFilterData(data);
             if (filterData)
                 this.setState({
@@ -51,39 +51,37 @@ const Table = React.createClass({
         let {page, total_page, rows} = this.state;
 
         let th_cell = (t, index) => {
-            return <th key={index} width={t.width} className={"thCell"+index}>{t.title}</th>
+            return <th key={index} width={t.width} className={"thCell" + index}>{t.title}</th>
         };
 
         let tr = (row, row_index) => {
             let td = (cell, cell_index) => {
                 return (
                     <td key={cell_index} className={cell.className}>
-                        {cell.clickProductLink?<a href={cell.clickProductLink} target="_blank">{cell.text}</a>:<span onClick={()=>cell.clickHandler(this.reloadData)}>{cell.text}</span>}
+                        {cell.clickProductLink ? <a href={cell.clickProductLink} target="_blank">{cell.text}</a> : <span onClick={() => cell.clickHandler(this.reloadData)}>{cell.text}</span>}
                         <p className="presentTime">{cell.time}</p>
                     </td>
                 )
             };
             return (
-                <tr key={row_index} className={"trCell"+row_index}>
+                <tr key={row_index} className={"trCell" + row_index}>
                     {row.map(td)}
                 </tr>)
         };
 
         let pagination, empty_records;
         if (rows.length) {
-            pagination = (
-                <div className="pagination">
-                    <div className="paginationPage">
-                        第{page}页, 共{total_page}页
-                        {page > 1 ? <a onClick={()=>this.switchPageHandler('first')}>首页</a> : null}
-                        {page > 1 ? <a onClick={()=>this.switchPageHandler('prev')}>上一页</a> : null}
-                        {page < total_page ?
-                            <a onClick={()=>this.switchPageHandler('next')}>下一页</a> : null}
-                        {page < total_page ?
-                            <a onClick={()=>this.switchPageHandler('last')}>尾页</a> : null}
-                    </div>
+            pagination = <div className="pagination">
+                <div className="paginationPage">
+                    第{page}页, 共{total_page}页
+                        {page > 1 ? <a onClick={() => this.switchPageHandler('first')}>首页</a> : null}
+                    {page > 1 ? <a onClick={() => this.switchPageHandler('prev')}>上一页</a> : null}
+                    {page < total_page ?
+                        <a onClick={() => this.switchPageHandler('next')}>下一页</a> : null}
+                    {page < total_page ?
+                        <a onClick={() => this.switchPageHandler('last')}>尾页</a> : null}
                 </div>
-            );
+            </div>;
         } else {
             empty_records = <div className="emptyRecords">暂无记录</div>
         }
@@ -92,8 +90,8 @@ const Table = React.createClass({
             <div>
                 <table className="table-read-only">
                     <tbody>
-                    <tr className="trTitle">{this.state.th_rows.map(th_cell)}</tr>
-                    {this.state.rows.map(tr)}
+                        <tr className="trTitle">{this.state.th_rows.map(th_cell)}</tr>
+                        {this.state.rows.map(tr)}
                     </tbody>
                 </table>
                 {empty_records}
