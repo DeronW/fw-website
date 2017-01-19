@@ -256,7 +256,7 @@ var Content = React.createClass({
                                             <p className="text">根据会员贡献值不同，工友将荣升为不同的VIP等级，级别越高享有的权益越多哦~~ </p>
                                             <p className="text">贡献值包括投资贡献值和邀友贡献值。</p>
                                             <p className="text">还不明白，豆哥这里还有更详细的哦， <a
-                                                href="http://www.9888.cn/user/level/levelRule.shtml" target="_blank"
+                                                href="https://www.9888.cn/static/web/vip-prerogative/index.html" target="_blank"
                                                 className="c-629df9">查看升级攻略></a></p>
                                         </div>
 
