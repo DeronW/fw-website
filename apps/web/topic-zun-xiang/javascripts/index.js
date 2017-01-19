@@ -42,6 +42,7 @@ $(function () {
                 clearInterval(obj.timer);
             }
         }, 15)
+        setTimeout(function(){clearInterval(obj.timer)}, 1000)
     };
     var onesize1, onesize2, onesize3, onesize4, onesize5, onesize7;
     getHeight();
