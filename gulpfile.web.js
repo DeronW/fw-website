@@ -7,14 +7,15 @@ let APP_NAMES = [
     'app-download', // app 下载页面
     'welcome-register', // 推广用户注册落地页面
     'welcome-register-success', // 推广用户注册 成功页面
+];
 
+// 公告类页面
+const NOTICE_PAGES = [
     'preservation', // 安全保障介绍页面
     'guide-cookbook', // 玩赚攻略页
     'vip-prerogative', // 等级攻略页
     'notice-corporate-structure', // 信息披露页面
-    // 其他页面
-    // 'statistics', // 实时交易统计
-];
+]
 
 // 专题说明类页面
 const TOPIC_PAGES = [
@@ -52,6 +53,7 @@ const DEVELOPING_PAGES = [
 APP_NAMES.push(
     ...TOPIC_PAGES,
     ...USER_PAGES,
+    ...NOTICE_PAGES,
     ...DEVELOPING_PAGES
 )
 
