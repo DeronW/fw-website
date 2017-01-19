@@ -31,7 +31,7 @@
             window.USER_ID = data.uid
         }
     </script>
-    <script src="http://game.9888.cn/index.php?r=games/get-userid"></script>
+    <script src="https://game.9888.cn/index.php?r=games/get-userid"></script>
     <script src="javascripts/hilo-standalone.js"></script>
     <script src="javascripts/sha1.js"></script>
     <script src="javascripts/illegal_words.js"></script>
@@ -75,8 +75,8 @@
         });
     }
 
-    var gurl = 'http://game.9888.cn/index.php?r=games/game-notice&gameNo=0pn5m';
-    var iurl = 'http://game.9888.cn/static/frontend/game/axc/image/axc_share.jpg';
+    var gurl = 'https://game.9888.cn/index.php?r=games/game-notice&gameNo=0pn5m';
+    var iurl = 'https://game.9888.cn/static/frontend/game/axc/image/axc_share.jpg';
 
     function setShareFriend() {
         wx.onMenuShareAppMessage({
@@ -109,7 +109,7 @@
 
 
     // $.get('http://fore.9888.cn/weixin/jssdk/share', {
-    $.get('http://game.9888.cn/index.php?r=games/getshare', {
+    $.get('https://game.9888.cn/index.php?r=games/getshare', {
         url: location.href
     }, function (data) {
         setWxConfig(false, data.appId, data.timestamp, data.nonceStr, data.signature);
