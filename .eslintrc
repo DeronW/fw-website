@@ -6,9 +6,24 @@
             "jsx": true
         }
     },
+    "extends": "eslint:recommended",
     "plugins": [ "react", "promise" ],
     "rules": {
-        "no-cond-assign": [ "error", "always" ],
+        "no-extra-parens": ["warn"],
+        "array-callback-return": ["warn"],
+        "block-scoped-var": ["warn"],
+        "default-case": ["warn"],
+        "no-eq-null": ["warn"],
+        "no-eval": ["error"],
+        "no-lone-blocks": ["warn"],
+        "no-loop-func": ["error"],
+        "no-throw-literal": ["warn"],
+        "no-useless-escape": ["warn"],
+        "no-undef-init": ["warn"],
+        "no-undef": ["off"],
+        "no-unused-vars": ["off"],
+        "no-multiple-empty-lines": ["warn"],
+        "no-nested-ternary": ["warn"],
         "linebreak-style": [ "error", "unix" ],
         "indent": [ "warn", 4 ]
     },
