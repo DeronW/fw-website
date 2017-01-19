@@ -99,7 +99,7 @@ module.exports = function (gulp, generate_task, settings) {
     gulp.task(`lint:${PROJ}`, gulp.series(() => {
         return gulp.src([
             `apps/${PROJ}/**/*.+(js|jsx)`, '!node_modules/**',
-            '!**/jquery.*.js'])
+            '!**/jquery.*.js', '!**.min.js'])
             .pipe(eslint())
             .pipe(eslint.result(result => {
                 console.log(

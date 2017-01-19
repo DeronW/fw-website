@@ -56,7 +56,9 @@ module.exports = function (gulp, generate_task, settings) {
 
     gulp.task(`build:${PROJ}`, gulp.series(APP_NAMES.map(i => `${PROJ}:pack:${i.name || i}:revision`)));
     gulp.task(`lint:${PROJ}`, gulp.series(() => {
-        return gulp.src([`apps/${PROJ}/**/*.+(js|jsx)`, '!node_modules/**'])
+        return gulp.src([
+            `apps/${PROJ}/**/*.+(js|jsx)`,
+            '!node_modules/**', '!**.min.js'])
             .pipe(eslint())
             .pipe(eslint.result(result => {
                 console.log(
