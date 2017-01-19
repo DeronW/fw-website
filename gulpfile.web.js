@@ -1,3 +1,5 @@
+const eslint = require('gulp-eslint');
+
 const PROJ = 'web';
 
 let APP_NAMES = [
@@ -16,7 +18,7 @@ let APP_NAMES = [
 
 // 专题说明类页面
 const TOPIC_PAGES = [
-// 主营产品分类说明页面
+    // 主营产品分类说明页面
     'topic-yi-zhuan-ying', // 易赚赢
     'topic-yi-che-xiang', // 易车享
     'topic-li-sui-xiang', // 易随享
@@ -92,4 +94,19 @@ module.exports = function (gulp, generate_task, settings) {
     });
 
     gulp.task(`build:${PROJ}`, gulp.series(APP_NAMES.map(i => `${PROJ}:pack:${i.name || i}:revision`)));
+    gulp.task(`lint:${PROJ}`, gulp.series(() => {
+        return gulp.src([
+            `apps/${PROJ}/**/*.+(js|jsx)`, '!node_modules/**',
+            '!**/jquery.*.js'])
+            .pipe(eslint())
+            .pipe(eslint.result(result => {
+                console.log(
+                    `\nESLint result: ${result.filePath}\n`,
+                    `# Messages: ${result.messages.length}\n`,
+                    `# Warnings: ${result.warningCount}\n`,
+                    `# Errors: ${result.errorCount}\n`
+                );
+            }))
+            .pipe(eslint.format())
+    }))
 };

@@ -6,7 +6,7 @@ $(function () {
             $(this).text("点击折叠");
             $(this).addClass("on");
             $(".text_first").hide();
-            
+
         } else {
             $(".more_txt").css("display", "none");
             $(".text_first").show();
@@ -64,19 +64,19 @@ $(function () {
     var iTop = $(".head-top").outerHeight();
     var iH = $(".top1").height();
     $(".menue ul li.list1").click(function () {
-        starMove(document, {'scrollbar': iH + iTop})
+        starMove(document, { 'scrollbar': iH + iTop })
     });
     $(".menue ul li.list2").click(function () {
-        starMove(document, {'scrollbar': onesize1 + iH + iTop})
+        starMove(document, { 'scrollbar': onesize1 + iH + iTop })
     });
     $(".menue ul li.list3").click(function () {
-        starMove(document, {'scrollbar': onesize1 + onesize2 + iH + iTop})
+        starMove(document, { 'scrollbar': onesize1 + onesize2 + iH + iTop })
     });
     $(".menue ul li.list4").click(function () {
-        starMove(document, {'scrollbar': onesize1 + onesize2 + onesize3 + iH + iTop})
+        starMove(document, { 'scrollbar': onesize1 + onesize2 + onesize3 + iH + iTop })
     });
     $(".menue ul li.list5").click(function () {
-        starMove(document, {'scrollbar': onesize1 + onesize2 + onesize3 + onesize4 + iH + iTop})
+        starMove(document, { 'scrollbar': onesize1 + onesize2 + onesize3 + onesize4 + iH + iTop })
     });
 
     $(window).on("scroll resize", function () {
@@ -96,7 +96,7 @@ $(function () {
         }
         flag = false;
         if ($(window).scrollTop() >= iH + 414) {
-            $(".menue").css("position", "fixed").css("top", 0).css("left", 0).css("z-index","103");
+            $(".menue").css("position", "fixed").css("top", 0).css("left", 0).css("z-index", "103");
             //$(".innerment").css("top",62);
             $(".moment.last").css("paddingBottom", 100);
             $(".menue ul li a").attr("class", "");
@@ -109,8 +109,8 @@ $(function () {
         }
     })
 
-//  fn($(".agency"));
-	fn($(".anli"));
+    //  fn($(".agency"));
+    fn($(".anli"));
     function fn(obj) {
         $(window).on("resize", function () {
             toSize();
@@ -127,7 +127,7 @@ $(function () {
         obj.find("div").find("a").click(function () {
             iNum = $(this).index();
             fnclear();  // 重新分配A的class函数
-            obj.find("ul").stop().animate({left: -iNum * onesize});
+            obj.find("ul").stop().animate({ left: -iNum * onesize });
         })
         function fnclear() {
             obj.find("div").find("a").attr("class", "");
@@ -140,12 +140,12 @@ $(function () {
             iNum++;
             if (iNum < obj.find("ul li").size()) {
                 fnclear();
-                obj.find("ul").stop().animate({left: -iNum * onesize});
+                obj.find("ul").stop().animate({ left: -iNum * onesize });
             } else {
                 iNum = 0;
                 fnclear();
                 obj.find("ul li").eq(0).css("position", "relative").css("left", obj.find("ul li").size() * obj.find("ul li").eq(0).width());
-                obj.find("ul").stop().animate({left: -obj.find("ul li").size() * onesize}, function () {
+                obj.find("ul").stop().animate({ left: -obj.find("ul li").size() * onesize }, function () {
                     obj.find("ul li").eq(0).css("position", "static");
                     obj.find("ul").css("left", 0);
                 });
