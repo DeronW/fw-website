@@ -2,8 +2,23 @@
   "name": "website",
   "version": "2.0.0",
   "private": true,
-  "dependencies": {
+  "eslintConfig": {
+    "parserOptions": {
+      "ecmaVersion": 6,
+      "sourceType": "module",
+      "ecmaFeatures": {
+        "jsx": true
+      }
+    },
+    "plugins": [ "react", "promise" ],
+    "rules": {
+        "no-cond-assign": ["error", "always"],
+        "linebreak-style": ["error", "unix"],
+        "indent": ["warn", 4]
+    },
+    "env": {}
   },
+  "dependencies": {},
   "devDependencies": {
     "gulp": "gulpjs/gulp#4.0",
     "gulp-data": ">=1.2",
@@ -21,6 +36,9 @@
     "gulp-changed": ">=1.3",
     "gulp-plumber": ">= 1.1",
     "gulp-task-listing": ">= 1.0",
+    "gulp-eslint": ">= 3.0",
+    "eslint-plugin-react": ">= 6.9",
+    "eslint-plugin-promise": ">= 3.4",
     "babel-preset-es2015": ">= 6.18",
     "babel-preset-react": ">= 6.16",
     "eslint": ">=3.12",

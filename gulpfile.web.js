@@ -1,3 +1,5 @@
+const eslint = require('gulp-eslint');
+
 const PROJ = 'web';
 
 let APP_NAMES = [
@@ -5,18 +7,19 @@ let APP_NAMES = [
     'app-download', // app 下载页面
     'welcome-register', // 推广用户注册落地页面
     'welcome-register-success', // 推广用户注册 成功页面
+];
 
+// 公告类页面
+const NOTICE_PAGES = [
     'preservation', // 安全保障介绍页面
     'guide-cookbook', // 玩赚攻略页
     'vip-prerogative', // 等级攻略页
     'notice-corporate-structure', // 信息披露页面
-    // 其他页面
-    // 'statistics', // 实时交易统计
-];
+]
 
 // 专题说明类页面
 const TOPIC_PAGES = [
-// 主营产品分类说明页面
+    // 主营产品分类说明页面
     'topic-yi-zhuan-ying', // 易赚赢
     'topic-yi-che-xiang', // 易车享
     'topic-li-sui-xiang', // 易随享
@@ -50,6 +53,7 @@ const DEVELOPING_PAGES = [
 APP_NAMES.push(
     ...TOPIC_PAGES,
     ...USER_PAGES,
+    ...NOTICE_PAGES,
     ...DEVELOPING_PAGES
 )
 
@@ -92,4 +96,19 @@ module.exports = function (gulp, generate_task, settings) {
     });
 
     gulp.task(`build:${PROJ}`, gulp.series(APP_NAMES.map(i => `${PROJ}:pack:${i.name || i}:revision`)));
+    gulp.task(`lint:${PROJ}`, gulp.series(() => {
+        return gulp.src([
+            `apps/${PROJ}/**/*.+(js|jsx)`, '!node_modules/**',
+            '!**/jquery.*.js'])
+            .pipe(eslint())
+            .pipe(eslint.result(result => {
+                console.log(
+                    `\nESLint result: ${result.filePath}\n`,
+                    `# Messages: ${result.messages.length}\n`,
+                    `# Warnings: ${result.warningCount}\n`,
+                    `# Errors: ${result.errorCount}\n`
+                );
+            }))
+            .pipe(eslint.format())
+    }))
 };

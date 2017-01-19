@@ -24,7 +24,7 @@ require('./gulpfile.activity.js')(gulp, gt, SETTINGS);
 
 //游戏
 gt('web', 'popong', {
-    api_path: "http://game.9888.cn/",
+    api_path: "https://game.9888.cn/",
     cmd_prefix: 'pack',
     cdn_prefix: '/front/game/popong/'
 });
