@@ -1,0 +1,16 @@
+{
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "jsx": true
+        }
+    },
+    "plugins": [ "react", "promise" ],
+    "rules": {
+        "no-cond-assign": [ "error", "always" ],
+        "linebreak-style": [ "error", "unix" ],
+        "indent": [ "warn", 4 ]
+    },
+    "env": {}
+}

@@ -2,22 +2,6 @@
   "name": "website",
   "version": "2.0.0",
   "private": true,
-  "eslintConfig": {
-    "parserOptions": {
-      "ecmaVersion": 6,
-      "sourceType": "module",
-      "ecmaFeatures": {
-        "jsx": true
-      }
-    },
-    "plugins": [ "react", "promise" ],
-    "rules": {
-        "no-cond-assign": ["error", "always"],
-        "linebreak-style": ["error", "unix"],
-        "indent": ["warn", 4]
-    },
-    "env": {}
-  },
   "dependencies": {},
   "devDependencies": {
     "gulp": "gulpjs/gulp#4.0",
