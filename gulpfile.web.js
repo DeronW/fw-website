@@ -103,5 +103,6 @@ module.exports = function (gulp, generate_task, settings) {
             .pipe(eslint())
             .pipe(eslint.result(result => null))
             .pipe(eslint.format())
+            .pipe(eslint.failAfterError());
     }))
 };
