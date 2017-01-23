@@ -76,15 +76,15 @@ $(function () {
     });
 
     $(window).on("scroll resize", function () {
-        if ($(window).scrollTop() >= iH + iTop && $(window).scrollTop() < onesize1 + iH + iTop) {
+        if ($(window).scrollTop() >= iH + iTop && $(window).scrollTop() < onesize1 + iH + iTop  + 50) {
             iNum = 0;
-        } else if ($(window).scrollTop() >= onesize1 + iH + iTop && $(window).scrollTop() < onesize1 + onesize2 + iH + iTop) {
+        } else if ($(window).scrollTop() >= onesize1 + iH + iTop  + 50&& $(window).scrollTop() < onesize1 + onesize2 + iH + iTop + 30) {
             iNum = 1;
-        } else if ($(window).scrollTop() >= onesize1 + onesize2 + iH + iTop && $(window).scrollTop() < onesize1 + onesize2 + onesize3 + iH + iTop) {
+        } else if ($(window).scrollTop() >= onesize1 + onesize2 + iH + iTop  + 30&& $(window).scrollTop() < onesize1 + onesize2 + onesize3 + iH + iTop) {
             iNum = 2;
-        } else if ($(window).scrollTop() >= onesize1 + onesize2 + onesize3 + iH + iTop && $(window).scrollTop() < onesize1 + onesize2 + onesize3 + onesize4 + iH + iTop) {
+        } else if ($(window).scrollTop() >= onesize1 + onesize2 + onesize3 + iH + iTop && $(window).scrollTop() < onesize1 + onesize2 + onesize3 + onesize7 + onesize4 + iH + iTop - 30 ) {
             iNum = 3;
-        } else if ($(window).scrollTop() >= onesize1 + onesize2 + onesize3 + onesize4 + iH + iTop) {
+        } else if ($(window).scrollTop() >= onesize1 + onesize2 + onesize3 + onesize7 + onesize4 + iH + iTop - 30 ) {
             iNum = 4
         }
         if (flag == false) {
@@ -98,7 +98,7 @@ $(function () {
             $(".menue ul li a").attr("class", "");
             $(".menue ul li a").eq(iNum).attr("class", "on");
         } else {
-            $(".menue").css("position", "relative").css("top", 0).css("left", 0);
+            $(".menue").css("position", "relative").css("top", -6+'px').css("left", 0);
             //$(".innerment").css("top",0);
             $(".moment.last").css("paddingBottom", 38);
             $(".menue ul li a").attr("class", "");
