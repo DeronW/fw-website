@@ -46,6 +46,12 @@
 <!--// jQuery 不能加入公共库中, 因为公共库的uglify过程破坏了jQuery源码中兼容IE8的语法 -->
 <script src="javascripts/jquery-1.11.3.min.js"></script>
 <script src="javascripts/lib.js"></script>
+{% if !DEBUG %}
+<script src="https://cdn.ravenjs.com/3.9.1/raven.min.js"></script>
+<script>
+    Raven.config('https://4135eb9a33e248e984bcc7789424be8e@sentry.dougemall.com/3').install()
+</script>
+{% endif %}
 <script src="javascripts/bundle.js"></script>
 
 {% block javascripts %}{% endblock %}
