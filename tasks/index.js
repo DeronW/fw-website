@@ -163,7 +163,7 @@ module.exports = function generate_task(site_name, page_name, configs) {
 
     if (!CONFIG.debug && !COMMON_JAVASCRIPTS_TASK[site_name]) {
         gulp.task(`${site_name}:common_js`, gulp.series(
-            () => javascripts(common_javascript_files, tmp_path, 'lib.js')));
+            () => javascripts(common_javascript_files, tmp_path, 'lib.js', true)));
         COMMON_JAVASCRIPTS_TASK[site_name] = true;
     }
 };
