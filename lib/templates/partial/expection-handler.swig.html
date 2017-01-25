@@ -1,6 +1,6 @@
 <script src="javascripts/raven-3.9.1.min.js" crossorigin="anonymous"></script>
 <script>
-    Raven.config('{{ RAVEN_DSN }}').install()
+    Raven.config('{{ SENTRY_DSN }}').install()
     // 全局JS异常捕获方法
     window.onerror = function (msg, file, line, column, error) {
         typeof (Raven) === 'object' && Raven.isSetup() && Raven.captchExpection(e)
