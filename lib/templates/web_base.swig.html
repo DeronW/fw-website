@@ -48,14 +48,7 @@
 <script src="javascripts/lib.js"></script>
 <script src="javascripts/bundle.js"></script>
 {% if !DEBUG %}
-<script src="https://cdn.ravenjs.com/3.9.1/raven.min.js"></script>
-<script>
-    Raven.config('https://4135eb9a33e248e984bcc7789424be8e@sentry.dougemall.com/3').install()
-    window.onerror = function (msg, file, line, column, error) {
-        var e = error || msg + ' ' + file + ':' + line;
-        typeof (Raven) === 'object' && Raven.isSetup() && Raven.captchExpection(e)
-    }
-</script>
+{% include 'partial/expection-handler.swig.html' with {SENTRY_DSN: 'https://4135eb9a33e248e984bcc7789424be8e@sentry.dougemall.com/3'} %}
 {% endif %}
 
 {% block javascripts %}{% endblock %}
