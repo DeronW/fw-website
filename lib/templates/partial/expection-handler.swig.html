@@ -1,8 +1,23 @@
-<script src="javascripts/raven-3.9.1.min.js" crossorigin="anonymous"></script>
+<script src="javascripts/raven-3.10.0.min.js" crossorigin="anonymous"></script>
 <script>
-    Raven.config('{{ SENTRY_DSN }}').install()
+    Raven.config('{{ SENTRY_DSN }}', {
+        autoBreadcrumbs: { xhr: false }
+    }).install()
     // 全局JS异常捕获方法
     window.onerror = function (msg, file, line, column, error) {
-        typeof (Raven) === 'object' && Raven.isSetup() && Raven.captchExpection(e)
+        if (typeof (Raven) === 'object' && Raven.isSetup()) {
+            var err;
+            if (error) {
+                Raven.captureException(error);
+            } else {
+                err = 'Uncatch Error in ' + file + ':' + line;
+                if (column) err += ',' + column;
+                err += ' -> ' + msg;
+                Raven.captureMessage(err);
+            }
+        } else {
+            return; // Raven is now ready
+        }
     }
+
 </script>
