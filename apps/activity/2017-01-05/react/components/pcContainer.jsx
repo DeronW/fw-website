@@ -92,6 +92,7 @@ const PcContainer = React.createClass({
                     </div>
                 </div>
                 <div className="pcQuarterPack">
+                    
                     <div className="quarterTitle"></div>
                     <div className="quarterText">
                         1.6-3.30，全榜30名推荐人的有效好友累投年化总额（不含自身）达到对应礼包标准，平台开启新春特奖。推荐人（有效好友≥100人且有效好友累投年化额≥100万元）奖金为推荐人活动期间的有效好友累投年化额*对应奖金比例。</div>
