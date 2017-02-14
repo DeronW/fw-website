@@ -1,9 +1,9 @@
 const MobileContainer = React.createClass({
     getInitialState: function () {
-        return ({
+        return {
             startDate: '',
             endDate: ''
-        })
+        }
     },
     ajaxMonth: function (start,end) {
         this.getServerTimestamp(function (timestamp) {

@@ -65,7 +65,7 @@ $(function () {
     });
     //移动端活动说明
     $(".mobileActivityExplain").on("click", function () {
-       $(".mobileNoticeActivity").removeClass('hidden')
+        $(".mobileNoticeActivity").removeClass('hidden')
     });
     $(".mobileActivityClose").on("click", function () {
         $(".mobileNoticeActivity").addClass('hidden')
@@ -165,7 +165,7 @@ $(function () {
         if (pullNewCount < 50 || myFriendYearInvest < 500000) {
             titText = '该月内，您有效邀友 <em>' + pullNewCount + '</em> 人，有效好友累投年化 <em>' + myFriendYearInvest + '</em> 元，排名 <em>' + rankNum + '</em>，当前无奖金可分，要努力哦！';
         } else {
-            prize = ((myFriendYearInvest / totalYearInvest) * arg3).toFixed(2);
+            prize = (myFriendYearInvest / totalYearInvest * arg3).toFixed(2);
             titText = '该月内，您有效邀友 <em>' + pullNewCount + '</em> 人，有效好友累投年化 <em>' + myFriendYearInvest + '</em> 元，排名 <em>' + rankNum + '</em>，当前可分得 <em>' + prize + ' </em>元奖金！';
         }
         $UserReady(function (is_login, user) {
@@ -346,7 +346,7 @@ $(function () {
     var startTime = new Date("2017/1/6 00:00:00").getTime();
     var weekList = [];
     for (var i = 0; i < 12; i++) {
-        weekList.push((startTime += weekTime));
+        weekList.push(startTime += weekTime);
     }
     //时间戳
     getServerTimestamp(function (timestamp) {
@@ -355,7 +355,7 @@ $(function () {
         //遮罩层
 
         var startTime = new Date("2017/1/6 00:00:00").getTime();
-        if(nowTime < startTime){
+        if (nowTime < startTime) {
             $(".pcNoStart").removeClass('hidden');
             $(".mobileNoStart").removeClass('hidden');
         }
@@ -414,8 +414,7 @@ $(function () {
         //月份切换
         monthClickChange(nowTime)
     }.bind(this))
-    if(navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion .split(";")[1].replace(/[ ]/g,"")=="MSIE6.0" || navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion .split(";")[1].replace(/[ ]/g,"")=="MSIE7.0" || navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion .split(";")[1].replace(/[ ]/g,"")=="MSIE8.0" || navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion .split(";")[1].replace(/[ ]/g,"")=="MSIE9.0")
-    {
+    if (navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion.split(";")[1].replace(/[ ]/g, "") == "MSIE6.0" || navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion.split(";")[1].replace(/[ ]/g, "") == "MSIE7.0" || navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion.split(";")[1].replace(/[ ]/g, "") == "MSIE8.0" || navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion.split(";")[1].replace(/[ ]/g, "") == "MSIE9.0") {
         $(".copyCode").on('click', function () {
             alert("您的浏览器版本过低, 请手动复制")
         });
