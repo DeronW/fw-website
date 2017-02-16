@@ -2,22 +2,17 @@
 <script>
     Raven.config('{{ SENTRY_DSN }}', {
         autoBreadcrumbs: { xhr: false }
-    }).install()
+    }).install();
     // 全局JS异常捕获方法
     window.onerror = function (msg, file, line, column, error) {
+        var err;
+        err = 'Uncatch Error in ' + file + ':' + line;
+        if (column) err += ',' + column;
+        err += ' -> ' + msg;
+        if(error) err = error;
         if (typeof (Raven) === 'object' && Raven.isSetup()) {
-            var err;
-            if (error) {
-                Raven.captureException(error);
-            } else {
-                err = 'Uncatch Error in ' + file + ':' + line;
-                if (column) err += ',' + column;
-                err += ' -> ' + msg;
-                Raven.captureMessage(err);
-            }
-        } else {
-            return; // Raven is now ready
+            error ? Raven.captureException(err) : Raven.captureMessage(err);
         }
+        console.error(err);
     }
-
 </script>
