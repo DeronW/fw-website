@@ -48,6 +48,10 @@
 
 {% block javascripts %}{% endblock %}
 
-{% if !DEBUG %} {% include './activity/tong-ji.swig.html' %} {% endif %}
+{% if ENV == 'production'  %}
+{% include 'partial/expection-handler.swig.html' with {SENTRY_DSN: 'https://4135eb9a33e248e984bcc7789424be8e@sentry.dougemall.com/3'} %}
+{% endif %}
+
+{% if ENV == 'production' %} {% include './activity/tong-ji.swig.html' %} {% endif %}
 </body>
 </html>
