@@ -1,40 +1,47 @@
 @headerHeight: 50px;
 
-.pc-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 50px;
-  line-height: 50px;
-  background-color: black;
-  z-index: 1000;
+.pc-header-container {
+  height: @headerHeight;
+
+  .pc-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50px;
+    line-height: 50px;
+    background-color: black;
+    z-index: 1000;
+  }
 }
 
-.mobile-header {
-  display: none;
+.mobile-header-container {
   height: 80px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  background: black;
-  z-index: 100;
+  display: none;
+  .mobile-header {
+    height: 80px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: black;
+    z-index: 100;
 
-  .back {
-    display: block;
-    float: left;
-    margin-left: 30px;
-    margin-top: 16px;
-  }
+    .back {
+      display: block;
+      float: left;
+      margin-left: 30px;
+      margin-top: 16px;
+    }
 
-  .link {
-    display: block;
-    float: right;
-    margin-right: 30px;
-    font-size: 24px;
-    color: white;
-    line-height: 80px;
+    .link {
+      display: block;
+      float: right;
+      margin-right: 30px;
+      font-size: 24px;
+      color: white;
+      line-height: 80px;
+    }
   }
 }
 
@@ -85,9 +92,6 @@
     }
   }
 
-  .show-when-not-login {
-
-  }
   .show-when-login {
     display: none
   }
@@ -145,7 +149,6 @@
       border: 1px solid #aaa;
       border-top: 0;
       line-height: 20px;
-      //top: 48px;
       top: 36px;
       left: -1px;
       font-size: 12px;
@@ -314,11 +317,11 @@
 }
 
 @media screen and (max-width: 760px) {
-  .pc-header {
+  .pc-header-container {
     display: none;
   }
 
-  .mobile-header {
+  .mobile-header-container {
     display: block;
   }
 
