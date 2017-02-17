@@ -1,19 +1,121 @@
-em{
+@import "variables.less";
+
+em {
   font-style: normal;
 }
-.templateMainPC{
-  width:100%;
+
+.templateMainPC {
+  width: 100%;
   height: 100%;
-  background: #fff;
+  background: @colorWhite;
   position: relative;
   padding-top: 1px;
-}
-.productListPC{
-  width: 880px;
-  margin:auto;
-  height: 100%;
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between;
-  align-items: center;
+  .bannerPC {
+    width: 100%;
+    height: 360px;
+  }
+  .titlePC {
+    width: 1000px;
+    height: 100%;
+    margin: 660px auto 50px;
+    .titlePCTop {
+      width: 702px;
+      height: 110px;
+      margin: auto;
+      background: url("../images/titleBg.png") no-repeat;
+      text-align: center;
+      font-size: @fontSize30;
+      color: @colorWhite;
+      padding-top: 10px;
+    }
+    .titlePCText {
+      color: @colorWhite;
+      font-size: @fontSize20;
+      width: 702px;
+      text-align: center;
+      margin: auto;
+    }
+  }
+  .movePC {
+    position: fixed;
+    top: 500px;
+    right: 100px;
+    z-index: 2;
+    cursor: pointer;
+    .moveText {
+      display: none;
+      width: 458px;
+      height: 95px;
+      background: url("../images/pcPersonText.png") no-repeat;
+      position: absolute;
+      right: -20px;
+      top: -70px;
+      font-size: @fontSize14;
+      color: @color6;
+      padding: 10px 10px 10px 16px;
+      line-height: 24px;
+      em {
+        color: @colorRed;
+      }
+    }
+    &:hover {
+      .moveText {
+        display: block;
+      }
+    }
+  }
+  .productListPC {
+    width: 880px;
+    margin: auto;
+    height: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .textExplain {
+    width: 880px;
+    height: 36px;
+    margin: 30px auto 30px;
+    text-align: center;
+    color: @colorWhite;
+    background: #5b4ba3;
+    border-radius: 36px;
+    line-height: 36px;
+    font-size: @fontSize14;
+    em {
+      color: @colorYellow;
+    }
+  }
+  .interestBtn {
+    width: 250px;
+    height: 64px;
+    background: url("../images/btn.png") no-repeat;
+    margin: 30px auto 50px;
+    text-align: center;
+    font-size: @fontSize24;
+    color: @colorWhite;
+    line-height: 64px;
+    cursor: pointer;
+  }
+  .activityExplainPC {
+    width: 100%;
+    height: 400px;
+    background: #5b4ba3;
+    color: @colorWhite;
+    .explainPCTitle {
+      padding: 70px 0 20px 0;
+      width: 880px;
+      text-align: left;
+      margin: auto;
+      font-size: 36px;
+    }
+    .explainPCText {
+      width: 880px;
+      text-align: left;
+      font-size: @fontSize14;
+      margin: auto;
+      line-height: 30px;
+    }
+  }
 }

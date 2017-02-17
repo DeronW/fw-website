@@ -1,10 +1,107 @@
+@import "variables.less";
 em{
   font-style: normal;
 }
 .templateMobile{
-  margin-top: 100px;
   width: 100%;
   height: 100%;
+  .bannerMobile{
+    margin-top: 78px;
+    width: 100%;
+    height: 360px;
+  }
+  .titleMobile{
+    width: 692px;
+    margin: auto;
+    color:@colorWhite;
+    .titleTextMobile{
+      font-size: @fontSize34;
+      width: 676px;
+      margin: 20px auto;
+      height: 112px;
+      background: url("../images/titleMobileBg.png") no-repeat;
+      text-align: center;
+      line-height: 82px;
+    }
+    .titleExplainMobile{
+      font-size: @fontSize24;
+      width: 646px;
+      margin: auto;
+      text-align: center;
+      line-height: 34px;
+    }
+  }
+  .moveMobile{
+    position: fixed;
+    right: 20px;
+    top: 540px;
+    z-index: 2;
+    .moveText{
+      width: 670px;
+      height: 170px;
+      background: url("../images/mobilePersonText.png") no-repeat;
+      position: absolute;
+      right: -14px;
+      top: -140px;
+      font-size: @fontSize20;
+      color: @color6;
+      line-height: 40px;
+      padding: 15px 20px 0 20px;
+      em{
+        color: @colorRed;
+      }
+    }
+  }
+  .textExplain{
+    width: 692px;
+    margin: 68px auto 40px;
+    text-align: center;
+    font-size: 23px;
+    color: @colorWhite;
+    line-height: 40px;
+    em{
+      color: #ffef7e;
+    }
+  }
+  .interestBtn{
+    width: 290px;
+    height: 64px;
+    margin: 0 auto 60px;
+    text-align: center;
+    font-size: 26px;
+    color: @colorWhite;
+    line-height: 64px;
+    background: url("../images/mobileBtn.png") no-repeat;
+  }
+  .activityExplainMobile{
+    width: 100%;
+    height: 660px;
+    background: #5b4ba3;
+    color: @colorWhite;
+    .explainMobileTitle{
+      font-size: 40px;
+      padding: 78px 0 24px 0;
+      width: 692px;
+      text-align: center;
+      margin: auto;
+    }
+    .explainMobileText{
+      width: 642px;
+      margin: auto;
+      font-size: @fontSize26;
+      text-align: left;
+      line-height: 40px;
+    }
+    p{
+      width: 100%;
+      height: 76px;
+      line-height: 76px;
+      text-align: center;
+      background: #463989;
+      color: @colorWhite;
+      font-size: @fontSize26;
+    }
+  }
 }
 .productListMobile{
   width: 692px;

@@ -11,15 +11,12 @@ const APP_NAMES = [
 module.exports = function (gulp, generate_task, settings) {
 
     let INCLUDE_COMPONENTS = [
-        `${PROJ}/board/banner-pc.jsx`,
-        `${PROJ}/board/title-pc.jsx`,
         `${PROJ}/board/product-blue-pc.jsx`,
         `${PROJ}/board/product-purple-pc.jsx`,
         `${PROJ}/board/product-orange-pc.jsx`,
         `${PROJ}/board/product-blue-mobile.jsx`,
         `${PROJ}/board/product-purple-mobile.jsx`,
         `${PROJ}/board/product-orange-mobile.jsx`,
-        `${PROJ}/board/activity-explain-pc.jsx`,
         `${PROJ}/ladder/quarter-ladder-pc.jsx`,
         `${PROJ}/ladder/quarter-ladder-mobile.jsx`,
         `${PROJ}/ladder/month-ladder-pc.jsx`,
@@ -39,15 +36,12 @@ module.exports = function (gulp, generate_task, settings) {
     let INCLUDE_LESS = [
         `${PROJ}/reset.less`,
         `${PROJ}/header.less`,
-        `${PROJ}/board/banner-pc.less`,
-        `${PROJ}/board/title-pc.less`,
         `${PROJ}/board/product-blue-pc.less`,
         `${PROJ}/board/product-purple-pc.less`,
         `${PROJ}/board/product-orange-pc.less`,
         `${PROJ}/board/product-blue-mobile.less`,
         `${PROJ}/board/product-purple-mobile.less`,
         `${PROJ}/board/product-orange-mobile.less`,
-        `${PROJ}/board/activity-explain-pc.less`,
         `${PROJ}/ladder/quarter-ladder-pc.less`,
         `${PROJ}/ladder/quarter-ladder-mobile.less`,
         `${PROJ}/ladder/month-ladder-pc.less`,

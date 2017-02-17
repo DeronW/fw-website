@@ -1,6 +1,6 @@
 $(() => {
     let bg = {
-        background:"#6758ac"
+        background:"#6960bd"
     };
     let C = navigator.userAgent.match(/Android|iPhone|iPad|Mobile/i) ?
         <TemplateMobile bg ={bg}/> :
