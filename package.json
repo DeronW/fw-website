@@ -2,8 +2,7 @@
   "name": "website",
   "version": "2.0.0",
   "private": true,
-  "dependencies": {},
-  "devDependencies": {
+  "dependencies": {
     "gulp": "gulpjs/gulp#4.0",
     "gulp-data": ">=1.2",
     "gulp-swig": ">=0.8",
