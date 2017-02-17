@@ -3,7 +3,7 @@ const eslint = require('gulp-eslint');
 const PROJ = 'activity';
 
 const APP_NAMES = [
-    '2017-01-05',
+    // '2017-01-05',
     'topic-template-one'
 ];
 
