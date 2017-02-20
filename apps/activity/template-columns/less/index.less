@@ -1,5 +1,11 @@
+@containerWidth: 1140px;
+@paddingWidth: 40px;
+@contentWidth: @containerWidth - @paddingWidth * 2;
+
 .products-container {
-  width: 1140px;
+  width: @containerWidth;
+  box-sizing: border-box;
+  padding: @paddingWidth;
   margin: 20px auto;
   background: whitesmoke;
 
@@ -17,25 +23,25 @@
 
   .row-col-1 {
     .cell {
-      width: 100%;
+      width: @contentWidth;
     }
   }
 
   .row-col-2 {
     .cell {
-      width: 50%;
+      width: @contentWidth / 2;
     }
   }
 
   .row-col-3 {
     .cell {
-      width: 33%;
+      width: @contentWidth / 3;
     }
   }
 
   .row-col-4 {
     .cell {
-      width: 25%;
+      width: @contentWidth / 4;
     }
   }
 }

@@ -2,7 +2,7 @@ const Content = React.createClass({
     getInitialState() {
         return {
             products: [],
-            num: 3
+            num: 9
         }
     },
     componentDidMount() {
