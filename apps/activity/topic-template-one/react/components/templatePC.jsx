@@ -58,7 +58,9 @@ const TemplatePC = React.createClass({
 
         return (
             <div className="templateMainPC" style={this.props.bg}>
-                <div className="bannerPC"></div>
+                <div className="bannerPC">
+                    <img src="http://placehold.it/1920x360" alt=""/>
+                </div>
                 <div className="titlePC">
                     <div className="titlePCTop">
                         拼累计年化投资，玩转数码奖品盛宴
