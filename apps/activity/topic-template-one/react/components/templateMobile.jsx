@@ -74,7 +74,9 @@ const TemplateMobile = React.createClass({
         };
         return (
             <div className="templateMobile" style={this.props.bg} onTouchEnd={() => {this.handleMoveHidden()}}>
-                <div className="bannerMobile"></div>
+                <div className="bannerMobile">
+                    <img src="http://placehold.it/720x360" alt=""/>
+                </div>
                 <div className="titleMobile">
                     <div className="titleTextMobile">拼累计年化投资，玩转数码奖品盛宴</div>
                     <div className="titleExplainMobile">活动期间，用户累计投资年化满额，可获得不同级别的实物 奖品，奖品不累加。</div>
