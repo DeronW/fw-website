@@ -3,28 +3,68 @@ const TemplateMobile = React.createClass({
         return {
             text: '',
             isLogin: false,
-            isShow: false
+            isShow: false,
+            products:[]
         }
     },
     componentDidMount: function () {
         var _this = this;
+        //$.get("javascripts/getPersonDate.json",(resolve)=>{
+        //    var data = resolve.data;
+        //    var text = '';
+        //    var prize = '';
+        //    if (data.totalYearMoney >= data.list[data.list.length - 1].levelprice) {
+        //        for (var i = 0; i < data.list.length; i++) {
+        //            if (data.totalYearMoney > data.list[i].levelprice) {
+        //                prize = data.list[i].goodsname;
+        //                text = `活动期间，您已累计投资 <em>${data.totalInvestedMoney}</em> 元，折合年化 <em>${data.totalYearMoney}</em> 元，获<br/><em>${prize}</em>`
+        //                break;
+        //            }
+        //        }
+        //    } else {
+        //        text = `活动期间，您已累计投资 <em>${data.totalInvestedMoney}</em> 元，折合年化 <em>${data.totalYearMoney}</em> 元，当前没有奖品可拿，继续加油`
+        //    }
+        //    _this.setState({
+        //        products: data.list,
+        //        isLogin: true,
+        //        text: text
+        //    });
+        //},"json");
         $UserReady(function (isLogin, user) {
-            if (isLogin) {
-                _this.setState({
-                    isLogin: true,
-                    text: '活动期间，您已累计投资 <em>12,000</em> 元，折合年化 <em>1,052,536</em> 元，<br/>可获得<em>天梭机械情侣表一对</em>'
-                });
-            } else {
-                _this.setState({
-                    isLogin: false,
-                    text: '请登录后，查看您的投资获奖情况。'
-                });
-            }
+            $.get(API_PATH + 'api/investReward/v1/getPersonDate.do?id=1').then((resolve)=> {
+                var data = resolve.data;
+                if (isLogin) {
+                    var text = '';
+                    var prize = '';
+                    if (data.totalYearMoney >= data.list[data.list.length - 1].levelprice) {
+                        for (var i = 0; i < data.list.length; i++) {
+                            if (data.totalYearMoney > data.list[i].levelprice) {
+                                prize = data.list[i].goodsname;
+                                text = `${data.roundTime}，您已累计投资 <em>${data.totalInvestedMoney}</em> 元，折合年化 <em>${data.totalYearMoney}</em> 元，获 ${prize}`
+                                break;
+                            }
+                        }
+                    } else {
+                        text = `${data.roundTime}，您已累计投资 <em>${data.totalInvestedMoney}</em> 元，折合年化 <em>${data.totalYearMoney}</em> 元，当前没有奖品可拿，继续加油`
+                    }
+                    _this.setState({
+                        products: data.list,
+                        isLogin: true,
+                        text: text
+                    });
+                } else {
+                    _this.setState({
+                        products: data.list,
+                        isLogin: false,
+                        text: '请登录后，查看您的投资获奖情况。'
+                    });
+                }
+            });
         });
     },
     handleInterest: function () {
         var loginUrl =  location.href = 'https://passport.9888.cn/passport/login?sourceSite=jrgc';
-        this.state.isLogin ? location.href = "https://www.9888.cn/prdClaims/list.shtml" : $FW.gotoSpecialPage("登录", loginUrl);
+        this.state.isLogin ? location.href = "https://m.9888.cn/mpwap/new/prdclaims/prdPageList.shtml" : $FW.gotoSpecialPage("登录", loginUrl);
     },
     handleMoveShow: function () {
         this.setState({
@@ -36,38 +76,16 @@ const TemplateMobile = React.createClass({
         this.setState({
             isShow: false
         });
-        console.log(this.state.isShow);
     },
     render: function () {
-        let productBlue1 = {
-            num: '≥10',
-            name: '送SK-II PITERA基础护肤奇迹套装',
-            img: 'http://placehold.it/234x234'
-        };
-        let productBlue2 = {
-            num: '≥15',
-            name: '送SK-II PITERA基础护肤奇迹套装',
-            img: 'http://placehold.it/234x234'
-        };
-        let productPurple1 = {
-            num: '≥20',
-            name: '送SK-II PITERA基础护肤奇迹套装',
-            img: 'http://placehold.it/234x234'
-        };
-        let productPurple2 = {
-            num: '≥30',
-            name: '送SK-II PITERA基础护肤奇迹套装',
-            img: 'http://placehold.it/234x234'
-        };
-        let productOrange1 = {
-            num: '≥35',
-            name: '送SK-II PITERA基础护肤奇迹套装',
-            img: 'http://placehold.it/234x234'
-        };
-        let productOrange2 = {
-            num: '≥40',
-            name: '送SK-II PITERA基础护肤奇迹套装',
-            img: 'http://placehold.it/234x234'
+        var product = (p, i) => {
+            if(i % 6 == 0 || i % 6 == 1){
+                return <ProductBlueMobile key={i} product={p}/>
+            }else if(i % 6 == 2 || i % 6 == 3){
+                return <ProductPurpleMobile key={i} product={p}/>
+            }else{
+                return <ProductOrangeMobile key={i} product={p}/>
+            }
         };
         var hidden = {
             display: this.state.isShow ? "block" : "none"
@@ -89,12 +107,7 @@ const TemplateMobile = React.createClass({
                     </div>
                 </div>
                 <div className="productListMobile">
-                    <ProductBlueMobile product={productBlue1}/>
-                    <ProductBlueMobile product={productBlue2}/>
-                    <ProductPurpleMobile product={productPurple1}/>
-                    <ProductPurpleMobile product={productPurple2}/>
-                    <ProductOrangeMobile product={productOrange1}/>
-                    <ProductOrangeMobile product={productOrange2}/>
+                    {this.state.products.map(product)}
                 </div>
                 <div className="textExplain" dangerouslySetInnerHTML={{__html:this.state.text}}></div>
                 <div className="interestBtn" onClick={() => this.handleInterest()}>

@@ -2,10 +2,10 @@ const ProductOrangePC= React.createClass({
     render: function () {
         return(
             <div className="productOrangePC">
-                <img className="productImg" src={this.props.product.img} alt=""/>
+                <img className="productImg" src={this.props.product.picture} alt=""/>
                 <div className="productBg"></div>
-                <div className="productText">累计投资年化<em>{this.props.product.num}</em>万</div>
-                <div className="productName">{this.props.product.name}</div>
+                <div className="productText">累计投资年化<em>≥{this.props.product.levelprice/10000}</em>万</div>
+                <div className="productName">{this.props.product.goodsname}</div>
             </div>
         )
     }

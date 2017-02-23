@@ -2,60 +2,78 @@ const TemplatePC = React.createClass({
     getInitialState: function () {
         return {
             text: '',
-            isLogin: false
+            isLogin: false,
+            products: []
         }
     },
     componentDidMount: function () {
         var _this = this;
+        //$.get("javascripts/getPersonDate.json",(resolve)=>{
+        //    var data = resolve.data;
+        //    var text = '';
+        //    var prize = '';
+        //    if (data.totalYearMoney >= data.list[data.list.length - 1].levelprice) {
+        //        for (var i = 0; i < data.list.length; i++) {
+        //            if (data.totalYearMoney > data.list[i].levelprice) {
+        //                prize = data.list[i].goodsname;
+        //                text = `活动期间，您已累计投资 <em>${data.totalInvestedMoney}</em> 元，折合年化 <em>${data.totalYearMoney}</em> 元，获 <em>${prize}</em>`
+        //                break;
+        //            }
+        //        }
+        //    } else {
+        //        text = `活动期间，您已累计投资 <em>${data.totalInvestedMoney}</em> 元，折合年化 <em>${data.totalYearMoney}</em> 元，当前没有奖品可拿，继续加油`
+        //    }
+        //    _this.setState({
+        //        products: data.list,
+        //        isLogin: true,
+        //        text: text
+        //    });
+        //},"json");
         $UserReady(function (isLogin, user) {
-            if (isLogin) {
-                _this.setState({
-                    isLogin: true,
-                    text: '活动期间，您已累计投资 <em>12,510,000</em> 元，折合年化 <em>1,052,536</em> 元，当前没有奖品可拿，继续加油！<em>天梭机械情侣表一对</em>'
-                });
-            } else {
-                _this.setState({
-                    isLogin: false,
-                    text: '请登录后，查看您的投资获奖情况。'
-                });
-            }
+            $.get(API_PATH + 'api/investReward/v1/getPersonDate.do?id=1').then((resolve)=> {
+                var data = resolve.data;
+                if (isLogin) {
+                    var text = '';
+                    var prize = '';
+                    if (data.totalYearMoney >= data.list[data.list.length - 1].levelprice) {
+                        for (var i = 0; i < data.list.length; i++) {
+                            if (data.totalYearMoney > data.list[i].levelprice) {
+                                prize = data.list[i].goodsname;
+                                text = `${data.roundTime}，您已累计投资 <em>${data.totalInvestedMoney}</em> 元，折合年化 <em>${data.totalYearMoney}</em> 元，获 ${prize}`
+                                break;
+                            }
+                        }
+                    } else {
+                        text = `${data.roundTime}，您已累计投资 <em>${data.totalInvestedMoney}</em> 元，折合年化 <em>${data.totalYearMoney}</em> 元，当前没有奖品可拿，继续加油`
+                    }
+                    _this.setState({
+                        products: data.list,
+                        isLogin: true,
+                        text: text
+                    });
+                } else {
+                    _this.setState({
+                        products: data.list,
+                        isLogin: false,
+                        text: '请登录后，查看您的投资获奖情况。'
+                    });
+                }
+            });
         });
     },
     handleInterest: function () {
         this.state.isLogin ? location.href = "https://www.9888.cn/prdClaims/list.shtml" : location.href = 'https://passport.9888.cn/passport/login?sourceSite=jrgc'
     },
     render: function () {
-        let productBlue1 = {
-            num: '≥10',
-            name: '送SK-II PITERA基础护肤奇迹套装',
-            img: 'http://placehold.it/280x280'
+        var product = (p, i) => {
+            if(i % 6 == 0 || i % 6 == 1){
+                return <ProductBluePC key={i} product={p}/>
+            }else if(i % 6 == 2 || i % 6 == 3){
+                return <ProductPurplePC key={i} product={p}/>
+            }else{
+                return <ProductOrangePC key={i} product={p}/>
+            }
         };
-        let productBlue2 = {
-            num: '≥15',
-            name: '送SK-II PITERA基础护肤奇迹套装',
-            img: 'http://placehold.it/280x280'
-        };
-        let productPurple1 = {
-            num: '≥20',
-            name: '送SK-II PITERA基础护肤奇迹套装',
-            img: 'http://placehold.it/280x280'
-        };
-        let productPurple2 = {
-            num: '≥30',
-            name: '送SK-II PITERA基础护肤奇迹套装',
-            img: 'http://placehold.it/280x280'
-        };
-        let productOrange1 = {
-            num: '≥35',
-            name: '送SK-II PITERA基础护肤奇迹套装',
-            img: 'http://placehold.it/280x280'
-        };
-        let productOrange2 = {
-            num: '≥40',
-            name: '送SK-II PITERA基础护肤奇迹套装',
-            img: 'http://placehold.it/280x280'
-        };
-
         return (
             <div className="templateMainPC" style={this.props.bg}>
                 <div className="bannerPC">
@@ -69,18 +87,14 @@ const TemplatePC = React.createClass({
                 </div>
                 <div className="movePC">
                     <img className="moveImg" src="images/move.gif" alt=""/>
+
                     <div className="moveText">
                         有效好友标准：<em>好友注册7天内累投年化额≥1000元</em>才算一个有效邀请。
                         温馨提示：投资等额标，超过18个月按18个月计算年化额
                     </div>
                 </div>
                 <div className="productListPC">
-                    <ProductBluePC product={productBlue1}/>
-                    <ProductBluePC product={productBlue2}/>
-                    <ProductPurplePC product={productPurple1}/>
-                    <ProductPurplePC product={productPurple2}/>
-                    <ProductOrangePC product={productOrange1}/>
-                    <ProductOrangePC product={productOrange2}/>
+                    {this.state.products.map(product)}
                 </div>
                 <div className="textExplain" dangerouslySetInnerHTML={{__html:this.state.text}}></div>
                 <div className="interestBtn" onClick={() => this.handleInterest()}>
