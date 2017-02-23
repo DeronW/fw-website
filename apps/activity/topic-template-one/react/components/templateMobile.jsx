@@ -63,7 +63,7 @@ const TemplateMobile = React.createClass({
         });
     },
     handleInterest: function () {
-        var loginUrl =  location.href = 'https://www.9888.cn/static/activity/topic-template-one/index.html';
+        var loginUrl = 'https://www.9888.cn/static/activity/topic-template-one/index.html';
         this.state.isLogin ? location.href = "https://m.9888.cn/mpwap/new/prdclaims/prdPageList.shtml" : $FW.gotoSpecialPage("登录", loginUrl);
     },
     handleMoveShow: function () {

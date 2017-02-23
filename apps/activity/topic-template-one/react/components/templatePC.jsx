@@ -62,7 +62,8 @@ const TemplatePC = React.createClass({
         });
     },
     handleInterest: function () {
-        this.state.isLogin ? location.href = "https://www.9888.cn/prdClaims/list.shtml" : location.href = 'https://www.9888.cn/static/activity/topic-template-one/index.html'
+        var loginUrl = 'https://www.9888.cn/static/activity/topic-template-one/index.html';
+        this.state.isLogin ? location.href = "https://www.9888.cn/prdClaims/list.shtml" : $FW.gotoSpecialPage("登录", loginUrl);
     },
     render: function () {
         var product = (p, i) => {
