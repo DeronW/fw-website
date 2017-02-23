@@ -31,7 +31,7 @@ const TemplateMobile = React.createClass({
         //    });
         //},"json");
         $UserReady(function (isLogin, user) {
-            $.get(API_PATH + 'api/investReward/v1/getPersonDate.do?id=1').then((resolve)=> {
+            $.get(API_PATH + 'api/investReward/v1/getPersonDate.do?id=1&m=200000').then((resolve)=> {
                 var data = resolve.data;
                 if (isLogin) {
                     var text = '';
@@ -40,7 +40,7 @@ const TemplateMobile = React.createClass({
                         for (var i = 0; i < data.list.length; i++) {
                             if (data.totalYearMoney > data.list[i].levelprice) {
                                 prize = data.list[i].goodsname;
-                                text = `${data.roundTime}，您已累计投资 <em>${data.totalInvestedMoney}</em> 元，折合年化 <em>${data.totalYearMoney}</em> 元，获 ${prize}`
+                                text = `${data.roundTime}，您已累计投资 <em>${data.totalInvestedMoney}</em> 元，折合年化 <em>${data.totalYearMoney}</em> 元，获 <em>${prize}</em>`
                                 break;
                             }
                         }
@@ -63,7 +63,7 @@ const TemplateMobile = React.createClass({
         });
     },
     handleInterest: function () {
-        var loginUrl =  location.href = 'https://passport.9888.cn/passport/login?sourceSite=jrgc';
+        var loginUrl =  location.href = 'https://www.9888.cn/static/activity/topic-template-one/index.html';
         this.state.isLogin ? location.href = "https://m.9888.cn/mpwap/new/prdclaims/prdPageList.shtml" : $FW.gotoSpecialPage("登录", loginUrl);
     },
     handleMoveShow: function () {

@@ -62,7 +62,7 @@ const TemplatePC = React.createClass({
         });
     },
     handleInterest: function () {
-        this.state.isLogin ? location.href = "https://www.9888.cn/prdClaims/list.shtml" : location.href = 'https://passport.9888.cn/passport/login?sourceSite=jrgc'
+        this.state.isLogin ? location.href = "https://www.9888.cn/prdClaims/list.shtml" : location.href = 'https://www.9888.cn/static/activity/topic-template-one/index.html'
     },
     render: function () {
         var product = (p, i) => {
