@@ -5,7 +5,8 @@ const PROJ = 'activity';
 const APP_NAMES = [
     // '2017-01-05',
     'topic-template-one',
-    'template-columns'
+    'template-columns',
+    'template-lottery-draw'
 ];
 
 module.exports = function (gulp, generate_task, settings) {
