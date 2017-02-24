@@ -1,0 +1,66 @@
+@import "variables";
+.slotShow{
+  margin-top: 48px;
+  width:654px;
+  height: 456px;
+  background: url("../images/slot.png") no-repeat;
+  position: relative;
+  .current{
+    width: 138px;
+    height: 168px;
+    overflow: hidden;
+    position: absolute;
+    top: 100px;
+    left: 86px;
+    .product{
+      width: 100%;
+      height: 100%;
+      img{
+        display: block;
+        width: 138px;
+        height: 138px;
+      }
+      p{
+        height: 20px;
+        width: 138px;
+        text-align: center;
+      }
+    }
+  }
+  .current1{
+    position: absolute;
+    top: 100px;
+    left: 246px;
+  }
+  .current2{
+    position: absolute;
+    top: 100px;
+    left: 406px;
+  }
+  .onceBtn{
+    position: absolute;
+    bottom: 84px;
+    left:80px;
+    width: 206px;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    color: #e43f00;
+    font-size: @fontSize20;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  .tenBtn{
+    position: absolute;
+    bottom: 84px;
+    left:340px;
+    width: 206px;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    color: #e43f00;
+    font-size: @fontSize20;
+    font-weight: bold;
+    cursor: pointer;
+  }
+}

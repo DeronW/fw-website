@@ -1,7 +1,31 @@
 const SlotMachinePC = React.createClass({
     getInitialState(){
-        this.imgs = ["images/one.png", "images/two.png", "images/three.png", "images/one.png", "images/two.png", "images/three.png"];
-        this.productsName=['苹果笔记本','智能手环','智能手机','苹果笔记本','智能手环','智能手机'];
+        this.products = [
+            {
+                img: 'images/one.png',
+                name: '苹果笔记本'
+            },
+            {
+                img: 'images/two.png',
+                name: '手环'
+            },
+            {
+                img: 'images/three.png',
+                name: '手机'
+            },
+            {
+                img: 'images/one.png',
+                name: '苹果笔记本'
+            },
+            {
+                img: 'images/two.png',
+                name: '手环'
+            },
+            {
+                img: 'images/three.png',
+                name: '手机'
+            }
+        ];
         return {
             arr: [],
             position: 0
@@ -9,16 +33,19 @@ const SlotMachinePC = React.createClass({
     },
     componentDidMount(){
         this.setState({
-            arr: this.imgs
+            arr: this.products
         });
-
     },
-    lotteryDraw(){
+    onceLotteryDraw(){
+        if(window.delay) return;
+        window.delay = true;
+        setTimeout(()=>{
+            window.delay = false;
+        },parseInt(Math.random() * 10) * 500);
+
         var destination = 30;
-        var count = 0;
-        var iSpeed = 0;
-        let timer = setInterval(() => {
-            if (destination >= (this.state.arr.length - 1) * 138) {
+        var timer = setInterval(() => {
+            if (destination >= (this.state.arr.length - 1) * 168) {
                 destination = 30;
                 this.setState({
                     position: destination
@@ -30,26 +57,78 @@ const SlotMachinePC = React.createClass({
         }, 30);
         setTimeout(()=> {
             let {position} = this.state;
-
             this.setState({
-                position: parseInt(position / 138) * 138
+                position: parseInt(position / 168) * 168
             });
             clearInterval(timer);
-            console.log(this.productsName[parseInt(position / 138)]);
-        }, parseInt(Math.random() * 10) * 500)
+            setTimeout(()=> {
+                alert(this.state.arr[parseInt(position / 168)].name)
+            }, 100)
+        }, parseInt(Math.random() * 10) * 500);
+    },
+    tenLotteryDraw(){
+        if(window.delay) return;
+        window.delay = true;
+        setTimeout(()=>{
+            window.delay = false;
+        },parseInt(Math.random() * 10) * 500);
+
+        var destination = 30;
+        this.products.push({
+            img:"images/gift.png",
+            name:'大礼包'
+        });
+        this.setState({
+            arr:this.products
+        });
+        var timer = setInterval(() => {
+            if (destination >= (this.state.arr.length - 1) * 168) {
+                destination = 30;
+                this.setState({
+                    position: destination
+                });
+            } else {
+                destination += 30;
+                this.setState({position: destination});
+            }
+        }, 30);
+        setTimeout(()=> {
+            this.setState({
+                position: 6 * 168
+            });
+            clearInterval(timer);
+            setTimeout(()=> {
+                alert(this.state.arr[this.state.arr.length-1].name);
+                this.products.pop({
+                    img:"images/gift.png",
+                    name:'大礼包'
+                });
+            }, 100)
+        }, parseInt(Math.random() * 10) * 500);
     },
     render(){
         let noticePosition = {
             transform: 'translateY(-' + this.state.position + 'px)'
         };
-        let img = (item, index) => {
-            return <img style={noticePosition} key={index} src={item} alt=""/>
-        };
-        return <div className="imgShow">
-            <div className="current">
-                {this.state.arr.map(img)}
+        let products = (item, index) => {
+            return <div className="product" key={index}>
+                <img style={noticePosition} src={item.img} alt=""/>
+
+                <p style={noticePosition}>{item.name}</p>
             </div>
-            <div className="btn" onClick={this.lotteryDraw}>抽奖</div>
+        };
+        return <div className="slotShow">
+            <div className="current">
+                {this.state.arr.map(products)}
+            </div>
+            <div className="current current1">
+                {this.state.arr.map(products)}
+            </div>
+            <div className="current current2">
+                {this.state.arr.map(products)}
+            </div>
+            <div className="onceBtn" onClick={this.onceLotteryDraw}>抽奖一次</div>
+            <div className="tenBtn" onClick={this.tenLotteryDraw}>抽奖十次</div>
         </div>
     }
 });
