@@ -36,6 +36,9 @@ const SlotMachinePC = React.createClass({
             arr: this.products
         });
     },
+    closePopHandler(){
+        ReactDOM.unmountComponentAtNode(document.getElementById('pop'));
+    },
     onceLotteryDraw(){
         if(window.delay) return;
         window.delay = true;
@@ -62,7 +65,11 @@ const SlotMachinePC = React.createClass({
             });
             clearInterval(timer);
             setTimeout(()=> {
-                alert(this.state.arr[parseInt(position / 168)].name)
+                //ReactDOM.render(<PopMessage closePopHandle={this.closePopHandler} popMyPrize="我的奖品" popNoTitle="暂无中奖记录" popBtn="朕知道了"/>,document.getElementById('pop'))
+                //ReactDOM.render(<PopMessage closePopHandle={this.closePopHandler} popTitle="抱歉，抽奖异常！" popText="请稍后再试，如需咨询请联系客服400-0322-988 。" popBtn="朕知道了"/>,document.getElementById('pop'))
+                //ReactDOM.render(<PopOnePrize closePopHandle={this.closePopHandler} popPrize="1888工豆" popNumber="10" popBtn='继续抽奖'/>,document.getElementById('pop'))
+                //ReactDOM.render(<PopZero closePopHandle={this.closePopHandler}/>,document.getElementById('pop'))
+
             }, 100)
         }, parseInt(Math.random() * 10) * 500);
     },
@@ -71,7 +78,7 @@ const SlotMachinePC = React.createClass({
         window.delay = true;
         setTimeout(()=>{
             window.delay = false;
-        },parseInt(Math.random() * 10) * 500);
+        },parseInt(Math.random() * 10) * 500 - 100);
 
         var destination = 30;
         this.products.push({
@@ -98,7 +105,7 @@ const SlotMachinePC = React.createClass({
             });
             clearInterval(timer);
             setTimeout(()=> {
-                alert(this.state.arr[this.state.arr.length-1].name);
+                ReactDOM.render(<PopTenPrice closePopHandle={this.closePopHandler} popNumber="10" popBtn="继续抽奖"/>,document.getElementById('pop'));
                 this.products.pop({
                     img:"images/gift.png",
                     name:'大礼包'
@@ -106,14 +113,14 @@ const SlotMachinePC = React.createClass({
             }, 100)
         }, parseInt(Math.random() * 10) * 500);
     },
+
     render(){
         let noticePosition = {
             transform: 'translateY(-' + this.state.position + 'px)'
         };
         let products = (item, index) => {
             return <div className="product" key={index}>
-                <img style={noticePosition} src={item.img} alt=""/>
-
+                <img style={noticePosition} src={item.img} />
                 <p style={noticePosition}>{item.name}</p>
             </div>
         };
@@ -129,6 +136,8 @@ const SlotMachinePC = React.createClass({
             </div>
             <div className="onceBtn" onClick={this.onceLotteryDraw}>抽奖一次</div>
             <div className="tenBtn" onClick={this.tenLotteryDraw}>抽奖十次</div>
+            <div className="onceText">消耗1次抽奖机会</div>
+            <div className="tenText">消耗10次抽奖机会</div>
         </div>
     }
 });

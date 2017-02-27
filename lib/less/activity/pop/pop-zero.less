@@ -1,0 +1,71 @@
+@import "variables.less";
+.popZero{
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: url("../images/popBg.png");
+  .popZeroContent{
+    width: 596px;
+    height: 478px;
+    background: url("../images/zero.png") no-repeat;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+  }
+  .closePop{
+    width: 62px;
+    height: 62px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    cursor: pointer;
+  }
+  .popTitle{
+    width: 596px;
+    text-align: center;
+    font-size: @fontSize30;
+    color: @color6;
+    position: absolute;
+    top: 180px;
+    left: 0;
+  }
+  .popText{
+    position: absolute;
+    top: 240px;
+    left: 0;
+    width: 596px;
+    text-align: center;
+    font-size: @fontSize18;
+    color: @color6;
+  }
+  .interestBtn{
+    display: block;
+    width: 230px;
+    height: 62px;
+    position: absolute;
+    left: 40px;
+    bottom: 110px;
+    text-align: center;
+    line-height: 58px;
+    color: @colorRed;
+    cursor: pointer;
+    font-size: @fontSize24;
+  }
+  .cancelBtn{
+    width: 230px;
+    height: 62px;
+    position: absolute;
+    right: 70px;
+    bottom: 110px;
+    text-align: center;
+    line-height: 58px;
+    color: @color6;
+    cursor: pointer;
+    font-size: @fontSize24;
+  }
+}

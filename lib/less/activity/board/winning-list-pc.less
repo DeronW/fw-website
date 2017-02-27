@@ -1,0 +1,35 @@
+@import "variables.less";
+.winningListPC{
+  width: 374px;
+  height: 496px;
+  background: url("../images/listPC.png") no-repeat;
+  position: relative;
+  .myPrize{
+    position: absolute;
+    right: 15px;
+    top: 35px;
+    width: 92px;
+    height: 70px;
+    cursor: pointer;
+  }
+  .list{
+    width: 308px;
+    height: 272px;
+    position: absolute;
+    top: 120px;
+    left: 32px;
+    overflow: hidden;
+    display: block;
+    table{
+      width: 100%;
+    }
+    .listCell{
+      td{
+        width: 33.33%;
+        text-align: center;
+        white-space:nowrap;
+        line-height: 42px;
+      }
+    }
+  }
+}

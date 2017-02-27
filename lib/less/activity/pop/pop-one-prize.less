@@ -1,0 +1,63 @@
+@import "variables.less";
+.popOnePrize{
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: url("../images/popBg.png");
+  .popOnePrizeContent{
+    width: 596px;
+    height: 478px;
+    background: url("../images/oncePrize.png") no-repeat;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+  }
+  .closePop{
+    width: 62px;
+    height: 62px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    cursor: pointer;
+  }
+  .popTitle{
+    width: 596px;
+    text-align: center;
+    font-size: @fontSize30;
+    color: @colorRed;
+    position: absolute;
+    left: 0;
+    top: 200px;
+  }
+  .popText{
+    width: 596px;
+    text-align: center;
+    color: @color6;
+    position: absolute;
+    left: 0;
+    top: 240px;
+    font-size: @fontSize18;
+    line-height: 10px;
+    em{
+      color: @colorRed;
+    }
+  }
+  .popBtn{
+    width: 230px;
+    height: 62px;
+    text-align: center;
+    line-height: 58px;
+    font-size: @fontSize24;
+    color: @colorRed;
+    position: absolute;
+    left: 180px;
+    bottom: 80px;
+    background: url("../images/popBtn.png") no-repeat;
+    cursor: pointer;
+  }
+}
