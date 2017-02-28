@@ -30,7 +30,7 @@ module.exports = function (gulp, generate_task, settings) {
         `${PROJ}/pop/pop-zero.jsx`,
         `${PROJ}/pop/pop-more-prize.jsx`,
         `${PROJ}/board/slot-machine-pc.jsx`,
-        `${PROJ}/board/slot-machine-mobile.jsx`,
+        `${PROJ}/board/poke-balloon-mobile.jsx`,
         `${PROJ}/board/winning-list-pc.jsx`,
         `${PROJ}/board/winning-list-mobile.jsx`,
     ];
@@ -64,7 +64,7 @@ module.exports = function (gulp, generate_task, settings) {
         `${PROJ}/pop/pop-zero.less`,
         `${PROJ}/pop/pop-more-prize.less`,
         `${PROJ}/board/slot-machine-pc.less`,
-        `${PROJ}/board/slot-machine-mobile.less`,
+        `${PROJ}/board/poke-balloon-mobile.less`,
         `${PROJ}/board/winning-list-pc.less`,
         `${PROJ}/board/winning-list-mobile.less`,
     ];
