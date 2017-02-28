@@ -47,6 +47,7 @@ const SlotMachinePC = React.createClass({
         },parseInt(Math.random() * 10) * 500);
 
         var destination = 30;
+
         var timer = setInterval(() => {
             if (destination >= (this.state.arr.length - 1) * 168) {
                 destination = 30;
@@ -58,6 +59,7 @@ const SlotMachinePC = React.createClass({
                 this.setState({position: destination});
             }
         }, 30);
+
         setTimeout(()=> {
             let {position} = this.state;
             this.setState({
