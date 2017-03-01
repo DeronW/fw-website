@@ -1,7 +1,7 @@
-const PokeBalloonMobile = React.createClass({
+const BalloonBoom = React.createClass({
     getInitialState(){
         return {
-            bluePath: 'images/blue.png',
+            bluePath: this.props.path,
             giftPath: ''
         }
     },
@@ -28,16 +28,32 @@ const PokeBalloonMobile = React.createClass({
             }
         }, 40);
     },
+   render(){
+       let blueStyle = {
+           position: 'absolute',
+           left: '0',
+           top: '110px'
+       };
+       return <div className="ballBoom">
+           <img className="giftBoom" src={this.state.giftPath} alt=""/>
+           <img className="blueBalloon" onClick={this.balloonBoomHandler}
+                style={this.state.bluePath == 'images/giftMobile.png' ? blueStyle:{}} src={this.state.bluePath}/>
+       </div>
+   }
+});
+
+const PokeBalloonMobile = React.createClass({
     render(){
-        let blueStyle = {
-            position: 'absolute',
-            left: '0',
-            top: '110px'
-        };
         return <div className="pokeBalloonMobile">
-            <img className="giftBoom" src={this.state.giftPath} alt=""/>
-            <img className="blueBalloon" onClick={this.balloonBoomHandler}
-                 style={this.state.bluePath == 'images/giftMobile.png' ? blueStyle:{}} src={this.state.bluePath}/>
+            <div className="ball">
+                <BalloonBoom path='images/blue.png'/>
+            </div>
+            <div className="ball2">
+                <BalloonBoom path='images/purple.png'/>
+            </div>
+            <div className="ball3">
+                <BalloonBoom path='images/pink.png'/>
+            </div>
         </div>
     }
 });

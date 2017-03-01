@@ -7,10 +7,16 @@ const RockProduct = React.createClass({
     lotteryDrawHandler(speed, id){
         var productList = this.props.productList;
         var s = 0;
+        var i = 0;
         var count = 0;
         var timer = setInterval(()=> {
             var position = this.state.position;
-            var target = (id - 1) * 182;
+            productList.forEach((item,index)=>{
+               if(item.id == id){
+                   i = index;
+               }
+            });
+            var target = (i - 1) * 182;
             if (position >= (productList.length - 1) * 182) {
                 this.setState({
                     position: speed
