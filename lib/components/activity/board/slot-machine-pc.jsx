@@ -1,20 +1,24 @@
 const RockProduct = React.createClass({
-    getInitialState(){
+    getInitialState() {
         return {
-            position: 0
+            position: 0,
+            result: null
         }
     },
-    lotteryDrawHandler(speed, id){
+    componentWillReceiveProps(next_props) {
+        this.setState({ result: next_props.result }, this.lotteryDrawHandler)
+    },
+    lotteryDrawHandler(speed, id) {
         var productList = this.props.productList;
         var s = 0;
         var i = 0;
         var count = 0;
-        var timer = setInterval(()=> {
+        var timer = setInterval(() => {
             var position = this.state.position;
-            productList.forEach((item,index)=>{
-               if(item.id == id){
-                   i = index;
-               }
+            productList.forEach((item, index) => {
+                if (item.id == id) {
+                    i = index;
+                }
             });
             var target = (i - 1) * 182;
             if (position >= (productList.length - 1) * 182) {
@@ -22,8 +26,8 @@ const RockProduct = React.createClass({
                     position: speed
                 });
                 count++;
-                if(count == 2){
-                    this.setState({position: target});
+                if (count == 2) {
+                    this.setState({ position: target });
                     clearInterval(timer);
                 }
             } else {
@@ -34,13 +38,13 @@ const RockProduct = React.createClass({
             }
         }, 30)
     },
-    render(){
+    render() {
         let position = {
             transform: 'translateY(-' + this.state.position + 'px)'
         };
         let products = (item, index) => {
             return <div className="product" key={index}>
-                <img style={position} src={item.img}/>
+                <img style={position} src={item.img} />
 
                 <p style={position}>{item.name}</p>
             </div>
@@ -52,50 +56,18 @@ const RockProduct = React.createClass({
 });
 
 const SlotMachinePC = React.createClass({
-    getInitialState(){
-        this.products = [
-            {
-                id: 1,
-                img: 'images/one.png',
-                name: '苹果笔记本'
-            },
-            {
-                id: 2,
-                img: 'images/two.png',
-                name: '手环'
-            },
-            {
-                id: 3,
-                img: 'images/three.png',
-                name: '手机'
-            },
-            {
-                id: 4,
-                img: 'images/one.png',
-                name: '苹果笔记本'
-            },
-            {
-                id: 5,
-                img: 'images/two.png',
-                name: '手环'
-            },
-            {
-                id: 6,
-                img: 'images/three.png',
-                name: '手机'
-            }
-        ];
+    getInitialState() {
         return {
             arr: [],
-            position: 0
+            position: 0,
+
+            result: null,
+            // prize_list: this.props.prize_list
         }
     },
-    componentDidMount(){
-        this.setState({
-            arr: this.products
-        });
+    componentDidMount() {
     },
-    closePopHandler(){
+    closePopHandler() {
         ReactDOM.unmountComponentAtNode(document.getElementById('pop'));
     },
     //onceLotteryDraw(){
@@ -192,25 +164,28 @@ const SlotMachinePC = React.createClass({
     //        }, 100)
     //    }, parseInt(Math.random() * 10) * 500);
     //},
-    rockLotteryDraw(){
+    rockLotteryDraw() {
         this.refs.rockProduct.lotteryDrawHandler(30, 4);
-        setTimeout(()=> {
+        setTimeout(() => {
             this.refs.rockProduct2.lotteryDrawHandler(30, 4);
         }, 300);
-        setTimeout(()=> {
+        setTimeout(() => {
             this.refs.rockProduct3.lotteryDrawHandler(30, 4);
         }, 600);
     },
-    render(){
+    render() {
+        let {prize_list} = this.props;
+        let {result} = this.state;
+
         return <div className="slotShow">
             <div className="current">
-                <RockProduct productList={this.state.arr} ref="rockProduct"/>
+                <RockProduct productList={prize_list} result={result} ref="rockProduct" />
             </div>
             <div className="current current1">
-                <RockProduct productList={this.state.arr} ref="rockProduct2"/>
+                <RockProduct productList={prize_list} ref="rockProduct2" />
             </div>
             <div className="current current2">
-                <RockProduct productList={this.state.arr} ref="rockProduct3"/>
+                <RockProduct productList={prize_list} ref="rockProduct3" />
             </div>
             <div className="onceBtn" onClick={this.rockLotteryDraw}>抽奖一次</div>
             <div className="tenBtn" onClick={this.tenLotteryDraw}>抽奖十次</div>
