@@ -1,20 +1,20 @@
 const BalloonBoom = React.createClass({
-    getInitialState(){
+    getInitialState() {
         return {
             bluePath: this.props.path,
             giftPath: ''
         }
     },
-    componentWillReceiveProps(nextProps){
-        if(nextProps.number){
-            
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.number) {
+
         }
     },
-    balloonBoomHandler(){
+    balloonBoomHandler() {
         var arr = ['images/balloonBoom.png', 'images/giftMobile.png'];
         var i = 0;
-        var timer = setInterval(()=> {
-            this.setState({bluePath: arr[i]});
+        var timer = setInterval(() => {
+            this.setState({ bluePath: arr[i] });
             i++;
             if (i == 2) {
                 this.giftBoomHandler();
@@ -22,33 +22,33 @@ const BalloonBoom = React.createClass({
             }
         }, 40);
     },
-    giftBoomHandler(){
+    giftBoomHandler() {
         var gifts = ['images/gift1Mobile.png', 'images/gift2Mobile.png'];
         var i = 0;
-        var timer2 = setInterval(()=> {
-            this.setState({giftPath: gifts[i]});
+        var timer2 = setInterval(() => {
+            this.setState({ giftPath: gifts[i] });
             i++;
             if (i == 2) {
                 clearInterval(timer2);
             }
         }, 40);
     },
-    render(){
+    render() {
         let blueStyle = {
             position: 'absolute',
             left: '0',
             top: '110px'
         };
         return <div className="ballBoom">
-            <img className="giftBoom" src={this.state.giftPath} alt=""/>
+            <img className="giftBoom" src={this.state.giftPath} alt="" />
             <img className="blueBalloon" onClick={this.balloonBoomHandler}
-                 style={this.state.bluePath == 'images/giftMobile.png' ? blueStyle:{}} src={this.state.bluePath}/>
+                style={this.state.bluePath == 'images/giftMobile.png' ? blueStyle : {}} src={this.state.bluePath} />
         </div>
     }
 });
 
 const PokeBalloonMobile = React.createClass({
-    getInitialState(){
+    getInitialState() {
         return {
             number: 1,
             btnTab: '使用1次机会',
@@ -56,30 +56,35 @@ const PokeBalloonMobile = React.createClass({
             notTenClick: 10
         }
     },
-    componentDidMount(){
-        $.get("./javascripts/once.json", (data)=> {
+    componentDidMount() {
+        $.get("./javascripts/once.json", (data) => {
             if (data.number < 10) {
-                this.setState({notTenClick: 0})
+                this.setState({ notTenClick: 0 })
             }
-            if(data.number < 1){
-                this.setState({notOnceClick: 0})
+            if (data.number < 1) {
+                this.setState({ notOnceClick: 0 })
             }
-        }, 'json')
+        }, 'json');
+
+
     },
-    changeNumberHandler(tab){
-        this.setState({btnTab: tab});
-        if(this.state.notClick){
+    changeNumberHandler(tab) {
+        this.setState({ btnTab: tab });
+        if (this.state.notClick) {
             if (tab == '使用1次机会') {
-                this.setState({number: 1})
+                this.setState({ number: 1 })
             } else if (tab == '使用10次机会') {
-                this.setState({number: 10})
+                this.setState({ number: 10 })
             }
-        }else{
-            this.setState({number:0})
+        } else {
+            this.setState({ number: 0 })
         }
 
     },
-    render(){
+    getPrizeType(){
+        return this.state.btnTab
+    },
+    render() {
         let notClick = {
             width: '276px',
             height: '102px',
@@ -90,25 +95,29 @@ const PokeBalloonMobile = React.createClass({
             color: '#676767',
             marginLeft: '25px'
         };
-        let btn = (item, index)=> {
-            return <div key={index} className={this.state.btnTab == item?"active":""}
-                        style={this.state.notTenClick ? {} : notClick}
-                        onClick={()=>this.changeNumberHandler(item)}>{item}</div>
+        let btn = (btnTab) => {
+            let gray;
+            if ((this.state.notTenClick && btnTab == '使用10次机会') ||
+                (this.state.notOnceClick && btnTab == '使用1次机会')) gray = true;
+
+            return <div className={this.state.btnTab == btnTab && "active"}
+                style={gray && notClick}
+                onClick={() => this.changeNumberHandler(btnTab)}>{btnTab}</div>
         };
+
         return <div className="pokeBalloonMobile">
             <div className="ball">
-                <BalloonBoom path='images/blue.png' number={this.state.number}/>
+                <BalloonBoom path='images/blue.png' getPrizeType={this.getPrizeType} number={this.state.number} />
             </div>
             <div className="ball2">
-                <BalloonBoom path='images/purple.png' number={this.state.number}/>
+                <BalloonBoom path='images/purple.png' number={this.state.number} />
             </div>
             <div className="ball3">
-                <BalloonBoom path='images/pink.png' number={this.state.number}/>
+                <BalloonBoom path='images/pink.png' number={this.state.number} />
             </div>
             <div className="chanceBtn">
-                {
-                    ['使用1次机会', '使用10次机会'].map(btn)
-                }
+                {btn('使用1次机会')}
+                {btn('使用10次机会')}
             </div>
 
         </div>
