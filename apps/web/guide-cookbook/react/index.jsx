@@ -98,26 +98,24 @@ var Content = React.createClass({
                                 <div className="list welfare-list">
                                     <ul>
                                         <li>
-                                            <p className="title-text">注册成功即可获得</p>
-                                            <p className="info-text">120元返现券礼包</p>
+                                            <p className="title-text">注册成功即可获得<span className="info-text">120元返现券礼包</span></p>
                                             <div className="img">
                                                 <img src="images/welfare-1.png"/>
                                             </div>
                                         </li>
-                                        <li>
-                                            <p className="title-text">新工友可投</p>
-                                            <p className="info-text">新手专享标</p>
+                                        <li className="last-li">
+                                            <p className="title-text">新工友可投 <span className="info-text">新手专享标</span></p>
                                             <div className="img">
                                                 <img src="images/welfare-2.png"/>
                                             </div>
                                         </li>
-                                        <li className="last-li">
-                                            <p className="title-text">首投满5000及以上即可获得</p>
-                                            <p className="info-text">最高150元返现券礼包</p>
-                                            <div className="img">
-                                                <img src="images/welfare-3.png"/>
-                                            </div>
-                                        </li>
+                                        {/*<li className="last-li">*/}
+                                            {/*<p className="title-text">首投满5000及以上即可获得</p>*/}
+                                            {/*<p className="info-text">最高150元返现券礼包</p>*/}
+                                            {/*<div className="img">*/}
+                                                {/*<img src="images/welfare-3.png"/>*/}
+                                            {/*</div>*/}
+                                        {/*</li>*/}
                                     </ul>
                                 </div>
 
@@ -125,9 +123,9 @@ var Content = React.createClass({
                                     <div className="prompt-text">
                                         <div className="text-block">
                                             <h3 className="title-text">如何才能正确的投资赚更多的钱呢？</h3>
-                                            <p className="text">新手必学 → 首投2千稳赚50元（20元新手返现现金+30元首投返现券奖励）！</p>
-                                            <p className="text">想赚更多 → 首投5千立获200元（20元+30元新手返现现金，再送150元返现券礼包哟~）</p>
-                                            <p className="text">最高挑战 → 首投1.2万新手120返现全到手，再投1.5万首投150返现立即领走，加收益小1千啦！</p>
+                                            <p className="text">新手必学 → 首投2千稳赚20元（20元新手返现现金）！</p>
+                                            <p className="text">想赚更多 → 首投1万立获100元（100元新手返现现金）！</p>
+                                            <p className="text">最高挑战 → 首投1.2万新手120返现全到手！</p>
                                         </div>
 
                                         <div className="pop-arrow-icon"></div>
@@ -160,18 +158,18 @@ var Content = React.createClass({
                             <div className="info-block">
                                 <div className="list gift-list">
                                     <ul>
+                                        {/*<li>*/}
+                                            {/*<p className="title-text">好友填邀请码注册并首投满<em className="c-629df9">5000</em>，送邀请人*/}
+                                            {/*</p>*/}
+                                            {/*<div className="img">*/}
+                                                {/*<img src="images/gift-1.png"/>*/}
+                                            {/*</div>*/}
+                                        {/*</li>*/}
                                         <li>
-                                            <p className="title-text">好友填邀请码注册并首投满<em className="c-629df9">5000</em>，送邀请人
+                                            <p className="title-text">好友达到<em className="c-629df9">VIP1及以上</em>，最高再送邀请人
                                             </p>
                                             <div className="img">
-                                                <img src="images/gift-1.png"/>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <p className="title-text">好友达到<em className="c-629df9">VIP2及以上</em>，最高再送邀请人
-                                            </p>
-                                            <div className="img">
-                                                <img src="images/gift-2.png"/>
+                                                <img src="images/gift-2.png" style={{'padding-top':'8px'}}/>
                                             </div>
                                         </li>
                                         <li className="last-li">
@@ -188,9 +186,9 @@ var Content = React.createClass({
                                     <div className="prompt-text">
                                         <div className="text-block">
                                             <p className="text">温馨提示：</p>
-                                            <p className="text">邀请了N名好友首投5000元，邀请人获50*N元返现券，邀越多赚越多，看看你人脉有多广！</p>
-                                            <p className="text">
-                                                好友达VIP2及以上所赠返现券在好友注册后的第30天10:00（注册当天算第1天）,按好友当时的等级发放。</p>
+                                            <p className="text">好友达VIP1及以上所赠工豆在好友注册的30天内（注册当天算第1天），按好友当时的等级实时发放。</p>
+                                            {/*<p className="text">*/}
+                                                {/*好友达VIP2及以上所赠返现券在好友注册后的第30天10:00（注册当天算第1天）,按好友当时的等级发放。</p>*/}
                                             <p className="text">相应好友投资返利可去 <a
                                                 href="http://www.9888.cn/factoryCode/info.shtml" target="_blank"
                                                 className="c-629df9">我的工场>工场码</a> 中查看。</p>
@@ -321,7 +319,7 @@ var Content = React.createClass({
 
                                     <div className="list-title">
                                         <h3 className="text">2.工友可用兑换券换礼物</h3>
-                                        <p className="">兑换券是领取工场促销活动礼品的小凭证，可以自主在工豆商城中兑换虚拟或实物礼品。可在 <a
+                                        <p className="" style={{'font-size':'14px'}}>兑换券是领取工场促销活动礼品的小凭证，可以自主在工豆商城中兑换虚拟或实物礼品。可在 <a
                                             href="http://mall.9888.cn/member/ticket.shtm" target="_blank"
                                             className="c-629df9">我的商城>我的兑换券</a> 中查看。</p>
                                     </div>
