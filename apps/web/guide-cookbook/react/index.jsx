@@ -173,7 +173,7 @@ var Content = React.createClass({
                                             </div>
                                         </li>
                                         <li className="last-li">
-                                            <p className="title-text">好友每投资一笔，邀请人均可获<em className="c-629df9">投资返利</em>
+                                            <p className="title-text">好友每投资一笔，C码用户均可获得0.25%<em className="c-629df9">投资返利</em>
                                             </p>
                                             <div className="img">
                                                 <img src="images/gift-3.png"/>
