@@ -13,6 +13,7 @@ const RockProduct = React.createClass({
         var s = 0;
         var i = 0;
         var count = 0;
+        var sp = 20;
         var timer = setInterval(() => {
             var position = this.state.position;
             productList.forEach((item, index) => {
@@ -26,20 +27,14 @@ const RockProduct = React.createClass({
                     position: speed
                 });
                 count++;
-                if (count == 2) {
-                    var timer2 = setInterval(()=> {
-                        console.log(Math.abs(target - this.state.position));
-                        if (this.state.position == target) {
-                            clearInterval(timer2);
-                            clearInterval(timer);
-                        } else {
-                            //this.setState({position: sp});
-                        }
-                    }, 1000)
-
-                }
             } else {
                 s = speed + this.state.position;
+                if(count >= 2){
+                    s = s - (20);
+                    if(s == 10){
+                        clearInterval(timer);
+                    }
+                }
                 this.setState({
                     position: s
                 });
