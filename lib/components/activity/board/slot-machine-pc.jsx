@@ -27,6 +27,18 @@ const RockProduct = React.createClass({
                     position: speed
                 });
                 count++;
+                if (count == 2) {
+                    var timer2 = setInterval(()=> {
+                        console.log(Math.abs(target - this.state.position));
+                        if (this.state.position == target) {
+                            clearInterval(timer2);
+                            clearInterval(timer);
+                        } else {
+                            //this.setState({position: sp});
+                        }
+                    }, 1000)
+
+                }
             } else {
                 s = speed + this.state.position;
                 if(count >= 2){
