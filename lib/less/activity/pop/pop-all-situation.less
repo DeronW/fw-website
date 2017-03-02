@@ -1,0 +1,87 @@
+@import "variables.less";
+.popAllSituation{
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: url("../images/popBg.png");
+  .popAllContent{
+    width: 628px;
+    height: 602px;
+    background: url("../images/popMobile.png") no-repeat;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    transform: rotate(0);
+    animation: rotatePop 0.5s ease-out both;
+  }
+  .popTitle {
+    width: 364px;
+    text-align: center;
+    font-size: @fontSize30;
+    color: @colorWhite;
+    position: absolute;
+    left: 136px;
+    top: 20px;
+    font-weight: bold;
+  }
+  .popText{
+    width: 580px;
+    height: 136px;
+    text-align: center;
+    line-height: 40px;
+    font-size: @fontSize24;
+    color: @colorRed;
+    position: absolute;
+    left: 20px;
+    top: 200px;
+  }
+  .popOneProduct{
+    width: 580px;
+    height: 136px;
+    text-align: center;
+    line-height: 40px;
+    font-size: @fontSize30;
+    color: @colorRed;
+    position: absolute;
+    left: 20px;
+    top: 220px;
+  }
+  .popTable{
+    width: 480px;
+    height: 280px;
+    text-align: center;
+    position: absolute;
+    left: 120px;
+    top: 120px;
+    color: @colorRed;
+    font-size: @fontSize24;
+    td{
+      width: 50%;
+    }
+  }
+  .knowPop{
+    width: 224px;
+    height: 92px;
+    position: absolute;
+    bottom: 60px;
+    left: 200px;
+    font-size: @fontSize32;
+    color: @colorRed;
+    text-align: center;
+    line-height: 92px;
+    font-weight: bold;
+  }
+}
+@keyframes rotatePop {
+  0%{
+    transform: scale(0);
+  }
+  100%{
+    transform: scale(1);
+  }
+}

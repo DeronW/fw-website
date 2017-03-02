@@ -9,6 +9,11 @@ const RockProduct = React.createClass({
         this.setState({ result: next_props.result }, this.lotteryDrawHandler)
     },
     lotteryDrawHandler(speed, id) {
+        if(this.state.result){
+            console.log(this.state.position);
+        }else{
+            console.log("as");
+        }
         var productList = this.props.productList;
         var s = 0;
         var i = 0;
@@ -27,7 +32,7 @@ const RockProduct = React.createClass({
                 });
                 count++;
                 if (count == 2) {
-                    this.setState({ position: target });
+                    this.setState({ position: target});
                     clearInterval(timer);
                 }
             } else {
@@ -61,7 +66,7 @@ const SlotMachinePC = React.createClass({
             arr: [],
             position: 0,
 
-            result: null,
+            result: null
             // prize_list: this.props.prize_list
         }
     },
