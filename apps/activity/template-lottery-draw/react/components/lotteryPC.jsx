@@ -26,9 +26,9 @@ const LotteryPC = React.createClass({
         }
     },
     componentDidMount() {
-        setTimeout(() => {
-            this.setState({ result: 4 })
-        }, 4000)
+        //setTimeout(() => {
+        //    this.setState({ result: 4 })
+        //}, 4000)
     },
     render() {
         //<SlotMachinePC />

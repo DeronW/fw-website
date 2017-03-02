@@ -6,7 +6,7 @@ const RockProduct = React.createClass({
         }
     },
     componentWillReceiveProps(nextProps) {
-        this.setState({ result: nextProps.result }, this.lotteryDrawHandler)
+        this.setState({result: nextProps.result}, this.lotteryDrawHandler)
     },
     lotteryDrawHandler(speed, id) {
         var productList = this.props.productList;
@@ -25,11 +25,19 @@ const RockProduct = React.createClass({
                 this.setState({
                     position: speed
                 });
-                //count++;
-                //if (count == 2) {
-                //    this.setState({ position: target});
-                //    clearInterval(timer);
-                //}
+                count++;
+                if (count == 2) {
+                    var timer2 = setInterval(()=> {
+                        console.log(Math.abs(target - this.state.position));
+                        if (this.state.position == target) {
+                            clearInterval(timer2);
+                            clearInterval(timer);
+                        } else {
+                            //this.setState({position: sp});
+                        }
+                    }, 1000)
+
+                }
             } else {
                 s = speed + this.state.position;
                 this.setState({
@@ -44,7 +52,8 @@ const RockProduct = React.createClass({
         };
         let products = (item, index) => {
             return <div className="product" key={index}>
-                <img style={position} src={item.img} />
+                <img style={position} src={item.img}/>
+
                 <p style={position}>{item.name}</p>
             </div>
         };
@@ -57,113 +66,25 @@ const RockProduct = React.createClass({
 const SlotMachinePC = React.createClass({
     getInitialState() {
         return {
-            arr: [],
-            position: 0,
             result: null
             // prize_list: this.props.prize_list
         }
     },
     componentDidMount() {
+        //setTimeout(() => {
+        //    this.setState({ result: 4 })
+        //}, 4000);
     },
     closePopHandler() {
         ReactDOM.unmountComponentAtNode(document.getElementById('pop'));
     },
-    //onceLotteryDraw(){
-    //    if(window.delay) return;
-    //    window.delay = true;
-    //    setTimeout(()=>{
-    //        window.delay = false;
-    //    },parseInt(Math.random() * 10) * 500);
-    //
-    //    var destination = 30;
-    //
-    //    var timer = setInterval(() => {
-    //        if (destination >= (this.state.arr.length - 1) * 168) {
-    //            destination = 30;
-    //            this.setState({
-    //                position: destination
-    //            });
-    //        } else {
-    //            destination += 30;
-    //            this.setState({position: destination});
-    //        }
-    //    }, 30);
-    //onceLotteryDraw(){
-    //    if(window.delay) return;
-    //    window.delay = true;
-    //    setTimeout(()=>{
-    //        window.delay = false;
-    //    },parseInt(Math.random() * 10) * 500);
-    //
-    //    var destination = 30;
-    //    var timer = setInterval(() => {
-    //        if (destination >= (this.state.arr.length - 1) * 168) {
-    //            destination = 30;
-    //            this.setState({
-    //                position: destination
-    //            });
-    //        } else {
-    //            destination += 30;
-    //            this.setState({position: destination});
-    //        }
-    //    }, 30);
-    //    setTimeout(()=> {
-    //        let {position} = this.state;
-    //        this.setState({
-    //            position: parseInt(position / 168) * 168
-    //        });
-    //        clearInterval(timer);
-    //        setTimeout(()=> {
-    //            //ReactDOM.render(<PopMessage closePopHandle={this.closePopHandler} popMyPrize="我的奖品" popNoTitle="暂无中奖记录" popBtn="朕知道了"/>,document.getElementById('pop'))
+    //ReactDOM.render(<PopMessage closePopHandle={this.closePopHandler} popMyPrize="我的奖品" popNoTitle="暂无中奖记录" popBtn="朕知道了"/>,document.getElementById('pop'))
     //            //ReactDOM.render(<PopMessage closePopHandle={this.closePopHandler} popTitle="抱歉，抽奖异常！" popText="请稍后再试，如需咨询请联系客服400-0322-988 。" popBtn="朕知道了"/>,document.getElementById('pop'))
     //            //ReactDOM.render(<PopOnePrize closePopHandle={this.closePopHandler} popPrize="1888工豆" popNumber="10" popBtn='继续抽奖'/>,document.getElementById('pop'))
     //            //ReactDOM.render(<PopZero closePopHandle={this.closePopHandler}/>,document.getElementById('pop'))
-    //
-    //        }, 100)
-    //    }, parseInt(Math.random() * 10) * 500);
-    //},
-    //tenLotteryDraw(){
-    //    if(window.delay) return;
-    //    window.delay = true;
-    //    setTimeout(()=>{
-    //        window.delay = false;
-    //    },parseInt(Math.random() * 10) * 500 - 100);
-    //
-    //    var destination = 30;
-    //    this.products.push({
-    //        img:"images/gift.png",
-    //        name:'大礼包'
-    //    });
-    //    this.setState({
-    //        arr:this.products
-    //    });
-    //    var timer = setInterval(() => {
-    //        if (destination >= (this.state.arr.length - 1) * 168) {
-    //            destination = 30;
-    //            this.setState({
-    //                position: destination
-    //            });
-    //        } else {
-    //            destination += 30;
-    //            this.setState({position: destination});
-    //        }
-    //    }, 30);
-    //    setTimeout(()=> {
-    //        this.setState({
-    //            position: 6 * 168
-    //        });
-    //        clearInterval(timer);
-    //        setTimeout(()=> {
-    //            ReactDOM.render(<PopTenPrice closePopHandle={this.closePopHandler} popNumber="10" popBtn="继续抽奖"/>,document.getElementById('pop'));
-    //            this.products.pop({
-    //                img:"images/gift.png",
-    //                name:'大礼包'
-    //            });
-    //        }, 100)
-    //    }, parseInt(Math.random() * 10) * 500);
-    //},
+
     componentWillReceiveProps(nextProps) {
-        this.setState({ result: nextProps.result }, this.rockLotteryDraw)
+        this.setState({result: nextProps.result}, this.rockLotteryDraw)
     },
     rockLotteryDraw() {
         this.refs.rockProduct.lotteryDrawHandler(30, 4);
@@ -176,14 +97,14 @@ const SlotMachinePC = React.createClass({
     },
     render() {
         let {prize_list} = this.props;
-        let {result} = this.props;
+        let {result} = this.state;
 
         return <div className="slotShow">
             <div className="current">
-                <RockProduct productList={prize_list}  ref="rockProduct" result={result}/>
+                <RockProduct productList={prize_list} ref="rockProduct" result={result}/>
             </div>
             <div className="current current1">
-                <RockProduct productList={prize_list}  ref="rockProduct2" result={result}/>
+                <RockProduct productList={prize_list} ref="rockProduct2" result={result}/>
             </div>
             <div className="current current2">
                 <RockProduct productList={prize_list} ref="rockProduct3" result={result}/>
