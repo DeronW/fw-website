@@ -2,18 +2,13 @@ const RockProduct = React.createClass({
     getInitialState() {
         return {
             position: 0,
-            result: null
+            result: this.props.result
         }
     },
-    componentWillReceiveProps(next_props) {
-        this.setState({ result: next_props.result }, this.lotteryDrawHandler)
+    componentWillReceiveProps(nextProps) {
+        this.setState({ result: nextProps.result }, this.lotteryDrawHandler)
     },
     lotteryDrawHandler(speed, id) {
-        if(this.state.result){
-            console.log(this.state.position);
-        }else{
-            console.log("as");
-        }
         var productList = this.props.productList;
         var s = 0;
         var i = 0;
@@ -30,11 +25,11 @@ const RockProduct = React.createClass({
                 this.setState({
                     position: speed
                 });
-                count++;
-                if (count == 2) {
-                    this.setState({ position: target});
-                    clearInterval(timer);
-                }
+                //count++;
+                //if (count == 2) {
+                //    this.setState({ position: target});
+                //    clearInterval(timer);
+                //}
             } else {
                 s = speed + this.state.position;
                 this.setState({
@@ -50,7 +45,6 @@ const RockProduct = React.createClass({
         let products = (item, index) => {
             return <div className="product" key={index}>
                 <img style={position} src={item.img} />
-
                 <p style={position}>{item.name}</p>
             </div>
         };
@@ -65,7 +59,6 @@ const SlotMachinePC = React.createClass({
         return {
             arr: [],
             position: 0,
-
             result: null
             // prize_list: this.props.prize_list
         }
@@ -169,6 +162,9 @@ const SlotMachinePC = React.createClass({
     //        }, 100)
     //    }, parseInt(Math.random() * 10) * 500);
     //},
+    componentWillReceiveProps(nextProps) {
+        this.setState({ result: nextProps.result }, this.rockLotteryDraw)
+    },
     rockLotteryDraw() {
         this.refs.rockProduct.lotteryDrawHandler(30, 4);
         setTimeout(() => {
@@ -180,20 +176,20 @@ const SlotMachinePC = React.createClass({
     },
     render() {
         let {prize_list} = this.props;
-        let {result} = this.state;
+        let {result} = this.props;
 
         return <div className="slotShow">
             <div className="current">
-                <RockProduct productList={prize_list} result={result} ref="rockProduct" />
+                <RockProduct productList={prize_list}  ref="rockProduct" result={result}/>
             </div>
             <div className="current current1">
-                <RockProduct productList={prize_list} ref="rockProduct2" />
+                <RockProduct productList={prize_list}  ref="rockProduct2" result={result}/>
             </div>
             <div className="current current2">
-                <RockProduct productList={prize_list} ref="rockProduct3" />
+                <RockProduct productList={prize_list} ref="rockProduct3" result={result}/>
             </div>
             <div className="onceBtn" onClick={this.rockLotteryDraw}>抽奖一次</div>
-            <div className="tenBtn" onClick={this.tenLotteryDraw}>抽奖十次</div>
+            <div className="tenBtn" onClick={this.rockLotteryDraw}>抽奖十次</div>
             <div className="onceText">消耗1次抽奖机会</div>
             <div className="tenText">消耗10次抽奖机会</div>
         </div>
