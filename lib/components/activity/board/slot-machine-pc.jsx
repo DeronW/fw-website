@@ -13,7 +13,6 @@ const RockProduct = React.createClass({
         var s = 0;
         var i = 0;
         var count = 0;
-        var sp = 20;
         var timer = setInterval(() => {
             var position = this.state.position;
             productList.forEach((item, index) => {
@@ -40,12 +39,19 @@ const RockProduct = React.createClass({
 
                 }
             } else {
-                s = speed + this.state.position;
-                if(count >= 2){
-                    s = s - (20);
-                    if(s == 10){
-                        clearInterval(timer);
-                    }
+                if (count >= 2) {
+                    //if(this.state.position > target){
+                    //    s = target;
+                    //}else{
+                    //    s = this.state.position++;
+                    //}
+                    //if(s == target){
+                    //    clearInterval(timer);
+                    //}
+                    s = this.state.position + 10;
+
+                }else{
+                    s = speed + this.state.position;
                 }
                 this.setState({
                     position: s
@@ -94,12 +100,12 @@ const SlotMachinePC = React.createClass({
         this.setState({result: nextProps.result}, this.rockLotteryDraw)
     },
     rockLotteryDraw() {
-        this.refs.rockProduct.lotteryDrawHandler(30, 4);
+        this.refs.rockProduct.lotteryDrawHandler(30, 2);
         setTimeout(() => {
-            this.refs.rockProduct2.lotteryDrawHandler(30, 4);
+            this.refs.rockProduct2.lotteryDrawHandler(30, 2);
         }, 300);
         setTimeout(() => {
-            this.refs.rockProduct3.lotteryDrawHandler(30, 4);
+            this.refs.rockProduct3.lotteryDrawHandler(30, 2);
         }, 600);
     },
     render() {
