@@ -45,6 +45,36 @@ const RockProduct = React.createClass({
             }
         }, 30)
     },
+    tenLotteryDrawHandler(speed,productList) {
+        var s = 0;
+        var count = 0;
+        var timer = setInterval(() => {
+            var position = this.state.position;
+            var distance = (productList.length - 1) * 182;
+            if (position >= distance) {
+                this.setState({
+                    position: speed
+                });
+                count++;
+            } else {
+                if (count >= 2) {
+                    s = (distance - this.state.position) / 8;
+                    s = s > 0 ? Math.ceil(s) : Math.floor(s);
+                    this.setState({
+                        position: this.state.position + s
+                    });
+                    if (this.state.position == distance) {
+                        clearInterval(timer);
+                    }
+                } else {
+                    s = speed + this.state.position;
+                    this.setState({
+                        position: s
+                    });
+                }
+            }
+        }, 30)
+    },
     render() {
         let position = {
             transform: 'translateY(-' + this.state.position + 'px)'
@@ -64,8 +94,8 @@ const RockProduct = React.createClass({
 const SlotMachinePC = React.createClass({
     getInitialState() {
         return {
-            result: null
-            // prize_list: this.props.prize_list
+            result: null,
+             prize_list: this.props.prize_list
         }
     },
     closePopHandler() {
@@ -80,25 +110,29 @@ const SlotMachinePC = React.createClass({
         this.setState({result: nextProps.result}, this.rockLotteryDraw)
     },
     rockLotteryDraw() {
-        this.refs.rockProduct.lotteryDrawHandler(30, 3, 1);
+        this.refs.rockProduct.lotteryDrawHandler(30, 3);
         setTimeout(() => {
-            this.refs.rockProduct2.lotteryDrawHandler(30, 3, 1);
+            this.refs.rockProduct2.lotteryDrawHandler(30, 3);
         }, 300);
         setTimeout(() => {
-            this.refs.rockProduct3.lotteryDrawHandler(30, 3, 1);
+            this.refs.rockProduct3.lotteryDrawHandler(30, 3);
         }, 600);
     },
     rockTenLotteryDraw(){
-        this.refs.rockProduct.lotteryDrawHandler(30, 3, 1);
+        this.state.prize_list.push({
+            img: 'http://placehold.it/138?text=大礼包',
+            name: '大礼包'
+        });
+        this.refs.rockProduct.tenLotteryDrawHandler(30,this.state.prize_list);
         setTimeout(() => {
-            this.refs.rockProduct2.lotteryDrawHandler(30, 3, 1);
+            this.refs.rockProduct2.tenLotteryDrawHandler(30,this.state.prize_list);
         }, 300);
         setTimeout(() => {
-            this.refs.rockProduct3.lotteryDrawHandler(30, 3, 1);
+            this.refs.rockProduct3.tenLotteryDrawHandler(30,this.state.prize_list);
         }, 600);
     },
     render() {
-        let {prize_list} = this.props;
+        let {prize_list} = this.state;
         let {result} = this.state;
 
         return <div className="slotShow">
