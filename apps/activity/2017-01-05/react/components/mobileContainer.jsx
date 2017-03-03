@@ -155,7 +155,7 @@ const MobileContainer = React.createClass({
                         <a className="login">登录注册</a>
 
                         <div className="noticeRemind">
-                            新手注册即送<em>120</em>元，首投最高送<em>150</em>元，邀请好友首投再得<em>50</em>元!
+                            新手注册即送<em>120</em>元
                         </div>
                         <a className="moreNew"
                            href="http://mp.weixin.qq.com/s?__biz=MjM5MjQwMjcyNA==&mid=507798032&idx=1&sn=6593ce9f7358486685b84006fa3c2fff&scene=0#wechat_redirect">更多新手秘笈></a>
@@ -166,7 +166,7 @@ const MobileContainer = React.createClass({
                         <div className="noticeCode">A354545</div>
 
                         <div className="noticeRemind">
-                            新手注册即送<em>120</em>元，首投最高送<em>150</em>元，邀请好友首投再得<em>50</em>元!
+                            新手注册即送<em>120</em>元
                         </div>
                         <a className="moreNew"
                            href="http://mp.weixin.qq.com/s?__biz=MjM5MjQwMjcyNA==&mid=507798032&idx=1&sn=6593ce9f7358486685b84006fa3c2fff&scene=0#wechat_redirect">更多新手秘笈></a>
