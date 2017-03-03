@@ -161,7 +161,7 @@ const PcContainer = React.createClass({
                             还没有工场码？注册即可拥有。</div>
                         <a className="login">登录注册</a>
                         <div className="noticeRemind">
-                            新手注册即送<em>120</em>元，首投最高送<em>150</em>元，邀请好友首投再得<em>50</em>元!<a href="http://www.9888.cn/news/notice/1861.html">更多新手秘笈></a>
+                            新手注册即送<em>120</em>元<a href="http://www.9888.cn/news/notice/1861.html">更多新手秘笈></a>
                         </div>
                     </div>
                     <div className="pcNoticeContentLogin hidden">
@@ -172,7 +172,7 @@ const PcContainer = React.createClass({
                         <div className="noticeLink" id="copy-value-pc">http://passport.9888.cn/pp-web2/register/phone.do?gcm=A677004</div>
                         <div className="copyCode" data-clipboard-action="copy" data-clipboard-target="#copy-value-pc" >复制链接</div>
                         <div className="noticeRemind">
-                            新手注册即送<em>120</em>元，首投最高送<em>150</em>元，邀请好友首投再得<em>50</em>元!<a href="http://www.9888.cn/news/notice/1861.html">更多新手秘笈></a>
+                            新手注册即送<em>120</em>元<a href="http://www.9888.cn/news/notice/1861.html">更多新手秘笈></a>
                         </div>
                     </div>
                     <div className="pcNoticeWeekLadder hidden">
