@@ -20,42 +20,28 @@ const RockProduct = React.createClass({
                     i = index;
                 }
             });
-            var target = (i - 1) * 182;
+            var distance = (i - 1) * 182;
             if (position >= (productList.length - 1) * 182) {
                 this.setState({
                     position: speed
                 });
                 count++;
-                if (count == 2) {
-                    var timer2 = setInterval(()=> {
-                        console.log(Math.abs(target - this.state.position));
-                        if (this.state.position == target) {
-                            clearInterval(timer2);
-                            clearInterval(timer);
-                        } else {
-                            //this.setState({position: sp});
-                        }
-                    }, 1000)
-
-                }
             } else {
                 if (count >= 2) {
-                    //if(this.state.position > target){
-                    //    s = target;
-                    //}else{
-                    //    s = this.state.position++;
-                    //}
-                    //if(s == target){
-                    //    clearInterval(timer);
-                    //}
-                    s = this.state.position + 10;
-
-                }else{
+                    s = (distance - this.state.position) / 8;
+                    s = s > 0 ? Math.ceil(s) : Math.floor(s);
+                    this.setState({
+                        position: this.state.position + s
+                    });
+                    if (this.state.position == distance) {
+                        clearInterval(timer);
+                    }
+                } else {
                     s = speed + this.state.position;
+                    this.setState({
+                        position: s
+                    });
                 }
-                this.setState({
-                    position: s
-                });
             }
         }, 30)
     },
@@ -66,7 +52,6 @@ const RockProduct = React.createClass({
         let products = (item, index) => {
             return <div className="product" key={index}>
                 <img style={position} src={item.img}/>
-
                 <p style={position}>{item.name}</p>
             </div>
         };
@@ -83,11 +68,6 @@ const SlotMachinePC = React.createClass({
             // prize_list: this.props.prize_list
         }
     },
-    componentDidMount() {
-        //setTimeout(() => {
-        //    this.setState({ result: 4 })
-        //}, 4000);
-    },
     closePopHandler() {
         ReactDOM.unmountComponentAtNode(document.getElementById('pop'));
     },
@@ -100,12 +80,21 @@ const SlotMachinePC = React.createClass({
         this.setState({result: nextProps.result}, this.rockLotteryDraw)
     },
     rockLotteryDraw() {
-        this.refs.rockProduct.lotteryDrawHandler(30, 2);
+        this.refs.rockProduct.lotteryDrawHandler(30, 3, 1);
         setTimeout(() => {
-            this.refs.rockProduct2.lotteryDrawHandler(30, 2);
+            this.refs.rockProduct2.lotteryDrawHandler(30, 3, 1);
         }, 300);
         setTimeout(() => {
-            this.refs.rockProduct3.lotteryDrawHandler(30, 2);
+            this.refs.rockProduct3.lotteryDrawHandler(30, 3, 1);
+        }, 600);
+    },
+    rockTenLotteryDraw(){
+        this.refs.rockProduct.lotteryDrawHandler(30, 3, 1);
+        setTimeout(() => {
+            this.refs.rockProduct2.lotteryDrawHandler(30, 3, 1);
+        }, 300);
+        setTimeout(() => {
+            this.refs.rockProduct3.lotteryDrawHandler(30, 3, 1);
         }, 600);
     },
     render() {
@@ -123,7 +112,7 @@ const SlotMachinePC = React.createClass({
                 <RockProduct productList={prize_list} ref="rockProduct3" result={result}/>
             </div>
             <div className="onceBtn" onClick={this.rockLotteryDraw}>抽奖一次</div>
-            <div className="tenBtn" onClick={this.rockLotteryDraw}>抽奖十次</div>
+            <div className="tenBtn" onClick={this.rockTenLotteryDraw}>抽奖十次</div>
             <div className="onceText">消耗1次抽奖机会</div>
             <div className="tenText">消耗10次抽奖机会</div>
         </div>
