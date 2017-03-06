@@ -8,7 +8,7 @@ const BalloonBoom = React.createClass({
     },
     closePopHandler() {
         ReactDOM.unmountComponentAtNode(document.getElementById('pop'));
-        this.setState({bluePath: this.props.path,giftPath:''})
+        this.setState({bluePath: this.props.path, giftPath: ''})
     },
     judgeType(){
         if (this.props.getPrizeType() == 'single') {
@@ -27,10 +27,10 @@ const BalloonBoom = React.createClass({
     promiseMoreLotteryResult(){
         $.get("./javascripts/getPersonDate.json", (data) => {
             this.setState({prizeList: data.data.list});
-            this.showMessagePop('抱歉，抽奖异常', '', '',this.state.prizeList)
+            this.showMessagePop('抱歉，抽奖异常', '', '', this.state.prizeList)
         }, 'json')
     },
-    showMessagePop(title, message, productName,prizeList){
+    showMessagePop(title, message, productName, prizeList){
         ReactDOM.render(<PopAllSituation closePopHandler={this.closePopHandler} popBtn="知道了"
                                          popTitle={title}
                                          popText={message}
@@ -128,7 +128,6 @@ const PokeBalloonMobile = React.createClass({
                 {btn('使用1次机会', 'single')}
                 {btn('使用10次机会', 'package')}
             </div>
-
         </div>
     }
 });

@@ -12,28 +12,29 @@ const APP_NAMES = [
 module.exports = function (gulp, generate_task, settings) {
 
     let INCLUDE_COMPONENTS = [
-        `${PROJ}/board/product-blue-pc.jsx`,
-        `${PROJ}/board/product-purple-pc.jsx`,
-        `${PROJ}/board/product-orange-pc.jsx`,
-        `${PROJ}/board/product-blue-mobile.jsx`,
-        `${PROJ}/board/product-purple-mobile.jsx`,
-        `${PROJ}/board/product-orange-mobile.jsx`,
-        `${PROJ}/board/product-list-auto.jsx`,
-        `${PROJ}/ladder/quarter-ladder-pc.jsx`,
-        `${PROJ}/ladder/quarter-ladder-mobile.jsx`,
-        `${PROJ}/ladder/month-ladder-pc.jsx`,
-        `${PROJ}/ladder/month-ladder-mobile.jsx`,
-        `${PROJ}/ladder/week-ladder-pc.jsx`,
-        `${PROJ}/ladder/week-ladder-mobile.jsx`,
-        `${PROJ}/pop/pop-one-prize.jsx`,
-        `${PROJ}/pop/pop-ten-prize.jsx`,
-        `${PROJ}/pop/pop-message.jsx`,
-        `${PROJ}/pop/pop-zero.jsx`,
-        `${PROJ}/pop/pop-more-prize.jsx`,
-        `${PROJ}/pop/pop-all-situation.jsx`,
-        `${PROJ}/board/slot-machine-pc.jsx`,
-        `${PROJ}/board/poke-balloon-mobile.jsx`,
-        `${PROJ}/board/winning-list-pc.jsx`,
+        `${PROJ}/board/product-blue-pc.jsx`,//专题模板
+        `${PROJ}/board/product-purple-pc.jsx`,//专题模板
+        `${PROJ}/board/product-orange-pc.jsx`,//专题模板
+        `${PROJ}/board/product-blue-mobile.jsx`,//专题模板
+        `${PROJ}/board/product-purple-mobile.jsx`,//专题模板
+        `${PROJ}/board/product-orange-mobile.jsx`,//专题模板
+        `${PROJ}/board/product-list-auto.jsx`,//摇奖商品展示模板自动适应商品个数
+        `${PROJ}/ladder/quarter-ladder-pc.jsx`,//专题活动季榜pc
+        `${PROJ}/ladder/quarter-ladder-mobile.jsx`,//专题活动季榜mobile
+        `${PROJ}/ladder/month-ladder-pc.jsx`,//专题活动月榜pc
+        `${PROJ}/ladder/month-ladder-mobile.jsx`,//专题活动月榜mobile
+        `${PROJ}/ladder/week-ladder-pc.jsx`,//专题活动周榜pc
+        `${PROJ}/ladder/week-ladder-mobile.jsx`,//专题活动周榜mobile
+        `${PROJ}/pop/pop-one-prize.jsx`,//摇奖弹层，摇奖一次
+        `${PROJ}/pop/pop-ten-prize.jsx`,//摇奖弹层，摇奖十次
+        `${PROJ}/pop/pop-message.jsx`,//摇奖弹层，摇奖信息显示
+        `${PROJ}/pop/pop-zero.jsx`,//摇奖弹层，没有摇奖机会
+        `${PROJ}/pop/pop-more-prize.jsx`,//摇奖弹层，我的多个奖品
+        `${PROJ}/pop/pop-all-situation.jsx`,//摇奖弹层，移动端的所有情况
+        `${PROJ}/pop/pop-information.jsx`,//摇奖弹层，移动端的收货信息
+        `${PROJ}/board/slot-machine-pc.jsx`,//老虎机
+        `${PROJ}/board/poke-balloon-mobile.jsx`,//戳气球
+        `${PROJ}/board/winning-list-pc.jsx`,//获奖名单
         `${PROJ}/board/winning-list-mobile.jsx`,
     ];
 
@@ -48,12 +49,12 @@ module.exports = function (gulp, generate_task, settings) {
     let INCLUDE_LESS = [
         `${PROJ}/reset.less`,
         `${PROJ}/header.less`,
-        `${PROJ}/board/product-blue-pc.less`,
-        `${PROJ}/board/product-purple-pc.less`,
-        `${PROJ}/board/product-orange-pc.less`,
-        `${PROJ}/board/product-blue-mobile.less`,
-        `${PROJ}/board/product-purple-mobile.less`,
-        `${PROJ}/board/product-orange-mobile.less`,
+        `${PROJ}/board/product-blue-pc.less`,//专题模板
+        `${PROJ}/board/product-purple-pc.less`,//专题模板
+        `${PROJ}/board/product-orange-pc.less`,//专题模板
+        `${PROJ}/board/product-blue-mobile.less`,//专题模板
+        `${PROJ}/board/product-purple-mobile.less`,//专题模板
+        `${PROJ}/board/product-orange-mobile.less`,//专题模板
         `${PROJ}/board/product-list-auto.less`,
         `${PROJ}/ladder/quarter-ladder-pc.less`,
         `${PROJ}/ladder/quarter-ladder-mobile.less`,
@@ -67,6 +68,7 @@ module.exports = function (gulp, generate_task, settings) {
         `${PROJ}/pop/pop-zero.less`,
         `${PROJ}/pop/pop-more-prize.less`,
         `${PROJ}/pop/pop-all-situation.less`,
+        `${PROJ}/pop/pop-information.less`,
         `${PROJ}/board/slot-machine-pc.less`,
         `${PROJ}/board/poke-balloon-mobile.less`,
         `${PROJ}/board/winning-list-pc.less`,
