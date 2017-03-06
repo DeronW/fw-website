@@ -1,0 +1,47 @@
+@containerWidth: 720px;
+@paddingWidth: 40px;
+@contentWidth: @containerWidth - @paddingWidth * 2;
+
+.products-container {
+  width: @containerWidth;
+  box-sizing: border-box;
+  padding: @paddingWidth;
+  margin: 20px auto;
+  background: whitesmoke;
+
+  .row {
+    display: table;
+    width: 100%;
+    .cell {
+      float: left;
+      display: block;
+      text-align: center;
+      background: #42baee;
+      padding: 20px 0;
+    }
+  }
+
+  .row-col-1 {
+    .cell {
+      width: @contentWidth;
+    }
+  }
+
+  .row-col-2 {
+    .cell {
+      width: @contentWidth / 2;
+    }
+  }
+
+  .row-col-3 {
+    .cell {
+      width: @contentWidth / 3;
+    }
+  }
+
+  .row-col-4 {
+    .cell {
+      width: @contentWidth / 4;
+    }
+  }
+}
