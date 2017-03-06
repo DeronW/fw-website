@@ -27,15 +27,15 @@ const BalloonBoom = React.createClass({
     promiseMoreLotteryResult(){
         $.get("./javascripts/getPersonDate.json", (data) => {
             this.setState({prizeList: data.data.list});
-            this.showMessagePop('抱歉，抽奖异常', '', '')
+            this.showMessagePop('抱歉，抽奖异常', '', '',this.state.prizeList)
         }, 'json')
     },
-    showMessagePop(title, message, productName){
+    showMessagePop(title, message, productName,prizeList){
         ReactDOM.render(<PopAllSituation closePopHandler={this.closePopHandler} popBtn="知道了"
                                          popTitle={title}
                                          popText={message}
                                          popOneProduct={productName}
-                                         popMoreProducts={message?'':this.state.prizeList}/>, document.getElementById("pop"))
+                                         popMoreProducts={prizeList}/>, document.getElementById("pop"))
     },
     balloonBoomHandler() {
         var arr = ['images/balloonBoom.png', 'images/giftMobile.png'];
