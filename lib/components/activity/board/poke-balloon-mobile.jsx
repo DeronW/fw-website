@@ -66,7 +66,10 @@ const PokeBalloonMobile = React.createClass({
         return {
             count: 1,
             type: 'single',
-            giftPath:''
+            giftPath:'',
+            singleProduct:{
+                id:null
+            }
         }
     },
     componentDidMount() {
@@ -82,6 +85,7 @@ const PokeBalloonMobile = React.createClass({
     },
     promiseOnceLotteryResult(){
         $.get("./javascripts/once.json", (data) => {
+            this.setState({singleProduct:data.data});
             this.showMessagePop('抱歉，系统异常', '', data.data.name)
         }, 'json')
     },
@@ -125,24 +129,29 @@ const PokeBalloonMobile = React.createClass({
         };
 
         return <div className="pokeBalloonMobile">
-            <div className="ball">
-                <BalloonBoom path='images/blue.png' getPrizeType={this.getPrizeType} number={this.state.number}
-                             promiseOnceLotteryResult={this.promiseOnceLotteryResult}
-                             promiseMoreLotteryResult={this.promiseMoreLotteryResult}/>
+            <div className="pokeBalloonShow">
+                <div className="ball">
+                    <BalloonBoom path='images/blue.png' getPrizeType={this.getPrizeType} number={this.state.number}
+                                 promiseOnceLotteryResult={this.promiseOnceLotteryResult}
+                                 promiseMoreLotteryResult={this.promiseMoreLotteryResult}/>
+                </div>
+                <div className="ball2">
+                    <BalloonBoom path='images/purple.png' getPrizeType={this.getPrizeType} number={this.state.number}
+                                 promiseOnceLotteryResult={this.promiseOnceLotteryResult}
+                                 promiseMoreLotteryResult={this.promiseMoreLotteryResult}/>
+                </div>
+                <div className="ball3">
+                    <BalloonBoom path='images/pink.png' getPrizeType={this.getPrizeType} number={this.state.number}
+                                 promiseOnceLotteryResult={this.promiseOnceLotteryResult}
+                                 promiseMoreLotteryResult={this.promiseMoreLotteryResult}/>
+                </div>
+                <div className="chanceBtn">
+                    {btn('使用1次机会', 'single')}
+                    {btn('使用10次机会', 'package')}
+                </div>
             </div>
-            <div className="ball2">
-                <BalloonBoom path='images/purple.png' getPrizeType={this.getPrizeType} number={this.state.number}
-                             promiseOnceLotteryResult={this.promiseOnceLotteryResult}
-                             promiseMoreLotteryResult={this.promiseMoreLotteryResult}/>
-            </div>
-            <div className="ball3">
-                <BalloonBoom path='images/pink.png' getPrizeType={this.getPrizeType} number={this.state.number}
-                             promiseOnceLotteryResult={this.promiseOnceLotteryResult}
-                             promiseMoreLotteryResult={this.promiseMoreLotteryResult}/>
-            </div>
-            <div className="chanceBtn">
-                {btn('使用1次机会', 'single')}
-                {btn('使用10次机会', 'package')}
+            <div className="productShow">
+                <ProductListAuto singleProduct={this.state.singleProduct}/>
             </div>
         </div>
     }

@@ -1,7 +1,8 @@
 const ProductListAuto = React.createClass({
     getInitialState(){
         return {
-            products: []
+            products: [],
+            singleProduct: null
         }
     },
     componentDidMount(){
@@ -12,8 +13,13 @@ const ProductListAuto = React.createClass({
             this.setState({products: data.data.list})
         }, "json")
     },
+    componentWillReceiveProps(nextProps){
+        if (nextProps.singleProduct) {
+            this.setState({singleProduct: nextProps.singleProduct})
+        }
+    },
     render(){
-        let {products} = this.state, sum = products.length;
+        let {products,singleProduct} = this.state, sum = products.length;
         let group = (arr, size) => {
             var r = [];
             arr = arr || [];
@@ -27,9 +33,11 @@ const ProductListAuto = React.createClass({
                 return <div className="cell" key={index}>
                     <div className="productPicture">
                         <img src={cell.picture} alt=""/>
-                        <div className="shade"></div>
+
+                        <div className={singleProduct.id === cell.id ? "":"shade"}></div>
                     </div>
-                    <div className="productNameShade productName">{cell.goodsname}</div>
+                    <div
+                        className={singleProduct.id === cell.id ? "productName":"productNameShade productName"}>{cell.goodsname}</div>
                 </div>
             };
             let fnRow = (row, index)=> {
@@ -43,7 +51,7 @@ const ProductListAuto = React.createClass({
         }
         if (sum === 2 || (sum > 3 && sum % 3 !== 0)) {
             if (sum % 3 == 2) items_c_2 = products.slice(Math.max(0, sum - 2));
-            if (sum % 3 == 1) items_c_2 = products.slice(Math.max(0,sum - 4));
+            if (sum % 3 == 1) items_c_2 = products.slice(Math.max(0, sum - 4));
         }
         if (sum >= 3) {
             let cur;
@@ -52,11 +60,9 @@ const ProductListAuto = React.createClass({
             items_c_3 = products.slice(0, Math.max(0, cur));
         }
         return <div className="productListAuto">
-            <div className="products-container">
-                {column(group(items_c_3, 3))}
-                {column(group(items_c_2, 2))}
-                {column(group(items_c_1, 1))}
-            </div>
+            {column(group(items_c_3, 3))}
+            {column(group(items_c_2, 2))}
+            {column(group(items_c_1, 1))}
         </div>
     }
 });
