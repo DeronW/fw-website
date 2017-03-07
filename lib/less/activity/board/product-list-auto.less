@@ -1,5 +1,6 @@
+@import "variables.less";
 @containerWidth: 720px;
-@paddingWidth: 40px;
+@paddingWidth: 10px;
 @contentWidth: @containerWidth - @paddingWidth * 2;
 
 .products-container {
@@ -11,37 +12,96 @@
 
   .row {
     display: table;
-    width: 100%;
     .cell {
       float: left;
-      display: block;
+      display: table;
       text-align: center;
-      background: #42baee;
       padding: 20px 0;
+      .productPicture{
+        width: 198px;
+        margin: auto;
+        height: 200px;
+        background: url("../images/boxMobile.png") no-repeat;
+        padding-top: 20px;
+        position: relative;
+        img{
+          vertical-align: middle;
+        }
+        .shade{
+          width: 198px;
+          height: 220px;
+          margin: auto;
+          background: url("../images/popBg.png");
+          position: absolute;
+          top: 0;
+          left: 0;
+          border-radius: 20px;
+        }
+      }
+      .productName{
+        font-size: @fontSize24;
+        margin-bottom: -120px;
+        width: 200px;
+        text-align: center;
+        display: inline-block;
+        vertical-align: middle;
+        border-left: 2px solid @colorRed;
+        color: @colorWhite;
+      }
+      .productNameShade{
+        color: @colorDeepRed;
+        border-left: 2px solid @colorDeepRed;
+      }
     }
   }
-
+  .row{
+    background: url("../images/boxStageMobile.png") no-repeat left bottom;
+    width: 700px;
+    height: 370px;
+    margin: auto;
+  }
   .row-col-1 {
     .cell {
       width: @contentWidth;
+      .productName{
+        border-left: transparent;
+      }
     }
   }
 
   .row-col-2 {
     .cell {
       width: @contentWidth / 2;
+      .productName{
+        width: 200px;
+        padding: 5px 0 5px 90px;
+        margin-left: -90px;
+      }
+      &:first-child{
+        .productName{
+          border-left: transparent;
+        }
+      }
     }
+
   }
 
   .row-col-3 {
     .cell {
       width: @contentWidth / 3;
-    }
-  }
-
-  .row-col-4 {
-    .cell {
-      width: @contentWidth / 4;
+      .productPicture{
+        margin-left: 20px;
+      }
+      .productName{
+        padding: 5px 0 5px 20px;
+        width: 200px;
+        margin-left: -10px;
+      }
+      &:first-child{
+        .productName{
+          border-left: transparent;
+        }
+      }
     }
   }
 }
