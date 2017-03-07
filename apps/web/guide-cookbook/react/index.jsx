@@ -98,13 +98,13 @@ var Content = React.createClass({
                                 <div className="list welfare-list">
                                     <ul>
                                         <li>
-                                            <p className="title-text">注册成功即可获得<span className="info-text">120元返现券礼包</span></p>
+                                            <p className="title-text title-text-position">注册成功即可获得<span className="info-text">120元返现券礼包</span></p>
                                             <div className="img">
                                                 <img src="images/welfare-1.png"/>
                                             </div>
                                         </li>
                                         <li className="last-li">
-                                            <p className="title-text">新工友可投 <span className="info-text">新手专享标</span></p>
+                                            <p className="title-text title-text-position">新工友可投 <span className="info-text">新手专享标</span></p>
                                             <div className="img">
                                                 <img src="images/welfare-2.png"/>
                                             </div>
