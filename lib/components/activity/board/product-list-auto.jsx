@@ -25,9 +25,11 @@ const ProductListAuto = React.createClass({
         let column = (rows) => {
             let fnCell = (cell, index) => {
                 return <div className="cell" key={index}>
-                    <img src={cell.picture} alt=""/>
-
-                    <div className="productName">{cell.goodsname}</div>
+                    <div className="productPicture">
+                        <img src={cell.picture} alt=""/>
+                        <div className="shade"></div>
+                    </div>
+                    <div className="productNameShade productName">{cell.goodsname}</div>
                 </div>
             };
             let fnRow = (row, index)=> {
@@ -36,9 +38,8 @@ const ProductListAuto = React.createClass({
             return <div>{rows.map(fnRow)}</div>
         };
         let items_c_1, items_c_2, items_c_3;
-        if (sum === 1 || (sum > 3 && sum % 3 !== 1)) {
-            if (sum % 3 == 1) items_c_1 = products.slice(Math.max(0, sum - 1));
-            if (sum % 3 == 0) items_c_1 = products;
+        if (sum === 1) {
+            items_c_1 = products;
         }
         if (sum === 2 || (sum > 3 && sum % 3 !== 0)) {
             if (sum % 3 == 2) items_c_2 = products.slice(Math.max(0, sum - 2));
@@ -47,7 +48,6 @@ const ProductListAuto = React.createClass({
         if (sum >= 3) {
             let cur;
             if (sum % 3 == 0) cur = sum;
-            if (sum % 3 == 1) cur = sum - 4;
             if (sum % 3 == 2) cur = sum - 2;
             items_c_3 = products.slice(0, Math.max(0, cur));
         }
