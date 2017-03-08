@@ -2,7 +2,7 @@ const ProductListAuto = React.createClass({
     getInitialState(){
         return {
             products: [],
-            singleProduct: null
+            singleProduct: []
         }
     },
     componentDidMount(){
@@ -15,6 +15,7 @@ const ProductListAuto = React.createClass({
     },
     componentWillReceiveProps(nextProps){
         if (nextProps.singleProduct) {
+            console.log(nextProps.singleProduct);
             this.setState({singleProduct: nextProps.singleProduct})
         }
     },
@@ -34,10 +35,10 @@ const ProductListAuto = React.createClass({
                     <div className="productPicture">
                         <img src={cell.picture} alt=""/>
 
-                        <div className={singleProduct.id === cell.id ? "":"shade"}></div>
+                        <div className={singleProduct&&singleProduct[index].id === cell.id ? "":"shade"}></div>
                     </div>
                     <div
-                        className={singleProduct.id === cell.id ? "productName":"productNameShade productName"}>{cell.goodsname}</div>
+                        className={singleProduct&&singleProduct[index].id === cell.id ? "productName":"productNameShade productName"}>{cell.goodsname}</div>
                 </div>
             };
             let fnRow = (row, index)=> {
