@@ -35,10 +35,10 @@ const ProductListAuto = React.createClass({
                     <div className="productPicture">
                         <img src={cell.picture} alt=""/>
 
-                        <div className={singleProduct&&singleProduct[index].id === cell.id ? "":"shade"}></div>
+                        <div className={singleProduct&&(singleProduct[index].id === cell.id )? "":"shade"}></div>
                     </div>
                     <div
-                        className={singleProduct&&singleProduct[index].id === cell.id ? "productName":"productNameShade productName"}>{cell.goodsname}</div>
+                        className={singleProduct&&(singleProduct[index].id === cell.id) ? "productName":"productNameShade productName"}>{cell.goodsname}</div>
                 </div>
             };
             let fnRow = (row, index)=> {
