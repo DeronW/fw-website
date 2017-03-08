@@ -33,7 +33,7 @@ module.exports = function (gulp, generate_task, settings) {
         `${PROJ}/pop/pop-more-prize.jsx`,//摇奖弹层，我的多个奖品
         `${PROJ}/pop/pop-all-situation.jsx`,//摇奖弹层，移动端的所有情况
         `${PROJ}/pop/pop-information.jsx`,//摇奖弹层，移动端的收货信息
-        `${PROJ}/board/slot-machine-pc.jsx`,//老虎机
+        //`${PROJ}/board/slot-machine-pc.jsx`,//老虎机
         `${PROJ}/board/poke-balloon-mobile.jsx`,//戳气球
         `${PROJ}/board/winning-list-pc.jsx`,//获奖名单
         `${PROJ}/board/winning-list-mobile.jsx`,
