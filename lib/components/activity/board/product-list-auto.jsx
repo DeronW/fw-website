@@ -7,18 +7,24 @@ const ProductListAuto = React.createClass({
     },
     componentDidMount(){
         this.resortHandler();
+        this.rewardPoolHandler();
     },
     resortHandler(){
         $.get("./javascripts/getPersonDate.json", (data)=> {
             this.setState({products: data.data.list})
         }, "json")
     },
-    componentWillReceiveProps(nextProps){
-        if (nextProps.singleProduct) {
-            console.log(nextProps.singleProduct);
-            this.setState({singleProduct: nextProps.singleProduct})
-        }
+    rewardPoolHandler(){
+        $.get("./javascripts/once.json", (data)=> {
+            this.setState({singleProduct: data.data.list})
+        }, "json")
     },
+    //componentWillReceiveProps(nextProps){
+    //    if (nextProps.singleProduct) {
+    //        console.log(nextProps.singleProduct);
+    //        this.setState({singleProduct: nextProps.singleProduct})
+    //    }
+    //},
     render(){
         let {products,singleProduct} = this.state, sum = products.length;
         let group = (arr, size) => {
@@ -35,10 +41,10 @@ const ProductListAuto = React.createClass({
                     <div className="productPicture">
                         <img src={cell.picture} alt=""/>
 
-                        <div className={singleProduct&&(singleProduct[index].id === cell.id )? "":"shade"}></div>
+                        <div className="shade"></div>
                     </div>
                     <div
-                        className={singleProduct&&(singleProduct[index].id === cell.id) ? "productName":"productNameShade productName"}>{cell.goodsname}</div>
+                        className="productNameShade productName">{cell.goodsname}</div>
                 </div>
             };
             let fnRow = (row, index)=> {
