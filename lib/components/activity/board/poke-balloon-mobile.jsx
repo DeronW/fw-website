@@ -59,17 +59,13 @@ const BalloonBoom = React.createClass({
 });
 
 
-
-
 const PokeBalloonMobile = React.createClass({
     getInitialState() {
         return {
             count: 1,
             type: 'single',
-            giftPath:'',
-            singleProduct:{
-                id:null
-            }
+            giftPath: '',
+            singleProduct: []
         }
     },
     componentDidMount() {
@@ -81,18 +77,18 @@ const PokeBalloonMobile = React.createClass({
     },
     closePopHandler() {
         ReactDOM.unmountComponentAtNode(document.getElementById('pop'));
-        this.setState({ giftPath: ''})
+        this.setState({giftPath: ''})
     },
     promiseOnceLotteryResult(){
         $.get("./javascripts/once.json", (data) => {
-            this.setState({singleProduct:data.data});
+            this.setState({singleProduct: data.data.list});
             this.showMessagePop('抱歉，系统异常', '', data.data.name)
         }, 'json')
     },
     promiseMoreLotteryResult(){
-        $.get("./javascripts/getPersonDate.json", (data) => {
-            this.setState({prizeList: data.data.list});
-            this.showMessagePop('抱歉，抽奖异常', '', '', this.state.prizeList)
+        $.get("./javascripts/once.json", (data) => {
+            this.setState({singleProduct: data.data.list});
+            this.showMessagePop('抱歉，抽奖异常', '', '', this.state.singleProduct)
         }, 'json')
     },
     showMessagePop(title, message, productName, prizeList){
@@ -106,7 +102,12 @@ const PokeBalloonMobile = React.createClass({
         this.setState({type: type});
     },
     getPrizeType(){
-        return this.state.type
+        if(this.state.count < 1){
+            return ''
+        }else{
+            return this.state.type
+        }
+
     },
     render() {
         let notClick = {
