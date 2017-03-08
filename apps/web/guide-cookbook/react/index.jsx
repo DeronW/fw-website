@@ -90,7 +90,7 @@ var Content = React.createClass({
                                     <h2 className="text">新工友注册好福利</h2>
                                     <i className="icon-r"></i>
                                 </div>
-                                <a href="http://www.9888.cn/news/notice/1861.html?reloadworkpage=y" target="_blank"
+                                <a href="https://www.9888.cn/news/notice/2046.html?reloadworkpage=y" target="_blank"
                                    className="btn-link">完整新手秘笈></a>
                             </div>
 
@@ -98,13 +98,13 @@ var Content = React.createClass({
                                 <div className="list welfare-list">
                                     <ul>
                                         <li>
-                                            <p className="title-text">注册成功即可获得<span className="info-text">120元返现券礼包</span></p>
+                                            <p className="title-text title-text-position">注册成功即可获得<span className="info-text">120元返现券礼包</span></p>
                                             <div className="img">
                                                 <img src="images/welfare-1.png"/>
                                             </div>
                                         </li>
                                         <li className="last-li">
-                                            <p className="title-text">新工友可投 <span className="info-text">新手专享标</span></p>
+                                            <p className="title-text title-text-position">新工友可投 <span className="info-text">新手专享标</span></p>
                                             <div className="img">
                                                 <img src="images/welfare-2.png"/>
                                             </div>
@@ -152,7 +152,7 @@ var Content = React.createClass({
                                     <h2 className="text">邀请好友礼上礼</h2>
                                     <i className="icon-r"></i>
                                 </div>
-                                <a href="http://www.9888.cn/news/notice/1861.html?reloadworkpage=y" target="_blank"
+                                <a href="https://www.9888.cn/news/notice/2046.html?reloadworkpage=y" target="_blank"
                                    className="btn-link">完整邀友返利攻略></a>
                             </div>
                             <div className="info-block">

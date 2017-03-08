@@ -6,6 +6,10 @@ const BalloonBoom = React.createClass({
             prizeList: []
         }
     },
+    closePopHandler() {
+        ReactDOM.unmountComponentAtNode(document.getElementById('pop'));
+        this.setState({bluePath: this.props.path, giftPath: ''})
+    },
     judgeType(){
         if (this.props.getPrizeType() == 'single') {
             this.balloonBoomHandler();

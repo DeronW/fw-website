@@ -53,6 +53,7 @@ const ProductListAuto = React.createClass({
         if (sum === 2 || (sum > 3 && sum % 3 !== 0)) {
             if (sum % 3 == 2) items_c_2 = products.slice(Math.max(0, sum - 2));
             if (sum % 3 == 1) items_c_2 = products.slice(Math.max(0, sum - 4));
+
         }
         if (sum >= 3) {
             let cur;
