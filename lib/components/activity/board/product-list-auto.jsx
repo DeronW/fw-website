@@ -7,7 +7,7 @@ const ProductListAuto = React.createClass({
     },
     componentDidMount(){
         this.resortHandler();
-        this.rewardPoolHandler();
+        this.rewardPoolHandler()
     },
     resortHandler(){
         $.get("./javascripts/getPersonDate.json", (data)=> {
@@ -27,6 +27,13 @@ const ProductListAuto = React.createClass({
     //},
     render(){
         let {products,singleProduct} = this.state, sum = products.length;
+        products && singleProduct.forEach((item, i)=> {
+            if (item.id === products[i].id) {
+                products[i].selected = true;
+                products[i].number = item.number;
+            }
+        });
+
         let group = (arr, size) => {
             var r = [];
             arr = arr || [];
@@ -41,10 +48,12 @@ const ProductListAuto = React.createClass({
                     <div className="productPicture">
                         <img src={cell.picture} alt=""/>
 
-                        <div className="shade"></div>
+                        <div className={cell.selected?"":'shade'}></div>
+                        <div
+                            className={(cell.selected && cell.number > 1)?"productNumber":''}>{(cell.selected && cell.number > 1) ? cell.number : ''}</div>
                     </div>
                     <div
-                        className="productNameShade productName">{cell.goodsname}</div>
+                        className={cell.selected?"productName":"productNameShade productName"}>{cell.goodsname}</div>
                 </div>
             };
             let fnRow = (row, index)=> {
