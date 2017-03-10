@@ -6,18 +6,32 @@ const WinningListPC = React.createClass({
         }
     },
     componentDidMount(){
-        $.get("./javascripts/getPersonDate.json", (data)=> {
+        $.get("./javascripts/list.json", (data)=> {
             var list = data.data.list;
             this.setState({dataList: list})
         }, 'json');
         this.moveListHandler();
     },
     moveListHandler(){
-        //setTimeout(()=>{
-        setInterval(()=> {
-            //this.setState({position: ++this.state.position})
-        }, 30);
-        //},1000)
+        let {list} = this.state;
+        var distance = 370;
+        var timer =setInterval(()=> {
+            if (this.state.position == distance) {
+                distance += distance;
+                this.move(distance);
+                clearInterval(timer)
+            } else {
+                this.move(distance)
+            }
+        }, 50);
+    },
+    move(distance){
+        var s = 0;
+        setTimeout(()=>{
+            s = (distance - this.state.position) / 8;
+            s = s > 0 ? Math.ceil(s) : Math.floor(s);
+            this.setState({position: this.state.position + s});
+        },3000);
     },
     closePopHandler(){
         ReactDOM.unmountComponentAtNode(document.getElementById('pop'));
