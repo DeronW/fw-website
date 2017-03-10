@@ -35,6 +35,9 @@ const RockProduct = React.createClass({
                     });
                     if (this.state.position == distance) {
                         clearInterval(timer);
+                        setTimeout(()=>{
+                            window.once_delay = false;
+                        },100);
                     }
                 } else {
                     s = speed + this.state.position;
@@ -65,6 +68,9 @@ const RockProduct = React.createClass({
                     });
                     if (this.state.position == distance) {
                         clearInterval(timer);
+                        setTimeout(()=>{
+                            window.ten_delay = false;
+                        },100);
                     }
                 } else {
                     s = speed + this.state.position;
@@ -110,6 +116,8 @@ const SlotMachinePC = React.createClass({
         this.setState({result: nextProps.result}, this.rockLotteryDraw)
     },
     rockLotteryDraw() {
+        if(window.once_delay) return;
+        window.once_delay = true;
         this.refs.rockProduct.lotteryDrawHandler(30, 3);
         setTimeout(() => {
             this.refs.rockProduct2.lotteryDrawHandler(30, 3);
@@ -119,6 +127,8 @@ const SlotMachinePC = React.createClass({
         }, 600);
     },
     rockTenLotteryDraw(){
+        if(window.ten_delay) return;
+        window.ten_delay = true;
         this.state.prize_list.push({
             img: 'http://placehold.it/138?text=大礼包',
             name: '大礼包'

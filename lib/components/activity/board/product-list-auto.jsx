@@ -7,7 +7,7 @@ const ProductListAuto = React.createClass({
     },
     componentDidMount(){
         this.resortHandler();
-        this.rewardPoolHandler()
+        this.rewardPoolHandler();
     },
     resortHandler(){
         $.get("./javascripts/getPersonDate.json", (data)=> {
@@ -27,13 +27,15 @@ const ProductListAuto = React.createClass({
     //},
     render(){
         let {products,singleProduct} = this.state, sum = products.length;
-        products && singleProduct.forEach((item, i)=> {
-            if (item.id === products[i].id) {
-                products[i].selected = true;
-                products[i].number = item.number;
-            }
+        products && singleProduct.forEach((item, index)=> {
+            products.forEach((p,i)=>{
+                if (item.id === products[i].id) {
+                    products[i].selected = true;
+                    products[i].number = item.number;
+                }
+            });
         });
-
+        //console.log(this.state.products);
         let group = (arr, size) => {
             var r = [];
             arr = arr || [];

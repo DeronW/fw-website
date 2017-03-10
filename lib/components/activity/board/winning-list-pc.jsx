@@ -11,6 +11,13 @@ const WinningListPC = React.createClass({
             this.setState({dataList: list})
         }, 'json');
     },
+    moveListHandler(){
+      setTimeout(()=>{
+          setInterval(()=>{
+              this.setState({position:++this.state.position})
+          },1000)
+      },1000)
+    },
     closePopHandler(){
         ReactDOM.unmountComponentAtNode(document.getElementById('pop'));
     },
