@@ -13,12 +13,13 @@ const WinningListPC = React.createClass({
         this.moveListHandler();
     },
     moveListHandler(){
-
+        let {list} = this.state;
         var distance = 370;
-        setInterval(()=> {
+        var timer =setInterval(()=> {
             if (this.state.position == distance) {
                 distance += distance;
-                this.move(distance)
+                this.move(distance);
+                clearInterval(timer)
             } else {
                 this.move(distance)
             }
@@ -30,7 +31,7 @@ const WinningListPC = React.createClass({
             s = (distance - this.state.position) / 8;
             s = s > 0 ? Math.ceil(s) : Math.floor(s);
             this.setState({position: this.state.position + s});
-        },2000);
+        },3000);
     },
     closePopHandler(){
         ReactDOM.unmountComponentAtNode(document.getElementById('pop'));
