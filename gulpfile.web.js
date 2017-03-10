@@ -27,6 +27,7 @@ const TOPIC_PAGES = [
     'topic-yi-shou-bao', // 易收宝
     'topic-bu-mao-tong', // 埠贸通
     'topic-xiao-fei-dai', // 消费贷
+    'topic-easyloan',//放心花
 
     // 专题说明页面
     'topic-annual-commision', // A码 用户返利规则 佣金说明
