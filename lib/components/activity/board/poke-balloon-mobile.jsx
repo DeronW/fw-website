@@ -3,15 +3,26 @@ const BalloonBoom = React.createClass({
         return {
             path: this.props.path,
             giftPath: '',
-            prizeList: []
+            prizeList: [],
+            animation: 1,
+            outTime: false
         }
+    },
+    componentDidMount(){
+        $.get("./javascripts/time.json", (data)=> {
+            if (data.time > 9) {
+                this.setState({outTime: true})
+            }
+        }, 'json')
     },
     judgeType(){
         if (this.props.getPrizeType() == 'single') {
             this.balloonBoomHandler();
+            this.setState({animation: 0});
             this.props.promiseOnceLotteryResult();
         } else if (this.props.getPrizeType() == 'package') {
             this.balloonBoomHandler();
+            this.setState({animation: 0});
             this.props.promiseMoreLotteryResult();
         }
     },
@@ -31,7 +42,7 @@ const BalloonBoom = React.createClass({
                 this.giftBoomHandler();
                 clearInterval(timer);
             }
-        }, 40);
+        }, 80);
     },
     giftBoomHandler() {
         var gifts = ['images/gift1Mobile.png', 'images/gift2Mobile.png'];
@@ -42,7 +53,7 @@ const BalloonBoom = React.createClass({
             if (i == 2) {
                 clearInterval(timer2);
             }
-        }, 40);
+        }, 80);
     },
     render() {
         let pathStyle = {
@@ -52,8 +63,12 @@ const BalloonBoom = React.createClass({
         };
         return <div className="ballBoom">
             <img className="giftBoom" src={this.state.giftPath} alt=""/>
-            <img className="blueBalloon" onClick={this.judgeType}
-                 style={this.state.path == 'images/giftMobile.png' ? pathStyle : {}} src={this.state.path}/>
+            {
+                this.state.outTime ? <img className="greyPath" src={this.props.greyPath} alt=""/> :
+                    <img className={this.props.isAnimation ? "blueBalloon":"blueBalloonNo"}
+                         onClick={this.judgeType}
+                         style={this.state.path == 'images/giftMobile.png' ? pathStyle : {}} src={this.state.path}/>
+            }
         </div>
     }
 });
@@ -65,7 +80,7 @@ const PokeBalloonMobile = React.createClass({
             count: 1,
             type: 'single',
             giftPath: '',
-            singleProduct: []
+            isAnimation: true
         }
     },
     componentDidMount() {
@@ -77,21 +92,22 @@ const PokeBalloonMobile = React.createClass({
     },
     closePopHandler() {
         ReactDOM.unmountComponentAtNode(document.getElementById('pop'));
-        this.setState({giftPath: ''})
+        this.setState({giftPath: '', isAnimation: true})
     },
     promiseOnceLotteryResult(){
         $.get("./javascripts/once.json", (data) => {
-            this.setState({singleProduct: data.data.list});
-            this.showMessagePop('抱歉，系统异常', '', data.data.name)
+            this.refs.productListAuto.rewardPoolHandler();
+            this.showMessagePop('抱歉，系统异常', '', data.data.list[0].goodsname)
         }, 'json')
     },
     promiseMoreLotteryResult(){
         $.get("./javascripts/once.json", (data) => {
-            this.setState({singleProduct: data.data.list});
-            this.showMessagePop('抱歉，抽奖异常', '', '', this.state.singleProduct)
+            this.refs.productListAuto.rewardPoolHandler();
+            this.showMessagePop('抱歉，抽奖异常', '', '', data.data.list)
         }, 'json')
     },
     showMessagePop(title, message, productName, prizeList){
+        this.setState({isAnimation: false});
         ReactDOM.render(<PopAllSituation closePopHandler={this.closePopHandler} popBtn="知道了"
                                          popTitle={title}
                                          popText={message}
@@ -102,12 +118,15 @@ const PokeBalloonMobile = React.createClass({
         this.setState({type: type});
     },
     getPrizeType(){
-        if(this.state.count < 1){
+        if (this.state.count < 1) {
             return ''
-        }else{
+        } else {
             return this.state.type
         }
 
+    },
+    showAddress(){
+        ReactDOM.render(<PopInformation />, document.getElementById("pop"))
     },
     render() {
         let notClick = {
@@ -132,17 +151,23 @@ const PokeBalloonMobile = React.createClass({
         return <div className="pokeBalloonMobile">
             <div className="pokeBalloonShow">
                 <div className="ball">
-                    <BalloonBoom path='images/blue.png' getPrizeType={this.getPrizeType} number={this.state.number}
+                    <BalloonBoom path='images/blue.png' greyPath="images/blueGrey.png" getPrizeType={this.getPrizeType}
+                                 number={this.state.number}
+                                 isAnimation={this.state.isAnimation}
                                  promiseOnceLotteryResult={this.promiseOnceLotteryResult}
                                  promiseMoreLotteryResult={this.promiseMoreLotteryResult}/>
                 </div>
                 <div className="ball2">
-                    <BalloonBoom path='images/purple.png' getPrizeType={this.getPrizeType} number={this.state.number}
+                    <BalloonBoom path='images/purple.png' greyPath="images/purpleGrey.png"
+                                 getPrizeType={this.getPrizeType} number={this.state.number}
+                                 isAnimation={this.state.isAnimation}
                                  promiseOnceLotteryResult={this.promiseOnceLotteryResult}
                                  promiseMoreLotteryResult={this.promiseMoreLotteryResult}/>
                 </div>
                 <div className="ball3">
-                    <BalloonBoom path='images/pink.png' getPrizeType={this.getPrizeType} number={this.state.number}
+                    <BalloonBoom path='images/pink.png' greyPath="images/pinkGrey.png" getPrizeType={this.getPrizeType}
+                                 number={this.state.number}
+                                 isAnimation={this.state.isAnimation}
                                  promiseOnceLotteryResult={this.promiseOnceLotteryResult}
                                  promiseMoreLotteryResult={this.promiseMoreLotteryResult}/>
                 </div>
@@ -150,10 +175,16 @@ const PokeBalloonMobile = React.createClass({
                     {btn('使用1次机会', 'single')}
                     {btn('使用10次机会', 'package')}
                 </div>
+                <div className="chanceText">
+                    <div> 一次获得1个奖品</div>
+                    <div> 一次获得10个奖品</div>
+                </div>
             </div>
+            <div className="myPrizeTitle">我的奖品</div>
             <div className="productShow">
-                <ProductListAuto singleProduct={this.state.singleProduct}/>
+                <ProductListAuto ref="productListAuto"/>
             </div>
+            <div className="goodAddressBtn" onClick={()=>this.showAddress()}></div>
         </div>
     }
 });

@@ -7,20 +7,35 @@ const ProductListAuto = React.createClass({
     },
     componentDidMount(){
         this.resortHandler();
+        this.rewardPoolHandler();
     },
     resortHandler(){
         $.get("./javascripts/getPersonDate.json", (data)=> {
             this.setState({products: data.data.list})
         }, "json")
     },
-    componentWillReceiveProps(nextProps){
-        if (nextProps.singleProduct) {
-            console.log(nextProps.singleProduct);
-            this.setState({singleProduct: nextProps.singleProduct})
-        }
+    rewardPoolHandler(){
+        $.get("./javascripts/once.json", (data)=> {
+            this.setState({singleProduct: data.data.list})
+        }, "json")
     },
+    //componentWillReceiveProps(nextProps){
+    //    if (nextProps.singleProduct) {
+    //        console.log(nextProps.singleProduct);
+    //        this.setState({singleProduct: nextProps.singleProduct})
+    //    }
+    //},
     render(){
         let {products,singleProduct} = this.state, sum = products.length;
+        products && singleProduct.forEach((item, index)=> {
+            products.forEach((p,i)=>{
+                if (item.id === products[i].id) {
+                    products[i].selected = true;
+                    products[i].number = item.number;
+                }
+            });
+        });
+        //console.log(this.state.products);
         let group = (arr, size) => {
             var r = [];
             arr = arr || [];
@@ -35,10 +50,12 @@ const ProductListAuto = React.createClass({
                     <div className="productPicture">
                         <img src={cell.picture} alt=""/>
 
-                        <div className={singleProduct&&singleProduct[index].id === cell.id ? "":"shade"}></div>
+                        <div className={cell.selected?"":'shade'}></div>
+                        <div
+                            className={(cell.selected && cell.number > 1)?"productNumber":''}>{(cell.selected && cell.number > 1) ? cell.number : ''}</div>
                     </div>
                     <div
-                        className={singleProduct&&singleProduct[index].id === cell.id ? "productName":"productNameShade productName"}>{cell.goodsname}</div>
+                        className={cell.selected?"productName":"productNameShade productName"}>{cell.goodsname}</div>
                 </div>
             };
             let fnRow = (row, index)=> {
@@ -53,6 +70,7 @@ const ProductListAuto = React.createClass({
         if (sum === 2 || (sum > 3 && sum % 3 !== 0)) {
             if (sum % 3 == 2) items_c_2 = products.slice(Math.max(0, sum - 2));
             if (sum % 3 == 1) items_c_2 = products.slice(Math.max(0, sum - 4));
+
         }
         if (sum >= 3) {
             let cur;

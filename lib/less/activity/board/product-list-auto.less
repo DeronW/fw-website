@@ -1,3 +1,4 @@
+
 @import "variables.less";
 @containerWidth: 720px;
 @paddingWidth: 10px;
@@ -8,7 +9,6 @@
   box-sizing: border-box;
   padding: @paddingWidth;
   margin: 20px auto;
-  background: whitesmoke;
 
   .row {
     display: table;
@@ -37,6 +37,18 @@
           left: 0;
           border-radius: 20px;
         }
+        .productNumber{
+          width: 61px;
+          height: 61px;
+          line-height: 61px;
+          text-align: center;
+          background: url("../images/circle.png") no-repeat;
+          position: absolute;
+          top: -20px;
+          right: -20px;
+          color: @colorWhite;
+          font-size: @fontSize24;
+        }
       }
       .productName{
         font-size: @fontSize24;
@@ -58,7 +70,7 @@
     background: url("../images/boxStageMobile.png") no-repeat left bottom;
     width: 700px;
     height: 370px;
-    margin: auto;
+    margin: 0 auto 60px;
   }
   .row-col-1 {
     .cell {
@@ -83,7 +95,6 @@
         }
       }
     }
-
   }
 
   .row-col-3 {

@@ -5,13 +5,23 @@
     height: 664px;
     background: url("../images/stage.png") no-repeat;
     position: relative;
-
     .giftBoom{
       position: absolute;
       top: 70px;
       left: 0;
     }
     .blueBalloon{
+      display: block;
+      position: absolute;
+      top: 160px;
+      left: 60px;
+      animation-duration: 1.5s;
+      animation-fill-mode: both;
+      animation-name: rubberBand;
+      animation-iteration-count:infinite;
+      transform-origin: 0 90%;
+    }
+    .blueBalloonNo,.greyPath{
       display: block;
       position: absolute;
       top: 160px;
@@ -35,7 +45,7 @@
     }
     .chanceBtn{
       position: absolute;
-      top: 500px;
+      top: 480px;
       left: 40px;
       display: table;
       div{
@@ -57,5 +67,68 @@
         font-size: @fontSize34;
       }
     }
+    .chanceText{
+      position: absolute;
+      top: 610px;
+      left: 40px;
+      display: table;
+      color: @colorWhite;
+      font-size: @fontSize24;
+      div{
+        float: left;
+        width: 276px;
+        text-align: center;
+        margin-left: 30px;
+      }
+    }
+  }
+  .myPrizeTitle{
+    width: 622px;
+    height: 142px;
+    margin: 70px auto 60px;
+    text-align: center;
+    line-height: 100px;
+    color: @colorWhite;
+    font-size: @fontSize36;
+    background: url("../images/titleMobile.png") no-repeat;
+  }
+  .goodAddressBtn{
+    width: 252px;
+    height: 98px;
+    margin: 0 auto 70px;
+    text-align: center;
+    background: url("../images/addressBtn.png") no-repeat;
+  }
+}
+
+@keyframes rubberBand {
+  0%{
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+
+  30% {
+    transform: scale3d(1, 0.98, 1);
+    transform: translate3d(0, 0, 0);
+  }
+
+  40% {
+    transform: scale3d(1, 1.02, 1);
+  }
+
+  50% {
+    transform: scale3d(1, 0.98, 1);
+  }
+
+  65% {
+    transform: scale3d(1, 1.02, 1);
+  }
+
+  75% {
+    transform: scale3d(1, 0.98, 1);
+  }
+
+  100%{
+    transform: scale3d(1, 1, 1);
   }
 }

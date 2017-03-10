@@ -2,7 +2,7 @@ const PopAllSituation = React.createClass({
     render(){
         let product = (item, index) => {
             return <tr key={index}>
-                <td>{item.goodsname}</td>
+                <td style={{width:'60%'}}>{item.goodsname}</td>
                 <td>X{item.id}</td>
             </tr>
         };
