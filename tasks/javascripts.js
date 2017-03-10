@@ -9,7 +9,10 @@ module.exports = javascripts = function (src_path, build_path, name, debug) {
         .pipe(changed(build_path))
         .pipe(debug ?
             plugins.util.noop() :
-            js_uglify({output: {quote_keys: true, screw_ie8: false}}))
+            js_uglify({
+                output: {quote_keys: true, screw_ie8: false},
+                compress: {unused: false}
+            }))
         .pipe(name ? concat(name, {newLine: ';\n'}) : plugins.util.noop())
         .pipe(gulp.dest(build_path));
 };
