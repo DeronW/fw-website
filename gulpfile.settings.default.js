@@ -7,5 +7,8 @@ module.exports = {
     },
     activity: {
         dev_api_path: '//fe.9888.cn/'
+    },
+    "loan-web": {
+        dev_api_path: '//fe.9888.cn/'
     }
 };
