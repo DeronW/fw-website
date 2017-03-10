@@ -31,11 +31,13 @@ const LotteryPC = React.createClass({
         //}, 4000)
     },
     render() {
-        //<SlotMachinePC />
-        //<WinningListPC />
         return <div>
-            <SlotMachinePC prize_list={this.state.prize_list} result={this.state.result}/>
-            <WinningListPC />
+            <div className="machine">
+                <SlotMachinePC prize_list={this.state.prize_list} result={this.state.result}/>
+            </div>
+            <div className="list">
+                <WinningListPC />
+            </div>
         </div>
 
     }

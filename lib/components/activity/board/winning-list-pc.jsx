@@ -10,21 +10,22 @@ const WinningListPC = React.createClass({
             var list = data.data.list;
             this.setState({dataList: list})
         }, 'json');
+        this.moveListHandler();
     },
     moveListHandler(){
-      setTimeout(()=>{
-          setInterval(()=>{
-              this.setState({position:++this.state.position})
-          },1000)
-      },1000)
+        //setTimeout(()=>{
+        setInterval(()=> {
+            //this.setState({position: ++this.state.position})
+        }, 30);
+        //},1000)
     },
     closePopHandler(){
         ReactDOM.unmountComponentAtNode(document.getElementById('pop'));
     },
     showMyPrize(){
-        if(this.state.dataList.length){
-            ReactDOM.render(<PopMorePrize closePopHandle={this.closePopHandler}/>,document.getElementById('pop'))
-        }else{
+        if (this.state.dataList.length) {
+            ReactDOM.render(<PopMorePrize closePopHandle={this.closePopHandler}/>, document.getElementById('pop'))
+        } else {
             ReactDOM.render(<PopMessage closePopHandle={this.closePopHandler} popMyPrize="我的奖品" popNoTitle="暂无中奖记录"
                                         popBtn="朕知道了"/>, document.getElementById('pop'))
         }
@@ -52,7 +53,7 @@ const WinningListPC = React.createClass({
             <div className="myPrize" onClick={this.showMyPrize}></div>
             <table className="list">
                 <tbody className="listCell" style={listStyle}>
-                    {this.state.dataList.map(cell)}
+                {this.state.dataList.map(cell)}
                 </tbody>
             </table>
         </div>

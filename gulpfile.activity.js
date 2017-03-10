@@ -36,7 +36,6 @@ module.exports = function (gulp, generate_task, settings) {
         //`${PROJ}/board/slot-machine-pc.jsx`,//老虎机
         `${PROJ}/board/poke-balloon-mobile.jsx`,//戳气球
         `${PROJ}/board/winning-list-pc.jsx`,//获奖名单
-        `${PROJ}/board/winning-list-mobile.jsx`,
     ];
 
     let INCLUDE_JAVASCRIPTS = [
@@ -73,7 +72,6 @@ module.exports = function (gulp, generate_task, settings) {
         `${PROJ}/board/slot-machine-pc.less`,
         `${PROJ}/board/poke-balloon-mobile.less`,
         `${PROJ}/board/winning-list-pc.less`,
-        `${PROJ}/board/winning-list-mobile.less`,
     ];
 
     APP_NAMES.forEach(i => {
