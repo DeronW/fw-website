@@ -35,7 +35,7 @@ const LotteryPC = React.createClass({
             <div className="machine">
                 <SlotMachinePC prize_list={this.state.prize_list} result={this.state.result}/>
             </div>
-            <div className="list">
+            <div className="winningList">
                 <WinningListPC />
             </div>
         </div>
