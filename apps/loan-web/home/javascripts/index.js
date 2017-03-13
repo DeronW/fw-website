@@ -61,7 +61,6 @@ $(function () {
 
 		if(phone == '') {
 			$("#phoneErrorText").text("手机号不能为空");
-			
 		} else if (!isMobilePhone(phone)) {
 			$("#phoneErrorText").text("手机号格式不对");
 		} else if(!registerObj.getCode) {
@@ -93,6 +92,16 @@ $(function () {
 
 
     $("#gaincode").click(function () {
+		var phone = registerObj.phoneVal;		
+		
+		if(phone == '') {
+			$("#phoneErrorText").text("手机号不能为空");
+			return false;
+		} else if (!isMobilePhone(phone)) {
+			$("#phoneErrorText").text("手机号格式不对");
+			return false;
+		} 
+
         var num = 60;
         var _this=$(this);
 
