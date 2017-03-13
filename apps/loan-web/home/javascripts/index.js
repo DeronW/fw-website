@@ -16,7 +16,7 @@ $(function () {
 		return /^1(3|4|5|7|8)\d{9}$/.test(phone)
 	}
 
-	function getVal(obj, _this) {
+	function getVal(obj, objVal, _this) {
 		obj.bind('input propertychange', function() {
 
 			var inputVal = $(this).val();
@@ -24,9 +24,9 @@ $(function () {
 			if(verificationNum(inputVal)) {
 				$(this).val($(this).val());				
 
-				_this.phoneVal = $(this).val();				
+				_this[objVal] = $(this).val();				
 			} else {
-				$(this).val(_this.phoneVal);	
+				$(this).val(_this[objVal]);	
 			}
 
 		});
@@ -35,16 +35,19 @@ $(function () {
 	var registerObj = {
 		phoneVal: '',
 		codeVal: '',
+		codeToken: '',
+		codeType: '',
+		getCode: false,
 		phoneValFun: function() {
 			var _this = this;
 
-			getVal($('#phoneChange'), _this);
+			getVal($('#phoneChange'), 'phoneVal', _this);
 
 		},
 		codeValFun: function() {
 			var _this = this;
 
-			getVal($('#codeChange'), _this);
+			getVal($('#codeChange'), 'codeVal',  _this);
 
 		}
 	};
@@ -57,20 +60,30 @@ $(function () {
 		var code = registerObj.codeVal;
 
 		if(phone == '') {
-			alert("手机号不能为空");
+			$("#phoneErrorText").text("手机号不能为空");
+			
 		} else if (!isMobilePhone(phone)) {
-			alert("手机号格式不对");
-		} else if(code == '') {
-			alert("验证不能为空");
-		} else {
+			$("#phoneErrorText").text("手机号格式不对");
+		} else if(!registerObj.getCode) {
+			$("#codeErrorText").text("请先获取验证码");
+		}  else if(code == '') {
+			$("#codeErrorText").text("验证不能为空");
+		}else {
 			$.ajax({
-				url: '/api/userBase/v1/register.json',
+				url: $("#api-path").val() + 'api/userBase/v1/register.json',
 				method: 'POST',
 				data: {
-				
+					mobile: registerObj.phoneVal,
+					codeToken: registerObj.codeToken,
+					verifyCode: registerObj.codeVal,
+					sourceType: 5
 				},
 				success: function(data) {
-					console.log(data);
+					if(data.code == 10000) {
+						$("#qrBlock").show();
+					} else {
+						alert(data.message);
+					}	
 				}
 			});	
 		}
@@ -79,22 +92,53 @@ $(function () {
 	});
 
 
-
-
     $("#gaincode").click(function () {
-        var num =5;
+        var num = 60;
         var _this=$(this);
+
+		$("#gaincode").hide();
+		$("#downCode").show();	
+		$("#downCode").text(num+'秒');	
+
+		registerObj.getCode = true;
+
+
         _this.text(num+'秒');
-        var timer=  setInterval(function () {
-            if(num==0){
-                _this.text('点击获取');
-                num = 5;
+        var timer = setInterval(function () {
+            if(num==0){                
+				$("#downCode").text('点击获取')
+                num = 60;
                 clearInterval(timer);
             }else{
-                _this.text(num+'秒');
+				$("#downCode").text(num+'秒')
+                
                 num--;
             }
         },1000);
+
+
+		$.ajax({
+			url: $("#api-path").val() + 'api/userBase/v1/sendVerifyCode.json',
+			method: 'POST',
+			data: {
+				mobile: registerObj.phoneVal,
+				userOperationType: 3,
+				sourceType: 5
+			},
+			success: function(data) {
+				if(data.code == 10000) {					
+					registerObj.codeToken = data.data.codeToken;
+					registerObj.codeType = data.data.codeType;
+					$("#downCode").text(num+'秒');
+				} else {
+					clearInterval(timer);
+					$("#gaincode").show();
+					$("#downCode").hide();	
+					alert(data.message);
+					
+				}				
+			}
+		});	
     });
     function  time() {
 

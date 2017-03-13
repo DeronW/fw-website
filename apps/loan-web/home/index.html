@@ -22,15 +22,20 @@
                 <div class="register-content">
                     <label>
                         <input id="phoneChange" type="text" maxlength="13" class="phonenum" placeholder="请输入手机号">
-                        <div class="p-tips"></div>
+                        <div id="phoneErrorText" class="p-tips"></div>
                     </label>
                     <div class="container">
                         <input id="codeChange" type="text" maxlength="4" class="securitycode" placeholder="请输入验证码">
                         <span class="gaincode" id="gaincode">点击获取</span>
-                        <div class="c-tips"></div>
+                        <span class="gaincode down-code" id="downCode" style="display: none;"></span>
+                        <div id="codeErrorText" class="c-tips"></div>
                     </div>
                     <div class="deal">同意<a href="" class="deallink">《放心花用户注册协议》</a></div>
                     <div id="registerButn" class="registerbutton" >立即借款</div>
+                </div>
+
+                <div id="qrBlock" class="qr-block" style="display: none;">
+                    <img src="images/QR.png" />
                 </div>
             </div>
         </div>
