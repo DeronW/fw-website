@@ -13,25 +13,30 @@ const WinningListPC = React.createClass({
         this.moveListHandler();
     },
     moveListHandler(){
-        let {list} = this.state;
-        var distance = 370;
-        var timer =setInterval(()=> {
-            if (this.state.position == distance) {
-                distance += distance;
-                this.move(distance);
-                clearInterval(timer)
+        var distance = 275;
+        var timer = setInterval(()=> {
+            let {position,dataList} = this.state;
+            if (position > (Math.ceil((dataList.length / 6)) - 2) * 275) {
+                setTimeout(()=> {
+                    this.setState({position: 0});
+                    distance = 275;
+                }, 3000);
             } else {
-                this.move(distance)
+                if (position == distance) {
+                    distance += distance;
+                } else {
+                    this.move(distance)
+                }
             }
-        }, 50);
+        }, 30);
     },
     move(distance){
         var s = 0;
-        setTimeout(()=>{
+        setTimeout(()=> {
             s = (distance - this.state.position) / 8;
             s = s > 0 ? Math.ceil(s) : Math.floor(s);
             this.setState({position: this.state.position + s});
-        },3000);
+        }, 3000);
     },
     closePopHandler(){
         ReactDOM.unmountComponentAtNode(document.getElementById('pop'));
@@ -45,7 +50,7 @@ const WinningListPC = React.createClass({
         }
     },
     sliceStrFun(productName){
-        if (productName.length > 10) {
+        if (productName && productName.length > 10) {
             return productName.substr(0, 10) + "..."
         } else {
             return productName
