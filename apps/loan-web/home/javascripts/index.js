@@ -119,6 +119,8 @@ $(function () {
             if(num==0){                
 				$("#downCode").text('点击获取')
                 num = 60;
+				$("#gaincode").show();
+				$("#downCode").hide();
                 clearInterval(timer);
             }else{
 				$("#downCode").text(num+'秒')
