@@ -92,7 +92,7 @@ const PcContainer = React.createClass({
                     </div>
                 </div>
                 <div className="pcQuarterPack">
-                    
+
                     <div className="quarterTitle"></div>
                     <div className="quarterText">
                         1.6-3.30，全榜30名推荐人的有效好友累投年化总额（不含自身）达到对应礼包标准，平台开启新春特奖。推荐人（有效好友≥100人且有效好友累投年化额≥100万元）奖金为推荐人活动期间的有效好友累投年化额*对应奖金比例。</div>
@@ -169,7 +169,7 @@ const PcContainer = React.createClass({
                         <div className="noticeText1">请好友注册或投资时填写我的工场码</div>
                         <div className="noticeCode">A354545</div>
                         <div className="noticeText2">复制以下链接，发送给好友！</div>
-                        <div className="noticeLink" id="copy-value-pc">http://passport.9888.cn/pp-web2/register/phone.do?gcm=A677004</div>
+                        <div className="noticeLink" id="copy-value-pc">https://www.9888.cn/depository/regist/toRegist.shtml?gcm=A677004</div>
                         <div className="copyCode" data-clipboard-action="copy" data-clipboard-target="#copy-value-pc" >复制链接</div>
                         <div className="noticeRemind">
                             新手注册即送<em>120</em>元<a href="http://www.9888.cn/news/notice/1861.html">更多新手秘笈></a>
