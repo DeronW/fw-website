@@ -3,7 +3,8 @@ const eslint = require('gulp-eslint');
 const PROJ = 'loan-web';
 
 let APP_NAMES = [
-    'home'
+    'home',
+    'register-protocol'
 ];
 
 module.exports = function (gulp, generate_task, settings) {
