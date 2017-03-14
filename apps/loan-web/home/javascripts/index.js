@@ -79,7 +79,9 @@ $(function () {
 				},
 				success: function(data) {
 					if(data.code == 10000) {
+						$("#rgisterContent").hide();
 						$("#qrBlock").show();
+
 					} else {
 						alert(data.message);
 					}	
