@@ -60,13 +60,13 @@ $(function () {
 		var code = registerObj.codeVal;
 
 		if(phone == '') {
-			$("#phoneErrorText").text("手机号不能为空");
+			$("#phoneErrorText").text("请输入手机号");
 		} else if (!isMobilePhone(phone)) {
-			$("#phoneErrorText").text("手机号格式不对");
+			$("#phoneErrorText").text("手机号格式不正确");
 		} else if(!registerObj.getCode) {
 			$("#codeErrorText").text("请先获取验证码");
 		}  else if(code == '') {
-			$("#codeErrorText").text("验证不能为空");
+			$("#codeErrorText").text("请输入验证码");
 		}else {
 			$.ajax({
 				url: $("#api-path").val() + 'api/userBase/v1/register.json',
@@ -97,10 +97,10 @@ $(function () {
 		var phone = registerObj.phoneVal;		
 		
 		if(phone == '') {
-			$("#phoneErrorText").text("手机号不能为空");
+			$("#phoneErrorText").text("请输入手机号");
 			return false;
 		} else if (!isMobilePhone(phone)) {
-			$("#phoneErrorText").text("手机号格式不对");
+			$("#phoneErrorText").text("手机号格式不正确");
 			return false;
 		} 
 
