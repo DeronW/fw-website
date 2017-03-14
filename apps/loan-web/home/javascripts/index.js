@@ -104,7 +104,7 @@ $(function () {
 			return false;
 		} 
 
-        var num = 60;
+        var num = 5;
         var _this=$(this);
 
 		$("#gaincode").hide();
@@ -117,8 +117,8 @@ $(function () {
         _this.text(num+'秒');
         var timer = setInterval(function () {
             if(num==0){                
-				$("#downCode").text('点击获取')
-                num = 60;
+				$("#gaincode").text('点击获取')
+                num = 5;
 				$("#gaincode").show();
 				$("#downCode").hide();
                 clearInterval(timer);
@@ -147,6 +147,7 @@ $(function () {
 					clearInterval(timer);
 					$("#gaincode").show();
 					$("#downCode").hide();	
+					$("#gaincode").text('点击获取')
 					alert(data.message);
 					
 				}				
