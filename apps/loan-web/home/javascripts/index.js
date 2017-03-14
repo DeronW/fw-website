@@ -104,7 +104,7 @@ $(function () {
 			return false;
 		} 
 
-        var num = 5;
+        var num = 60;
         var _this=$(this);
 
 		$("#gaincode").hide();
@@ -118,7 +118,7 @@ $(function () {
         var timer = setInterval(function () {
             if(num==0){                
 				$("#gaincode").text('点击获取')
-                num = 5;
+                num = 60;
 				$("#gaincode").show();
 				$("#downCode").hide();
                 clearInterval(timer);
