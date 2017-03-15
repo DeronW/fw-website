@@ -5,6 +5,7 @@ const PROJ = 'activity';
 const APP_NAMES = [
      '2017-01-05', //不再更能 旧专题
     'topic-template-one',
+    'topic-template-two',
     'template-columns', // 动态分配的 列数 模板
     'template-lottery-draw',
     'template-one-arm-bandit', // 老虎机 模板
