@@ -52,11 +52,11 @@
       }
       .productName{
         font-size: @fontSize24;
-        margin-bottom: -120px;
         width: 200px;
-        text-align: center;
-        display: inline-block;
-        vertical-align: middle;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 80px;
         border-left: 2px solid @colorRed;
         color: @colorWhite;
       }
@@ -85,9 +85,9 @@
     .cell {
       width: @contentWidth / 2;
       .productName{
-        width: 200px;
-        padding: 5px 0 5px 90px;
-        margin-left: -90px;
+        width: 240px;
+        margin-top: 30px;
+        padding-left: 45px;
       }
       &:first-child{
         .productName{
@@ -104,9 +104,8 @@
         margin-left: 20px;
       }
       .productName{
-        padding: 5px 0 5px 20px;
-        width: 200px;
-        margin-left: -10px;
+        margin-top: 30px;
+        padding-left: 10px;
       }
       &:first-child{
         .productName{
