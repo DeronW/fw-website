@@ -6,7 +6,7 @@ var colors = require('colors');
 const PROJ = process.argv[2];
 
 const sourceF = `/tmp/webapp.${PROJ}.git.diff`
-const targetF = 'differential.compile.tmp.sh'
+const targetF = `differential.compile.${PROJ}.sh`
 
 if (!PROJ) throw new Error('缺少参数, 待编译项目名称');
 
