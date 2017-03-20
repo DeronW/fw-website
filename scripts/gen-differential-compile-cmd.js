@@ -21,7 +21,7 @@ fs.readFile(sourceF, (err, data) => {
 
     lines.forEach(line => {
         ['lib', 'public', 'tasks', 'scripts', 'gulpfile'].forEach(i => {
-            if (line.time().startsWith(i)) r.lib = true
+            if (line.trim().startsWith(i)) r.lib = true
         });
         let m = line.match(reg_page);
         if (m) r.pages[m[1]] = true;
