@@ -20,7 +20,9 @@ fs.readFile(sourceF, (err, data) => {
     let reg_page = new RegExp(`apps/${PROJ}/([-\\w]+)/`)
 
     lines.forEach(line => {
-        ['lib', 'public', 'tasks', 'gulpfile'].forEach(i => { if (line.startsWith(i)) r.lib = true });
+        ['lib', 'public', 'tasks', 'scripts', 'gulpfile'].forEach(i => {
+            if (line.time().startsWith(i)) r.lib = true
+        });
         let m = line.match(reg_page);
         if (m) r.pages[m[1]] = true;
     })
