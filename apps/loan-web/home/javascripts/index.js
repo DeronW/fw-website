@@ -94,6 +94,7 @@ $(function () {
 
 
     $("#gaincode").click(function () {
+		console.log('xxx');
 		var phone = registerObj.phoneVal;		
 		
 		if(phone == '') {
