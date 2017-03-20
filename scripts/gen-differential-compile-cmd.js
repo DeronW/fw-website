@@ -20,7 +20,9 @@ fs.readFile(sourceF, (err, data) => {
     let reg_page = new RegExp(`apps/${PROJ}/([-\\w]+)/`)
 
     lines.forEach(line => {
-        ['lib', 'public', 'tasks', 'gulpfile'].forEach(i => { if (line.startsWith(i)) r.lib = true });
+        ['lib', 'public', 'tasks', 'scripts', 'gulpfile'].forEach(i => {
+            if (line.trim().startsWith(i)) r.lib = true
+        });
         let m = line.match(reg_page);
         if (m) r.pages[m[1]] = true;
     })
@@ -39,13 +41,12 @@ fs.readFile(sourceF, (err, data) => {
 
     fs.writeFile(targetF, sh_script.join('\n'), (err) => {
         if (err) throw err;
-        console.log(colors.yellow('完成差量编译检测:'));
-        console.log(colors.yellow(
-            r.lib ?
-                '需要完全编译' :
-                sh_script.length ?
-                    '可以差量编译' :
-                    '无更新, 不需要编译'));
+        let t = r.lib ?
+            '需要完全编译' :
+            sh_script.length ?
+                '可以差量编译' :
+                '无更新, 不需要编译';
+        console.log(colors.yellow(`完成差量编译检测:${t}`));
 
         fs.chmod(targetF, parseInt('755', 8));
     });
