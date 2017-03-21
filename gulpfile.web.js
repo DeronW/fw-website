@@ -15,6 +15,7 @@ const NOTICE_PAGES = [
     'guide-cookbook', // 玩赚攻略页
     'vip-prerogative', // 等级攻略页
     'notice-corporate-structure', // 信息披露页面
+    'information-disclosure'//信息披露新页面
 ]
 
 // 专题说明类页面
