@@ -51,7 +51,7 @@ const HeaderStatusBar = React.createClass({
     },
     render: function () {
         let user_state = null, msg = null;
-
+        let header;
         let separate_line = <span className="separate-line"> </span>;
 
         if (this.state.is_login) {
@@ -90,7 +90,7 @@ const HeaderStatusBar = React.createClass({
             msg = <div className="unread-msg-count">({this.state.msg_count})</div>
         }
 
-        return (
+        let p2pHeader= (
             <div className="header-status-bar">
                 <div className="container">
                     <div className="hsb-xin-dai">
@@ -129,6 +129,12 @@ const HeaderStatusBar = React.createClass({
                     </div>
                 </div>
             </div>
+        );
+        if(window.DOMAIN_P2P){
+            header = p2pHeader;
+        }
+        return (
+            {header}
         )
     }
 });
