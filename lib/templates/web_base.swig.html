@@ -36,7 +36,11 @@
 <input type="hidden" id="api-path" value="{{ API_PATH }}"/>
 
 <div id="header-status-bar"></div>
+{% if window.DOMAIN_P2P %}
 {% include 'web/header-nav-bar.swig.html' %}
+{% else %}
+{% include 'web/header-nav-bar-zx.swig.html' %}
+{% endif %}
 {% block content %}{% endblock %}
 {% include 'web/footer.swig.html' %}
 {% include 'web/sidebar-fn.swig.html' %}
