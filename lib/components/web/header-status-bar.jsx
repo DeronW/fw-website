@@ -84,11 +84,6 @@ const HeaderStatusBar = React.createClass({
                         {this.state.showUserPop ? pop : null}
                     </div>
                     <a href="/orderUser/loginout.do">退出</a>
-                    {/*<a className="link" href="/mesageCenter/msssageList.shtml?messageType=1" style={{display:"block"}}>*/}
-                        {/*消息*/}
-                        {/*{msg}*/}
-                    {/*</a>*/}
-                   {/*<div className="zx-lines"></div>*/}
                 </div>
             )
         }
