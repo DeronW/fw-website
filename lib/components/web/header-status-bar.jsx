@@ -84,11 +84,11 @@ const HeaderStatusBar = React.createClass({
                         {this.state.showUserPop ? pop : null}
                     </div>
                     <a href="/orderUser/loginout.do">退出</a>
-                    <a className="link" href="/mesageCenter/msssageList.shtml?messageType=1" style={{display:"block"}}>
-                        消息
-                        {msg}
-                    </a>
-                   <div className="zx-lines"></div>
+                    {/*<a className="link" href="/mesageCenter/msssageList.shtml?messageType=1" style={{display:"block"}}>*/}
+                        {/*消息*/}
+                        {/*{msg}*/}
+                    {/*</a>*/}
+                   {/*<div className="zx-lines"></div>*/}
                 </div>
             )
         }
@@ -147,6 +147,10 @@ const HeaderStatusBar = React.createClass({
                         <img src="images/global-header/menu-app.png"/>
                     </a>
                 </div>
+                <a className="link" href="/mesageCenter/msssageList.shtml?messageType=1">
+                    消息
+                    {msg}
+                </a>
                 {separate_line}
                 {this.state.is_login && this.state.username ? user_state : null}
                 {this.state.is_login ? null : <a className="link" href="/orderUser/register.shtml">注册</a>}
