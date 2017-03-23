@@ -53,6 +53,9 @@ const HeaderStatusBar = React.createClass({
         let user_state = null, msg = null;
         let separate_line = <span className="separate-line"> </span>;
         let header = null;
+        if (this.state.msg_count) {
+            msg = <div className="unread-msg-count">({this.state.msg_count})</div>
+        }
         if (this.state.is_login) {
             let pop = (
                 <div className="login-user-state-pop">
@@ -81,12 +84,13 @@ const HeaderStatusBar = React.createClass({
                         {this.state.showUserPop ? pop : null}
                     </div>
                     <a href="/orderUser/loginout.do">退出</a>
+                    <a className="link" href="/mesageCenter/msssageList.shtml?messageType=1" style={{display:"block"}}>
+                        消息
+                        {msg}
+                    </a>
+                   <div className="zx-lines"></div>
                 </div>
             )
-        }
-
-        if (this.state.msg_count) {
-            msg = <div className="unread-msg-count">({this.state.msg_count})</div>
         }
         let  p2pHeader = (
             <div className="container">
