@@ -2,9 +2,15 @@
  * Created by Administrator on 2017/3/20.
  */
 $(function () {
-    var myChartLeft = echarts.init(document.getElementById('main1'));
+    $(".informationTab .tab").on("click", function () {
+        $(this).addClass("active").siblings().removeClass("active");
+        var i = $(this).index();
+        $(".infoConPart").eq(i).removeClass("hidden").siblings().addClass("hidden")
+    });
 
-    // app.title = '嵌套环形图';
+
+
+    var myChartLeft = echarts.init(document.getElementById('main1'));
 
     optionLeft = {
         title: {
