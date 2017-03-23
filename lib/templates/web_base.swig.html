@@ -42,7 +42,12 @@
 {% include 'web/header-nav-bar-zx.swig.html' %}
 {% endif %}
 {% block content %}{% endblock %}
+{% if window.DOMAIN_P2P %}
 {% include 'web/footer.swig.html' %}
+{% else %}
+{% include 'web/footer-zx.swig.html' %}
+{% endif %}
+
 {% include 'web/sidebar-fn.swig.html' %}
 {% include 'partial/not-support-ie6-ie7.swig.html' %}
 
