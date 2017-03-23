@@ -4,7 +4,6 @@ const BalloonBoom = React.createClass({
             path: this.props.path,
             giftPath: '',
             prizeList: [],
-            animation: 1,
             outTime: false
         }
     },
@@ -18,11 +17,9 @@ const BalloonBoom = React.createClass({
     judgeType(){
         if (this.props.getPrizeType() == 'single') {
             this.balloonBoomHandler();
-            this.setState({animation: 0});
             this.props.promiseOnceLotteryResult();
         } else if (this.props.getPrizeType() == 'package') {
             this.balloonBoomHandler();
-            this.setState({animation: 0});
             this.props.promiseMoreLotteryResult();
         }
     },
@@ -64,7 +61,8 @@ const BalloonBoom = React.createClass({
         return <div className="ballBoom">
             <img className="giftBoom" src={this.state.giftPath} alt=""/>
             {
-                this.state.outTime ? <img className="greyPath" src={this.props.greyPath} alt=""/> :
+                (this.state.outTime || this.props.getPrizeType() == 'grey') ?
+                    <img className="greyPath" src={this.props.greyPath} alt=""/> :
                     <img className={this.props.isAnimation ? "blueBalloon":"blueBalloonNo"}
                          onClick={this.judgeType}
                          style={this.state.path == 'images/giftMobile.png' ? pathStyle : {}} src={this.state.path}/>
@@ -119,7 +117,7 @@ const PokeBalloonMobile = React.createClass({
     },
     getPrizeType(){
         if (this.state.count < 1) {
-            return ''
+            return 'grey'
         } else {
             return this.state.type
         }
