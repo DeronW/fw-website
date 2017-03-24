@@ -24,7 +24,7 @@ $(function () {
         },
         tooltip: {
             trigger: 'item',
-            formatter: "{b} : {c} ({d}%)",
+            formatter: "{d}%",
             backgroundColor: 'rgba(55,72,123,0.7)',
             padding: 10
         },
@@ -155,7 +155,7 @@ $(function () {
         },
         tooltip: {
             trigger: 'item',
-            formatter: "{b} : {c} ({d}%)",
+            formatter: "{d}%",
             backgroundColor: 'rgba(55,72,123,0.7)',
             padding: 10
         },
