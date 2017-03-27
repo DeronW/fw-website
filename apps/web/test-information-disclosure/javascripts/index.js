@@ -19,7 +19,8 @@ $(function () {
             x: 'center',
             textStyle: {
                 color: '#384a62',
-                fontSize: 24
+                fontSize: 24,
+                fontWeight:'normal'
             }
         },
         tooltip: {
@@ -150,7 +151,8 @@ $(function () {
             x: 'center',
             textStyle: {
                 color: '#384a62',
-                fontSize: 24
+                fontSize: 24,
+                fontWeight:'normal'
             }
         },
         tooltip: {
