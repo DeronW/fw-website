@@ -9,7 +9,7 @@ $(function () {
         $(".infoConPart").eq(i).removeClass("hidden").siblings().addClass("hidden")
     });
     //判断金额 n:四舍五入保留几位小数，默认为2位
-    function judgeCash(value,n) {
+    function judgeCash(value, n) {
         n = n > 0 && n <= 20 ? n : 2;
         var len = value.toString().length;
         var v = "";
@@ -22,17 +22,24 @@ $(function () {
         }
         return v
     }
+
     //格式化人数
     function formatPerson(s) {
         s = parseFloat((s + "").replace(/[^\d\.-]/g, "")) + "";
         var l = s.split(".")[0].split("").reverse(),
-        t = "";
+            t = "";
         for (i = 0; i < l.length; i++) {
             t += l[i] + ((i + 1) % 3 == 0 && (i + 1) != l.length ? "," : "");
         }
-        return t.split("").reverse().join("")+'人';
+        return t.split("").reverse().join("") + '人';
     }
 
+
+    var borrow = document.querySelectorAll(".staCommon");
+    var arr = [12, 23, 34, 45];
+    for (var i = 0; i < borrow.length; i++) {
+        borrow[i].querySelector('.number span').innerText = arr[i];
+    }
 
 
     var myChartLeft = echarts.init(document.getElementById('main1'));
