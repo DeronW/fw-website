@@ -1,23 +1,36 @@
 /**
  * Created by Administrator on 2017/3/20.
  */
-function judgeDomain(callback) {
-    var d = $getDebugParams().d;
-    if (d == "gongchangzx") {
-        $("[data-zx=true]").removeClass("hide")
-        $("[data-p2p=true]").addClass("hide")
-        //尊享的时候飘窗隐藏a
-        $("[data-zx-sidebar=true]").addClass("hide")
-    }else{
-        callback && callback();
-    }
-}
+
 $(function () {
     $(".informationTab .tab").on("click", function () {
         $(this).addClass("active").siblings().removeClass("active");
         var i = $(this).index();
         $(".infoConPart").eq(i).removeClass("hidden").siblings().addClass("hidden")
     });
+    //判断金额
+    function judgeCash(value) {
+        var len = value.toString().length;
+        var v = "";
+        if (len > 8) {
+            v = (value / 100000000).toFixed(2) + "亿";
+        } else if (len > 3) {
+            v = (value / 10000).toFixed(2) + "万";
+        } else {
+            return value
+        }
+        return v
+    }
+    //格式化人数
+    function formatPerson(s) {
+        s = parseFloat((s + "").replace(/[^\d\.-]/g, "")) + "";
+        var l = s.split(".")[0].split("").reverse(),
+        t = "";
+        for (i = 0; i < l.length; i++) {
+            t += l[i] + ((i + 1) % 3 == 0 && (i + 1) != l.length ? "," : "");
+        }
+        return t.split("").reverse().join("")+'人';
+    }
 
 
 
@@ -31,14 +44,14 @@ $(function () {
             textStyle: {
                 color: '#384a62',
                 fontSize: 24,
-                fontWeight:'normal'
+                fontWeight: 'normal'
             }
         },
         tooltip: {
             trigger: 'item',
             formatter: "{d}%",
             backgroundColor: 'rgba(55,72,123,0.7)',
-            padding: 10
+            padding: [5, 20, 5, 20]
         },
         legend: {
             orient: 'vertical',
@@ -163,14 +176,14 @@ $(function () {
             textStyle: {
                 color: '#384a62',
                 fontSize: 24,
-                fontWeight:'normal'
+                fontWeight: 'normal'
             }
         },
         tooltip: {
             trigger: 'item',
             formatter: "{d}%",
             backgroundColor: 'rgba(55,72,123,0.7)',
-            padding: 10
+            padding: [5, 20, 5, 20]
         },
         legend: {
             orient: 'vertical',
@@ -238,7 +251,7 @@ $(function () {
                 }
             ]
         },
-        color: ['#f46694','#6c8ed8','#f1b65c', '#e76f69', '#4cc0be', '#5baef5', '#6bb87a'],
+        color: ['#f46694', '#6c8ed8', '#f1b65c', '#e76f69', '#4cc0be', '#5baef5', '#6bb87a'],
         textStyle: {
             color: '#fff',
             fontSize: 18
