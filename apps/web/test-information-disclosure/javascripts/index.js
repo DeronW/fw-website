@@ -1,6 +1,17 @@
 /**
  * Created by Administrator on 2017/3/20.
  */
+function judgeDomain(callback) {
+    var d = $getDebugParams().d;
+    if (d == "gongchangzx") {
+        $("[data-zx=true]").removeClass("hide")
+        $("[data-p2p=true]").addClass("hide")
+        //尊享的时候飘窗隐藏a
+        $("[data-zx-sidebar=true]").addClass("hide")
+    }else{
+        callback && callback();
+    }
+}
 $(function () {
     $(".informationTab .tab").on("click", function () {
         $(this).addClass("active").siblings().removeClass("active");

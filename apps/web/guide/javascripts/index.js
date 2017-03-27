@@ -1,3 +1,14 @@
+function judgeDomain(callback) {
+    var d = $getDebugParams().d;
+    if (d == "gongchangzx") {
+        $("[data-zx=true]").removeClass("hide")
+        $("[data-p2p=true]").addClass("hide")
+        //尊享的时候飘窗隐藏a
+        $("[data-zx-sidebar=true]").addClass("hide")
+    }else{
+        callback && callback();
+    }
+}
 (function () {
 
     function tab(obj) {
