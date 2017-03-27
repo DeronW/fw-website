@@ -71,8 +71,7 @@ const HeaderStatusBar = React.createClass({
                     </div>
                 </div>
             );
-
-            user_state = (
+            let p2p_state = (
                 <div className="login-user-state">
                     你好,
                     <div
@@ -85,9 +84,34 @@ const HeaderStatusBar = React.createClass({
                     </div>
                     <a href="/orderUser/loginout.do">退出</a>
                 </div>
+            );
+            let zx_state = (
+                <div className="login-user-state">
+                    你好,
+                    <div
+                        className={this.state.showUserPop ? "hover login-user-state-username" : "login-user-state-username"}
+                        onMouseEnter={this.showUserPopHandler} onMouseLeave={this.hideUserPopHandler}>
+                        <a href="/account/home.shtml"> {this.state.username} </a>
+                        <i className="arrow"> </i>
+                        <div className="hidden-stone"></div>
+                        {this.state.showUserPop ? pop : null}
+                    </div>
+                    <a href="/orderUser/loginout.do">退出</a>
+                    <a className="link" href="/mesageCenter/msssageList.shtml?messageType=1">
+                        消息
+                        {msg}
+                    </a>
+                    <span className="msgline">
+
+                    </span>
+                </div>
+            );
+            user_state = (
+                window.DOMAIN_ZX != null ? zx_state : p2p_state
+
             )
         }
-        let  p2pHeader = (
+        let p2pHeader = (
             <div className="container">
                 <div className="hsb-xin-dai">
                     <a href="http://www.creditchina.hk/">中國信貸科技(08207.HK)</a>
@@ -126,15 +150,15 @@ const HeaderStatusBar = React.createClass({
             </div>
 
         );
-        let zxHeder =(
+        let zxHeder = (
             <div className="container">
                 <div className="zx-header-box">
-                   <div className="zxh-left">
-                       <a className="zxh-left-link l-first" href="https://bbs.9888.cn/">金融工场</a>
-                       <a className="zxh-left-link" href="https://www.easyloan888.com">放心花</a>
-                       <a className="zxh-left-link" href="http://mall.9888.cn">豆哥商城</a>
-                       <a className="zxh-left-link l-last" href="https://bbs.9888.cn/">工友之家</a>
-                   </div>
+                    <div className="zxh-left">
+                        <a className="zxh-left-link l-first" href="https://www.9888.cn/">金融工场</a>
+                        <a className="zxh-left-link" href="https://www.easyloan888.com">放心花</a>
+                        <a className="zxh-left-link" href="http://mall.9888.cn">豆哥商城</a>
+                        <a className="zxh-left-link l-last" href="https://bbs.9888.cn/">工友之家</a>
+                    </div>
                 </div>
                 <div className="header-status-bar-app">
                     <a href="/static/web/app-download/index.html">APP 客户端</a>
@@ -142,21 +166,22 @@ const HeaderStatusBar = React.createClass({
                         <img src="images/global-header/menu-app.png"/>
                     </a>
                 </div>
-                <a className="link" href="/mesageCenter/msssageList.shtml?messageType=1">
-                    消息
-                    {msg}
-                </a>
+                {/*<a className="link" href="/mesageCenter/msssageList.shtml?messageType=1">*/}
+                {/*消息*/}
+                {/*{msg}*/}
+                {/*</a>*/}
                 {separate_line}
                 {this.state.is_login && this.state.username ? user_state : null}
                 {this.state.is_login ? null : <a className="link" href="/orderUser/register.shtml">注册</a>}
                 {this.state.is_login ? null : separate_line}
-                {this.state.is_login ? null : <div className="link">你好，欢迎来到工场尊享！&nbsp;&nbsp;<a  href="/orderUser/login.shtml">登录</a></div>}
+                {this.state.is_login ? null :
+                    <div className="link">你好，欢迎来到工场尊享！&nbsp;&nbsp;<a href="/orderUser/login.shtml">登录</a></div>}
             </div>
         )
         // let header= window.DOMAIN_P2P?p2pHeader:zxHeder;
         return (
             <div className="header-status-bar">
-                {window.DOMAIN_P2P?p2pHeader:zxHeder}
+                {window.DOMAIN_ZX != null ? zxHeder : p2pHeader}
             </div>
         )
     }
