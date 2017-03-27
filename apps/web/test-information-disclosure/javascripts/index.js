@@ -8,14 +8,15 @@ $(function () {
         var i = $(this).index();
         $(".infoConPart").eq(i).removeClass("hidden").siblings().addClass("hidden")
     });
-    //判断金额
-    function judgeCash(value) {
+    //判断金额 n:四舍五入保留几位小数，默认为2位
+    function judgeCash(value,n) {
+        n = n > 0 && n <= 20 ? n : 2;
         var len = value.toString().length;
         var v = "";
         if (len > 8) {
-            v = (value / 100000000).toFixed(2) + "亿";
+            v = (value / 100000000).toFixed(n) + "亿";
         } else if (len > 3) {
-            v = (value / 10000).toFixed(2) + "万";
+            v = (value / 10000).toFixed(n) + "万";
         } else {
             return value
         }
