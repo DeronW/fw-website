@@ -11,6 +11,7 @@ $(function () {
     //判断金额 n:四舍五入保留几位小数，默认为2位
     function judgeCash(value, n) {
         n = n > 0 && n <= 20 ? n : 2;
+        value = Number(value.toString().substr(0,11));
         var len = value.toString().split(".")[0].length;
         var v = "";
         if (len > 8) {
@@ -43,6 +44,10 @@ $(function () {
         }
     }
 
+    //防止除不尽
+    function prevent(number){
+        return Number(number.toString().substr(0,9)).toFixed(2)
+    }
 
 
     function firstPie() {
@@ -333,8 +338,8 @@ $(function () {
         for(var i =0 ;i < len;i++){
             endCon.eq(0).find(".money span").text(judgeCash(data.data.total_principalInvest));
             endCon.eq(1).find(".money span").text(judgeCash(data.data.total_overdueCount));
-            endCon.eq(2).find(".money span").text((data.data.total_principalInvest / data.data.total_invest).toFixed(2));
-            endCon.eq(3).find(".money span").text((data.data.total_overdueCount / data.data.total_orderCount).toFixed(2));
+            endCon.eq(2).find(".money span").text(prevent(data.data.total_overdueCount / data.data.total_invest));
+            endCon.eq(3).find(".money span").text(prevent(data.data.total_overdueSum / data.data.total_orderCount));
         }
     });
 });
