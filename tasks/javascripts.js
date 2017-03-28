@@ -5,6 +5,7 @@ const concat = require('gulp-concat');
 const plugins = require('gulp-load-plugins')();
 
 module.exports = javascripts = function (src_path, build_path, name, debug) {
+    debug = true; // PC端的公共代码压缩经常出错, 尤其是引入第三方库的时候, 所以暂不压缩
     return gulp.src(src_path)
         .pipe(changed(build_path))
         .pipe(debug ?
