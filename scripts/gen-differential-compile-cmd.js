@@ -5,6 +5,7 @@ var colors = require('colors');
 // example : npm run pre-compile -- loan
 const PROJ = process.argv[2];
 
+// 每个代码库的每个项目配置文件需要不同
 const sourceF = `/tmp/website.${PROJ}.git.diff`
 const targetF = `differential.compile.${PROJ}.sh`
 
