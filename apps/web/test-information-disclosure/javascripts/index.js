@@ -175,8 +175,6 @@ $(function () {
         myChartLeft.setOption(optionLeft);
     }
 
-    //传递七个参数
-    firstPie(133, 133, 1, 2, 3, 4, 5);
 
     //第二个饼图
     function secondPie() {
@@ -311,7 +309,6 @@ $(function () {
         myChartRight.setOption(optionRight);
     }
     //args顺序：女，男，18,25,35,45,60以上
-    secondPie(133, 133, 1, 2, 3, 4, 5);
 
     $.get(API_PATH+"dataTopics/data.shtml").then((data)=>{
         //截止前一天日期
