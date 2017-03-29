@@ -42,7 +42,8 @@ $(function () {
                 clearInterval(obj.timer);
             }
         }, 15)
-    };
+    }
+
     var onesize1, onesize2, onesize3, onesize4, onesize5;
     getHeight();
     $(".more_link").click(function () {
@@ -110,7 +111,6 @@ $(function () {
     function toSize() {
         $(".agency_list").css("left", 0);
     }
-    var iNum = 0;
     var timer = null;
     var onesize = $(".agency_list li").eq(0).width(); // 一个运动单位的长度就是一个LI的宽度
     $(".agency_list").css("width", onesize * $(".agency_list li").size()); // 动态计算UL的宽度

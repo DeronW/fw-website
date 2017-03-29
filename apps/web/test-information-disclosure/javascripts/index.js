@@ -30,7 +30,7 @@ $(function () {
         var l = s.split(".")[0].split("").reverse(),
             t = "";
         for (i = 0; i < l.length; i++) {
-            t += l[i] + ((i + 1) % 3 == 0 && (i + 1) != l.length ? "," : "");
+            t += l[i] + ((i + 1) % 3 == 0 && i + 1 != l.length ? "," : "");
         }
         return t.split("").reverse().join("") + '人';
     }

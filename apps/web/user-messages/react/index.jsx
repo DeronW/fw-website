@@ -75,7 +75,7 @@ const MessagePanel = React.createClass({
             )
         };
 
-        tab_bar = (
+        tab_bar =
             <div className="tab-bar">
                 {['全部消息', '未读消息', '已读消息'].map((n, index) => {
                     return (
@@ -85,8 +85,7 @@ const MessagePanel = React.createClass({
                         </div>
                     )
                 })}
-            </div>
-        );
+            </div>;
 
         if (this.state.msg_list.length) {
             page = (

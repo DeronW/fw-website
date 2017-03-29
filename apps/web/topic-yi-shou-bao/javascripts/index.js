@@ -44,7 +44,8 @@ $(function () {
                 clearInterval(obj.timer);
             }
         }, 15)
-    };
+    }
+
     var onesize1, onesize2, onesize3, onesize4, onesize5;
     getHeight();
     $(".more_link").click(function () {

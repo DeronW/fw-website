@@ -17,11 +17,14 @@ const CenCont = React.createClass({
     },
     render: function () {
         var self = this;
-        if (1) {//this.props.banners.length
-            var riskAssess = <div className="per-risk-assess"><i className="icon"><img src="./images/prompt-icon.png"/></i>
-                <p>您尚未完成风险承受能力评估，为了使您更充分的了解自身风险承受能力，请您<a href="/user/riskgrade/toassess.shtml?type=home"
-                                                         className="text">立即评估</a>!</p></div>
-        }
+        //if (1) {//this.props.banners.length}
+        var riskAssess = <div className="per-risk-assess">
+            <i className="icon"><img src="./images/prompt-icon.png"/></i>
+
+            <p>您尚未完成风险承受能力评估，为了使您更充分的了解自身风险承受能力，请您
+                <a href="/user/riskgrade/toassess.shtml?type=home"
+                   className="text">立即评估</a>!</p>
+        </div>;
 
         let blockText = <div className="no-commodity-block">暂无记录</div>;
 
@@ -39,14 +42,18 @@ const CenCont = React.createClass({
                     </div>
                     <div className="per-shouyi">
                         <div className="block1 bl">
-                            <h5>累计收益(元)<span id="principal" className="tip_income"><span className="income_info">累计收益=已收利息+待收利息+已用工豆+已用优惠券<span className="san"></span></span></span>
+                            <h5>累计收益(元)<span id="principal" className="tip_income"><span className="income_info">累计收益=已收利息+待收利息+已用工豆+已用优惠券<span
+                                className="san"></span></span></span>
                             </h5>
                             <span className="accu-income">19,730.63</span>
                         </div>
                         <div className="block2 bl">
-                            <p className="ft1 line_h3 col3">账户总资产：<span className="ft2">17,743.71<em className="ft1"> 元</em></span>
+                            <p className="ft1 line_h3 col3">账户总资产：<span className="ft2">17,743.71<em className="ft1">
+                                元</em></span>
                             </p>
-                            <p className="ft1 line_h3 col3">待收本息：<span className="ft2">17,743.71<em className="ft1"> 元</em></span>
+
+                            <p className="ft1 line_h3 col3">待收本息：<span className="ft2">17,743.71<em className="ft1">
+                                元</em></span>
                             </p>
                         </div>
                         <div className="qiandao">
@@ -54,9 +61,11 @@ const CenCont = React.createClass({
                             <a href="javascript:;" id="click_qiandao2">
                                 <img src="./images/img_qiandao.png" width="80" height="80"/>
                             <span className="tip_info">
-                                1、每日签到奖励2工分；<br/>2、连续签到7天，可额外再奖励10工分；<br/><strong className="red2">3、投资更有机会领红包哦！</strong><span className="san"></span>
+                                1、每日签到奖励2工分；<br/>2、连续签到7天，可额外再奖励10工分；<br/><strong
+                                className="red2">3、投资更有机会领红包哦！</strong><span className="san"></span>
                             </span>
                             </a>
+
                             <p className="q_text">连续签到有惊喜</p>
                             <span className="getMoney" id="getMoney"></span>
                         </div>
@@ -67,7 +76,8 @@ const CenCont = React.createClass({
                         <div className="block2"><p>冻结资金(元)</p><span>0.00</span></div>
                         <a className="per-btn-style">充值</a>
                         <a className="per-btn-style2">提现</a>
-                        <a onclick="validateForHsAccount()" className="check-huishang-account"><img src="./images/hs_bank.jpg"/>查看徽商存管账户</a>
+                        <a onclick="validateForHsAccount()" className="check-huishang-account"><img
+                            src="./images/hs_bank.jpg"/>查看徽商存管账户</a>
                     </div>
                     <div class="per-other-box">
                         <div><span></span><span></span></div>
@@ -80,7 +90,7 @@ const CenCont = React.createClass({
 
     }
 });
-$(function(){
+$(function () {
     ReactDOM.render(<HeaderStatusBar />, document.getElementById('header-status-bar'));
     ReactDOM.render(<CenCont/>, document.querySelector(".p2p_right"));
 })

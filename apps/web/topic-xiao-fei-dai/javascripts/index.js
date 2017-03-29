@@ -78,15 +78,15 @@ $(function () {
     });
     $(window).scroll(function () {
         var st = $(window).scrollTop();
-        if (st > (iTop + iH - 120) && st < (iH + iTop + onesize1 - 120)) {
+        if (st > iTop + iH - 120 && st < iH + iTop + onesize1 - 120) {
             $(".list1 a").addClass("on").parent().siblings().children("a").removeClass("on");
-        } else if (st > (iH + iTop + onesize1-80) && st < (iTop + iH + onesize1 + onesize2-80)) {
+        } else if (st > iH + iTop + onesize1-80 && st < iTop + iH + onesize1 + onesize2-80) {
             $(".list2 a").addClass("on").parent().siblings().children("a").removeClass("on");
-        } else if (st > (iTop + iH + onesize1 + onesize2 - 40) && st < (iTop + iH + onesize1 + onesize2 + onesize3 - 40)) {
+        } else if (st > iTop + iH + onesize1 + onesize2 - 40 && st < iTop + iH + onesize1 + onesize2 + onesize3 - 40) {
             $(".list3 a").addClass("on").parent().siblings().children("a").removeClass("on");
-        } else if (st > (iTop + iH + onesize1 + onesize2 + onesize3 - 40) && st < (iTop + iH + onesize1 + onesize2 + onesize3 + onesize4 - 40)) {
+        } else if (st > iTop + iH + onesize1 + onesize2 + onesize3 - 40 && st < iTop + iH + onesize1 + onesize2 + onesize3 + onesize4 - 40) {
             $(".list4 a").addClass("on").parent().siblings().children("a").removeClass("on");
-        } else if (st > (iTop + iH + onesize1 + onesize2 + onesize3 + onesize4 - 40) && st < (iTop + iH + onesize1 + onesize2 + onesize3 + onesize4 + onesize5 - 40)) {
+        } else if (st > iTop + iH + onesize1 + onesize2 + onesize3 + onesize4 - 40 && st < iTop + iH + onesize1 + onesize2 + onesize3 + onesize4 + onesize5 - 40) {
             $(".list5 a").addClass("on").parent().siblings().children("a").removeClass("on");
         }
     });
