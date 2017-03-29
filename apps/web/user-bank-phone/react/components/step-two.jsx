@@ -87,13 +87,11 @@ const StepTwo = React.createClass({
             if (voice_call) {
                 tips = <div className="tips">已向{newphone}发送语音验证码，请注意收听</div>
             } else {
-                tips = (
-                    <div className="tips">
+                tips = <div className="tips">
                         若获取不到，请
                         <span className="link" onClick={this.makeVoiceHandler}>点击这里</span>，
                         获取语音验证码
                     </div>
-                )
             }
         }
 

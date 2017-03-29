@@ -88,8 +88,7 @@ const MessagePanel = React.createClass({
             </div>;
 
         if (this.state.msg_list.length) {
-            page = (
-                <div className="pagination">
+            page = <div className="pagination">
                     第{this.state.page}页, 共{this.state.total_page}页
                     <a onClick={() => this.loadPage('first')}>首页</a>
                     {this.state.page > 1 ?
@@ -97,8 +96,7 @@ const MessagePanel = React.createClass({
                     {this.state.page < this.state.total_page ?
                         <a onClick={() => this.loadPage('next')}>下一页</a> : null }
                     <a onClick={() => this.loadPage('last')}>末页</a>
-                </div>
-            );
+                </div>;
             records = this.state.msg_list.map(message);
         } else {
             records = <div className="no-message">暂无记录</div>

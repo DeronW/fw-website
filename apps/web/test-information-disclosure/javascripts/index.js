@@ -26,7 +26,7 @@ $(function () {
 
     //格式化人数
     function formatPerson(s) {
-        s = parseFloat((s + "").replace(/[^\d\.-]/g, "")) + "";
+        s = parseFloat((s + "").replace(/[^\d.-]/g, "")) + "";
         var l = s.split(".")[0].split("").reverse(),
             t = "";
         for (i = 0; i < l.length; i++) {

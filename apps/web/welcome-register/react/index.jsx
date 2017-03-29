@@ -2,7 +2,7 @@ const NumberBoard = React.createClass({
     getInitialState: function () {
         let n = this.props.num;
         let yizi = parseInt(n / (10000 * 10000));  //得到亿位显示的数字
-        let wan = parseInt((n % (10000 * 10000) / 10000)); //得到万位显示的数字
+        let wan = parseInt(n % (10000 * 10000) / 10000); //得到万位显示的数字
         let wan_arr = [];
         let yizi_arr = [];
         //把数字分割开来的函数
