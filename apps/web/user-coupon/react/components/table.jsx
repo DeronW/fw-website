@@ -25,7 +25,7 @@ const Table = React.createClass({
         } else if (type == 'next') {
             if (page < total_page) new_page = page + 1;
         }
-        if (new_page) this.setState({ page: new_page }, this.reloadData);
+        if (new_page) this.setState({page: new_page}, this.reloadData);
     },
     reloadData: function () {
         this.props.fnLoadData && this.props.fnLoadData(this.state.page, (data) => {
@@ -78,7 +78,7 @@ const Table = React.createClass({
             pagination = <div className="pagination">
                 <div className="paginationPage">
                     第{page}页, 共{total_page}页
-                        {page > 1 ? <a onClick={() => this.switchPageHandler('first')}>首页</a> : null}
+                    {page > 1 ? <a onClick={() => this.switchPageHandler('first')}>首页</a> : null}
                     {page > 1 ? <a onClick={() => this.switchPageHandler('prev')}>上一页</a> : null}
                     {page < total_page ?
                         <a onClick={() => this.switchPageHandler('next')}>下一页</a> : null}
@@ -94,8 +94,8 @@ const Table = React.createClass({
             <div>
                 <table className="table-read-only">
                     <tbody>
-                        <tr className="trTitle">{this.state.th_rows.map(th_cell)}</tr>
-                        {this.state.rows.map(tr)}
+                    <tr className="trTitle">{this.state.th_rows.map(th_cell)}</tr>
+                    {this.state.rows.map(tr)}
                     </tbody>
                 </table>
                 {empty_records}

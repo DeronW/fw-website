@@ -16,7 +16,7 @@ const Content = React.createClass({
             }, 'json')
     },
     tabClickHandler: function (tab) {
-        let n = (tab == "已获取") ? true : false;
+        let n = tab == "已获取" ? true : false;
         this.setState({ tabName: tab });
     },
     render: function () {
@@ -71,8 +71,8 @@ let Fn = {
             let rows = data.result.map((i) => [{
                 text: i.createTimeString
             }, {
-                text: i.cashAmount > 0 ? ("+" + i.cashAmount) : (i.cashAmount),
-                className: (i.cashAmount >= 0) ? 'red' : 'green'
+                text: i.cashAmount > 0 ? "+" + i.cashAmount : i.cashAmount,
+                className: i.cashAmount >= 0 ? 'red' : 'green'
             }, {
                 text: i.remark
             }]);

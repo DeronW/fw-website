@@ -18,7 +18,7 @@ const Content = React.createClass({
     },
 
     tabClickHandler: function (tab) {
-        let n = (tab == "工豆收入") ? true : false;
+        let n = tab == "工豆收入" ? true : false;
         this.setState({ tabName: tab, check: n });
     },
 
@@ -54,13 +54,11 @@ const Content = React.createClass({
             fnLoadData = Fn.OverdateLoadData;
             fnFilterData = Fn.OverdateFilterData;
         }
-        let ch = (this.state.check == false) ? "none" : "block";
-        console.log(this.state.check);
-        let checkLine = (
-            <div className="checkLine" style={{ display: ch }}>
+        let ch = this.state.check == false ? "none" : "block";
+        let checkLine = <div className="checkLine" style={{ display: ch }}>
                 <a href="" className="blue">导出对账</a>（仅可导出最近1个月数据，如有问题，请联系客服 400-0322-988沟通）
-            </div>
-        )
+            </div>;
+
 
         return (
             <div className="topNav">
@@ -100,7 +98,7 @@ let Fn = {
         let rows = data.result.map((i) => [{
             text: i.createTime
         }, {
-            text: i.cashValue > 0 ? ("+" + i.cashValue) : (i.cashValue),
+            text: i.cashValue > 0 ? "+" + i.cashValue : i.cashValue,
             className: i.cashValue > 0 ? 'red' : 'green'
         }, {
             text: `(${i.waterTypeName})${i.remark}`
@@ -125,7 +123,7 @@ let Fn = {
         let rows = data.result.map((i) => [
             { text: i.issueTime },
             {
-                text: i.beanUsed > 0 ? ("+" + i.beanUsed) : (i.beanUsed),
+                text: i.beanUsed > 0 ? "+" + i.beanUsed : i.beanUsed,
                 className: i.beanUsed > 0 ? 'red' : 'green'
             },
             { text: i.overdueTime },
@@ -153,7 +151,7 @@ let Fn = {
         let rows = data.result.map((value) => [
             { text: value.createTime },
             {
-                text: (value.cashValue > 0) ? "+" + value.cashValue : value.cashValue,
+                text: value.cashValue > 0 ? "+" + value.cashValue : value.cashValue,
                 className: value.cashValue > 0 ? "red" : "green"
             },
             { text: value.remark }
@@ -178,7 +176,7 @@ let Fn = {
         let rows = data.result.map((value) => [
             { text: value.issueTime },
             {
-                text: (value.beanOverdue > 0) ? "+" + value.beanOverdue : value.beanOverdue,
+                text: value.beanOverdue > 0 ? "+" + value.beanOverdue : value.beanOverdue,
                 className: value.beanOverdue > 0 ? "red" : "green"
             },
             { text: value.overdueTime },

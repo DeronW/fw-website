@@ -7,7 +7,7 @@ const PopList = React.createClass({
             finalRole: '',
             user_list: [],
             selectedId: null,
-            isConfirm:false,
+            isConfirm: false,
             staMoneyData: [],
             staInterestData: []
         }
@@ -66,9 +66,9 @@ const PopList = React.createClass({
             this.closeHandler();
             let couponName = this.props.type, userValue = this.props.value;
             if (this.props.type == "返现券") {
-                GlobalConfirm('您确定赠送%s元'+couponName+'给您的好友吗？', userValue, this.presentCoupon)
+                GlobalConfirm('您确定赠送%s元' + couponName + '给您的好友吗？', userValue, this.presentCoupon)
             } else if (this.props.type == "返息券") {
-                GlobalConfirm('您确定赠送%s'+couponName+'给您的好友吗？', userValue, this.presentCoupon)
+                GlobalConfirm('您确定赠送%s' + couponName + '给您的好友吗？', userValue, this.presentCoupon)
             } else {
                 GlobalConfirm("没有确定返券类型")
             }
@@ -102,7 +102,7 @@ const PopList = React.createClass({
 
         var popLoginName = function (loginName, gcm, finalRole) {
             var loginNameValue = '';
-            if (loginName != null && gcm.substring(0, 1) == 'A') {
+            if (loginName !== null && gcm.substring(0, 1) == 'A') {
                 if (finalRole == 4) {
                     if (loginName.length <= 4) {
                         loginNameValue = loginName.substring(0, 1) + "**"
@@ -112,7 +112,7 @@ const PopList = React.createClass({
                 } else {
                     loginNameValue = loginName;
                 }
-            } else if (loginName != null) {
+            } else if (loginName !== null) {
                 if (loginName.length <= 4) {
                     loginNameValue = loginName.substring(0, 1) + "**";
                 } else {
@@ -128,18 +128,18 @@ const PopList = React.createClass({
             let sexValue = sex == 1 ? "先生" : "女士";
 
             var realNameValue = '--';
-            if (realName != null && gcm.substring(0, 1) == 'A') {
+            if (realName !== null && gcm.substring(0, 1) == 'A') {
                 if (finalRole == 4) {
                     realNameValue = realName.substring(0, 1) + sexValue;
                 } else {
-                    if(realName.length >= 8){
-                        realNameValue = realName.substring(0, 6) + "..." ;
-                    }else{
+                    if (realName.length >= 8) {
+                        realNameValue = realName.substring(0, 6) + "...";
+                    } else {
                         realNameValue = realName
                     }
 
                 }
-            } else if (realName != null) {
+            } else if (realName !== null) {
                 realNameValue = realName.substring(0, 1) + sexValue
             }
             return realNameValue
@@ -150,7 +150,7 @@ const PopList = React.createClass({
 
             if (gcm.substring(0, 1) == 'A') {
                 if (finalRole == 4) {
-                    if (mobile != null) {
+                    if (mobile !== null) {
                         mobileValue = mobile.substring(0, 3) + "****" + mobile.substring(7, 11);
                     } else {
                         mobileValue = "--"
@@ -234,9 +234,10 @@ function showPopList(type, value, id, cb) {
         },
         type: 'get',
         success: (data) => {
-            if(data.data.pageData.result.length>0){
-                ReactDOM.render(<PopList type={type} value={value} id={id} callback={cb}/>, document.getElementById('popList'))
-            }else{
+            if (data.data.pageData.result.length > 0) {
+                ReactDOM.render(<PopList type={type} value={value} id={id}
+                                         callback={cb}/>, document.getElementById('popList'))
+            } else {
                 GlobalAlert('抱歉，您暂无推荐好友，无法进行赠送。');
             }
         },

@@ -16,9 +16,9 @@ const InterestPanel = React.createClass({
             status: 2,
             couponType: 2
         }, (data) => {
-            if (data.code == 10000 && data.data.pageData){
+            if (data.code == 10000 && data.data.pageData) {
                 this.setState({tab_name_list: ['未使用', '已使用', '已过期', '已赠送']})
-            }else if(data.code == 63001){
+            } else if (data.code == 63001) {
                 gotoLogin();
             }
         }, 'json')
@@ -28,7 +28,7 @@ const InterestPanel = React.createClass({
             availableNumber = 0,
             willExpireNumber = 0,
             usedNumber = 0,
-        } = this.props.data;
+            } = this.props.data;
 
         // if (this.props.data == "undefined") {
         //     availableNumber = 0;
@@ -121,7 +121,8 @@ const InterestPanel = React.createClass({
                     温馨提示：<br/>
                     1、返息券投资完成后，额外返息以工豆形式返入工豆账户，可继续投资使用；<br/>
                     2、投资有锁定天数的灵活收益项目，使用返息券后仅发锁定天数内产生的额外收益；<br/>
-                    3、投资按月/季等额还款的项目，最终返息需乘以0.56，0.56为借款方占用投资方的资金使用率。</div>
+                    3、投资按月/季等额还款的项目，最终返息需乘以0.56，0.56为借款方占用投资方的资金使用率。
+                </div>
             </div>
         )
     }
@@ -146,7 +147,7 @@ let InterestUnusedCouponList = function (page, cb) {
         success: function (data) {
             if (data.code == 10000) {
                 cb && cb(data.data.pageData)
-            } else if(data.code == 63001){
+            } else if (data.code == 63001) {
                 gotoLogin();
             }
         }.bind(this)
@@ -165,7 +166,7 @@ let InterestUsedCouponList = function (page, cb) {
         success: function (data) {
             if (data.code == 10000) {
                 cb && cb(data.data.pageData)
-            } else if(data.code == 63001){
+            } else if (data.code == 63001) {
                 gotoLogin();
             }
         }.bind(this)
@@ -184,7 +185,7 @@ let InterestOverdueCouponList = function (page, cb) {
         success: function (data) {
             if (data.code == 10000) {
                 cb && cb(data.data.pageData)
-            } else if(data.code == 63001){
+            } else if (data.code == 63001) {
                 gotoLogin();
             }
         }.bind(this)
@@ -203,7 +204,7 @@ let InterestPresentCouponList = function (page, cb) {
         success: function (data) {
             if (data.code == 10000) {
                 cb && cb(data.data.pageData)
-            } else if(data.code == 63001){
+            } else if (data.code == 63001) {
                 gotoLogin();
             }
         }.bind(this)
@@ -221,7 +222,7 @@ let InterestUnusedCouponFilter = function (data) {
                 text: item.investMultip,
                 className: 'moneyUnused2'
             }, {
-                text: item.inverstPeriod == 0 || item.inverstPeriod == null ? '全场通用' : `≥${item.inverstPeriod}`,
+                text: item.inverstPeriod == 0 || item.inverstPeriod === null ? '全场通用' : `≥${item.inverstPeriod}`,
                 className: 'moneyUnused2'
             }, {
                 text: `${getLocationDate(item.issueTime)}至${getLocationDate(item.overdueTime)}`,
@@ -247,7 +248,7 @@ let InterestUsedCouponFilter = function (data) {
                 text: item.investMultip,
                 className: 'moneyUnused2'
             }, {
-                text: item.inverstPeriod == 0 || item.inverstPeriod == null ? '全场通用' : `≥${item.inverstPeriod}`,
+                text: item.inverstPeriod == 0 || item.inverstPeriod === null ? '全场通用' : `≥${item.inverstPeriod}`,
                 className: 'moneyUnused2'
             }, {
                 text: `${getLocationDate(item.usedTime)}   ${getTimesString(item.usedTime)}`,
@@ -269,7 +270,7 @@ let InterestOverdueCouponFilter = function (data) {
                 text: item.investMultip,
                 className: 'moneyUnused2'
             }, {
-                text: item.inverstPeriod == 0 || item.inverstPeriod == null ? '全场通用' : `≥${item.inverstPeriod}`,
+                text: item.inverstPeriod == 0 || item.inverstPeriod === null ? '全场通用' : `≥${item.inverstPeriod}`,
                 className: 'moneyUnused2'
             }, {
                 text: getLocationDate(item.overdueTime),
@@ -291,15 +292,15 @@ let InterestPresentCouponFilter = function (data) {
                 text: item.investMultip,
                 className: 'moneyUnused2'
             }, {
-                text: item.inverstPeriod == 0 || item.inverstPeriod == null ? '全场通用' : `≥${item.inverstPeriod}`,
+                text: item.inverstPeriod == 0 || item.inverstPeriod === null ? '全场通用' : `≥${item.inverstPeriod}`,
                 className: 'moneyUnused2'
             }, {
                 text: `${getLocationDate(item.issueTime)}至`,
-                time:`${getLocationDate(item.overdueTime)}`,
+                time: `${getLocationDate(item.overdueTime)}`,
             }, {
                 text: getLocationDate(item.givenTime)
             }, {
-                text: item.transferName == null ? '--' : item.transferName
+                text: item.transferName === null ? '--' : item.transferName
             }, {
                 text: item.remark
             }]

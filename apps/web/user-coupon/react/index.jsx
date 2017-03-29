@@ -1,12 +1,12 @@
 const Content = React.createClass({
     getInitialState: function () {
-        return ({tab: '返现券'})
+        return {tab: '返现券'}
     },
     toggleTabHandler: function (tab_name) {
         this.setState({tab: tab_name});
     },
     render: function () {
-        var tab_bar = (
+        var tab_bar =
             <div className="containerTop">
                 {['返现券', '返息券'].map((n, index) => {
                     return (
@@ -15,8 +15,7 @@ const Content = React.createClass({
                         </div>
                     )
                 })}
-            </div>
-        );
+            </div>;
 
         return (
             <div className="couponContent">

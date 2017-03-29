@@ -31,7 +31,7 @@ const MoneyPanel = React.createClass({
             willExpireAmount,
             usedNumber,
             usedAmount
-        } = this.props.data;
+            } = this.props.data;
         let tab = (name, index) => {
             return (
                 <div key={index} className={this.state.tab_name == name ? "centerList" : null}
@@ -223,7 +223,7 @@ let MoneyUnusedCouponFilter = function (data) {
                 text: item.investMultip,
                 className: 'moneyUnused2'
             }, {
-                text: item.inverstPeriod == 0 || item.inverstPeriod == null ? '全场通用' : `≥${item.inverstPeriod}`,
+                text: item.inverstPeriod == 0 || item.inverstPeriod === null ? '全场通用' : `≥${item.inverstPeriod}`,
                 className: 'moneyUnused2'
             }, {
                 text: `${getLocationDate(item.issueTime)}至${getLocationDate(item.overdueTime)}`,
@@ -249,7 +249,7 @@ let MoneyUsedCouponFilter = function (data) {
                 text: item.investMultip,
                 className: 'moneyUnused2'
             }, {
-                text: item.inverstPeriod == 0 || item.inverstPeriod == null ? '全场通用' : `≥${item.inverstPeriod}`,
+                text: item.inverstPeriod == 0 || item.inverstPeriod === null ? '全场通用' : `≥${item.inverstPeriod}`,
                 className: 'moneyUnused2'
             }, {
                 text: `${getLocationDate(item.usedTime)}   ${getTimesString(item.usedTime)}`,
@@ -271,7 +271,7 @@ let MoneyOverdueCouponFilter = function (data) {
                 text: item.investMultip,
                 className: 'moneyUnused2'
             }, {
-                text: item.inverstPeriod == 0 || item.inverstPeriod == null ? '全场通用' : `≥${item.inverstPeriod}`,
+                text: item.inverstPeriod == 0 || item.inverstPeriod === null ? '全场通用' : `≥${item.inverstPeriod}`,
                 className: 'moneyUnused2'
             }, {
                 text: getLocationDate(item.overdueTime),
@@ -293,15 +293,15 @@ let MoneyPresentCouponFilter = function (data) {
                 text: item.investMultip,
                 className: 'moneyUnused2'
             }, {
-                text: item.inverstPeriod == 0 || item.inverstPeriod == null ? '全场通用' : `≥${item.inverstPeriod}`,
+                text: item.inverstPeriod == 0 || item.inverstPeriod === null ? '全场通用' : `≥${item.inverstPeriod}`,
                 className: 'moneyUnused2'
             }, {
                 text: `${getLocationDate(item.issueTime)}至`,
-                time:`${getLocationDate(item.overdueTime)}`,
+                time: `${getLocationDate(item.overdueTime)}`,
             }, {
                 text: getLocationDate(item.givenTime)
             }, {
-                text: item.transferName == null ? '--' : item.transferName
+                text: item.transferName === null ? '--' : item.transferName
             }, {
                 text: item.remark
             }]

@@ -75,18 +75,15 @@ const Table = React.createClass({
 
         let pagination, empty_records;
         let bean_count;
-        console.log(this.state.bean_count);
         if(this.state.bean_count) {
-            bean_count = (
+            bean_count =
                 <div className="totalCount">
                     <span>总记{this.state.bean_count}个,</span>
                     <span className="calculate">共计{this.state.bean_count/100}元</span>
                 </div>
-
-            )
         }
         if (rows.length) {
-            pagination = (
+            pagination =
                 <div className="pagination">
                     <div className="paginationPage">
                         {bean_count}
@@ -98,13 +95,10 @@ const Table = React.createClass({
                         {page < total_page ?
                             <a  className="last" onClick={() => this.switchPageHandler('last')}>尾页</a> : null}
                     </div>
-                </div>
-            );
+                </div>;
         } else {
             empty_records = <div className="emptyRecords">暂无记录</div>
         }
-
-        console.log(this.state.th_rows)
 
         return (
             <div className="tableContaner">

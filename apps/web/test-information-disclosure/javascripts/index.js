@@ -26,11 +26,11 @@ $(function () {
 
     //格式化人数
     function formatPerson(s) {
-        s = parseFloat((s + "").replace(/[^\d\.-]/g, "")) + "";
+        s = parseFloat((s + "").replace(/[^\d.-]/g, "")) + "";
         var l = s.split(".")[0].split("").reverse(),
             t = "";
         for (i = 0; i < l.length; i++) {
-            t += l[i] + ((i + 1) % 3 == 0 && (i + 1) != l.length ? "," : "");
+            t += l[i] + ((i + 1) % 3 == 0 && i + 1 != l.length ? "," : "");
         }
         return t.split("").reverse().join("") + '人';
     }
@@ -338,8 +338,8 @@ $(function () {
         for(var i =0 ;i < len;i++){
             endCon.eq(0).find(".money span").text(judgeCash(data.data.total_principalInvest));
             endCon.eq(1).find(".money span").text(judgeCash(data.data.total_overdueCount));
-            endCon.eq(2).find(".money span").text(prevent(data.data.total_overdueCount / data.data.total_invest));
-            endCon.eq(3).find(".money span").text(data.data.total_overdueSum && prevent(data.data.total_overdueSum / data.data.total_orderCount));
+            endCon.eq(2).find(".money span").text(prevent(data.data.total_overdueCount / data.data.total_invest * 100));
+            endCon.eq(3).find(".money span").text(prevent(data.data.total_overdueSum / data.data.total_orderCount * 100));
         }
     });
 });
