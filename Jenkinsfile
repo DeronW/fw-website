@@ -11,7 +11,7 @@ node("front") {
 
         if(!params.FORCE) {
             sh 'git fetch'
-            sh 'git diff --stat=400 origin/$BRANCH > /tmp/webapp.$PROJECT.git.diff'
+            sh 'git diff --stat=400 origin/$BRANCH > /tmp/website.$PROJECT.git.diff'
         }
         sh 'git pull'
     }
