@@ -338,8 +338,8 @@ $(function () {
         for(var i =0 ;i < len;i++){
             endCon.eq(0).find(".money span").text(judgeCash(data.data.total_principalInvest));
             endCon.eq(1).find(".money span").text(judgeCash(data.data.total_overdueCount));
-            endCon.eq(2).find(".money span").text(prevent(data.data.total_overdueCount / data.data.total_invest * 100));
-            endCon.eq(3).find(".money span").text(prevent(data.data.total_overdueSum / data.data.total_orderCount * 100));
+            endCon.eq(2).find(".money span").text(prevent(data.data.total_overdueSum / data.data.total_invest * 100));
+            endCon.eq(3).find(".money span").text(prevent(data.data.total_overdueCount / data.data.total_orderCount * 100));
         }
     });
 });
