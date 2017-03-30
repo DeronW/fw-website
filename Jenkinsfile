@@ -1,5 +1,8 @@
 node("front") {
    stage('Preparation') {
+       // 初始化项目用, jenkins创建job时需要先pull代码库
+       git credentialsId: '4cac0f9e-5bcd-4f50-a38f-d17f417bbeb5', url: 'git@10.10.100.106:front/webapp.git'
+        
         sh 'git checkout $BRANCH'
         sh 'git fetch'
         sh 'git diff --stat=400 origin/$BRANCH > /tmp/webapp.$PROJECT.git.diff'
