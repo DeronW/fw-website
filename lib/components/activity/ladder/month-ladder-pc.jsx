@@ -947,7 +947,7 @@ const MonthLadderPC = React.createClass({
                 endDate = '2017-3-2 23:59:59';
             } else {
                 startDate = '2017-3-3';
-                endDate = '2017-3-30';
+                endDate = '2017-3-30 23:59:59';
             }
             this.ajaxPullNewInvest(startDate, endDate)
         }.bind(this))
