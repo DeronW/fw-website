@@ -39,7 +39,7 @@ const Content = React.createClass({
 });
 let Fn = {
     DetailLoadData: function (page, cb) {
-        $.get(API_PATH + 'beans/allBorrows.do', {
+        $.get(API_PATH + '/beans/allBorrows.do', {
             rows: 12,
             page: page
         }, function (data) {

@@ -74,7 +74,7 @@ const ExchangePanel = React.createClass({
 
 let ExchangeUnusedCouponList = function (page, cb) {
     $.ajax({
-        url: API_PATH + 'api/coupon/v1/ticketList.json',
+        url: API_PATH + '/api/coupon/v1/ticketList.json',
         data: {
             page: page,
             rows: 8,
@@ -93,7 +93,7 @@ let ExchangeUnusedCouponList = function (page, cb) {
 
 let ExchangeUsedCouponList = function (page, cb) {
     $.ajax({
-        url: API_PATH + 'api/coupon/v1/ticketList.json',
+        url: API_PATH + '/api/coupon/v1/ticketList.json',
         data: {
             page: page,
             rows: 8,
@@ -112,7 +112,7 @@ let ExchangeUsedCouponList = function (page, cb) {
 
 let ExchangeOverdueCouponList = function (page, cb) {
     $.ajax({
-        url: API_PATH + 'api/coupon/v1/ticketList.json',
+        url: API_PATH + '/api/coupon/v1/ticketList.json',
         data: {
             page: page,
             rows: 8,

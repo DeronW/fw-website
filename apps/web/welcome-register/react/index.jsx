@@ -144,7 +144,7 @@ const FormStepOne = React.createClass({
         } else if (!this.state.captcha) {
             this.setState({captcha_error: '请输入验证码'})
         } else {
-            $.get(API_PATH + 'activity/new-user-guide/index.php', {
+            $.get(API_PATH + '/activity/new-user-guide/index.php', {
                 op: 'action_tell',
                 mobile: this.state.phone,
                 uk: this.state.captcha
@@ -210,7 +210,7 @@ const FormStepTwo = React.createClass({
         })
     },
     getSMSCodeHandler: function () {
-        $.get(API_PATH + 'activity/new-user-guide/index.php', {
+        $.get(API_PATH + '/activity/new-user-guide/index.php', {
             op: 'code',
             mobile: this.props.phone,
             imgcode: this.state.captcha
@@ -228,7 +228,7 @@ const FormStepTwo = React.createClass({
         } else if (!this.state.password_confirm) {
             alert('确认密码不能为空')
         } else {
-            $.post(API_PATH + 'activity/new-user-guide/index.php?op=reg', {
+            $.post(API_PATH + '/activity/new-user-guide/index.php?op=reg', {
                 imgcode: this.state.captcha,
                 gccode: null,
                 mobile: this.props.phone,

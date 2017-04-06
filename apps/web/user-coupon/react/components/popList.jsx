@@ -34,7 +34,7 @@ const PopList = React.createClass({
     },
     ajaxFriendsList: function () {
         $.ajax({
-            url: API_PATH + 'api/parttimeFinancialer/v1/searchFriends.json',
+            url: API_PATH + '/api/parttimeFinancialer/v1/searchFriends.json',
             data: {
                 containOneself: 0,
                 page: this.state.page,
@@ -78,7 +78,7 @@ const PopList = React.createClass({
     },
     presentCoupon: function () {
         $.ajax({
-            url: API_PATH + 'api/coupon/v1/changeHolder.json',
+            url: API_PATH + '/api/coupon/v1/changeHolder.json',
             method: 'post',
             data: {
                 couponId: this.props.id,
@@ -226,7 +226,7 @@ const PopList = React.createClass({
 
 function showPopList(type, value, id, cb) {
     $.ajax({
-        url: API_PATH + 'api/parttimeFinancialer/v1/searchFriends.json',
+        url: API_PATH + '/api/parttimeFinancialer/v1/searchFriends.json',
         data: {
             containOneself: 0,
             page: 1,

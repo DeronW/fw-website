@@ -11,7 +11,7 @@ const Coupon = React.createClass({
     },
     componentDidMount: function () {
         $.ajax({
-            url: API_PATH + 'api/coupon/v1/accountCouponStatistics.json',
+            url: API_PATH + '/api/coupon/v1/accountCouponStatistics.json',
             data: {
                 couponType: 1
             },
@@ -31,7 +31,7 @@ const Coupon = React.createClass({
             this.ajaxExchangeStatistics()
         } else {
             $.ajax({
-                url: API_PATH + 'api/coupon/v1/accountCouponStatistics.json',
+                url: API_PATH + '/api/coupon/v1/accountCouponStatistics.json',
                 data: {couponType: tab_name == '返现券' ? 1 : 2},
                 type: 'get',
                 success: function (data) {
@@ -45,7 +45,7 @@ const Coupon = React.createClass({
     },
     ajaxExchangeStatistics: function () {
         $.ajax({
-            url: API_PATH + 'api/coupon/v1/accountTickeStatistics.json',
+            url: API_PATH + '/api/coupon/v1/accountTickeStatistics.json',
             type: 'get',
             success: function (data) {
                 this.setState({staExchangeData: data.data})

@@ -5,7 +5,7 @@ const GlobalInvestList = React.createClass({
     },
     componentDidMount: function () {
         console.log(333)
-        $.get(API_PATH + 'prdClaims/phpDataList.shtml', {}, (data) => {
+        $.get(API_PATH + '/prdClaims/phpDataList.shtml', {}, (data) => {
             this.setState({products: data.pageData.result})
         }, 'json')
     },

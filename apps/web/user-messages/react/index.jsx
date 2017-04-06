@@ -18,7 +18,7 @@ const MessagePanel = React.createClass({
             '已读消息': 'Y'
         };
         // A: 全部, N: 未读, Y:已读
-        $.get(API_PATH + 'mesageCenter/dataList.shtml', {
+        $.get(API_PATH + '/mesageCenter/dataList.shtml', {
             rows: 10,
             page: this.state.page,
             isUse: m[this.state.tab],

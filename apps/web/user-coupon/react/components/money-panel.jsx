@@ -10,7 +10,7 @@ const MoneyPanel = React.createClass({
         this.setState({tab_name: name})
     },
     componentDidMount: function () {
-        $.get(API_PATH + 'api/coupon/v1/dataListByTransfer.json', {
+        $.get(API_PATH + '/api/coupon/v1/dataListByTransfer.json', {
             page: 1,
             limit: 1,
             status: 2,
@@ -136,7 +136,7 @@ let getTimesString = function (d) {
 };
 let MoneyUnusedCouponList = function (page, cb) {
     $.ajax({
-        url: API_PATH + 'api/coupon/v1/dataList.json',
+        url: API_PATH + '/api/coupon/v1/dataList.json',
         //url: './coupon.json',
         data: {
             page: page,
@@ -156,7 +156,7 @@ let MoneyUnusedCouponList = function (page, cb) {
 };
 let MoneyUsedCouponList = function (page, cb) {
     $.ajax({
-        url: API_PATH + 'api/coupon/v1/dataList.json',
+        url: API_PATH + '/api/coupon/v1/dataList.json',
         data: {
             page: page,
             limit: 8,
@@ -175,7 +175,7 @@ let MoneyUsedCouponList = function (page, cb) {
 };
 let MoneyOverdueCouponList = function (page, cb) {
     $.ajax({
-        url: API_PATH + 'api/coupon/v1/dataList.json',
+        url: API_PATH + '/api/coupon/v1/dataList.json',
         data: {
             page: page,
             limit: 8,
@@ -194,7 +194,7 @@ let MoneyOverdueCouponList = function (page, cb) {
 };
 let MoneyPresentCouponList = function (page, cb) {
     $.ajax({
-        url: API_PATH + 'api/coupon/v1/dataListByTransfer.json',
+        url: API_PATH + '/api/coupon/v1/dataListByTransfer.json',
         data: {
             page: page,
             limit: 8,

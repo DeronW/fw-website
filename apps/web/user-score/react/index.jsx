@@ -7,7 +7,7 @@ const Content = React.createClass({
     },
     componentDidMount: function () {
         var _this = this;
-        $.post(API_PATH + 'api/credit/v1/dataList.json', {
+        $.post(API_PATH + '/api/credit/v1/dataList.json', {
             limit: 1,
             page: 1
         },
@@ -57,7 +57,7 @@ const Content = React.createClass({
 });
 let Fn = {
     DetailLoadData: function (page, cb) {
-        $.post(API_PATH + 'api/credit/v1/dataList.json', {
+        $.post(API_PATH + '/api/credit/v1/dataList.json', {
             limit: 10,
             page: page
         }, function (data) {

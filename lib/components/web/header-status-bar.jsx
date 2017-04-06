@@ -18,7 +18,7 @@ const HeaderStatusBar = React.createClass({
             if (p[0] == 'ticket') login_token = p[1].split('.')[0]
         });
 
-        $.get(API_PATH + 'api/userState/v1/userState.json', {
+        $.get(API_PATH + '/api/userState/v1/userState.json', {
             token: login_token
         }, function (data) {
             if (data.code != 10000) throw `got error ${data.message}`;
@@ -35,7 +35,7 @@ const HeaderStatusBar = React.createClass({
         }.bind(this), 'json');
 
         // 获取用户未读消息数
-        $.get(API_PATH + 'mesageCenter/refressSession.shtml', null, function (data) {
+        $.get(API_PATH + '/mesageCenter/refressSession.shtml', null, function (data) {
             if (!isNaN(data)) {
                 this.setState({msg_count: data})
             } else {
