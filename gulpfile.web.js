@@ -87,7 +87,7 @@ module.exports = function (gulp, generate_task, settings) {
             include_less: INCLUDE_LESS
         });
         generate_task(PROJ, i, {
-            api_path: "/",
+            api_path: "",
             cmd_prefix: 'pack',
             cdn_prefix: `/static/${PROJ}/${i.name || i}/`,
             include_components: INCLUDE_COMPONENTS,
