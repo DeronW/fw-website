@@ -135,18 +135,10 @@ body, html {
           }
         }
       }
-      .partStatisticsText {
-        width: 100%;
-        text-align: center;
-        color: @colorWhite;
-        font-size: @fontSize18;
-        position: absolute;
-        bottom: 70px;
-      }
     }
     .partPie {
       width: 1200px;
-      height: 540px;
+      height: 480px;//540
       margin: 505px auto 0;
       .partPieLeft {
         float: left;
@@ -274,7 +266,14 @@ body, html {
       }
     }
   }
-
+  .partStatisticsText {
+    width: 100%;
+    text-align: center;
+    color: @colorRed;
+    font-size: @fontSize18;
+    position: absolute;
+    bottom: 70px;
+  }
   .infoConPart2 {
     //width: 100%;
     width: 1000px;
@@ -324,6 +323,9 @@ body, html {
               width: 760px;
               height: 15px;
               font-size: 14px;
+            }
+            .lineLook{
+              color: #f00;
             }
             .rrange {
               width: 760px;
