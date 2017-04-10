@@ -267,12 +267,12 @@
 
                 var birthday = rule[i].birthdayBag;
                 if (birthday) {
-                    $("#birthday-text-" + i).html(birthday.describe);
+                    $("#birthday-text-" + i).html(parseInt(birthday.describe));
                 }
 
                 var levelUp = rule[i].levelUpBag;
                 if (levelUp) {
-                    $("#level-text-" + i).html(levelUp.describe);
+                    $("#level-text-" + i).html(parseInt(levelUp.describe));
                 }
             }
         }, 'json');
