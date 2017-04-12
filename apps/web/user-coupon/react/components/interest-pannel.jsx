@@ -251,7 +251,7 @@ let InterestUsedCouponFilter = function (data) {
                 text: item.inverstPeriod == 0 || item.inverstPeriod === null ? '全场通用' : `≥${item.inverstPeriod}`,
                 className: 'moneyUnused2'
             }, {
-                text: `${getLocationDate(item.usedTime)}   ${getTimesString(item.usedTime)}`,
+                text: `${getLocationDate(item.exchangeTime)}   ${getTimesString(item.exchangeTime)}`,
                 className: 'moneyUsedTime'
             }, {
                 text: item.transferNumber >= 1 ? '好友赠送' : item.remark
