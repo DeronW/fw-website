@@ -39,7 +39,7 @@ const Content = React.createClass({
         return (
             <div className="topNav">
                 <div className="scoreTips">
-                    注：此处为我在工场P2P和工场尊享共发出/收到的工分。
+                    注：此处为我在工场P2P和工场尊享共获得的工分。
                 </div>
                 <div className="topRow">
                     <div className="on">我的工分</div>
