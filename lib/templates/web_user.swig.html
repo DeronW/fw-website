@@ -85,15 +85,22 @@
                 if (!arg.is_companyagent) {
                     $('#ucpLinkSymbol').removeClass('hide')
                 }
+                //合同管理
                 if (arg.borrowCount > 0 || arg.subrogationCount > 0 || arg.debtorsCount > 0) {
                     $('#ucpLinkContract').removeClass('hide')
+                    $('[data-line=true]').removeClass('hide')
+                }else{
+                    $('[data-line=true]').addClass('hide')
                 }
+                //我的借款
                 //if (arg.borrowCount > 0) {
                     $('#ucpLinkBorrow').removeClass('hide');
                // }
+                //权益转让
                 if (arg.subrogationCount > 0) {
                     $('#ucpLinkTransfer').removeClass('hide')
                 }
+                //我的担保
                 if (arg.debtorsCount > 0) {
                     $('#ucpLinkGuarantee').removeClass('hide')
                 }

@@ -24,22 +24,22 @@ const ExchangePanel = React.createClass({
         };
         let th_rows, fn_load_data, fn_filter_data;
         th_rows = [
-            {title:'名称', width: '25%'},
-            {title:'商品编号', width: '15%'},
-            {title:'价格', width: '15%'},
-            {title:'有效期', width: '14%'},
-            {title:'来源', width: '15%'},
-            {title:'备注', width: '16%'}
+            {title: '名称', width: '25%'},
+            {title: '商品编号', width: '15%'},
+            {title: '价格', width: '15%'},
+            {title: '有效期', width: '14%'},
+            {title: '来源', width: '15%'},
+            {title: '备注', width: '16%'}
         ];
         fn_filter_data = ExchangeCouponFilter;
         if (this.state.tab_name == '未使用') {
             fn_load_data = ExchangeUnusedCouponList;
         } else if (this.state.tab_name == '已使用') {
             fn_load_data = ExchangeUsedCouponList;
-        } else if(this.state.tab_name == '已过期'){
+        } else if (this.state.tab_name == '已过期') {
             fn_load_data = ExchangeOverdueCouponList;
         }
-        return(
+        return (
             <div className="containerCenter">
 
                 <div className="containerCenterTitle">
@@ -74,7 +74,7 @@ const ExchangePanel = React.createClass({
 
 let ExchangeUnusedCouponList = function (page, cb) {
     $.ajax({
-        url: API_PATH + 'api/coupon/v1/ticketList.json',
+        url: API_PATH + '/api/coupon/v1/ticketList.json',
         data: {
             page: page,
             rows: 8,
@@ -84,7 +84,7 @@ let ExchangeUnusedCouponList = function (page, cb) {
         success: function (data) {
             if (data.code == 10000) {
                 cb && cb(data.data.pageData)
-            } else if(data.code == 63001){
+            } else if (data.code == 63001) {
                 gotoLogin();
             }
         }.bind(this)
@@ -93,7 +93,7 @@ let ExchangeUnusedCouponList = function (page, cb) {
 
 let ExchangeUsedCouponList = function (page, cb) {
     $.ajax({
-        url: API_PATH + 'api/coupon/v1/ticketList.json',
+        url: API_PATH + '/api/coupon/v1/ticketList.json',
         data: {
             page: page,
             rows: 8,
@@ -103,7 +103,7 @@ let ExchangeUsedCouponList = function (page, cb) {
         success: function (data) {
             if (data.code == 10000) {
                 cb && cb(data.data.pageData)
-            } else if(data.code == 63001){
+            } else if (data.code == 63001) {
                 gotoLogin();
             }
         }.bind(this)
@@ -112,7 +112,7 @@ let ExchangeUsedCouponList = function (page, cb) {
 
 let ExchangeOverdueCouponList = function (page, cb) {
     $.ajax({
-        url: API_PATH + 'api/coupon/v1/ticketList.json',
+        url: API_PATH + '/api/coupon/v1/ticketList.json',
         data: {
             page: page,
             rows: 8,
@@ -122,7 +122,7 @@ let ExchangeOverdueCouponList = function (page, cb) {
         success: function (data) {
             if (data.code == 10000) {
                 cb && cb(data.data.pageData)
-            } else if(data.code == 63001){
+            } else if (data.code == 63001) {
                 gotoLogin();
             }
         }.bind(this)
@@ -133,29 +133,29 @@ let ExchangeCouponFilter = function (data) {
 
     var source = function (source) {
         var sourceValue = "市场活动";
-        if(source =='1' ){
-            sourceValue="市场活动";
-        }else if(source =='2' ){
-            sourceValue="渠道活动";
-        }else if(source =='3' ){
-            sourceValue="消费金融";
-        }else{
-            sourceValue="其他";
+        if (source == '1') {
+            sourceValue = "市场活动";
+        } else if (source == '2') {
+            sourceValue = "渠道活动";
+        } else if (source == '3') {
+            sourceValue = "消费金融";
+        } else {
+            sourceValue = "其他";
         }
         return sourceValue
     };
-    return{
+    return {
         total_page: data.pagination && data.pagination.totalPage,
         rows: (data.result && data.result).map((item)=> {
             return [{
-                text: item.productName ,
-                className:'exchangeName',
-                clickProductLink:'https://mall.9888.cn/detail/item_detail.shtm?bizNo='+item.productNumber
+                text: item.productName,
+                className: 'exchangeName',
+                clickProductLink: 'https://mall.9888.cn/detail/item_detail.shtm?bizNo=' + item.productNumber
             }, {
                 text: item.productNumber
             }, {
-                text:  item.pointsPrice != null && item.pointsPrice != ''  ?   `￥${item.rmbPrice}` : `￥${item.rmbPrice}+${item.pointsPrice}工分`,
-                className:'exchangePrice'
+                text: item.pointsPrice !== null && item.pointsPrice != '' ? `￥${item.rmbPrice}` : `￥${item.rmbPrice}+${item.pointsPrice}工分`,
+                className: 'exchangePrice'
             }, {
                 text: item.endTime
             }, {

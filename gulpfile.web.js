@@ -15,7 +15,8 @@ const NOTICE_PAGES = [
     'guide-cookbook', // 玩赚攻略页
     'vip-prerogative', // 等级攻略页
     'notice-corporate-structure', // 信息披露页面
-    'information-disclosure'//信息披露新页面
+    'notice-information-disclosure',//信息披露新页面
+    'protocol-user-service',//金融工场用户协议
 ]
 
 // 专题说明类页面
@@ -87,7 +88,7 @@ module.exports = function (gulp, generate_task, settings) {
             include_less: INCLUDE_LESS
         });
         generate_task(PROJ, i, {
-            api_path: "//www.9888.cn/",
+            api_path: "",
             cmd_prefix: 'pack',
             cdn_prefix: `/static/${PROJ}/${i.name || i}/`,
             include_components: INCLUDE_COMPONENTS,

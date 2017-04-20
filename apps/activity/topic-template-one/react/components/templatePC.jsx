@@ -8,27 +8,6 @@ const TemplatePC = React.createClass({
     },
     componentDidMount: function () {
         var _this = this;
-        //$.get("javascripts/getPersonDate.json",(resolve)=>{
-        //    var data = resolve.data;
-        //    var text = '';
-        //    var prize = '';
-        //    if (data.totalYearMoney >= data.list[data.list.length - 1].levelprice) {
-        //        for (var i = 0; i < data.list.length; i++) {
-        //            if (data.totalYearMoney > data.list[i].levelprice) {
-        //                prize = data.list[i].goodsname;
-        //                text = `活动期间，您已累计投资 <em>${data.totalInvestedMoney}</em> 元，折合年化 <em>${data.totalYearMoney}</em> 元，获 <em>${prize}</em>`
-        //                break;
-        //            }
-        //        }
-        //    } else {
-        //        text = `活动期间，您已累计投资 <em>${data.totalInvestedMoney}</em> 元，折合年化 <em>${data.totalYearMoney}</em> 元，当前没有奖品可拿，继续加油`
-        //    }
-        //    _this.setState({
-        //        products: data.list,
-        //        isLogin: true,
-        //        text: text
-        //    });
-        //},"json");
         $UserReady(function (isLogin, user) {
             $.get(API_PATH + 'api/investReward/v1/getPersonDate.do?id=1').then((resolve)=> {
                 var data = resolve.data;

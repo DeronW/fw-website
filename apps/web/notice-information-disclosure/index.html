@@ -1,0 +1,316 @@
+{% extends "../../../lib/templates/web_base.swig.html" %}>
+
+{% block javascripts %}
+<script type='text/javascript' src="javascripts/echarts.common.min.js"></script>
+<script type="text/javascript" src="javascripts/index.js"></script>
+{% endblock %}
+
+{% block content %}
+<div class="informationDisclosure">
+    <div class="informationTab">
+        <div class="tab tabFirst active">平台运营信息</div>
+        <div class="tab tabMiddle ">企业信息</div>
+        <div class="tab tabLast ">专项报告</div>
+    </div>
+    <div class="informationPartContent">
+        <div class="infoConPart infoConPart1">
+            <div class="partStatistics">
+                <div class="statisticsContent">
+                    <div class="staOne staCommon">
+                        <div class="text">累计出借总额</div>
+                        <div class="number"><span> </span>元</div>
+                    </div>
+                    <div class="staTwo staCommon">
+                        <div class="text">累计赚取收益</div>
+                        <div class="number"><span> </span>元</div>
+                    </div>
+                    <div class="staThree staCommon">
+                        <div class="text">累计回款本金</div>
+                        <div class="number"><span> </span>元</div>
+                    </div>
+                    <div class="staFour staCommon">
+                        <div class="text">累计出借笔数</div>
+                        <div class="number"><span> </span>笔</div>
+                    </div>
+                </div>
+            </div>
+            <div class="partPie">
+                <div class="partPieLeft">
+                    <div id="main1" style="width: 550px;height:400px;"></div>
+                    <div class="pieLeftText pieCommon hidden">
+                        <div class="person">借款用户：<span></span></div>
+                        <div class="cash">人均累计融资金额：<span></span></div>
+                    </div>
+                </div>
+                <div class="partPieRight">
+                    <div id="main2" style="width: 550px;height:400px;"></div>
+                    <div class="pieRightText pieCommon hidden">
+                        <div class="person">出借用户：<span></span></div>
+                        <div class="cash">人均累计出借金额：<span></span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="partEndurance">
+                <div class="enduranceTitle">平台风险承受能力</div>
+                <div class="enduranceContent">
+                    <div class="endCommon end1">
+                        <div class="text">待偿金额(元)</div>
+                        <div class="money"><span></span></div>
+                    </div>
+                    <div class="endCommon end2">
+                        <div class="text">逾期金额(元)</div>
+                        <div class="money"><span></span></div>
+                    </div>
+                    <div class="endCommon end3">
+                        <div class="text">金额逾期率(％)</div>
+                        <div class="money"><span></span></div>
+                    </div>
+                    <div class="endCommon end4">
+                        <div class="text">项目逾期率(％)</div>
+                        <div class="money"><span></span></div>
+                    </div>
+                    <div class="endCommon end5">
+                        <div class="text">出借人<br/>本息损失(元)</div>
+                        <div class="money"><span>0</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="partReportForm">
+                <div class="reportFormTitle">经审计的年度报表</div>
+                <div class="reportFormContent">
+                    经审计的年度报表，
+                    <a href="https://static.9888.cn/pdf/2016report.pdf">立即查看</a>
+                </div>
+            </div>
+            <div class="partStatisticsText">数据截止至 <span>2017年3月20日</span></div>
+        </div>
+        <div class="infoConPart infoConPart2 hidden">
+            <div class="main">
+                <!--基本信息模块-->
+                <div class="basicInfo">
+                    <div class="basicInfoTitle">
+                        公司基本信息
+                    </div>
+                    <div class="basicInfoContent clearfix">
+                        <div class="ContentLeft fl">
+                            <p class="line">公司全称及简称：</p>
+
+                            <p class="line">注册资本：</p>
+
+                            <p class="line">实缴资本：</p>
+
+                            <p class="line">注册地址：</p>
+
+                            <p class="line">成立时间：</p>
+
+                            <p class="line">法定代表人：</p>
+
+                            <p class="range">经营范围：</p>
+
+                            <p class="line">联系方式：</p>
+
+                            <p class="line">经营场所：</p>
+
+                            <p class="line">注册协议模板：</p>
+
+                            <p class="line">资金存管情况：</p>
+                        </div>
+                        <div class="ContentRight fl">
+                            <p class="rline">北京凤凰信用管理有限公司（简称：凤凰信用）</p>
+
+                            <p class="rline">5000万</p>
+
+                            <p class="rline">5000万</p>
+
+                            <p class="rline">北京市朝阳区朝阳门外大街18号11层1105内008号</p>
+
+                            <p class="rline">2012年5月23日</p>
+
+                            <p class="rline">康忠芹</p>
+
+                            <p class="rrange">
+                                企业信用征集、评定；企业信用管理咨询；经济贸易咨询；投资咨询；企业管理咨询；市场调查；投资管理；资产管理；软件开发；设计、制作、代理、发布广告；技术咨询；技术服务；委托生产电子产品、照相器材、计算机、软件及辅助设备；航空机票票务代理；经营电信业务；互联网信息服务；销售化工产品。（企业依法自主选择经营项目，开展经营活动；销售化工产品、“经营电信业务”；“互联网信息服务”以及依法须经批准的项目，经相关部门批准后依批准的内容开展经营活动；不得从事本市产业政策禁止和限制类项目的经营活动。）</p>
+
+                            <p class="rline">400-0322-988</p>
+
+                            <p class="rline">北京朝阳区朝阳门外大街18号11层1105内008号</p>
+
+                            <p class="rline"><a class="lineLook" href="https://www.9888.cn/static/web/protocol-user-service/index.html" target="_blank">点击查看</a></p>
+                            
+                            <p class="rrange">
+                                金融工场与徽商银行建立合作，由徽商银行提供资金存管服务，为平台、投资人、借款人和其他业务参与方分别开立独立的银行电子账户，每个主体各自资金存管在各自名下的账户中。可最大限度的保障投资人、借款人的资金安全。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!--网站平台信息模块-->
+                <div class="webInfo clearfix">
+                    <div class="webInfoTitle">
+                        公司网站平台信息
+                    </div>
+                    <div class="webInfoContent ">
+                        <div class="webInfoContentL fl">
+                            <p class="line">网站或互联网平台地址：</p>
+
+                            <p class="line">平台名称：</p>
+
+                            <p class="line">平台上线运营时间：</p>
+
+                            <p class="line">ICP备案号：</p>
+
+                            <p class="line">经营性ICP许可证号：</p>
+
+                            <p class="line">移动APP应用：</p>
+
+                            <p class="line">公众号或服务号：</p>
+
+                            <p class="line">全国公安网监备案：</p>
+                        </div>
+                        <div class="webInfoContentR fl">
+                            <p class="rline">www.9888.cn</p>
+
+                            <p class="rline">金融工场</p>
+
+                            <p class="rline">2012年7月1日</p>
+
+                            <p class="rline">京ICP备14029254号-1</p>
+
+                            <p class="rline">京ICP证140736号</p>
+
+                            <p class="rline">金融工场</p>
+
+                            <p class="rline">jrgc_p2p</p>
+
+                            <p class="rline">京公网安备11010502031615号</p>
+                        </div>
+                    </div>
+                </div>
+                <!--组织架构模块-->
+                <div class="organization">
+                    <div class="orgTitle">
+                        组织架构
+                    </div>
+                    <img src="images/org.png" alt="" class="orgPic">
+                </div>
+                <!--股东名单模块-->
+                <div class="shareholder">
+                    <div class="shareTitle">
+                        实际控股人与持股5%以上的股东名单
+                    </div>
+                    <div class="shareContent">
+                        <img src="images/logo.png" alt="" class="sharePic">
+
+                        <p class="des">中國信貸科技控股有限公司</p>
+                    </div>
+                </div>
+                <!--董监高模块-->
+                <div class="chairman">
+                    <div class="chairmanLeft">
+
+                    </div>
+                    <div class="chairmanRight">
+                        <div class="chairmanRightTitle">
+                            董监高人员名单
+                        </div>
+                        <div class="chairmanRightTitleContent">
+                            <div class="person clearfix first">
+                                <div class="personL fl">
+                                    <img src="images/men1.png" alt="" class="personPic">
+                                </div>
+                                <div class="personR fl">
+                                    <div class="personRTitle">
+                                        <span class="name">康忠芹·法人</span>
+                                        <span class="position">中國信貸科技副总裁</span>
+                                    </div>
+                                    <div class="personRContent">
+                                        <p class="line">
+                                            康忠芹女士，毕业于东北财经大学投资经济专业。先后在大开信托投资、亿达企业集团负责人力资源及投融资项目前期开发工作，资深人力资源管理师，具备独特的管理风格。自2011年涉足普惠金融以来，带领团队从应用ipc技术发展小微金融起步，发挥团队互联网科技优势，先后参与创建了网信集团、众筹网、一房集团、网信征信，在中國信貸科技的互联网金融发展历程中做出突出业绩。</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="person clearfix">
+                                <div class="personL fl">
+                                    <img src="images/men2.png" alt="" class="personPic">
+                                </div>
+                                <div class="personR fl">
+                                    <div class="personRTitle">
+                                        <span class="name">魏薇·董事长</span>
+                                    </div>
+                                    <div class="personRContent">
+                                        <p class="line">
+                                            毕业于中国人民大学。曾任北京联合开元投资担保有限公司副总经理和联合创业集团有限公司营运管理中心总经理。经过10余年金融行业管理岗位的历练，拥有丰富的P2P行业实战经验和全面而独到的行业视角及理念，是小微金融的领军人物，普惠金融体系的积极践行者。</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="person clearfix">
+                                <div class="personL fl">
+                                    <img src="images/men3.png" alt="" class="personPic">
+                                </div>
+                                <div class="personR fl">
+                                    <div class="personRTitle">
+                                        <span class="name">崔海晨·监事</span>
+                                        <span class="position">首席执行官</span>
+                                    </div>
+                                    <div class="personRContent">
+                                        <p class="line">毕业于北京邮电大学，软件工程硕士。曾任安博教育集团 （纽交所上市公司，交易代码NYSE: AMBO）
+                                            研发总监、宜信公司互联网技术总监等职。多年的PHP开发工作，J2EE资深开发者，拥有丰富的IT从业经验。</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="person clearfix">
+                                <div class="personL fl">
+                                    <img src="images/men4.png" alt="" class="personPic">
+                                </div>
+                                <div class="personR fl">
+                                    <div class="personRTitle">
+                                        <span class="name">邹晓东</span>
+                                        <span class="position">首席风险官</span>
+                                    </div>
+                                    <div class="personRContent">
+                                        <p class="line">毕业于东北财经大学，中国注册会计师（CICPA），英国特许公认会计师
+                                            （FCCA），曾任普华永道中天会计师事务所审计经理，联合创业担保集团辽宁公司首席风险官，拥有多年的风险管理经验。</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="person clearfix personLast">
+                                <div class="personL fl">
+                                    <img src="images/men5.png" alt="" class="personPic">
+                                </div>
+                                <div class="personR fl">
+                                    <div class="personRTitle">
+                                        <span class="name">李建光</span>
+                                        <span class="position">副总裁</span>
+                                    </div>
+                                    <div class="personRContent">
+                                        <p class="line">
+                                            毕业于北京师范大学，曾任职于中央电化教育馆资源中心、安博教育集团(美国纽交所上市公司,交易代码NYSE:AMBO)。精通P2P业务运作模式，带领技术团队设计、开发金融工场P2P网贷平台，拥有丰富的网站运营上的实践经验。</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="infoConPart infoConPart3 hidden">
+                <div class="specialTitle">专项报告</div>
+                <div class="specialContent">
+                    <div class="conReport1 conReport">
+                        <span>会计师事务所审计报告＞</span>
+                        <a href="javascript:;">点击查看</a>
+                    </div>
+                    <div class="conReport3 conReport">
+                        <span>信息系统安全等级测评报告＞</span>
+                        <a href="javascript:;">点击查看</a>
+                    </div>
+                    <div class="conReport2 conReport">
+                        <span>律师事务所合规报告＞</span>
+                        <a href="javascript:;">点击查看</a>
+                    </div>
+                </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

@@ -7,7 +7,7 @@ const Content = React.createClass({
     },
     componentDidMount: function () {
         var _this = this;
-        $.post(API_PATH + 'api/credit/v1/dataList.json', {
+        $.post(API_PATH + '/api/credit/v1/dataList.json', {
             limit: 1,
             page: 1
         },
@@ -16,7 +16,7 @@ const Content = React.createClass({
             }, 'json')
     },
     tabClickHandler: function (tab) {
-        let n = (tab == "已获取") ? true : false;
+        let n = tab == "已获取" ? true : false;
         this.setState({ tabName: tab });
     },
     render: function () {
@@ -38,6 +38,9 @@ const Content = React.createClass({
         }
         return (
             <div className="topNav">
+                <div className="scoreTips">
+                    注：此处为我在工场P2P和工场尊享共获得的工分。
+                </div>
                 <div className="topRow">
                     <div className="on">我的工分</div>
                 </div>
@@ -54,7 +57,7 @@ const Content = React.createClass({
 });
 let Fn = {
     DetailLoadData: function (page, cb) {
-        $.post(API_PATH + 'api/credit/v1/dataList.json', {
+        $.post(API_PATH + '/api/credit/v1/dataList.json', {
             limit: 10,
             page: page
         }, function (data) {
@@ -68,8 +71,8 @@ let Fn = {
             let rows = data.result.map((i) => [{
                 text: i.createTimeString
             }, {
-                text: i.cashAmount > 0 ? ("+" + i.cashAmount) : (i.cashAmount),
-                className: (i.cashAmount >= 0) ? 'red' : 'green'
+                text: i.cashAmount > 0 ? "+" + i.cashAmount : i.cashAmount,
+                className: i.cashAmount >= 0 ? 'red' : 'green'
             }, {
                 text: i.remark
             }]);

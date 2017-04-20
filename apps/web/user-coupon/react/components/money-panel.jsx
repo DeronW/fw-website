@@ -10,7 +10,7 @@ const MoneyPanel = React.createClass({
         this.setState({tab_name: name})
     },
     componentDidMount: function () {
-        $.get(API_PATH + 'api/coupon/v1/dataListByTransfer.json', {
+        $.get(API_PATH + '/api/coupon/v1/dataListByTransfer.json', {
             page: 1,
             limit: 1,
             status: 2,
@@ -31,7 +31,7 @@ const MoneyPanel = React.createClass({
             willExpireAmount,
             usedNumber,
             usedAmount
-        } = this.props.data;
+            } = this.props.data;
         let tab = (name, index) => {
             return (
                 <div key={index} className={this.state.tab_name == name ? "centerList" : null}
@@ -136,7 +136,7 @@ let getTimesString = function (d) {
 };
 let MoneyUnusedCouponList = function (page, cb) {
     $.ajax({
-        url: API_PATH + 'api/coupon/v1/dataList.json',
+        url: API_PATH + '/api/coupon/v1/dataList.json',
         //url: './coupon.json',
         data: {
             page: page,
@@ -156,7 +156,7 @@ let MoneyUnusedCouponList = function (page, cb) {
 };
 let MoneyUsedCouponList = function (page, cb) {
     $.ajax({
-        url: API_PATH + 'api/coupon/v1/dataList.json',
+        url: API_PATH + '/api/coupon/v1/dataList.json',
         data: {
             page: page,
             limit: 8,
@@ -175,7 +175,7 @@ let MoneyUsedCouponList = function (page, cb) {
 };
 let MoneyOverdueCouponList = function (page, cb) {
     $.ajax({
-        url: API_PATH + 'api/coupon/v1/dataList.json',
+        url: API_PATH + '/api/coupon/v1/dataList.json',
         data: {
             page: page,
             limit: 8,
@@ -194,7 +194,7 @@ let MoneyOverdueCouponList = function (page, cb) {
 };
 let MoneyPresentCouponList = function (page, cb) {
     $.ajax({
-        url: API_PATH + 'api/coupon/v1/dataListByTransfer.json',
+        url: API_PATH + '/api/coupon/v1/dataListByTransfer.json',
         data: {
             page: page,
             limit: 8,
@@ -223,7 +223,7 @@ let MoneyUnusedCouponFilter = function (data) {
                 text: item.investMultip,
                 className: 'moneyUnused2'
             }, {
-                text: item.inverstPeriod == 0 || item.inverstPeriod == null ? '全场通用' : `≥${item.inverstPeriod}`,
+                text: item.inverstPeriod == 0 || item.inverstPeriod === null ? '全场通用' : `≥${item.inverstPeriod}`,
                 className: 'moneyUnused2'
             }, {
                 text: `${getLocationDate(item.issueTime)}至${getLocationDate(item.overdueTime)}`,
@@ -249,7 +249,7 @@ let MoneyUsedCouponFilter = function (data) {
                 text: item.investMultip,
                 className: 'moneyUnused2'
             }, {
-                text: item.inverstPeriod == 0 || item.inverstPeriod == null ? '全场通用' : `≥${item.inverstPeriod}`,
+                text: item.inverstPeriod == 0 || item.inverstPeriod === null ? '全场通用' : `≥${item.inverstPeriod}`,
                 className: 'moneyUnused2'
             }, {
                 text: `${getLocationDate(item.usedTime)}   ${getTimesString(item.usedTime)}`,
@@ -271,7 +271,7 @@ let MoneyOverdueCouponFilter = function (data) {
                 text: item.investMultip,
                 className: 'moneyUnused2'
             }, {
-                text: item.inverstPeriod == 0 || item.inverstPeriod == null ? '全场通用' : `≥${item.inverstPeriod}`,
+                text: item.inverstPeriod == 0 || item.inverstPeriod === null ? '全场通用' : `≥${item.inverstPeriod}`,
                 className: 'moneyUnused2'
             }, {
                 text: getLocationDate(item.overdueTime),
@@ -293,15 +293,15 @@ let MoneyPresentCouponFilter = function (data) {
                 text: item.investMultip,
                 className: 'moneyUnused2'
             }, {
-                text: item.inverstPeriod == 0 || item.inverstPeriod == null ? '全场通用' : `≥${item.inverstPeriod}`,
+                text: item.inverstPeriod == 0 || item.inverstPeriod === null ? '全场通用' : `≥${item.inverstPeriod}`,
                 className: 'moneyUnused2'
             }, {
                 text: `${getLocationDate(item.issueTime)}至`,
-                time:`${getLocationDate(item.overdueTime)}`,
+                time: `${getLocationDate(item.overdueTime)}`,
             }, {
                 text: getLocationDate(item.givenTime)
             }, {
-                text: item.transferName == null ? '--' : item.transferName
+                text: item.transferName === null ? '--' : item.transferName
             }, {
                 text: item.remark
             }]

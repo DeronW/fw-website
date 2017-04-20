@@ -1,42 +1,42 @@
 const WinningListPC = React.createClass({
     getInitialState(){
+        this._time_gap = 0;
         return {
             dataList: [],
-            position: 0
+            position: 0,
+            position_index: 0
         }
     },
     componentDidMount(){
         $.get("./javascripts/list.json", (data)=> {
             var list = data.data.list;
-            this.setState({dataList: list})
+            this.setState({dataList: list}, this.startMoveList)
         }, 'json');
-        this.moveListHandler();
     },
-    moveListHandler(){
-        var distance = 275;
-        var timer = setInterval(()=> {
-            let {position,dataList} = this.state;
-            if (position > (Math.ceil((dataList.length / 6)) - 2) * 275) {
-                setTimeout(()=> {
-                    this.setState({position: 0});
-                    distance = 275;
-                }, 3000);
-            } else {
-                if (position == distance) {
-                    distance += distance;
-                } else {
-                    this.move(distance)
+    startMoveList(){
+        let delay = 30, duration = 4000, step = 15, singleH = 275, p, position_index;
+        let {dataList} = this.state;
+
+        let t = setInterval(()=> {
+            this._time_gap += delay;
+            if (this._time_gap >= duration) {
+                p = this.state.position - step, position_index = this.state.position_index;
+                if (p <= -singleH * (this.state.position_index + 1)) {
+                    this._time_gap = 0;
+                    p = Math.round(p / singleH) * singleH;
+                    position_index += 1;
                 }
+                if (p <= -singleH * (Math.ceil(dataList.length) / 6)) {
+                    this._time_gap = 0;
+                    p = 0;
+                    position_index = 0;
+                }
+                this.setState({
+                    position: p,
+                    position_index: position_index
+                })
             }
-        }, 30);
-    },
-    move(distance){
-        var s = 0;
-        setTimeout(()=> {
-            s = (distance - this.state.position) / 8;
-            s = s > 0 ? Math.ceil(s) : Math.floor(s);
-            this.setState({position: this.state.position + s});
-        }, 3000);
+        }, delay)
     },
     closePopHandler(){
         ReactDOM.unmountComponentAtNode(document.getElementById('pop'));
@@ -57,9 +57,7 @@ const WinningListPC = React.createClass({
         }
     },
     render(){
-        let listStyle = {
-            transform: "translateY(-" + this.state.position + "px)"
-        };
+        let {position} = this.state;
         let cell = (item, index) => {
             return <tr key={index}>
                 <td>{item.goodsmark}</td>
@@ -71,7 +69,7 @@ const WinningListPC = React.createClass({
         return <div className="winningListPC">
             <div className="myPrize" onClick={this.showMyPrize}></div>
             <table className="list">
-                <tbody className="listCell" style={listStyle}>
+                <tbody className="listCell" style={{top:`${position}px`}}>
                 {this.state.dataList.map(cell)}
                 </tbody>
             </table>

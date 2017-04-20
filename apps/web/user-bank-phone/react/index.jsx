@@ -29,16 +29,26 @@ const Panel = React.createClass({
         } else if (step == 3) {
             section = <StepThree />
         }
+        let back;
+        if(window.DOMAIN_ZX!=null){
+            back=<a className="right" href="http://www.gongchangzx.com/depository/recharge/toQRecharge.shtml"
+                    target="_self">
+                <img src="images/return.png"/>
+                返回
+            </a>
+        }else{
+            back=<a className="right" href="https://www.9888.cn/depository/recharge/toQRecharge.shtml"
+                    target="_self">
+                <img src="images/return.png"/>
+                返回
+            </a>
+        }
         return (
             <div className="topNav">
                 <div className="moneyItemContainer">
                     <div className="beanItem">
                         <span className="left">修改银行预留手机号</span>
-                        <a className="right" href="https://www.9888.cn/depository/recharge/toQRecharge.shtml"
-                           target="_self">
-                            <img src="images/return.png"/>
-                            返回
-                        </a>
+                        {back}
                     </div>
                     <div className="tabContainer">
                         <ul className="tabUl">

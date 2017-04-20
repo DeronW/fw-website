@@ -17,7 +17,7 @@ const QuarterLadderMobile = React.createClass({
             data: {
                 dataCount: 30,
                 totalBaseAmt: 1000,
-                endDate: '2017-3-30',
+                endDate: '2017-3-30 23:59:59',
                 startDate: '2017-1-6',
                 startTotalCount: 100,
                 startTotalInvest: 1000000

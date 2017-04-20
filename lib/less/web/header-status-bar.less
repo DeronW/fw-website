@@ -12,7 +12,34 @@
   height: 40px;
   line-height: 40px;
   font-size: 14px;
-
+  .msgline{
+    float: right;
+    width: 1px;
+    height: 16px;
+    margin:8px 15px 0 15px;
+    background-color: #d3d3d3;
+  }
+  //尊享头部样式
+  .zx-header-box{
+    float: left;
+    box-sizing: border-box;
+    .zxh-left-link{
+      display: inline-block;
+      padding: 0 15px;
+      border-right: 1px solid #ccc;
+      height: 20px;
+      margin: 10px 0;
+      line-height: 20px;
+    }
+    .l-first{
+      padding-left: 0;
+    }
+    .l-last{
+      padding-right: 0;
+      border-right: 0;
+    }
+  }
+  //p2p头部样式
   .hsb-xin-dai {
     padding-left: 20px;
     float: left;
@@ -28,6 +55,7 @@
 
   .link {
     float: right;
+    padding: 0 5px;
   }
 
   .unread-msg-count {
@@ -99,6 +127,14 @@
 
     & > span, & > a {
       display: inline-block;
+    }
+    .zx-lines{
+      border-right: 1px solid #ccc;
+      margin: 0 15px;
+      float: right;
+      width: 1px;
+      height: 16px;
+      margin-top: 8px;
     }
   }
 

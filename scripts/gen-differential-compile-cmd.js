@@ -5,7 +5,8 @@ var colors = require('colors');
 // example : npm run pre-compile -- loan
 const PROJ = process.argv[2];
 
-const sourceF = `/tmp/webapp.${PROJ}.git.diff`
+// 每个代码库的每个项目配置文件需要不同
+const sourceF = `/tmp/website.${PROJ}.git.diff`
 const targetF = `differential.compile.${PROJ}.sh`
 
 if (!PROJ) throw new Error('缺少参数, 待编译项目名称');
@@ -20,7 +21,7 @@ fs.readFile(sourceF, (err, data) => {
     let reg_page = new RegExp(`apps/${PROJ}/([-\\w]+)/`)
 
     lines.forEach(line => {
-        ['lib', 'public', 'tasks', 'scripts', 'gulpfile'].forEach(i => {
+        ['lib', 'public', 'tasks', 'scripts', `gulpfile.${PROJ}`].forEach(i => {
             if (line.trim().startsWith(i)) r.lib = true
         });
         let m = line.match(reg_page);

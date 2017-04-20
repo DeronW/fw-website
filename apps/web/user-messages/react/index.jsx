@@ -18,7 +18,7 @@ const MessagePanel = React.createClass({
             '已读消息': 'Y'
         };
         // A: 全部, N: 未读, Y:已读
-        $.get(API_PATH + 'mesageCenter/dataList.shtml', {
+        $.get(API_PATH + '/mesageCenter/dataList.shtml', {
             rows: 10,
             page: this.state.page,
             isUse: m[this.state.tab],
@@ -75,7 +75,7 @@ const MessagePanel = React.createClass({
             )
         };
 
-        tab_bar = (
+        tab_bar =
             <div className="tab-bar">
                 {['全部消息', '未读消息', '已读消息'].map((n, index) => {
                     return (
@@ -85,12 +85,10 @@ const MessagePanel = React.createClass({
                         </div>
                     )
                 })}
-            </div>
-        );
+            </div>;
 
         if (this.state.msg_list.length) {
-            page = (
-                <div className="pagination">
+            page = <div className="pagination">
                     第{this.state.page}页, 共{this.state.total_page}页
                     <a onClick={() => this.loadPage('first')}>首页</a>
                     {this.state.page > 1 ?
@@ -98,8 +96,7 @@ const MessagePanel = React.createClass({
                     {this.state.page < this.state.total_page ?
                         <a onClick={() => this.loadPage('next')}>下一页</a> : null }
                     <a onClick={() => this.loadPage('last')}>末页</a>
-                </div>
-            );
+                </div>;
             records = this.state.msg_list.map(message);
         } else {
             records = <div className="no-message">暂无记录</div>
