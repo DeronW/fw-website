@@ -22,3 +22,4 @@ require('./gulpfile.web.js')(gulp, gt, SETTINGS);
 require('./gulpfile.zx.js')(gulp, gt, SETTINGS);
 require('./gulpfile.loan-web.js')(gulp, gt, SETTINGS);
 require('./gulpfile.activity.js')(gulp, gt, SETTINGS);
+require('./gulpfile.p2p.js')(gulp, gt, SETTINGS);
