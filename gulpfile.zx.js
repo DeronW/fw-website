@@ -21,15 +21,6 @@ const NOTICE_PAGES = [
 
 // 专题说明类页面
 const TOPIC_PAGES = [
-    // 主营产品分类说明页面
-    //'topic-yi-zhuan-ying', // 易赚赢
-    //'topic-yi-che-xiang', // 易车享
-    //'topic-li-sui-xiang', // 易随享
-    //'topic-you-ju-dai', // 友居贷
-    //'topic-yi-shou-bao', // 易收宝
-    //'topic-bu-mao-tong', // 埠贸通
-    //'topic-xiao-fei-dai', // 消费贷
-
     // 专题说明页面
     //'topic-annual-commision', // A码 用户返利规则 佣金说明
     //'topic-hui-shang', // 徽商
