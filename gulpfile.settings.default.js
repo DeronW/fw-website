@@ -10,5 +10,8 @@ module.exports = {
     },
     "loan-web": {
         dev_api_path: '//fe.9888.cn/'
+    },
+    zx: {
+        dev_api_path: '//fe.9888.cn/api/test-b/web'
     }
 };
