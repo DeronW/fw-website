@@ -1,10 +1,10 @@
-{% extends 'web_base.swig.html' %}
+{% extends 'zx_base.swig.html' %}
 
 {% block content %}
 <div class="partial-user-center-panel">
     <div class="ucp-left-nav-bg"></div>
     <div class="ucp-right-panel"> {% block user_content %}{% endblock %}</div>
-    {% include './web/partial/user-center-panel.swig.html' %}
+    {% include './zx/partial/user-center-panel.swig.html' %}
 </div>
 {% endblock %}
 
