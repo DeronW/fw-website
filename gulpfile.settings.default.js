@@ -14,7 +14,7 @@ module.exports = {
     zx: {
         dev_api_path: '//fe.9888.cn/api/test-b/zx'
     },
-    p2p: {
-        dev_api_path: '//fe.9888.cn/api/test-b/p2p'
+    "p2p-web": {
+        dev_api_path: '//fe.9888.cn/api/test-b/p2p-web'
     }
 };

@@ -1,6 +1,6 @@
 const eslint = require('gulp-eslint');
 
-const PROJ = 'p2p';
+const PROJ = 'p2p-web';
 
 let APP_NAMES = [
     'guide', // 新手引导
