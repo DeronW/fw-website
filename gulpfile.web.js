@@ -17,8 +17,8 @@ const NOTICE_PAGES = [
     'notice-corporate-structure', // 信息披露页面
     'notice-information-disclosure',//信息披露新页面
     'protocol-user-service',//金融工场用户协议
-	'guarantee-letter-T0002',//担保函
-	'guarantee-letter-T0007-T0010'
+    'guarantee-letter-T0002',//担保函
+    'guarantee-letter-T0007-T0010'
 ]
 
 // 专题说明类页面
@@ -81,22 +81,22 @@ module.exports = function (gulp, generate_task, settings) {
         `${PROJ}/sidebar-fn.less`,
     ];
 
+    let common_config = {
+        include_components: INCLUDE_COMPONENTS,
+        include_javascripts: INCLUDE_JAVASCRIPTS,
+        include_less: INCLUDE_LESS
+    }
+
     APP_NAMES.forEach(i => {
-        generate_task(PROJ, i, {
+        generate_task(PROJ, i, Object.assign({
             debug: true,
-            api_path: settings[PROJ].dev_api_path,
-            include_components: INCLUDE_COMPONENTS,
-            include_javascripts: INCLUDE_JAVASCRIPTS,
-            include_less: INCLUDE_LESS
-        });
-        generate_task(PROJ, i, {
+            api_path: settings[PROJ].dev_api_path
+        }))
+        generate_task(PROJ, i, Object.assign({
             api_path: "",
             cmd_prefix: 'pack',
             cdn_prefix: `/static/${PROJ}/${i.name || i}/`,
-            include_components: INCLUDE_COMPONENTS,
-            include_javascripts: INCLUDE_JAVASCRIPTS,
-            include_less: INCLUDE_LESS
-        });
+        }))
     });
 
     gulp.task(`build:${PROJ}`, gulp.series(APP_NAMES.map(i => `${PROJ}:pack:${i.name || i}:revision`)));

@@ -11,7 +11,7 @@ module.exports = {
     "loan-web": {
         dev_api_path: '//fe.9888.cn/'
     },
-    zx: {
+    "zx-web": {
         dev_api_path: '//fe.9888.cn/api/test-b/zx'
     },
     "p2p-web": {
