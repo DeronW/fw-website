@@ -1,9 +1,35 @@
-
-{% block css %}
-<link rel="stylesheet" type="text/css" href="./stylesheets/all.less.css">
-{% endblock %}
-
-{% block content %}
+<!DOCTYPE HTML>
+<html>
+<meta name="viewport" content="target-densitydpi=device-dpi,width=720,user-scalable=no">
+<title>担保函</title>
+<head>
+</head>
+<body>
+<style>
+body,html{margin:0;padding:0}
+.main {
+	position: relative;
+	top: 0;
+}
+.section {
+	margin: 0px auto;
+	position: relative;
+	z-index: 100;
+	background: #fff;
+	padding-top: 1px;
+	height:auto;
+}
+.block1{
+	width: 1140px;
+}
+.block2{
+	width: 111%;
+}
+img{
+	display:block;
+	width:100%
+}
+</style>
 	<div class="main">
 			<div class="section block1" style="display:none">
 				<img src="./images/gl_01.jpg">
@@ -14,7 +40,7 @@
 				<img src="./images/gl_06.jpg">
 				<img src="./images/gl_07.jpg">
 			</div>
-			<div class="section block2" style="display:none;margin-left: -133px;">
+			<div class="section block2" style="display:none;margin-left: -10%;">
 				<img src="./images/gl_01.jpg">
 				<img src="./images/gl_02.jpg">
 				<img src="./images/gl_03.jpg">
@@ -24,9 +50,6 @@
 				<img src="./images/gl_07.jpg">
 			</div>
 	</div>
-{% endblock %}
-
-{% block javascripts %}
 <script>
 var checkBrowser;
 function browserRedirect() {
@@ -58,4 +81,5 @@ else{
 }
 
 </script>
-{% endblock %}
+</body>
+</html>
