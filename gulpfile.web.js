@@ -91,12 +91,12 @@ module.exports = function (gulp, generate_task, settings) {
         generate_task(PROJ, i, Object.assign({
             debug: true,
             api_path: settings[PROJ].dev_api_path
-        }))
+        }, common_config))
         generate_task(PROJ, i, Object.assign({
             api_path: "",
             cmd_prefix: 'pack',
             cdn_prefix: `/static/${PROJ}/${i.name || i}/`,
-        }))
+        }, common_config))
     });
 
     gulp.task(`build:${PROJ}`, gulp.series(APP_NAMES.map(i => `${PROJ}:pack:${i.name || i}:revision`)));

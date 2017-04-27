@@ -18,22 +18,22 @@ module.exports = function (gulp, generate_task, settings) {
     let INCLUDE_LESS = [
     ];
 
+    let common_config = {
+        include_components: INCLUDE_COMPONENTS,
+        include_javascripts: INCLUDE_JAVASCRIPTS,
+        include_less: INCLUDE_LESS
+    }
+
     APP_NAMES.forEach(i => {
-        generate_task(PROJ, i, {
+        generate_task(PROJ, i, Object.assign({
             debug: true,
-            api_path: settings[PROJ].dev_api_path,
-            include_components: INCLUDE_COMPONENTS,
-            include_javascripts: INCLUDE_JAVASCRIPTS,
-            include_less: INCLUDE_LESS
-        });
-        generate_task(PROJ, i, {
+            api_path: settings[PROJ].dev_api_path
+        }, common_config))
+        generate_task(PROJ, i, Object.assign({
             api_path: "//www.easyloan888.com/",
             cmd_prefix: 'pack',
-            cdn_prefix: `/static/${PROJ}/${i.name || i}/`,
-            include_components: INCLUDE_COMPONENTS,
-            include_javascripts: INCLUDE_JAVASCRIPTS,
-            include_less: INCLUDE_LESS
-        });
+            cdn_prefix: `/static/${PROJ}/${i.name || i}/`
+        }, common_config));
     });
 
     gulp.task(`build:${PROJ}`, gulp.series(APP_NAMES.map(i => `${PROJ}:pack:${i.name || i}:revision`)));
