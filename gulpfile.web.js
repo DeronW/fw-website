@@ -17,6 +17,8 @@ const NOTICE_PAGES = [
     'notice-corporate-structure', // 信息披露页面
     'notice-information-disclosure',//信息披露新页面
     'protocol-user-service',//金融工场用户协议
+	'guarantee-letter-T0002',//担保函
+	'guarantee-letter-T0007-T0010'
 ]
 
 // 专题说明类页面
