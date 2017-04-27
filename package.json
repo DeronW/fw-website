@@ -33,6 +33,8 @@
     "gulp": "node node_modules/gulp/bin/gulp.js",
     "build:web": "npm run clean && npm run gulp web:common_js && npm run gulp build:web",
     "build:loan-web": "npm run clean && npm run gulp loan-web:common_js && npm run gulp build:loan-web",
+    "build:p2p-web": "npm run clean && npm run gulp loan-web:common_js && npm run gulp build:p2p-web",
+    "build:zx-web": "npm run clean && npm run gulp loan-web:common_js && npm run gulp build:zx-web",
     "build:activity": "npm run clean && npm run gulp activity:common_js && npm run gulp build:activity",
     "pre-compile": "node scripts/gen-differential-compile-cmd.js"
   }
