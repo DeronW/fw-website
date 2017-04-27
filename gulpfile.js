@@ -19,5 +19,7 @@ try {
 const SETTINGS = Object.assign({}, require('./gulpfile.settings.default.js'), settings);
 // gulpfile 本地扩展配置
 require('./gulpfile.web.js')(gulp, gt, SETTINGS);
+require('./gulpfile.zx.js')(gulp, gt, SETTINGS);
 require('./gulpfile.loan-web.js')(gulp, gt, SETTINGS);
 require('./gulpfile.activity.js')(gulp, gt, SETTINGS);
+require('./gulpfile.p2p-web.js')(gulp, gt, SETTINGS);
