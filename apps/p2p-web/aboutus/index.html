@@ -1,0 +1,138 @@
+{% extends '../../../lib/templates/p2p-web-base.swig.html' %}
+
+{% block title %}金融工场是由北京凤凰信用管理有限公司（简称：凤凰信用）倾力打造的专注于小贷公司资产交易的P2P平台—上金融工场，圆财富梦想！{% endblock %}
+
+{% block javascripts %}
+<script src="javascripts/index.js"></script>
+<script type="text/javascript"
+        src="http://api.map.baidu.com/api?v=2.0&ak=1k0hI3NQCtMWDQN0D0kmpXuIYV2GjM0e"></script>
+{% endblock %}
+
+{% block content %}
+<div class="aboutus-container">
+    <div class="aboutus-title">
+        首页&nbsp;&nbsp;><span class="aboutus">关于我们</span>
+    </div>
+    <div class="aboutus-box clearfix">
+        <div class="a-left clearfix">
+            <div class="left-item active">
+                <i class="l-icon icon-aboutus"></i>
+                <span class="l-content">关于我们</span>
+            </div>
+            <div class="left-item">
+                <i class="l-icon icon-contactus"></i>
+                <span class="l-content">联系我们</span>
+            </div>
+            <div class="left-item">
+                <i class="l-icon icon-school"></i>
+                <span class="l-content">网贷学堂</span>
+            </div>
+        </div>
+        <div class="a-right">
+            <div class="r-item r-item1" style="display: block">
+                <div class="item-box item1-box">
+                    <div class="item-title item1-title">平台介绍</div>
+                    <div class="item1-des"><span style="padding-left: 30px"></span>工场微金是由北京凤凰信用管理有限公司管理运营，向借款人及出借人（用户）提供撮合服务的网络借贷信息中介平台。平台主要为用户提供信息搜集、信息公布、资信评估、信息交互、借贷撮合等服务。平台于2016年成功完成资金的银行存管，实现用户资金和平台自有资金的完全隔离，确保用户资金安全。平台顺应网贷行业监管要求，更加贴近小微信贷与普惠金融，更好的服务于平台新老用户，服务于中国实体经济，合规发展，稳健运营！
+                    </div>
+                </div>
+            </div>
+            <div class="r-item r-item2" style="display: none">
+                <div class="item2-box" id="item2-box">
+
+                </div>
+            </div>
+            <div class="r-item r-item3" style="display: none">
+                <div class="item-box item3-box">
+                    <div class="item-title item3-title">
+                        网贷学堂
+                    </div>
+                    <div class="item3-policy">
+                        <div class="policy-title">
+                            <a href="#">政策法规</a>
+                        </div>
+                        <div class="policy-item active">
+                            <a href="#">中华人民共和国网络安全法</a>
+                        </div>
+                        <div class="policy-item">
+                            <a href="#">中华人民共和国广告法</a>
+                        </div>
+                        <div class="policy-item">
+                            <a href="">中华人民共和国电子签名法</a>
+                        </div>
+                        <div class="policy-item">
+                            <a href="">中华人民共和国反洗钱法</a>
+                        </div>
+                        <div class="policy-item">
+                            <a href="">央行等十部委《关于促进互联网金融健康发展的指导意见》</a>
+                        </div>
+                        <div class="policy-item">
+                            <a href="">网络借贷信息中介机构业务活动管理暂行办法</a>
+                        </div>
+                        <div class="policy-item">
+                            <a href="">国务院办公厅互联网金融风险专项整治工作实施方案</a>
+                        </div>
+                        <div class="policy-item">
+                            <a href="">通过互联网开展资产管理及跨界从事金融业务风险专项整治工作实施方案</a>
+                        </div>
+                        <div class="policy-item">
+                            <a href="">工商总局等开展互联网金融广告及以投资理财名义从事金融活动风险专项整治工作实施方案</a>
+                        </div>
+                        <div class="policy-item">
+                            <a href="">北京市互联网金融风险专项整治工作实施方案</a>
+                        </div>
+                        <div class="policy-item">
+                            <a href="">中国互联网金融协会信息披露自律管理规范</a>
+                        </div>
+                        <div class="policy-item">
+                            <a href="">中国互联网金融信息披露标准：个体网络借贷</a>
+                        </div>
+                        <div class="policy-item">
+                            <a href="">P2P网络借贷风险专项整治工作实施方案</a>
+                        </div>
+                        <div class="policy-item">
+                            <a href="">网络借贷资金存管业务指引（正式版）</a>
+                        </div>
+                    </div>
+                    <div class="item3-policy">
+                        <div class="policy-title">
+                            <a href="#">网贷百科</a>
+                        </div>
+                        <div class="policy-item">
+                            <a href="#">P2P出借必读：到底选长期标还是短期标?</a>
+                        </div>
+                        <div class="policy-item">
+                            <a href="#">为什么网贷？网贷有哪些好处.</a>
+                        </div>
+                        <div class="policy-item">
+                            <a href="">五件真实案例告诉你 网贷中最容易犯哪些错误?</a>
+                        </div>
+                        <div class="policy-item">
+                            <a href="">影响P2P网贷的错误观念 你中了几条。</a>
+                        </div>
+                    </div>
+                    <div class="item3-policy">
+                        <div class="policy-title">
+                            <a href="#">媒体采访</a>
+                        </div>
+                        <div class="policy-item">
+                            <a href="#">P2P网贷平台选择技巧。</a>
+                        </div>
+                        <div class="policy-item">
+                            <a href="#">八大“细节”帮你远离问题平台。</a>
+                        </div>
+                        <div class="policy-item">
+                            <a href="">个人网贷技巧，一定要明白！</a>
+                        </div>
+                        <div class="policy-item">
+                            <a href="">如何让财富运动起来 这四招就够了。</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+

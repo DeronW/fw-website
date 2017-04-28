@@ -8,7 +8,7 @@ let APP_NAMES = [
 
 // 公告类页面
 const NOTICE_PAGES = [
-
+    'aboutus'
 ]
 
 // 专题说明类页面
