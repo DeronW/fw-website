@@ -1,43 +1,37 @@
-class drawPC extends React.Component{
-    constructor(props){
-        super(props);
-        this.state = {
-            isLogin:false,
-            monthNotice:"",
-
+const drawPC = React.createClass({
+    getInitialState(){
+        return{
+            
         }
-    }
-
+    },
     componentDidMount(){
-        var _this = this;
-        $UserReady(function (isLogin, user) {
+        //var _this = this;
+        //$UserReady(function (isLogin, user) {
+        //
+        //})
+    },
+    render(){
+        return <div>
+        {
+            <PersonMonthLadder />
+        }
+        </div>
 
-        })
     }
+});
+
+const PersonMonthLadder = React.createClass({
+    getInitialState(){
+
+    },
+    componentDidMount(){
+
+    },
     render(){
         return (
-                <div>
-                   <PersonMonthLadder />
-                </div>
-            )
-
+            <div className="personMonthLadder">
+                asdafa
+            </div>
+        )
     }
-}
-
-class PersonMonthLadder extends React.Component{
-    constructor(props){
-        super(props)
-    }
-    componentDidMount(){
-
-    }
-    render(){
-        return (
-                <div className="personMonthLadder">
-                    asdafa
-                </div>
-            )
-
-
-    }
-}
+});
