@@ -17,7 +17,7 @@
     bottom: 0;
     margin: auto;
     transform: scale(0);
-    animation: tenScale 0.5s ease-out both;
+    animation: rotatePop 0.5s ease-out both;
     .closePop {
       width: 62px;
       height: 62px;
@@ -38,7 +38,11 @@
     .popList{
       width: 446px;
       position: absolute;
-      top: 260px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 520px;
+      top: 80px;
       left: 150px;
       tr{
         line-height: 30px;
@@ -109,13 +113,5 @@
       background: url("../images/popBtn.png") no-repeat;
       cursor: pointer;
     }
-  }
-}
-@keyframes tenScale {
-  0%{
-    transform: scale(0);
-  }
-  100%{
-    transform: scale(1);
   }
 }

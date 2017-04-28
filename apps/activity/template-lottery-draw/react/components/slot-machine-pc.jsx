@@ -8,11 +8,16 @@ const RockProduct = React.createClass({
     componentWillReceiveProps(nextProps) {
         this.setState({result: nextProps.result}, this.lotteryDrawHandler)
     },
+    closePopHandler() {
+        ReactDOM.unmountComponentAtNode(document.getElementById('pop'));
+    },
+    tenClosePopHandler() {
+        this.props.productList.pop();
+        ReactDOM.unmountComponentAtNode(document.getElementById('pop'));
+    },
     lotteryDrawHandler(speed, id) {
         var productList = this.props.productList;
-        var s = 0;
-        var i = 0;
-        var count = 0;
+        var s = 0, i = 0, count = 0;
         var timer = setInterval(() => {
             var position = this.state.position;
             productList.forEach((item, index) => {
@@ -20,24 +25,36 @@ const RockProduct = React.createClass({
                     i = index;
                 }
             });
-            var distance = (i - 1) * 182;
+            var distance = (i) * 182;
             if (position >= (productList.length - 1) * 182) {
                 this.setState({
                     position: speed
                 });
                 count++;
             } else {
-                if (count >= 2) {
-                    s = (distance - this.state.position) / 8;
-                    s = s > 0 ? Math.ceil(s) : Math.floor(s);
-                    this.setState({
-                        position: this.state.position + s
-                    });
+                if (count >= 3) {
+                    if (this.state.position > 182) {
+                        s = (distance - this.state.position) / 8;
+                        s = s > 0 ? Math.ceil(s) : Math.floor(s);
+                        this.setState({
+                            position: this.state.position + s
+                        });
+                    } else {
+                        this.setState({
+                            position: distance
+                        });
+                    }
                     if (this.state.position == distance) {
                         clearInterval(timer);
-                        setTimeout(()=>{
+                        setTimeout(()=> {
+                            ReactDOM.render(<PopOnePrize closePopHandle={this.closePopHandler} popPrize="1888工豆"
+                                                         popNumber="10" popBtn='继续抽奖'/>, document.getElementById('pop'));
+                            //ReactDOM.render(<PopMessage closePopHandle={this.closePopHandler} popTitle="抱歉，抽奖异常！" popText="请稍后再试，如需咨询请联系客服400-0322-988 。" popBtn="朕知道了"/>,document.getElementById('pop'))
+                            //ReactDOM.render(<PopOnePrize closePopHandle={this.closePopHandler} popPrize="1888工豆" popNumber="10" popBtn='继续抽奖'/>,document.getElementById('pop'))
+                            //ReactDOM.render(<PopZero closePopHandle={this.closePopHandler}/>,document.getElementById('pop'))
+
                             window.once_delay = false;
-                        },100);
+                        }, 1000);
                     }
                 } else {
                     s = speed + this.state.position;
@@ -48,7 +65,7 @@ const RockProduct = React.createClass({
             }
         }, 30)
     },
-    tenLotteryDrawHandler(speed,productList) {
+    tenLotteryDrawHandler(speed, productList) {
         var s = 0;
         var count = 0;
         var timer = setInterval(() => {
@@ -68,9 +85,11 @@ const RockProduct = React.createClass({
                     });
                     if (this.state.position == distance) {
                         clearInterval(timer);
-                        setTimeout(()=>{
-                            window.ten_delay = false;
-                        },100);
+                        setTimeout(()=> {
+                            window.once_delay = false;
+                            ReactDOM.render(<PopTenPrice closePopHandle={this.tenClosePopHandler} popNumber={31}
+                                                         popBtn={"继续抽奖"}/>, document.getElementById("pop"))
+                        }, 1000);
                     }
                 } else {
                     s = speed + this.state.position;
@@ -88,6 +107,7 @@ const RockProduct = React.createClass({
         let products = (item, index) => {
             return <div className="product" key={index}>
                 <img style={position} src={item.img}/>
+
                 <p style={position}>{item.name}</p>
             </div>
         };
@@ -101,44 +121,39 @@ const SlotMachinePC = React.createClass({
     getInitialState() {
         return {
             result: null,
-             prize_list: this.props.prize_list
+            prize_list: this.props.prize_list
         }
     },
-    closePopHandler() {
-        ReactDOM.unmountComponentAtNode(document.getElementById('pop'));
-    },
-    //ReactDOM.render(<PopMessage closePopHandle={this.closePopHandler} popMyPrize="我的奖品" popNoTitle="暂无中奖记录" popBtn="朕知道了"/>,document.getElementById('pop'))
-    //            //ReactDOM.render(<PopMessage closePopHandle={this.closePopHandler} popTitle="抱歉，抽奖异常！" popText="请稍后再试，如需咨询请联系客服400-0322-988 。" popBtn="朕知道了"/>,document.getElementById('pop'))
-    //            //ReactDOM.render(<PopOnePrize closePopHandle={this.closePopHandler} popPrize="1888工豆" popNumber="10" popBtn='继续抽奖'/>,document.getElementById('pop'))
-    //            //ReactDOM.render(<PopZero closePopHandle={this.closePopHandler}/>,document.getElementById('pop'))
+
 
     componentWillReceiveProps(nextProps) {
         this.setState({result: nextProps.result}, this.rockLotteryDraw)
     },
     rockLotteryDraw() {
-        if(window.once_delay) return;
+        if (window.once_delay) return;
         window.once_delay = true;
-        this.refs.rockProduct.lotteryDrawHandler(30, 3);
+        this.refs.rockProduct.lotteryDrawHandler(30, 2);
         setTimeout(() => {
-            this.refs.rockProduct2.lotteryDrawHandler(30, 3);
+            this.refs.rockProduct2.lotteryDrawHandler(30, 2);
         }, 300);
         setTimeout(() => {
-            this.refs.rockProduct3.lotteryDrawHandler(30, 3);
+            this.refs.rockProduct3.lotteryDrawHandler(30, 2);
         }, 600);
     },
     rockTenLotteryDraw(){
-        if(window.ten_delay) return;
-        window.ten_delay = true;
-        this.state.prize_list.push({
+        if (window.once_delay) return;
+        window.once_delay = true;
+        var prize_list = this.state.prize_list;
+        prize_list.push({
             img: 'http://placehold.it/138?text=大礼包',
             name: '大礼包'
         });
-        this.refs.rockProduct.tenLotteryDrawHandler(30,this.state.prize_list);
+        this.refs.rockProduct.tenLotteryDrawHandler(30, prize_list);
         setTimeout(() => {
-            this.refs.rockProduct2.tenLotteryDrawHandler(30,this.state.prize_list);
+            this.refs.rockProduct2.tenLotteryDrawHandler(30, prize_list);
         }, 300);
         setTimeout(() => {
-            this.refs.rockProduct3.tenLotteryDrawHandler(30,this.state.prize_list);
+            this.refs.rockProduct3.tenLotteryDrawHandler(30, prize_list);
         }, 600);
     },
     render() {

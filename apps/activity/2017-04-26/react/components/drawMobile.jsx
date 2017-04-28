@@ -1,4 +1,4 @@
-class GridMobile extends React.Component{
+class drawMobile extends React.Component{
     render(){
 
     }

@@ -12,7 +12,6 @@ const PopTenPrice = React.createClass({
         $.get("./javascripts/getPersonDate.json", (data)=> {
             var list = data.data.list;
             if (list.length > 4) this.setState({pageList: [1, 2]});
-
             this.setState({list: list})
         }, 'json')
     },
