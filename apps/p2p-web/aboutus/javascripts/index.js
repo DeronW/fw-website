@@ -19,6 +19,13 @@ $(document).ready(function () {
             $(".r-item").eq(index).css({display: "block"}).siblings().css({display: "none"})
             $(".aboutus").text($(this).find(".l-content").text());
             $(".a-left").height($(".a-right").height());
+            if(index==0){
+                location.hash = "#aboutus"
+            }else if(index==1){
+                location.hash ="#contactus"
+            }else if(index=2){
+                location.hash="school"
+            }
         })
     })
     $(".policy-item").each(function (index, item) {
