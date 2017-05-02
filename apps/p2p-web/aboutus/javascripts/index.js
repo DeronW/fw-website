@@ -24,7 +24,7 @@ $(document).ready(function () {
             }else if(index==1){
                 location.hash ="#contactus"
             }else if(index=2){
-                location.hash="school"
+                location.hash="#school"
             }
         })
     })
