@@ -1,5 +1,5 @@
-class DrawMobile extends React.Component{
-    constructor(props){
+class DrawMobile extends React.Component {
+    constructor(props) {
         super(props);
         this.state = {
             isLogin: false,
@@ -11,8 +11,14 @@ class DrawMobile extends React.Component{
             remain: '',
             close: false,
             chance: '',
+            tab:'个人榜'
         }
     }
+
+    componentDidMount() {
+        this.judgeStageHandler();
+    }
+
     judgeStageHandler() {
         var timeStart = 1494864000000;//5.16号
         var timeMiddle = 1497283200000;//6.13号
@@ -25,6 +31,7 @@ class DrawMobile extends React.Component{
             this.setState({stageMay: '已结束', stageJune: '进行中', selectedMay: false, selectedJune: true})
         }
     }
+
     switchTabHandler(stage, month) {
         if (month == "五月") {
             this.setState({selectedMay: true, selectedJune: false})
@@ -32,22 +39,33 @@ class DrawMobile extends React.Component{
             if (stage != "未开始")  this.setState({selectedMay: false, selectedJune: true})
         }
     }
+
     isImgFun(index) {
         return ['images/no1.png', 'images/no2.png', 'images/no3.png'][index]
     }
+
     fixedPrice(total) {
         return total.toFixed(2)
     }
+
     closeHandler() {
         this.setState({close: !this.state.close})
     }
-    render(){
-        let {stageMay,stageJune,selectedMay,selectedJune,remain,close,chance,isLogin} = this.state;
+
+    gotoLogin() {
+        console.log("登录");
+        var loginUrl = location.protocol + '//www.9888.cn/api/activityPullNew/pullnewParty.do?id=19';
+        $FW.gotoSpecialPage("登录", loginUrl);
+    }
+
+    render() {
+        let {stageMay,stageJune,selectedMay,selectedJune,remain,close,chance,isLogin,tab} = this.state;
         let no = {
             width: "237px",
             height: "96px",
             background: 'url("images/notStarting.png")',
-            marginRight: "110px",
+            marginRight: "30px",
+            marginLeft: "80px",
             cursor: 'default'
         };
         let monthMayTab = (stage, month, section) => {
@@ -73,11 +91,37 @@ class DrawMobile extends React.Component{
                 </div>
             </div>
         };
+        let tipsNoLogin = (
+            <div className="drawTips">
+                <p>请登录后，查看您的邀友排名及可获奖金</p>
+
+                <div className="login" onClick={()=>this.gotoLogin()}>立即登录</div>
+            </div>
+        );
+        let tipsLogin = (
+            <div className="drawTips">该月内，个人累投金额≥50万元；或单月内团队累投金额≥
+                1000万且团队人数≥50人，当前可分 <em>18万</em> 元奖金！
+                月度奖金分配方式：个人和团队奖金分配比例=4(个人)
+                ：6(团队)
+            </div>
+        );
+        let ladderTab = (t,i)=>{
+            return <div key={i} className={tab == t ?"ladderTab selected":'ladderTab'}>
+                {t}
+            </div>
+        };
         return <div className="drawMobile">
             <div className="drawTitleMobile">投资冲月榜，个人团队大作战</div>
             <div className="monthStateTab">
                 {monthMayTab(stageMay, "五月", "5.16 ~ 6.13")}
                 {monthJuneTab(stageJune, "六月", "6.14 ~ 7.12")}
+            </div>
+            <div className="drawTips">该月内，平台达到相应任务目标，且个人及团队排行前20名 的工友，最高可获分：</div>
+            {isLogin ? tipsLogin : tipsNoLogin}
+            <div className="switchMonthLadder">
+                {
+                    ['个人榜','团队榜'].map(ladderTab)
+                }
             </div>
         </div>
     }
