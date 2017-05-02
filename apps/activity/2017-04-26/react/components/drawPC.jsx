@@ -1,33 +1,60 @@
 class DrawPC extends React.Component {
     constructor(props) {
         super(props);
+        this.URL = 'https://passport.9888.cn/passport/login' + '?service=' + location.protocol + '//www.9888.cn/api/activityPullNew/pullnewParty.do?id=19'
         this.state = {
             isLogin: false,
             monthNotice: "",
             stageMay: '未开始',
             stageJune: '未开始',
-            selectedMay:true,
-            selectedJune:false,
-            remain:'',
-        }
+            selectedMay: true,
+            selectedJune: false,
+            remain: '',
+            close: false,
+            chance: '',
+            prize_list: [{
+                img: 'http://placehold.it/138?text=1',
+                name: 'name',
+                id: 1
+            }, {
+                img: 'http://placehold.it/138?text=2',
+                name: 'name',
+                id: 2
+            }, {
+                img: 'http://placehold.it/138?text=3',
+                name: 'name',
+                id: 3
+            }, {
+                img: 'http://placehold.it/138?text=4',
+                name: 'name',
+                id: 4
+            }, {
+                img: 'http://placehold.it/138?text=5',
+                name: 'name',
+                id: 5
+            }]
+        };
     }
 
     componentDidMount() {
-        var _this = this;
-        $UserReady(function (isLogin, user) {
-            _this.setState({isLogin:isLogin});
-            var remain = "";
-            if(isLogin){
-                remain = "<div class='loginRemain'>该月内，个人累投金额<span>≥50万</span>元；或单月内团队累投金额<span>≥1000万</span>且团队人数<span>≥50</span>人，当前可分<span></span>18万</span>元奖金！ 月度奖金分配方式：<span>个人和团队奖金分配比例=4（个人）：6（团队）</span></div>"
-            }else{
-                remain="<div class='noLoginRemain'>请登录后，查看您的投资获奖情况。</div>"
-            }
+        var that = this;
 
-            _this.setState({remain:remain})
+        $UserReady(function (isLogin, user) {
+            that.setState({isLogin: isLogin});
+            var remain = "";
+            var chance = false;
+            if (isLogin) {
+                remain = "<div class='loginRemain'>该月内，个人累投金额<span>≥50万</span>元；或单月内团队累投金额<span>≥1000万</span>且团队人数<span>≥50</span>人，当前可分<span></span>18万</span>元奖金！ 月度奖金分配方式：<span>个人和团队奖金分配比例=4（个人）：6（团队）</span></div>"
+            } else {
+                remain = "<div class='noLoginRemain'>请登录后，查看您的投资获奖情况。</div>";
+                chance = "<div class='noLoginChance'>登录后可查抽奖机会，<a href='https://passport.9888.cn/passport/login?service=http://www.9888.cn/api/activityPullNew/pullnewParty.do?id=19'>立即登录</a></div>"
+            }
+            that.setState({remain: remain, chance: chance})
         });
         this.judgeStageHandler();
     }
-    judgeStageHandler(){
+
+    judgeStageHandler() {
         var timeStart = 1494864000000;//5.16号
         var timeMiddle = 1497283200000;//6.13号
         var timeEnd = 1499961600000;//7.12号
@@ -36,24 +63,40 @@ class DrawPC extends React.Component {
         if (currentTime < timeMiddle) {
             this.setState({stageMay: '进行中', stageJune: '未开始'})
         } else if (currentTime < timeEnd) {
-            this.setState({stageMay: '已结束', stageJune: '进行中',selectedMay:false,selectedJune:true})
+            this.setState({stageMay: '已结束', stageJune: '进行中', selectedMay: false, selectedJune: true})
         }
     }
-    switchTabHandler(stage,month){
-        if(month=="五月"){
-            this.setState({selectedMay:true,selectedJune:false})
-        }else{
-            if(stage != "未开始")  this.setState({selectedMay:false,selectedJune:true})
+
+    switchTabHandler(stage, month) {
+        if (month == "五月") {
+            this.setState({selectedMay: true, selectedJune: false})
+        } else {
+            if (stage != "未开始")  this.setState({selectedMay: false, selectedJune: true})
         }
+    }
+
+    isImgFun(index) {
+        return ['images/no1.png', 'images/no2.png', 'images/no3.png'][index]
+    }
+    fixedPrice(total) {
+        return total.toFixed(2)
+    }
+    closeHandler() {
+        this.setState({close: !this.state.close})
+    }
+    gotoLogin(){
+        console.log("登录");
+        var loginUrl = location.protocol + '//www.9888.cn/api/activityPullNew/pullnewParty.do?id=19';
+        $FW.gotoSpecialPage("登录", loginUrl);
     }
     render() {
-        let {stageMay,stageJune,selectedMay,selectedJune,remain} = this.state;
+        let {stageMay,stageJune,selectedMay,selectedJune,remain,close,chance,isLogin} = this.state;
         let no = {
             width: "237px",
             height: "96px",
             background: 'url("images/notStarting.png")',
-            marginRight:"110px",
-            cursor:'default'
+            marginRight: "110px",
+            cursor: 'default'
         };
         let monthMayTab = (stage, month, section) => {
             return <div className={selectedMay ?"monthTab going":"monthTab end"}
@@ -67,7 +110,7 @@ class DrawPC extends React.Component {
         };
         let monthJuneTab = (stage, month, section) => {
             let change;
-            if(stage == "未开始") change=true;
+            if (stage == "未开始") change = true;
             return <div className={selectedJune?"monthTab going":"monthTab end"}
                         style={change && no}
                         onClick={()=>this.switchTabHandler(stage,month)}>
@@ -78,9 +121,25 @@ class DrawPC extends React.Component {
                 </div>
             </div>
         };
+        let closeStyle = {
+            display: close ? "none" : "block"
+        };
         return <div className="drawPC">
             <div className="drawBanner"></div>
             <div className="drawBox">
+                <div className="drawTitle">大奖抽抽抽，100%中奖</div>
+                <div className="drawMachine">
+                    <div className="machine">
+                        <SlotMachinePC isLogin={isLogin} gotoLogin={this.gotoLogin} prize_list={this.state.prize_list} result={this.state.result}/>
+                    </div>
+                    <div className="winningList">
+                        <WinningListPC/>
+                    </div>
+                </div>
+                {
+                    chance && <div className="drawChance" dangerouslySetInnerHTML={{__html:chance}}></div>
+                }
+                <div className="drawTitle">投资冲月榜，个人团队大作战</div>
                 <div className="monthStateTab">
                     {monthMayTab(stageMay, "五月", "5.16 ~ 6.13")}
                     {monthJuneTab(stageJune, "六月", "6.14 ~ 7.12")}
@@ -89,440 +148,79 @@ class DrawPC extends React.Component {
                 <div className="drawMonthLadder">
                     <div className="person">
                         {
-                            <PersonMonthLadder />
+                            <PersonMonthLadder title={"个人榜"} isImgFun={this.isImgFun} fixedPrice={this.fixedPrice}/>
                         }
                     </div>
                     <div className="team">
                         {
-                            <PersonMonthLadder />
+                            <TeamMonthLadder title={"团队榜"} isImgFun={this.isImgFun} fixedPrice={this.fixedPrice}/>
                         }
                     </div>
                 </div>
+                <div className="drawTips">
+                    <div className="tips">温馨提示：</div>
+                    <p>1. 以上数据实时更新，最终发放奖金请以每月结束后数据为准，排名顺序：获奖工友的有效好友累投年化额>获奖工友的有效邀友数>未获奖工友的有效好友累投年化额>未获奖工友的有效邀友数；</p>
+
+                    <p>2. 奖金包奖励以工豆形式发放；</p>
+
+                    <p>3. 月度奖金分配方式：个人和团队奖金分配比例=4（个人）：6（团队）</p>
+
+                    <p>4. 奖金包占比分配公式：个人（或团队）累投总额÷前20名个人（或团队）累投总额。仅计算满足获奖资格的用户。</p>
+
+                    <p>5. 活动期间，单月内平台达到相应任务目标，且个人及团队排行前20名的工友，即可赢得最高百万奖金包！累计金额越多获得的奖金就越多。</p>
+                </div>
+                <div className="drawTitle">终级排行榜 百万壕礼奉上</div>
+                <div className="drawInstructor">5.16-7.12，平台累投金额及累投年化金额达标。个人及团队排行前30的工友，将按照其累计投资金额占比进行最高<em>100万</em>元奖
+                    金分配。累计金额越多获得的奖金就越多。
+                </div>
+                <div className="drawTotalLadder">
+                    <div className="person">
+                        {
+                            <PersonTotalLadder title={"个人榜"} isImgFun={this.isImgFun} fixedPrice={this.fixedPrice}/>
+                        }
+                    </div>
+                    <div className="team">
+                        {
+                            <TeamTotalLadder title={"团队榜"} isImgFun={this.isImgFun} fixedPrice={this.fixedPrice}/>
+                        }
+                    </div>
+                </div>
+                <div className="drawTips">
+                    <div className="tips">温馨提示：</div>
+                    <p>1. 奖金包奖励以工豆形式发放；</p>
+
+                    <p>2、奖金包占比分配公式：奖金包占比分配公式：个人（或团队）累投总额÷前30名个人（或团队）累投总额。仅计算满足获奖资格的用户。</p>
+                </div>
             </div>
+            <div className="drawExplain">
+                <div className="explainContent">
+                    <div className="explainTitle">
+                        <img src="images/explain.png" alt=""/>
+                        <em>活动说明</em>
+                    </div>
+                    <p>1. 投资债权转让产品，不能参与本次活动；</p>
 
-            {
-                <PersonTotalLadder />
-            }
-        </div>
-    }
-}
+                    <p>2. 月度奖金工豆奖励将于每月结束后7个工作日内，统一发放至邀请人的工场账户；</p>
 
-class PersonMonthLadder extends React.Component {
-    constructor(props) {
-        super(props);
-        this.PRE_PAGE = 10;
-        this.state = {
-            totalData: {
-                topList: []
-            },
-            page: 1,
-            totalPage: 2,
-            tab: '上一页',
-            isClick: true,
-            cursor: 0,
-        }
-    }
+                    <p>3. 总排行奖金工豆奖励将于活动结束后7个工作日内，统一发放至邀请人的工场账户；</p>
 
-    getServerTimestamp(callback) {
-        var ts = $getDebugParams().timestamp;
-        if (ts) {
-            this.setState({currentTime: ts});
-            callback(ts)
-        } else {
-            $.get(API_PATH + "api/userState/v1/timestamp.json", function (data) {
-                this.setState({currentTime: data.data.timestamp});
-                callback(data.data.timestamp)
-            }.bind(this), 'json')
-        }
-    }
+                    <p>4. 实物奖统一于活动结束后7个工作日内统一发送所获奖品兑换券至用户账号内，实物奖图片仅供参考；</p>
 
-    componentDidMount() {
-        var febStart = new Date("2017/5/11").getTime();
-        var marStart = new Date("2017/6/1").getTime();
-        var startDate = '2017-1-6';
-        var endDate = '2017-2-2 23:59:59';
-        this.getServerTimestamp(function (timestamp) {
-            if (timestamp < febStart) {
-                startDate = '2017-1-6';
-                endDate = '2017-2-2 23:59:59';
-            } else if (timestamp < marStart) {
-                startDate = '2017-2-3';
-                endDate = '2017-3-2 23:59:59';
-            }
-            this.ajaxPullNewInvest(startDate, endDate)
-        }.bind(this))
-    }
+                    <p>5. 活动最终解释权归金融工场所有，活动详情致电客服热线咨询：400-0322-988。</p>
 
-    componentWillReceiveProps(nextProps) {
-        this.ajaxPullNewInvest(nextProps.startDate, nextProps.endDate);
-    }
-
-    ajaxPullNewInvest(startDate, endDate) {
-        $.ajax({
-            url: API_PATH + 'api/activityPullNew/v2/PullNewTopAndYearInvest.json',
-            data: {
-                dataCount: 20,
-                totalBaseAmt: 1000,
-                startDate: startDate,
-                endDate: endDate,
-                startTotalCount: 50,
-                startTotalInvest: 500000
-            },
-            type: "get",
-            dataType: 'json',
-            success: function (data) {
-                this.showAndSetData(data);
-            }.bind(this)
-        });
-    }
-
-    showAndSetData(data) {
-        var sData = data.data || {};
-        var len = sData.topList.length;
-        if (len <= this.PRE_PAGE) {
-            this.setState({totalPage: 1, isClick: false});
-        } else if (len > this.PRE_PAGE && sData.length <= this.PRE_PAGE * 2) {
-            this.setState({totalPage: 2, isClick: true})
-        }
-        this.setState({totalData: sData})
-    }
-
-    switchPageHandler(type) {
-        this.setState({tab: type});
-        let {page,totalPage}=this.state;
-        let cursor, min, new_page, len = this.state.totalData.topList.length;
-        if (type == '上一页') {
-            if (len % this.PRE_PAGE) {
-                min = parseInt(len / this.PRE_PAGE) * this.PRE_PAGE
-            } else {
-                min = len - this.PRE_PAGE
-            }
-            cursor = this.state.cursor > 0 ? Math.min(min, this.state.cursor - this.PRE_PAGE) : 0;
-            this.setState({cursor: cursor});
-            if (page > 1) {
-                new_page = page - 1;
-                this.setState({page: new_page});
-                if (page > 2) {
-                    this.setState({tab: ''})
-                }
-            }
-        } else {
-            if (len % this.PRE_PAGE) {
-                min = parseInt(len / this.PRE_PAGE) * this.PRE_PAGE
-            } else {
-                min = len - this.PRE_PAGE
-            }
-            cursor = Math.min(min, this.state.cursor + this.PRE_PAGE);
-            this.setState({cursor: cursor});
-            if (page < totalPage) {
-                new_page = page + 1;
-                this.setState({page: new_page});
-                if (page < totalPage - 1) {
-                    this.setState({tab: ''})
-                }
-            }
-        }
-    }
-
-    fixedPriceFun(i) {
-        var febStart = new Date("2017/2/3").getTime();
-        var marStart = new Date("2017/3/3").getTime();
-        let monthPrice = 0;
-        var money = 0;
-        let totalData = this.state.totalData;
-        if (totalData.topList[i].totalall < 50 || totalData.topList[i].total < 500000) {
-            return '暂无奖金'
-        } else {
-            if (this.state.currentTime < febStart || this.props.startDate == '2017-1-6') {
-                monthPrice = 120000;
-            } else if (this.state.currentTime < marStart || this.props.startDate == '2017-2-3') {
-                monthPrice = 150000;
-            } else {
-                monthPrice = 180000;
-            }
-            money = ((totalData.topList[i].total) / (totalData.totalYearInvest)) * monthPrice;
-        }
-        return money.toFixed(2);
-    }
-
-    get_current_page() {
-        return this.state.totalData.topList.slice(this.state.cursor, this.state.cursor + this.PRE_PAGE);
-    }
-
-    isImgFun(index) {
-        return ['images/no1.png', 'images/no2.png', 'images/no3.png'][index]
-    }
-
-    fixedPrice(total) {
-        return total.toFixed(2)
-    }
-
-    render() {
-        let pageImg = (item, index) => {
-            return <div key={index}
-                        className={this.state.isClick?(this.state.tab == item ? 'selectedPage':null):'selectedPage'}
-                        onClick={this.state.isClick?()=>{this.switchPageHandler(item)}:null}>{item}</div>
-        };
-        let page = (
-            <div className="page">
-                {
-                    ['上一页', '下一页'].map(pageImg)
-                }
+                    <p>声明：以上活动由金融工场主办 与Apple Inc. 无关。</p>
+                </div>
             </div>
-        );
-        let bodyImg = (item, index) => {
-            index += this.state.cursor;
-            return <tr key={index}>
-                <td>
-                    {this.isImgFun(index) ? <img className="tdImg" src={this.isImgFun(index)}/> :
-                        <span className="twoSpan">{index + 1}</span>}
-                    {<span className="oneSpan">{item.loginName}</span>}
-                </td>
-                <td>
-                    {this.fixedPrice(item.total)}
-                </td>
-                <td className={this.fixedPriceFun(index) == '暂无奖金'?null:"bodyPrice"}>{this.fixedPriceFun(index)}</td>
-            </tr>
-        };
-        let tBody = (
-            <tbody>
-            {
-                this.get_current_page().map(bodyImg)
-            }
-            </tbody>
-        );
-        return <div className="personMonthLadder">
-            <div className="personTitle">个人榜</div>
-            <div className="personTable">
-                <table>
-                    <thead>
-                    <tr>
-                        <td>用户名</td>
-                        <td>个人累投金额（元）</td>
-                        <td>奖金（元）</td>
-                    </tr>
-                    </thead>
-                    {
-                        this.state.totalData.topList.length ? tBody : null
-                    }
-                </table>
+            <div className="pcFooterBar" style={closeStyle}>
+                <div className="footerBarContent">
+                    <img src="images/logo.png" alt=""/>
+
+                    <div className="barText">朋友多，这些奖励还觉得不够？</div>
+                    <a className="moreAward" onClick={()=> {$toggleYaoQingYouLi()}}>更多邀友奖励</a>
+                    <a className="howAward">如何邀友</a>
+                    <em className="barClose" onClick={()=>this.closeHandler()}></em>
+                </div>
             </div>
-            {
-                this.state.totalData.topList.length ? page : null
-            }
-            {
-                this.state.totalData.topList.length ? null : <div className="monthLadderPcNot">人气王还在堵车，马上就来</div>
-            }
-        </div>
-    }
-}
-
-class PersonTotalLadder extends React.Component {
-    constructor(props) {
-        super(props);
-        this.PRE_PAGE = 15;
-        this.state = {
-            totalData: {
-                topList: []
-            },
-            page: 1,
-            totalPage: 2,
-            tab: '上一页',
-            isClick: true,
-            cursor: 0,
-        }
-    }
-
-    getServerTimestamp(callback) {
-        var ts = $getDebugParams().timestamp;
-        if (ts) {
-            this.setState({currentTime: ts});
-            callback(ts)
-        } else {
-            $.get(API_PATH + "api/userState/v1/timestamp.json", function (data) {
-                this.setState({currentTime: data.data.timestamp});
-                callback(data.data.timestamp)
-            }.bind(this), 'json')
-        }
-    }
-
-    componentDidMount() {
-        var febStart = new Date("2017/5/11").getTime();
-        var marStart = new Date("2017/6/1").getTime();
-        var startDate = '2017-1-6';
-        var endDate = '2017-2-2 23:59:59';
-        this.getServerTimestamp(function (timestamp) {
-            if (timestamp < febStart) {
-                startDate = '2017-1-6';
-                endDate = '2017-2-2 23:59:59';
-            } else if (timestamp < marStart) {
-                startDate = '2017-2-3';
-                endDate = '2017-3-2 23:59:59';
-            }
-            this.ajaxPullNewInvest(startDate, endDate)
-        }.bind(this))
-    }
-
-    componentWillReceiveProps(nextProps) {
-        this.ajaxPullNewInvest(nextProps.startDate, nextProps.endDate);
-    }
-
-    ajaxPullNewInvest(startDate, endDate) {
-        $.ajax({
-            url: API_PATH + 'api/activityPullNew/v2/PullNewTopAndYearInvest.json',
-            data: {
-                dataCount: 20,
-                totalBaseAmt: 1000,
-                startDate: startDate,
-                endDate: endDate,
-                startTotalCount: 50,
-                startTotalInvest: 500000
-            },
-            type: "get",
-            dataType: 'json',
-            success: function (data) {
-                this.showAndSetData(data);
-            }.bind(this)
-        });
-    }
-
-    showAndSetData(data) {
-        var sData = data.data || {};
-        var len = sData.topList.length;
-        if (len <= this.PRE_PAGE) {
-            this.setState({totalPage: 1, isClick: false});
-        } else if (len > this.PRE_PAGE && sData.length <= this.PRE_PAGE * 2) {
-            this.setState({totalPage: 2, isClick: true})
-        }
-        this.setState({totalData: sData})
-    }
-
-    switchPageHandler(type) {
-        this.setState({tab: type});
-        let {page,totalPage}=this.state;
-        let cursor, min, new_page, len = this.state.totalData.topList.length;
-        if (type == '上一页') {
-            if (len % this.PRE_PAGE) {
-                min = parseInt(len / this.PRE_PAGE) * this.PRE_PAGE
-            } else {
-                min = len - this.PRE_PAGE
-            }
-            cursor = this.state.cursor > 0 ? Math.min(min, this.state.cursor - this.PRE_PAGE) : 0;
-            this.setState({cursor: cursor});
-            if (page > 1) {
-                new_page = page - 1;
-                this.setState({page: new_page});
-                if (page > 2) {
-                    this.setState({tab: ''})
-                }
-            }
-        } else {
-            if (len % this.PRE_PAGE) {
-                min = parseInt(len / this.PRE_PAGE) * this.PRE_PAGE
-            } else {
-                min = len - this.PRE_PAGE
-            }
-            cursor = Math.min(min, this.state.cursor + this.PRE_PAGE);
-            this.setState({cursor: cursor});
-            if (page < totalPage) {
-                new_page = page + 1;
-                this.setState({page: new_page});
-                if (page < totalPage - 1) {
-                    this.setState({tab: ''})
-                }
-            }
-        }
-    }
-
-    fixedPriceFun(i) {
-        var febStart = new Date("2017/2/3").getTime();
-        var marStart = new Date("2017/3/3").getTime();
-        let monthPrice = 0;
-        var money = 0;
-        let totalData = this.state.totalData;
-        if (totalData.topList[i].totalall < 50 || totalData.topList[i].total < 500000) {
-            return '暂无奖金'
-        } else {
-            if (this.state.currentTime < febStart || this.props.startDate == '2017-1-6') {
-                monthPrice = 120000;
-            } else if (this.state.currentTime < marStart || this.props.startDate == '2017-2-3') {
-                monthPrice = 150000;
-            } else {
-                monthPrice = 180000;
-            }
-            money = ((totalData.topList[i].total) / (totalData.totalYearInvest)) * monthPrice;
-        }
-        return money.toFixed(2);
-    }
-
-    get_current_page() {
-        return this.state.totalData.topList.slice(this.state.cursor, this.state.cursor + this.PRE_PAGE);
-    }
-
-    isImgFun(index) {
-        return ['images/no1.png', 'images/no2.png', 'images/no3.png'][index]
-    }
-
-    fixedPrice(total) {
-        return total.toFixed(2)
-    }
-
-    render() {
-        let pageImg = (item, index) => {
-            return <div key={index}
-                        className={this.state.isClick?(this.state.tab == item ? 'selectedPage':null):'selectedPage'}
-                        onClick={this.state.isClick?()=>{this.switchPageHandler(item)}:null}>{item}</div>
-        };
-        let page = (
-            <div className="page">
-                {
-                    ['上一页', '下一页'].map(pageImg)
-                }
-            </div>
-        );
-        let bodyImg = (item, index) => {
-            index += this.state.cursor;
-            return <tr key={index}>
-                <td>
-                    {this.isImgFun(index) ? <img className="tdImg" src={this.isImgFun(index)}/> :
-                        <span className="twoSpan">{index + 1}</span>}
-                    {<span className="oneSpan">{item.loginName}</span>}
-                </td>
-                <td>
-                    {this.fixedPrice(item.total)}
-                </td>
-                <td className={this.fixedPriceFun(index) == '暂无奖金'?null:"bodyPrice"}>{this.fixedPriceFun(index)}</td>
-            </tr>
-        };
-        let tBody = (
-            <tbody>
-            {
-                this.get_current_page().map(bodyImg)
-            }
-            </tbody>
-        );
-        return <div className="personMonthLadder personTotalLadder">
-            <div className="personTitle">个人榜</div>
-            <div className="personTable">
-                <table>
-                    <thead>
-                    <tr>
-                        <td>用户名</td>
-                        <td>个人累投金额（元）</td>
-                        <td>奖金（元）</td>
-                    </tr>
-                    </thead>
-                    {
-                        this.state.totalData.topList.length ? tBody : null
-                    }
-                </table>
-            </div>
-            {
-                this.state.totalData.topList.length ? page : null
-            }
-            {
-                this.state.totalData.topList.length ? null : <div className="monthLadderPcNot">人气王还在堵车，马上就来</div>
-            }
         </div>
     }
 }

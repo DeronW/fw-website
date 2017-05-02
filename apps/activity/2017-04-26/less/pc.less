@@ -1,26 +1,56 @@
 @import "variables.less";
-.drawPC{
+
+.drawPC {
   width: 100%;
   height: 100%;
   background: @colorBg;
-  .drawBanner{
+  .drawBanner {
     height: 360px;
   }
-  .drawBox{
+  .drawBox {
     width: 1140px;
-    height: 1000px;
+    height: 3600px;
     margin: auto;
     background: @colorBg;
     position: relative;
     padding-top: 1px;
-    .monthStateTab{
+    color: @colorWhite;
+    .drawChance{
+      width: 886px;
+      height: 40px;
+      border-radius: 40px;
+      background: @colorDarkBlue;
+      margin: 0 auto 20px;
+      .noLoginChance{
+        padding: 0 40px;
+        text-align: center;
+        line-height: 40px;
+        a{
+          color: @colorYellow;
+        }
+      }
+
+    }
+    .drawMachine{
+      width: 1140px;
+      height: 600px;
+      margin: auto;
+      .machine{
+        float: left;
+      }
+      .winningList{
+        float: right;
+      }
+    }
+
+    .monthStateTab {
       width: 940px;
       height: 44px;
       margin: auto;
       background: url("../images/arrowBg.png") no-repeat;
       display: table;
       margin-top: 30px;
-      .monthTab{
+      .monthTab {
         width: 237px;
         height: 96px;
         margin-left: 115px;
@@ -29,41 +59,40 @@
         float: left;
         background: url("../images/notStarting.png") no-repeat;
         display: table;
-        color: @colorWhite;
         cursor: default;
-        .tabLeft{
+        .tabLeft {
           float: left;
           width: 34px;
           font-size: @fontSize18;
           margin: 10px 0 10px 24px;
         }
-        .tabRight{
+        .tabRight {
           float: left;
           width: 120px;
           text-align: center;
           margin: 14px 0 0 16px;
-          .month{
+          .month {
             font-size: @fontSize28;
           }
-          .section{
+          .section {
             font-size: @fontSize18;
           }
         }
       }
-      .going{
+      .going {
         width: 263px;
         height: 104px;
         margin-right: 80px;
         background: url("../images/going.png") no-repeat;
         cursor: pointer;
-        .tabLeft{
+        .tabLeft {
           margin: 10px 0 10px 30px;
         }
         .tabRight {
           margin: 14px 0 0 10px;
         }
       }
-      .end{
+      .end {
         width: 263px;
         height: 104px;
         margin-right: 80px;
@@ -71,28 +100,188 @@
         cursor: pointer;
       }
     }
-    .remindText{
+    .remindText {
       width: 880px;
       height: 55px;
-      margin: 50px auto 30px;
+      margin: 50px auto 50px;
       border-radius: 70px;
       background: @colorDarkBlue;
       font-size: @fontSize14;
       padding-top: 15px;
       text-align: center;
-      .loginRemain{
+      .loginRemain {
         margin: 0 100px;
-        span{
+        span {
           color: @colorYellow;
         }
       }
-      .noLoginRemain{
+      .noLoginRemain {
         margin: 10px 100px;
       }
     }
-    .drawMonthLadder{
+    .drawMonthLadder {
       width: 100%;
       display: table;
+      .person {
+        float: left;
+      }
+      .team {
+        float: right;
+      }
+    }
+    .personMonthLadder {
+      width: 532px;
+      height: 620px;
+      background: url("../images/personMonth1.png") no-repeat;
+      background-size: 100% 100%;
+      position: relative;
+      padding-top: 1px;
+      .personTitle {
+        width: 280px;
+        height: 42px;
+        background: url("../images/personMonthUp.png") no-repeat;
+        margin: auto;
+        margin-top: -24px;
+        text-align: center;
+        font-size: @fontSize26;
+        padding-top: 16px;
+      }
+      .teamTitle {
+        position: relative;
+        width: 344px;
+        height: 52px;
+        background: url("../images/teamMonthUp.png") no-repeat;
+        margin: auto;
+        margin-top: -34px;
+        text-align: center;
+        font-size: @fontSize26;
+        padding-top: 16px;
+      }
+      .personTable {
+        width: 446px;
+        height: 412px;
+        margin: 80px auto 70px;
+        position: relative;
+        table {
+          width: 100%;
+        }
+        td {
+          width: 33.33%;
+          text-align: center;
+          color: @colorBlue;
+        }
+        thead {
+          td {
+            height: 49px;
+          }
+        }
+        tbody {
+          td {
+            height: 32px;
+          }
+          .tdImg {
+            display: inline-block;
+            margin-top: 2px;
+            vertical-align: middle;
+          }
+          .oneSpan {
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: 10px;
+            width: 50px;
+            text-align: center;
+          }
+          .twoSpan {
+            display: inline-block;
+            margin: auto;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: @colorPink;
+            color: @colorDarkRed;
+            text-align: center;
+            line-height: 20px;
+          }
+          .bodyPrice {
+            color: @colorF4;
+          }
+        }
+      }
+      .page {
+        width: 340px;
+        position: absolute;
+        bottom: 30px;
+        left: 100px;
+        div {
+          float: left;
+          width: 102px;
+          height: 34px;
+          text-align: center;
+          line-height: 34px;
+          margin-left: 40px;
+          cursor: pointer;
+          border-radius: 34px;
+          font-size: @fontSize16;
+        }
+        .selectedPage {
+          background: @colorPageBg;
+          color: @colorPage;
+        }
+      }
+      .monthLadderPcNot {
+        width: 446px;
+        height: 260px;
+        position: absolute;
+        top: 180px;
+        left: 30px;
+        text-align: center;
+        line-height: 260px;
+        font-size: @fontSize24;
+        color: @color6;
+      }
+    }
+
+    .drawTips {
+      width: 1068px;
+      border-radius: 8px;
+      margin: 20px auto 86px;
+      background: @colorDarkBlue;
+      padding: 32px 36px;
+      .tips {
+        height: 30px;
+        font-size: @fontSize18;
+        margin-bottom: 20px;
+      }
+      p{
+        font-size: @fontSize14;
+        line-height: 22px;
+      }
+    }
+    .drawTitle{
+      width: 622px;
+      height: 112px;
+      background: url("../images/drawTitle.png") no-repeat;
+      margin:0 auto 40px;
+      line-height: 62px;
+      text-align: center;
+      font-size: @fontSize30;
+
+    }
+    .drawInstructor{
+      width: 794px;
+      padding: 12px 46px;
+      border-radius: 72px;
+      margin:0 auto 20px;
+      background: @colorDarkBlue;
+      font-size: @fontSize14;
+      em{
+        color: @colorYellow;
+      }
+    }
+    .drawTotalLadder{
+      width: 1140px;
+      height: 760px;
+      margin: 80px auto;
       .person{
         float: left;
       }
@@ -100,163 +289,148 @@
         float: right;
       }
     }
-  }
-}
-.personMonthLadder{
-  width: 532px;
-  height: 620px;
-  background: url("../images/personMonth1.png") no-repeat;
-  background-size: 100% 100%;
-  position: relative;
-  padding-top: 1px;
-  .personTitle{
-    width: 280px;
-    height: 42px;
-    background: url("../images/personMonthUp.png") no-repeat;
-    margin: auto;
-    margin-top: -24px;
-    text-align: center;
-    font-size: @fontSize26;
-    color: @colorWhite;
-    padding-top: 16px;
-  }
-  .teamTitle{
-    position: relative;
-    width: 344px;
-    height: 52px;
-    background: url("../images/teamMonthUp.png") no-repeat;
-    margin: auto;
-    margin-top: -34px;
-    text-align: center;
-    font-size: @fontSize26;
-    color: @colorWhite;
-    padding-top: 16px;
-  }
-  .personTable{
-    width: 446px;
-    height: 412px;
-    margin: 80px auto 70px;
-    position: relative;
-    table{
-      width: 100%;
-    }
-    td{
-      width: 33.33%;
-      text-align: center;
-      color: @colorBlue;
-    }
-    thead{
-      td{
-        height: 49px;
-      }
-    }
-    tbody{
-      td{
-        height: 32px;
-      }
-      .tdImg{
-        display: inline-block;
-        margin-top: 2px;
-        vertical-align: middle;
-      }
-      .oneSpan{
-        display: inline-block;
-        vertical-align: middle;
-        margin-left: 10px;
-        width: 50px;
-        text-align: center;
-      }
-      .twoSpan{
-        display: inline-block;
+    .personTotalLadder {
+      width: 532px;
+      height: 826px;
+      background: url("../images/personTotal1.png") no-repeat;
+      position: relative;
+      .personTotalTitle {
+        width: 280px;
+        height: 33px;
+        background: url("../images/personTotalUp.png") no-repeat;
         margin: auto;
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-        background: @colorPink;
-        color: @colorDarkRed;
+        margin-top: -24px;
         text-align: center;
-        line-height: 20px;
+        font-size: @fontSize26;
+        padding-top: 16px;
       }
-      .bodyPrice{
-        color: @colorF4;
+      .teamTotalTitle {
+        position: relative;
+        width: 344px;
+        height: 46px;
+        background: url("../images/teamTotalUp.png") no-repeat;
+        margin: auto;
+        margin-top: -34px;
+        text-align: center;
+        font-size: @fontSize26;
+        padding-top: 16px;
+      }
+      .personTable {
+        width: 550px;
+        height: 598px;
+        margin: 94px auto 70px;
+        table {
+          width: 90%;
+          margin-left: 5%;
+        }
+        td {
+          width: 30%;
+        }
+        thead {
+          td {
+            height: 48px;
+          }
+        }
+        tbody {
+          td {
+            height: 32px;
+          }
+        }
+      }
+      .page {
+        width: 440px;
+        position: absolute;
+        bottom: 50px;
+        left: 60px;
+        div {
+          line-height: 34px;
+          margin-left: 60px;
+          font-size: @fontSize16;
+        }
+        .selectedPage {
+          background: @colorPageBgTotal;
+          color: @colorPageTotal;
+        }
       }
     }
   }
-  .page{
-    width: 340px;
-    position: absolute;
-    bottom: 30px;
-    left: 100px;
-    div{
-      float: left;
-      width: 102px;
-      height: 34px;
-      text-align: center;
-      line-height: 34px;
-      margin-left: 40px;
-      color: #fff;
-      cursor: pointer;
-      border-radius: 34px;
+  .drawExplain{
+    width: 100%;
+    height: 480px;
+    background: @colorDarkBlue;
+    color: @colorWhite;
+    font-size: @fontSize14;
+    .explainContent{
+      width: 1140px;
+      padding: 32px 0;
+      margin: auto;
+      .explainTitle{
+        font-size: @fontSize34;
+        img{
+          vertical-align: middle;
+        }
+        em{
+          vertical-align: middle;
+          margin-left: 10px;
+        }
+      }
+    }
+  }
+  .pcFooterBar{
+    width: 100%;
+    height: 98px;
+    background: @colorBar;
+    position: fixed;
+    bottom: 0;
+    z-index: 6;
+    .footerBarContent{
+      width: 1140px;
+      margin: auto;
+      position: relative;
+      img{
+        top: -60px;
+        left: 0;
+        position: absolute;
+        z-index: 112;
+        width: 130px;
+        height: 150px;
+      }
+    }
+    .barText{
+      position: absolute;
+      left: 200px;
       font-size: @fontSize16;
+      color: @colorWhite;
+      height: 98px;
+      line-height: 98px;
     }
-    .selectedPage{
-      background: @colorPageBg;
-      color: @colorPage;
+    a{
+      width: 156px;
+      height: 33px;
+      background: url("../images/btn.png") no-repeat;
+      text-align: center;
+      line-height: 30px;
+      color: @colorWhite;
+      font-size: @fontSize14;
+      position: absolute;
     }
-  }
-  .monthLadderPcNot{
-    width: 446px;
-    height: 260px;
-    position: absolute;
-    top: 180px;
-    left: 30px;
-    text-align: center;
-    line-height: 260px;
-    font-size: @fontSize24;
-    color: @color6;
+    .moreAward{
+      left: 550px;
+      top: 32px;
+    }
+    .howAward{
+      left: 750px;
+      top: 32px;
+    }
+    em{
+      cursor: pointer;
+      position: absolute;
+      top: 10px;
+      right: 0;
+      width: 26px;
+      height: 26px;
+      background: url("../images/close.png") no-repeat;
+    }
   }
 }
 
-.personTotalLadder{
-  width: 532px;
-  height: 826px;
-  background: url("../images/personTotal.png") no-repeat;
-  position: relative;
-  .personTable{
-    width: 550px;
-    height: 598px;
-    margin:94px auto 70px;
-    table{
-      width: 90%;
-      margin-left: 5%;
-    }
-    td{
-      width: 30%;
-    }
-    thead{
-      td{
-        height: 48px;
-      }
-    }
-    tbody{
-      td{
-        height: 32px;
-      }
-    }
-  }
-  .page{
-    width: 440px;
-    position: absolute;
-    bottom: 30px;
-    left: 60px;
-    div{
-      line-height: 34px;
-      margin-left: 60px;
-      font-size: @fontSize16;
-    }
-    .selectedPage{
-      background: @colorPageBgTotal;
-      color: @colorPageTotal;
-    }
-  }
-}

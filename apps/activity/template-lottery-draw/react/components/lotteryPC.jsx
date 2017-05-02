@@ -1,6 +1,7 @@
-const LotteryPC = React.createClass({
-    getInitialState() {
-        return {
+class LotteryPC extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {
             prize_list: [{
                 img: 'http://placehold.it/138?text=1',
                 name: 'name',
@@ -22,23 +23,16 @@ const LotteryPC = React.createClass({
                 name: 'name',
                 id: 5
             }],
-            result: null
         }
-    },
-    componentDidMount() {
-        //setTimeout(() => {
-        //    this.setState({ result: 4 })
-        //}, 4000)
-    },
+    }
     render() {
         return <div>
             <div className="machine">
                 <SlotMachinePC prize_list={this.state.prize_list} result={this.state.result}/>
             </div>
-            <div className="winningList">
-                <WinningListPC />
-            </div>
         </div>
 
     }
-});
+}
+
+

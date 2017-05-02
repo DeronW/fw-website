@@ -1,1 +1,73 @@
 @import "variables.less";
+.drawMobile{
+  width: 100%;
+  height: 2000px;
+  background: @colorBg;
+  padding-top: 1px;
+  color: @colorWhite;
+  .drawTitleMobile{
+    width: 664px;
+    height: 118px;
+    background: url("../images/drawTitleMobile.png") no-repeat;
+    margin: 20px auto;
+    font-size: @fontSize32;
+    text-align: center;
+    line-height: 60px;
+  }
+  .monthStateTab {
+    width: 100%;
+    height: 44px;
+    margin: auto;
+    display: table;
+    margin-top: 30px;
+    .monthTab {
+      width: 237px;
+      height: 96px;
+      margin-left: 115px;
+      margin-right: 110px;
+      margin-top: -30px;
+      float: left;
+      background: url("../images/notStarting.png") no-repeat;
+      display: table;
+      cursor: default;
+      .tabLeft {
+        float: left;
+        width: 34px;
+        font-size: @fontSize18;
+        margin: 10px 0 10px 24px;
+      }
+      .tabRight {
+        float: left;
+        width: 120px;
+        text-align: center;
+        margin: 14px 0 0 16px;
+        .month {
+          font-size: @fontSize28;
+        }
+        .section {
+          font-size: @fontSize18;
+        }
+      }
+    }
+    .going {
+      width: 263px;
+      height: 104px;
+      margin-right: 80px;
+      background: url("../images/going.png") no-repeat;
+      cursor: pointer;
+      .tabLeft {
+        margin: 10px 0 10px 30px;
+      }
+      .tabRight {
+        margin: 14px 0 0 10px;
+      }
+    }
+    .end {
+      width: 263px;
+      height: 104px;
+      margin-right: 80px;
+      background: url("../images/end.png") no-repeat;
+      cursor: pointer;
+    }
+  }
+}

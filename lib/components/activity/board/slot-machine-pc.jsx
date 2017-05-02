@@ -2,20 +2,15 @@ const RockProduct = React.createClass({
     getInitialState() {
         return {
             position: 0,
-            result: this.props.result
         }
     },
-    componentWillReceiveProps(nextProps) {
-        this.setState({result: nextProps.result}, this.lotteryDrawHandler)
-    },
-    closePopHandler() {
-        ReactDOM.unmountComponentAtNode(document.getElementById('pop'));
-    },
+
     tenClosePopHandler() {
         this.props.productList.pop();
         ReactDOM.unmountComponentAtNode(document.getElementById('pop'));
     },
     lotteryDrawHandler(speed, id) {
+        console.log(speed);
         var productList = this.props.productList;
         var s = 0, i = 0, count = 0;
         var timer = setInterval(() => {
@@ -47,7 +42,7 @@ const RockProduct = React.createClass({
                     if (this.state.position == distance) {
                         clearInterval(timer);
                         setTimeout(()=> {
-                            ReactDOM.render(<PopOnePrize closePopHandle={this.closePopHandler} popPrize="1888工豆"
+                            ReactDOM.render(<PopOnePrize closePopHandle={this.props.closePopHandler} popPrize="1888工豆"
                                                          popNumber="10" popBtn='继续抽奖'/>, document.getElementById('pop'));
                             //ReactDOM.render(<PopMessage closePopHandle={this.closePopHandler} popTitle="抱歉，抽奖异常！" popText="请稍后再试，如需咨询请联系客服400-0322-988 。" popBtn="朕知道了"/>,document.getElementById('pop'))
                             //ReactDOM.render(<PopOnePrize closePopHandle={this.closePopHandler} popPrize="1888工豆" popNumber="10" popBtn='继续抽奖'/>,document.getElementById('pop'))
@@ -117,17 +112,16 @@ const RockProduct = React.createClass({
     }
 });
 
+
+
 const SlotMachinePC = React.createClass({
     getInitialState() {
         return {
-            result: null,
             prize_list: this.props.prize_list
         }
     },
-
-
-    componentWillReceiveProps(nextProps) {
-        this.setState({result: nextProps.result}, this.rockLotteryDraw)
+    closePopHandler() {
+        ReactDOM.unmountComponentAtNode(document.getElementById('pop'));
     },
     rockLotteryDraw() {
         if (window.once_delay) return;
@@ -156,22 +150,33 @@ const SlotMachinePC = React.createClass({
             this.refs.rockProduct3.tenLotteryDrawHandler(30, prize_list);
         }, 600);
     },
+    showRule(){
+        ReactDOM.render(<PopMessage closePopHandle={this.closePopHandler} gotoLogin={this.props.gotoLogin} popMyPrize="抽奖规则" popRule={true} popBtn="朕知道了"/>, document.getElementById('pop'))
+    },
+    popLogin(){
+        ReactDOM.render(<PopMessage closePopHandle={this.closePopHandler} gotoLogin={this.props.gotoLogin} popMyPrize="立即登录" popNoTitle={"您还没有登录"} popBtn="立即登录"/>, document.getElementById('pop'))
+    },
     render() {
         let {prize_list} = this.state;
-        let {result} = this.state;
-
+        let {isLogin,gotoLogin} = this.props;
         return <div className="slotShow">
+            {
+                isLogin && <div className="chance">
+                    您有<em>19</em>次机会
+                </div>
+            }
+            <div className="rule" onClick={()=>this.showRule()}>抽奖规则></div>
             <div className="current">
-                <RockProduct productList={prize_list} ref="rockProduct" result={result}/>
+                <RockProduct productList={prize_list} ref="rockProduct" closePopHandler={this.closePopHandler} gotoLogin={gotoLogin}/>
             </div>
             <div className="current current1">
-                <RockProduct productList={prize_list} ref="rockProduct2" result={result}/>
+                <RockProduct productList={prize_list} ref="rockProduct2" closePopHandler={this.closePopHandler} gotoLogin={gotoLogin}/>
             </div>
             <div className="current current2">
-                <RockProduct productList={prize_list} ref="rockProduct3" result={result}/>
+                <RockProduct productList={prize_list} ref="rockProduct3" closePopHandler={this.closePopHandler} gotoLogin={gotoLogin}/>
             </div>
-            <div className="onceBtn" onClick={this.rockLotteryDraw}>抽奖一次</div>
-            <div className="tenBtn" onClick={this.rockTenLotteryDraw}>抽奖十次</div>
+            <div className="onceBtn" onClick={isLogin?()=>this.rockLotteryDraw():()=>this.popLogin()}>抽奖一次</div>
+            <div className="tenBtn" onClick={isLogin?()=>this.rockTenLotteryDraw():()=>this.popLogin()}>抽奖十次</div>
             <div className="onceText">消耗1次抽奖机会</div>
             <div className="tenText">消耗10次抽奖机会</div>
         </div>
