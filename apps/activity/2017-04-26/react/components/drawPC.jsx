@@ -35,10 +35,11 @@ class DrawPC extends React.Component {
             }]
         };
     }
-
+    closePopHandler(){
+        ReactDOM.unmountComponentAtNode(document.getElementById('pop'));
+    }
     componentDidMount() {
         var that = this;
-
         $UserReady(function (isLogin, user) {
             that.setState({isLogin: isLogin});
             var remain = "";
@@ -75,6 +76,9 @@ class DrawPC extends React.Component {
         }
     }
 
+    investFriends(){
+        ReactDOM.render(<InvestFriendsPC gotoLogin={this.gotoLogin} closePopHandler={this.closePopHandler}/>,document.getElementById("pop"))
+    }
     isImgFun(index) {
         return ['images/no1.png', 'images/no2.png', 'images/no3.png'][index]
     }
@@ -133,7 +137,7 @@ class DrawPC extends React.Component {
                         <SlotMachinePC isLogin={isLogin} gotoLogin={this.gotoLogin} prize_list={this.state.prize_list} result={this.state.result}/>
                     </div>
                     <div className="winningList">
-                        <WinningListPC/>
+                        <WinningListPC />
                     </div>
                 </div>
                 {
@@ -217,7 +221,7 @@ class DrawPC extends React.Component {
 
                     <div className="barText">朋友多，这些奖励还觉得不够？</div>
                     <a className="moreAward" onClick={()=> {$toggleYaoQingYouLi()}}>更多邀友奖励</a>
-                    <a className="howAward">如何邀友</a>
+                    <a className="howAward" onClick={()=>this.investFriends()}>如何邀友</a>
                     <em className="barClose" onClick={()=>this.closeHandler()}></em>
                 </div>
             </div>

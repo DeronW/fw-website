@@ -11,7 +11,8 @@ class DrawMobile extends React.Component {
             remain: '',
             close: false,
             chance: '',
-            tab:'个人榜'
+            monthTipsClose: true,
+            totalTipsClose:true,
         }
     }
 
@@ -32,12 +33,31 @@ class DrawMobile extends React.Component {
         }
     }
 
+    //切换月份tab
     switchTabHandler(stage, month) {
         if (month == "五月") {
             this.setState({selectedMay: true, selectedJune: false})
         } else {
             if (stage != "未开始")  this.setState({selectedMay: false, selectedJune: true})
         }
+    }
+
+    closeHandler() {
+        this.setState({close: !this.state.close})
+    }
+
+    investFriends(){
+        ReactDOM.render(<InvestFriendsMobile gotoLogin={this.gotoLogin} closePopHandler={this.closePopHandler}/>,document.getElementById("pop"))
+    }
+
+    closePopHandler(){
+        ReactDOM.unmountComponentAtNode(document.getElementById('pop'));
+    }
+    toggleMonthTips() {
+        this.setState({monthTipsClose: !this.state.monthTipsClose})
+    }
+    toggleTotalTips() {
+        this.setState({totalTipsClose: !this.state.totalTipsClose})
     }
 
     isImgFun(index) {
@@ -48,18 +68,13 @@ class DrawMobile extends React.Component {
         return total.toFixed(2)
     }
 
-    closeHandler() {
-        this.setState({close: !this.state.close})
-    }
-
     gotoLogin() {
-        console.log("登录");
         var loginUrl = location.protocol + '//www.9888.cn/api/activityPullNew/pullnewParty.do?id=19';
         $FW.gotoSpecialPage("登录", loginUrl);
     }
 
     render() {
-        let {stageMay,stageJune,selectedMay,selectedJune,remain,close,chance,isLogin,tab} = this.state;
+        let {stageMay,stageJune,selectedMay,selectedJune,remain,close,chance,isLogin,ladderTab,totalLadderTab,monthTipsClose,totalTipsClose} = this.state;
         let no = {
             width: "237px",
             height: "96px",
@@ -105,10 +120,19 @@ class DrawMobile extends React.Component {
                 ：6(团队)
             </div>
         );
-        let ladderTab = (t,i)=>{
-            return <div key={i} className={tab == t ?"ladderTab selected":'ladderTab'}>
-                {t}
-            </div>
+
+        let monthTipsBriefStyle = {
+            display: monthTipsClose ? "block" : "none"
+        };
+        let monthTipsFullStyle = {
+            display: monthTipsClose ? "none" : "block"
+        };
+
+        let totalTipsBriefStyle = {
+            display: totalTipsClose ? "block" : "none"
+        };
+        let totalTipsFullStyle = {
+            display: totalTipsClose ? "none" : "block"
         };
         return <div className="drawMobile">
             <div className="drawTitleMobile">投资冲月榜，个人团队大作战</div>
@@ -118,11 +142,62 @@ class DrawMobile extends React.Component {
             </div>
             <div className="drawTips">该月内，平台达到相应任务目标，且个人及团队排行前20名 的工友，最高可获分：</div>
             {isLogin ? tipsLogin : tipsNoLogin}
+
             <div className="switchMonthLadder">
-                {
-                    ['个人榜','团队榜'].map(ladderTab)
-                }
+                <PersonTeamMonthLadder isImgFun={this.isImgFun} fixedPrice={this.fixedPrice} ladderTab={ladderTab}/>
             </div>
+
+            <div className="drawTips">
+                <div className="tips">温馨提示:</div>
+                <div className="briefText" style={monthTipsBriefStyle}>
+                    1.以上数据实时更新，最终发放奖金请以每月结束后数据为准，排名顺序：获奖工友的有效好友累投年化额>获奖工友的有效邀友数>未获奖工友的有...
+                    <div className="showBtn" onClick={()=>this.toggleMonthTips()}>展开全部<img src="images/arrow.png"/>
+                    </div>
+                </div>
+                <div className="fullText" style={monthTipsFullStyle}>
+                    <div className="briefText">
+                        1.以上数据实时更新，最终发放奖金请以每月结束后数据为准，排名顺序：获奖工友的有效好友累投年化额>获奖工友的有效邀友数>未获奖工友的有效好友累投年化额>未获奖工友的有效邀友数；
+                    </div>
+                    <div className="briefText">2.奖金包奖励以工豆形式发放；</div>
+                    <div className="briefText">3.月度奖金分配方式：个人和团队奖金分配比例=4(个人)：6(团队)；</div>
+                    <div className="briefText">4.奖金包占比分配公式：个人(或团队)累投总额÷前20名个人(或团队)累投总额。仅计算满足获奖资格的用户；</div>
+                    <div className="briefText">5.活动期间，单月内平台达到相应任务目标，且个人及团队排行前20名的工友，即可赢得最高百万奖金包！累计金额越多获得的奖金就越多。
+                        <div className="showBtn" onClick={()=>this.toggleMonthTips()}>收起<img src="images/arrow.png"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="drawTitleMobile">终级排行榜，百万壕礼奉上</div>
+
+            <div className="switchTotalLadder">
+                <PersonTeamTotalLadder isImgFun={this.isImgFun} fixedPrice={this.fixedPrice}
+                                       totalLadderTab={totalLadderTab}/>
+            </div>
+
+            <div className="drawTips">
+                <div className="tips">温馨提示:</div>
+                <div className="briefText" style={totalTipsBriefStyle}>
+                    1.以上数据实时更新，最终发放奖金请以每月结束后数据为准； 奖金包奖励以工豆形式发放；
+                </div>
+                <div className="briefText" style={totalTipsBriefStyle}>
+                    2.奖金包奖励以工豆形式发放；
+                    <div className="showBtn" onClick={()=>this.toggleTotalTips()}>展开全部<img src="images/arrow.png"/>
+                    </div>
+                </div>
+                <div className="fullText" style={totalTipsFullStyle}>
+                    <div className="briefText">
+                        1.以上数据实时更新，最终发放奖金请以每月结束后数据为准；
+                    </div>
+                    <div className="briefText">2.奖金包奖励以工豆形式发放；</div>
+                    <div className="briefText">3.月度奖金分配方式：个人和团队奖金分配比例=4(个人)：6(团队)；</div>
+                    <div className="briefText">4.奖金包占比分配公式：个人(或团队)累投总额÷前20名个人(或团队)累投总额。仅计算满足获奖资格的用户；</div>
+                    <div className="briefText">5.活动期间，单月内平台达到相应任务目标，且个人及团队排行前20名的工友，即可累计赢得不同金额的奖金包！累计金额越多获得的奖金就越多。
+                        <div className="showBtn" onClick={()=>this.toggleTotalTips()}>收起<img src="images/arrow.png"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div onClick={()=>this.investFriends()}>如何邀友</div>
         </div>
     }
 }
