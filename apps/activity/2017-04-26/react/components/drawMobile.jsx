@@ -177,7 +177,7 @@ class DrawMobile extends React.Component {
             <div className="drawTips">
                 <div className="tips">温馨提示:</div>
                 <div className="briefText" style={totalTipsBriefStyle}>
-                    1.以上数据实时更新，最终发放奖金请以每月结束后数据为准； 奖金包奖励以工豆形式发放；
+                    1.以上数据实时更新，最终发放奖金请以每月结束后数据为准；
                 </div>
                 <div className="briefText" style={totalTipsBriefStyle}>
                     2.奖金包奖励以工豆形式发放；
