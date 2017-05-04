@@ -59,12 +59,12 @@ const RockProduct = React.createClass({
             }
         }, 30)
     },
-    tenLotteryDrawHandler(speed, productList,remainTimes) {
+    tenLotteryDrawHandler(speed, productList,remainTimes,prize_list) {
         var s = 0;
         var count = 0;
         var timer = setInterval(() => {
             var position = this.state.position;
-            var distance = (productList.length - 1) * 182;
+            var distance = (prize_list.length - 1) * 182;
             if (position >= distance) {
                 this.setState({
                     position: speed
@@ -81,7 +81,7 @@ const RockProduct = React.createClass({
                         clearInterval(timer);
                         setTimeout(()=> {
                             window.once_delay = false;
-                            ReactDOM.render(<PopTenPrice closePopHandle={this.props.closePopHandler }
+                            ReactDOM.render(<PopTenPrice closePopHandle={this.tenClosePopHandler }
                                                          productList={productList}
                                                          popNumber={remainTimes} popBtn='继续抽奖'/>, document.getElementById('pop'));
                         }, 1000);
@@ -137,12 +137,12 @@ const SlotMachinePC = React.createClass({
     },
     //请求一次抽奖
     ajaxOnePrize(){
-        this.ajaxCount();
         $.get(API_PATH+'api/activityPullInvest/v1/play.json',{
             configNo:1,
             drawCount:1
         }).then(data => {
-            var prize = data.data.resultAward.prize;
+            this.ajaxCount();
+            var prize = data.data.resultAward[0].prize;
             var prizeMark = data.data.resultAward.prizeMark;
             var remainTimes = data.data.remainTimes;
             if (window.once_delay) return;
@@ -160,23 +160,24 @@ const SlotMachinePC = React.createClass({
     ajaxTenPrize(){
         $.get(API_PATH+'api/activityPullInvest/v1/play.json',{
             configNo:1,
-            drawCount:1
+            drawCount:10
         }).then(data => {
             this.ajaxCount();
-            var prize_list = data.data.resultAward;
+            var resultAward = data.data.resultAward;
             var remainTimes = data.data.remainTimes;
+            let {prize_list} = this.props;
             if (window.once_delay) return;
             window.once_delay = true;
             prize_list&&prize_list.push({
                 img: 'http://placehold.it/138?text=大礼包',
                 name: '大礼包'
             });
-            this.refs.rockProduct.tenLotteryDrawHandler(30, prize_list,remainTimes);
+            this.refs.rockProduct.tenLotteryDrawHandler(30, resultAward,remainTimes,prize_list);
             setTimeout(() => {
-                this.refs.rockProduct2.tenLotteryDrawHandler(30, prize_list,remainTimes);
+                this.refs.rockProduct2.tenLotteryDrawHandler(30, resultAward,remainTimes,prize_list);
             }, 300);
             setTimeout(() => {
-                this.refs.rockProduct3.tenLotteryDrawHandler(30, prize_list,remainTimes);
+                this.refs.rockProduct3.tenLotteryDrawHandler(30, resultAward,remainTimes,prize_list);
             }, 600);
 
         })
@@ -206,8 +207,8 @@ const SlotMachinePC = React.createClass({
         ReactDOM.render(<PopMessage closePopHandle={this.closePopHandler} gotoLogin={this.props.gotoLogin} popTop="立即登录" popNoTitle={"您还没有登录"} popBtn="立即登录"/>, document.getElementById('pop'))
     },
     render() {
-        let {prize_list,count} = this.state;
-        let {isLogin,gotoLogin,chance} = this.props;
+        let {count} = this.state;
+        let {isLogin,gotoLogin,prize_list} = this.props;
         return <div className="slotShow">
             {
                 isLogin && <div className="chance">

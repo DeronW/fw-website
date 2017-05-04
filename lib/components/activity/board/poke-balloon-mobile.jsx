@@ -95,6 +95,7 @@ const PokeBalloonMobile = React.createClass({
         ReactDOM.unmountComponentAtNode(document.getElementById('pop'));
         this.setState({giftPath: '', isAnimation: true})
     },
+    //一次
     promiseOnceLotteryResult(){
         $.get(API_PATH+"api/activityPullInvest/v1/play.json?",{
             configNo:1,
@@ -102,10 +103,11 @@ const PokeBalloonMobile = React.createClass({
         }).then((data) => {
             this.ajaxCount();
             this.refs.productListAuto.rewardPoolHandler();
-            this.showMessagePop('恭喜中奖', '', data.data.list[0].goodsname)
+            this.showMessagePop('恭喜中奖', '', data.data.resultAward[0].prize)
         });
 
     },
+    //十次
     promiseMoreLotteryResult(){
         $.get(API_PATH+"api/activityPullInvest/v1/play.json?",{
             configNo:1,

@@ -52,6 +52,7 @@ const ProductListAuto = React.createClass({
     },
     rewardPoolHandler(){
         $.get(API_PATH + "api/activityPullInvest/v1/myPrizeRecordList.json").then(data => {
+            console.log(data);
             this.setState({singleProduct: data.data.pageData.result})
         })
     },
