@@ -190,7 +190,7 @@ const SlotMachinePC = React.createClass({
             this.ajaxOnePrize();
         }
     },
-    //点击十次抽奖时先判断抽奖次数是否大于1，大于十
+    //点击十次抽奖时先判断抽奖次数是否大于1，大于10
     rockTenLotteryDraw(){
         if(this.props.chance < 1){
             ReactDOM.render(<PopZero closePopHandle={this.closePopHandler}/>,document.getElementById('pop'))
