@@ -1,7 +1,6 @@
 class DrawPC extends React.Component {
     constructor(props) {
         super(props);
-        this.URL = 'https://passport.9888.cn/passport/login' + '?service=' + location.protocol + '//www.9888.cn/api/activityPullNew/pullnewParty.do?id=19'
         this.state = {
             isLogin: false,
             monthNotice: "",
@@ -11,7 +10,6 @@ class DrawPC extends React.Component {
             selectedJune: false,
             remain: '',
             close: false,
-            chance: '',
             prize_list: [{
                 img: 'http://placehold.it/138?text=1',
                 name: 'name',
@@ -35,22 +33,20 @@ class DrawPC extends React.Component {
             }]
         };
     }
-    closePopHandler(){
+
+    closePopHandler() {
         ReactDOM.unmountComponentAtNode(document.getElementById('pop'));
     }
+
     componentDidMount() {
         var that = this;
         $UserReady(function (isLogin, user) {
             that.setState({isLogin: isLogin});
             var remain = "";
-            var chance = false;
             if (isLogin) {
                 remain = "<div class='loginRemain'>该月内，个人累投金额<span>≥50万</span>元；或单月内团队累投金额<span>≥1000万</span>且团队人数<span>≥50</span>人，当前可分<span></span>18万</span>元奖金！ 月度奖金分配方式：<span>个人和团队奖金分配比例=4（个人）：6（团队）</span></div>"
-            } else {
-                remain = "<div class='noLoginRemain'>请登录后，查看您的投资获奖情况。</div>";
-                chance = "<div class='noLoginChance'>登录后可查抽奖机会，<a href='https://passport.9888.cn/passport/login?service=http://www.9888.cn/api/activityPullNew/pullnewParty.do?id=19'>立即登录</a></div>"
             }
-            that.setState({remain: remain, chance: chance})
+            that.setState({remain: remain})
         });
         this.judgeStageHandler();
     }
@@ -76,25 +72,30 @@ class DrawPC extends React.Component {
         }
     }
 
-    investFriends(){
-        ReactDOM.render(<InvestFriendsPC gotoLogin={this.gotoLogin} closePopHandler={this.closePopHandler}/>,document.getElementById("pop"))
+    investFriends() {
+        ReactDOM.render(<InvestFriendsPC gotoLogin={this.gotoLogin}
+                                         closePopHandler={this.closePopHandler}/>, document.getElementById("pop"))
     }
+
     isImgFun(index) {
         return ['images/no1.png', 'images/no2.png', 'images/no3.png'][index]
     }
+
     fixedPrice(total) {
         return total.toFixed(2)
     }
+
     closeHandler() {
         this.setState({close: !this.state.close})
     }
-    gotoLogin(){
-        console.log("登录");
+
+    gotoLogin() {
         var loginUrl = location.protocol + '//www.9888.cn/api/activityPullNew/pullnewParty.do?id=19';
         $FW.gotoSpecialPage("登录", loginUrl);
     }
+
     render() {
-        let {stageMay,stageJune,selectedMay,selectedJune,remain,close,chance,isLogin} = this.state;
+        let {stageMay,stageJune,selectedMay,selectedJune,remain,close,isLogin} = this.state;
         let no = {
             width: "237px",
             height: "96px",
@@ -125,30 +126,46 @@ class DrawPC extends React.Component {
                 </div>
             </div>
         };
+
         let closeStyle = {
             display: close ? "none" : "block"
         };
+        let noLoginRemain = (
+            <div className="remindText">
+                <div className='noLoginRemain'>请登录后，查看您的投资获奖情况。<a onClick={()=>this.gotoLogin()}>立即登录</a></div>
+            </div>
+        );
+        let noLoginChance = (
+            <div className="drawChance">
+                <div className='noLoginChance'>登录后可查抽奖机会，<a onClick={()=>this.gotoLogin()}>立即登录</a></div>
+            </div>
+        );
         return <div className="drawPC">
             <div className="drawBanner"></div>
             <div className="drawBox">
                 <div className="drawTitle">大奖抽抽抽，100%中奖</div>
                 <div className="drawMachine">
                     <div className="machine">
-                        <SlotMachinePC isLogin={isLogin} gotoLogin={this.gotoLogin} prize_list={this.state.prize_list} result={this.state.result}/>
+                        <SlotMachinePC isLogin={isLogin} gotoLogin={this.gotoLogin} prize_list={this.state.prize_list}
+                                       result={this.state.result} />
                     </div>
                     <div className="winningList">
                         <WinningListPC />
                     </div>
                 </div>
                 {
-                    chance && <div className="drawChance" dangerouslySetInnerHTML={{__html:chance}}></div>
+                    !isLogin && noLoginChance
                 }
                 <div className="drawTitle">投资冲月榜，个人团队大作战</div>
                 <div className="monthStateTab">
                     {monthMayTab(stageMay, "五月", "5.16 ~ 6.13")}
                     {monthJuneTab(stageJune, "六月", "6.14 ~ 7.12")}
                 </div>
-                <div className="remindText" dangerouslySetInnerHTML={{__html:remain}}></div>
+                {
+                    isLogin ?
+                        <div className="remindText" dangerouslySetInnerHTML={{__html:remain}}></div> : noLoginRemain
+                }
+
                 <div className="drawMonthLadder">
                     <div className="person">
                         {

@@ -1,11 +1,11 @@
 const PopMessage = React.createClass({
 
     render(){
-        let {closePopHandle,popMyPrize,popTitle,popText,popNoTitle,popRule,popBtn,gotoLogin} = this.props;
+        let {closePopHandle,popTop,popTitle,popText,popNoTitle,popRule,popBtn,gotoLogin} = this.props;
         return <div className="popMessage">
             <div className="popMessageContent">
                 <div className="closePop" onClick={closePopHandle}></div>
-                <div className="popMyPrize">{popMyPrize?popMyPrize:''}</div>
+                <div className="popMyPrize">{popTop?popTop:''}</div>
                 <div className="popTitle">{popTitle ? popTitle : ''}</div>
                 <div className="popText">{popText ? popText : ''}</div>
 

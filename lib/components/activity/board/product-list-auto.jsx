@@ -1,7 +1,43 @@
 const ProductListAuto = React.createClass({
     getInitialState(){
         return {
-            products: [],
+            products: [{
+                img: 'http://placehold.it/138?text=1',
+                name: 'name',
+                prizeMark: 1
+            }, {
+                img: 'http://placehold.it/138?text=2',
+                name: 'name',
+                prizeMark: 2
+            }, {
+                img: 'http://placehold.it/138?text=3',
+                name: 'name',
+                prizeMark: 3
+            }, {
+                img: 'http://placehold.it/138?text=4',
+                name: 'name',
+                prizeMark: 4
+            }, {
+                img: 'http://placehold.it/138?text=5',
+                name: 'name',
+                prizeMark: 5
+            }, {
+                img: 'http://placehold.it/138?text=2',
+                name: 'name',
+                prizeMark: 6
+            }, {
+                img: 'http://placehold.it/138?text=3',
+                name: 'name',
+                prizeMark: 7
+            }, {
+                img: 'http://placehold.it/138?text=4',
+                name: 'name',
+                prizeMark: 8
+            }, {
+                img: 'http://placehold.it/138?text=5',
+                name: 'name',
+                prizeMark: 9
+            }],
             singleProduct: []
         }
     },
@@ -10,32 +46,25 @@ const ProductListAuto = React.createClass({
         this.rewardPoolHandler();
     },
     resortHandler(){
-        $.get("./javascripts/getPersonDate.json", (data)=> {
-            this.setState({products: data.data.list})
-        }, "json")
+        //$.get(API_PATH + "api/activityPullInvest/v1/myPrizeRecordList.json").then(data => {
+        //    this.setState({products: data.data.pageData.result})
+        //})
     },
     rewardPoolHandler(){
-        $.get("./javascripts/once.json", (data)=> {
-            this.setState({singleProduct: data.data.list})
-        }, "json")
+        $.get(API_PATH + "api/activityPullInvest/v1/myPrizeRecordList.json").then(data => {
+            this.setState({singleProduct: data.data.pageData.result})
+        })
     },
-    //componentWillReceiveProps(nextProps){
-    //    if (nextProps.singleProduct) {
-    //        console.log(nextProps.singleProduct);
-    //        this.setState({singleProduct: nextProps.singleProduct})
-    //    }
-    //},
     render(){
         let {products,singleProduct} = this.state, sum = products.length;
         products && singleProduct.forEach((item, index)=> {
-            products.forEach((p,i)=>{
-                if (item.id === products[i].id) {
+            products.forEach((p, i)=> {
+                if (item.prizeMark === products[i].prizeMark) {
                     products[i].selected = true;
                     products[i].number = item.number;
                 }
             });
         });
-        //console.log(this.state.products);
         let group = (arr, size) => {
             var r = [];
             arr = arr || [];

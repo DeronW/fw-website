@@ -10,14 +10,23 @@ class DrawMobile extends React.Component {
             selectedJune: false,
             remain: '',
             close: false,
-            chance: '',
+            bonus: '',
             monthTipsClose: true,
-            totalTipsClose:true,
+            totalTipsClose: true,
+            show: false,
         }
     }
 
     componentDidMount() {
         this.judgeStageHandler();
+        this.rankingAndPrize();
+    }
+
+    rankingAndPrize() {
+        var bonus = '';
+        //ajax请求当前排名，当前可分奖金
+        bonus = "<div class='drawTips'>5.16-7.12，个人累投金额≥100万，团队累投金额≥1200万 且团队人数≥50人 排名5，当前可分 <em>50万</em> 奖金！</div>"
+        this.setState({bonus: bonus})
     }
 
     judgeStageHandler() {
@@ -46,16 +55,23 @@ class DrawMobile extends React.Component {
         this.setState({close: !this.state.close})
     }
 
-    investFriends(){
-        ReactDOM.render(<InvestFriendsMobile gotoLogin={this.gotoLogin} closePopHandler={this.closePopHandler}/>,document.getElementById("pop"))
+    showHandler() {
+        this.setState({show: !this.state.show})
     }
 
-    closePopHandler(){
+    investFriends() {
+        ReactDOM.render(<InvestFriendsMobile gotoLogin={this.gotoLogin}
+                                             closePopHandler={this.closePopHandler}/>, document.getElementById("pop"))
+    }
+
+    closePopHandler() {
         ReactDOM.unmountComponentAtNode(document.getElementById('pop'));
     }
+
     toggleMonthTips() {
         this.setState({monthTipsClose: !this.state.monthTipsClose})
     }
+
     toggleTotalTips() {
         this.setState({totalTipsClose: !this.state.totalTipsClose})
     }
@@ -74,7 +90,7 @@ class DrawMobile extends React.Component {
     }
 
     render() {
-        let {stageMay,stageJune,selectedMay,selectedJune,remain,close,chance,isLogin,ladderTab,totalLadderTab,monthTipsClose,totalTipsClose} = this.state;
+        let {stageMay,stageJune,selectedMay,selectedJune,remain,close,bonus,show,isLogin,ladderTab,totalLadderTab,monthTipsClose,totalTipsClose} = this.state;
         let no = {
             width: "237px",
             height: "96px",
@@ -120,7 +136,6 @@ class DrawMobile extends React.Component {
                 ：6(团队)
             </div>
         );
-
         let monthTipsBriefStyle = {
             display: monthTipsClose ? "block" : "none"
         };
@@ -134,7 +149,14 @@ class DrawMobile extends React.Component {
         let totalTipsFullStyle = {
             display: totalTipsClose ? "none" : "block"
         };
+        let closeStyle = {
+            display: close ? "none" : "block"
+        };
+        let showStyle = {
+            display: show ? "block" : "none"
+        };
         return <div className="drawMobile">
+            <div className="activityExplain" onClick={()=>this.showHandler()}>活动说明</div>
             <div className="drawTitleMobile">投资冲月榜，个人团队大作战</div>
             <div className="monthStateTab">
                 {monthMayTab(stageMay, "五月", "5.16 ~ 6.13")}
@@ -168,6 +190,12 @@ class DrawMobile extends React.Component {
                 </div>
             </div>
             <div className="drawTitleMobile">终级排行榜，百万壕礼奉上</div>
+            <div className="drawTips">
+                5.16-7.12，平台累投金额及累投年化金额达标。个人及团
+                队排行前30的工友，将按照其累计投资金额占比进行最高
+                <em>100万</em>元奖金分配。累计金额越多获得的奖金就越多。
+            </div>
+            {isLogin ? <div dangerouslySetInnerHTML={{__html:bonus}}></div>:tipsNoLogin}
 
             <div className="switchTotalLadder">
                 <PersonTeamTotalLadder isImgFun={this.isImgFun} fixedPrice={this.fixedPrice}
@@ -197,7 +225,38 @@ class DrawMobile extends React.Component {
                     </div>
                 </div>
             </div>
-            <div onClick={()=>this.investFriends()}>如何邀友</div>
+            <div className="mobileExplainBg" style={showStyle}>
+                <div className="mobileExplain">
+                    <div className="close" onClick={()=>this.showHandler()}></div>
+                    <div className="explain">
+                        <p>1. 投资债权转让产品，不能参与本次活动；</p>
+
+                        <p>2. 月度奖金工豆奖励将于每月结束后7个工作日
+                            内，统一发放至邀请人的工场账户；</p>
+
+                        <p>3. 总排行奖金工豆奖励将于活动结束后7个工作日
+                            内，统一发放至邀请人的工场账户；</p>
+
+                        <p>4. 实物奖统一于活动结束后7个工作日内统一发送
+                            所获奖品兑换券至用户账号内，实物奖图片仅供
+                            参考；</p>
+
+                        <p>5. 活动最终解释权归金融工场所有，活动详情致
+                            电客服热线咨询：400-0322-988。</p>
+                    </div>
+                </div>
+            </div>
+            <div className="appleMobile">＊以上活动由金融工场主办 与Apple Inc. 无关</div>
+            <div className="mobileBar" style={closeStyle}>
+                <img className="mobileLogo" src="images/mobileLogo.png" alt=""/>
+
+                <div className="mobileBarCenter">
+                    <div className="barCenterTop">朋友多，这些奖励还觉得不够？</div>
+                    <div className="mobileBarAward" onClick={()=> {$toggleYaoQingYouLi()}}>更多邀友奖励</div>
+                    <div className="mobileBarFriend" onClick={()=>this.investFriends()}>如何邀友</div>
+                </div>
+                <img src="images/mobileClose.png" alt="" className="mobileClose" onClick={()=>this.closeHandler()}/>
+            </div>
         </div>
     }
 }

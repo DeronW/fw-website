@@ -4,7 +4,7 @@ const BalloonBoom = React.createClass({
             path: this.props.path,
             giftPath: '',
             prizeList: [],
-            outTime: false
+            outTime: false,
         }
     },
     componentDidMount(){
@@ -75,34 +75,46 @@ const BalloonBoom = React.createClass({
 const PokeBalloonMobile = React.createClass({
     getInitialState() {
         return {
-            count: 1,
+            count: 0,
             type: 'single',
             giftPath: '',
-            isAnimation: true
+            isAnimation: true,
         }
     },
     componentDidMount() {
-        $.get("./javascripts/count.json", (data) => {
-            this.setState({
-                count: data.number
-            });
-        }, 'json');
+        this.ajaxCount();
+    },
+    ajaxCount(){
+        $.get(API_PATH + "api/activityPullInvest/v1/prizeDrawTimes.json", {
+            isUsed: 0
+        }).then(data => {
+            this.setState({count: data.data.times})
+        })
     },
     closePopHandler() {
         ReactDOM.unmountComponentAtNode(document.getElementById('pop'));
         this.setState({giftPath: '', isAnimation: true})
     },
     promiseOnceLotteryResult(){
-        $.get("./javascripts/once.json", (data) => {
+        $.get(API_PATH+"api/activityPullInvest/v1/play.json?",{
+            configNo:1,
+            drawCount:1
+        }).then((data) => {
+            this.ajaxCount();
             this.refs.productListAuto.rewardPoolHandler();
-            this.showMessagePop('抱歉，系统异常', '', data.data.list[0].goodsname)
-        }, 'json')
+            this.showMessagePop('恭喜中奖', '', data.data.list[0].goodsname)
+        });
+
     },
     promiseMoreLotteryResult(){
-        $.get("./javascripts/once.json", (data) => {
+        $.get(API_PATH+"api/activityPullInvest/v1/play.json?",{
+            configNo:1,
+            drawCount:10
+        }).then((data) => {
+            this.ajaxCount();
             this.refs.productListAuto.rewardPoolHandler();
-            this.showMessagePop('抱歉，抽奖异常', '', '', data.data.list)
-        }, 'json')
+            this.showMessagePop('恭喜中奖', '', '', data.data.resultAward)
+        });
     },
     showMessagePop(title, message, productName, prizeList){
         this.setState({isAnimation: false});
@@ -127,6 +139,7 @@ const PokeBalloonMobile = React.createClass({
         ReactDOM.render(<PopInformation />, document.getElementById("pop"))
     },
     render() {
+        let {count} =this.state;
         let notClick = {
             width: '276px',
             height: '102px',
@@ -139,8 +152,8 @@ const PokeBalloonMobile = React.createClass({
         };
         let btn = (btnTab, type) => {
             let gray;
-            if ((this.state.count < 10 && btnTab == '使用10次机会') ||
-                (this.state.count < 1 && btnTab == '使用1次机会')) gray = true;
+            if ((count < 10 && btnTab == '使用10次机会') ||
+                (count < 1 && btnTab == '使用1次机会')) gray = true;
             return <div className={this.state.type == type && "active"}
                         style={gray && notClick}
                         onClick={gray?'':() => this.changeNumberHandler(type)}>{btnTab}</div>
@@ -148,26 +161,36 @@ const PokeBalloonMobile = React.createClass({
 
         return <div className="pokeBalloonMobile">
             <div className="pokeBalloonShow">
+                <div className="pokeBallChance">您有<em>{count}</em>次获奖机会</div>
                 <div className="ball">
-                    <BalloonBoom path='images/blue.png' greyPath="images/blueGrey.png" getPrizeType={this.getPrizeType}
-                                 number={this.state.number}
+                    <BalloonBoom path='images/blue.png' greyPath="images/blueGrey.png"
+                                 getPrizeType={this.getPrizeType}
+                                 count={this.state.count}
                                  isAnimation={this.state.isAnimation}
+                                 ajaxCount={this.ajaxCount}
                                  promiseOnceLotteryResult={this.promiseOnceLotteryResult}
-                                 promiseMoreLotteryResult={this.promiseMoreLotteryResult}/>
+                                 promiseMoreLotteryResult={this.promiseMoreLotteryResult}
+                                 closePopHandler={this.closePopHandler}/>
                 </div>
                 <div className="ball2">
                     <BalloonBoom path='images/purple.png' greyPath="images/purpleGrey.png"
-                                 getPrizeType={this.getPrizeType} number={this.state.number}
+                                 getPrizeType={this.getPrizeType}
+                                 count={this.state.count}
                                  isAnimation={this.state.isAnimation}
+                                 ajaxCount={this.ajaxCount}
                                  promiseOnceLotteryResult={this.promiseOnceLotteryResult}
-                                 promiseMoreLotteryResult={this.promiseMoreLotteryResult}/>
+                                 promiseMoreLotteryResult={this.promiseMoreLotteryResult}
+                                 closePopHandler={this.closePopHandler}/>/>
                 </div>
                 <div className="ball3">
-                    <BalloonBoom path='images/pink.png' greyPath="images/pinkGrey.png" getPrizeType={this.getPrizeType}
-                                 number={this.state.number}
+                    <BalloonBoom path='images/pink.png' greyPath="images/pinkGrey.png"
+                                 getPrizeType={this.getPrizeType}
+                                 count={this.state.count}
                                  isAnimation={this.state.isAnimation}
+                                 ajaxCount={this.ajaxCount}
                                  promiseOnceLotteryResult={this.promiseOnceLotteryResult}
-                                 promiseMoreLotteryResult={this.promiseMoreLotteryResult}/>
+                                 promiseMoreLotteryResult={this.promiseMoreLotteryResult}
+                                 closePopHandler={this.closePopHandler}/>/>
                 </div>
                 <div className="chanceBtn">
                     {btn('使用1次机会', 'single')}

@@ -9,14 +9,13 @@ const RockProduct = React.createClass({
         this.props.productList.pop();
         ReactDOM.unmountComponentAtNode(document.getElementById('pop'));
     },
-    lotteryDrawHandler(speed, id) {
-        console.log(speed);
+    lotteryDrawHandler(speed,prizeMark,prize,remainTimes) {
         var productList = this.props.productList;
         var s = 0, i = 0, count = 0;
         var timer = setInterval(() => {
             var position = this.state.position;
             productList.forEach((item, index) => {
-                if (item.id == id) {
+                if (item.prizeMark == prizeMark) {
                     i = index;
                 }
             });
@@ -42,8 +41,8 @@ const RockProduct = React.createClass({
                     if (this.state.position == distance) {
                         clearInterval(timer);
                         setTimeout(()=> {
-                            ReactDOM.render(<PopOnePrize closePopHandle={this.props.closePopHandler} popPrize="1888工豆"
-                                                         popNumber="10" popBtn='继续抽奖'/>, document.getElementById('pop'));
+                            ReactDOM.render(<PopOnePrize closePopHandle={this.props.closePopHandler} popPrize={prize}
+                                                         popNumber={remainTimes} popBtn='继续抽奖'/>, document.getElementById('pop'));
                             //ReactDOM.render(<PopMessage closePopHandle={this.closePopHandler} popTitle="抱歉，抽奖异常！" popText="请稍后再试，如需咨询请联系客服400-0322-988 。" popBtn="朕知道了"/>,document.getElementById('pop'))
                             //ReactDOM.render(<PopOnePrize closePopHandle={this.closePopHandler} popPrize="1888工豆" popNumber="10" popBtn='继续抽奖'/>,document.getElementById('pop'))
                             //ReactDOM.render(<PopZero closePopHandle={this.closePopHandler}/>,document.getElementById('pop'))
@@ -60,7 +59,7 @@ const RockProduct = React.createClass({
             }
         }, 30)
     },
-    tenLotteryDrawHandler(speed, productList) {
+    tenLotteryDrawHandler(speed, productList,remainTimes) {
         var s = 0;
         var count = 0;
         var timer = setInterval(() => {
@@ -82,8 +81,9 @@ const RockProduct = React.createClass({
                         clearInterval(timer);
                         setTimeout(()=> {
                             window.once_delay = false;
-                            ReactDOM.render(<PopTenPrice closePopHandle={this.tenClosePopHandler} popNumber={31}
-                                                         popBtn={"继续抽奖"}/>, document.getElementById("pop"))
+                            ReactDOM.render(<PopTenPrice closePopHandle={this.props.closePopHandler }
+                                                         productList={productList}
+                                                         popNumber={remainTimes} popBtn='继续抽奖'/>, document.getElementById('pop'));
                         }, 1000);
                     }
                 } else {
@@ -117,52 +117,101 @@ const RockProduct = React.createClass({
 const SlotMachinePC = React.createClass({
     getInitialState() {
         return {
-            prize_list: this.props.prize_list
+            prize_list: this.props.prize_list,
+            count:0,
         }
     },
     closePopHandler() {
         ReactDOM.unmountComponentAtNode(document.getElementById('pop'));
     },
-    rockLotteryDraw() {
-        if (window.once_delay) return;
-        window.once_delay = true;
-        this.refs.rockProduct.lotteryDrawHandler(30, 2);
-        setTimeout(() => {
-            this.refs.rockProduct2.lotteryDrawHandler(30, 2);
-        }, 300);
-        setTimeout(() => {
-            this.refs.rockProduct3.lotteryDrawHandler(30, 2);
-        }, 600);
+    componentDidMount(){
+        this.ajaxCount()
     },
+    //请求有几次抽奖次数
+    ajaxCount(){
+        $.get(API_PATH+"api/activityPullInvest/v1/prizeDrawTimes.json?isUsed=0",{
+            isUsed:0
+        }).then(data => {
+            this.setState({count:data.data.times})
+        })
+    },
+    //请求一次抽奖
+    ajaxOnePrize(){
+        this.ajaxCount();
+        $.get(API_PATH+'api/activityPullInvest/v1/play.json',{
+            configNo:1,
+            drawCount:1
+        }).then(data => {
+            var prize = data.data.resultAward.prize;
+            var prizeMark = data.data.resultAward.prizeMark;
+            var remainTimes = data.data.remainTimes;
+            if (window.once_delay) return;
+            window.once_delay = true;
+            this.refs.rockProduct.lotteryDrawHandler(30,prizeMark,prize,remainTimes);
+            setTimeout(() => {
+                this.refs.rockProduct2.lotteryDrawHandler(30,prizeMark,prize,remainTimes);
+            }, 300);
+            setTimeout(() => {
+                this.refs.rockProduct3.lotteryDrawHandler(30,prizeMark,prize,remainTimes);
+            }, 600);
+        })
+    },
+    //请求十次抽奖
+    ajaxTenPrize(){
+        $.get(API_PATH+'api/activityPullInvest/v1/play.json',{
+            configNo:1,
+            drawCount:1
+        }).then(data => {
+            this.ajaxCount();
+            var prize_list = data.data.resultAward;
+            var remainTimes = data.data.remainTimes;
+            if (window.once_delay) return;
+            window.once_delay = true;
+            prize_list&&prize_list.push({
+                img: 'http://placehold.it/138?text=大礼包',
+                name: '大礼包'
+            });
+            this.refs.rockProduct.tenLotteryDrawHandler(30, prize_list,remainTimes);
+            setTimeout(() => {
+                this.refs.rockProduct2.tenLotteryDrawHandler(30, prize_list,remainTimes);
+            }, 300);
+            setTimeout(() => {
+                this.refs.rockProduct3.tenLotteryDrawHandler(30, prize_list,remainTimes);
+            }, 600);
+
+        })
+    },
+    //点击一次抽奖时先判断抽奖次数是否大于1
+    rockLotteryDraw() {
+        if(this.props.chance <= 0){
+            ReactDOM.render(<PopZero closePopHandle={this.closePopHandler}/>,document.getElementById('pop'))
+        }else {
+            this.ajaxOnePrize();
+        }
+    },
+    //点击十次抽奖时先判断抽奖次数是否大于1，大于十
     rockTenLotteryDraw(){
-        if (window.once_delay) return;
-        window.once_delay = true;
-        var prize_list = this.state.prize_list;
-        prize_list.push({
-            img: 'http://placehold.it/138?text=大礼包',
-            name: '大礼包'
-        });
-        this.refs.rockProduct.tenLotteryDrawHandler(30, prize_list);
-        setTimeout(() => {
-            this.refs.rockProduct2.tenLotteryDrawHandler(30, prize_list);
-        }, 300);
-        setTimeout(() => {
-            this.refs.rockProduct3.tenLotteryDrawHandler(30, prize_list);
-        }, 600);
+        if(this.props.chance < 1){
+            ReactDOM.render(<PopZero closePopHandle={this.closePopHandler}/>,document.getElementById('pop'))
+        }else if(this.props.chance < 10){
+            ReactDOM.render(<PopMessage closePopHandle={this.closePopHandler} gotoLogin={this.props.gotoLogin} popTop="抽奖次数" popNoTitle={"抽奖机会不足10次啦，去单次抽奖吧。"} popBtn="朕知道了"/>, document.getElementById('pop'))
+        }else{
+            this.ajaxTenPrize()
+        }
     },
     showRule(){
         ReactDOM.render(<PopMessage closePopHandle={this.closePopHandler} gotoLogin={this.props.gotoLogin} popMyPrize="抽奖规则" popRule={true} popBtn="朕知道了"/>, document.getElementById('pop'))
     },
     popLogin(){
-        ReactDOM.render(<PopMessage closePopHandle={this.closePopHandler} gotoLogin={this.props.gotoLogin} popMyPrize="立即登录" popNoTitle={"您还没有登录"} popBtn="立即登录"/>, document.getElementById('pop'))
+        ReactDOM.render(<PopMessage closePopHandle={this.closePopHandler} gotoLogin={this.props.gotoLogin} popTop="立即登录" popNoTitle={"您还没有登录"} popBtn="立即登录"/>, document.getElementById('pop'))
     },
     render() {
-        let {prize_list} = this.state;
-        let {isLogin,gotoLogin} = this.props;
+        let {prize_list,count} = this.state;
+        let {isLogin,gotoLogin,chance} = this.props;
         return <div className="slotShow">
             {
                 isLogin && <div className="chance">
-                    您有<em>19</em>次机会
+                    您有<em>{count}</em>次机会
                 </div>
             }
             <div className="rule" onClick={()=>this.showRule()}>抽奖规则></div>

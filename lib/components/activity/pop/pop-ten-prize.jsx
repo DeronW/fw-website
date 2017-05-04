@@ -9,11 +9,9 @@ const PopTenPrice = React.createClass({
         }
     },
     componentDidMount(){
-        $.get("./javascripts/getPersonDate.json", (data)=> {
-            var list = data.data.list;
-            if (list.length > 4) this.setState({pageList: [1, 2]});
-            this.setState({list: list})
-        }, 'json')
+        var {productList} =this.props;
+        if (productList.length > 4) this.setState({pageList: [1, 2]});
+        this.setState({list: productList})
     },
     changePageHandler(page){
         if (this.state.page == page) return;
@@ -45,8 +43,8 @@ const PopTenPrice = React.createClass({
             index += this.state.cursor;
             return (
                 <tr key={index}>
-                    <td >{item.goodsname}</td>
-                    <td style={{textAlign:'left'}}>{item.id}</td>
+                    <td >{item.prize}</td>
+                    <td style={{textAlign:'left'}}>{item.count}</td>
                 </tr>
             )
         };

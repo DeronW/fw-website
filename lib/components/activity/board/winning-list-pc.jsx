@@ -8,10 +8,13 @@ const WinningListPC = React.createClass({
         }
     },
     componentDidMount(){
-        $.get("./javascripts/list.json", (data)=> {
-            var list = data.data.list;
+        $.get(API_PATH+"api/activityPullInvest/v1/prizeRecordList.json",{
+            topNum:20,
+            realTopNum:5
+        }).then(data =>{
+            var list = data.data.pageData;
             this.setState({dataList: list}, this.startMoveList)
-        }, 'json');
+        });
     },
     startMoveList(){
         let delay = 30, duration = 4000, step = 15, singleH = 275, p, position_index;
@@ -60,9 +63,9 @@ const WinningListPC = React.createClass({
         let {position} = this.state;
         let cell = (item, index) => {
             return <tr key={index}>
-                <td>{item.goodsmark}</td>
-                <td style={{color:'#ef464d'}}>{this.sliceStrFun(item.goodsname)}</td>
-                <td>{item.inserttime}</td>
+                <td>{item.loginName}</td>
+                <td style={{color:'#ef464d'}}>{this.sliceStrFun(item.praiseContent)}</td>
+                <td>{item.drawTime}</td>
             </tr>
 
         };
