@@ -20,7 +20,8 @@ const USER_PAGES = [
     //用户界面
     'user-coupon', //用户优惠券
     'user-score', //用户工分
-    'user-bank-phone'//用户预留手机号页面
+    'user-bank-phone',//用户预留手机号页面
+    'notice-information-disclosure',//信息披露页
 ]
 
 const DEVELOPING_PAGES = [
