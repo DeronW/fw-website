@@ -8,6 +8,8 @@ class DrawPC extends React.Component {
             stageJune: '未开始',
             selectedMay: true,
             selectedJune: false,
+            start:'2017/5/16 00:00:00',
+            end:'2017/6/13 23:59:59',
             remain: '',
             close: false,
             prize_list: [{
@@ -37,7 +39,16 @@ class DrawPC extends React.Component {
     closePopHandler() {
         ReactDOM.unmountComponentAtNode(document.getElementById('pop'));
     }
-
+    getServerTimestamp(callback) {
+        var ts = $getDebugParams().timestamp;
+        if (ts) {
+            callback(ts)
+        } else {
+            $.get(API_PATH + "api/userState/v1/timestamp.json", function (data) {
+                callback(data.data.timestamp)
+            }.bind(this), 'json')
+        }
+    }
     componentDidMount() {
         var that = this;
         $UserReady(function (isLogin, user) {
@@ -66,9 +77,19 @@ class DrawPC extends React.Component {
 
     switchTabHandler(stage, month) {
         if (month == "五月") {
-            this.setState({selectedMay: true, selectedJune: false})
+            this.setState({
+                selectedMay: true,
+                selectedJune: false,
+                start:'2017/5/16 00:00:00',
+                end:'2017/6/13 23:59:59'
+            })
         } else {
-            if (stage != "未开始")  this.setState({selectedMay: false, selectedJune: true})
+            if (stage != "未开始")  this.setState({
+                selectedMay: false,
+                selectedJune: true,
+                start:'2017/6/14 00:00:00',
+                end:'2017/7/12 23:59:59'
+            })
         }
     }
 
@@ -95,7 +116,7 @@ class DrawPC extends React.Component {
     }
 
     render() {
-        let {stageMay,stageJune,selectedMay,selectedJune,remain,close,isLogin} = this.state;
+        let {stageMay,stageJune,selectedMay,selectedJune,remain,close,isLogin,start,end} = this.state;
         let no = {
             width: "237px",
             height: "96px",
@@ -150,7 +171,7 @@ class DrawPC extends React.Component {
                                        result={this.state.result} />
                     </div>
                     <div className="winningList">
-                        <WinningListPC />
+                        <WinningListPC isLogin={isLogin} gotoLogin={this.gotoLogin}/>
                     </div>
                 </div>
                 {
@@ -169,12 +190,12 @@ class DrawPC extends React.Component {
                 <div className="drawMonthLadder">
                     <div className="person">
                         {
-                            <PersonMonthLadder title={"个人榜"} isImgFun={this.isImgFun} fixedPrice={this.fixedPrice}/>
+                            <PersonTeamMonthLadderPC title={"个人榜"} start={start} end={end} getServerTimestamp={this.getServerTimestamp} isImgFun={this.isImgFun} fixedPrice={this.fixedPrice}/>
                         }
                     </div>
                     <div className="team">
                         {
-                            <TeamMonthLadder title={"团队榜"} isImgFun={this.isImgFun} fixedPrice={this.fixedPrice}/>
+                            <PersonTeamMonthLadderPC title={"团队榜"} start={start} end={end} getServerTimestamp={this.getServerTimestamp} isImgFun={this.isImgFun} fixedPrice={this.fixedPrice}/>
                         }
                     </div>
                 </div>
@@ -197,12 +218,12 @@ class DrawPC extends React.Component {
                 <div className="drawTotalLadder">
                     <div className="person">
                         {
-                            <PersonTotalLadder title={"个人榜"} isImgFun={this.isImgFun} fixedPrice={this.fixedPrice}/>
+                            <PersonTotalLadder title={"个人榜"} getServerTimestamp={this.getServerTimestamp} isImgFun={this.isImgFun} fixedPrice={this.fixedPrice}/>
                         }
                     </div>
                     <div className="team">
                         {
-                            <TeamTotalLadder title={"团队榜"} isImgFun={this.isImgFun} fixedPrice={this.fixedPrice}/>
+                            <TeamTotalLadder title={"团队榜"} getServerTimestamp={this.getServerTimestamp} isImgFun={this.isImgFun} fixedPrice={this.fixedPrice}/>
                         }
                     </div>
                 </div>

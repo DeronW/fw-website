@@ -8,6 +8,8 @@ class DrawMobile extends React.Component {
             stageJune: '未开始',
             selectedMay: true,
             selectedJune: false,
+            start:'2017/5/16 00:00:00',
+            end:'2017/6/13 23:59:59',
             remain: '',
             close: false,
             bonus: '',
@@ -21,7 +23,16 @@ class DrawMobile extends React.Component {
         this.judgeStageHandler();
         this.rankingAndPrize();
     }
-
+    getServerTimestamp(callback) {
+        var ts = $getDebugParams().timestamp;
+        if (ts) {
+            callback(ts)
+        } else {
+            $.get(API_PATH + "api/userState/v1/timestamp.json", function (data) {
+                callback(data.data.timestamp)
+            }.bind(this), 'json')
+        }
+    }
     rankingAndPrize() {
         var bonus = '';
         //ajax请求当前排名，当前可分奖金
@@ -45,12 +56,21 @@ class DrawMobile extends React.Component {
     //切换月份tab
     switchTabHandler(stage, month) {
         if (month == "五月") {
-            this.setState({selectedMay: true, selectedJune: false})
+            this.setState({
+                selectedMay: true,
+                selectedJune: false,
+                start:'2017/5/16 00:00:00',
+                end:'2017/6/13 23:59:59'
+            })
         } else {
-            if (stage != "未开始")  this.setState({selectedMay: false, selectedJune: true})
+            if (stage != "未开始")  this.setState({
+                selectedMay: false,
+                selectedJune: true,
+                start:'2017/6/14 00:00:00',
+                end:'2017/7/12 23:59:59'
+            })
         }
     }
-
     closeHandler() {
         this.setState({close: !this.state.close})
     }
@@ -90,7 +110,7 @@ class DrawMobile extends React.Component {
     }
 
     render() {
-        let {stageMay,stageJune,selectedMay,selectedJune,remain,close,bonus,show,isLogin,ladderTab,totalLadderTab,monthTipsClose,totalTipsClose} = this.state;
+        let {stageMay,stageJune,selectedMay,selectedJune,close,bonus,show,isLogin,totalLadderTab,monthTipsClose,totalTipsClose,start,end} = this.state;
         let no = {
             width: "237px",
             height: "96px",
@@ -166,7 +186,7 @@ class DrawMobile extends React.Component {
             {isLogin ? tipsLogin : tipsNoLogin}
 
             <div className="switchMonthLadder">
-                <PersonTeamMonthLadder isImgFun={this.isImgFun} fixedPrice={this.fixedPrice} ladderTab={ladderTab}/>
+                <PersonTeamMonthLadderMobile start={start} end={end} isImgFun={this.isImgFun} fixedPrice={this.fixedPrice} getServerTimestamp={this.getServerTimestamp}/>
             </div>
 
             <div className="drawTips">
@@ -198,7 +218,7 @@ class DrawMobile extends React.Component {
             {isLogin ? <div dangerouslySetInnerHTML={{__html:bonus}}></div>:tipsNoLogin}
 
             <div className="switchTotalLadder">
-                <PersonTeamTotalLadder isImgFun={this.isImgFun} fixedPrice={this.fixedPrice}
+                <PersonTeamTotalLadderMobile isImgFun={this.isImgFun} fixedPrice={this.fixedPrice}
                                        totalLadderTab={totalLadderTab}/>
             </div>
 

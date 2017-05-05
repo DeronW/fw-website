@@ -1,5 +1,5 @@
-//个人月榜
-class PersonMonthLadder extends React.Component {
+//月榜移动端
+class PersonTeamMonthLadderMobile extends React.Component {
     constructor(props) {
         super(props);
         this.PRE_PAGE = 10;
@@ -12,59 +12,66 @@ class PersonMonthLadder extends React.Component {
             tab: '上一页',
             isClick: true,
             cursor: 0,
-        }
-    }
-    getServerTimestamp(callback) {
-        var ts = $getDebugParams().timestamp;
-        if (ts) {
-            this.setState({currentTime: ts});
-            callback(ts)
-        } else {
-            $.get(API_PATH + "api/userState/v1/timestamp.json", function (data) {
-                this.setState({currentTime: data.data.timestamp});
-                callback(data.data.timestamp)
-            }.bind(this), 'json')
+            start:'2017/5/16 00:00:00',
+            end:'2017/6/13 23:59:59',
+            thead: ['用户名', '个人累投金额(元)', '奖金(元)'],
+            ladderTab: '个人榜',
         }
     }
     componentDidMount() {
-        var febStart = new Date("2017/5/11").getTime();
-        var marStart = new Date("2017/6/1").getTime();
-        var startDate = '2017-1-6';
-        var endDate = '2017-2-2 23:59:59';
-        this.getServerTimestamp(function (timestamp) {
-            if (timestamp < febStart) {
-                startDate = '2017-1-6';
-                endDate = '2017-2-2 23:59:59';
-            } else if (timestamp < marStart) {
-                startDate = '2017-2-3';
-                endDate = '2017-3-2 23:59:59';
+        let {getServerTimestamp} = this.props;
+        var June = new Date("2017/6/13 23:59:59").getTime();
+        var July = new Date("2017/7/12 23:59:59").getTime();
+        var startDate = '2017/5/16 00:00:00';
+        var endDate = '2017/7/12 23:59:59';
+        getServerTimestamp(function (timestamp) {
+            if (timestamp < June) {
+                startDate = '2017/5/16 00:00:00';
+                endDate = '2017/6/13 23:59:59';
+            } else if (timestamp < July) {
+                startDate = '2017/6/14 00:00:00';
+                endDate = '2017/7/12 23:59:59';
             }
-            this.ajaxPullNewInvest('2017-1-6', '2017-2-2 23:59:59')
+            this.switchCategoryTab(this.state.ladderTab,startDate,endDate);
         }.bind(this));
-        if(this.props.title == "个人榜"){
-            this.ajaxPersonLadder()
+    }
+    componentWillReceiveProps(nextProps){
+        this.setState({start:nextProps.start,end:nextProps.end});
+        this.switchCategoryTab(this.state.ladderTab,nextProps.start, nextProps.end);
+    }
+
+    //切换月榜tab
+    switchLadderTabHandler(t) {
+        if (t == this.state.ladderTab) return;
+        this.setState({ladderTab: t});
+        this.switchCategoryTab(t,this.state.start,this.state.end);
+    }
+    switchCategoryTab(t,start,end){
+        if(t == "个人榜"){
+            this.setState({thead: ['用户名', '个人累投金额(元)', '奖金(元)'],cursor:0,tab: '上一页'});
+            this.ajaxPersonLadder(start,end);
+        }else if(t == "团队榜"){
+            this.setState({thead: ['用户名', '团队累投金额(元)', '奖金(元)'],cursor:0,tab: '上一页'});
+            this.ajaxTeamLadder(start,end);
         }
     }
-    ajaxPersonLadder(){
-
+    //个人榜请求ajax
+    ajaxPersonLadder(start,end){
+        $.get(API_PATH+"api/activityPullInvest/v1/singularMonthList.json",{
+            start:start,
+            end:end
+        }).then(data => {
+            this.showAndSetData(data)
+        })
     }
-    ajaxPullNewInvest(startDate, endDate) {
-        $.ajax({
-            url: API_PATH + 'api/activityPullNew/v2/PullNewTopAndYearInvest.json',
-            data: {
-                dataCount: 20,
-                totalBaseAmt: 1000,
-                startDate: startDate,
-                endDate: endDate,
-                startTotalCount: 50,
-                startTotalInvest: 500000
-            },
-            type: "get",
-            dataType: 'json',
-            success: function (data) {
-                this.showAndSetData(data);
-            }.bind(this)
-        });
+    //团队榜请求ajax
+    ajaxTeamLadder(start,end){
+        $.get(API_PATH+"api/activityPullInvest/v1/singularMonthTeamList.json",{
+            start:start,
+            end:end
+        }).then(data => {
+            this.showAndSetData(data)
+        })
     }
 
     showAndSetData(data) {
@@ -140,10 +147,11 @@ class PersonMonthLadder extends React.Component {
         return this.state.totalData.topList.slice(this.state.cursor, this.state.cursor + this.PRE_PAGE);
     }
     render() {
+        let {isClick,tab,ladderTab,cursor,thead} = this.state;
         let pageImg = (item, index) => {
             return <div key={index}
-                        className={this.state.isClick?(this.state.tab == item ? 'selectedPage':null):'selectedPage'}
-                        onClick={this.state.isClick?()=>{this.switchPageHandler(item)}:null}>{item}</div>
+                        className={isClick?(tab == item ? 'selectedPage':null):'selectedPage'}
+                        onClick={isClick?()=>{this.switchPageHandler(item)}:null}>{item}</div>
         };
         let page = (
             <div className="page">
@@ -153,7 +161,7 @@ class PersonMonthLadder extends React.Component {
             </div>
         );
         let bodyImg = (item, index) => {
-            index += this.state.cursor;
+            index += cursor;
             return <tr key={index}>
                 <td>
                     {this.props.isImgFun(index) ? <img className="tdImg" src={this.props.isImgFun(index)}/> :
@@ -166,6 +174,11 @@ class PersonMonthLadder extends React.Component {
                 <td className={this.fixedPriceFun(index) == '暂无奖金'?null:"bodyPrice"}>{this.fixedPriceFun(index)}</td>
             </tr>
         };
+        let tHead = (item, index)=> {
+            return <td key={index}>
+                {item}
+            </td>
+        };
         let tBody = (
             <tbody>
             {
@@ -173,15 +186,24 @@ class PersonMonthLadder extends React.Component {
             }
             </tbody>
         );
-        return <div className="personMonthLadder">
-            <div className={this.props.title == "个人榜"?"personTitle":"teamTitle"}>{this.props.title}</div>
+        let t = (t, i)=> {
+            return <div key={i}
+                        className={ladderTab == t ?"tab selected":'tab'}
+                        onClick={()=>this.switchLadderTabHandler(t)}>
+                {t}
+            </div>
+        };
+        return <div className="personTeamMonthLadder">
+            <div className="ladderTab">
+                {
+                    ['个人榜', '团队榜'].map(t)
+                }
+            </div>
             <div className="personTable">
                 <table>
                     <thead>
                     <tr>
-                        <td>用户名</td>
-                        <td>个人累投金额（元）</td>
-                        <td>奖金（元）</td>
+                        {thead.map(tHead)}
                     </tr>
                     </thead>
                     {

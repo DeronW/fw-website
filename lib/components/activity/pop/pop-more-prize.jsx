@@ -2,72 +2,40 @@ const PopMorePrize = React.createClass({
     getInitialState(){
         this.PRE_PAGE = 5;
         return {
-            cursor: 0,
             list: [],
             page: 1,
-            totalPage: 2,
-            tab: '上一页',
-            isClick: true,
+            total_page: 2
         }
     },
     componentDidMount(){
-        $.get(API_PATH + "api/activityPullInvest/v1/myPrizeRecordList.json", (data)=> {
+        this.reloadData()
+    },
+    reloadData(){
+        $.get(API_PATH + "api/activityPullInvest/v1/myPrizeRecordList.json",{
+            page:this.state.page,
+            rows:5
+        }).then(data =>{
             var list = data.data.pageData.result;
-            this.setState({list: list})
-        }, 'json');
+            var totalPage = data.data.pageData.pagination.totalPage;
+            this.setState({list: list,total_page:totalPage})
+        });
     },
-    switchPageHandler(type) {
-        this.setState({tab: type});
-        let {page,totalPage}=this.state;
-        let cursor, min, new_page, len = this.state.list.length;
-        if (type == '上一页') {
-            if (len % this.PRE_PAGE) {
-                min = parseInt(len / this.PRE_PAGE) * this.PRE_PAGE
-            } else {
-                min = len - this.PRE_PAGE
-            }
-            cursor = this.state.cursor > 0 ? Math.min(min, this.state.cursor - this.PRE_PAGE) : 0;
-            this.setState({cursor: cursor});
-            if (page > 1) {
-                new_page = page - 1;
-                this.setState({page: new_page});
-                if (page > 2) {
-                    this.setState({tab: ''})
-                }
-            }
-        } else {
-            if (len % this.PRE_PAGE) {
-                min = parseInt(len / this.PRE_PAGE) * this.PRE_PAGE
-            } else {
-                min = len - this.PRE_PAGE
-            }
-            cursor = Math.min(min, this.state.cursor + this.PRE_PAGE);
-            this.setState({cursor: cursor});
-            if (page < totalPage) {
-                new_page = page + 1;
-                this.setState({page: new_page});
-                if (page < totalPage - 1) {
-                    this.setState({tab: ''})
-                }
-            }
+    switchPageHandler: function (type) {
+        // 4种换页方式. 首页, 尾页, 上一页, 下一页
+        let {page, total_page} = this.state, new_page;
+        if (type == 'first') {
+            if (page != 1) new_page = 1;
+        } else if (type == 'last') {
+            if (page != total_page) new_page = total_page;
+        } else if (type == 'prev') {
+            if (page > 1) new_page = page - 1;
+        } else if (type == 'next') {
+            if (page < total_page) new_page = page + 1;
         }
-    },
-    get_current_page() {
-        return this.state.list.slice(this.state.cursor, this.state.cursor + this.PRE_PAGE);
+        if (new_page) this.setState({page: new_page}, this.reloadData);
     },
     render(){
-        let pageImg = (item, index) => {
-            return <div key={index}
-                        className={this.state.isClick?(this.state.tab == item ? 'selectedPage':null):'selectedPage'}
-                        onClick={this.state.isClick?()=>{this.switchPageHandler(item)}:null}>{item}</div>
-        };
-        let page = (
-            <div className="page">
-                {
-                    ['上一页', '下一页'].map(pageImg)
-                }
-            </div>
-        );
+        let {page,total_page,list} =this.state;
         let tBody = (item, index) => {
             return <tr key={index}>
                 <td>{item.magicTitle}</td>
@@ -75,6 +43,15 @@ const PopMorePrize = React.createClass({
                 <td style={{color:'#ef464d'}}>{item.praiseContent}</td>
             </tr>
         };
+        let pagination;
+        pagination = <div className="pagination">
+            <div className="paginationPage">
+                第{page}页, 共{total_page}页
+                {page > 1 ? <a onClick={() => this.switchPageHandler('prev')}>上一页</a> : null}
+                {page < total_page ?
+                    <a onClick={() => this.switchPageHandler('next')}>下一页</a> : null}
+            </div>
+        </div>;
         return <div className="popMorePrize">
             <div className="popMorePrizeContent">
                 <div className="closePop" onClick={this.props.closePopHandle}></div>
@@ -87,15 +64,10 @@ const PopMorePrize = React.createClass({
                     </tr>
                     </thead>
                     <tbody>
-                    {this.get_current_page.map(tBody)}
+                    {list.map(tBody)}
                     </tbody>
-                    {
-                        this.state.state.length ? tBody : null
-                    }
                 </table>
-                {
-                    this.state.list.length ? page : null
-                }
+                {pagination}
             </div>
         </div>
     }

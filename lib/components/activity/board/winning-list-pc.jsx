@@ -45,12 +45,18 @@ const WinningListPC = React.createClass({
         ReactDOM.unmountComponentAtNode(document.getElementById('pop'));
     },
     showMyPrize(){
-        if (this.state.dataList.length) {
-            ReactDOM.render(<PopMorePrize closePopHandle={this.closePopHandler}/>, document.getElementById('pop'))
-        } else {
-            ReactDOM.render(<PopMessage closePopHandle={this.closePopHandler} popMyPrize="我的奖品" popNoTitle="暂无中奖记录"
-                                        popBtn="朕知道了"/>, document.getElementById('pop'))
+        let {isLogin,gotoLogin} =this.props;
+        if(isLogin){
+            if (this.state.dataList.length) {
+                ReactDOM.render(<PopMorePrize closePopHandle={this.closePopHandler}/>, document.getElementById('pop'))
+            } else {
+                ReactDOM.render(<PopMessage closePopHandle={this.closePopHandler} popMyPrize="我的奖品" popNoTitle="暂无中奖记录"
+                                            popBtn="朕知道了"/>, document.getElementById('pop'))
+            }
+        }else{
+            ReactDOM.render(<PopMessage closePopHandle={this.closePopHandler} gotoLogin={gotoLogin} popTop="立即登录" popNoTitle={"您还没有登录"} popBtn="立即登录"/>, document.getElementById('pop'))
         }
+
     },
     sliceStrFun(productName){
         if (productName && productName.length > 10) {

@@ -129,7 +129,7 @@ const SlotMachinePC = React.createClass({
     },
     //请求有几次抽奖次数
     ajaxCount(){
-        $.get(API_PATH+"api/activityPullInvest/v1/prizeDrawTimes.json?isUsed=0",{
+        $.get(API_PATH+"api/activityPullInvest/v1/prizeDrawTimes.json",{
             isUsed:0
         }).then(data => {
             this.setState({count:data.data.times})
