@@ -218,12 +218,12 @@ class DrawPC extends React.Component {
                 <div className="drawTotalLadder">
                     <div className="person">
                         {
-                            <PersonTotalLadder title={"个人榜"} getServerTimestamp={this.getServerTimestamp} isImgFun={this.isImgFun} fixedPrice={this.fixedPrice}/>
+                            <PersonTeamTotalLadderPC title={"个人榜"} getServerTimestamp={this.getServerTimestamp} isImgFun={this.isImgFun} fixedPrice={this.fixedPrice}/>
                         }
                     </div>
                     <div className="team">
                         {
-                            <TeamTotalLadder title={"团队榜"} getServerTimestamp={this.getServerTimestamp} isImgFun={this.isImgFun} fixedPrice={this.fixedPrice}/>
+                            <PersonTeamTotalLadderPC title={"团队榜"} getServerTimestamp={this.getServerTimestamp} isImgFun={this.isImgFun} fixedPrice={this.fixedPrice}/>
                         }
                     </div>
                 </div>

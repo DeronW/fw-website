@@ -1,8 +1,8 @@
-//月榜移动端
-class PersonTeamTotalLadderMobile extends React.Component {
+//总榜PC端
+class PersonTeamTotalLadderPC extends React.Component {
     constructor(props) {
         super(props);
-        this.PRE_PAGE = 15;
+        this.PRE_PAGE = 10;
         this.START = '2017/5/16 00:00:00';
         this.END = '2017/7/12 23:59:59';
         this.state = {
@@ -14,27 +14,14 @@ class PersonTeamTotalLadderMobile extends React.Component {
             tab: '上一页',
             isClick: true,
             cursor: 0,
-            thead: ['用户名', '个人累投金额(元)', '奖金(元)'],
-            totalLadderTab: '个人榜',
         }
     }
     componentDidMount() {
-        this.switchCategoryTab(this.state.ladderTab);
-    }
-
-    //切换总榜tab
-    switchTotalLadderTab(t) {
-        if (t == this.state.ladderTab) return;
-        this.setState({ladderTab: t});
-        this.switchCategoryTab(t);
-    }
-    switchCategoryTab(t){
-        if(t == "个人榜"){
-            this.setState({thead: ['用户名', '个人累投金额(元)', '奖金(元)'],cursor:0,tab: '上一页'});
-            this.ajaxPersonLadder();
-        }else if(t == "团队榜"){
-            this.setState({thead: ['用户名', '团队累投金额(元)', '奖金(元)'],cursor:0,tab: '上一页'});
-            this.ajaxTeamLadder();
+        let {title} = this.props;
+        if(title == "个人榜"){
+            this.ajaxPersonLadder()
+        }else if(title == "团队榜"){
+            this.ajaxTeamLadder()
         }
     }
     //个人榜请求ajax
@@ -55,6 +42,7 @@ class PersonTeamTotalLadderMobile extends React.Component {
             this.showAndSetData(data)
         })
     }
+
     showAndSetData(data) {
         var sData = data.data || {};
         var len = sData.topList.length;
@@ -128,12 +116,10 @@ class PersonTeamTotalLadderMobile extends React.Component {
         return this.state.totalData.topList.slice(this.state.cursor, this.state.cursor + this.PRE_PAGE);
     }
     render() {
-        let {isClick,tab,totalLadderTab,thead,cursor} = this.state;
-        let {isImgFun,fixedPrice} = this.props;
         let pageImg = (item, index) => {
             return <div key={index}
-                        className={isClick?(tab == item ? 'selectedPage':null):'selectedPage'}
-                        onClick={isClick?()=>{this.switchPageHandler(item)}:null}>{item}</div>
+                        className={this.state.isClick?(this.state.tab == item ? 'selectedPage':null):'selectedPage'}
+                        onClick={this.state.isClick?()=>{this.switchPageHandler(item)}:null}>{item}</div>
         };
         let page = (
             <div className="page">
@@ -143,23 +129,18 @@ class PersonTeamTotalLadderMobile extends React.Component {
             </div>
         );
         let bodyImg = (item, index) => {
-            index += cursor;
+            index += this.state.cursor;
             return <tr key={index}>
                 <td>
-                    {isImgFun(index) ? <img className="tdImg" src={isImgFun(index)}/> :
+                    {this.props.isImgFun(index) ? <img className="tdImg" src={this.props.isImgFun(index)}/> :
                         <span className="twoSpan">{index + 1}</span>}
                     {<span className="oneSpan">{item.loginName}</span>}
                 </td>
                 <td>
-                    {fixedPrice(item.total)}
+                    {this.props.fixedPrice(item.total)}
                 </td>
                 <td className={this.fixedPriceFun(index) == '暂无奖金'?null:"bodyPrice"}>{this.fixedPriceFun(index)}</td>
             </tr>
-        };
-        let tHead = (item, index)=> {
-            return <td key={index}>
-                {item}
-            </td>
         };
         let tBody = (
             <tbody>
@@ -168,24 +149,15 @@ class PersonTeamTotalLadderMobile extends React.Component {
             }
             </tbody>
         );
-        let totalTab = (t, i)=> {
-            return <div key={i}
-                        className={totalLadderTab == t ?"tab selected":'tab'}
-                        onClick={()=>this.switchTotalLadderTab(t)}>
-                {t}
-            </div>
-        };
-        return <div className="personTeamTotalLadder">
-            <div className="ladderTab">
-                {
-                    ['个人榜', '团队榜'].map(totalTab)
-                }
-            </div>
+        return <div className="personMonthLadder">
+            <div className={this.props.title == "个人榜"?"personTitle":"teamTitle"}>{this.props.title}</div>
             <div className="personTable">
                 <table>
                     <thead>
                     <tr>
-                        {thead.map(tHead)}
+                        <td>用户名</td>
+                        <td>团队累投金额（元）</td>
+                        <td>奖金（元）</td>
                     </tr>
                     </thead>
                     {
