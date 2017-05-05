@@ -4,9 +4,7 @@ class PersonTeamMonthLadderPC extends React.Component {
         super(props);
         this.PRE_PAGE = 10;
         this.state = {
-            totalData: {
-                topList: []
-            },
+            list:[],
             page: 1,
             totalPage: 2,
             tab: '上一页',
@@ -60,19 +58,13 @@ class PersonTeamMonthLadderPC extends React.Component {
 
     showAndSetData(data) {
         var sData = data.data || {};
-        var len = sData.topList && sData.topList.length;
-        if (len <= this.PRE_PAGE) {
-            this.setState({totalPage: 1, isClick: false});
-        } else if (len > this.PRE_PAGE && sData.length <= this.PRE_PAGE * 2) {
-            this.setState({totalPage: 2, isClick: true})
-        }
         this.setState({totalData: sData})
     }
 
     switchPageHandler(type) {
         this.setState({tab: type});
         let {page,totalPage}=this.state;
-        let cursor, min, new_page, len = this.state.totalData.topList.length;
+        let cursor, min, new_page, len = this.state.list.length;
         if (type == '上一页') {
             if (len % this.PRE_PAGE) {
                 min = parseInt(len / this.PRE_PAGE) * this.PRE_PAGE
@@ -128,10 +120,10 @@ class PersonTeamMonthLadderPC extends React.Component {
     }
 
     get_current_page() {
-        return this.state.totalData.topList.slice(this.state.cursor, this.state.cursor + this.PRE_PAGE);
+        return this.state.list.slice(this.state.cursor, this.state.cursor + this.PRE_PAGE);
     }
     render() {
-        let {isClick,tab,cursor}=this.state;
+        let {isClick,tab,cursor,list}=this.state;
         let {title,isImgFun,fixedPrice} = this.props;
         let pageImg = (item, index) => {
             return <div key={index}
@@ -178,15 +170,15 @@ class PersonTeamMonthLadderPC extends React.Component {
                     </tr>
                     </thead>
                     {
-                        this.state.totalData.topList.length ? tBody : null
+                        list.length ? tBody : null
                     }
                 </table>
             </div>
             {
-                this.state.totalData.topList.length ? page : null
+                list.length ? page : null
             }
             {
-                this.state.totalData.topList.length ? null : <div className="monthLadderPcNot">人气王还在堵车，马上就来</div>
+                list.length ? null : <div className="monthLadderPcNot">人气王还在堵车，马上就来</div>
             }
         </div>
     }

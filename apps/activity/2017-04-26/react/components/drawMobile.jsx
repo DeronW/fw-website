@@ -108,7 +108,10 @@ class DrawMobile extends React.Component {
         var loginUrl = location.protocol + '//www.9888.cn/api/activityPullNew/pullnewParty.do?id=19';
         $FW.gotoSpecialPage("登录", loginUrl);
     }
-
+    gotoDraw(){
+        var link = "https://www.9888.cn/static/activity/template-lottery-draw/index.html";
+        $FW.gotoSpecialPage("", link);
+    }
     render() {
         let {stageMay,stageJune,selectedMay,selectedJune,close,bonus,show,isLogin,totalLadderTab,monthTipsClose,totalTipsClose,start,end} = this.state;
         let no = {
@@ -177,6 +180,8 @@ class DrawMobile extends React.Component {
         };
         return <div className="drawMobile">
             <div className="activityExplain" onClick={()=>this.showHandler()}>活动说明</div>
+            <div className="drawTitleMobile">大奖抽抽抽，100%中奖</div>
+            <div className="drawGift" onClick={isLogin?()=>{this.gotoDraw()}:()=>this.gotoLogin()}><p>{isLogin?"去抽奖":"登录"}</p></div>
             <div className="drawTitleMobile">投资冲月榜，个人团队大作战</div>
             <div className="monthStateTab">
                 {monthMayTab(stageMay, "五月", "5.16 ~ 6.13")}

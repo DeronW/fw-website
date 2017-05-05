@@ -4,20 +4,18 @@ class PersonTeamMonthLadderMobile extends React.Component {
         super(props);
         this.PRE_PAGE = 10;
         this.state = {
-            totalData: {
-                topList: []
-            },
+            list: [],
             page: 1,
             totalPage: 2,
             tab: '上一页',
-            isClick: true,
             cursor: 0,
-            start:'2017/5/16 00:00:00',
-            end:'2017/6/13 23:59:59',
+            start: '2017/5/16 00:00:00',
+            end: '2017/6/13 23:59:59',
             thead: ['用户名', '个人累投金额(元)', '奖金(元)'],
             ladderTab: '个人榜',
         }
     }
+
     componentDidMount() {
         let {getServerTimestamp} = this.props;
         var June = new Date("2017/6/13 23:59:59").getTime();
@@ -32,57 +30,39 @@ class PersonTeamMonthLadderMobile extends React.Component {
                 startDate = '2017/6/14 00:00:00';
                 endDate = '2017/7/12 23:59:59';
             }
-            this.switchCategoryTab(this.state.ladderTab,startDate,endDate);
+            this.switchCategoryTab(this.state.ladderTab, startDate, endDate);
         }.bind(this));
     }
-    componentWillReceiveProps(nextProps){
-        this.setState({start:nextProps.start,end:nextProps.end});
-        this.switchCategoryTab(this.state.ladderTab,nextProps.start, nextProps.end);
+
+    componentWillReceiveProps(nextProps) {
+        this.setState({start: nextProps.start, end: nextProps.end});
+        this.switchCategoryTab(this.state.ladderTab, nextProps.start, nextProps.end);
     }
 
     //切换月榜tab
     switchLadderTabHandler(t) {
         if (t == this.state.ladderTab) return;
         this.setState({ladderTab: t});
-        this.switchCategoryTab(t,this.state.start,this.state.end);
-    }
-    switchCategoryTab(t,start,end){
-        if(t == "个人榜"){
-            this.setState({thead: ['用户名', '个人累投金额(元)', '奖金(元)'],cursor:0,tab: '上一页'});
-            this.ajaxPersonLadder(start,end);
-        }else if(t == "团队榜"){
-            this.setState({thead: ['用户名', '团队累投金额(元)', '奖金(元)'],cursor:0,tab: '上一页'});
-            this.ajaxTeamLadder(start,end);
-        }
-    }
-    //个人榜请求ajax
-    ajaxPersonLadder(start,end){
-        $.get(API_PATH+"api/activityPullInvest/v1/singularMonthList.json",{
-            start:start,
-            end:end
-        }).then(data => {
-            this.showAndSetData(data)
-        })
-    }
-    //团队榜请求ajax
-    ajaxTeamLadder(start,end){
-        $.get(API_PATH+"api/activityPullInvest/v1/singularMonthTeamList.json",{
-            start:start,
-            end:end
-        }).then(data => {
-            this.showAndSetData(data)
-        })
+        this.switchCategoryTab(t, this.state.start, this.state.end);
     }
 
-    showAndSetData(data) {
-        var sData = data.data || {};
-        var len = sData.topList.length;
-        if (len <= this.PRE_PAGE) {
-            this.setState({totalPage: 1, isClick: false});
-        } else if (len > this.PRE_PAGE && sData.length <= this.PRE_PAGE * 2) {
-            this.setState({totalPage: 2, isClick: true})
+    switchCategoryTab(t, start, end) {
+        if (t == "个人榜") {
+            this.setState({thead: ['用户名', '个人累投金额(元)', '奖金(元)'], cursor: 0, tab: '上一页'});
+            this.ajaxLadderHandler(API_PATH + "api/activityPullInvest/v1/singularMonthList.json",start, end);
+        } else if (t == "团队榜") {
+            this.setState({thead: ['用户名', '团队累投金额(元)', '奖金(元)'], cursor: 0, tab: '上一页'});
+            this.ajaxLadderHandler(API_PATH + "api/activityPullInvest/v1/singularMonthTeamList.json",start, end);
         }
-        this.setState({totalData: sData})
+    }
+    ajaxLadderHandler(url,start,end){
+        $.get(url, {
+            start: start,
+            end: end
+        }).then(data => {
+            var sData = data.data || {};
+            this.setState({list: sData})
+        })
     }
 
     switchPageHandler(type) {
@@ -122,36 +102,20 @@ class PersonTeamMonthLadderMobile extends React.Component {
         }
     }
 
-    fixedPriceFun(i) {
-        var febStart = new Date("2017/2/3").getTime();
-        var marStart = new Date("2017/3/3").getTime();
-        let monthPrice = 0;
-        var money = 0;
-        let totalData = this.state.totalData;
-        if (totalData.topList[i].totalall < 50 || totalData.topList[i].total < 500000) {
-            return '暂无奖金'
-        } else {
-            if (this.state.currentTime < febStart || this.props.startDate == '2017-1-6') {
-                monthPrice = 120000;
-            } else if (this.state.currentTime < marStart || this.props.startDate == '2017-2-3') {
-                monthPrice = 150000;
-            } else {
-                monthPrice = 180000;
-            }
-            money = ((totalData.topList[i].total) / (totalData.totalYearInvest)) * monthPrice;
-        }
+    fixedPriceFun(money) {
         return money.toFixed(2);
     }
 
     get_current_page() {
-        return this.state.totalData.topList.slice(this.state.cursor, this.state.cursor + this.PRE_PAGE);
+        return this.state.list.slice(this.state.cursor, this.state.cursor + this.PRE_PAGE);
     }
+
     render() {
-        let {isClick,tab,ladderTab,cursor,thead} = this.state;
+        let {totalPage,tab,ladderTab,cursor,thead,list} = this.state;
         let pageImg = (item, index) => {
             return <div key={index}
-                        className={isClick?(tab == item ? 'selectedPage':null):'selectedPage'}
-                        onClick={isClick?()=>{this.switchPageHandler(item)}:null}>{item}</div>
+                        className={totalPage>1?(tab == item ? 'selectedPage':null):'selectedPage'}
+                        onClick={totalPage>1?()=>{this.switchPageHandler(item)}:null}>{item}</div>
         };
         let page = (
             <div className="page">
@@ -207,15 +171,15 @@ class PersonTeamMonthLadderMobile extends React.Component {
                     </tr>
                     </thead>
                     {
-                        this.state.totalData.topList.length ? tBody : null
+                        list.length ? tBody : null
                     }
                 </table>
             </div>
             {
-                this.state.totalData.topList.length ? page : null
+                list.length ? page : null
             }
             {
-                this.state.totalData.topList.length ? null : <div className="monthLadderPcNot">人气王还在堵车，马上就来</div>
+                list.length ? null : <div className="monthLadderPcNot">人气王还在堵车，马上就来</div>
             }
         </div>
     }
