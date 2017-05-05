@@ -22,6 +22,12 @@ class DrawMobile extends React.Component {
     componentDidMount() {
         this.judgeStageHandler();
         this.rankingAndPrize();
+        var that = this;
+        $UserReady(function (isLogin,user) {
+            if(isLogin){
+                that.setState({isLogin:isLogin})
+            }
+        })
     }
     getServerTimestamp(callback) {
         var ts = $getDebugParams().timestamp;
@@ -110,7 +116,7 @@ class DrawMobile extends React.Component {
     }
     gotoDraw(){
         var link = "https://www.9888.cn/static/activity/template-lottery-draw/index.html";
-        $FW.gotoSpecialPage("", link);
+        window.location.href = link;
     }
     render() {
         let {stageMay,stageJune,selectedMay,selectedJune,close,bonus,show,isLogin,totalLadderTab,monthTipsClose,totalTipsClose,start,end} = this.state;
