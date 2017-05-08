@@ -60,6 +60,7 @@ class DrawPC extends React.Component {
         });
         this.ajaxTradeSum();
         this.judgeStageHandler();
+
     }
 
     //请求交易平台交易额
@@ -71,13 +72,17 @@ class DrawPC extends React.Component {
             let bonus = 0;
             let totalBonus = 0;
             let total = data.data.total;
-            console.log(total);
             if (total >= 150000000 && total < 380000000) {
                 bonus = 6
             } else if (total >= 380000000 && total < 450000000) {
                 bonus = 12
             } else if (total >= 450000000) {
                 bonus = 18
+            }
+            if(total >= 100000000 && total < 130000000){
+                totalBonus = 40;
+            }else if(total >= 130000000){
+                totalBonus = 100;
             }
             this.setState({total:total,bonus: bonus,totalBonus:totalBonus});
         })
