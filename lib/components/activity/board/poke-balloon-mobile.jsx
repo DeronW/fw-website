@@ -206,7 +206,6 @@ const PokeBalloonMobile = React.createClass({
             <div className="productShow">
                 <ProductListAuto ref="productListAuto"/>
             </div>
-            <div className="goodAddressBtn" onClick={()=>this.showAddress()}></div>
         </div>
     }
 });

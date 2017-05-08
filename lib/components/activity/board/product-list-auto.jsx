@@ -22,19 +22,19 @@ const ProductListAuto = React.createClass({
                 name: 'name',
                 prizeMark: 5
             }, {
-                img: 'http://placehold.it/138?text=2',
+                img: 'http://placehold.it/138?text=6',
                 name: 'name',
                 prizeMark: 6
             }, {
-                img: 'http://placehold.it/138?text=3',
+                img: 'http://placehold.it/138?text=7',
                 name: 'name',
                 prizeMark: 7
             }, {
-                img: 'http://placehold.it/138?text=4',
+                img: 'http://placehold.it/138?text=8',
                 name: 'name',
                 prizeMark: 8
             }, {
-                img: 'http://placehold.it/138?text=5',
+                img: 'http://placehold.it/138?text=9',
                 name: 'name',
                 prizeMark: 9
             }],
@@ -46,7 +46,7 @@ const ProductListAuto = React.createClass({
     },
     rewardPoolHandler(){
         $.get(API_PATH + "/api/activityPullInvest/v1/myPrizeRecordListApp.json").then(data => {
-            this.setState({singleProduct: data.data.pageData.result})
+            this.setState({singleProduct: data.data.result})
         })
     },
     render(){
@@ -71,14 +71,14 @@ const ProductListAuto = React.createClass({
             let fnCell = (cell, index) => {
                 return <div className="cell" key={index}>
                     <div className="productPicture">
-                        <img src={cell.picture} alt=""/>
+                        <img src={cell.img} alt=""/>
 
                         <div className={cell.selected?"":'shade'}></div>
                         <div
                             className={(cell.selected && cell.count > 1)?"productNumber":''}>{(cell.selected && cell.count > 1) ? cell.count : ''}</div>
                     </div>
                     <div
-                        className={cell.selected?"productName":"productNameShade productName"}>{cell.goodsname}</div>
+                        className={cell.selected?"productName":"productNameShade productName"}>{cell.name}</div>
                 </div>
             };
             let fnRow = (row, index)=> {
