@@ -16,31 +16,31 @@ class PersonTeamTotalLadderMobile extends React.Component {
         }
     }
     componentDidMount() {
-        this.switchCategoryTab(this.state.ladderTab);
+        this.ajaxLadder(this.state.ladderTab);
     }
 
     //切换总榜tab
     switchTotalLadderTab(t) {
         if (t == this.state.ladderTab) return;
         this.setState({ladderTab: t});
-        this.switchCategoryTab(t);
+        this.ajaxLadder(t);
     }
-    switchCategoryTab(t){
-        if(t == "个人榜"){
-            this.setState({thead: ['用户名', '个人累投金额(元)', '奖金(元)'],cursor:0,tab: '上一页'});
-            this.ajaxLadderHandler(API_PATH+"api/activityPullInvest/v1/singularMonthList.json");
-        }else if(t == "团队榜"){
-            this.setState({thead: ['用户名', '团队累投金额(元)', '奖金(元)'],cursor:0,tab: '上一页'});
-            this.ajaxLadderHandler(API_PATH+"api/activityPullInvest/v1/singularMonthList.json");
-        }
-    }
-    ajaxLadderHandler(url){
-        $.get(url,{
+    //请求个人、小组数据
+    ajaxLadder(title){
+        $.get(API_PATH+"api/activityPullInvest/v1/singularMonthTeamList.json",{
             start:this.START,
             end:this.END
         }).then(data => {
-            var sData = data.data || {};
-            this.setState({totalData: sData})
+            let sData;
+            if(title == "个人榜"){
+                this.setState({thead: ['用户名', '个人累投金额(元)', '奖金(元)'], cursor: 0, tab: '上一页'});
+                sData = data.data.persondata || {};
+                this.setState({list: sData})
+            }else if(title == "团队榜"){
+                this.setState({thead: ['用户名', '团队累投金额(元)', '奖金(元)'], cursor: 0, tab: '上一页'});
+                sData = data.data.teamdata || {};
+                this.setState({list: sData})
+            }
         })
     }
 
@@ -81,12 +81,9 @@ class PersonTeamTotalLadderMobile extends React.Component {
         }
     }
 
-    fixedPriceFun(money) {
-        return money.toFixed(2);
-    }
-
     get_current_page() {
-        return this.state.list.slice(this.state.cursor, this.state.cursor + this.PRE_PAGE);
+        let {list} =this.state;
+        return list && list.slice(this.state.cursor, this.state.cursor + this.PRE_PAGE);
     }
     render() {
         let {tab,totalLadderTab,thead,cursor,totalPage} = this.state;
@@ -112,9 +109,9 @@ class PersonTeamTotalLadderMobile extends React.Component {
                     {<span className="oneSpan">{item.loginName}</span>}
                 </td>
                 <td>
-                    {fixedPrice(item.total)}
+                    {item.amount}
                 </td>
-                <td className={this.fixedPriceFun(index) == '暂无奖金'?null:"bodyPrice"}>{this.fixedPriceFun(index)}</td>
+                <td className={item.bonus?"bodyPrice":''}>{item.bonus}</td>
             </tr>
         };
         let tHead = (item, index)=> {

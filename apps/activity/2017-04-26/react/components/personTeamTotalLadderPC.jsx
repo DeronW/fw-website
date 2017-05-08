@@ -15,27 +15,30 @@ class PersonTeamTotalLadderPC extends React.Component {
         }
     }
     componentDidMount() {
-        let {title} = this.props;
-        if(title == "个人榜"){
-            this.ajaxLadderHandler(API_PATH+"api/activityPullInvest/v1/singularMonthList.json")
-        }else if(title == "团队榜"){
-            this.ajaxLadderHandler(API_PATH+"api/activityPullInvest/v1/singularMonthTeamList.json")
-        }
+        this.ajaxLadder();
     }
-    ajaxLadderHandler(url){
-        $.get(url,{
+    //请求个人、小组数据
+    ajaxLadder(){
+        $.get(API_PATH+"api/activityPullInvest/v1/singularMonthTeamList.json",{
             start:this.START,
             end:this.END
         }).then(data => {
-            var sData = data.data || {};
-            this.setState({list: sData})
+            let sData;
+            let {title} =this.props;
+            if(title == "个人榜"){
+                sData = data.data.persondata || {};
+                this.setState({list: sData})
+            }else if(title == "团队榜"){
+                sData = data.data.teamdata || {};
+                this.setState({list: sData})
+            }
         })
     }
 
     switchPageHandler(type) {
         this.setState({tab: type});
         let {page,totalPage}=this.state;
-        let cursor, min, new_page, len = this.state.totalData.topList.length;
+        let cursor, min, new_page, len = this.state.list.length;
         if (type == '上一页') {
             if (len % this.PRE_PAGE) {
                 min = parseInt(len / this.PRE_PAGE) * this.PRE_PAGE
@@ -69,29 +72,9 @@ class PersonTeamTotalLadderPC extends React.Component {
         }
     }
 
-    fixedPriceFun(i) {
-        var febStart = new Date("2017/2/3").getTime();
-        var marStart = new Date("2017/3/3").getTime();
-        let monthPrice = 0;
-        var money = 0;
-        let totalData = this.state.list;
-        if (totalData.topList[i].totalall < 50 || totalData.topList[i].total < 500000) {
-            return '暂无奖金'
-        } else {
-            if (this.state.currentTime < febStart || this.props.startDate == '2017-1-6') {
-                monthPrice = 120000;
-            } else if (this.state.currentTime < marStart || this.props.startDate == '2017-2-3') {
-                monthPrice = 150000;
-            } else {
-                monthPrice = 180000;
-            }
-            money = ((totalData.topList[i].total) / (totalData.totalYearInvest)) * monthPrice;
-        }
-        return money.toFixed(2);
-    }
-
     get_current_page() {
-        return this.state.list.slice(this.state.cursor, this.state.cursor + this.PRE_PAGE);
+        let {list} =this.state;
+        return list && list.slice(this.state.cursor, this.state.cursor + this.PRE_PAGE);
     }
     render() {
         let {totalPage,tab,cursor,list}=this.state;
@@ -116,9 +99,9 @@ class PersonTeamTotalLadderPC extends React.Component {
                     {<span className="oneSpan">{item.loginName}</span>}
                 </td>
                 <td>
-                    {this.props.fixedPrice(item.total)}
+                    {item.amount}
                 </td>
-                <td className={this.fixedPriceFun(index) == '暂无奖金'?null:"bodyPrice"}>{this.fixedPriceFun(index)}</td>
+                <td className={item.bonus?"bodyPrice":""}>{item.bonus}</td>
             </tr>
         };
         let tBody = (

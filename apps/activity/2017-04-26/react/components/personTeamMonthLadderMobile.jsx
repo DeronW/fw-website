@@ -3,14 +3,14 @@ class PersonTeamMonthLadderMobile extends React.Component {
     constructor(props) {
         super(props);
         this.PRE_PAGE = 10;
+        this.START = '2017/5/16 00:00:00';
+        this.end = '2017/6/13 23:59:59';
         this.state = {
             list: [],
             page: 1,
             totalPage: 2,
             tab: '上一页',
             cursor: 0,
-            start: '2017/5/16 00:00:00',
-            end: '2017/6/13 23:59:59',
             thead: ['用户名', '个人累投金额(元)', '奖金(元)'],
             ladderTab: '个人榜',
         }
@@ -30,45 +30,44 @@ class PersonTeamMonthLadderMobile extends React.Component {
                 startDate = '2017/6/14 00:00:00';
                 endDate = '2017/7/12 23:59:59';
             }
-            this.switchCategoryTab(this.state.ladderTab, startDate, endDate);
+            this.ajaxLadder(this.state.ladderTab, startDate, endDate);
         }.bind(this));
     }
 
     componentWillReceiveProps(nextProps) {
         this.setState({start: nextProps.start, end: nextProps.end});
-        this.switchCategoryTab(this.state.ladderTab, nextProps.start, nextProps.end);
+        this.ajaxLadder(this.state.ladderTab, nextProps.start, nextProps.end);
     }
 
     //切换月榜tab
     switchLadderTabHandler(t) {
         if (t == this.state.ladderTab) return;
         this.setState({ladderTab: t});
-        this.switchCategoryTab(t, this.state.start, this.state.end);
+        this.ajaxLadder(t, this.START, this.END);
     }
-
-    switchCategoryTab(t, start, end) {
-        if (t == "个人榜") {
-            this.setState({thead: ['用户名', '个人累投金额(元)', '奖金(元)'], cursor: 0, tab: '上一页'});
-            this.ajaxLadderHandler(API_PATH + "api/activityPullInvest/v1/singularMonthList.json",start, end);
-        } else if (t == "团队榜") {
-            this.setState({thead: ['用户名', '团队累投金额(元)', '奖金(元)'], cursor: 0, tab: '上一页'});
-            this.ajaxLadderHandler(API_PATH + "api/activityPullInvest/v1/singularMonthTeamList.json",start, end);
-        }
-    }
-    ajaxLadderHandler(url,start,end){
-        $.get(url, {
-            start: start,
-            end: end
+    //请求个人、小组数据
+    ajaxLadder(title,start,end){
+        $.get(API_PATH+"api/activityPullInvest/v1/singularMonthTeamList.json",{
+            start:start,
+            end:end
         }).then(data => {
-            var sData = data.data || {};
-            this.setState({list: sData})
+            let sData;
+            if(title == "个人榜"){
+                this.setState({thead: ['用户名', '个人累投金额(元)', '奖金(元)'], cursor: 0, tab: '上一页'});
+                sData = data.data.persondata || {};
+                this.setState({list: sData})
+            }else if(title == "团队榜"){
+                this.setState({thead: ['用户名', '团队累投金额(元)', '奖金(元)'], cursor: 0, tab: '上一页'});
+                sData = data.data.teamdata || {};
+                this.setState({list: sData})
+            }
         })
     }
 
     switchPageHandler(type) {
         this.setState({tab: type});
         let {page,totalPage}=this.state;
-        let cursor, min, new_page, len = this.state.totalData.topList.length;
+        let cursor, min, new_page, len = this.state.list.length;
         if (type == '上一页') {
             if (len % this.PRE_PAGE) {
                 min = parseInt(len / this.PRE_PAGE) * this.PRE_PAGE
@@ -102,12 +101,9 @@ class PersonTeamMonthLadderMobile extends React.Component {
         }
     }
 
-    fixedPriceFun(money) {
-        return money.toFixed(2);
-    }
-
     get_current_page() {
-        return this.state.list.slice(this.state.cursor, this.state.cursor + this.PRE_PAGE);
+        let {list} =this.state;
+        return list && list.slice(this.state.cursor, this.state.cursor + this.PRE_PAGE);
     }
 
     render() {
@@ -133,9 +129,9 @@ class PersonTeamMonthLadderMobile extends React.Component {
                     {<span className="oneSpan">{item.loginName}</span>}
                 </td>
                 <td>
-                    {this.props.fixedPrice(item.total)}
+                    {item.amount}
                 </td>
-                <td className={this.fixedPriceFun(index) == '暂无奖金'?null:"bodyPrice"}>{this.fixedPriceFun(index)}</td>
+                <td className={item.bonus?"bodyPrice":''}>{item.bonus}</td>
             </tr>
         };
         let tHead = (item, index)=> {

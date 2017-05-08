@@ -45,24 +45,18 @@ const ProductListAuto = React.createClass({
         this.resortHandler();
         this.rewardPoolHandler();
     },
-    resortHandler(){
-        //$.get(API_PATH + "api/activityPullInvest/v1/myPrizeRecordList.json").then(data => {
-        //    this.setState({products: data.data.pageData.result})
-        //})
-    },
     rewardPoolHandler(){
-        $.get(API_PATH + "api/activityPullInvest/v1/myPrizeRecordList.json").then(data => {
-            console.log(data);
+        $.get(API_PATH + "/api/activityPullInvest/v1/myPrizeRecordListApp.json").then(data => {
             this.setState({singleProduct: data.data.pageData.result})
         })
     },
     render(){
         let {products,singleProduct} = this.state, sum = products.length;
-        products && singleProduct.forEach((item, index)=> {
+        singleProduct && singleProduct.forEach((item, index)=> {
             products.forEach((p, i)=> {
                 if (item.prizeMark === products[i].prizeMark) {
                     products[i].selected = true;
-                    products[i].number = item.number;
+                    products[i].count = item.count;
                 }
             });
         });
@@ -82,7 +76,7 @@ const ProductListAuto = React.createClass({
 
                         <div className={cell.selected?"":'shade'}></div>
                         <div
-                            className={(cell.selected && cell.number > 1)?"productNumber":''}>{(cell.selected && cell.number > 1) ? cell.number : ''}</div>
+                            className={(cell.selected && cell.count > 1)?"productNumber":''}>{(cell.selected && cell.count > 1) ? cell.count : ''}</div>
                     </div>
                     <div
                         className={cell.selected?"productName":"productNameShade productName"}>{cell.goodsname}</div>
