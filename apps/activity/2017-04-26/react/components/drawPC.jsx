@@ -10,8 +10,10 @@ class DrawPC extends React.Component {
             selectedJune: false,
             start: '2017-05-16 00:00:00',
             end: '2017-06-13 23:59:59',
-            remain: '',
             close: false,
+            bonus: 0,
+            totalBonus:0,
+            total:'',
             prize_list: [{
                 img: 'http://placehold.it/138?text=1',
                 name: 'name',
@@ -52,33 +54,32 @@ class DrawPC extends React.Component {
     }
 
     componentDidMount() {
-        this.ajaxTradeSum();
-        this.judgeStageHandler();
         var that = this;
         $UserReady(function (isLogin, user) {
             that.setState({isLogin: isLogin});
         });
+        this.ajaxTradeSum();
+        this.judgeStageHandler();
     }
 
     //请求交易平台交易额
-    ajaxTradeSum(){
-        $.get(API_PATH+"api/activityPullInvest/v1/singularMonthTeamList.json",{
-            start:this.state.start,
-            end:this.state.end
-        }).then(data=>{
+    ajaxTradeSum() {
+        $.get(API_PATH + "api/activityPullInvest/v1/singularMonthTeamList.json", {
+            start: this.state.start,
+            end: this.state.end
+        }).then(data=> {
             let bonus = 0;
+            let totalBonus = 0;
             let total = data.data.total;
-            if(total >= 150000000 && total < 380000000){
+            console.log(total);
+            if (total >= 150000000 && total < 380000000) {
                 bonus = 6
-            }else if(total >= 380000000 && total < 450000000){
+            } else if (total >= 380000000 && total < 450000000) {
                 bonus = 12
-            }else if(total >= 450000000){
+            } else if (total >= 450000000) {
                 bonus = 18
             }
-            console.log(total);
-            let remain = "<div class='loginRemain'>该月内，个人累投金额<span>≥50万</span>元；或单月内团队累投金额<span>≥1000万</span>且团队人数<span>≥50</span>人，当前可分<em>"+bonus+"</em>元奖金！ 月度奖金分配方式：<span>个人和团队奖金分配比例=4（个人）：6（团队）</span></div>"
-
-            this.setState({remain: remain});
+            this.setState({total:total,bonus: bonus,totalBonus:totalBonus});
         })
     }
 
@@ -86,13 +87,14 @@ class DrawPC extends React.Component {
         var timeStart = 1494864000000;//5.16号
         var timeMiddle = 1497283200000;//6.13号
         var timeEnd = 1499961600000;//7.12号
-        var currentTime = 1497369600000;//1494691200000 5.15号 ，1497369600000 6.14
-        console.log(new Date(currentTime));
-        if (currentTime < timeMiddle) {
-            this.setState({stageMay: '进行中', stageJune: '未开始'})
-        } else if (currentTime < timeEnd) {
-            this.setState({stageMay: '已结束', stageJune: '进行中', selectedMay: false, selectedJune: true})
-        }
+        var that = this;
+        this.getServerTimestamp(function (currentTime) {
+            if (currentTime < timeMiddle) {
+                that.setState({stageMay: '进行中', stageJune: '未开始'})
+            } else if (currentTime < timeEnd) {
+                that.setState({stageMay: '已结束', stageJune: '进行中', selectedMay: false, selectedJune: true})
+            }
+        });
     }
 
     switchTabHandler(stage, month) {
@@ -132,7 +134,7 @@ class DrawPC extends React.Component {
     }
 
     render() {
-        let {stageMay,stageJune,selectedMay,selectedJune,remain,close,isLogin,start,end} = this.state;
+        let {stageMay,stageJune,selectedMay,selectedJune,total,bonus,totalBonus,close,isLogin,start,end} = this.state;
         let no = {
             width: "237px",
             height: "96px",
@@ -172,6 +174,14 @@ class DrawPC extends React.Component {
                 <div className='noLoginRemain'>请登录后，查看您的投资获奖情况。<a onClick={()=>this.gotoLogin()}>立即登录</a></div>
             </div>
         );
+        let loginRemain = (
+            <div className="remindText">
+                <div className='loginRemain'>
+                    单月内，平台达到相应累计交易量，且个人及团队排行前20名的工友，最高可获分33万奖金。
+                    当前平台累计交易量<em>{this.state.total}</em> 元，可获分<em>{bonus}</em>元奖金！
+                </div>
+            </div>
+        );
         let noLoginChance = (
             <div className="drawChance">
                 <div className='noLoginChance'>活动期间单标单笔投资每满10000元获1次抽奖机会，登录后可查抽奖机会，<a onClick={()=>this.gotoLogin()}>立即登录</a>
@@ -200,10 +210,10 @@ class DrawPC extends React.Component {
                     </div>
                 </div>
                 <div className="drawTips">
-                    <div className="tips">大转盘活动说明：</div>
+                    <div className="tips">抽奖活动说明：</div>
                     <p>1、活动期间，单笔每满10000元获1次抽奖机会；</p>
 
-                    <p>2、抽奖机会仅在本活动期间（5月4日—6月30日）有效。</p>
+                    <p>2、抽奖机会仅在本活动期间（5月16日-7月12日）有效。</p>
                 </div>
                 <div className="drawTitle">投资冲月榜，个人团队大作战</div>
                 <div className="monthStateTab">
@@ -211,10 +221,10 @@ class DrawPC extends React.Component {
                     {monthJuneTab(stageJune, "六月", "6.14 ~ 7.12")}
                 </div>
                 {
-                    isLogin ?
-                        <div className="remindText" dangerouslySetInnerHTML={{__html:remain}}></div> : noLoginRemain
+                    isLogin ? loginRemain : noLoginRemain
                 }
-
+                <div className="remindText"> <div className='loginRemain'>进榜规则：个人累投金额≥50万元；或团队累投金额≥1000万且团队人数≥50人。
+                    月度奖金分配方式：个人和团队奖金分配比例=4（个人）：6（团队）</div></div>
                 <div className="drawMonthLadder">
                     <div className="person">
                         {
@@ -244,9 +254,11 @@ class DrawPC extends React.Component {
                     <p>5. 活动期间，单月内平台达到相应任务目标，且个人及团队排行前20名的工友，即可赢得最高百万奖金包！累计金额越多获得的奖金就越多。</p>
                 </div>
                 <div className="drawTitle">终级排行榜 百万壕礼奉上</div>
-                <div className="drawInstructor">5.16-7.12，平台累投金额及累投年化金额达标。个人及团队排行前30的工友，将按照其累计投资金额占比进行最高<em>100万</em>元奖
-                    金分配。累计金额越多获得的奖金就越多。
+                <div className="remindText"><div className='loginRemain'>5.16-7.12，平台达到相应累计交易量，且个人及团队排行前30名的工友，最高获分100万元奖金。
+                    当前平台累计交易量<em>{total}</em>元，可获分{totalBonus}元奖金！。</div>
                 </div>
+                <div className="remindText"><div className='loginRemain'>进榜规则：个人累投金额≥50万元；或团队累投金额≥1000万且团队人数≥50人。
+                    月度奖金分配方式：个人和团队奖金分配比例=4（个人）：6（团队）</div></div>
                 <div className="drawTotalLadder">
                     <div className="person">
                         {

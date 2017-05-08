@@ -45,10 +45,10 @@ class PersonTeamMonthLadderPC extends React.Component {
         }).then(data => {
             let sData;
             if(title == "个人榜"){
-                sData = data.data.persondata || {};
+                sData = data.data.persondata || [];
                 this.setState({list: sData})
             }else if(title == "团队榜"){
-                sData = data.data.teamdata || {};
+                sData = data.data.teamdata || [];
                 this.setState({list: sData})
             }
         })

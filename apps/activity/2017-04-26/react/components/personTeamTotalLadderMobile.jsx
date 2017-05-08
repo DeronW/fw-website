@@ -34,11 +34,11 @@ class PersonTeamTotalLadderMobile extends React.Component {
             let sData;
             if(title == "个人榜"){
                 this.setState({thead: ['用户名', '个人累投金额(元)', '奖金(元)'], cursor: 0, tab: '上一页'});
-                sData = data.data.persondata || {};
+                sData = data.data.persondata || [];
                 this.setState({list: sData})
             }else if(title == "团队榜"){
                 this.setState({thead: ['用户名', '团队累投金额(元)', '奖金(元)'], cursor: 0, tab: '上一页'});
-                sData = data.data.teamdata || {};
+                sData = data.data.teamdata || [];
                 this.setState({list: sData})
             }
         })

@@ -50,13 +50,13 @@ class DrawMobile extends React.Component {
         var timeStart = 1494864000000;//5.16号
         var timeMiddle = 1497283200000;//6.13号
         var timeEnd = 1499961600000;//7.12号
-        var currentTime = 1497369600000;//1494691200000 5.15号 ，1497369600000 6.14
-        console.log(new Date(currentTime));
-        if (currentTime < timeMiddle) {
-            this.setState({stageMay: '进行中', stageJune: '未开始'})
-        } else if (currentTime < timeEnd) {
-            this.setState({stageMay: '已结束', stageJune: '进行中', selectedMay: false, selectedJune: true})
-        }
+        this.getServerTimestamp(function (currentTime) {
+            if (currentTime < timeMiddle) {
+                that.setState({stageMay: '进行中', stageJune: '未开始'})
+            } else if (currentTime < timeEnd) {
+                that.setState({stageMay: '已结束', stageJune: '进行中', selectedMay: false, selectedJune: true})
+            }
+        });
     }
 
     //切换月份tab
