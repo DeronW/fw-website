@@ -75,6 +75,7 @@ class DrawPC extends React.Component {
             }else if(total >= 450000000){
                 bonus = 18
             }
+            console.log(total);
             let remain = "<div class='loginRemain'>该月内，个人累投金额<span>≥50万</span>元；或单月内团队累投金额<span>≥1000万</span>且团队人数<span>≥50</span>人，当前可分<em>"+bonus+"</em>元奖金！ 月度奖金分配方式：<span>个人和团队奖金分配比例=4（个人）：6（团队）</span></div>"
 
             this.setState({remain: remain});

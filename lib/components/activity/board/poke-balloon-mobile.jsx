@@ -9,7 +9,7 @@ const BalloonBoom = React.createClass({
     },
     componentDidMount(){
         $.get(API_PATH+"api/userState/v1/timestamp.json", (data)=> {
-            if (data.data.timestamp> 9) {
+            if (data.data.timestamp > 1499875200000) {
                 this.setState({outTime: true})
             }
         }, 'json')

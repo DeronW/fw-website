@@ -42,7 +42,6 @@ const ProductListAuto = React.createClass({
         }
     },
     componentDidMount(){
-        this.resortHandler();
         this.rewardPoolHandler();
     },
     rewardPoolHandler(){
