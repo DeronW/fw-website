@@ -8,6 +8,8 @@ $(document).ready(function () {
     }
     if(hash==="#aboutus"){
         jumplink(hash);
+    }else if(hash==="#partner"){
+        jumplink(hash);
     }else if(hash==="#contactus"){
         jumplink(hash);
     }else if(hash==="#school"){
@@ -15,6 +17,7 @@ $(document).ready(function () {
     }
     $(".left-item").each(function (index, item) {
         $(this).click(function () {
+            console.log(index);
             $(this).addClass("active").siblings().removeClass("active")
             $(".r-item").eq(index).css({display: "block"}).siblings().css({display: "none"})
             $(".aboutus").text($(this).find(".l-content").text());
@@ -22,8 +25,10 @@ $(document).ready(function () {
             if(index==0){
                 location.hash = "#aboutus"
             }else if(index==1){
-                location.hash ="#contactus"
-            }else if(index=2){
+                location.hash ="#partner"
+            }else if(index==2){
+                location.hash="#contactus"
+            }else if(index==3){
                 location.hash="#school"
             }
         })
