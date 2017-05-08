@@ -8,8 +8,8 @@ const BalloonBoom = React.createClass({
         }
     },
     componentDidMount(){
-        $.get("./javascripts/time.json", (data)=> {
-            if (data.time > 9) {
+        $.get(API_PATH+"api/userState/v1/timestamp.json", (data)=> {
+            if (data.data.timestamp> 9) {
                 this.setState({outTime: true})
             }
         }, 'json')
@@ -135,7 +135,6 @@ const PokeBalloonMobile = React.createClass({
         } else {
             return this.state.type
         }
-
     },
     showAddress(){
         ReactDOM.render(<PopInformation />, document.getElementById("pop"))

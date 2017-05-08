@@ -8,8 +8,8 @@ class DrawPC extends React.Component {
             stageJune: '未开始',
             selectedMay: true,
             selectedJune: false,
-            start:'2017/5/16 00:00:00',
-            end:'2017/6/13 23:59:59',
+            start: '2017-05-16 00:00:00',
+            end: '2017-06-13 23:59:59',
             remain: '',
             close: false,
             prize_list: [{
@@ -39,6 +39,7 @@ class DrawPC extends React.Component {
     closePopHandler() {
         ReactDOM.unmountComponentAtNode(document.getElementById('pop'));
     }
+
     getServerTimestamp(callback) {
         var ts = $getDebugParams().timestamp;
         if (ts) {
@@ -49,17 +50,35 @@ class DrawPC extends React.Component {
             }.bind(this), 'json')
         }
     }
+
     componentDidMount() {
+        this.ajaxTradeSum();
+        this.judgeStageHandler();
         var that = this;
         $UserReady(function (isLogin, user) {
             that.setState({isLogin: isLogin});
-            var remain = "";
-            if (isLogin) {
-                remain = "<div class='loginRemain'>该月内，个人累投金额<span>≥50万</span>元；或单月内团队累投金额<span>≥1000万</span>且团队人数<span>≥50</span>人，当前可分<span></span>18万</span>元奖金！ 月度奖金分配方式：<span>个人和团队奖金分配比例=4（个人）：6（团队）</span></div>"
-            }
-            that.setState({remain: remain})
         });
-        this.judgeStageHandler();
+    }
+
+    //请求交易平台交易额
+    ajaxTradeSum(){
+        $.get(API_PATH+"api/activityPullInvest/v1/singularMonthTeamList.json",{
+            start:this.state.start,
+            end:this.state.end
+        }).then(data=>{
+            let bonus = 0;
+            let total = data.data.total;
+            if(total >= 150000000 && total < 380000000){
+                bonus = 6
+            }else if(total >= 380000000 && total < 450000000){
+                bonus = 12
+            }else if(total >= 450000000){
+                bonus = 18
+            }
+            let remain = "<div class='loginRemain'>该月内，个人累投金额<span>≥50万</span>元；或单月内团队累投金额<span>≥1000万</span>且团队人数<span>≥50</span>人，当前可分<em>"+bonus+"</em>元奖金！ 月度奖金分配方式：<span>个人和团队奖金分配比例=4（个人）：6（团队）</span></div>"
+
+            this.setState({remain: remain});
+        })
     }
 
     judgeStageHandler() {
@@ -80,15 +99,15 @@ class DrawPC extends React.Component {
             this.setState({
                 selectedMay: true,
                 selectedJune: false,
-                start:'2017/5/16 00:00:00',
-                end:'2017/6/13 23:59:59'
+                start: '2017-05/16 00:00:00',
+                end: '2017-06/13 23:59:59'
             })
         } else {
             if (stage != "未开始")  this.setState({
                 selectedMay: false,
                 selectedJune: true,
-                start:'2017/6/14 00:00:00',
-                end:'2017/7/12 23:59:59'
+                start: '2017-06/14 00:00:00',
+                end: '2017-07/12 23:59:59'
             })
         }
     }
@@ -154,7 +173,13 @@ class DrawPC extends React.Component {
         );
         let noLoginChance = (
             <div className="drawChance">
-                <div className='noLoginChance'>登录后可查抽奖机会，<a onClick={()=>this.gotoLogin()}>立即登录</a></div>
+                <div className='noLoginChance'>活动期间单标单笔投资每满10000元获1次抽奖机会，登录后可查抽奖机会，<a onClick={()=>this.gotoLogin()}>立即登录</a>
+                </div>
+            </div>
+        );
+        let loginChance = (
+            <div className="drawChance">
+                <div className='noLoginChance'>投资每满10000元获1次抽奖机会，登录后可查抽奖</div>
             </div>
         );
         return <div className="drawPC">
@@ -162,12 +187,12 @@ class DrawPC extends React.Component {
             <div className="drawBox">
                 <div className="drawTitle">大奖抽抽抽，100%中奖</div>
                 {
-                    !isLogin && noLoginChance
+                    isLogin ? loginChance : noLoginChance
                 }
                 <div className="drawMachine">
                     <div className="machine">
                         <SlotMachinePC isLogin={isLogin} gotoLogin={this.gotoLogin} prize_list={this.state.prize_list}
-                                       result={this.state.result} />
+                                       result={this.state.result}/>
                     </div>
                     <div className="winningList">
                         <WinningListPC isLogin={isLogin} gotoLogin={this.gotoLogin}/>
@@ -176,6 +201,7 @@ class DrawPC extends React.Component {
                 <div className="drawTips">
                     <div className="tips">大转盘活动说明：</div>
                     <p>1、活动期间，单笔每满10000元获1次抽奖机会；</p>
+
                     <p>2、抽奖机会仅在本活动期间（5月4日—6月30日）有效。</p>
                 </div>
                 <div className="drawTitle">投资冲月榜，个人团队大作战</div>
@@ -191,12 +217,16 @@ class DrawPC extends React.Component {
                 <div className="drawMonthLadder">
                     <div className="person">
                         {
-                            <PersonTeamMonthLadderPC title={"个人榜"} start={start} end={end} getServerTimestamp={this.getServerTimestamp} isImgFun={this.isImgFun} fixedPrice={this.fixedPrice}/>
+                            <PersonTeamMonthLadderPC title={"个人榜"} start={start} end={end}
+                                                     getServerTimestamp={this.getServerTimestamp}
+                                                     isImgFun={this.isImgFun} fixedPrice={this.fixedPrice}/>
                         }
                     </div>
                     <div className="team">
                         {
-                            <PersonTeamMonthLadderPC title={"团队榜"} start={start} end={end} getServerTimestamp={this.getServerTimestamp} isImgFun={this.isImgFun} fixedPrice={this.fixedPrice}/>
+                            <PersonTeamMonthLadderPC title={"团队榜"} start={start} end={end}
+                                                     getServerTimestamp={this.getServerTimestamp}
+                                                     isImgFun={this.isImgFun} fixedPrice={this.fixedPrice}/>
                         }
                     </div>
                 </div>
@@ -219,12 +249,14 @@ class DrawPC extends React.Component {
                 <div className="drawTotalLadder">
                     <div className="person">
                         {
-                            <PersonTeamTotalLadderPC title={"个人榜"} getServerTimestamp={this.getServerTimestamp} isImgFun={this.isImgFun} fixedPrice={this.fixedPrice}/>
+                            <PersonTeamTotalLadderPC title={"个人榜"} getServerTimestamp={this.getServerTimestamp}
+                                                     isImgFun={this.isImgFun} fixedPrice={this.fixedPrice}/>
                         }
                     </div>
                     <div className="team">
                         {
-                            <PersonTeamTotalLadderPC title={"团队榜"} getServerTimestamp={this.getServerTimestamp} isImgFun={this.isImgFun} fixedPrice={this.fixedPrice}/>
+                            <PersonTeamTotalLadderPC title={"团队榜"} getServerTimestamp={this.getServerTimestamp}
+                                                     isImgFun={this.isImgFun} fixedPrice={this.fixedPrice}/>
                         }
                     </div>
                 </div>

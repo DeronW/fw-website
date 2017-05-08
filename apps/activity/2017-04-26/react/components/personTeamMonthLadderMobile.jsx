@@ -3,8 +3,8 @@ class PersonTeamMonthLadderMobile extends React.Component {
     constructor(props) {
         super(props);
         this.PRE_PAGE = 10;
-        this.START = '2017/5/16 00:00:00';
-        this.end = '2017/6/13 23:59:59';
+        this.START = '2017-05-16 00:00:00';
+        this.end = '2017-06-13 23:59:59';
         this.state = {
             list: [],
             page: 1,
@@ -18,17 +18,17 @@ class PersonTeamMonthLadderMobile extends React.Component {
 
     componentDidMount() {
         let {getServerTimestamp} = this.props;
-        var June = new Date("2017/6/13 23:59:59").getTime();
-        var July = new Date("2017/7/12 23:59:59").getTime();
-        var startDate = '2017/5/16 00:00:00';
-        var endDate = '2017/7/12 23:59:59';
+        var June = new Date("2017-06-13 23:59:59").getTime();
+        var July = new Date("2017-07-12 23:59:59").getTime();
+        var startDate = '2017-05-16 00:00:00';
+        var endDate = '2017-07-12 23:59:59';
         getServerTimestamp(function (timestamp) {
             if (timestamp < June) {
-                startDate = '2017/5/16 00:00:00';
-                endDate = '2017/6/13 23:59:59';
+                startDate = '2017-05-16 00:00:00';
+                endDate = '2017-06-13 23:59:59';
             } else if (timestamp < July) {
-                startDate = '2017/6/14 00:00:00';
-                endDate = '2017/7/12 23:59:59';
+                startDate = '2017-06-14 00:00:00';
+                endDate = '2017-07-12 23:59:59';
             }
             this.ajaxLadder(this.state.ladderTab, startDate, endDate);
         }.bind(this));

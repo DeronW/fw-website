@@ -17,13 +17,13 @@ const RockProduct = React.createClass({
     },
     //自动循环播放奖品列表
     autoCycleHandler(){
-        let delay = 30, duration = 3000, singleH = 182, p, target = 182;
+        let delay = 30, duration = 4500, singleH = 182, p, target = 182;
         let { productList } = this.props;
         this.t = setInterval(() => {
             this._time_gap += delay;
             if (this._time_gap >= duration) {
                 if (this.state.position < singleH * (productList.length - 1)) {
-                    p = (target - this.state.position) / 8;
+                    p = (target - this.state.position) / 12;
                     p = p > 0 ? Math.ceil(p) : Math.floor(p);
                     if (this.state.position >= singleH * (this.state.position_index)) {
                         target += 182;
@@ -241,8 +241,7 @@ const SlotMachinePC = React.createClass({
         }
     },
     showRule(){
-        ReactDOM.render(<PopMessage closePopHandle={this.closePopHandler} gotoLogin={this.props.gotoLogin}
-                                    popMyPrize="抽奖说明" popRule={true} popBtn="朕知道了"/>, document.getElementById('pop'))
+        ReactDOM.render(<PopRule closePopHandle={this.closePopHandler} popBtn="朕知道了"/>, document.getElementById('pop'))
     },
     popLogin(){
         ReactDOM.render(<PopMessage closePopHandle={this.closePopHandler} gotoLogin={this.props.gotoLogin} popTop="立即登录"

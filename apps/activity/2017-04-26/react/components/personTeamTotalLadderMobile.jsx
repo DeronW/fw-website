@@ -3,8 +3,8 @@ class PersonTeamTotalLadderMobile extends React.Component {
     constructor(props) {
         super(props);
         this.PRE_PAGE = 15;
-        this.START = '2017/5/16 00:00:00';
-        this.END = '2017/7/12 23:59:59';
+        this.START = '2017-05-16 00:00:00';
+        this.END = '2017-07-12 23:59:59';
         this.state = {
             list:[],
             page:1,

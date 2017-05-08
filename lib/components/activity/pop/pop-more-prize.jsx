@@ -59,7 +59,7 @@ const PopMorePrize = React.createClass({
                     <thead>
                     <tr>
                         <td>活动名称</td>
-                        <td>翻牌时间</td>
+                        <td>抽奖时间</td>
                         <td>所获奖品</td>
                     </tr>
                     </thead>

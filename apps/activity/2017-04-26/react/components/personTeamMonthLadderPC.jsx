@@ -14,17 +14,17 @@ class PersonTeamMonthLadderPC extends React.Component {
     }
     componentDidMount() {
         let {getServerTimestamp,title} = this.props;
-        var June = new Date("2017/6/13 23:59:59").getTime();
-        var July = new Date("2017/7/12 23:59:59").getTime();
-        var startDate = '2017/5/16 00:00:00';
-        var endDate = '2017/7/12 23:59:59';
+        var June = new Date("2017-06-13 23:59:59").getTime();
+        var July = new Date("2017-07-12 23:59:59").getTime();
+        var startDate = '2017-05-16 00:00:00';
+        var endDate = '2017-07-12 23:59:59';
         getServerTimestamp(function (timestamp) {
             if (timestamp < June) {
-                startDate = '2017/5/16 00:00:00';
-                endDate = '2017/6/13 23:59:59';
+                startDate = '2017-05-16 00:00:00';
+                endDate = '2017-06-13 23:59:59';
             } else if (timestamp < July) {
-                startDate = '2017/6/14 00:00:00';
-                endDate = '2017/7/12 23:59:59';
+                startDate = '2017-06-14 00:00:00';
+                endDate = '2017-07-12 23:59:59';
             }
             this.ajaxLadder(title,startDate, endDate);
             //if(title == "个人榜"){
