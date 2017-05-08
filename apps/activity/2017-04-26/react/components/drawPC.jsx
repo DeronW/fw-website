@@ -255,7 +255,7 @@ class DrawPC extends React.Component {
                 </div>
                 <div className="drawTitle">终级排行榜 百万壕礼奉上</div>
                 <div className="remindText"><div className='loginRemain'>5.16-7.12，平台达到相应累计交易量，且个人及团队排行前30名的工友，最高获分100万元奖金。
-                    当前平台累计交易量<em>{total}</em>元，可获分{totalBonus}元奖金！。</div>
+                    当前平台累计交易量<em>{total}</em>元，可获分<em>{totalBonus}</em>元奖金！。</div>
                 </div>
                 <div className="remindText"><div className='loginRemain'>进榜规则：个人累投金额≥50万元；或团队累投金额≥1000万且团队人数≥50人。
                     月度奖金分配方式：个人和团队奖金分配比例=4（个人）：6（团队）</div></div>

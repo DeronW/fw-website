@@ -49,7 +49,8 @@ class PersonTeamMonthLadderMobile extends React.Component {
     ajaxLadder(title,start,end){
         $.get(API_PATH+"api/activityPullInvest/v1/singularMonthTeamList.json",{
             start:start,
-            end:end
+            end:end,
+            type:'pjgtest99'
         }).then(data => {
             let sData;
             if(title == "个人榜"){

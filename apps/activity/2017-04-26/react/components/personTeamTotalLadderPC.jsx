@@ -21,7 +21,8 @@ class PersonTeamTotalLadderPC extends React.Component {
     ajaxLadder(){
         $.get(API_PATH+"api/activityPullInvest/v1/singularMonthTeamList.json",{
             start:this.START,
-            end:this.END
+            end:this.END,
+            type:'mayActBig'
         }).then(data => {
             let sData;
             let {title} =this.props;
