@@ -111,7 +111,7 @@ class DrawMobile extends React.Component {
     }
 
     gotoLogin() {
-        var loginUrl = location.protocol + '//www.9888.cn/api/activityPullNew/pullnewParty.do?id=19';
+        var loginUrl = location.protocol + '//www.9888.cn/static/activity/2017-04-26/index.html';
         $FW.gotoSpecialPage("登录", loginUrl);
     }
     gotoDraw(){

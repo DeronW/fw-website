@@ -15,23 +15,23 @@ class DrawPC extends React.Component {
             prize_list: [{
                 img: 'http://placehold.it/138?text=1',
                 name: 'name',
-                id: 1
+                prizeMark: 1
             }, {
                 img: 'http://placehold.it/138?text=2',
                 name: 'name',
-                id: 2
+                prizeMark: 2
             }, {
                 img: 'http://placehold.it/138?text=3',
                 name: 'name',
-                id: 3
+                prizeMark: 3
             }, {
                 img: 'http://placehold.it/138?text=4',
                 name: 'name',
-                id: 4
+                prizeMark: 4
             }, {
                 img: 'http://placehold.it/138?text=5',
                 name: 'name',
-                id: 5
+                prizeMark: 5
             }]
         };
     }
@@ -102,16 +102,12 @@ class DrawPC extends React.Component {
         return ['images/no1.png', 'images/no2.png', 'images/no3.png'][index]
     }
 
-    fixedPrice(total) {
-        return total.toFixed(2)
-    }
-
     closeHandler() {
         this.setState({close: !this.state.close})
     }
 
     gotoLogin() {
-        var loginUrl = location.protocol + '//www.9888.cn/api/activityPullNew/pullnewParty.do?id=19';
+        var loginUrl = location.protocol + '//www.9888.cn/static/activity/2017-04-26/index.html';
         $FW.gotoSpecialPage("登录", loginUrl);
     }
 
@@ -165,6 +161,9 @@ class DrawPC extends React.Component {
             <div className="drawBanner"></div>
             <div className="drawBox">
                 <div className="drawTitle">大奖抽抽抽，100%中奖</div>
+                {
+                    !isLogin && noLoginChance
+                }
                 <div className="drawMachine">
                     <div className="machine">
                         <SlotMachinePC isLogin={isLogin} gotoLogin={this.gotoLogin} prize_list={this.state.prize_list}
@@ -174,9 +173,11 @@ class DrawPC extends React.Component {
                         <WinningListPC isLogin={isLogin} gotoLogin={this.gotoLogin}/>
                     </div>
                 </div>
-                {
-                    !isLogin && noLoginChance
-                }
+                <div className="drawTips">
+                    <div className="tips">大转盘活动说明：</div>
+                    <p>1、活动期间，单笔每满10000元获1次抽奖机会；</p>
+                    <p>2、抽奖机会仅在本活动期间（5月4日—6月30日）有效。</p>
+                </div>
                 <div className="drawTitle">投资冲月榜，个人团队大作战</div>
                 <div className="monthStateTab">
                     {monthMayTab(stageMay, "五月", "5.16 ~ 6.13")}
