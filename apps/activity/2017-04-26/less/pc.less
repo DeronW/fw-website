@@ -9,7 +9,7 @@
   }
   .drawBox {
     width: 1140px;
-    height: 3760px;
+    height: 4080px;
     margin: auto;
     background: @colorBg;
     position: relative;
@@ -109,8 +109,10 @@
       padding: 15px 0;
       text-align: center;
       .loginRemain {
-        width: 580px;
-        margin: 10px auto;
+        width: 622px;
+        text-align: center;
+        margin: 0 auto;
+        line-height: 24px;
         em {
           color: @colorYellow;
           font-size: @fontSize20;
@@ -233,15 +235,26 @@
         }
       }
       .monthLadderPcNot {
-        width: 446px;
-        height: 260px;
+        width: 450px;
+        height: 342px;
         position: absolute;
-        top: 180px;
-        left: 30px;
+        top: 164px;
+        left: 43px;
         text-align: center;
         line-height: 260px;
         font-size: @fontSize24;
         color: @color6;
+        background: @colorWhite;
+      }
+      .totalLadderPcNot {
+        width: 450px;
+        height: 550px;
+        position: absolute;
+        top: 164px;
+        left: 41px;
+        text-align: center;
+        line-height: 550px;
+        border-radius: 10px;
       }
     }
 
@@ -271,25 +284,9 @@
       font-size: @fontSize30;
 
     }
-    .drawInstructor{
-      width: 794px;
-      padding: 12px 46px;
-      border-radius: 72px;
-      margin:0 auto 20px;
-      background: @colorDarkBlue;
-      font-size: @fontSize14;
-      .loginRemain {
-        width: 580px;
-        margin: 10px auto;
-        em {
-          color: @colorYellow;
-          font-size: @fontSize20;
-        }
-      }
-    }
     .drawTotalLadder{
       width: 1140px;
-      height: 645px;
+      height: 770px;
       margin: 80px auto;
       .person{
         float: left;
@@ -308,7 +305,7 @@
         height: 33px;
         background: url("../images/personTotalUp.png") no-repeat;
         margin: auto;
-        margin-top: -24px;
+        margin-top: -26px;
         text-align: center;
         font-size: @fontSize26;
         padding-top: 16px;
@@ -365,7 +362,7 @@
   }
   .drawExplain{
     width: 100%;
-    height: 480px;
+    height: 514px;
     background: @colorDarkBlue;
     color: @colorWhite;
     font-size: @fontSize14;

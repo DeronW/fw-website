@@ -34,6 +34,22 @@ class DrawPC extends React.Component {
                 img: 'http://placehold.it/138?text=5',
                 name: 'name',
                 prizeMark: 5
+            }, {
+                img: 'http://placehold.it/138?text=6',
+                name: 'name',
+                prizeMark: 6
+            }, {
+                img: 'http://placehold.it/138?text=7',
+                name: 'name',
+                prizeMark: 7
+            }, {
+                img: 'http://placehold.it/138?text=8',
+                name: 'name',
+                prizeMark: 8
+            }, {
+                img: 'http://placehold.it/138?text=9',
+                name: 'name',
+                prizeMark: 9
             }]
         };
     }
@@ -67,7 +83,8 @@ class DrawPC extends React.Component {
     ajaxTradeSum() {
         $.get(API_PATH + "api/activityPullInvest/v1/singularMonthTeamList.json", {
             start: this.state.start,
-            end: this.state.end
+            end: this.state.end,
+            type:'pjgtest99'
         }).then(data=> {
             let bonus = 0;
             let totalBonus = 0;
@@ -229,7 +246,7 @@ class DrawPC extends React.Component {
                     isLogin ? loginRemain : noLoginRemain
                 }
                 <div className="remindText">
-                    <div className='loginRemain'>进榜规则：个人累投金额≥50万元；或团队累投金额≥1000万且团队人数≥50人。
+                    <div className='loginRemain'>进榜规则：个人累投金额≥50万元；或团队累投金额≥1000万且团队人数≥50人。<br/>
                         月度奖金分配方式：个人和团队奖金分配比例=4（个人）：6（团队）
                     </div>
                 </div>
@@ -251,7 +268,7 @@ class DrawPC extends React.Component {
                 </div>
                 <div className="drawTips">
                     <div className="tips">温馨提示：</div>
-                    <p>1. 以上数据实时更新，最终发放奖金请以每月结束后数据为准，排名顺序：获奖工友的有效好友累投年化额>获奖工友的有效邀友数>未获奖工友的有效好友累投年化额>未获奖工友的有效邀友数；</p>
+                    <p>1. 以上数据实时更新，最终发放奖金请以每月结束后数据为准；</p>
 
                     <p>2. 奖金包奖励以工豆形式发放；</p>
 
@@ -259,19 +276,19 @@ class DrawPC extends React.Component {
 
                     <p>4. 奖金包占比分配公式：个人（或团队）累投总额÷前20名个人（或团队）累投总额。仅计算满足获奖资格的用户。</p>
 
-                    <p>5. 活动期间，单月内平台达到相应任务目标，且个人及团队排行前20名的工友，即可赢得最高百万奖金包！累计金额越多获得的奖金就越多。</p>
+                    <p>5. 活动期间，单月内平台达到相应任务目标，且个人及团队排行前20名的工友，即可累计赢得最高百万奖金包！累计金额越多获得的奖金就越多。</p>
                 </div>
                 <div className="drawTitle">终级排行榜 百万壕礼奉上</div>
                 {
                     isLogin ? <div className="remindText">
-                        <div className='loginRemain'>5.16-7.12，平台达到相应累计交易量，且个人及团队排行前30名的工友，最高获分100万元奖金。
-                            当前平台累计交易量<em>{total}</em>元，可获分<em>{totalBonus}</em>元奖金！。
+                        <div className='loginRemain'>5.16-7.12，平台达到相应累计交易量，且个人及团队排行前30名的工友，最高获分100万元奖金。<br/>
+                            当前平台累计交易量<em>{total}</em>元，可获分<em>{totalBonus}</em>元奖金！
                         </div>
                     </div> : noLoginRemain
                 }
 
                 <div className="remindText">
-                    <div className='loginRemain'>进榜规则：个人累投金额≥50万元；或团队累投金额≥1000万且团队人数≥50人。
+                    <div className='loginRemain'>进榜规则：个人累投金额≥100万元；或团队累投金额≥1200万且团队人数≥50人。<br/>
                         月度奖金分配方式：个人和团队奖金分配比例=4（个人）：6（团队）
                     </div>
                 </div>
@@ -291,9 +308,12 @@ class DrawPC extends React.Component {
                 </div>
                 <div className="drawTips">
                     <div className="tips">温馨提示：</div>
-                    <p>1. 奖金包奖励以工豆形式发放；</p>
+                    <p>1. 以上数据实时更新，最终发放奖金请以每月结束后数据为准；</p>
 
-                    <p>2、奖金包占比分配公式：奖金包占比分配公式：个人（或团队）累投总额÷前30名个人（或团队）累投总额。仅计算满足获奖资格的用户。</p>
+                    <p>2. 奖金包奖励以工豆形式发放；</p>
+                    <p>3. 奖金分配方式：个人和团队奖金分配比例=4（个人）：6（团队）</p>
+                    <p>4. 奖金包占比分配公式：个人（或团队）累投总额÷前30名个人（或团队）累投总额。仅计算满足获奖资格的用户。</p>
+                    <p>5. 活动期间，平台累投金额达标。个人及团队排行前30的工友，将按照其累计投资金额占比进行最高100万元奖金分配。累计金额越多获得的奖金就越多。</p>
                 </div>
             </div>
             <div className="drawExplain">
@@ -304,7 +324,7 @@ class DrawPC extends React.Component {
                     </div>
                     <p>1. 投资债权转让产品，不能参与本次活动；</p>
 
-                    <p>2. 批量投资（非单标）不参与本次抽奖活动</p>
+                    <p>2. 批量投资（非单标）不参与本次抽奖活动；</p>
 
                     <p>3. 月度奖金工豆奖励将于每月结束后7个工作日内，统一发放至邀请人的工场账户；</p>
 

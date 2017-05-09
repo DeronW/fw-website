@@ -66,7 +66,7 @@ const WinningListPC = React.createClass({
         }
     },
     render(){
-        let {position} = this.state;
+        let {position,dataList} = this.state;
         let cell = (item, index) => {
             return <tr key={index}>
                 <td>{item.loginName}</td>
@@ -77,11 +77,14 @@ const WinningListPC = React.createClass({
         };
         return <div className="winningListPC">
             <div className="myPrize" onClick={this.showMyPrize}></div>
-            <table className="list">
+            {dataList.length ?<table className="list">
                 <tbody className="listCell" style={{top:`${position}px`}}>
-                {this.state.dataList.map(cell)}
+                {dataList.map(cell)}
                 </tbody>
-            </table>
+            </table>:null}
+            {
+                dataList.length ? null : <div className="winningListNo">暂无抽奖记录</div>
+            }
         </div>
     }
 });
