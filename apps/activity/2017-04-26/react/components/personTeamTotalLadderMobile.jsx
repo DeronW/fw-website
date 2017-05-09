@@ -19,7 +19,16 @@ class PersonTeamTotalLadderMobile extends React.Component {
     componentDidMount() {
         this.ajaxLadder(this.state.totalLadderTab);
     }
-
+    getTestParam(callback){
+        let start = $getDebugParams().start;
+        let end = $getDebugParams().end;
+        let test = $getDebugParams().test;
+        if(start && end && test){
+            callback(decodeURI(start),decodeURI(end),test);
+        }else{
+            callback(this.state.start,this.state.end,'');
+        }
+    }
     //切换总榜tab
     switchTotalLadderTab(t) {
         if (t == this.state.totalLadderTab) return;
@@ -94,7 +103,7 @@ class PersonTeamTotalLadderMobile extends React.Component {
         let {isImgFun} = this.props;
         let pageImg = (item, index) => {
             return <div key={index}
-                        className={totalPage > 1?(tab == item ? 'selectedPage':null):'selectedPage'}
+                        className={totalPage > 1?(tab == item ? null:'selectedPage'):'selectedPage'}
                         onClick={totalPage > 1?()=>{this.switchPageHandler(item)}:null}>{item}</div>
         };
         let page = (

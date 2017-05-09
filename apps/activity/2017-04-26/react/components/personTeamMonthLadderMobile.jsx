@@ -102,7 +102,7 @@ class PersonTeamMonthLadderMobile extends React.Component {
         let {totalPage,tab,ladderTab,cursor,thead,list} = this.state;
         let pageImg = (item, index) => {
             return <div key={index}
-                        className={totalPage>1?(tab == item ? 'selectedPage':null):'selectedPage'}
+                        className={totalPage>1?(tab == item ? null:'selectedPage'):'selectedPage'}
                         onClick={totalPage>1?()=>{this.switchPageHandler(item)}:null}>{item}</div>
         };
         let page = (

@@ -94,7 +94,7 @@ class PersonTeamMonthLadderPC extends React.Component {
         let {title,isImgFun} = this.props;
         let pageImg = (item, index) => {
             return <div key={index}
-                        className={totalPage > 1?(tab == item ? 'selectedPage':null):'selectedPage'}
+                        className={totalPage > 1?(tab == item ? null:'selectedPage'):'selectedPage'}
                         onClick={totalPage > 1?()=>{this.switchPageHandler(item)}:null}>{item}</div>
         };
         let page = (
@@ -115,7 +115,7 @@ class PersonTeamMonthLadderPC extends React.Component {
                 <td>
                     {item.amount}
                 </td>
-                <td className={item.bonus?"bodyPrice":''}>{item.bonus}</td>
+                <td className={item.bonus>0?"bodyPrice":''}>{item.bonus}</td>
             </tr>
         };
         let tBody = (

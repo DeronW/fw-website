@@ -173,7 +173,7 @@ class DrawPC extends React.Component {
 
     render() {
         let {stageMay,stageJune,selectedMay,selectedJune,total,bonus,totalBonus,close,isLogin,start,end,personData,teamData} = this.state;
-        console.log(personData);
+
         let no = {
             width: "237px",
             height: "96px",
