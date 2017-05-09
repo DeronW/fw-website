@@ -27,6 +27,7 @@ class PersonTeamMonthLadderPC extends React.Component {
                 endDate = '2017-07-12 23:59:59';
             }
             this.ajaxLadder(title,personData, teamData);
+
             //if(title == "个人榜"){
             //    this.ajaxPersonLadder(startDate, endDate)
             //}else if(title == "团队榜"){

@@ -94,8 +94,8 @@ class DrawPC extends React.Component {
                 let bonus = 0;
                 let totalBonus = 0;
                 let total = data.data.total;
-                var personDate = data.data.persondata;
-                var teamDate = data.data.teamdata;
+                var personData = data.data.persondata;
+                var teamData = data.data.teamdata;
                 if (total >= 150000000 && total < 380000000) {
                     bonus = 6
                 } else if (total >= 380000000 && total < 450000000) {
@@ -111,7 +111,7 @@ class DrawPC extends React.Component {
 
                 that.setState({
                     total: total, bonus: bonus, totalBonus: totalBonus,
-                    personDate:personDate,teamDate:teamDate});
+                    personData:personData,teamData:teamData});
             })
         });
         this.judgeStageHandler();
@@ -172,8 +172,8 @@ class DrawPC extends React.Component {
     }
 
     render() {
-        let {stageMay,stageJune,selectedMay,selectedJune,total,bonus,totalBonus,close,isLogin,start,end,personDate,teamDate} = this.state;
-
+        let {stageMay,stageJune,selectedMay,selectedJune,total,bonus,totalBonus,close,isLogin,start,end,personData,teamData} = this.state;
+        console.log(personData);
         let no = {
             width: "237px",
             height: "96px",
@@ -272,14 +272,14 @@ class DrawPC extends React.Component {
                         {
                             <PersonTeamMonthLadderPC title={"个人榜"} start={start} end={end}
                                                      getServerTimestamp={this.getServerTimestamp}
-                                                     isImgFun={this.isImgFun} personDate={personDate}/>
+                                                     isImgFun={this.isImgFun} personData={personData}/>
                         }
                     </div>
                     <div className="team">
                         {
                             <PersonTeamMonthLadderPC title={"团队榜"} start={start} end={end}
                                                      getServerTimestamp={this.getServerTimestamp}
-                                                     isImgFun={this.isImgFun} teamDate={teamDate}/>
+                                                     isImgFun={this.isImgFun} teamData={teamData}/>
                         }
                     </div>
                 </div>

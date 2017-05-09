@@ -45,23 +45,6 @@ class PersonTeamTotalLadderPC extends React.Component {
             callback(this.START,this.END,'mayActBig');
         }
     }
-    //ajaxLadder(){
-    //    $.get(API_PATH+"api/activityPullInvest/v1/singularMonthTeamList.json",{
-    //        start:this.START,
-    //        end:this.END,
-    //        type:'mayActBig'
-    //    }).then(data => {
-    //        let sData;
-    //        let {title} =this.props;
-    //        if(title == "个人榜"){
-    //            sData = data.data && data.data.persondata || [];
-    //            this.setState({list: sData})
-    //        }else if(title == "团队榜"){
-    //            sData = data.data && data.data.teamdata || [];
-    //            this.setState({list: sData})
-    //        }
-    //    })
-    //}
 
     switchPageHandler(type) {
         this.setState({tab: type});
