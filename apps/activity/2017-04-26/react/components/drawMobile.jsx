@@ -44,11 +44,9 @@ class DrawMobile extends React.Component {
         }
     }
     rankingAndPrize() {
-        let start = $getDebugParams().start;
-        let end = $getDebugParams().end;
         $.get(API_PATH + "api/activityPullInvest/v1/singularMonthTeamList.json", {
-            start: decodeURI(start) || this.state.start,
-            end: decodeURI(end) || this.state.end,
+            start: this.state.start,
+            end: this.state.end,
             type:'pjgtest99'
         }).then(data=> {
             let bonus = 0;
@@ -147,7 +145,7 @@ class DrawMobile extends React.Component {
         window.location.href = link;
     }
     render() {
-        let {stageMay,stageJune,selectedMay,selectedJune,close,bonus,total,totalBonus,show,isLogin,totalLadderTab,monthTipsClose,totalTipsClose,start,personData,teamData} = this.state;
+        let {stageMay,stageJune,selectedMay,selectedJune,close,bonus,total,totalBonus,show,isLogin,totalLadderTab,monthTipsClose,totalTipsClose,start,end,personData,teamData} = this.state;
         let no = {
             width: "237px",
             height: "96px",

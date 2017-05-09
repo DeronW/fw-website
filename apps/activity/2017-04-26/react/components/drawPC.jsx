@@ -71,11 +71,20 @@ class DrawPC extends React.Component {
         }
     }
 
+    //getTestParam(callback){
+    //    let start = $getDebugParams().start;
+    //    let end = $getDebugParams().end;
+    //    let test = $getDebugParams().test;
+    //    if(start && end && test){
+    //        callback(decodeURI(start),decodeURI(end),test);
+    //    }
+    //}
     componentDidMount() {
         var that = this;
         $UserReady(function (isLogin, user) {
             that.setState({isLogin: isLogin});
         });
+
         this.ajaxTradeSum();
         this.judgeStageHandler();
 
@@ -83,13 +92,13 @@ class DrawPC extends React.Component {
 
     //请求交易平台交易额
     ajaxTradeSum() {
-        let start = $getDebugParams().start;
-        let end = $getDebugParams().end;
-        console.log(decodeURI(end));
+        //let start = $getDebugParams().start;
+        //let end = $getDebugParams().end;
+        //let test = $getDebugParams().test;
         $.get(API_PATH + "api/activityPullInvest/v1/singularMonthTeamList.json", {
-            start: decodeURI(start) || this.state.start,
-            end: decodeURI(end) || this.state.end,
-            type:'pjgtest99'
+            start: this.state.start,
+            end: this.state.end,
+            type:''
         }).then(data=> {
             let bonus = 0;
             let totalBonus = 0;

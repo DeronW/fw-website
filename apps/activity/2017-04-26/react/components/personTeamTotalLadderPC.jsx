@@ -19,11 +19,12 @@ class PersonTeamTotalLadderPC extends React.Component {
     }
     //请求个人、小组数据
     ajaxLadder(){
-        let start = $getDebugParams().start;
-        let end = $getDebugParams().end;
+        //let start = $getDebugParams().start;
+        //let end = $getDebugParams().end;
+        //let test = $getDebugParams().test;
         $.get(API_PATH+"api/activityPullInvest/v1/singularMonthTeamList.json",{
-            start:decodeURI(start) || this.START,
-            end:decodeURI(end) || this.END,
+            start:this.START,
+            end:this.END,
             type:'mayActBig'
         }).then(data => {
             let sData;
