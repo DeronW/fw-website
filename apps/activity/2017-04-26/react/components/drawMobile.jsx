@@ -8,11 +8,13 @@ class DrawMobile extends React.Component {
             stageJune: '未开始',
             selectedMay: true,
             selectedJune: false,
-            start:'2017/5/16 00:00:00',
-            end:'2017/6/13 23:59:59',
+            start:'2017-05-16 00:00:00',
+            end:'2017-06-13 23:59:59',
             remain: '',
             close: false,
-            bonus: '',
+            bonus: 0,
+            total:0,
+            totalBonus:0,
             monthTipsClose: true,
             totalTipsClose: true,
             show: false,
@@ -40,16 +42,35 @@ class DrawMobile extends React.Component {
         }
     }
     rankingAndPrize() {
-        var bonus = '';
-        //ajax请求当前排名，当前可分奖金
-        bonus = "<div class='drawTips'>5.16-7.12，个人累投金额≥100万，团队累投金额≥1200万 且团队人数≥50人 排名5，当前可分 <em>50万</em> 奖金！</div>"
-        this.setState({bonus: bonus})
+        $.get(API_PATH + "api/activityPullInvest/v1/singularMonthTeamList.json", {
+            start: this.state.start,
+            end: this.state.end,
+            type:'pjgtest99'
+        }).then(data=> {
+            let bonus = 0;
+            let totalBonus = 0;
+            let total = data.data.total;
+            if (total >= 150000000 && total < 380000000) {
+                bonus = 6
+            } else if (total >= 380000000 && total < 450000000) {
+                bonus = 12
+            } else if (total >= 450000000) {
+                bonus = 18
+            }
+            if (total >= 100000000 && total < 130000000) {
+                totalBonus = 40;
+            } else if (total >= 130000000) {
+                totalBonus = 100;
+            }
+            this.setState({total: total, bonus: bonus, totalBonus: totalBonus});
+        })
     }
 
     judgeStageHandler() {
         var timeStart = 1494864000000;//5.16号
         var timeMiddle = 1497283200000;//6.13号
         var timeEnd = 1499961600000;//7.12号
+        var that = this;
         this.getServerTimestamp(function (currentTime) {
             if (currentTime < timeMiddle) {
                 that.setState({stageMay: '进行中', stageJune: '未开始'})
@@ -65,15 +86,15 @@ class DrawMobile extends React.Component {
             this.setState({
                 selectedMay: true,
                 selectedJune: false,
-                start:'2017/5/16 00:00:00',
-                end:'2017/6/13 23:59:59'
+                start:'2017-05-16 00:00:00',
+                end:'2017-06-13 23:59:59'
             })
         } else {
             if (stage != "未开始")  this.setState({
                 selectedMay: false,
                 selectedJune: true,
-                start:'2017/6/14 00:00:00',
-                end:'2017/7/12 23:59:59'
+                start:'2017-06-14 00:00:00',
+                end:'2017-07-12 23:59:59'
             })
         }
     }
@@ -119,7 +140,7 @@ class DrawMobile extends React.Component {
         window.location.href = link;
     }
     render() {
-        let {stageMay,stageJune,selectedMay,selectedJune,close,bonus,show,isLogin,totalLadderTab,monthTipsClose,totalTipsClose,start,end} = this.state;
+        let {stageMay,stageJune,selectedMay,selectedJune,close,bonus,total,totalBonus,show,isLogin,totalLadderTab,monthTipsClose,totalTipsClose,start,end} = this.state;
         let no = {
             width: "237px",
             height: "96px",
@@ -158,11 +179,18 @@ class DrawMobile extends React.Component {
                 <div className="login" onClick={()=>this.gotoLogin()}>立即登录</div>
             </div>
         );
-        let tipsLogin = (
-            <div className="drawTips">该月内，个人累投金额≥50万元；或单月内团队累投金额≥
-                1000万且团队人数≥50人，当前可分 <em>18万</em> 元奖金！
-                月度奖金分配方式：个人和团队奖金分配比例=4(个人)
-                ：6(团队)
+        let tipsBonus = (
+            <div className='drawTips'>
+                单月内，平台达到相应累计交易量，且个人及团队排行前20
+                名的工友，最高可获分33万奖金。<br/>
+                当前平台累计交易量<em>{total}</em>元，可获分<em>{bonus}</em>元奖金！
+            </div>
+
+        );
+        let tipsTotalBonus = (
+            <div className="drawTips">5.16-7.12，平台达到相应累计交易量，且个人及团队排行
+                前30名的工友，最高获分100万元奖金。<br/>
+                当前平台累计交易量<em>{total}</em>元，可获分<em>{totalBonus}</em>元奖金！
             </div>
         );
         let monthTipsBriefStyle = {
@@ -193,9 +221,13 @@ class DrawMobile extends React.Component {
                 {monthMayTab(stageMay, "五月", "5.16 ~ 6.13")}
                 {monthJuneTab(stageJune, "六月", "6.14 ~ 7.12")}
             </div>
-            <div className="drawTips">该月内，平台达到相应任务目标，且个人及团队排行前20名 的工友，最高可获分：</div>
-            {isLogin ? tipsLogin : tipsNoLogin}
-
+            {isLogin ? tipsBonus : tipsNoLogin}
+            <div className="drawTips">
+                进榜规则：个人累投金额≥50万元；或团队累投金额≥1000
+                万且团队人数≥50人。<br/>
+                月度奖金分配方式：个人和团队奖金分配比例=4（个人）：
+                6（团队）
+            </div>
             <div className="switchMonthLadder">
                 <PersonTeamMonthLadderMobile start={start} end={end} isImgFun={this.isImgFun} fixedPrice={this.fixedPrice} getServerTimestamp={this.getServerTimestamp}/>
             </div>
@@ -203,13 +235,13 @@ class DrawMobile extends React.Component {
             <div className="drawTips">
                 <div className="tips">温馨提示:</div>
                 <div className="briefText" style={monthTipsBriefStyle}>
-                    1.以上数据实时更新，最终发放奖金请以每月结束后数据为准，排名顺序：获奖工友的有效好友累投年化额>获奖工友的有效邀友数>未获奖工友的有...
+                    1.以上数据实时更新，最终发放奖金请以每月结束后数据为准...
                     <div className="showBtn" onClick={()=>this.toggleMonthTips()}>展开全部<img src="images/arrow.png"/>
                     </div>
                 </div>
                 <div className="fullText" style={monthTipsFullStyle}>
                     <div className="briefText">
-                        1.以上数据实时更新，最终发放奖金请以每月结束后数据为准，排名顺序：获奖工友的有效好友累投年化额>获奖工友的有效邀友数>未获奖工友的有效好友累投年化额>未获奖工友的有效邀友数；
+                        1.以上数据实时更新，最终发放奖金请以每月结束后数据为准；
                     </div>
                     <div className="briefText">2.奖金包奖励以工豆形式发放；</div>
                     <div className="briefText">3.月度奖金分配方式：个人和团队奖金分配比例=4(个人)：6(团队)；</div>
@@ -221,13 +253,13 @@ class DrawMobile extends React.Component {
                 </div>
             </div>
             <div className="drawTitleMobile">终级排行榜，百万壕礼奉上</div>
+            {isLogin ? tipsTotalBonus:tipsNoLogin}
             <div className="drawTips">
-                5.16-7.12，平台累投金额及累投年化金额达标。个人及团
-                队排行前30的工友，将按照其累计投资金额占比进行最高
-                <em>100万</em>元奖金分配。累计金额越多获得的奖金就越多。
+                进榜规则：个人累投金额≥100万元；或团队累投金额≥1200
+                万且团队人数≥50人。<br/>
+                月度奖金分配方式：个人和团队奖金分配比例=4（个人）：
+                6（团队）
             </div>
-            {isLogin ? <div dangerouslySetInnerHTML={{__html:bonus}}></div>:tipsNoLogin}
-
             <div className="switchTotalLadder">
                 <PersonTeamTotalLadderMobile isImgFun={this.isImgFun} fixedPrice={this.fixedPrice}
                                        totalLadderTab={totalLadderTab}/>
@@ -239,7 +271,7 @@ class DrawMobile extends React.Component {
                     1.以上数据实时更新，最终发放奖金请以每月结束后数据为准；
                 </div>
                 <div className="briefText" style={totalTipsBriefStyle}>
-                    2.奖金包奖励以工豆形式发放；
+                    2.奖金包奖励以工豆形式...
                     <div className="showBtn" onClick={()=>this.toggleTotalTips()}>展开全部<img src="images/arrow.png"/>
                     </div>
                 </div>
@@ -261,18 +293,18 @@ class DrawMobile extends React.Component {
                     <div className="close" onClick={()=>this.showHandler()}></div>
                     <div className="explain">
                         <p>1. 投资债权转让产品，不能参与本次活动；</p>
-
-                        <p>2. 月度奖金工豆奖励将于每月结束后7个工作日
+                        <p>2.批量投资（非单标）不参与本次抽奖活动；</p>
+                        <p>3. 月度奖金工豆奖励将于每月结束后7个工作日
                             内，统一发放至邀请人的工场账户；</p>
 
-                        <p>3. 总排行奖金工豆奖励将于活动结束后7个工作日
+                        <p>4. 总排行奖金工豆奖励将于活动结束后7个工作日
                             内，统一发放至邀请人的工场账户；</p>
 
-                        <p>4. 实物奖统一于活动结束后7个工作日内统一发送
+                        <p>5. 实物奖统一于活动结束后7个工作日内统一发送
                             所获奖品兑换券至用户账号内，实物奖图片仅供
                             参考；</p>
 
-                        <p>5. 活动最终解释权归金融工场所有，活动详情致
+                        <p>6. 活动最终解释权归金融工场所有，活动详情致
                             电客服热线咨询：400-0322-988。</p>
                     </div>
                 </div>

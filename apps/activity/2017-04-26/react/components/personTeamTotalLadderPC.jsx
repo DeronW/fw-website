@@ -112,8 +112,8 @@ class PersonTeamTotalLadderPC extends React.Component {
             }
             </tbody>
         );
-        return <div className="personMonthLadder">
-            <div className={this.props.title == "个人榜"?"personTitle":"teamTitle"}>{this.props.title}</div>
+        return <div className="personMonthLadder personTotalLadder">
+            <div className={this.props.title == "个人榜"?"personTotalTitle":"teamTotalTitle"}>{this.props.title}</div>
             <div className="personTable">
                 <table>
                     <thead>
