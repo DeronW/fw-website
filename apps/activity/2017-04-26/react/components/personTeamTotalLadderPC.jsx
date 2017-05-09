@@ -15,29 +15,53 @@ class PersonTeamTotalLadderPC extends React.Component {
         }
     }
     componentDidMount() {
-        this.ajaxLadder();
-    }
-    //请求个人、小组数据
-    ajaxLadder(){
-        //let start = $getDebugParams().start;
-        //let end = $getDebugParams().end;
-        //let test = $getDebugParams().test;
-        $.get(API_PATH+"api/activityPullInvest/v1/singularMonthTeamList.json",{
-            start:this.START,
-            end:this.END,
-            type:'mayActBig'
-        }).then(data => {
-            let sData;
-            let {title} =this.props;
-            if(title == "个人榜"){
-                sData = data.data && data.data.persondata || [];
-                this.setState({list: sData})
-            }else if(title == "团队榜"){
-                sData = data.data && data.data.teamdata || [];
-                this.setState({list: sData})
-            }
+        var that = this;
+        this.getTestParam(function (start,end,test) {
+            $.get(API_PATH+"api/activityPullInvest/v1/singularMonthTeamList.json",{
+                start:start,
+                end:end,
+                type:test
+            }).then(data => {
+                let sData;
+                let {title} =that.props;
+                if(title == "个人榜"){
+                    sData = data.data && data.data.persondata || [];
+                    that.setState({list: sData})
+                }else if(title == "团队榜"){
+                    sData = data.data && data.data.teamdata || [];
+                    that.setState({list: sData})
+                }
+            })
         })
     }
+    //请求个人、小组数据
+    getTestParam(callback){
+        let start = $getDebugParams().start;
+        let end = $getDebugParams().end;
+        let test = $getDebugParams().test;
+        if(start && end && test){
+            callback(decodeURI(start),decodeURI(end),test);
+        }else{
+            callback(this.START,this.END,'mayActBig');
+        }
+    }
+    //ajaxLadder(){
+    //    $.get(API_PATH+"api/activityPullInvest/v1/singularMonthTeamList.json",{
+    //        start:this.START,
+    //        end:this.END,
+    //        type:'mayActBig'
+    //    }).then(data => {
+    //        let sData;
+    //        let {title} =this.props;
+    //        if(title == "个人榜"){
+    //            sData = data.data && data.data.persondata || [];
+    //            this.setState({list: sData})
+    //        }else if(title == "团队榜"){
+    //            sData = data.data && data.data.teamdata || [];
+    //            this.setState({list: sData})
+    //        }
+    //    })
+    //}
 
     switchPageHandler(type) {
         this.setState({tab: type});

@@ -45,24 +45,6 @@ class PersonTeamMonthLadderPC extends React.Component {
             this.setState({list: teamData || []})
         }
     }
-    //个人榜请求ajax
-    //ajaxPersonLadder(start,end){
-    //    $.get(API_PATH+"api/activityPullInvest/v1/singularMonthList.json",{
-    //        start:start,
-    //        end:end
-    //    }).then(data => {
-    //        this.showAndSetData(data)
-    //    })
-    //}
-    //团队榜请求ajax
-    //ajaxTeamLadder(start,end){
-    //    $.get(API_PATH+"api/activityPullInvest/v1/singularMonthTeamList.json",{
-    //        start:start,
-    //        end:end
-    //    }).then(data => {
-    //        this.showAndSetData(data)
-    //    })
-    //}
 
 
     switchPageHandler(type) {

@@ -70,59 +70,54 @@ class DrawPC extends React.Component {
             }.bind(this), 'json')
         }
     }
-
-    //getTestParam(callback){
-    //    let start = $getDebugParams().start;
-    //    let end = $getDebugParams().end;
-    //    let test = $getDebugParams().test;
-    //    if(start && end && test){
-    //        callback(decodeURI(start),decodeURI(end),test);
-    //    }
-    //}
+    getTestParam(callback){
+        let start = $getDebugParams().start;
+        let end = $getDebugParams().end;
+        let test = $getDebugParams().test;
+        if(start && end && test){
+            callback(decodeURI(start),decodeURI(end),test);
+        }else{
+            callback(this.state.start,this.state.end,'');
+        }
+    }
     componentDidMount() {
         var that = this;
         $UserReady(function (isLogin, user) {
             that.setState({isLogin: isLogin});
         });
+        this.getTestParam(function (start,end,test) {
+            $.get(API_PATH + "api/activityPullInvest/v1/singularMonthTeamList.json", {
+                start: start,
+                end: end,
+                type:test
+            }).then(data=> {
+                let bonus = 0;
+                let totalBonus = 0;
+                let total = data.data.total;
+                var personDate = data.data.persondata;
+                var teamDate = data.data.teamdata;
+                if (total >= 150000000 && total < 380000000) {
+                    bonus = 6
+                } else if (total >= 380000000 && total < 450000000) {
+                    bonus = 12
+                } else if (total >= 450000000) {
+                    bonus = 18
+                }
+                if (total >= 100000000 && total < 130000000) {
+                    totalBonus = 40;
+                } else if (total >= 130000000) {
+                    totalBonus = 100;
+                }
 
-        this.ajaxTradeSum();
+                that.setState({
+                    total: total, bonus: bonus, totalBonus: totalBonus,
+                    personDate:personDate,teamDate:teamDate});
+            })
+        });
         this.judgeStageHandler();
 
     }
 
-    //请求交易平台交易额
-    ajaxTradeSum() {
-        //let start = $getDebugParams().start;
-        //let end = $getDebugParams().end;
-        //let test = $getDebugParams().test;
-        $.get(API_PATH + "api/activityPullInvest/v1/singularMonthTeamList.json", {
-            start: this.state.start,
-            end: this.state.end,
-            type:''
-        }).then(data=> {
-            let bonus = 0;
-            let totalBonus = 0;
-            let total = data.data.total;
-            var personDate = data.data.persondata;
-            var teamDate = data.data.teamdata;
-            if (total >= 150000000 && total < 380000000) {
-                bonus = 6
-            } else if (total >= 380000000 && total < 450000000) {
-                bonus = 12
-            } else if (total >= 450000000) {
-                bonus = 18
-            }
-            if (total >= 100000000 && total < 130000000) {
-                totalBonus = 40;
-            } else if (total >= 130000000) {
-                totalBonus = 100;
-            }
-
-            this.setState({
-                total: total, bonus: bonus, totalBonus: totalBonus,
-                personDate:personDate,teamDate:teamDate});
-        })
-    }
 
     judgeStageHandler() {
         var timeStart = +new Date("2017-05-16 00:00:00");//5.16号
