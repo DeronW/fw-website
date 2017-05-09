@@ -44,7 +44,7 @@ const PopTenPrice = React.createClass({
             return (
                 <tr key={index}>
                     <td >{item.prize}</td>
-                    <td style={{textAlign:'left'}}> X {item.count}</td>
+                    <td style={{textAlign:'center'}}> X {item.count}</td>
                 </tr>
             )
         };
