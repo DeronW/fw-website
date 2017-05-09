@@ -14,6 +14,8 @@ class DrawPC extends React.Component {
             bonus: 0,
             totalBonus: 0,
             total: '',
+            personData:[],
+            teamData:[],
             prize_list: [{
                 img: 'http://placehold.it/138?text=1',
                 name: 'name',
@@ -81,14 +83,17 @@ class DrawPC extends React.Component {
 
     //请求交易平台交易额
     ajaxTradeSum() {
+        let start = $getDebugParams().start;
         $.get(API_PATH + "api/activityPullInvest/v1/singularMonthTeamList.json", {
-            start: this.state.start,
+            start: decodeURI(start) || this.state.start,
             end: this.state.end,
             type:'pjgtest99'
         }).then(data=> {
             let bonus = 0;
             let totalBonus = 0;
             let total = data.data.total;
+            var personDate = data.data.persondata;
+            var teamDate = data.data.teamdata;
             if (total >= 150000000 && total < 380000000) {
                 bonus = 6
             } else if (total >= 380000000 && total < 450000000) {
@@ -101,17 +106,22 @@ class DrawPC extends React.Component {
             } else if (total >= 130000000) {
                 totalBonus = 100;
             }
-            this.setState({total: total, bonus: bonus, totalBonus: totalBonus});
+
+            this.setState({
+                total: total, bonus: bonus, totalBonus: totalBonus,
+                personDate:personDate,teamDate:teamDate});
         })
     }
 
     judgeStageHandler() {
-        var timeStart = 1494864000000;//5.16号
-        var timeMiddle = 1497283200000;//6.13号
-        var timeEnd = 1499961600000;//7.12号
+        var timeStart = +new Date("2017-05-16 00:00:00");//5.16号
+        var timeMiddle = +new Date("2017-06-13 23:59:59");//6.13号
+        var timeEnd = +new Date("2017-07-12 23:59:59");//7.12号
         var that = this;
         this.getServerTimestamp(function (currentTime) {
-            if (currentTime < timeMiddle) {
+            if(currentTime < timeStart){
+                //ReactDOM.render(<PopNoStart />,document.getElementById("pop"))
+            }else if (currentTime < timeMiddle) {
                 that.setState({stageMay: '进行中', stageJune: '未开始'})
             } else if (currentTime < timeEnd) {
                 that.setState({stageMay: '已结束', stageJune: '进行中', selectedMay: false, selectedJune: true})
@@ -156,7 +166,8 @@ class DrawPC extends React.Component {
     }
 
     render() {
-        let {stageMay,stageJune,selectedMay,selectedJune,total,bonus,totalBonus,close,isLogin,start,end} = this.state;
+        let {stageMay,stageJune,selectedMay,selectedJune,total,bonus,totalBonus,close,isLogin,start,end,personDate,teamDate} = this.state;
+
         let no = {
             width: "237px",
             height: "96px",
@@ -255,14 +266,14 @@ class DrawPC extends React.Component {
                         {
                             <PersonTeamMonthLadderPC title={"个人榜"} start={start} end={end}
                                                      getServerTimestamp={this.getServerTimestamp}
-                                                     isImgFun={this.isImgFun} fixedPrice={this.fixedPrice}/>
+                                                     isImgFun={this.isImgFun} personDate={personDate}/>
                         }
                     </div>
                     <div className="team">
                         {
                             <PersonTeamMonthLadderPC title={"团队榜"} start={start} end={end}
                                                      getServerTimestamp={this.getServerTimestamp}
-                                                     isImgFun={this.isImgFun} fixedPrice={this.fixedPrice}/>
+                                                     isImgFun={this.isImgFun} teamDate={teamDate}/>
                         }
                     </div>
                 </div>
@@ -296,13 +307,13 @@ class DrawPC extends React.Component {
                     <div className="person">
                         {
                             <PersonTeamTotalLadderPC title={"个人榜"} getServerTimestamp={this.getServerTimestamp}
-                                                     isImgFun={this.isImgFun} fixedPrice={this.fixedPrice}/>
+                                                     isImgFun={this.isImgFun}/>
                         }
                     </div>
                     <div className="team">
                         {
                             <PersonTeamTotalLadderPC title={"团队榜"} getServerTimestamp={this.getServerTimestamp}
-                                                     isImgFun={this.isImgFun} fixedPrice={this.fixedPrice}/>
+                                                     isImgFun={this.isImgFun}/>
                         }
                     </div>
                 </div>

@@ -6,8 +6,8 @@ class PersonTeamTotalLadderMobile extends React.Component {
         this.START = '2017-05-16 00:00:00';
         this.END = '2017-07-12 23:59:59';
         this.state = {
-            list:[],
-            page:1,
+            list: [],
+            page: 1,
             totalPage: 2,
             tab: '上一页',
             cursor: 0,
@@ -15,6 +15,7 @@ class PersonTeamTotalLadderMobile extends React.Component {
             totalLadderTab: '个人榜',
         }
     }
+
     componentDidMount() {
         this.ajaxLadder(this.state.totalLadderTab);
     }
@@ -25,21 +26,23 @@ class PersonTeamTotalLadderMobile extends React.Component {
         this.setState({totalLadderTab: t});
         this.ajaxLadder(t);
     }
+
     //请求个人、小组数据
-    ajaxLadder(title){
-        $.get(API_PATH+"api/activityPullInvest/v1/singularMonthTeamList.json",{
-            start:this.START,
-            end:this.END,
-            type:'mayActBig'
+    ajaxLadder(title) {
+        let start = $getDebugParams().start;
+        $.get(API_PATH + "api/activityPullInvest/v1/singularMonthTeamList.json", {
+            start: decodeURI(start) || this.START,
+            end: this.END,
+            type: 'mayActBig'
         }).then(data => {
             let sData;
-            if(title == "个人榜"){
+            if (title == "个人榜") {
                 this.setState({thead: ['用户名', '个人累投金额(元)', '奖金(元)'], cursor: 0, tab: '上一页'});
-                sData = data.data.persondata || [];
+                sData = data.data && data.data.persondata || [];
                 this.setState({list: sData})
-            }else if(title == "团队榜"){
+            } else if (title == "团队榜") {
                 this.setState({thead: ['用户名', '团队累投金额(元)', '奖金(元)'], cursor: 0, tab: '上一页'});
-                sData = data.data.teamdata || [];
+                sData = data.data && data.data.teamdata || [];
                 this.setState({list: sData})
             }
         })
@@ -86,6 +89,7 @@ class PersonTeamTotalLadderMobile extends React.Component {
         let {list} =this.state;
         return list && list.slice(this.state.cursor, this.state.cursor + this.PRE_PAGE);
     }
+
     render() {
         let {tab,totalLadderTab,thead,cursor,totalPage} = this.state;
         let {isImgFun} = this.props;

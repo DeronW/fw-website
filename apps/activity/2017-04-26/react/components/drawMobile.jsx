@@ -18,6 +18,8 @@ class DrawMobile extends React.Component {
             monthTipsClose: true,
             totalTipsClose: true,
             show: false,
+            personData:[],
+            teamData:[]
         }
     }
 
@@ -42,14 +44,17 @@ class DrawMobile extends React.Component {
         }
     }
     rankingAndPrize() {
+        let start = $getDebugParams().start;
         $.get(API_PATH + "api/activityPullInvest/v1/singularMonthTeamList.json", {
-            start: this.state.start,
+            start: start || this.state.start,
             end: this.state.end,
             type:'pjgtest99'
         }).then(data=> {
             let bonus = 0;
             let totalBonus = 0;
             let total = data.data.total;
+            let personData = data.data.persondata;
+            let teamData = data.data.teamdata;
             if (total >= 150000000 && total < 380000000) {
                 bonus = 6
             } else if (total >= 380000000 && total < 450000000) {
@@ -62,7 +67,8 @@ class DrawMobile extends React.Component {
             } else if (total >= 130000000) {
                 totalBonus = 100;
             }
-            this.setState({total: total, bonus: bonus, totalBonus: totalBonus});
+            this.setState({total: total, bonus: bonus, totalBonus: totalBonus,
+                personData:personData,teamData:teamData});
         })
     }
 
@@ -140,7 +146,7 @@ class DrawMobile extends React.Component {
         window.location.href = link;
     }
     render() {
-        let {stageMay,stageJune,selectedMay,selectedJune,close,bonus,total,totalBonus,show,isLogin,totalLadderTab,monthTipsClose,totalTipsClose,start,end} = this.state;
+        let {stageMay,stageJune,selectedMay,selectedJune,close,bonus,total,totalBonus,show,isLogin,totalLadderTab,monthTipsClose,totalTipsClose,start,personData,teamData} = this.state;
         let no = {
             width: "237px",
             height: "96px",
@@ -229,7 +235,7 @@ class DrawMobile extends React.Component {
                 6（团队）
             </div>
             <div className="switchMonthLadder">
-                <PersonTeamMonthLadderMobile start={start} end={end} isImgFun={this.isImgFun} fixedPrice={this.fixedPrice} getServerTimestamp={this.getServerTimestamp}/>
+                <PersonTeamMonthLadderMobile start={start} end={end} isImgFun={this.isImgFun} personData={personData} teamData={teamData} getServerTimestamp={this.getServerTimestamp}/>
             </div>
 
             <div className="drawTips">

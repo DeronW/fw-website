@@ -13,7 +13,7 @@ class PersonTeamMonthLadderPC extends React.Component {
         }
     }
     componentDidMount() {
-        let {getServerTimestamp,title} = this.props;
+        let {getServerTimestamp,title,personData,teamData} = this.props;
         var June = new Date("2017-06-13 23:59:59").getTime();
         var July = new Date("2017-07-12 23:59:59").getTime();
         var startDate = '2017-05-16 00:00:00';
@@ -26,7 +26,7 @@ class PersonTeamMonthLadderPC extends React.Component {
                 startDate = '2017-06-14 00:00:00';
                 endDate = '2017-07-12 23:59:59';
             }
-            this.ajaxLadder(title,startDate, endDate);
+            this.ajaxLadder(title,personData, teamData);
             //if(title == "个人榜"){
             //    this.ajaxPersonLadder(startDate, endDate)
             //}else if(title == "团队榜"){
@@ -35,24 +35,15 @@ class PersonTeamMonthLadderPC extends React.Component {
         }.bind(this));
     }
     componentWillReceiveProps(nextProps){
-        this.ajaxLadder(nextProps.title,nextProps.start, nextProps.end);
+        this.ajaxLadder(nextProps.title,nextProps.personData, nextProps.teamData);
     }
     //请求个人、小组数据
-    ajaxLadder(title,start,end){
-        $.get(API_PATH+"api/activityPullInvest/v1/singularMonthTeamList.json",{
-            start:start,
-            end:end,
-            type:'pjgtest99'
-        }).then(data => {
-            let sData;
-            if(title == "个人榜"){
-                sData = data.data.persondata || [];
-                this.setState({list: sData})
-            }else if(title == "团队榜"){
-                sData = data.data.teamdata || [];
-                this.setState({list: sData})
-            }
-        })
+    ajaxLadder(title,personData,teamData){
+        if(title == "个人榜"){
+            this.setState({list: personData || []})
+        }else if(title == "团队榜"){
+            this.setState({list: teamData || []})
+        }
     }
     //个人榜请求ajax
     //ajaxPersonLadder(start,end){

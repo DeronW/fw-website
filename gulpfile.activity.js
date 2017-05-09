@@ -36,6 +36,7 @@ module.exports = function (gulp, generate_task, settings) {
         `${PROJ}/pop/pop-all-situation.jsx`,//摇奖弹层，移动端的所有情况
         `${PROJ}/pop/pop-information.jsx`,//摇奖弹层，移动端的收货信息
         `${PROJ}/pop/pop-rule.jsx`,//摇奖说明
+        `${PROJ}/pop/pop-no-start.jsx`,//活动未开始
         `${PROJ}/board/slot-machine-pc.jsx`,//老虎机
         `${PROJ}/board/poke-balloon-mobile.jsx`,//戳气球
         `${PROJ}/board/winning-list-pc.jsx`,//获奖名单
@@ -73,6 +74,7 @@ module.exports = function (gulp, generate_task, settings) {
         `${PROJ}/pop/pop-all-situation.less`,
         `${PROJ}/pop/pop-information.less`,
         `${PROJ}/pop/pop-rule.less`,
+        `${PROJ}/pop/pop-no-start.less`,
         `${PROJ}/board/slot-machine-pc.less`,
         `${PROJ}/board/poke-balloon-mobile.less`,
         `${PROJ}/board/winning-list-pc.less`,
