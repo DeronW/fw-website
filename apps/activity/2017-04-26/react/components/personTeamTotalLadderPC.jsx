@@ -132,7 +132,7 @@ class PersonTeamTotalLadderPC extends React.Component {
                 list.length ? page : null
             }
             {
-                list.length ? null : <div className="monthLadderPcNot">人气王还在堵车，马上就来</div>
+                list.length ? null : <div className="monthLadderPcNot totalLadderPcNot">人气王还在堵车，马上就来</div>
             }
         </div>
     }
