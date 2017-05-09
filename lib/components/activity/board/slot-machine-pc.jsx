@@ -256,7 +256,7 @@ const SlotMachinePC = React.createClass({
                     您有<em>{count}</em>次机会
                 </div>
             }
-            <div className="rule" onClick={()=>this.showRule()}>抽奖说明></div>
+            <div className="rule" onClick={()=>this.showRule()}>抽奖奖品></div>
             <div className="current">
                 <RockProduct productList={prize_list} ref="rockProduct" closePopHandler={this.closePopHandler}
                              gotoLogin={gotoLogin}/>

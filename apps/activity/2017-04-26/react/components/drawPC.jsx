@@ -12,8 +12,8 @@ class DrawPC extends React.Component {
             end: '2017-06-13 23:59:59',
             close: false,
             bonus: 0,
-            totalBonus:0,
-            total:'',
+            totalBonus: 0,
+            total: '',
             prize_list: [{
                 img: 'http://placehold.it/138?text=1',
                 name: 'name',
@@ -79,12 +79,12 @@ class DrawPC extends React.Component {
             } else if (total >= 450000000) {
                 bonus = 18
             }
-            if(total >= 100000000 && total < 130000000){
+            if (total >= 100000000 && total < 130000000) {
                 totalBonus = 40;
-            }else if(total >= 130000000){
+            } else if (total >= 130000000) {
                 totalBonus = 100;
             }
-            this.setState({total:total,bonus: bonus,totalBonus:totalBonus});
+            this.setState({total: total, bonus: bonus, totalBonus: totalBonus});
         })
     }
 
@@ -216,7 +216,7 @@ class DrawPC extends React.Component {
                 </div>
                 <div className="drawTips">
                     <div className="tips">抽奖活动说明：</div>
-                    <p>1、活动期间，单笔每满10000元获1次抽奖机会；</p>
+                    <p>1、批量投资（非单标）不参与本次抽奖活动；</p>
 
                     <p>2、抽奖机会仅在本活动期间（5月16日-7月12日）有效。</p>
                 </div>
@@ -228,8 +228,11 @@ class DrawPC extends React.Component {
                 {
                     isLogin ? loginRemain : noLoginRemain
                 }
-                <div className="remindText"> <div className='loginRemain'>进榜规则：个人累投金额≥50万元；或团队累投金额≥1000万且团队人数≥50人。
-                    月度奖金分配方式：个人和团队奖金分配比例=4（个人）：6（团队）</div></div>
+                <div className="remindText">
+                    <div className='loginRemain'>进榜规则：个人累投金额≥50万元；或团队累投金额≥1000万且团队人数≥50人。
+                        月度奖金分配方式：个人和团队奖金分配比例=4（个人）：6（团队）
+                    </div>
+                </div>
                 <div className="drawMonthLadder">
                     <div className="person">
                         {
@@ -260,13 +263,18 @@ class DrawPC extends React.Component {
                 </div>
                 <div className="drawTitle">终级排行榜 百万壕礼奉上</div>
                 {
-                    isLogin?<div className="remindText"><div className='loginRemain'>5.16-7.12，平台达到相应累计交易量，且个人及团队排行前30名的工友，最高获分100万元奖金。
-                        当前平台累计交易量<em>{total}</em>元，可获分<em>{totalBonus}</em>元奖金！。</div>
-                    </div>:noLoginRemain
+                    isLogin ? <div className="remindText">
+                        <div className='loginRemain'>5.16-7.12，平台达到相应累计交易量，且个人及团队排行前30名的工友，最高获分100万元奖金。
+                            当前平台累计交易量<em>{total}</em>元，可获分<em>{totalBonus}</em>元奖金！。
+                        </div>
+                    </div> : noLoginRemain
                 }
 
-                <div className="remindText"><div className='loginRemain'>进榜规则：个人累投金额≥50万元；或团队累投金额≥1000万且团队人数≥50人。
-                    月度奖金分配方式：个人和团队奖金分配比例=4（个人）：6（团队）</div></div>
+                <div className="remindText">
+                    <div className='loginRemain'>进榜规则：个人累投金额≥50万元；或团队累投金额≥1000万且团队人数≥50人。
+                        月度奖金分配方式：个人和团队奖金分配比例=4（个人）：6（团队）
+                    </div>
+                </div>
                 <div className="drawTotalLadder">
                     <div className="person">
                         {
@@ -296,13 +304,15 @@ class DrawPC extends React.Component {
                     </div>
                     <p>1. 投资债权转让产品，不能参与本次活动；</p>
 
-                    <p>2. 月度奖金工豆奖励将于每月结束后7个工作日内，统一发放至邀请人的工场账户；</p>
+                    <p>2. 批量投资（非单标）不参与本次抽奖活动</p>
 
-                    <p>3. 总排行奖金工豆奖励将于活动结束后7个工作日内，统一发放至邀请人的工场账户；</p>
+                    <p>3. 月度奖金工豆奖励将于每月结束后7个工作日内，统一发放至邀请人的工场账户；</p>
 
-                    <p>4. 实物奖统一于活动结束后7个工作日内统一发送所获奖品兑换券至用户账号内，实物奖图片仅供参考；</p>
+                    <p>4. 总排行奖金工豆奖励将于活动结束后7个工作日内，统一发放至邀请人的工场账户；</p>
 
-                    <p>5. 活动最终解释权归金融工场所有，活动详情致电客服热线咨询：400-0322-988。</p>
+                    <p>5. 实物奖统一于活动结束后7个工作日内统一发送所获奖品兑换券至用户账号内，实物奖图片仅供参考；</p>
+
+                    <p>6. 活动最终解释权归金融工场所有，活动详情致电客服热线咨询：400-0322-988。</p>
 
                     <p>声明：以上活动由金融工场主办 与Apple Inc. 无关。</p>
                 </div>
