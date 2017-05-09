@@ -84,9 +84,11 @@ class DrawPC extends React.Component {
     //请求交易平台交易额
     ajaxTradeSum() {
         let start = $getDebugParams().start;
+        let end = $getDebugParams().end;
+        console.log(decodeURI(end));
         $.get(API_PATH + "api/activityPullInvest/v1/singularMonthTeamList.json", {
             start: decodeURI(start) || this.state.start,
-            end: this.state.end,
+            end: decodeURI(end) || this.state.end,
             type:'pjgtest99'
         }).then(data=> {
             let bonus = 0;

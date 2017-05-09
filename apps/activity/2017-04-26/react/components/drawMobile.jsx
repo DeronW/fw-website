@@ -45,9 +45,10 @@ class DrawMobile extends React.Component {
     }
     rankingAndPrize() {
         let start = $getDebugParams().start;
+        let end = $getDebugParams().end;
         $.get(API_PATH + "api/activityPullInvest/v1/singularMonthTeamList.json", {
-            start: start || this.state.start,
-            end: this.state.end,
+            start: decodeURI(start) || this.state.start,
+            end: decodeURI(end) || this.state.end,
             type:'pjgtest99'
         }).then(data=> {
             let bonus = 0;
