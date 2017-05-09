@@ -2,40 +2,40 @@ const ProductListAuto = React.createClass({
     getInitialState(){
         return {
             products: [{
-                img: 'http://placehold.it/138?text=1',
-                name: 'name',
+                img: 'images/p1.jpg',
+                name: 'No.1  Iphone7',
                 prizeMark: 1
             }, {
-                img: 'http://placehold.it/138?text=2',
-                name: 'name',
+                img: 'images/p2.jpg',
+                name: 'No.2  小米6',
                 prizeMark: 2
             }, {
-                img: 'http://placehold.it/138?text=3',
-                name: 'name',
+                img: 'images/p3.jpg',
+                name: 'No.3  2%返息券',
                 prizeMark: 3
             }, {
-                img: 'http://placehold.it/138?text=4',
-                name: 'name',
+                img: 'images/p4.jpg',
+                name: 'No.4  550返现券礼包',
                 prizeMark: 4
             }, {
-                img: 'http://placehold.it/138?text=5',
-                name: 'name',
+                img: 'images/p5.jpg',
+                name: 'No.5  1%返息券',
                 prizeMark: 5
             }, {
-                img: 'http://placehold.it/138?text=6',
-                name: 'name',
+                img: 'images/p6.jpg',
+                name: 'No.6  10元返现券',
                 prizeMark: 6
             }, {
-                img: 'http://placehold.it/138?text=7',
-                name: 'name',
+                img: 'images/p7.jpg',
+                name: 'No.7  0.5%返息券',
                 prizeMark: 7
             }, {
-                img: 'http://placehold.it/138?text=8',
-                name: 'name',
+                img: 'images/p8.jpg',
+                name: 'No.8  5元返现券',
                 prizeMark: 8
             }, {
-                img: 'http://placehold.it/138?text=9',
-                name: 'name',
+                img: 'images/p9.jpg',
+                name: 'No.9  2元返现券',
                 prizeMark: 9
             }],
             singleProduct: []
