@@ -103,7 +103,7 @@ class PersonTeamTotalLadderMobile extends React.Component {
         let {isImgFun} = this.props;
         let pageImg = (item, index) => {
             return <div key={index}
-                        className={totalPage > 1?(tab == item ? null:'selectedPage'):'selectedPage'}
+                        className={totalPage > 1?(tab == item ? 'selectedPage':null):'selectedPage'}
                         onClick={totalPage > 1?()=>{this.switchPageHandler(item)}:null}>{item}</div>
         };
         let page = (
