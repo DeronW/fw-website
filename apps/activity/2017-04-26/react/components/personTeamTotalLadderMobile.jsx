@@ -16,13 +16,13 @@ class PersonTeamTotalLadderMobile extends React.Component {
         }
     }
     componentDidMount() {
-        this.ajaxLadder(this.state.ladderTab);
+        this.ajaxLadder(this.state.totalLadderTab);
     }
 
     //切换总榜tab
     switchTotalLadderTab(t) {
-        if (t == this.state.ladderTab) return;
-        this.setState({ladderTab: t});
+        if (t == this.state.totalLadderTab) return;
+        this.setState({totalLadderTab: t});
         this.ajaxLadder(t);
     }
     //请求个人、小组数据
@@ -88,7 +88,7 @@ class PersonTeamTotalLadderMobile extends React.Component {
     }
     render() {
         let {tab,totalLadderTab,thead,cursor,totalPage} = this.state;
-        let {isImgFun,fixedPrice} = this.props;
+        let {isImgFun} = this.props;
         let pageImg = (item, index) => {
             return <div key={index}
                         className={totalPage > 1?(tab == item ? 'selectedPage':null):'selectedPage'}
