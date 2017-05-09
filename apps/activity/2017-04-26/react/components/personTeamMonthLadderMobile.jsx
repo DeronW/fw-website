@@ -8,7 +8,7 @@ class PersonTeamMonthLadderMobile extends React.Component {
         this.state = {
             list: [],
             page: 1,
-            totalPage: 2,
+            totalPage: 1,
             tab: '上一页',
             cursor: 0,
             thead: ['用户名', '个人累投金额(元)', '奖金(元)'],
@@ -45,14 +45,18 @@ class PersonTeamMonthLadderMobile extends React.Component {
         this.setState({ladderTab: t});
         this.ajaxLadder(t, this.props.personData, this.props.teamData);
     }
+
     //请求个人、小组数据
-    ajaxLadder(title,personData,teamData){
-        if(title == "个人榜"){
+    ajaxLadder(title, personData, teamData) {
+        if (title == "个人榜") {
             this.setState({thead: ['用户名', '个人累投金额(元)', '奖金(元)'], cursor: 0, tab: '上一页'});
             this.setState({list: personData || []})
-        }else if(title == "团队榜"){
+        } else if (title == "团队榜") {
             this.setState({thead: ['用户名', '团队累投金额(元)', '奖金(元)'], cursor: 0, tab: '上一页'});
             this.setState({list: teamData || []})
+        }
+        if (personData && personData.length > this.PRE_PAGE || teamData && teamData.length > this.PRE_PAGE) {
+            this.setState({totalPage: 2})
         }
     }
 

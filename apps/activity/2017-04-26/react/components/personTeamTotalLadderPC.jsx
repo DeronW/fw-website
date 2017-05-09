@@ -8,7 +8,7 @@ class PersonTeamTotalLadderPC extends React.Component {
         this.state = {
             list:[],
             page: 1,
-            totalPage: 2,
+            totalPage: 1,
             tab: '上一页',
             isClick: true,
             cursor: 0,
@@ -31,6 +31,7 @@ class PersonTeamTotalLadderPC extends React.Component {
                     sData = data.data && data.data.teamdata || [];
                     that.setState({list: sData})
                 }
+                if(sData.length > that.PRE_PAGE) that.setState({totalPage: 2})
             })
         })
     }

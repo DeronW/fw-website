@@ -53,6 +53,7 @@ class PersonTeamTotalLadderMobile extends React.Component {
                 sData = data.data && data.data.teamdata || [];
                 this.setState({list: sData})
             }
+            if(sData.length > this.PRE_PAGE) this.setState({totalPage:2})
         })
     }
 

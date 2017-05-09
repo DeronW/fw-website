@@ -4,14 +4,15 @@ class PersonTeamMonthLadderPC extends React.Component {
         super(props);
         this.PRE_PAGE = 10;
         this.state = {
-            list:[],
+            list: [],
             page: 1,
-            totalPage: 2,
+            totalPage: 1,
             tab: '上一页',
             isClick: true,
             cursor: 0
         }
     }
+
     componentDidMount() {
         let {getServerTimestamp,title,personData,teamData} = this.props;
         var June = new Date("2017-06-13 23:59:59").getTime();
@@ -26,7 +27,7 @@ class PersonTeamMonthLadderPC extends React.Component {
                 startDate = '2017-06-14 00:00:00';
                 endDate = '2017-07-12 23:59:59';
             }
-            this.ajaxLadder(title,personData, teamData);
+            this.ajaxLadder(title, personData, teamData);
 
             //if(title == "个人榜"){
             //    this.ajaxPersonLadder(startDate, endDate)
@@ -35,16 +36,19 @@ class PersonTeamMonthLadderPC extends React.Component {
             //}
         }.bind(this));
     }
-    componentWillReceiveProps(nextProps){
-        this.ajaxLadder(nextProps.title,nextProps.personData, nextProps.teamData);
+
+    componentWillReceiveProps(nextProps) {
+        this.ajaxLadder(nextProps.title, nextProps.personData, nextProps.teamData);
     }
+
     //请求个人、小组数据
-    ajaxLadder(title,personData,teamData){
-        if(title == "个人榜"){
+    ajaxLadder(title, personData, teamData) {
+        if (title == "个人榜") {
             this.setState({list: personData || []})
-        }else if(title == "团队榜"){
+        } else if (title == "团队榜") {
             this.setState({list: teamData || []})
         }
+        if (personData && personData.length > this.PRE_PAGE || teamData && teamData.length > this.PRE_PAGE) this.setState({totalPage: 2})
     }
 
 
@@ -89,6 +93,7 @@ class PersonTeamMonthLadderPC extends React.Component {
         let {list} =this.state;
         return list && list.slice(this.state.cursor, this.state.cursor + this.PRE_PAGE);
     }
+
     render() {
         let {totalPage,tab,cursor,list}=this.state;
         let {title,isImgFun} = this.props;
@@ -132,7 +137,7 @@ class PersonTeamMonthLadderPC extends React.Component {
                     <thead>
                     <tr>
                         <td>用户名</td>
-                        <td>{title == "个人榜"?"个人累投金额（元）":"团队累投金额（元）"}</td>
+                        <td>{title == "个人榜" ? "个人累投金额（元）" : "团队累投金额（元）"}</td>
                         <td>奖金（元）</td>
                     </tr>
                     </thead>
