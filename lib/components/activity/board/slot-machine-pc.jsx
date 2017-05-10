@@ -180,7 +180,7 @@ const SlotMachinePC = React.createClass({
         }).then(data => {
             this.ajaxCount();
             var prize = data.data.resultAward[0].prize;
-            var prizeMark = data.data.resultAward.prizeMark;
+            var prizeMark = data.data.resultAward[0].prizeMark;
             var remainTimes = data.data.remainTimes;
             if (window.once_delay) return;
             window.once_delay = true;
