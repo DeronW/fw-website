@@ -432,7 +432,49 @@
     font-size: @fontSize24;
     color: @colorWhite;
   }
-
+  .platformMobile{
+    width: 100%;
+    margin: 20px auto;
+    .platformBg{
+      width: 100%;
+      height: 568px;
+      background: url("../images/platformM1.png") no-repeat;
+      position: relative;
+      .injectWater{
+        width: 140px;
+        height: 146px;
+        position: absolute;
+        right: 28px;
+        top: 24px;
+      }
+      a{
+        display: block;
+        width: 600px;
+        height: 60px;
+        background: url("../images/injectWater.png") no-repeat;
+        position: absolute;
+        top: 0;
+        right: 0;
+      }
+      img{
+        display: block;
+        width: 229px;
+        height: 39px;
+        position: absolute;
+        left: 240px;
+        bottom: 100px;
+      }
+      .pillars{
+        width: 229px;
+        background: #8fe5fe;
+        position: absolute;
+        bottom: 62px;
+        left: 240px;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+      }
+    }
+  }
   .platformTotalMobile{
     width: 100%;
     margin: 20px auto;
@@ -448,11 +490,19 @@
         right: 28px;
         top: 24px;
       }
+      a{
+        display: block;
+        width: 600px;
+        height: 60px;
+        background: url("../images/injectWater.png") no-repeat;
+        position: absolute;
+        top: 0;
+        right: 0;
+      }
       img{
         display: block;
         width: 239px;
         height: 39px;
-        background: url("../images/waterTotalMobile.png") no-repeat;
         position: absolute;
         left: 254px;
         bottom: 100px;

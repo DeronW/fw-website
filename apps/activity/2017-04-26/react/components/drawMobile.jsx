@@ -194,7 +194,7 @@ class DrawMobile extends React.Component {
         window.location.href = link;
     }
     render() {
-        let {stageMay,stageJune,selectedMay,selectedJune,close,bonus,total,totalBonus,show,isLogin,totalLadderTab,monthTipsClose,totalTipsClose,start,end,personData,teamData,height,platBg,totalHeight,platTotalBg} = this.state;
+        let {stageMay,stageJune,selectedMay,selectedJune,close,bonus,total,totalBonus,show,showWater,isLogin,totalLadderTab,monthTipsClose,totalTipsClose,start,end,personData,teamData,height,platBg,totalHeight,platTotalBg} = this.state;
         let no = {
             width: "237px",
             height: "96px",
@@ -279,6 +279,19 @@ class DrawMobile extends React.Component {
                 {monthJuneTab(stageJune, "六月", "6.14 ~ 7.12")}
             </div>
             {isLogin ? tipsBonus : tipsNoLogin}
+            <div className="platformMobile" >
+                <div className="platformBg" style={{background:platBg}}>
+                    <a style={waterStyle}></a>
+                    <div className="injectWater" onTouchEnd={(e)=>{
+                        e.preventDefault();
+                        e.stopPropagation();
+                        this.showWaterRemain()
+                    }}></div>
+                    <img style={{bottom:height + 61}} src="images/waterMobile.png" alt=""/>
+
+                    <div style={{height:height}} className="pillars"></div>
+                </div>
+            </div>
             <div className="drawTips">
                 进榜规则：个人累投金额≥50万元；或团队累投金额≥1000
                 万且团队人数≥50人。<br/>
@@ -313,13 +326,13 @@ class DrawMobile extends React.Component {
             {isLogin ? tipsTotalBonus:tipsNoLogin}
             <div className="platformTotalMobile" >
                 <div className="platformBg" style={{background:platTotalBg}}>
-                    <a href="https://m.9888.cn/" target="_blank" style={waterStyle}></a>
+                    <a style={waterStyle}></a>
                     <div className="injectWater" onTouchEnd={(e)=>{
                         e.preventDefault();
                         e.stopPropagation();
                         this.showWaterRemain()
                     }}></div>
-                    <img style={{bottom:totalHeight + 64}} src="images/waterTotal.png" alt=""/>
+                    <img style={{bottom:totalHeight + 63}} src="images/waterTotal.png" alt=""/>
 
                     <div style={{height:totalHeight}} className="pillars"></div>
                 </div>
