@@ -112,7 +112,7 @@ class DrawPC extends React.Component {
                     bonus = 0
                 } else if (total < 380000000) {
                     bonus = 6
-                } else if (total >= 450000000) {
+                } else if (total < 450000000) {
                     bonus = 18
                 } else {
                     bonus = 33
