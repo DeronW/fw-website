@@ -104,6 +104,7 @@ class PersonTeamMonthLadderMobile extends React.Component {
 
     render() {
         let {totalPage,tab,ladderTab,cursor,thead,list} = this.state;
+        let {personData,teamData} = this.props;
         let pageImg = (item, index) => {
             return <div key={index}
                         className={totalPage>1?(tab == item ? 'selectedPage':null):'selectedPage'}
@@ -171,7 +172,7 @@ class PersonTeamMonthLadderMobile extends React.Component {
                 list.length ? page : null
             }
             {
-                list.length ? null : <div className="monthLadderPcNot">人气王还在堵车，马上就来</div>
+                list.length ? null : <div className="monthLadderMobileNot">人气王还在堵车，马上就来</div>
             }
         </div>
     }

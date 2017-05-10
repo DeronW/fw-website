@@ -169,7 +169,7 @@ class PersonTeamTotalLadderMobile extends React.Component {
                 this.state.list.length ? page : null
             }
             {
-                this.state.list.length ? null : <div className="monthLadderPcNot">人气王还在堵车，马上就来</div>
+                this.state.list.length ? null : <div className="monthLadderMobileNot monthLadderTotalNot">人气王还在堵车，马上就来</div>
             }
         </div>
     }

@@ -206,7 +206,7 @@ const SlotMachinePC = React.createClass({
             if (window.once_delay) return;
             window.once_delay = true;
             prize_list && prize_list.push({
-                img: 'http://placehold.it/138?text=大礼包',
+                img: 'images/gift.png',
                 name: '大礼包'
             });
             this.refs.rockProduct.tenLotteryDrawHandler(30, resultAward, remainTimes, prize_list);

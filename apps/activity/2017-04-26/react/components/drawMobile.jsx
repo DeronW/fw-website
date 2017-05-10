@@ -109,12 +109,14 @@ class DrawMobile extends React.Component {
     }
 
     judgeStageHandler() {
-        var timeStart = 1494864000000;//5.16号
-        var timeMiddle = 1497283200000;//6.13号
-        var timeEnd = 1499961600000;//7.12号
+        var timeStart = +new Date("2017-05-16 00:00:00");//5.16号
+        var timeMiddle = +new Date("2017-06-13 23:59:59");//6.13号
+        var timeEnd = +new Date("2017-07-12 23:59:59");//7.12号
         var that = this;
         this.getServerTimestamp(function (currentTime) {
-            if (currentTime < timeMiddle) {
+            if(currentTime < timeStart){
+                //ReactDOM.render(<PopNoStartMobile />,document.getElementById("pop"))
+            }else if (currentTime < timeMiddle) {
                 that.setState({stageMay: '进行中', stageJune: '未开始'})
             } else if (currentTime < timeEnd) {
                 that.setState({stageMay: '已结束', stageJune: '进行中', selectedMay: false, selectedJune: true})
