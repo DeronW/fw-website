@@ -17,6 +17,7 @@ class DrawPC extends React.Component {
             total: '',
             personData:[],
             teamData:[],
+            height:1,
             prize_list: [{
                 img: 'images/p1.jpg',
                 name: 'No.1  Iphone7',
@@ -115,10 +116,10 @@ class DrawPC extends React.Component {
                 } else if (total >= 130000000) {
                     totalBonus = 100;
                 }
-
+                let diff = Number(total) / 10000000 * 4;
                 that.setState({
                     total: total, bonus: bonus, totalBonus: totalBonus,
-                    personData:personData,teamData:teamData});
+                    personData:personData,teamData:teamData,height:diff});
             })
         });
     }
@@ -190,7 +191,7 @@ class DrawPC extends React.Component {
     }
 
     render() {
-        let {stageMay,stageJune,selectedMay,selectedJune,total,bonus,totalBonus,close,isLogin,start,end,personData,teamData} = this.state;
+        let {stageMay,stageJune,selectedMay,selectedJune,total,bonus,totalBonus,close,isLogin,start,end,personData,teamData,height} = this.state;
 
         let no = {
             width: "237px",
@@ -198,6 +199,9 @@ class DrawPC extends React.Component {
             background: 'url("images/notStarting.png")',
             marginRight: "110px",
             cursor: 'default'
+        };
+        let bg = {
+            background:"url('images/platformPC2.png')"
         };
         let monthMayTab = (stage, month, section) => {
             return <div className={selectedMay ?"monthTab going":"monthTab end"}
@@ -281,8 +285,8 @@ class DrawPC extends React.Component {
                     isLogin ? loginRemain : noLoginRemain
                 }
                 <div className="platformPC">
-                    <div className="platformBg">
-                        <img src="images/water.png" alt=""/>
+                    <div className="platformBg" style={bg}>
+                        <img style={{height:height}} src="images/water.png" alt=""/>
                     </div>
                 </div>
                 <div className="remindText">

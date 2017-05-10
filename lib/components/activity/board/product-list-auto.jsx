@@ -51,9 +51,9 @@ const ProductListAuto = React.createClass({
     },
     render(){
         let {products,singleProduct} = this.state, sum = products.length;
-        singleProduct && singleProduct.forEach((item, index)=> {
+        singleProduct && products && singleProduct.forEach((item, index)=> {
             products.forEach((p, i)=> {
-                if (item.prizeMark === products[i].prizeMark) {
+                if (item.prizeMark == products[i].prizeMark) {
                     products[i].selected = true;
                     products[i].count = item.count;
                 }
