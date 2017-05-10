@@ -160,6 +160,9 @@ class DrawMobile extends React.Component {
     showWaterRemain(){
         this.setState({showWater:true})
     }
+    closeWaterRemain(){
+        this.setState({showWater:false})
+    }
     investFriends() {
         ReactDOM.render(<InvestFriendsMobile gotoLogin={this.gotoLogin}
                                              closePopHandler={this.closePopHandler}/>, document.getElementById("pop"))
@@ -269,7 +272,7 @@ class DrawMobile extends React.Component {
         let waterStyle = {
             display:showWater ?"block":"none"
         };
-        return <div className="drawMobile">
+        return <div className="drawMobile" onTouchEnd={()=>{this.closeWaterRemain()}}>
             <div className="activityExplain" onClick={()=>this.showHandler()}>活动说明</div>
             <div className="drawTitleMobile">大奖抽抽抽，100%中奖</div>
             <div className="drawGift" onClick={isLogin?()=>{this.gotoDraw()}:()=>this.gotoLogin()}><p>{isLogin?"去抽奖":"登录"}</p></div>
@@ -281,7 +284,7 @@ class DrawMobile extends React.Component {
             {isLogin ? tipsBonus : tipsNoLogin}
             <div className="platformMobile" >
                 <div className="platformBg" style={{background:platBg}}>
-                    <a style={waterStyle}></a>
+                    <div className="injectText" style={waterStyle}>活动期间，累投越多可获分的奖金越多，快来注入！</div>
                     <div className="injectWater" onTouchEnd={(e)=>{
                         e.preventDefault();
                         e.stopPropagation();
@@ -326,7 +329,7 @@ class DrawMobile extends React.Component {
             {isLogin ? tipsTotalBonus:tipsNoLogin}
             <div className="platformTotalMobile" >
                 <div className="platformBg" style={{background:platTotalBg}}>
-                    <a style={waterStyle}></a>
+                    <div className="injectText" style={waterStyle}>活动期间，累投越多可获分的奖金越多，快来注入！</div>
                     <div className="injectWater" onTouchEnd={(e)=>{
                         e.preventDefault();
                         e.stopPropagation();
