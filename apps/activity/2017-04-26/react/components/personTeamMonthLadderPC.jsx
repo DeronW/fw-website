@@ -4,74 +4,33 @@ class PersonTeamMonthLadderPC extends React.Component {
         super(props);
         this.PRE_PAGE = 10;
         this.state = {
-            list:[],
+            list: [],
             page: 1,
-            totalPage: 2,
+            totalPage: 1,
             tab: '上一页',
             isClick: true,
             cursor: 0
         }
     }
+
     componentDidMount() {
-        let {getServerTimestamp,title} = this.props;
-        var June = new Date("2017-06-13 23:59:59").getTime();
-        var July = new Date("2017-07-12 23:59:59").getTime();
-        var startDate = '2017-05-16 00:00:00';
-        var endDate = '2017-07-12 23:59:59';
-        getServerTimestamp(function (timestamp) {
-            if (timestamp < June) {
-                startDate = '2017-05-16 00:00:00';
-                endDate = '2017-06-13 23:59:59';
-            } else if (timestamp < July) {
-                startDate = '2017-06-14 00:00:00';
-                endDate = '2017-07-12 23:59:59';
-            }
-            this.ajaxLadder(title,startDate, endDate);
-            //if(title == "个人榜"){
-            //    this.ajaxPersonLadder(startDate, endDate)
-            //}else if(title == "团队榜"){
-            //    this.ajaxTeamLadder(startDate, endDate)
-            //}
-        }.bind(this));
+        let {title,personData,teamData} = this.props;
+        this.ajaxLadder(title, personData, teamData);
     }
-    componentWillReceiveProps(nextProps){
-        this.ajaxLadder(nextProps.title,nextProps.start, nextProps.end);
+
+    componentWillReceiveProps(nextProps) {
+        this.ajaxLadder(nextProps.title, nextProps.personData, nextProps.teamData);
     }
+
     //请求个人、小组数据
-    ajaxLadder(title,start,end){
-        $.get(API_PATH+"api/activityPullInvest/v1/singularMonthTeamList.json",{
-            start:start,
-            end:end,
-            type:'pjgtest99'
-        }).then(data => {
-            let sData;
-            if(title == "个人榜"){
-                sData = data.data.persondata || [];
-                this.setState({list: sData})
-            }else if(title == "团队榜"){
-                sData = data.data.teamdata || [];
-                this.setState({list: sData})
-            }
-        })
+    ajaxLadder(title, personData, teamData) {
+        if (title == "个人榜") {
+            this.setState({list: personData || []})
+        } else if (title == "团队榜") {
+            this.setState({list: teamData || []})
+        }
+        if (personData && personData.length > this.PRE_PAGE || teamData && teamData.length > this.PRE_PAGE) this.setState({totalPage: 2})
     }
-    //个人榜请求ajax
-    //ajaxPersonLadder(start,end){
-    //    $.get(API_PATH+"api/activityPullInvest/v1/singularMonthList.json",{
-    //        start:start,
-    //        end:end
-    //    }).then(data => {
-    //        this.showAndSetData(data)
-    //    })
-    //}
-    //团队榜请求ajax
-    //ajaxTeamLadder(start,end){
-    //    $.get(API_PATH+"api/activityPullInvest/v1/singularMonthTeamList.json",{
-    //        start:start,
-    //        end:end
-    //    }).then(data => {
-    //        this.showAndSetData(data)
-    //    })
-    //}
 
 
     switchPageHandler(type) {
@@ -115,6 +74,7 @@ class PersonTeamMonthLadderPC extends React.Component {
         let {list} =this.state;
         return list && list.slice(this.state.cursor, this.state.cursor + this.PRE_PAGE);
     }
+
     render() {
         let {totalPage,tab,cursor,list}=this.state;
         let {title,isImgFun} = this.props;
@@ -141,7 +101,7 @@ class PersonTeamMonthLadderPC extends React.Component {
                 <td>
                     {item.amount}
                 </td>
-                <td className={item.bonus?"bodyPrice":''}>{item.bonus}</td>
+                <td className={item.bonus>0?"bodyPrice":''}>{item.bonus}</td>
             </tr>
         };
         let tBody = (
@@ -158,7 +118,7 @@ class PersonTeamMonthLadderPC extends React.Component {
                     <thead>
                     <tr>
                         <td>用户名</td>
-                        <td>{title == "个人榜"?"个人累投金额（元）":"团队累投金额（元）"}</td>
+                        <td>{title == "个人榜" ? "个人累投金额（元）" : "团队累投金额（元）"}</td>
                         <td>奖金（元）</td>
                     </tr>
                     </thead>

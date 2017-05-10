@@ -3,12 +3,10 @@ class PersonTeamMonthLadderMobile extends React.Component {
     constructor(props) {
         super(props);
         this.PRE_PAGE = 10;
-        this.START = '2017-05-16 00:00:00';
-        this.end = '2017-06-13 23:59:59';
         this.state = {
             list: [],
             page: 1,
-            totalPage: 2,
+            totalPage: 1,
             tab: '上一页',
             cursor: 0,
             thead: ['用户名', '个人累投金额(元)', '奖金(元)'],
@@ -17,52 +15,34 @@ class PersonTeamMonthLadderMobile extends React.Component {
     }
 
     componentDidMount() {
-        let {getServerTimestamp} = this.props;
-        var June = new Date("2017-06-13 23:59:59").getTime();
-        var July = new Date("2017-07-12 23:59:59").getTime();
-        var startDate = '2017-05-16 00:00:00';
-        var endDate = '2017-07-12 23:59:59';
-        getServerTimestamp(function (timestamp) {
-            if (timestamp < June) {
-                startDate = '2017-05-16 00:00:00';
-                endDate = '2017-06-13 23:59:59';
-            } else if (timestamp < July) {
-                startDate = '2017-06-14 00:00:00';
-                endDate = '2017-07-12 23:59:59';
-            }
-            this.ajaxLadder(this.state.ladderTab, startDate, endDate);
-        }.bind(this));
+        let {personData,teamData} = this.props;
+        this.ajaxLadder(this.state.ladderTab, personData, teamData);
     }
 
     componentWillReceiveProps(nextProps) {
         this.setState({start: nextProps.start, end: nextProps.end});
-        this.ajaxLadder(this.state.ladderTab, nextProps.start, nextProps.end);
+        this.ajaxLadder(this.state.ladderTab, nextProps.personData, nextProps.teamData);
     }
 
     //切换月榜tab
     switchLadderTabHandler(t) {
         if (t == this.state.ladderTab) return;
         this.setState({ladderTab: t});
-        this.ajaxLadder(t, this.START, this.END);
+        this.ajaxLadder(t, this.props.personData, this.props.teamData);
     }
+
     //请求个人、小组数据
-    ajaxLadder(title,start,end){
-        $.get(API_PATH+"api/activityPullInvest/v1/singularMonthTeamList.json",{
-            start:start,
-            end:end,
-            type:'pjgtest99'
-        }).then(data => {
-            let sData;
-            if(title == "个人榜"){
-                this.setState({thead: ['用户名', '个人累投金额(元)', '奖金(元)'], cursor: 0, tab: '上一页'});
-                sData = data.data.persondata || [];
-                this.setState({list: sData})
-            }else if(title == "团队榜"){
-                this.setState({thead: ['用户名', '团队累投金额(元)', '奖金(元)'], cursor: 0, tab: '上一页'});
-                sData = data.data.teamdata || [];
-                this.setState({list: sData})
-            }
-        })
+    ajaxLadder(title, personData, teamData) {
+        if (title == "个人榜") {
+            this.setState({thead: ['用户名', '个人累投金额(元)', '奖金(元)'], cursor: 0, tab: '上一页'});
+            this.setState({list: personData || []})
+        } else if (title == "团队榜") {
+            this.setState({thead: ['用户名', '团队累投金额(元)', '奖金(元)'], cursor: 0, tab: '上一页'});
+            this.setState({list: teamData || []})
+        }
+        if (personData && personData.length > this.PRE_PAGE || teamData && teamData.length > this.PRE_PAGE) {
+            this.setState({totalPage: 2})
+        }
     }
 
     switchPageHandler(type) {
@@ -109,6 +89,7 @@ class PersonTeamMonthLadderMobile extends React.Component {
 
     render() {
         let {totalPage,tab,ladderTab,cursor,thead,list} = this.state;
+        let {personData,teamData} = this.props;
         let pageImg = (item, index) => {
             return <div key={index}
                         className={totalPage>1?(tab == item ? 'selectedPage':null):'selectedPage'}
@@ -176,7 +157,7 @@ class PersonTeamMonthLadderMobile extends React.Component {
                 list.length ? page : null
             }
             {
-                list.length ? null : <div className="monthLadderPcNot">人气王还在堵车，马上就来</div>
+                list.length ? null : <div className="monthLadderMobileNot">人气王还在堵车，马上就来</div>
             }
         </div>
     }

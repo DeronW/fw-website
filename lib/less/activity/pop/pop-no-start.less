@@ -1,0 +1,42 @@
+@import "variables.less";
+.popNoStart{
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: url("../images/popBg.png");
+  z-index: 100;
+  .popNoStartContent{
+    width: 569px;
+    height: 423px;
+    background: url("../images/noStart.png") no-repeat;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    transform: scale(0);
+    animation: rotatePop 0.5s ease-out both;
+  }
+  .popTitle{
+    width: 569px;
+    text-align: center;
+    font-size: @fontSize30;
+    color: @colorRed;
+    position: absolute;
+    left: 0;
+    top: 155px;
+  }
+  .popText{
+    width: 569px;
+    text-align: center;
+    color: @color6;
+    position: absolute;
+    left: 0;
+    top: 208px;
+    font-size: @fontSize14;
+    line-height: 10px;
+  }
+}

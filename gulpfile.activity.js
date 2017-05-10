@@ -3,7 +3,7 @@ const eslint = require('gulp-eslint');
 const PROJ = 'activity';
 
 const APP_NAMES = [
-     '2017-01-05', //不再更能 旧专题
+    //  '2017-01-05', //不再更能 旧专题
     '2017-04-26',//五月份上线的专题
     'topic-template-one',
     'topic-template-two',
@@ -36,6 +36,8 @@ module.exports = function (gulp, generate_task, settings) {
         `${PROJ}/pop/pop-all-situation.jsx`,//摇奖弹层，移动端的所有情况
         `${PROJ}/pop/pop-information.jsx`,//摇奖弹层，移动端的收货信息
         `${PROJ}/pop/pop-rule.jsx`,//摇奖说明
+        `${PROJ}/pop/pop-no-start.jsx`,//活动未开始
+        `${PROJ}/pop/pop-no-start-mobile.jsx`,//移动端活动未开始
         `${PROJ}/board/slot-machine-pc.jsx`,//老虎机
         `${PROJ}/board/poke-balloon-mobile.jsx`,//戳气球
         `${PROJ}/board/winning-list-pc.jsx`,//获奖名单
@@ -73,27 +75,29 @@ module.exports = function (gulp, generate_task, settings) {
         `${PROJ}/pop/pop-all-situation.less`,
         `${PROJ}/pop/pop-information.less`,
         `${PROJ}/pop/pop-rule.less`,
+        `${PROJ}/pop/pop-no-start.less`,
+        `${PROJ}/pop/pop-no-start-mobile.less`,
         `${PROJ}/board/slot-machine-pc.less`,
         `${PROJ}/board/poke-balloon-mobile.less`,
         `${PROJ}/board/winning-list-pc.less`,
     ];
 
+    let default_options = {
+        include_components: INCLUDE_COMPONENTS,
+        include_javascripts: INCLUDE_JAVASCRIPTS,
+        include_less: INCLUDE_LESS
+    }
+
     APP_NAMES.forEach(i => {
-        generate_task(PROJ, i, {
+        generate_task(PROJ, i, Object.assign({}, default_options, {
             debug: true,
-            api_path: settings[PROJ].dev_api_path,
-            include_components: INCLUDE_COMPONENTS,
-            include_javascripts: INCLUDE_JAVASCRIPTS,
-            include_less: INCLUDE_LESS
-        });
-        generate_task(PROJ, i, {
+            api_path: settings[PROJ].dev_api_path
+        }))
+        generate_task(PROJ, i, Object.assign({}, default_options, {
             api_path: "//www.9888.cn/",
             cmd_prefix: 'pack',
             cdn_prefix: `/static/${PROJ}/${i.name || i}/`,
-            include_components: INCLUDE_COMPONENTS,
-            include_javascripts: INCLUDE_JAVASCRIPTS,
-            include_less: INCLUDE_LESS
-        });
+        }))
     });
 
     gulp.task(`build:${PROJ}`, gulp.series(APP_NAMES.map(i => `${PROJ}:pack:${i.name || i}:revision`)));

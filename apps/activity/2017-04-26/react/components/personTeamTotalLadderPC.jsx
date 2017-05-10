@@ -2,38 +2,49 @@
 class PersonTeamTotalLadderPC extends React.Component {
     constructor(props) {
         super(props);
-        this.PRE_PAGE = 10;
+        this.PRE_PAGE = 15;
         this.START = '2017-05-16 00:00:00';
         this.END = '2017-07-12 23:59:59';
         this.state = {
             list:[],
             page: 1,
-            totalPage: 2,
+            totalPage: 1,
             tab: '上一页',
             isClick: true,
             cursor: 0,
         }
     }
     componentDidMount() {
-        this.ajaxLadder();
+        var that = this;
+        this.getTestParam(function (start,end,test) {
+            $.get(API_PATH+"api/activityPullInvest/v1/singularMonthTeamList.json",{
+                start:start,
+                end:end,
+                type:test
+            }).then(data => {
+                let sData;
+                let {title} =that.props;
+                if(title == "个人榜"){
+                    sData = data.data && data.data.persondata || [];
+                    that.setState({list: sData})
+                }else if(title == "团队榜"){
+                    sData = data.data && data.data.teamdata || [];
+                    that.setState({list: sData})
+                }
+                if(sData.length > that.PRE_PAGE) that.setState({totalPage: 2})
+            })
+        })
     }
     //请求个人、小组数据
-    ajaxLadder(){
-        $.get(API_PATH+"api/activityPullInvest/v1/singularMonthTeamList.json",{
-            start:this.START,
-            end:this.END,
-            type:'mayActBig'
-        }).then(data => {
-            let sData;
-            let {title} =this.props;
-            if(title == "个人榜"){
-                sData = data.data.persondata || [];
-                this.setState({list: sData})
-            }else if(title == "团队榜"){
-                sData = data.data.teamdata || [];
-                this.setState({list: sData})
-            }
-        })
+    getTestParam(callback){
+        let start = $getDebugParams().start;
+        let end = $getDebugParams().end;
+        let test = $getDebugParams().test;
+        if(start && end && test){
+            callback(decodeURI(start),decodeURI(end),test);
+        }else{
+            callback(this.START,this.END,'mayActBig');
+        }
     }
 
     switchPageHandler(type) {
@@ -112,8 +123,8 @@ class PersonTeamTotalLadderPC extends React.Component {
             }
             </tbody>
         );
-        return <div className="personMonthLadder">
-            <div className={this.props.title == "个人榜"?"personTitle":"teamTitle"}>{this.props.title}</div>
+        return <div className="personMonthLadder personTotalLadder">
+            <div className={this.props.title == "个人榜"?"personTotalTitle":"teamTotalTitle"}>{this.props.title}</div>
             <div className="personTable">
                 <table>
                     <thead>
@@ -132,7 +143,7 @@ class PersonTeamTotalLadderPC extends React.Component {
                 list.length ? page : null
             }
             {
-                list.length ? null : <div className="monthLadderPcNot">人气王还在堵车，马上就来</div>
+                list.length ? null : <div className="monthLadderPcNot totalLadderPcNot">人气王还在堵车，马上就来</div>
             }
         </div>
     }
