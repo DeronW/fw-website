@@ -17,7 +17,8 @@ class DrawPC extends React.Component {
             total: '',
             personData:[],
             teamData:[],
-            height:1,
+            height:30,
+            platBg:'',
             prize_list: [{
                 img: 'images/p1.jpg',
                 name: 'No.1  Iphone7',
@@ -92,7 +93,6 @@ class DrawPC extends React.Component {
 
     }
     ajaxPersonTeamData(){
-        var that = this;
         this.getTestParam(function (start,end,test) {
             $.get(API_PATH + "api/activityPullInvest/v1/singularMonthTeamList.json", {
                 start: start,
@@ -116,14 +116,23 @@ class DrawPC extends React.Component {
                 } else if (total >= 130000000) {
                     totalBonus = 100;
                 }
+                this.judgePlatformBg(total);
                 let diff = Number(total) / 10000000 * 4;
-                that.setState({
+                this.setState({
                     total: total, bonus: bonus, totalBonus: totalBonus,
                     personData:personData,teamData:teamData,height:diff});
             })
-        });
+        }.bind(this));
     }
-
+    judgePlatformBg(total){
+        if(total < 150000000){
+            this.setState({platBg:"url('images/platformPC1.png')"})
+        }else if(total < 380000000){
+            this.setState({platBg:"url('images/platformPC2.png')"})
+        }else if(total < 450000000){
+            this.setState({platBg:"url('images/platformPC3.png')"})
+        }
+    }
     judgeStageHandler() {
         var that = this;
         var timeStart = +new Date("2017-05-16 00:00:00");//5.16号
@@ -191,7 +200,7 @@ class DrawPC extends React.Component {
     }
 
     render() {
-        let {stageMay,stageJune,selectedMay,selectedJune,total,bonus,totalBonus,close,isLogin,start,end,personData,teamData,height} = this.state;
+        let {stageMay,stageJune,selectedMay,selectedJune,total,bonus,totalBonus,close,isLogin,start,end,personData,teamData,height,platBg} = this.state;
 
         let no = {
             width: "237px",
@@ -199,9 +208,6 @@ class DrawPC extends React.Component {
             background: 'url("images/notStarting.png")',
             marginRight: "110px",
             cursor: 'default'
-        };
-        let bg = {
-            background:"url('images/platformPC2.png')"
         };
         let monthMayTab = (stage, month, section) => {
             return <div className={selectedMay ?"monthTab going":"monthTab end"}
@@ -285,8 +291,10 @@ class DrawPC extends React.Component {
                     isLogin ? loginRemain : noLoginRemain
                 }
                 <div className="platformPC">
-                    <div className="platformBg" style={bg}>
-                        <img style={{height:height}} src="images/water.png" alt=""/>
+                    <div className="platformBg" style={{background:platBg}}>
+                        <a href=""></a>
+                        <img style={{bottom:height + 64}} src="images/water.png" alt=""/>
+                        <div style={{height:height}} className="pillars"></div>
                     </div>
                 </div>
                 <div className="remindText">
