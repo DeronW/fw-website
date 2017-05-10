@@ -3,7 +3,7 @@ const eslint = require('gulp-eslint');
 const PROJ = 'activity';
 
 const APP_NAMES = [
-     '2017-01-05', //不再更能 旧专题
+    //  '2017-01-05', //不再更能 旧专题
     '2017-04-26',//五月份上线的专题
     'topic-template-one',
     'topic-template-two',
@@ -82,22 +82,22 @@ module.exports = function (gulp, generate_task, settings) {
         `${PROJ}/board/winning-list-pc.less`,
     ];
 
+    let default_options = {
+        include_components: INCLUDE_COMPONENTS,
+        include_javascripts: INCLUDE_JAVASCRIPTS,
+        include_less: INCLUDE_LESS
+    }
+
     APP_NAMES.forEach(i => {
-        generate_task(PROJ, i, {
+        generate_task(PROJ, i, Object.assign({}, default_options, {
             debug: true,
-            api_path: settings[PROJ].dev_api_path,
-            include_components: INCLUDE_COMPONENTS,
-            include_javascripts: INCLUDE_JAVASCRIPTS,
-            include_less: INCLUDE_LESS
-        });
-        generate_task(PROJ, i, {
+            api_path: settings[PROJ].dev_api_path
+        }))
+        generate_task(PROJ, i, Object.assign({}, default_options, {
             api_path: "//www.9888.cn/",
             cmd_prefix: 'pack',
             cdn_prefix: `/static/${PROJ}/${i.name || i}/`,
-            include_components: INCLUDE_COMPONENTS,
-            include_javascripts: INCLUDE_JAVASCRIPTS,
-            include_less: INCLUDE_LESS
-        });
+        }))
     });
 
     gulp.task(`build:${PROJ}`, gulp.series(APP_NAMES.map(i => `${PROJ}:pack:${i.name || i}:revision`)));
