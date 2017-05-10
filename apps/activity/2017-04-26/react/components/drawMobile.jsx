@@ -16,11 +16,16 @@ class DrawMobile extends React.Component {
             bonus: 0,
             total:0,
             totalBonus:0,
+            height: 30,
+            totalHeight: 30,
+            platBg: '',
+            platTotalBg: '',
             monthTipsClose: true,
             totalTipsClose: true,
             show: false,
             personData:[],
-            teamData:[]
+            teamData:[],
+            showWater:false,
         }
     }
 
@@ -33,33 +38,6 @@ class DrawMobile extends React.Component {
         });
         this.judgeStageHandler();
         this.ajaxPersonTeamData();
-        //this.getTestParam(function (start,end,test) {
-        //    $.get(API_PATH + "api/activityPullInvest/v1/singularMonthTeamList.json", {
-        //        start: start,
-        //        end: end,
-        //        type:test
-        //    }).then(data=> {
-        //        let bonus = 0;
-        //        let totalBonus = 0;
-        //        let total = data.data.total;
-        //        let personData = data.data.persondata;
-        //        let teamData = data.data.teamdata;
-        //        if (total >= 150000000 && total < 380000000) {
-        //            bonus = 6
-        //        } else if (total >= 380000000 && total < 450000000) {
-        //            bonus = 12
-        //        } else if (total >= 450000000) {
-        //            bonus = 18
-        //        }
-        //        if (total >= 100000000 && total < 130000000) {
-        //            totalBonus = 40;
-        //        } else if (total >= 130000000) {
-        //            totalBonus = 100;
-        //        }
-        //        that.setState({total: total, bonus: bonus, totalBonus: totalBonus,
-        //            personData:personData,teamData:teamData});
-        //    })
-        //})
     }
     getServerTimestamp(callback) {
         var ts = $getDebugParams().timestamp;
@@ -71,44 +49,59 @@ class DrawMobile extends React.Component {
             }.bind(this), 'json')
         }
     }
-    //getTestParam(callback){
-    //    let start = $getDebugParams().start;
-    //    let end = $getDebugParams().end;
-    //    let test = $getDebugParams().test;
-    //    if(start && end && test){
-    //        callback(decodeURI(start),decodeURI(end),test);
-    //    }else{
-    //        callback(this.state.start,this.state.end,'');
-    //    }
-    //}
     ajaxPersonTeamData() {
         $.get(API_PATH + "api/activityPullInvest/v1/singularMonthTeamList.json", {
             start: this.state.start,
             end: this.state.end,
             type:this.state.type
         }).then(data=> {
-            let bonus = 0;
-            let totalBonus = 0;
+            let bonus = 0, totalBonus = 0;
             let total = data.data.total;
-            let personData = data.data.persondata;
-            let teamData = data.data.teamdata;
-            if (total >= 150000000 && total < 380000000) {
+            var personData = data.data.persondata;
+            var teamData = data.data.teamdata;
+            if (total < 150000000) {
+                bonus = 0
+            } else if (total < 380000000) {
                 bonus = 6
-            } else if (total >= 380000000 && total < 450000000) {
-                bonus = 12
             } else if (total >= 450000000) {
                 bonus = 18
+            } else {
+                bonus = 33
             }
             if (total >= 100000000 && total < 130000000) {
                 totalBonus = 40;
             } else if (total >= 130000000) {
                 totalBonus = 100;
             }
-            this.setState({total: total, bonus: bonus, totalBonus: totalBonus,
-                personData:personData,teamData:teamData});
+            this.judgePlatformBg(total);
+            this.judgePlatformTotalBg(total);
+            let height = Number(total) / 10000000 * 4;
+            let totalHeight = Number(total) / 50000000 * 5;
+            this.setState({
+                total: total, bonus: bonus, totalBonus: totalBonus,
+                personData: personData, teamData: teamData, height: height, totalHeight: totalHeight
+            });
         })
     }
+    judgePlatformBg(total) {
+        if (total < 150000000) {
+            this.setState({platBg: "url('images/platformM1.png')"})
+        } else if (total < 380000000) {
+            this.setState({platBg: "url('images/platformM2.png')"})
+        } else if (total < 450000000) {
+            this.setState({platBg: "url('images/platformM3.png')"})
+        }
+    }
 
+    judgePlatformTotalBg(total) {
+        if (total < 1000000000) {
+            this.setState({platTotalBg: "url('images/platformTotalM1.png')"})
+        } else if (total < 1300000000) {
+            this.setState({platTotalBg: "url('images/platformTotalM2.png')"})
+        } else {
+            this.setState({platTotalBg: "url('images/platformTotalM3.png')"})
+        }
+    }
     judgeStageHandler() {
         var that = this;
         var timeStart = +new Date("2017-05-16 00:00:00");//5.16号
@@ -164,7 +157,9 @@ class DrawMobile extends React.Component {
     showHandler() {
         this.setState({show: !this.state.show})
     }
-
+    showWaterRemain(){
+        this.setState({showWater:true})
+    }
     investFriends() {
         ReactDOM.render(<InvestFriendsMobile gotoLogin={this.gotoLogin}
                                              closePopHandler={this.closePopHandler}/>, document.getElementById("pop"))
@@ -199,7 +194,7 @@ class DrawMobile extends React.Component {
         window.location.href = link;
     }
     render() {
-        let {stageMay,stageJune,selectedMay,selectedJune,close,bonus,total,totalBonus,show,isLogin,totalLadderTab,monthTipsClose,totalTipsClose,start,end,personData,teamData} = this.state;
+        let {stageMay,stageJune,selectedMay,selectedJune,close,bonus,total,totalBonus,show,isLogin,totalLadderTab,monthTipsClose,totalTipsClose,start,end,personData,teamData,height,platBg,totalHeight,platTotalBg} = this.state;
         let no = {
             width: "237px",
             height: "96px",
@@ -271,6 +266,9 @@ class DrawMobile extends React.Component {
         let showStyle = {
             display: show ? "block" : "none"
         };
+        let waterStyle = {
+            display:showWater ?"block":"none"
+        };
         return <div className="drawMobile">
             <div className="activityExplain" onClick={()=>this.showHandler()}>活动说明</div>
             <div className="drawTitleMobile">大奖抽抽抽，100%中奖</div>
@@ -313,6 +311,19 @@ class DrawMobile extends React.Component {
             </div>
             <div className="drawTitleMobile">终级排行榜，百万壕礼奉上</div>
             {isLogin ? tipsTotalBonus:tipsNoLogin}
+            <div className="platformTotalMobile" >
+                <div className="platformBg" style={{background:platTotalBg}}>
+                    <a href="https://m.9888.cn/" target="_blank" style={waterStyle}></a>
+                    <div className="injectWater" onTouchEnd={(e)=>{
+                        e.preventDefault();
+                        e.stopPropagation();
+                        this.showWaterRemain()
+                    }}></div>
+                    <img style={{bottom:totalHeight + 64}} src="images/waterTotal.png" alt=""/>
+
+                    <div style={{height:totalHeight}} className="pillars"></div>
+                </div>
+            </div>
             <div className="drawTips">
                 进榜规则：个人累投金额≥100万元；或团队累投金额≥1200
                 万且团队人数≥50人。<br/>

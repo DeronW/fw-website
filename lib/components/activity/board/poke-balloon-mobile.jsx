@@ -64,7 +64,7 @@ const BalloonBoom = React.createClass({
                 (this.state.outTime || this.props.getPrizeType() == 'grey') ?
                     <img className="greyPath" src={this.props.greyPath} alt=""/> :
                     <img className={this.props.isAnimation ? "blueBalloon":"blueBalloonNo"}
-                         onClick={this.judgeType}
+                         onTouchEnd={this.judgeType}
                          style={this.state.path == 'images/giftMobile.png' ? pathStyle : {}} src={this.state.path}/>
             }
         </div>
