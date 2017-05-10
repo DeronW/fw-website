@@ -9,36 +9,36 @@
   }
   .drawBox {
     width: 1140px;
-    height: 4180px;
+    height: 100%;
     margin: auto;
     background: @colorBg;
     position: relative;
     padding-top: 1px;
     color: @colorWhite;
-    .drawChance{
+    .drawChance {
       width: 886px;
       height: 40px;
       border-radius: 40px;
       background: @colorDarkBlue;
       margin: 0 auto 20px;
-      .noLoginChance{
+      .noLoginChance {
         padding: 0 40px;
         text-align: center;
         line-height: 40px;
-        a{
+        a {
           color: @colorYellow;
         }
       }
 
     }
-    .drawMachine{
+    .drawMachine {
       width: 1140px;
       height: 540px;
       margin: auto;
-      .machine{
+      .machine {
         float: left;
       }
-      .winningList{
+      .winningList {
         float: right;
       }
     }
@@ -120,7 +120,7 @@
       }
       .noLoginRemain {
         margin: 0 100px;
-        a{
+        a {
           color: @colorYellow;
         }
       }
@@ -270,29 +270,29 @@
         font-size: @fontSize18;
         margin-bottom: 20px;
       }
-      p{
+      p {
         font-size: @fontSize14;
         line-height: 22px;
       }
     }
-    .drawTitle{
+    .drawTitle {
       width: 622px;
       height: 112px;
       background: url("../images/drawTitle.png") no-repeat;
-      margin:0 auto 40px;
+      margin: 0 auto 40px;
       line-height: 62px;
       text-align: center;
       font-size: @fontSize30;
 
     }
-    .drawTotalLadder{
+    .drawTotalLadder {
       width: 1140px;
       height: 770px;
       margin: 80px auto;
-      .person{
+      .person {
         float: left;
       }
-      .team{
+      .team {
         float: right;
       }
     }
@@ -361,16 +361,16 @@
         }
       }
     }
-    .platformPC{
+    .platformPC {
       width: 1140px;
       margin: 20px auto;
-      .platformBg{
+      .platformBg {
         width: 911px;
         height: 538px;
         background: url("../images/platformPC1.png") no-repeat;
         margin: auto;
         position: relative;
-        a{
+        a {
           display: block;
           width: 120px;
           height: 120px;
@@ -380,7 +380,7 @@
           right: 54px;
           cursor: pointer;
         }
-        img{
+        img {
           display: block;
           position: absolute;
           left: 280px;
@@ -388,7 +388,7 @@
           width: 271px;
           height: 43px;
         }
-        .pillars{
+        .pillars {
           width: 271px;
           background: #8fe5fe;
           position: absolute;
@@ -399,41 +399,72 @@
         }
       }
     }
+    .platformTotalPC {
+      .platformBg {
+        width: 911px;
+        height: 497px;
+        background: url("../images/platformTotalPC1.png") no-repeat;
+        position: relative;
+        a {
+          display: block;
+          position: absolute;
+          top: 38px;
+          right: 64px;
+        }
+        img {
+          display: block;
+          position: absolute;
+          left: 360px;
+          bottom: 64px;
+          width: 279px;
+          height: 39px;
+        }
+        .pillars {
+          width: 279px;
+          background: #ffe8b8;
+          position: absolute;
+          bottom: 64px;
+          left: 360px;
+          border-bottom-left-radius: 5px;
+          border-bottom-right-radius: 5px;
+        }
+      }
+    }
   }
-  .drawExplain{
+  .drawExplain {
     width: 100%;
     height: 514px;
     background: @colorDarkBlue;
     color: @colorWhite;
     font-size: @fontSize14;
-    .explainContent{
+    .explainContent {
       width: 1140px;
       padding: 32px 0;
       margin: auto;
-      .explainTitle{
+      .explainTitle {
         font-size: @fontSize34;
-        img{
+        img {
           vertical-align: middle;
         }
-        em{
+        em {
           vertical-align: middle;
           margin-left: 10px;
         }
       }
     }
   }
-  .pcFooterBar{
+  .pcFooterBar {
     width: 100%;
     height: 98px;
-    background: rgba(61,79,137,0.8);
+    background: rgba(61, 79, 137, 0.8);
     position: fixed;
     bottom: 0;
     z-index: 6;
-    .footerBarContent{
+    .footerBarContent {
       width: 1140px;
       margin: auto;
       position: relative;
-      img{
+      img {
         top: -60px;
         left: 0;
         position: absolute;
@@ -442,7 +473,7 @@
         height: 150px;
       }
     }
-    .barText{
+    .barText {
       position: absolute;
       left: 200px;
       font-size: @fontSize16;
@@ -450,7 +481,7 @@
       height: 98px;
       line-height: 98px;
     }
-    a{
+    a {
       width: 156px;
       height: 33px;
       background: url("../images/btn.png") no-repeat;
@@ -460,15 +491,15 @@
       font-size: @fontSize14;
       position: absolute;
     }
-    .moreAward{
+    .moreAward {
       left: 550px;
       top: 32px;
     }
-    .howAward{
+    .howAward {
       left: 750px;
       top: 32px;
     }
-    em{
+    em {
       cursor: pointer;
       position: absolute;
       top: 10px;
@@ -479,7 +510,8 @@
     }
   }
 }
-.pcNotice{
+
+.pcNotice {
   width: 100%;
   height: 100%;
   background: url("../images/noticeBg.png");
@@ -489,7 +521,7 @@
   display: block;
   z-index: 100;
   font-size: @fontSize16;
-  .noticeTitle{
+  .noticeTitle {
     font-size: @fontSize26;
     color: @colorWhite;
     width: 100%;
@@ -497,17 +529,17 @@
     position: absolute;
     top: 64px;
   }
-  .pcNoticeContentNo{
+  .pcNoticeContentNo {
     width: 830px;
     height: 487px;
-    background:url("../images/noticePC.png") no-repeat;
+    background: url("../images/noticePC.png") no-repeat;
     position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
     margin: auto;
-    .noticeClose{
+    .noticeClose {
       width: 56px;
       height: 56px;
       background: transparent;
@@ -516,17 +548,17 @@
       top: 0;
       cursor: pointer;
     }
-    .noticeText{
+    .noticeText {
       width: 616px;
       margin: 164px auto 0;
       color: @color6;
       text-align: center;
       line-height: 30px;
-      em{
+      em {
         color: @colorRed;
       }
     }
-    .login{
+    .login {
       display: block;
       width: 128px;
       height: 40px;
@@ -538,7 +570,7 @@
       top: 240px;
       color: @colorWhite;
     }
-    .noticeRemind{
+    .noticeRemind {
       width: 638px;
       height: 48px;
       text-align: center;
@@ -546,19 +578,19 @@
       position: absolute;
       right: 110px;
       top: 370px;
-      em,a{
+      em, a {
         color: @colorRed;
       }
-      a{
+      a {
         display: inline-block;
         margin-left: 20px;
       }
     }
   }
-  .pcNoticeContentLogin{
+  .pcNoticeContentLogin {
     width: 830px;
     height: 487px;
-    background:url("../images/noticeLoginPC.png") no-repeat;
+    background: url("../images/noticeLoginPC.png") no-repeat;
     position: absolute;
     top: 0;
     bottom: 0;
@@ -566,7 +598,7 @@
     right: 0;
     margin: auto;
     font-size: @fontSize16;
-    .noticeClose{
+    .noticeClose {
       width: 56px;
       height: 56px;
       background: transparent;
@@ -575,13 +607,13 @@
       top: 0;
       cursor: pointer;
     }
-    .noticeText1{
+    .noticeText1 {
       position: absolute;
       top: 145px;
       left: 130px;
       color: @color6;
     }
-    .noticeCode{
+    .noticeCode {
       position: absolute;
       top: 172px;
       left: 132px;
@@ -590,31 +622,31 @@
       font-size: @fontSize30;
       color: @color6;
     }
-    .noticeText2{
+    .noticeText2 {
       position: absolute;
       top: 242px;
       left: 130px;
       color: @color6;
     }
-    .noticeLink{
+    .noticeLink {
       position: absolute;
       top: 274px;
       left: 130px;
-      width:486px;
+      width: 486px;
       text-align: center;
       color: @colorLink;
       font-size: @fontSize14;
     }
-    .copyCode{
+    .copyCode {
       position: absolute;
       top: 274px;
       left: 616px;
-      width:96px;
+      width: 96px;
       text-align: center;
       color: @colorWhite;
       cursor: pointer;
     }
-    .noticeRemind{
+    .noticeRemind {
       width: 638px;
       height: 48px;
       text-align: center;
@@ -622,10 +654,10 @@
       position: absolute;
       right: 110px;
       top: 370px;
-      em,a{
+      em, a {
         color: @colorRed;
       }
-      a{
+      a {
         display: inline-block;
         margin-left: 20px;
       }

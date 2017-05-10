@@ -10,15 +10,17 @@ class DrawPC extends React.Component {
             selectedJune: false,
             start: '2017-05-16 00:00:00',
             end: '2017-06-13 23:59:59',
-            type:'mayActf',
+            type: 'mayActf',
             close: false,
             bonus: 0,
             totalBonus: 0,
             total: '',
-            personData:[],
-            teamData:[],
-            height:30,
-            platBg:'',
+            personData: [],
+            teamData: [],
+            height: 30,
+            totalHeight: 30,
+            platBg: '',
+            platTotalBg: '',
             prize_list: [{
                 img: 'images/p1.jpg',
                 name: 'No.1  Iphone7',
@@ -73,16 +75,18 @@ class DrawPC extends React.Component {
             }.bind(this), 'json')
         }
     }
-    getTestParam(callback){
+
+    getTestParam(callback) {
         let start = $getDebugParams().start;
         let end = $getDebugParams().end;
         let test = $getDebugParams().test;
-        if(start && end && test){
-            callback(decodeURI(start),decodeURI(end),test);
-        }else{
-            callback(this.state.start,this.state.end,this.state.type);
+        if (start && end && test) {
+            callback(decodeURI(start), decodeURI(end), test);
+        } else {
+            callback(this.state.start, this.state.end, this.state.type);
         }
     }
+
     componentDidMount() {
         var that = this;
         $UserReady(function (isLogin, user) {
@@ -92,24 +96,26 @@ class DrawPC extends React.Component {
         this.ajaxPersonTeamData();
 
     }
-    ajaxPersonTeamData(){
-        this.getTestParam(function (start,end,test) {
+
+    ajaxPersonTeamData() {
+        this.getTestParam(function (start, end, test) {
             $.get(API_PATH + "api/activityPullInvest/v1/singularMonthTeamList.json", {
                 start: start,
                 end: end,
-                type:test
+                type: test
             }).then(data=> {
-                let bonus = 0;
-                let totalBonus = 0;
+                let bonus = 0, totalBonus = 0;
                 let total = data.data.total;
                 var personData = data.data.persondata;
                 var teamData = data.data.teamdata;
-                if (total >= 150000000 && total < 380000000) {
+                if (total < 150000000) {
+                    bonus = 0
+                } else if (total < 380000000) {
                     bonus = 6
-                } else if (total >= 380000000 && total < 450000000) {
-                    bonus = 12
                 } else if (total >= 450000000) {
                     bonus = 18
+                } else {
+                    bonus = 33
                 }
                 if (total >= 100000000 && total < 130000000) {
                     totalBonus = 40;
@@ -117,22 +123,37 @@ class DrawPC extends React.Component {
                     totalBonus = 100;
                 }
                 this.judgePlatformBg(total);
-                let diff = Number(total) / 10000000 * 4;
+                this.judgePlatformTotalBg(total);
+                let height = Number(total) / 10000000 * 4;
+                let totalHeight = Number(total) / 50000000 * 5;
                 this.setState({
                     total: total, bonus: bonus, totalBonus: totalBonus,
-                    personData:personData,teamData:teamData,height:diff});
+                    personData: personData, teamData: teamData, height: height, totalHeight: totalHeight
+                });
             })
         }.bind(this));
     }
-    judgePlatformBg(total){
-        if(total < 150000000){
-            this.setState({platBg:"url('images/platformPC1.png')"})
-        }else if(total < 380000000){
-            this.setState({platBg:"url('images/platformPC2.png')"})
-        }else if(total < 450000000){
-            this.setState({platBg:"url('images/platformPC3.png')"})
+
+    judgePlatformBg(total) {
+        if (total < 150000000) {
+            this.setState({platBg: "url('images/platformPC1.png')"})
+        } else if (total < 380000000) {
+            this.setState({platBg: "url('images/platformPC2.png')"})
+        } else if (total < 450000000) {
+            this.setState({platBg: "url('images/platformPC3.png')"})
         }
     }
+
+    judgePlatformTotalBg(total) {
+        if (total < 1000000000) {
+            this.setState({platTotalBg: "url('images/platformTotalPC1.png')"})
+        } else if (total < 1300000000) {
+            this.setState({platTotalBg: "url('images/platformTotalPC2.png')"})
+        } else {
+            this.setState({platTotalBg: "url('images/platformTotalPC3.png')"})
+        }
+    }
+
     judgeStageHandler() {
         var that = this;
         var timeStart = +new Date("2017-05-16 00:00:00");//5.16号
@@ -142,20 +163,21 @@ class DrawPC extends React.Component {
         var startDate = '2017-05-16 00:00:00';
         var endDate = '2017-07-12 23:59:59';
         this.getServerTimestamp(function (currentTime) {
-            if(currentTime < timeStart){
+            if (currentTime < timeStart) {
                 //ReactDOM.render(<PopNoStart />,document.getElementById("pop"))
-            }else if (currentTime < timeMiddle) {
+            } else if (currentTime < timeMiddle) {
                 startDate = '2017-05-16 00:00:00';
                 endDate = '2017-06-13 23:59:59';
                 that.setState({
                     stageMay: '进行中', stageJune: '未开始',
-                    start:startDate,end:endDate,type:'mayActf'
+                    start: startDate, end: endDate, type: 'mayActf'
                 })
             } else if (currentTime < timeEnd) {
                 startDate = '2017-06-14 00:00:00';
                 endDate = '2017-07-12 23:59:59';
-                that.setState({stageMay: '已结束', stageJune: '进行中',
-                    selectedMay: false, selectedJune: true,start:startDate,end:endDate,type:'mayActt'
+                that.setState({
+                    stageMay: '已结束', stageJune: '进行中',
+                    selectedMay: false, selectedJune: true, start: startDate, end: endDate, type: 'mayActt'
                 })
             }
         });
@@ -168,16 +190,16 @@ class DrawPC extends React.Component {
                 selectedJune: false,
                 start: '2017-05/16 00:00:00',
                 end: '2017-06/13 23:59:59',
-                type:'mayActf'
-            },this.ajaxPersonTeamData)
+                type: 'mayActf'
+            }, this.ajaxPersonTeamData)
         } else {
             if (stage != "未开始")  this.setState({
                 selectedMay: false,
                 selectedJune: true,
                 start: '2017-06/14 00:00:00',
                 end: '2017-07/12 23:59:59',
-                type:'mayActt'
-            },this.ajaxPersonTeamData)
+                type: 'mayActt'
+            }, this.ajaxPersonTeamData)
         }
     }
 
@@ -200,7 +222,7 @@ class DrawPC extends React.Component {
     }
 
     render() {
-        let {stageMay,stageJune,selectedMay,selectedJune,total,bonus,totalBonus,close,isLogin,start,end,personData,teamData,height,platBg} = this.state;
+        let {stageMay,stageJune,selectedMay,selectedJune,total,bonus,totalBonus,close,isLogin,start,end,personData,teamData,height,platBg,totalHeight,platTotalBg} = this.state;
 
         let no = {
             width: "237px",
@@ -292,8 +314,9 @@ class DrawPC extends React.Component {
                 }
                 <div className="platformPC">
                     <div className="platformBg" style={{background:platBg}}>
-                        <a href=""></a>
+                        <a href="https://www.9888.cn/"></a>
                         <img style={{bottom:height + 64}} src="images/water.png" alt=""/>
+
                         <div style={{height:height}} className="pillars"></div>
                     </div>
                 </div>
@@ -338,7 +361,14 @@ class DrawPC extends React.Component {
                         </div>
                     </div> : noLoginRemain
                 }
+                <div className="platformBg platformTotalPC" >
+                    <div className="platformBg" style={{background:platTotalBg}}>
+                        <a href="https://www.9888.cn/"></a>
+                        <img style={{bottom:totalHeight + 64}} src="images/waterTotal.png" alt=""/>
 
+                        <div style={{height:totalHeight}} className="pillars"></div>
+                    </div>
+                </div>
                 <div className="remindText">
                     <div className='loginRemain'>进榜规则：个人累投金额≥100万元；或团队累投金额≥1200万且团队人数≥50人。<br/>
                         月度奖金分配方式：个人和团队奖金分配比例=4（个人）：6（团队）
@@ -363,8 +393,11 @@ class DrawPC extends React.Component {
                     <p>1. 以上数据实时更新，最终发放奖金请以每月结束后数据为准；</p>
 
                     <p>2. 奖金包奖励以工豆形式发放；</p>
+
                     <p>3. 奖金分配方式：个人和团队奖金分配比例=4（个人）：6（团队）</p>
+
                     <p>4. 奖金包占比分配公式：个人（或团队）累投总额÷前30名个人（或团队）累投总额。仅计算满足获奖资格的用户。</p>
+
                     <p>5. 活动期间，平台累投金额达标。个人及团队排行前30的工友，将按照其累计投资金额占比进行最高100万元奖金分配。累计金额越多获得的奖金就越多。</p>
                 </div>
             </div>
