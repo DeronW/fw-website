@@ -314,7 +314,7 @@ class DrawPC extends React.Component {
                 }
                 <div className="platformPC">
                     <div className="platformBg" style={{background:platBg}}>
-                        <a href="https://www.9888.cn/"></a>
+                        <a href="https://www.9888.cn/" target="_blank"></a>
                         <img style={{bottom:height + 64}} src="images/water.png" alt=""/>
 
                         <div style={{height:height}} className="pillars"></div>
@@ -361,9 +361,9 @@ class DrawPC extends React.Component {
                         </div>
                     </div> : noLoginRemain
                 }
-                <div className="platformBg platformTotalPC" >
+                <div className="platformTotalPC" >
                     <div className="platformBg" style={{background:platTotalBg}}>
-                        <a href="https://www.9888.cn/"></a>
+                        <a href="https://www.9888.cn/" target="_blank"></a>
                         <img style={{bottom:totalHeight + 64}} src="images/waterTotal.png" alt=""/>
 
                         <div style={{height:totalHeight}} className="pillars"></div>
