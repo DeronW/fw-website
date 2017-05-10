@@ -10,6 +10,7 @@ class DrawMobile extends React.Component {
             selectedJune: false,
             start:'2017-05-16 00:00:00',
             end:'2017-06-13 23:59:59',
+            type:'mayActf',
             remain: '',
             close: false,
             bonus: 0,
@@ -24,14 +25,14 @@ class DrawMobile extends React.Component {
     }
 
     componentDidMount() {
-        this.judgeStageHandler();
-        this.rankingAndPrize();
         var that = this;
         $UserReady(function (isLogin,user) {
             if(isLogin){
                 that.setState({isLogin:isLogin})
             }
         });
+        this.judgeStageHandler();
+        this.ajaxPersonTeamData();
         //this.getTestParam(function (start,end,test) {
         //    $.get(API_PATH + "api/activityPullInvest/v1/singularMonthTeamList.json", {
         //        start: start,
@@ -80,11 +81,11 @@ class DrawMobile extends React.Component {
     //        callback(this.state.start,this.state.end,'');
     //    }
     //}
-    rankingAndPrize() {
+    ajaxPersonTeamData() {
         $.get(API_PATH + "api/activityPullInvest/v1/singularMonthTeamList.json", {
             start: this.state.start,
             end: this.state.end,
-            type:'pjgtest99'
+            type:this.state.type
         }).then(data=> {
             let bonus = 0;
             let totalBonus = 0;
@@ -109,17 +110,29 @@ class DrawMobile extends React.Component {
     }
 
     judgeStageHandler() {
+        var that = this;
         var timeStart = +new Date("2017-05-16 00:00:00");//5.16号
         var timeMiddle = +new Date("2017-06-13 23:59:59");//6.13号
         var timeEnd = +new Date("2017-07-12 23:59:59");//7.12号
-        var that = this;
+
+        var startDate = '2017-05-16 00:00:00';
+        var endDate = '2017-07-12 23:59:59';
         this.getServerTimestamp(function (currentTime) {
             if(currentTime < timeStart){
-                //ReactDOM.render(<PopNoStartMobile />,document.getElementById("pop"))
+                //ReactDOM.render(<PopNoStart />,document.getElementById("pop"))
             }else if (currentTime < timeMiddle) {
-                that.setState({stageMay: '进行中', stageJune: '未开始'})
+                startDate = '2017-05-16 00:00:00';
+                endDate = '2017-06-13 23:59:59';
+                that.setState({
+                    stageMay: '进行中', stageJune: '未开始',
+                    start:startDate,end:endDate,type:'mayActf'
+                })
             } else if (currentTime < timeEnd) {
-                that.setState({stageMay: '已结束', stageJune: '进行中', selectedMay: false, selectedJune: true})
+                startDate = '2017-06-14 00:00:00';
+                endDate = '2017-07-12 23:59:59';
+                that.setState({stageMay: '已结束', stageJune: '进行中',
+                    selectedMay: false, selectedJune: true,start:startDate,end:endDate,type:'mayActt'
+                })
             }
         });
     }
@@ -130,16 +143,18 @@ class DrawMobile extends React.Component {
             this.setState({
                 selectedMay: true,
                 selectedJune: false,
-                start:'2017-05-16 00:00:00',
-                end:'2017-06-13 23:59:59'
-            })
+                start: '2017-05/16 00:00:00',
+                end: '2017-06/13 23:59:59',
+                type:'mayActf'
+            },this.ajaxPersonTeamData)
         } else {
             if (stage != "未开始")  this.setState({
                 selectedMay: false,
                 selectedJune: true,
-                start:'2017-06-14 00:00:00',
-                end:'2017-07-12 23:59:59'
-            })
+                start: '2017-06/14 00:00:00',
+                end: '2017-07/12 23:59:59',
+                type:'mayActt'
+            },this.ajaxPersonTeamData)
         }
     }
     closeHandler() {
@@ -234,7 +249,7 @@ class DrawMobile extends React.Component {
         let tipsTotalBonus = (
             <div className="drawTips">5.16-7.12，平台达到相应累计交易量，且个人及团队排行
                 前30名的工友，最高获分100万元奖金。<br/>
-                当前平台累计交易量<em>{total}</em>元，可获分<em>{totalBonus}</em>元奖金！
+                当前平台累计交易量<em>{total}</em>元，可获分<em>{totalBonus}</em>万奖金！
             </div>
         );
         let monthTipsBriefStyle = {

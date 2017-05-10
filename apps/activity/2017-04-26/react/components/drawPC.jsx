@@ -10,6 +10,7 @@ class DrawPC extends React.Component {
             selectedJune: false,
             start: '2017-05-16 00:00:00',
             end: '2017-06-13 23:59:59',
+            type:'mayActf',
             close: false,
             bonus: 0,
             totalBonus: 0,
@@ -77,7 +78,7 @@ class DrawPC extends React.Component {
         if(start && end && test){
             callback(decodeURI(start),decodeURI(end),test);
         }else{
-            callback(this.state.start,this.state.end,'');
+            callback(this.state.start,this.state.end,this.state.type);
         }
     }
     componentDidMount() {
@@ -85,6 +86,12 @@ class DrawPC extends React.Component {
         $UserReady(function (isLogin, user) {
             that.setState({isLogin: isLogin});
         });
+        this.judgeStageHandler();
+        this.ajaxPersonTeamData();
+
+    }
+    ajaxPersonTeamData(){
+        var that = this;
         this.getTestParam(function (start,end,test) {
             $.get(API_PATH + "api/activityPullInvest/v1/singularMonthTeamList.json", {
                 start: start,
@@ -114,23 +121,32 @@ class DrawPC extends React.Component {
                     personData:personData,teamData:teamData});
             })
         });
-        this.judgeStageHandler();
-
     }
 
-
     judgeStageHandler() {
+        var that = this;
         var timeStart = +new Date("2017-05-16 00:00:00");//5.16号
         var timeMiddle = +new Date("2017-06-13 23:59:59");//6.13号
         var timeEnd = +new Date("2017-07-12 23:59:59");//7.12号
-        var that = this;
+
+        var startDate = '2017-05-16 00:00:00';
+        var endDate = '2017-07-12 23:59:59';
         this.getServerTimestamp(function (currentTime) {
             if(currentTime < timeStart){
                 //ReactDOM.render(<PopNoStart />,document.getElementById("pop"))
             }else if (currentTime < timeMiddle) {
-                that.setState({stageMay: '进行中', stageJune: '未开始'})
+                startDate = '2017-05-16 00:00:00';
+                endDate = '2017-06-13 23:59:59';
+                that.setState({
+                    stageMay: '进行中', stageJune: '未开始',
+                    start:startDate,end:endDate,type:'mayActf'
+                })
             } else if (currentTime < timeEnd) {
-                that.setState({stageMay: '已结束', stageJune: '进行中', selectedMay: false, selectedJune: true})
+                startDate = '2017-06-14 00:00:00';
+                endDate = '2017-07-12 23:59:59';
+                that.setState({stageMay: '已结束', stageJune: '进行中',
+                    selectedMay: false, selectedJune: true,start:startDate,end:endDate,type:'mayActt'
+                })
             }
         });
     }
@@ -141,15 +157,17 @@ class DrawPC extends React.Component {
                 selectedMay: true,
                 selectedJune: false,
                 start: '2017-05/16 00:00:00',
-                end: '2017-06/13 23:59:59'
-            })
+                end: '2017-06/13 23:59:59',
+                type:'mayActf'
+            },this.ajaxPersonTeamData)
         } else {
             if (stage != "未开始")  this.setState({
                 selectedMay: false,
                 selectedJune: true,
                 start: '2017-06/14 00:00:00',
-                end: '2017-07/12 23:59:59'
-            })
+                end: '2017-07/12 23:59:59',
+                type:'mayActt'
+            },this.ajaxPersonTeamData)
         }
     }
 
@@ -217,7 +235,7 @@ class DrawPC extends React.Component {
             <div className="remindText">
                 <div className='loginRemain'>
                     单月内，平台达到相应累计交易量，且个人及团队排行前20名的工友，最高可获分33万奖金。
-                    当前平台累计交易量<em>{this.state.total}</em> 元，可获分<em>{bonus}</em>元奖金！
+                    当前平台累计交易量<em>{this.state.total}</em> 元，可获分<em>{bonus}</em>万奖金！
                 </div>
             </div>
         );
@@ -262,6 +280,11 @@ class DrawPC extends React.Component {
                 {
                     isLogin ? loginRemain : noLoginRemain
                 }
+                <div className="platformPC">
+                    <div className="platformBg">
+                        <img src="images/water.png" alt=""/>
+                    </div>
+                </div>
                 <div className="remindText">
                     <div className='loginRemain'>进榜规则：个人累投金额≥50万元；或团队累投金额≥1000万且团队人数≥50人。<br/>
                         月度奖金分配方式：个人和团队奖金分配比例=4（个人）：6（团队）

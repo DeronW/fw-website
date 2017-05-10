@@ -14,27 +14,8 @@ class PersonTeamMonthLadderPC extends React.Component {
     }
 
     componentDidMount() {
-        let {getServerTimestamp,title,personData,teamData} = this.props;
-        var June = new Date("2017-06-13 23:59:59").getTime();
-        var July = new Date("2017-07-12 23:59:59").getTime();
-        var startDate = '2017-05-16 00:00:00';
-        var endDate = '2017-07-12 23:59:59';
-        getServerTimestamp(function (timestamp) {
-            if (timestamp < June) {
-                startDate = '2017-05-16 00:00:00';
-                endDate = '2017-06-13 23:59:59';
-            } else if (timestamp < July) {
-                startDate = '2017-06-14 00:00:00';
-                endDate = '2017-07-12 23:59:59';
-            }
-            this.ajaxLadder(title, personData, teamData);
-
-            //if(title == "个人榜"){
-            //    this.ajaxPersonLadder(startDate, endDate)
-            //}else if(title == "团队榜"){
-            //    this.ajaxTeamLadder(startDate, endDate)
-            //}
-        }.bind(this));
+        let {title,personData,teamData} = this.props;
+        this.ajaxLadder(title, personData, teamData);
     }
 
     componentWillReceiveProps(nextProps) {

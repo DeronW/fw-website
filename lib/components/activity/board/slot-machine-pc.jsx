@@ -207,7 +207,7 @@ const SlotMachinePC = React.createClass({
             window.once_delay = true;
             prize_list && prize_list.push({
                 img: 'images/gift.png',
-                name: '大礼包'
+                name: '抽奖十次大礼包'
             });
             this.refs.rockProduct.tenLotteryDrawHandler(30, resultAward, remainTimes, prize_list);
             setTimeout(() => {
