@@ -45,7 +45,6 @@ class DrawMobile extends React.Component {
         } else {
             $.get(API_PATH + "api/userState/v1/timestamp.json", function (data) {
                 callback(data.data.timestamp)
-                alert(data.data.timestamp);
             }.bind(this), 'json')
         }
     }
@@ -117,9 +116,9 @@ class DrawMobile extends React.Component {
         }
     }
     judgeStageHandler() {
-        var timeStart = +new Date("2017-05-16 00:00:00");//5.16号
-        var timeMiddle = +new Date("2017-06-13 23:59:59");//6.13号
-        var timeEnd = +new Date("2017-07-12 23:59:59");//7.12号
+        var timeStart = new Date("2017-05-16 00:00:00").getTime();//5.16号
+        var timeMiddle = new Date("2017-06-13 23:59:59").getTime();//6.13号
+        var timeEnd = new Date("2017-07-12 23:59:59").getTime();//7.12号
 
         var startDate = '2017-05-16 00:00:00';
         var endDate = '2017-07-12 23:59:59';
@@ -137,7 +136,8 @@ class DrawMobile extends React.Component {
                 startDate = '2017-06-14 00:00:00';
                 endDate = '2017-07-12 23:59:59';
                 this.setState({stageMay: '已结束', stageJune: '进行中',
-                    selectedMay: false, selectedJune: true,start:startDate,end:endDate,type:'mayActt'
+                    selectedMay: false, selectedJune: true,
+                    start:startDate,end:endDate,type:'mayActt'
                 },this.ajaxPersonTeamData)
             }
         }.bind(this));

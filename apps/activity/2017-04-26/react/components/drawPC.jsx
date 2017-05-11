@@ -18,7 +18,7 @@ class DrawPC extends React.Component {
             totalSum: '',
             personData: [],
             teamData: [],
-            height: 30,
+            height: 50,
             totalHeight: 30,
             platBg: '',
             platTotalBg: '',
@@ -82,11 +82,12 @@ class DrawPC extends React.Component {
             this.setState({isLogin: isLogin});
         }.bind(this));
         this.judgeStageHandler();
-        this.ajaxPersonTeamData(this.state.start, this.state.end, this.state.type);
+        this.ajaxPersonTeamData();
         this.ajaxTotalData();
     }
 
-    ajaxPersonTeamData(start, end, type) {
+    ajaxPersonTeamData() {
+        let {start, end, type}=this.state;
         $.get(API_PATH + "api/activityPullInvest/v1/singularMonthTeamList.json", {
             start: start,
             end: end,
@@ -97,10 +98,10 @@ class DrawPC extends React.Component {
             var teamData = data.data.teamdata;
             this.setState({personData: personData, teamData: teamData});
             if (type == 'mayActf') {
-                console.log("单")
+                console.log("单");
                 this.judgePlatformSingle(total);
             } else if (type == 'mayActt') {
-                console.log("双")
+                console.log("双");
                 this.judgePlatformDouble(total)
             }
         })
@@ -154,6 +155,7 @@ class DrawPC extends React.Component {
     }
     //双月奖金
     judgePlatformDouble(total) {
+        console.log(total);
         let bonus = 0;
         if (total < 180000000) {
             bonus = 0;
