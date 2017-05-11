@@ -49,5 +49,9 @@ node("front") {
     stage('Publish') {
         sh 'mkdir -p ~/workspace/front-$PROJECT/cdn/$PROJECT/placeholder/'
         sh 'rsync -arI ~/workspace/front-$PROJECT/cdn/$PROJECT/ /srv/static/$PROJECT/'
+
+        if(params.EXTRA_SERVER_IP) {
+            sh 'rsync -arI ~/workspace/front-$PROJECT/cdn/$PROJECT/ $EXTRA_SERVER_IP:/static/$PROJECT/'
+        }
     }
 }
