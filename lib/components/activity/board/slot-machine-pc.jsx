@@ -41,8 +41,11 @@ const RockProduct = React.createClass({
             }
         }, delay)
     },
-    lotteryDrawHandler(speed, prizeMark, prize, remainTimes) {
+    clearTimerHandler(){
         clearInterval(this.t);
+    },
+    lotteryDrawHandler(speed, prizeMark, prize, remainTimes) {
+
         var productList = this.props.productList;
         var s = 0, i = 0, count = 0;
         var timer = setInterval(() => {
@@ -94,7 +97,6 @@ const RockProduct = React.createClass({
         }, 30)
     },
     tenLotteryDrawHandler(speed, productList, remainTimes, prize_list) {
-        clearInterval(this.t);
         var s = 0;
         var count = 0;
         var timer = setInterval(() => {
@@ -174,6 +176,9 @@ const SlotMachinePC = React.createClass({
 
     //请求一次抽奖
     ajaxOnePrize(){
+        this.refs.rockProduct.clearTimerHandler();
+        this.refs.rockProduct2.clearTimerHandler();
+        this.refs.rockProduct3.clearTimerHandler();
         $.get(API_PATH + 'api/activityPullInvest/v1/play.json', {
             configNo: 1,
             drawCount: 1
@@ -195,6 +200,9 @@ const SlotMachinePC = React.createClass({
     },
     //请求十次抽奖
     ajaxTenPrize(){
+        this.refs.rockProduct.clearTimerHandler();
+        this.refs.rockProduct2.clearTimerHandler();
+        this.refs.rockProduct3.clearTimerHandler();
         $.get(API_PATH + 'api/activityPullInvest/v1/play.json', {
             configNo: 1,
             drawCount: 10

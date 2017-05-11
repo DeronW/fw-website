@@ -112,12 +112,10 @@ class DrawPC extends React.Component {
             type: 'mayActBig'
         }).then(data => {
             let totalBonus = 0;
-            let totalSum = data.data.total;
-            //let personData = data.data.persondata;
-            //let teamData = data.data.teamdata;
-            if (totalSum >= 100000000 && totalSum < 130000000) {
+            let totalSum = data.data&&data.data.total;
+            if (totalSum >= 1000000000 && totalSum < 1300000000) {
                 totalBonus = 40;
-            } else if (totalSum >= 130000000) {
+            } else if (totalSum >= 1300000000) {
                 totalBonus = 100;
             }
             this.judgePlatformTotalBg(totalSum);

@@ -115,16 +115,14 @@ class DrawMobile extends React.Component {
             type: 'mayActBig'
         }).then(data =>{
             let totalBonus = 0;
-            let totalSum = data&&data.data.total;
-            //let personData = data.data.persondata;
-            //let teamData = data.data.teamdata;
-            if (totalSum >= 100000000 && totalSum < 130000000) {
+            let totalSum = data.data&&data.data.total;
+            if (totalSum >= 1000000000 && totalSum < 1300000000) {
                 totalBonus = 40;
-            } else if (totalSum >= 130000000) {
+            } else if (totalSum >= 1300000000) {
                 totalBonus = 100;
             }
-            this.judgePlatformTotalBg(totalSum);
-            let totalHeight = Number(totalSum) / 50000000 * 5;
+            this.judgePlatformTotalBg(1);
+            let totalHeight = Number(1) / 50000000 * 5;
             this.setState({totalSum:totalSum,totalBonus: totalBonus,totalHeight: totalHeight
             });
         })
@@ -155,13 +153,13 @@ class DrawMobile extends React.Component {
         let bonus = 0;
         if (total < 180000000) {
             bonus = 0;
-            this.setState({platBg: "url('images/platformM1.png')"})
+            this.setState({platBg: "url('images/platformM12.png')"})
         } else if (total < 400000000) {
             bonus = 8;
-            this.setState({platBg: "url('images/platformM2.png')"})
+            this.setState({platBg: "url('images/platformM22.png')"})
         } else if (total < 500000000) {
             bonus = 23;
-            this.setState({platBg: "url('images/platformM3.png')"})
+            this.setState({platBg: "url('images/platformM32.png')"})
         } else {
             bonus = 41;
         }
@@ -345,7 +343,7 @@ class DrawMobile extends React.Component {
                         e.stopPropagation();
                         this.showWaterRemain()
                     }}></div>
-                    <img style={{bottom:height + 61}} src="images/waterMobile.png" alt=""/>
+                    <img style={{bottom:height + 67}} src="images/waterMobile.png" alt=""/>
 
                     <div style={{height:height}} className="pillars"></div>
                 </div>
