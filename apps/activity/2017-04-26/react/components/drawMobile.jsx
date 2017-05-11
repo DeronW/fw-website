@@ -42,29 +42,40 @@ class DrawMobile extends React.Component {
         var ts = $getDebugParams().timestamp;
         if (ts) {
             callback(ts);
-            alert("test");
         } else {
             $.get(API_PATH + "api/userState/v1/timestamp.json", function (data) {
                 callback(data.data.timestamp);
-                alert('未传的时间');
             }.bind(this), 'json')
         }
     }
+    standardTime(year,month,day,hours,minutes,seconds){
+        var d = new Date();
+        d.setFullYear(year || 0);
+        d.setMonth(month-1 || 0);
+        d.setDate(day || 0);
+        d.setHours(hours || 0);
+        d.setMinutes(minutes || 0);
+        d.setSeconds(seconds || 0);
+        d.setMilliseconds(0);
+        return +new Date(d)
+    }
     judgeStageHandler() {
         var that = this;
-        var timeStart = new Date("2017/05/16 00:00:00").getTime();//5.16号
-        var timeMiddle = new Date("2017/06/13 23:59:59").getTime();//6.13号
-        var timeEnd = new Date("2017/07/12 23:59:59").getTime();//7.12号
-
+        //var timeStart = new Date("2017/05/16 00:00:00").getTime();//5.16号
+        //var timeMiddle = new Date("2017/06/13 23:59:59").getTime();//6.13号
+        //var timeEnd = new Date("2017/07/12 23:59:59").getTime();//7.12号
+        var timeStart = this.standardTime(2017,5,16,0,0,0);
+        var timeMiddle = this.standardTime(2017,6,13,23,59,59);
+        var timeEnd = this.standardTime(2017,6,13,23,59,59);
         var startDate = '2017-05-16 00:00:00';
         var endDate = '2017-07-12 23:59:59';
         this.getServerTimestamp(function (currentTime) {
-            alert('传过来的时间');
+            alert("格式化");
             if(currentTime < timeStart){
-                alert("未开始");
+                alert("no")
                 //ReactDOM.render(<PopNoStart />,document.getElementById("pop"))
             }else if (currentTime < timeMiddle) {
-                alert("五月");
+                alert("5")
                 startDate = '2017-05-16 00:00:00';
                 endDate = '2017-06-13 23:59:59';
                 that.setState({
@@ -72,7 +83,7 @@ class DrawMobile extends React.Component {
                     start:startDate,end:endDate,type:'mayActf'
                 },that.ajaxPersonTeamData)
             } else if (currentTime < timeEnd) {
-                alert("六月");
+                alert("6")
                 startDate = '2017-06-14 00:00:00';
                 endDate = '2017-07-12 23:59:59';
                 that.setState({stageMay: '已结束', stageJune: '进行中',
@@ -94,10 +105,8 @@ class DrawMobile extends React.Component {
             var teamData = data.data.teamdata;
             this.setState({personData: personData, teamData: teamData});
             if (type == 'mayActf') {
-                console.log("单");
                 this.judgePlatformSingle(total);
             } else if (type == 'mayActt') {
-                console.log("双");
                 this.judgePlatformDouble(total)
             }
         })
