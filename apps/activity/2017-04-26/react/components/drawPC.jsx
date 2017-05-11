@@ -98,10 +98,8 @@ class DrawPC extends React.Component {
             var teamData = data.data.teamdata;
             this.setState({personData: personData, teamData: teamData});
             if (type == 'mayActf') {
-                console.log("单");
                 this.judgePlatformSingle(total);
             } else if (type == 'mayActt') {
-                console.log("双");
                 this.judgePlatformDouble(total)
             }
         })
@@ -155,7 +153,6 @@ class DrawPC extends React.Component {
     }
     //双月奖金
     judgePlatformDouble(total) {
-        console.log(total);
         let bonus = 0;
         if (total < 180000000) {
             bonus = 0;
@@ -248,7 +245,7 @@ class DrawPC extends React.Component {
     }
 
     gotoLogin() {
-        var loginUrl = location.protocol + '//www.9888.cn/static/activity/2017-04-26/index.html';
+        var loginUrl = location.protocol + '//www.9888.cn/api/activityPullNew/pullnewParty.do?id=241';
         $FW.gotoSpecialPage("登录", loginUrl);
     }
 
@@ -430,7 +427,7 @@ class DrawPC extends React.Component {
                 </div>
                 <div className="drawTips">
                     <div className="tips">温馨提示：</div>
-                    <p>1. 以上数据实时更新，最终发放奖金请以每月结束后数据为准；</p>
+                    <p>1. 以上数据实时更新，排名先后由最近一次成功投标判定，最终发放奖金请以每月结束后数据为准；</p>
 
                     <p>2. 奖金包奖励以工豆形式发放；</p>
 

@@ -25,11 +25,12 @@ class PersonTeamMonthLadderPC extends React.Component {
     //请求个人、小组数据
     ajaxLadder(title, personData, teamData) {
         if (title == "个人榜") {
-            this.setState({list: personData || []})
+            this.setState({list: personData || []});
+            if (personData && personData.length > this.PRE_PAGE) this.setState({totalPage: 2})
         } else if (title == "团队榜") {
-            this.setState({list: teamData || []})
+            this.setState({list: teamData || []});
+            if(teamData && teamData.length > this.PRE_PAGE) this.setState({totalPage: 2})
         }
-        if (personData && personData.length > this.PRE_PAGE || teamData && teamData.length > this.PRE_PAGE) this.setState({totalPage: 2})
     }
 
 

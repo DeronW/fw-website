@@ -27,7 +27,7 @@ class PersonTeamMonthLadderMobile extends React.Component {
     //切换月榜tab
     switchLadderTabHandler(t) {
         if (t == this.state.ladderTab) return;
-        this.setState({ladderTab: t});
+        this.setState({ladderTab: t,totalPage:1});
         this.ajaxLadder(t, this.props.personData, this.props.teamData);
     }
 
@@ -35,13 +35,12 @@ class PersonTeamMonthLadderMobile extends React.Component {
     ajaxLadder(title, personData, teamData) {
         if (title == "个人榜") {
             this.setState({thead: ['用户名', '个人累投金额(元)', '奖金(元)'], cursor: 0, tab: '上一页'});
-            this.setState({list: personData || []})
+            this.setState({list: personData || []});
+            if(personData&&personData.length > this.PRE_PAGE) this.setState({totalPage: 2})
         } else if (title == "团队榜") {
             this.setState({thead: ['用户名', '团队累投金额(元)', '奖金(元)'], cursor: 0, tab: '上一页'});
-            this.setState({list: teamData || []})
-        }
-        if (personData && personData.length > this.PRE_PAGE || teamData && teamData.length > this.PRE_PAGE) {
-            this.setState({totalPage: 2})
+            this.setState({list: teamData || []});
+            if(teamData&&teamData.length > this.PRE_PAGE) this.setState({totalPage: 2})
         }
     }
 

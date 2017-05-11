@@ -31,7 +31,7 @@ class PersonTeamTotalLadderPC extends React.Component {
                     sData = data.data && data.data.teamdata || [];
                     that.setState({list: sData})
                 }
-                if(sData.length > that.PRE_PAGE) that.setState({totalPage: 2})
+                if(sData&&sData.length > that.PRE_PAGE) that.setState({totalPage: 2})
             })
         })
     }

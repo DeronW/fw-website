@@ -8,7 +8,7 @@ class PersonTeamTotalLadderMobile extends React.Component {
         this.state = {
             list: [],
             page: 1,
-            totalPage: 2,
+            totalPage: 1,
             tab: '上一页',
             cursor: 0,
             thead: ['用户名', '个人累投金额(元)', '奖金(元)'],
@@ -53,14 +53,14 @@ class PersonTeamTotalLadderMobile extends React.Component {
                 sData = data.data && data.data.teamdata || [];
                 this.setState({list: sData})
             }
-            if(sData.length > this.PRE_PAGE) this.setState({totalPage:2})
+            if(sData&&sData.length > this.PRE_PAGE) this.setState({totalPage:2})
         })
     }
 
     switchPageHandler(type) {
         this.setState({tab: type});
         let {page,totalPage}=this.state;
-        let cursor, min, len = this.state.list.length;
+        let cursor, min,new_page, len = this.state.list.length;
         if (type == '上一页') {
             if (len % this.PRE_PAGE) {
                 min = parseInt(len / this.PRE_PAGE) * this.PRE_PAGE

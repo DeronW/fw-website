@@ -8,8 +8,8 @@ class DrawMobile extends React.Component {
             stageJune: '未开始',
             selectedMay: true,
             selectedJune: false,
-            start:'2017-05-16 00:00:00',
-            end:'2017-06-13 23:59:59',
+            start:'',
+            end:'',
             type:'mayActf',
             remain: '',
             close: false,
@@ -97,9 +97,9 @@ class DrawMobile extends React.Component {
             end: end,
             type:type
         }).then(data=> {
-            let total = data.data.total;
-            var personData = data.data.persondata;
-            var teamData = data.data.teamdata;
+            let total = data.data&&data.data.total;
+            var personData =  data.data&&data.data.persondata;
+            var teamData =  data.data&&data.data.teamdata;
             this.setState({personData: personData, teamData: teamData});
             if (type == 'mayActf') {
                 this.judgePlatformSingle(total);
@@ -240,7 +240,7 @@ class DrawMobile extends React.Component {
     }
 
     gotoLogin() {
-        var loginUrl = location.protocol + '//www.9888.cn/static/activity/2017-04-26/index.html';
+        var loginUrl = location.protocol + '//www.9888.cn/api/activityPullNew/pullnewParty.do?id=241';
         $FW.gotoSpecialPage("登录", loginUrl);
     }
     gotoDraw(){
@@ -326,7 +326,10 @@ class DrawMobile extends React.Component {
             display:showWater ?"block":"none"
         };
         return <div className="drawMobile" onTouchEnd={()=>{this.closeWaterRemain()}}>
-            <div className="activityExplain" onClick={()=>this.showHandler()}>活动说明</div>
+            <div className="drawBanner">
+
+                <div className="activityExplain" onClick={()=>this.showHandler()}>活动说明</div> </div>
+
             <div className="drawTitleMobile">大奖抽抽抽，100%中奖</div>
             <div className="drawGift" onClick={isLogin?()=>{this.gotoDraw()}:()=>this.gotoLogin()}><p>{isLogin?"去抽奖":"登录"}</p></div>
             <div className="drawTitleMobile">投资冲月榜，个人团队大作战</div>
@@ -416,7 +419,7 @@ class DrawMobile extends React.Component {
                 </div>
                 <div className="fullText" style={totalTipsFullStyle}>
                     <div className="briefText">
-                        1.以上数据实时更新，最终发放奖金请以每月结束后数据为准；
+                        1.以上数据实时更新，排名先后由最近一次成功投标判定，最终发放奖金请以每月结束后数据为准；
                     </div>
                     <div className="briefText">2.奖金包奖励以工豆形式发放；</div>
                     <div className="briefText">3.月度奖金分配方式：个人和团队奖金分配比例=4(个人)：6(团队)；</div>
