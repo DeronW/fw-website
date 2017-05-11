@@ -8,8 +8,8 @@ class DrawPC extends React.Component {
             stageJune: '未开始',
             selectedMay: true,
             selectedJune: false,
-            start: '2017-05-16 00:00:00',
-            end: '2017-06-13 23:59:59',
+            start: '',
+            end: '',
             type: 'mayActf',
             close: false,
             bonus: 0,
@@ -93,9 +93,9 @@ class DrawPC extends React.Component {
             end: end,
             type: type
         }).then(data=> {
-            let total = data.data.total;
-            var personData = data.data.persondata;
-            var teamData = data.data.teamdata;
+            let total = data.data&&data.data.total;
+            var personData = data.data&&data.data.persondata;
+            var teamData = data.data&&data.data.teamdata;
             this.setState({personData: personData, teamData: teamData});
             if (type == 'mayActf') {
                 this.judgePlatformSingle(total);

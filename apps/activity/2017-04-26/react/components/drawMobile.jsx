@@ -327,9 +327,8 @@ class DrawMobile extends React.Component {
         };
         return <div className="drawMobile" onTouchEnd={()=>{this.closeWaterRemain()}}>
             <div className="drawBanner">
-
-                <div className="activityExplain" onClick={()=>this.showHandler()}>活动说明</div> </div>
-
+                <div className="activityExplain" onClick={()=>this.showHandler()}></div>
+            </div>
             <div className="drawTitleMobile">大奖抽抽抽，100%中奖</div>
             <div className="drawGift" onClick={isLogin?()=>{this.gotoDraw()}:()=>this.gotoLogin()}><p>{isLogin?"去抽奖":"登录"}</p></div>
             <div className="drawTitleMobile">投资冲月榜，个人团队大作战</div>
