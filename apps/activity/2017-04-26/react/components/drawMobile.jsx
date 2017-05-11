@@ -124,8 +124,10 @@ class DrawMobile extends React.Component {
         var endDate = '2017-07-12 23:59:59';
         this.getServerTimestamp(function (currentTime) {
             if(currentTime < timeStart){
+                alert("未开始");
                 //ReactDOM.render(<PopNoStart />,document.getElementById("pop"))
             }else if (currentTime < timeMiddle) {
+                alert("五月");
                 startDate = '2017-05-16 00:00:00';
                 endDate = '2017-06-13 23:59:59';
                 this.setState({
@@ -133,6 +135,7 @@ class DrawMobile extends React.Component {
                     start:startDate,end:endDate,type:'mayActf'
                 },this.ajaxPersonTeamData)
             } else if (currentTime < timeEnd) {
+                alert("六月");
                 startDate = '2017-06-14 00:00:00';
                 endDate = '2017-07-12 23:59:59';
                 this.setState({stageMay: '已结束', stageJune: '进行中',
