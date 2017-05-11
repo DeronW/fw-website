@@ -103,7 +103,6 @@ class DrawMobile extends React.Component {
         }
     }
     judgeStageHandler() {
-        var that = this;
         var timeStart = +new Date("2017-05-16 00:00:00");//5.16号
         var timeMiddle = +new Date("2017-06-13 23:59:59");//6.13号
         var timeEnd = +new Date("2017-07-12 23:59:59");//7.12号
@@ -116,18 +115,18 @@ class DrawMobile extends React.Component {
             }else if (currentTime < timeMiddle) {
                 startDate = '2017-05-16 00:00:00';
                 endDate = '2017-06-13 23:59:59';
-                that.setState({
+                this.setState({
                     stageMay: '进行中', stageJune: '未开始',
                     start:startDate,end:endDate,type:'mayActf'
-                })
+                },this.ajaxPersonTeamData)
             } else if (currentTime < timeEnd) {
                 startDate = '2017-06-14 00:00:00';
                 endDate = '2017-07-12 23:59:59';
-                that.setState({stageMay: '已结束', stageJune: '进行中',
+                this.setState({stageMay: '已结束', stageJune: '进行中',
                     selectedMay: false, selectedJune: true,start:startDate,end:endDate,type:'mayActt'
-                })
+                },this.ajaxPersonTeamData)
             }
-        });
+        }.bind(this));
     }
 
     //切换月份tab
@@ -136,16 +135,16 @@ class DrawMobile extends React.Component {
             this.setState({
                 selectedMay: true,
                 selectedJune: false,
-                start: '2017-05/16 00:00:00',
-                end: '2017-06/13 23:59:59',
+                start: '2017-05-16 00:00:00',
+                end: '2017-06-13 23:59:59',
                 type:'mayActf'
             },this.ajaxPersonTeamData)
         } else {
             if (stage != "未开始")  this.setState({
                 selectedMay: false,
                 selectedJune: true,
-                start: '2017-06/14 00:00:00',
-                end: '2017-07/12 23:59:59',
+                start: '2017-06-14 00:00:00',
+                end: '2017-07-12 23:59:59',
                 type:'mayActt'
             },this.ajaxPersonTeamData)
         }
