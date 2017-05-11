@@ -30,12 +30,9 @@ class DrawMobile extends React.Component {
     }
 
     componentDidMount() {
-        var that = this;
-        $UserReady(function (isLogin,user) {
-            if(isLogin){
-                that.setState({isLogin:isLogin})
-            }
-        });
+        $UserReady(function (isLogin, user) {
+            this.setState({isLogin: isLogin});
+        }.bind(this));
         this.judgeStageHandler();
         this.ajaxPersonTeamData();
     }
@@ -50,10 +47,11 @@ class DrawMobile extends React.Component {
         }
     }
     ajaxPersonTeamData() {
+        let {start,end,type} =this.state;
         $.get(API_PATH + "api/activityPullInvest/v1/singularMonthTeamList.json", {
-            start: this.state.start,
-            end: this.state.end,
-            type:this.state.type
+            start: start,
+            end: end,
+            type:type
         }).then(data=> {
             let bonus = 0, totalBonus = 0;
             let total = data.data.total;
