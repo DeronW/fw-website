@@ -50,78 +50,11 @@ class DrawMobile extends React.Component {
             }.bind(this), 'json')
         }
     }
-    ajaxPersonTeamData() {
-        let {start,end,type} =this.state;
-        $.get(API_PATH + "api/activityPullInvest/v1/singularMonthTeamList.json", {
-            start: start,
-            end: end,
-            type:type
-        }).then(data=> {
-            let bonus = 0;
-            let total = data.data.total;
-            var personData = data.data.persondata;
-            var teamData = data.data.teamdata;
-            if (total < 150000000) {
-                bonus = 0
-            } else if (total < 380000000) {
-                bonus = 6
-            } else if (total < 450000000) {
-                bonus = 18
-            } else {
-                bonus = 33
-            }
-            this.judgePlatformBg(total);
-            let height = Number(total) / 10000000 * 4;
-            this.setState({
-                total: total, bonus: bonus,personData: personData, teamData: teamData, height: height
-            });
-        })
-    }
-    ajaxTotalData(){
-        $.get(API_PATH + "api/activityPullInvest/v1/singularMonthTeamList.json",{
-            start: '2017-05-16 00:00:00',
-            end: '2017-07-12 23:59:59',
-            type: 'mayActBig'
-        }).then(data =>{
-            let totalBonus = 0;
-            let totalSum = data&&data.data.total;
-            //let personData = data.data.persondata;
-            //let teamData = data.data.teamdata;
-            if (totalSum >= 100000000 && totalSum < 130000000) {
-                totalBonus = 40;
-            } else if (totalSum >= 130000000) {
-                totalBonus = 100;
-            }
-            this.judgePlatformTotalBg(totalSum);
-            let totalHeight = Number(totalSum) / 50000000 * 5;
-            this.setState({totalSum:totalSum,totalBonus: totalBonus,totalHeight: totalHeight
-            });
-        })
-    }
-    judgePlatformBg(total) {
-        if (total < 150000000) {
-            this.setState({platBg: "url('images/platformM1.png')"})
-        } else if (total < 380000000) {
-            this.setState({platBg: "url('images/platformM2.png')"})
-        } else if (total < 450000000) {
-            this.setState({platBg: "url('images/platformM3.png')"})
-        }
-    }
-
-    judgePlatformTotalBg(total) {
-        if (total < 1000000000) {
-            this.setState({platTotalBg: "url('images/platformTotalM1.png')"})
-        } else if (total < 1300000000) {
-            this.setState({platTotalBg: "url('images/platformTotalM2.png')"})
-        } else {
-            this.setState({platTotalBg: "url('images/platformTotalM3.png')"})
-        }
-    }
     judgeStageHandler() {
         var that = this;
-        var timeStart = new Date("2017-05-16 00:00:00").getTime();//5.16号
-        var timeMiddle = new Date("2017-06-13 23:59:59").getTime();//6.13号
-        var timeEnd = new Date("2017-07-12 23:59:59").getTime();//7.12号
+        var timeStart = new Date("2017/05/16 00:00:00").getTime();//5.16号
+        var timeMiddle = new Date("2017/06/13 23:59:59").getTime();//6.13号
+        var timeEnd = new Date("2017/07/12 23:59:59").getTime();//7.12号
 
         var startDate = '2017-05-16 00:00:00';
         var endDate = '2017-07-12 23:59:59';
@@ -149,6 +82,98 @@ class DrawMobile extends React.Component {
             }
         });
     }
+    ajaxPersonTeamData() {
+        let {start,end,type} =this.state;
+        $.get(API_PATH + "api/activityPullInvest/v1/singularMonthTeamList.json", {
+            start: start,
+            end: end,
+            type:type
+        }).then(data=> {
+            let total = data.data.total;
+            var personData = data.data.persondata;
+            var teamData = data.data.teamdata;
+            this.setState({personData: personData, teamData: teamData});
+            if (type == 'mayActf') {
+                console.log("单");
+                this.judgePlatformSingle(total);
+            } else if (type == 'mayActt') {
+                console.log("双");
+                this.judgePlatformDouble(total)
+            }
+        })
+    }
+    ajaxTotalData(){
+        $.get(API_PATH + "api/activityPullInvest/v1/singularMonthTeamList.json",{
+            start: '2017-05-16 00:00:00',
+            end: '2017-07-12 23:59:59',
+            type: 'mayActBig'
+        }).then(data =>{
+            let totalBonus = 0;
+            let totalSum = data&&data.data.total;
+            //let personData = data.data.persondata;
+            //let teamData = data.data.teamdata;
+            if (totalSum >= 100000000 && totalSum < 130000000) {
+                totalBonus = 40;
+            } else if (totalSum >= 130000000) {
+                totalBonus = 100;
+            }
+            this.judgePlatformTotalBg(totalSum);
+            let totalHeight = Number(totalSum) / 50000000 * 5;
+            this.setState({totalSum:totalSum,totalBonus: totalBonus,totalHeight: totalHeight
+            });
+        })
+    }
+    //单月奖金
+    judgePlatformSingle(total) {
+        let bonus = 0;
+        if (total < 150000000) {
+            bonus = 0;
+            this.setState({platBg: "url('images/platformM1.png')"})
+        } else if (total < 380000000) {
+            bonus = 6;
+            this.setState({platBg: "url('images/platformM2.png')"})
+        } else if (total < 450000000) {
+            bonus = 18;
+            this.setState({platBg: "url('images/platformM3.png')"})
+        } else {
+            bonus = 33
+        }
+
+        let height = Number(total) / 10000000 * 4;
+        this.setState({
+            total: total, bonus: bonus, height: height
+        });
+    }
+    //双月奖金
+    judgePlatformDouble(total) {
+        let bonus = 0;
+        if (total < 180000000) {
+            bonus = 0;
+            this.setState({platBg: "url('images/platformPC1.png')"})
+        } else if (total < 400000000) {
+            bonus = 8;
+            this.setState({platBg: "url('images/platformPC2.png')"})
+        } else if (total < 500000000) {
+            bonus = 23;
+            this.setState({platBg: "url('images/platformPC3.png')"})
+        } else {
+            bonus = 41;
+        }
+        let height = Number(total) / 10000000 * 4;
+        this.setState({
+            total: total, bonus: bonus, height: height
+        });
+    }
+    judgePlatformTotalBg(total) {
+        if (total < 1000000000) {
+            this.setState({platTotalBg: "url('images/platformTotalM1.png')"})
+        } else if (total < 1300000000) {
+            this.setState({platTotalBg: "url('images/platformTotalM2.png')"})
+        } else {
+            this.setState({platTotalBg: "url('images/platformTotalM3.png')"})
+        }
+    }
+
 
     //切换月份tab
     switchTabHandler(stage, month) {
