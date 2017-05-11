@@ -45,6 +45,7 @@ class DrawMobile extends React.Component {
         } else {
             $.get(API_PATH + "api/userState/v1/timestamp.json", function (data) {
                 callback(data.data.timestamp)
+                alert(data.data.timestamp);
             }.bind(this), 'json')
         }
     }
@@ -82,7 +83,7 @@ class DrawMobile extends React.Component {
             type: 'mayActBig'
         }).then(data =>{
             let totalBonus = 0;
-            let totalSum = data.data.total;
+            let totalSum = data&&data.data.total;
             //let personData = data.data.persondata;
             //let teamData = data.data.teamdata;
             if (totalSum >= 100000000 && totalSum < 130000000) {

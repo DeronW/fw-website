@@ -77,61 +77,41 @@ class DrawPC extends React.Component {
         }
     }
 
-    getTestParam(callback) {
-        let start = $getDebugParams().start;
-        let end = $getDebugParams().end;
-        let test = $getDebugParams().test;
-        if (start && end && test) {
-            callback(decodeURI(start), decodeURI(end), test);
-        } else {
-            callback(this.state.start, this.state.end, this.state.type);
-        }
-    }
-
     componentDidMount() {
         $UserReady(function (isLogin, user) {
             this.setState({isLogin: isLogin});
         }.bind(this));
         this.judgeStageHandler();
-        this.ajaxPersonTeamData();
+        this.ajaxPersonTeamData(this.state.start, this.state.end, this.state.type);
         this.ajaxTotalData();
     }
 
-    ajaxPersonTeamData() {
-        this.getTestParam(function (start, end, test) {
-            $.get(API_PATH + "api/activityPullInvest/v1/singularMonthTeamList.json", {
-                start: start,
-                end: end,
-                type: test
-            }).then(data=> {
-                let bonus = 0;
-                let total = data.data.total;
-                var personData = data.data.persondata;
-                var teamData = data.data.teamdata;
-                if (total < 150000000) {
-                    bonus = 0
-                } else if (total < 380000000) {
-                    bonus = 6
-                } else if (total < 450000000) {
-                    bonus = 18
-                } else {
-                    bonus = 33
-                }
-                this.judgePlatformBg(total);
-                let height = Number(total) / 10000000 * 4;
-                this.setState({
-                    total: total, bonus: bonus,personData: personData, teamData: teamData, height: height
-                });
-            })
-        }.bind(this));
+    ajaxPersonTeamData(start, end, type) {
+        $.get(API_PATH + "api/activityPullInvest/v1/singularMonthTeamList.json", {
+            start: start,
+            end: end,
+            type: type
+        }).then(data=> {
+            let total = data.data.total;
+            var personData = data.data.persondata;
+            var teamData = data.data.teamdata;
+            this.setState({personData: personData, teamData: teamData});
+            if (type == 'mayActf') {
+                console.log("单")
+                this.judgePlatformSingle(total);
+            } else if (type == 'mayActt') {
+                console.log("双")
+                this.judgePlatformDouble(total)
+            }
+        })
     }
 
-    ajaxTotalData(){
-        $.get(API_PATH + "api/activityPullInvest/v1/singularMonthTeamList.json",{
+    ajaxTotalData() {
+        $.get(API_PATH + "api/activityPullInvest/v1/singularMonthTeamList.json", {
             start: '2017-05-16 00:00:00',
             end: '2017-07-12 23:59:59',
             type: 'mayActBig'
-        }).then(data =>{
+        }).then(data => {
             let totalBonus = 0;
             let totalSum = data.data.total;
             //let personData = data.data.persondata;
@@ -143,11 +123,23 @@ class DrawPC extends React.Component {
             }
             this.judgePlatformTotalBg(totalSum);
             let totalHeight = Number(totalSum) / 50000000 * 5;
-            this.setState({totalSum:totalSum,totalBonus: totalBonus,totalHeight: totalHeight
+            this.setState({
+                totalSum: totalSum, totalBonus: totalBonus, totalHeight: totalHeight
             });
         })
     }
-    judgePlatformBg(total) {
+    //单月奖金
+    judgePlatformSingle(total) {
+        let bonus = 0;
+        if (total < 150000000) {
+            bonus = 0
+        } else if (total < 380000000) {
+            bonus = 6
+        } else if (total < 450000000) {
+            bonus = 18
+        } else {
+            bonus = 33
+        }
         if (total < 150000000) {
             this.setState({platBg: "url('images/platformPC1.png')"})
         } else if (total < 380000000) {
@@ -155,6 +147,30 @@ class DrawPC extends React.Component {
         } else if (total < 450000000) {
             this.setState({platBg: "url('images/platformPC3.png')"})
         }
+        let height = Number(total) / 10000000 * 4;
+        this.setState({
+            total: total, bonus: bonus, height: height
+        });
+    }
+    //双月奖金
+    judgePlatformDouble(total) {
+        let bonus = 0;
+        if (total < 180000000) {
+            bonus = 0;
+            this.setState({platBg: "url('images/platformPC1.png')"})
+        } else if (total < 400000000) {
+            bonus = 8;
+            this.setState({platBg: "url('images/platformPC2.png')"})
+        } else if (total < 500000000) {
+            bonus = 23;
+            this.setState({platBg: "url('images/platformPC3.png')"})
+        } else {
+            bonus = 41;
+        }
+        let height = Number(total) / 10000000 * 4;
+        this.setState({
+            total: total, bonus: bonus, height: height
+        });
     }
 
     judgePlatformTotalBg(total) {
@@ -183,7 +199,7 @@ class DrawPC extends React.Component {
                 this.setState({
                     stageMay: '进行中', stageJune: '未开始',
                     start: startDate, end: endDate, type: 'mayActf'
-                },this.ajaxPersonTeamData)
+                }, this.ajaxPersonTeamData)
 
             } else if (currentTime < timeEnd) {
                 startDate = '2017-06-14 00:00:00';
@@ -191,7 +207,7 @@ class DrawPC extends React.Component {
                 this.setState({
                     stageMay: '已结束', stageJune: '进行中',
                     selectedMay: false, selectedJune: true, start: startDate, end: endDate, type: 'mayActt'
-                },this.ajaxPersonTeamData)
+                }, this.ajaxPersonTeamData)
             }
         }.bind(this));
     }
@@ -235,7 +251,7 @@ class DrawPC extends React.Component {
     }
 
     render() {
-        let {stageMay,stageJune,selectedMay,selectedJune,total,totalSum,bonus,totalBonus,close,isLogin,start,end,personData,teamData,height,platBg,totalHeight,platTotalBg} = this.state;
+        let {stageMay,stageJune,selectedMay,selectedJune,total,totalSum,bonus,totalBonus,close,isLogin,start,end,type,personData,teamData,height,platBg,totalHeight,platTotalBg} = this.state;
 
         let no = {
             width: "237px",
@@ -278,10 +294,14 @@ class DrawPC extends React.Component {
         );
         let loginRemain = (
             <div className="remindText">
-                <div className='loginRemain'>
-                    单月内，平台达到相应累计交易量，且个人及团队排行前20名的工友，最高可获分33万奖金。
-                    当前平台累计交易量<em>{total}</em> 元，可获分<em>{bonus}</em>万奖金！
-                </div>
+                {type == 'mayActf' ? <div className='loginRemain'>
+                    单月内，平台达到相应累计交易量，且个人及团队排行前20名的工友，最高可获分33万奖金。当前平台累计交易量<em>{total}</em> 元，可获分<em>{bonus}</em>万奖金！
+                </div> :
+                    <div className='loginRemain'>
+                        5.16-7.12，平台达到相应累计交易量，且个人及团队排行前30名的工友，最高获分100万元奖金。当前平台累计交易量<em>{total}</em>
+                        元，可获分<em>{bonus}</em>元奖金！
+                    </div>}
+
             </div>
         );
         let noLoginChance = (
@@ -378,7 +398,7 @@ class DrawPC extends React.Component {
                         </div>
                     </div> : noLoginRemain
                 }
-                <div className="platformTotalPC" >
+                <div className="platformTotalPC">
                     <div className="platformBg" style={{background:platTotalBg}}>
                         <a href="https://www.9888.cn/" target="_blank">
                             <div className="injectPC">活动期间，累投越多可获分的奖金越多，快来注入！</div>
