@@ -1,4 +1,7 @@
 const PopAllSituation = React.createClass({
+    componentDidMount(){
+        window.poke_delay = false;
+    },
     render(){
         let product = (item, index) => {
             return <tr key={index}>

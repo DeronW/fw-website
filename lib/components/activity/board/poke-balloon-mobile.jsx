@@ -55,7 +55,7 @@ const BalloonBoom = React.createClass({
     render() {
         let pathStyle = {
             position: 'absolute',
-            left: '0',
+            left: '40px',
             top: '110px'
         };
         return <div className="ballBoom">
@@ -97,25 +97,29 @@ const PokeBalloonMobile = React.createClass({
     },
     //一次
     promiseOnceLotteryResult(){
+        if(window.poke_delay) return;
+        window.poke_delay = true;
         $.get(API_PATH+"api/activityPullInvest/v1/play.json?",{
             configNo:1,
             drawCount:1
         }).then((data) => {
             this.ajaxCount();
             this.refs.productListAuto.rewardPoolHandler();
-            this.showMessagePop('恭喜中奖', '', data.data.resultAward[0].prize)
+            this.showMessagePop('恭喜中奖', '', data.data.resultAward[0].prize);
         });
 
     },
     //十次
     promiseMoreLotteryResult(){
+        if(window.poke_delay) return;
+        window.poke_delay = true;
         $.get(API_PATH+"api/activityPullInvest/v1/play.json?",{
             configNo:1,
             drawCount:10
         }).then((data) => {
             this.ajaxCount();
             this.refs.productListAuto.rewardPoolHandler();
-            this.showMessagePop('恭喜中奖', '', '', data.data.resultAward)
+            this.showMessagePop('恭喜中奖', '', '', data.data.resultAward);
         });
     },
     showMessagePop(title, message, productName, prizeList){
