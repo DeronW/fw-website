@@ -17,8 +17,8 @@ class DrawMobile extends React.Component {
             total:0,
             totalSum: '',
             totalBonus:0,
-            height: 30,
-            totalHeight: 30,
+            height: 60,
+            totalHeight: 60,
             platBg: '',
             platTotalBg: '',
             monthTipsClose: true,
@@ -57,11 +57,10 @@ class DrawMobile extends React.Component {
         d.setMinutes(minutes || 0);
         d.setSeconds(seconds || 0);
         d.setMilliseconds(0);
-        //console.log(new Date(d).getTime());
         return new Date(d).getTime()
     }
     judgeStageHandler() {
-        var that = this;
+        var that =this;
         var timeStart = new Date("2017/05/16 00:00:00").getTime();//5.16号
         var timeMiddle = new Date("2017/06/13 23:59:59").getTime();//6.13号
         var timeEnd = new Date("2017/07/12 23:59:59").getTime();//7.12号
@@ -70,7 +69,6 @@ class DrawMobile extends React.Component {
         //var timeEnd = this.standardTime(2017,6,13,23,59,59);
         var startDate = '2017-05-16 00:00:00';
         var endDate = '2017-07-12 23:59:59';
-        console.log(timeStart);
         this.getServerTimestamp(function (currentTime) {
             if(currentTime < timeStart){
                 //ReactDOM.render(<PopNoStart />,document.getElementById("pop"))
@@ -90,6 +88,7 @@ class DrawMobile extends React.Component {
                 },that.ajaxPersonTeamData)
             }
         });
+
     }
     ajaxPersonTeamData() {
         let {start,end,type} =this.state;
@@ -156,13 +155,13 @@ class DrawMobile extends React.Component {
         let bonus = 0;
         if (total < 180000000) {
             bonus = 0;
-            this.setState({platBg: "url('images/platformPC1.png')"})
+            this.setState({platBg: "url('images/platformM1.png')"})
         } else if (total < 400000000) {
             bonus = 8;
-            this.setState({platBg: "url('images/platformPC2.png')"})
+            this.setState({platBg: "url('images/platformM2.png')"})
         } else if (total < 500000000) {
             bonus = 23;
-            this.setState({platBg: "url('images/platformPC3.png')"})
+            this.setState({platBg: "url('images/platformM3.png')"})
         } else {
             bonus = 41;
         }
