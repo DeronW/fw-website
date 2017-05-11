@@ -3,24 +3,28 @@ const eslint = require('gulp-eslint');
 const PROJ = 'p2p-web';
 
 let APP_NAMES = [
-    'guide', // 新手引导
+    'app-download',//下载引导页
 ];
 
 // 公告类页面
 const NOTICE_PAGES = [
-    'aboutus'
+    'aboutus',//关于我们相关页面
+    'preservation',//易保全页面
 ]
 
 // 专题说明类页面
 const TOPIC_PAGES = [
-
+    'topic-bu-mao-tong',//埠贸通专题页
+    'topic-li-sui-xiang',//利随想专题页
+    'topic-xiao-fei-dai',//消费贷专题页
+    'topic-yi-che-xiang',//易车享专题页
+    'topic-yi-shou-bao',//易收宝专题页
+    'topic-yi-zhuan-ying',//易赚盈专题页
+    'topic-you-ju-dai',//友居贷专题页
 ]
 
 const USER_PAGES = [
     //用户界面
-    'user-coupon', //用户优惠券
-    'user-score', //用户工分
-    'user-bank-phone',//用户预留手机号页面
     'notice-information-disclosure',//信息披露页
 ]
 
