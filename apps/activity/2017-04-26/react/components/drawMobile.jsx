@@ -15,6 +15,7 @@ class DrawMobile extends React.Component {
             close: false,
             bonus: 0,
             total:0,
+            totalSum: '',
             totalBonus:0,
             height: 30,
             totalHeight: 30,
@@ -35,6 +36,7 @@ class DrawMobile extends React.Component {
         }.bind(this));
         this.judgeStageHandler();
         this.ajaxPersonTeamData();
+        this.ajaxTotalData();
     }
     getServerTimestamp(callback) {
         var ts = $getDebugParams().timestamp;
@@ -53,7 +55,7 @@ class DrawMobile extends React.Component {
             end: end,
             type:type
         }).then(data=> {
-            let bonus = 0, totalBonus = 0;
+            let bonus = 0;
             let total = data.data.total;
             var personData = data.data.persondata;
             var teamData = data.data.teamdata;
@@ -66,18 +68,31 @@ class DrawMobile extends React.Component {
             } else {
                 bonus = 33
             }
-            if (total >= 100000000 && total < 130000000) {
+            this.judgePlatformBg(total);
+            let height = Number(total) / 10000000 * 4;
+            this.setState({
+                total: total, bonus: bonus,personData: personData, teamData: teamData, height: height
+            });
+        })
+    }
+    ajaxTotalData(){
+        $.get(API_PATH + "api/activityPullInvest/v1/singularMonthTeamList.json",{
+            start: '2017-05-16 00:00:00',
+            end: '2017-07-12 23:59:59',
+            type: 'mayActBig'
+        }).then(data =>{
+            let totalBonus = 0;
+            let totalSum = data.data.total;
+            //let personData = data.data.persondata;
+            //let teamData = data.data.teamdata;
+            if (totalSum >= 100000000 && totalSum < 130000000) {
                 totalBonus = 40;
-            } else if (total >= 130000000) {
+            } else if (totalSum >= 130000000) {
                 totalBonus = 100;
             }
-            this.judgePlatformBg(total);
-            this.judgePlatformTotalBg(total);
-            let height = Number(total) / 10000000 * 4;
-            let totalHeight = Number(total) / 50000000 * 5;
-            this.setState({
-                total: total, bonus: bonus, totalBonus: totalBonus,
-                personData: personData, teamData: teamData, height: height, totalHeight: totalHeight
+            this.judgePlatformTotalBg(totalSum);
+            let totalHeight = Number(totalSum) / 50000000 * 5;
+            this.setState({totalSum:totalSum,totalBonus: totalBonus,totalHeight: totalHeight
             });
         })
     }
@@ -194,7 +209,7 @@ class DrawMobile extends React.Component {
         window.location.href = link;
     }
     render() {
-        let {stageMay,stageJune,selectedMay,selectedJune,close,bonus,total,totalBonus,show,showWater,isLogin,totalLadderTab,monthTipsClose,totalTipsClose,start,end,personData,teamData,height,platBg,totalHeight,platTotalBg} = this.state;
+        let {stageMay,stageJune,selectedMay,selectedJune,close,bonus,total,totalSum,totalBonus,show,showWater,isLogin,totalLadderTab,monthTipsClose,totalTipsClose,start,end,personData,teamData,height,platBg,totalHeight,platTotalBg} = this.state;
         let no = {
             width: "237px",
             height: "96px",
@@ -244,7 +259,7 @@ class DrawMobile extends React.Component {
         let tipsTotalBonus = (
             <div className="drawTips">5.16-7.12，平台达到相应累计交易量，且个人及团队排行
                 前30名的工友，最高获分100万元奖金。<br/>
-                当前平台累计交易量<em>{total}</em>元，可获分<em>{totalBonus}</em>万奖金！
+                当前平台累计交易量<em>{totalSum}</em>元，可获分<em>{totalBonus}</em>万奖金！
             </div>
         );
         let monthTipsBriefStyle = {
