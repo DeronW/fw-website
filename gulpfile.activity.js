@@ -8,7 +8,7 @@ const APP_NAMES = [
     // 'topic-template-one',
     // 'topic-template-two',
     // 'template-columns', // 动态分配的 列数 模板
-    // 'template-lottery-draw',
+     'template-lottery-draw',//戳气球
     // 'template-one-arm-bandit', // 老虎机 模板
 ];
 
