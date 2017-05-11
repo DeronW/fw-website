@@ -57,25 +57,24 @@ class DrawMobile extends React.Component {
         d.setMinutes(minutes || 0);
         d.setSeconds(seconds || 0);
         d.setMilliseconds(0);
-        return +new Date(d)
+        //console.log(new Date(d).getTime());
+        return new Date(d).getTime()
     }
     judgeStageHandler() {
         var that = this;
-        //var timeStart = new Date("2017/05/16 00:00:00").getTime();//5.16号
-        //var timeMiddle = new Date("2017/06/13 23:59:59").getTime();//6.13号
-        //var timeEnd = new Date("2017/07/12 23:59:59").getTime();//7.12号
-        var timeStart = this.standardTime(2017,5,16,0,0,0);
-        var timeMiddle = this.standardTime(2017,6,13,23,59,59);
-        var timeEnd = this.standardTime(2017,6,13,23,59,59);
+        var timeStart = new Date("2017/05/16 00:00:00").getTime();//5.16号
+        var timeMiddle = new Date("2017/06/13 23:59:59").getTime();//6.13号
+        var timeEnd = new Date("2017/07/12 23:59:59").getTime();//7.12号
+        //var timeStart = this.standardTime(2017,5,16,0,0,0);
+        //var timeMiddle = this.standardTime(2017,6,13,23,59,59);
+        //var timeEnd = this.standardTime(2017,6,13,23,59,59);
         var startDate = '2017-05-16 00:00:00';
         var endDate = '2017-07-12 23:59:59';
+        console.log(timeStart);
         this.getServerTimestamp(function (currentTime) {
-            alert("格式化");
             if(currentTime < timeStart){
-                alert("no")
                 //ReactDOM.render(<PopNoStart />,document.getElementById("pop"))
             }else if (currentTime < timeMiddle) {
-                alert("5")
                 startDate = '2017-05-16 00:00:00';
                 endDate = '2017-06-13 23:59:59';
                 that.setState({
@@ -83,7 +82,6 @@ class DrawMobile extends React.Component {
                     start:startDate,end:endDate,type:'mayActf'
                 },that.ajaxPersonTeamData)
             } else if (currentTime < timeEnd) {
-                alert("6")
                 startDate = '2017-06-14 00:00:00';
                 endDate = '2017-07-12 23:59:59';
                 that.setState({stageMay: '已结束', stageJune: '进行中',
