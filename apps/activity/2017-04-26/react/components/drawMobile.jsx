@@ -41,10 +41,12 @@ class DrawMobile extends React.Component {
     getServerTimestamp(callback) {
         var ts = $getDebugParams().timestamp;
         if (ts) {
-            callback(ts)
+            callback(ts);
+            alert("test");
         } else {
             $.get(API_PATH + "api/userState/v1/timestamp.json", function (data) {
-                callback(data.data.timestamp)
+                callback(data.data.timestamp);
+                alert('未传的时间');
             }.bind(this), 'json')
         }
     }
@@ -124,6 +126,7 @@ class DrawMobile extends React.Component {
         var startDate = '2017-05-16 00:00:00';
         var endDate = '2017-07-12 23:59:59';
         this.getServerTimestamp(function (currentTime) {
+            alert('传过来的时间');
             if(currentTime < timeStart){
                 alert("未开始");
                 //ReactDOM.render(<PopNoStart />,document.getElementById("pop"))
@@ -255,9 +258,11 @@ class DrawMobile extends React.Component {
         );
         let tipsBonus = (
             <div className='drawTips'>
-                单月内，平台达到相应累计交易量，且个人及团队排行前20
-                名的工友，最高可获分33万奖金。<br/>
-                当前平台累计交易量<em>{total}</em>元，可获分<em>{bonus}</em>元奖金！
+                {type == 'mayActf' ?<div>单月内，平台达到相应累计交易量，且个人及团队排行前20
+                    名的工友，最高可获分33万奖金。<br/>
+                    当前平台累计交易量<em>{total}</em>元，可获分<em>{bonus}</em>元奖金！</div>:
+                    <div>5.16-7.12，平台达到相应累计交易量，且个人及团队排行前30名的工友，最高获分100万元奖金。当前平台累计交易量<em>{total}</em>
+                        元，可获分<em>{bonus}</em>元奖金！</div>}
             </div>
         );
         let tipsTotalBonus = (
