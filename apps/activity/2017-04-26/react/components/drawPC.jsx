@@ -303,7 +303,6 @@ class DrawPC extends React.Component {
                         5.16-7.12，平台达到相应累计交易量，且个人及团队排行前30名的工友，最高获分100万元奖金。当前平台累计交易量<em>{total}</em>
                         元，可获分<em>{bonus}</em>元奖金！
                     </div>}
-
             </div>
         );
         let noLoginChance = (

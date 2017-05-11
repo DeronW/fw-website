@@ -116,6 +116,7 @@ class DrawMobile extends React.Component {
         }
     }
     judgeStageHandler() {
+        var that = this;
         var timeStart = new Date("2017-05-16 00:00:00").getTime();//5.16号
         var timeMiddle = new Date("2017-06-13 23:59:59").getTime();//6.13号
         var timeEnd = new Date("2017-07-12 23:59:59").getTime();//7.12号
@@ -130,20 +131,20 @@ class DrawMobile extends React.Component {
                 alert("五月");
                 startDate = '2017-05-16 00:00:00';
                 endDate = '2017-06-13 23:59:59';
-                this.setState({
+                that.setState({
                     stageMay: '进行中', stageJune: '未开始',
                     start:startDate,end:endDate,type:'mayActf'
-                },this.ajaxPersonTeamData)
+                },that.ajaxPersonTeamData)
             } else if (currentTime < timeEnd) {
                 alert("六月");
                 startDate = '2017-06-14 00:00:00';
                 endDate = '2017-07-12 23:59:59';
-                this.setState({stageMay: '已结束', stageJune: '进行中',
+                that.setState({stageMay: '已结束', stageJune: '进行中',
                     selectedMay: false, selectedJune: true,
                     start:startDate,end:endDate,type:'mayActt'
-                },this.ajaxPersonTeamData)
+                },that.ajaxPersonTeamData)
             }
-        }.bind(this));
+        });
     }
 
     //切换月份tab
@@ -213,7 +214,7 @@ class DrawMobile extends React.Component {
         window.location.href = link;
     }
     render() {
-        let {stageMay,stageJune,selectedMay,selectedJune,close,bonus,total,totalSum,totalBonus,show,showWater,isLogin,totalLadderTab,monthTipsClose,totalTipsClose,start,end,personData,teamData,height,platBg,totalHeight,platTotalBg} = this.state;
+        let {stageMay,stageJune,selectedMay,selectedJune,close,bonus,total,totalSum,totalBonus,show,showWater,isLogin,totalLadderTab,monthTipsClose,totalTipsClose,start,end,type,personData,teamData,height,platBg,totalHeight,platTotalBg} = this.state;
         let no = {
             width: "237px",
             height: "96px",
@@ -258,10 +259,10 @@ class DrawMobile extends React.Component {
                 名的工友，最高可获分33万奖金。<br/>
                 当前平台累计交易量<em>{total}</em>元，可获分<em>{bonus}</em>元奖金！
             </div>
-
         );
         let tipsTotalBonus = (
-            <div className="drawTips">5.16-7.12，平台达到相应累计交易量，且个人及团队排行
+            <div className="drawTips">
+                5.16-7.12，平台达到相应累计交易量，且个人及团队排行
                 前30名的工友，最高获分100万元奖金。<br/>
                 当前平台累计交易量<em>{totalSum}</em>元，可获分<em>{totalBonus}</em>万奖金！
             </div>
