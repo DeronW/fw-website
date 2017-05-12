@@ -299,7 +299,7 @@ class DrawMobile extends React.Component {
             <div className='drawTips'>
                 {type == 'mayActf' ?<div>5.16 ~ 6.13，平台达到相应累计交易量，且个人及团队排行前20名的工友，最高可获分33万奖金。<br/>
                     当前平台累计交易量<em>{total}</em>元，可获分<em>{bonus}</em>元奖金！</div>:
-                    <div>6.14-7.12，平台达到相应累计交易量，且个人及团队排行前30名的工友，最高获分41万元奖金。当前平台累计交易量<em>{total}</em>
+                    <div>6.14-7.12，平台达到相应累计交易量，且个人及团队排行前20名的工友，最高获分41万元奖金。当前平台累计交易量<em>{total}</em>
                         元，可获分<em>{bonus}</em>元奖金！</div>}
             </div>
         );
