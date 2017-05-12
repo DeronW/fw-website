@@ -179,6 +179,8 @@ const SlotMachinePC = React.createClass({
         this.refs.rockProduct.clearTimerHandler();
         this.refs.rockProduct2.clearTimerHandler();
         this.refs.rockProduct3.clearTimerHandler();
+        if (window.once_delay) return;
+        window.once_delay = true;
         $.get(API_PATH + 'api/activityPullInvest/v1/play.json', {
             configNo: 1,
             drawCount: 1
@@ -187,8 +189,7 @@ const SlotMachinePC = React.createClass({
             var prize = data.data.resultAward[0].prize;
             var prizeMark = data.data.resultAward[0].prizeMark;
             var remainTimes = data.data.remainTimes;
-            if (window.once_delay) return;
-            window.once_delay = true;
+
             this.refs.rockProduct.lotteryDrawHandler(30, prizeMark, prize, remainTimes);
             setTimeout(() => {
                 this.refs.rockProduct2.lotteryDrawHandler(30, prizeMark, prize, remainTimes);
@@ -203,6 +204,8 @@ const SlotMachinePC = React.createClass({
         this.refs.rockProduct.clearTimerHandler();
         this.refs.rockProduct2.clearTimerHandler();
         this.refs.rockProduct3.clearTimerHandler();
+        if (window.once_delay) return;
+        window.once_delay = true;
         $.get(API_PATH + 'api/activityPullInvest/v1/play.json', {
             configNo: 1,
             drawCount: 10
@@ -211,8 +214,7 @@ const SlotMachinePC = React.createClass({
             var resultAward = data.data.resultAward;
             var remainTimes = data.data.remainTimes;
             let {prize_list} = this.props;
-            if (window.once_delay) return;
-            window.once_delay = true;
+
             prize_list && prize_list.push({
                 img: 'images/gift.png',
                 name: '抽奖十次大礼包'
