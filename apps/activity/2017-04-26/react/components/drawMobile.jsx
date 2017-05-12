@@ -108,6 +108,7 @@ class DrawMobile extends React.Component {
             }
         })
     }
+    //计算总榜奖金
     ajaxTotalData(){
         $.get(API_PATH + "api/activityPullInvest/v1/singularMonthTeamList.json",{
             start: '2017-05-16 00:00:00',
@@ -121,9 +122,10 @@ class DrawMobile extends React.Component {
             } else if (totalSum >= 1300000000) {
                 totalBonus = 100;
             }
-            this.judgePlatformTotalBg(1);
-            let totalHeight = Number(1) / 50000000 * 5;
-            this.setState({totalSum:totalSum,totalBonus: totalBonus,totalHeight: totalHeight
+            this.judgePlatformTotalBg(totalSum);
+            let totalHeight = Number(totalSum) / 50000000 * 5;
+            let t = ((totalSum/10000).toFixed(2))+"万";
+            this.setState({totalSum:t,totalBonus: totalBonus,totalHeight: totalHeight
             });
         })
     }
@@ -134,18 +136,19 @@ class DrawMobile extends React.Component {
             bonus = 0;
             this.setState({platBg: "url('images/platformM1.png')"})
         } else if (total < 380000000) {
-            bonus = 6;
+            bonus = '6万';
             this.setState({platBg: "url('images/platformM2.png')"})
         } else if (total < 450000000) {
-            bonus = 18;
+            bonus = '18万';
             this.setState({platBg: "url('images/platformM3.png')"})
         } else {
-            bonus = 33
+            bonus = '33万'
         }
 
         let height = Number(total) / 10000000 * 4;
+        let t = ((total/10000).toFixed(2))+"万";
         this.setState({
-            total: total, bonus: bonus, height: height
+            total: t, bonus: bonus, height: height
         });
     }
     //双月奖金
@@ -155,17 +158,18 @@ class DrawMobile extends React.Component {
             bonus = 0;
             this.setState({platBg: "url('images/platformM12.png')"})
         } else if (total < 400000000) {
-            bonus = 8;
+            bonus = '8万';
             this.setState({platBg: "url('images/platformM22.png')"})
         } else if (total < 500000000) {
-            bonus = 23;
+            bonus = '23万';
             this.setState({platBg: "url('images/platformM32.png')"})
         } else {
-            bonus = 41;
+            bonus = '41万';
         }
         let height = Number(total) / 10000000 * 4;
+        let t = ((total/10000).toFixed(2))+"万";
         this.setState({
-            total: total, bonus: bonus, height: height
+            total: t, bonus: bonus, height: height
         });
     }
     judgePlatformTotalBg(total) {
@@ -345,7 +349,7 @@ class DrawMobile extends React.Component {
                     }}></div>
                     <img style={{bottom:height + 67}} src="images/waterMobile.png" alt=""/>
 
-                    <div style={{height:height}} className="pillars"></div>
+                    <div style={{height:height}} className="pillars"></div>`
                 </div>
             </div>
             <div className="drawTips">
@@ -388,7 +392,7 @@ class DrawMobile extends React.Component {
                         e.stopPropagation();
                         this.showWaterRemain()
                     }}></div>
-                    <img style={{bottom:totalHeight + 63}} src="images/waterTotal.png" alt=""/>
+                    <img style={{bottom:totalHeight + 67}} src="images/s.png" alt=""/>
 
                     <div style={{height:totalHeight}} className="pillars"></div>
                 </div>

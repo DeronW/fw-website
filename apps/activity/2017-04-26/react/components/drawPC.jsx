@@ -104,7 +104,7 @@ class DrawPC extends React.Component {
             }
         })
     }
-
+    //总榜奖金
     ajaxTotalData() {
         $.get(API_PATH + "api/activityPullInvest/v1/singularMonthTeamList.json", {
             start: '2017-05-16 00:00:00',
@@ -118,10 +118,11 @@ class DrawPC extends React.Component {
             } else if (totalSum >= 1300000000) {
                 totalBonus = 100;
             }
-            this.judgePlatformTotalBg(totalSum);
-            let totalHeight = Number(totalSum) / 50000000 * 5;
+            this.judgePlatformTotalBg(1000000000);
+            let totalHeight = Number(1000000000) / 50000000 * 5;
+            let t = ((totalSum/10000).toFixed(2))+"万";
             this.setState({
-                totalSum: totalSum, totalBonus: totalBonus, totalHeight: totalHeight
+                totalSum: t, totalBonus: totalBonus, totalHeight: totalHeight
             });
         })
     }
@@ -129,24 +130,21 @@ class DrawPC extends React.Component {
     judgePlatformSingle(total) {
         let bonus = 0;
         if (total < 150000000) {
-            bonus = 0
-        } else if (total < 380000000) {
-            bonus = 6
-        } else if (total < 450000000) {
-            bonus = 18
-        } else {
-            bonus = 33
-        }
-        if (total < 150000000) {
+            bonus = 0;
             this.setState({platBg: "url('images/platformPC1.png')"})
         } else if (total < 380000000) {
+            bonus = '6万';
             this.setState({platBg: "url('images/platformPC2.png')"})
         } else if (total < 450000000) {
+            bonus = '18万';
             this.setState({platBg: "url('images/platformPC3.png')"})
+        } else {
+            bonus = '33万'
         }
         let height = Number(total) / 10000000 * 4;
+        let t = ((total/10000).toFixed(2))+"万";
         this.setState({
-            total: total, bonus: bonus, height: height
+            total: t, bonus: bonus, height: height
         });
     }
     //双月奖金
@@ -154,19 +152,20 @@ class DrawPC extends React.Component {
         let bonus = 0;
         if (total < 180000000) {
             bonus = 0;
-            this.setState({platBg: "url('images/platformPC1.png')"})
+            this.setState({platBg: "url('images/platformPC12.png')"})
         } else if (total < 400000000) {
-            bonus = 8;
-            this.setState({platBg: "url('images/platformPC2.png')"})
+            bonus = '8万';
+            this.setState({platBg: "url('images/platformPC22.png')"})
         } else if (total < 500000000) {
-            bonus = 23;
-            this.setState({platBg: "url('images/platformPC3.png')"})
+            bonus = '23万';
+            this.setState({platBg: "url('images/platformPC32.png')"})
         } else {
-            bonus = 41;
+            bonus = '41万';
         }
         let height = Number(total) / 10000000 * 4;
+        let t = ((total/10000).toFixed(2))+"万";
         this.setState({
-            total: total, bonus: bonus, height: height
+            total: t, bonus: bonus, height: height
         });
     }
 
@@ -292,7 +291,7 @@ class DrawPC extends React.Component {
         let loginRemain = (
             <div className="remindText">
                 {type == 'mayActf' ? <div className='loginRemain'>
-                    单月内，平台达到相应累计交易量，且个人及团队排行前20名的工友，最高可获分33万奖金。当前平台累计交易量<em>{total}</em> 元，可获分<em>{bonus}</em>万奖金！
+                    单月内，平台达到相应累计交易量，且个人及团队排行前20名的工友，最高可获分33万奖金。当前平台累计交易量<em>{total}</em> 元，可获分<em>{bonus}</em>元奖金！
                 </div> :
                     <div className='loginRemain'>
                         5.16-7.12，平台达到相应累计交易量，且个人及团队排行前30名的工友，最高获分100万元奖金。当前平台累计交易量<em>{total}</em>
@@ -313,7 +312,7 @@ class DrawPC extends React.Component {
         );
         return <div className="drawPC">
             <div className="drawBanner">
-                <div className="banner"></div>
+                <a href="#explain"></a>
             </div>
             <div className="drawBox">
                 <div className="drawTitle">大奖抽抽抽，100%中奖</div>
@@ -390,7 +389,7 @@ class DrawPC extends React.Component {
                 {
                     isLogin ? <div className="remindText">
                         <div className='loginRemain'>5.16-7.12，平台达到相应累计交易量，且个人及团队排行前30名的工友，最高获分100万元奖金。<br/>
-                            当前平台累计交易量<em>{totalSum}</em>元，可获分<em>{totalBonus}</em>万奖金！
+                            当前平台累计交易量<em>{totalSum}</em>元，可获分<em>{totalBonus}</em>元奖金！
                         </div>
                     </div> : noLoginRemain
                 }
@@ -436,7 +435,7 @@ class DrawPC extends React.Component {
                     <p>5. 活动期间，平台累投金额达标。个人及团队排行前30的工友，将按照其累计投资金额占比进行最高100万元奖金分配。累计金额越多获得的奖金就越多。</p>
                 </div>
             </div>
-            <div className="drawExplain">
+            <div className="drawExplain" id="explain">
                 <div className="explainContent">
                     <div className="explainTitle">
                         <img src="images/explain.png" alt=""/>
