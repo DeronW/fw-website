@@ -79,9 +79,13 @@ const PokeBalloonMobile = React.createClass({
             type: 'single',
             giftPath: '',
             isAnimation: true,
+            isLogin:false
         }
     },
     componentDidMount() {
+        $UserReady(function (isLogin, user) {
+            this.setState({isLogin: isLogin});
+        }.bind(this));
         this.ajaxCount();
     },
     ajaxCount(){
@@ -97,6 +101,7 @@ const PokeBalloonMobile = React.createClass({
     },
     //一次
     promiseOnceLotteryResult(){
+        this.showMessagePop('恭喜中奖');
         if(window.poke_delay) return;
         window.poke_delay = true;
         $.get(API_PATH+"api/activityPullInvest/v1/play.json?",{
@@ -104,13 +109,14 @@ const PokeBalloonMobile = React.createClass({
             drawCount:1
         }).then((data) => {
             this.ajaxCount();
+            this.showMessagePop('恭喜中奖', data.data.resultAward[0].prize);
             this.refs.productListAuto.rewardPoolHandler();
-            this.showMessagePop('恭喜中奖', '', data.data.resultAward[0].prize);
         });
 
     },
     //十次
     promiseMoreLotteryResult(){
+        this.showMessagePop('恭喜中奖');
         if(window.poke_delay) return;
         window.poke_delay = true;
         $.get(API_PATH+"api/activityPullInvest/v1/play.json?",{
@@ -118,15 +124,14 @@ const PokeBalloonMobile = React.createClass({
             drawCount:10
         }).then((data) => {
             this.ajaxCount();
+            this.showMessagePop('恭喜中奖','', data.data.resultAward);
             this.refs.productListAuto.rewardPoolHandler();
-            this.showMessagePop('恭喜中奖', '', '', data.data.resultAward);
         });
     },
-    showMessagePop(title, message, productName, prizeList){
+    showMessagePop(title, productName, prizeList){
         this.setState({isAnimation: false});
         ReactDOM.render(<PopAllSituation closePopHandler={this.closePopHandler} popBtn="知道了"
                                          popTitle={title}
-                                         popText={message}
                                          popOneProduct={productName}
                                          popMoreProducts={prizeList}/>, document.getElementById("pop"))
     },

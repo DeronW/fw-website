@@ -394,7 +394,7 @@ class DrawMobile extends React.Component {
                         e.stopPropagation();
                         this.showWaterRemain()
                     }}></div>
-                    <img style={{bottom:totalHeight + 67}} src="images/s.png" alt=""/>
+                    <img style={{bottom:totalHeight + 67}} src="images/zongbang.png" alt=""/>
 
                     <div style={{height:totalHeight}} className="pillars"></div>
                 </div>
