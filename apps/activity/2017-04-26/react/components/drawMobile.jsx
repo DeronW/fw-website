@@ -27,6 +27,7 @@ class DrawMobile extends React.Component {
             personData:[],
             teamData:[],
             showWater:false,
+            isApp:false,
         }
     }
 
@@ -34,6 +35,8 @@ class DrawMobile extends React.Component {
         $UserReady(function (isLogin, user) {
             this.setState({isLogin: isLogin});
         }.bind(this));
+        let isApp = navigator.userAgent.match(/FinancialWorkshop/i)?true:false;
+        this.setState({isApp:isApp});
         this.judgeStageHandler();
         this.ajaxPersonTeamData();
         this.ajaxTotalData();
@@ -49,7 +52,7 @@ class DrawMobile extends React.Component {
         }
     }
     standardTime(year,month,day,hours,minutes,seconds){
-        var d = new Date();
+        let d = new Date();
         d.setFullYear(year || 0);
         d.setMonth(month-1 || 0);
         d.setDate(day || 0);
@@ -57,7 +60,8 @@ class DrawMobile extends React.Component {
         d.setMinutes(minutes || 0);
         d.setSeconds(seconds || 0);
         d.setMilliseconds(0);
-        return new Date(d).getTime()
+        let t = new Date(d).getTime();
+        return t
     }
     judgeStageHandler() {
         var that =this;
@@ -252,7 +256,7 @@ class DrawMobile extends React.Component {
         window.location.href = link;
     }
     render() {
-        let {stageMay,stageJune,selectedMay,selectedJune,close,bonus,total,totalSum,totalBonus,show,showWater,isLogin,totalLadderTab,monthTipsClose,totalTipsClose,start,end,type,personData,teamData,height,platBg,totalHeight,platTotalBg} = this.state;
+        let {stageMay,stageJune,selectedMay,selectedJune,close,bonus,total,totalSum,totalBonus,show,showWater,isLogin,totalLadderTab,monthTipsClose,totalTipsClose,start,end,type,personData,teamData,height,platBg,totalHeight,platTotalBg,isApp} = this.state;
         let no = {
             width: "237px",
             height: "96px",
@@ -329,7 +333,10 @@ class DrawMobile extends React.Component {
         let waterStyle = {
             display:showWater ?"block":"none"
         };
-        return <div className="drawMobile" onTouchEnd={()=>{this.closeWaterRemain()}}>
+        let appTop = {
+            marginTop:isApp?"-80px":"0"
+        };
+        return <div className="drawMobile" style={appTop} onTouchEnd={()=>{this.closeWaterRemain()}}>
             <div className="drawBanner">
                 <div className="activityExplain" onClick={()=>this.showHandler()}></div>
             </div>

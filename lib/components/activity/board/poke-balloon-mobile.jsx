@@ -8,8 +8,8 @@ const BalloonBoom = React.createClass({
         }
     },
     componentDidMount(){
-        $.get(API_PATH+"api/userState/v1/timestamp.json", (data)=> {
-            if (data.data.timestamp > 1499875200000) {
+        $.get(API_PATH + "api/userState/v1/timestamp.json", (data)=> {
+            if (data.data.timestamp < 1494864000000 || data.data.timestamp > 1499875200000) {
                 this.setState({outTime: true})
             }
         }, 'json')
@@ -79,7 +79,7 @@ const PokeBalloonMobile = React.createClass({
             type: 'single',
             giftPath: '',
             isAnimation: true,
-            isLogin:false
+            isLogin: false
         }
     },
     componentDidMount() {
@@ -102,11 +102,11 @@ const PokeBalloonMobile = React.createClass({
     //一次
     promiseOnceLotteryResult(){
         this.showMessagePop('恭喜中奖');
-        if(window.poke_delay) return;
+        if (window.poke_delay) return;
         window.poke_delay = true;
-        $.get(API_PATH+"api/activityPullInvest/v1/play.json?",{
-            configNo:1,
-            drawCount:1
+        $.get(API_PATH + "api/activityPullInvest/v1/play.json?", {
+            configNo: 1,
+            drawCount: 1
         }).then((data) => {
             this.ajaxCount();
             this.showMessagePop('恭喜中奖', data.data.resultAward[0].prize);
@@ -117,14 +117,14 @@ const PokeBalloonMobile = React.createClass({
     //十次
     promiseMoreLotteryResult(){
         this.showMessagePop('恭喜中奖');
-        if(window.poke_delay) return;
+        if (window.poke_delay) return;
         window.poke_delay = true;
-        $.get(API_PATH+"api/activityPullInvest/v1/play.json?",{
-            configNo:1,
-            drawCount:10
+        $.get(API_PATH + "api/activityPullInvest/v1/play.json?", {
+            configNo: 1,
+            drawCount: 10
         }).then((data) => {
             this.ajaxCount();
-            this.showMessagePop('恭喜中奖','', data.data.resultAward);
+            this.showMessagePop('恭喜中奖', '', data.data.resultAward);
             this.refs.productListAuto.rewardPoolHandler();
         });
     },

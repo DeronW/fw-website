@@ -1,6 +1,18 @@
 const LotteryMobile = React.createClass({
+    getInitialState(){
+        return{
+            isApp:false
+        }
+    },
+    componentDidMount(){
+        let isApp = navigator.userAgent.match(/FinancialWorkshop/i)?true:false;
+        this.setState({isApp:isApp});
+    },
     render(){
-        return <div className="lotteryMobile">
+        let appTop = {
+            marginTop:this.state.isApp?"-80px":"0"
+        };
+        return <div className="lotteryMobile" style={appTop}>
             <PokeBalloonMobile/>
             <div className="activityRule">
                 <div className="ruleTag">活动规则</div>
