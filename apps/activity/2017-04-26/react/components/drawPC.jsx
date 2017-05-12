@@ -118,8 +118,8 @@ class DrawPC extends React.Component {
             } else if (totalSum >= 1300000000) {
                 totalBonus = 100;
             }
-            this.judgePlatformTotalBg(1000000000);
-            let totalHeight = Number(1000000000) / 50000000 * 5;
+            this.judgePlatformTotalBg(totalSum);
+            let totalHeight = Number(totalSum) / 50000000 * 5;
             let t = ((totalSum/10000).toFixed(2))+"万";
             this.setState({
                 totalSum: t, totalBonus: totalBonus, totalHeight: totalHeight
