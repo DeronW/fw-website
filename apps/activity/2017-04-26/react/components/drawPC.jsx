@@ -87,7 +87,7 @@ class DrawPC extends React.Component {
     }
 
     ajaxPersonTeamData() {
-        let {start, end, type}=this.state;
+        let {start,end,type} =this.state;
         $.get(API_PATH + "api/activityPullInvest/v1/singularMonthTeamList.json", {
             start: start,
             end: end,
@@ -139,7 +139,8 @@ class DrawPC extends React.Component {
             bonus = '18万';
             this.setState({platBg: "url('images/platformPC3.png')"})
         } else {
-            bonus = '33万'
+            bonus = '33万';
+            this.setState({platBg: "url('images/platformPC1.png')"})
         }
         let height = Number(total) / 10000000 * 4;
         let t = ((total/10000).toFixed(2))+"万";
@@ -161,6 +162,7 @@ class DrawPC extends React.Component {
             this.setState({platBg: "url('images/platformPC32.png')"})
         } else {
             bonus = '41万';
+            this.setState({platBg: "url('images/platformPC12.png')"})
         }
         let height = Number(total) / 10000000 * 4;
         let t = ((total/10000).toFixed(2))+"万";
