@@ -142,7 +142,8 @@ class DrawMobile extends React.Component {
             bonus = '18万';
             this.setState({platBg: "url('images/platformM3.png')"})
         } else {
-            bonus = '33万'
+            bonus = '33万';
+            this.setState({platBg: "url('images/platformM1.png')"})
         }
 
         let height = Number(total) / 10000000 * 4;
@@ -165,6 +166,7 @@ class DrawMobile extends React.Component {
             this.setState({platBg: "url('images/platformM32.png')"})
         } else {
             bonus = '41万';
+            this.setState({platBg: "url('images/platformM12.png')"})
         }
         let height = Number(total) / 10000000 * 4;
         let t = ((total/10000).toFixed(2))+"万";
