@@ -185,18 +185,25 @@ const SlotMachinePC = React.createClass({
             configNo: 1,
             drawCount: 1
         }).then(data => {
-            this.ajaxCount();
-            var prize = data.data.resultAward[0].prize;
-            var prizeMark = data.data.resultAward[0].prizeMark;
-            var remainTimes = data.data.remainTimes;
+            if (code == 10000) {
+                this.ajaxCount();
+                var prize = data.data.resultAward[0].prize;
+                var prizeMark = data.data.resultAward[0].prizeMark;
+                var remainTimes = data.data.remainTimes;
 
-            this.refs.rockProduct.lotteryDrawHandler(30, prizeMark, prize, remainTimes);
-            setTimeout(() => {
-                this.refs.rockProduct2.lotteryDrawHandler(30, prizeMark, prize, remainTimes);
-            }, 300);
-            setTimeout(() => {
-                this.refs.rockProduct3.lotteryDrawHandler(30, prizeMark, prize, remainTimes);
-            }, 600);
+                this.refs.rockProduct.lotteryDrawHandler(30, prizeMark, prize, remainTimes);
+                setTimeout(() => {
+                    this.refs.rockProduct2.lotteryDrawHandler(30, prizeMark, prize, remainTimes);
+                }, 300);
+                setTimeout(() => {
+                    this.refs.rockProduct3.lotteryDrawHandler(30, prizeMark, prize, remainTimes);
+                }, 600);
+            } else {
+                ReactDOM.render(<PopMessage closePopHandle={this.closePopHandler} popTop="抽奖异常" popTitle={"抱歉，抽奖异常！"}
+                                            popText={"请稍后再试，如需咨询请联系客服400-0322-988 。"}
+                                            popBtn="朕知道了"/>, document.getElementById('pop'))
+            }
+
         })
     },
     //请求十次抽奖
@@ -210,22 +217,28 @@ const SlotMachinePC = React.createClass({
             configNo: 1,
             drawCount: 10
         }).then(data => {
-            this.ajaxCount();
-            var resultAward = data.data.resultAward;
-            var remainTimes = data.data.remainTimes;
-            let {prize_list} = this.props;
+            if (code == 10000) {
+                this.ajaxCount();
+                var resultAward = data.data.resultAward;
+                var remainTimes = data.data.remainTimes;
+                let {prize_list} = this.props;
 
-            prize_list && prize_list.push({
-                img: 'images/gift.png',
-                name: '抽奖十次大礼包'
-            });
-            this.refs.rockProduct.tenLotteryDrawHandler(30, resultAward, remainTimes, prize_list);
-            setTimeout(() => {
-                this.refs.rockProduct2.tenLotteryDrawHandler(30, resultAward, remainTimes, prize_list);
-            }, 300);
-            setTimeout(() => {
-                this.refs.rockProduct3.tenLotteryDrawHandler(30, resultAward, remainTimes, prize_list);
-            }, 600);
+                prize_list && prize_list.push({
+                    img: 'images/gift.png',
+                    name: '抽奖十次大礼包'
+                });
+                this.refs.rockProduct.tenLotteryDrawHandler(30, resultAward, remainTimes, prize_list);
+                setTimeout(() => {
+                    this.refs.rockProduct2.tenLotteryDrawHandler(30, resultAward, remainTimes, prize_list);
+                }, 300);
+                setTimeout(() => {
+                    this.refs.rockProduct3.tenLotteryDrawHandler(30, resultAward, remainTimes, prize_list);
+                }, 600);
+            } else {
+                ReactDOM.render(<PopMessage closePopHandle={this.closePopHandler} popTop="抽奖异常" popTitle={"抱歉，抽奖异常！"}
+                                            popText={"请稍后再试，如需咨询请联系客服400-0322-988 。"}
+                                            popBtn="朕知道了"/>, document.getElementById('pop'))
+            }
 
         })
     },

@@ -75,7 +75,7 @@ class DrawMobile extends React.Component {
         var endDate = '2017-07-12 23:59:59';
         this.getServerTimestamp(function (currentTime) {
             if(currentTime < timeStart){
-                //ReactDOM.render(<PopNoStart />,document.getElementById("pop"))
+                ReactDOM.render(<PopNoStart popTitle={"活动暂未开启"} popText={true}/>,document.getElementById("pop"))
             }else if (currentTime < timeMiddle) {
                 startDate = '2017-05-16 00:00:00';
                 endDate = '2017-06-13 23:59:59';
@@ -90,6 +90,8 @@ class DrawMobile extends React.Component {
                     selectedMay: false, selectedJune: true,
                     start:startDate,end:endDate,type:'mayActt'
                 },that.ajaxPersonTeamData)
+            }else{
+                ReactDOM.render(<PopNoStart popTitle={"来晚了，活动已结束"} popEnd={true}/>,document.getElementById("pop"))
             }
         });
 
@@ -128,6 +130,7 @@ class DrawMobile extends React.Component {
             }
             this.judgePlatformTotalBg(totalSum);
             let totalHeight = Number(totalSum) / 50000000 * 5;
+            if (totalHeight > 135) totalHeight = 135;
             let t = ((totalSum/10000).toFixed(2))+"万";
             this.setState({totalSum:t,totalBonus: totalBonus,totalHeight: totalHeight
             });
@@ -151,6 +154,7 @@ class DrawMobile extends React.Component {
         }
 
         let height = Number(total) / 10000000 * 4;
+        if (height > 203) height = 203;
         let t = ((total/10000).toFixed(2))+"万";
         this.setState({
             total: t, bonus: bonus, height: height
@@ -173,6 +177,7 @@ class DrawMobile extends React.Component {
             this.setState({platBg: "url('images/platformM42.png')"})
         }
         let height = Number(total) / 10000000 * 4;
+        if (height > 203) height = 203;
         let t = ((total/10000).toFixed(2))+"万";
         this.setState({
             total: t, bonus: bonus, height: height
@@ -373,19 +378,19 @@ class DrawMobile extends React.Component {
             <div className="drawTips drawTips2">
                 <div className="tips">温馨提示:</div>
                 <div className="briefText" style={monthTipsBriefStyle}>
-                    <div className="briefText">1.以上数据实时更新，最终发放奖金请以每月结束后数据为准;</div>
-                    <div className="mask">2.奖金包奖励以工豆形式发放；</div>
+                    <div className="briefText">1. 以上数据实时更新，排名以时间先后顺序为准，最终发放奖金请以每月结束后数据为准；</div>
+                    <div className="mask">2. 奖金包奖励以工豆形式发放；</div>
                     <div className="showBtn" onClick={()=>this.toggleMonthTips()}>展开全部<img src="images/arrow.png"/>
                     </div>
                 </div>
                 <div className="fullText" style={monthTipsFullStyle}>
                     <div className="briefText">
-                        1.以上数据实时更新，最终发放奖金请以每月结束后数据为准；
+                        1. 以上数据实时更新，排名以时间先后顺序为准，最终发放奖金请以每月结束后数据为准；
                     </div>
-                    <div className="briefText">2.奖金包奖励以工豆形式发放；</div>
-                    <div className="briefText">3.月度奖金分配方式：个人和团队奖金分配比例=4(个人)：6(团队)；</div>
-                    <div className="briefText">4.奖金包占比分配公式：个人(或团队)累投总额÷前20名个人(或团队)累投总额。仅计算满足获奖资格的用户；</div>
-                    <div className="briefText">5.活动期间，单月内平台达到相应任务目标，且个人及团队排行前20名的工友，即可赢得最高百万奖金包！累计金额越多获得的奖金就越多。
+                    <div className="briefText">2. 奖金包奖励以工豆形式发放；</div>
+                    <div className="briefText">3. 月度奖金分配方式：个人和团队奖金分配比例=4（个人）：6（团队）；</div>
+                    <div className="briefText">4. 奖金包占比分配公式：个人（或团队）累投总额÷前20名个人（或团队）累投总额。仅计算满足获奖资格的用户；</div>
+                    <div className="briefText">5. 活动期间，单月内平台达到相应任务目标，且个人及团队排行前20名的工友，即可累计赢得不同金额的奖金包！累计金额越多获得的奖金就越多。
                         <div className="showBtn" onClick={()=>this.toggleMonthTips()}>收起<img src="images/arrow.png"/>
                         </div>
                     </div>
@@ -420,7 +425,7 @@ class DrawMobile extends React.Component {
             <div className="drawTips">
                 <div className="tips">温馨提示:</div>
                 <div className="briefText" style={totalTipsBriefStyle}>
-                    1.以上数据实时更新，最终发放奖金请以每月结束后数据为准；
+                    1. 以上数据实时更新，排名以时间先后顺序为准，最终发放奖金请以活动结束后数据为准；
                 </div>
                 <div className="briefText" style={totalTipsBriefStyle}>
                     <div className="mask">2.奖金包奖励以工豆形式...</div>
@@ -429,12 +434,12 @@ class DrawMobile extends React.Component {
                 </div>
                 <div className="fullText" style={totalTipsFullStyle}>
                     <div className="briefText">
-                        1.以上数据实时更新，排名先后由最近一次成功投标判定，最终发放奖金请以每月结束后数据为准；
+                        1. 以上数据实时更新，排名以时间先后顺序为准，最终发放奖金请以活动结束后数据为准；
                     </div>
-                    <div className="briefText">2.奖金包奖励以工豆形式发放；</div>
-                    <div className="briefText">3.月度奖金分配方式：个人和团队奖金分配比例=4(个人)：6(团队)；</div>
-                    <div className="briefText">4.奖金包占比分配公式：个人(或团队)累投总额÷前20名个人(或团队)累投总额。仅计算满足获奖资格的用户；</div>
-                    <div className="briefText">5.活动期间，单月内平台达到相应任务目标，且个人及团队排行前20名的工友，即可累计赢得不同金额的奖金包！累计金额越多获得的奖金就越多。
+                    <div className="briefText">2. 奖金包奖励以工豆形式发放；</div>
+                    <div className="briefText">3. 奖金分配方式：个人和团队奖金分配比例=4（个人）：6（团队）；</div>
+                    <div className="briefText">4. 奖金包占比分配公式：个人（或团队）累投总额÷前30名个人（或团队）累投总额。仅计算满足获奖资格的用户；</div>
+                    <div className="briefText">5. 活动期间，平台累投金额达标。个人及团队排行前30的工友，将按照其累计投资金额占比进行最高100万元奖金分配。累计金额越多获得的奖金就越多。
                         <div className="showBtn" onClick={()=>this.toggleTotalTips()}>收起<img src="images/arrow.png"/>
                         </div>
                     </div>
