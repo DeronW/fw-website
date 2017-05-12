@@ -93,14 +93,17 @@ class DrawPC extends React.Component {
             end: end,
             type: type
         }).then(data=> {
-            let total = data.data && data.data.total;
-            var personData = data.data && data.data.persondata;
-            var teamData = data.data && data.data.teamdata;
-            this.setState({personData: personData, teamData: teamData});
-            if (type == 'mayActf') {
-                this.judgePlatformSingle(total);
-            } else if (type == 'mayActt') {
-                this.judgePlatformDouble(total)
+            let total,personData,teamData;
+            if(data&&data.data){
+                total = data.data.total;
+                personData = data.data.persondata;
+                teamData = data.data.teamdata;
+                this.setState({personData: personData, teamData: teamData});
+                if (type == 'mayActf') {
+                    this.judgePlatformSingle(total);
+                } else if (type == 'mayActt') {
+                    this.judgePlatformDouble(total)
+                }
             }
         })
     }

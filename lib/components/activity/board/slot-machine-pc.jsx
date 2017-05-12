@@ -196,7 +196,7 @@ const SlotMachinePC = React.createClass({
             configNo: 1,
             drawCount: 1
         }).then(data => {
-            if (code == 10000) {
+            if (data.code == 10000) {
                 this.ajaxCount();
                 var prize = data.data.resultAward[0].prize;
                 var prizeMark = data.data.resultAward[0].prizeMark;
@@ -228,7 +228,7 @@ const SlotMachinePC = React.createClass({
             configNo: 1,
             drawCount: 10
         }).then(data => {
-            if (code == 10000) {
+            if (data.code == 10000) {
                 this.ajaxCount();
                 var resultAward = data.data.resultAward;
                 var remainTimes = data.data.remainTimes;

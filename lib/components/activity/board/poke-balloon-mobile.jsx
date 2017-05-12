@@ -108,7 +108,7 @@ const PokeBalloonMobile = React.createClass({
             configNo: 1,
             drawCount: 1
         }).then((data) => {
-            if(code == 10000){
+            if(data.code == 10000){
                 this.ajaxCount();
                 this.showMessagePop('恭喜中奖', data.data.resultAward[0].prize);
                 this.refs.productListAuto.rewardPoolHandler();
@@ -127,7 +127,7 @@ const PokeBalloonMobile = React.createClass({
             configNo: 1,
             drawCount: 10
         }).then((data) => {
-            if(code == 10000){
+            if(data.code == 10000){
                 this.ajaxCount();
                 this.showMessagePop('恭喜中奖', '', data.data.resultAward);
                 this.refs.productListAuto.rewardPoolHandler();
