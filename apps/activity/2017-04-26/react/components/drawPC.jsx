@@ -140,7 +140,7 @@ class DrawPC extends React.Component {
             this.setState({platBg: "url('images/platformPC3.png')"})
         } else {
             bonus = '33万';
-            this.setState({platBg: "url('images/platformPC1.png')"})
+            this.setState({platBg: "url('images/platformPC4.png')"})
         }
         let height = Number(total) / 10000000 * 4;
         let t = ((total/10000).toFixed(2))+"万";
@@ -162,7 +162,7 @@ class DrawPC extends React.Component {
             this.setState({platBg: "url('images/platformPC32.png')"})
         } else {
             bonus = '41万';
-            this.setState({platBg: "url('images/platformPC12.png')"})
+            this.setState({platBg: "url('images/platformPC42.png')"})
         }
         let height = Number(total) / 10000000 * 4;
         let t = ((total/10000).toFixed(2))+"万";
@@ -293,10 +293,10 @@ class DrawPC extends React.Component {
         let loginRemain = (
             <div className="remindText">
                 {type == 'mayActf' ? <div className='loginRemain'>
-                    单月内，平台达到相应累计交易量，且个人及团队排行前20名的工友，最高可获分33万奖金。当前平台累计交易量<em>{total}</em> 元，可获分<em>{bonus}</em>元奖金！
+                    5.16 ~ 6.13，平台达到相应累计交易量，且个人及团队排行前20名的工友，最高可获分33万奖金。当前平台累计交易量<em>{total}</em> 元，可获分<em>{bonus}</em>元奖金！
                 </div> :
                     <div className='loginRemain'>
-                        5.16-7.12，平台达到相应累计交易量，且个人及团队排行前30名的工友，最高获分100万元奖金。当前平台累计交易量<em>{total}</em>
+                        6.14-7.12，平台达到相应累计交易量，且个人及团队排行前30名的工友，最高获分41万元奖金。当前平台累计交易量<em>{total}</em>
                         元，可获分<em>{bonus}</em>元奖金！
                     </div>}
             </div>

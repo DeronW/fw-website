@@ -147,7 +147,7 @@ class DrawMobile extends React.Component {
             this.setState({platBg: "url('images/platformM3.png')"})
         } else {
             bonus = '33万';
-            this.setState({platBg: "url('images/platformM1.png')"})
+            this.setState({platBg: "url('images/platformM4.png')"})
         }
 
         let height = Number(total) / 10000000 * 4;
@@ -170,7 +170,7 @@ class DrawMobile extends React.Component {
             this.setState({platBg: "url('images/platformM32.png')"})
         } else {
             bonus = '41万';
-            this.setState({platBg: "url('images/platformM12.png')"})
+            this.setState({platBg: "url('images/platformM42.png')"})
         }
         let height = Number(total) / 10000000 * 4;
         let t = ((total/10000).toFixed(2))+"万";
@@ -297,10 +297,9 @@ class DrawMobile extends React.Component {
         );
         let tipsBonus = (
             <div className='drawTips'>
-                {type == 'mayActf' ?<div>单月内，平台达到相应累计交易量，且个人及团队排行前20
-                    名的工友，最高可获分33万奖金。<br/>
+                {type == 'mayActf' ?<div>5.16 ~ 6.13，平台达到相应累计交易量，且个人及团队排行前20名的工友，最高可获分33万奖金。<br/>
                     当前平台累计交易量<em>{total}</em>元，可获分<em>{bonus}</em>元奖金！</div>:
-                    <div>5.16-7.12，平台达到相应累计交易量，且个人及团队排行前30名的工友，最高获分100万元奖金。当前平台累计交易量<em>{total}</em>
+                    <div>6.14-7.12，平台达到相应累计交易量，且个人及团队排行前30名的工友，最高获分41万元奖金。当前平台累计交易量<em>{total}</em>
                         元，可获分<em>{bonus}</em>元奖金！</div>}
             </div>
         );
