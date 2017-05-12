@@ -9,8 +9,8 @@ const WinningListPC = React.createClass({
     },
     componentDidMount(){
         $.get(API_PATH+"api/activityPullInvest/v1/prizeRecordList.json",{
-            topNum:20,
-            realTopNum:5
+            //topNum:20,
+            //realTopNum:5
         }).then(data =>{
             var list = data.data.pageData;
             this.setState({dataList: list}, this.startMoveList)
@@ -80,6 +80,7 @@ const WinningListPC = React.createClass({
             {dataList.length ?<table className="list">
                 <tbody className="listCell" style={{top:`${position}px`}}>
                 {dataList.map(cell)}
+                {dataList.slice(0,6).map(cell)}
                 </tbody>
             </table>:null}
             {
