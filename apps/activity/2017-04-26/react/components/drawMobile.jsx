@@ -75,7 +75,7 @@ class DrawMobile extends React.Component {
         var endDate = '2017-07-12 23:59:59';
         this.getServerTimestamp(function (currentTime) {
             if(currentTime < timeStart){
-                ReactDOM.render(<PopNoStart popTitle={"活动暂未开启"} popText={true}/>,document.getElementById("pop"))
+                ReactDOM.render(<PopNoStartMobile popTitle={"活动暂未开启"} popText={true}/>,document.getElementById("pop"))
             }else if (currentTime < timeMiddle) {
                 startDate = '2017-05-16 00:00:00';
                 endDate = '2017-06-13 23:59:59';
@@ -90,8 +90,8 @@ class DrawMobile extends React.Component {
                     selectedMay: false, selectedJune: true,
                     start:startDate,end:endDate,type:'mayActt'
                 },that.ajaxPersonTeamData)
-            }else{
-                ReactDOM.render(<PopNoStart popTitle={"来晚了，活动已结束"} popEnd={true}/>,document.getElementById("pop"))
+            }else if(currentTime >= timeEnd){
+                ReactDOM.render(<PopNoStartMobile popTitle={"来晚了，活动已结束"} popEnd={true}/>,document.getElementById("pop"))
             }
         });
 

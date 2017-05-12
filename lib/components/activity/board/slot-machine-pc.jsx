@@ -47,7 +47,7 @@ const RockProduct = React.createClass({
     lotteryDrawHandler(speed, prizeMark, prize, remainTimes) {
 
         var productList = this.props.productList;
-        var s = 0, i = 0, count = 0;
+        var s = 0, i = "error", count = 0;
         var timer = setInterval(() => {
             var position = this.state.position;
             productList.forEach((item, index) => {
@@ -55,43 +55,46 @@ const RockProduct = React.createClass({
                     i = index;
                 }
             });
-            var distance = (i) * 182;
-            if (position >= (productList.length - 1) * 182) {
-                this.setState({
-                    position: speed
-                });
-                count++;
+            if (i == "error") {
+                ReactDOM.render(<PopMessage closePopHandle={this.closePopHandler} popTop="抽奖异常" popTitle={"抱歉，抽奖异常！"}
+                                            popText={"请稍后再试，如需咨询请联系客服400-0322-988 。"}
+                                            popBtn="朕知道了"/>, document.getElementById('pop'))
             } else {
-                if (count >= 3) {
-                    if (this.state.position > 182) {
-                        s = (distance - this.state.position) / 8;
-                        s = s > 0 ? Math.ceil(s) : Math.floor(s);
-                        this.setState({
-                            position: this.state.position + s
-                        });
-                    } else {
-                        this.setState({
-                            position: distance
-                        });
-                    }
-                    if (this.state.position == distance) {
-                        clearInterval(timer);
-                        setTimeout(()=> {
-                            ReactDOM.render(<PopOnePrize closePopHandle={this.props.closePopHandler} popPrize={prize}
-                                                         popNumber={remainTimes}
-                                                         popBtn='继续抽奖'/>, document.getElementById('pop'));
-                            //ReactDOM.render(<PopMessage closePopHandle={this.closePopHandler} popTitle="抱歉，抽奖异常！" popText="请稍后再试，如需咨询请联系客服400-0322-988 。" popBtn="朕知道了"/>,document.getElementById('pop'))
-                            //ReactDOM.render(<PopOnePrize closePopHandle={this.closePopHandler} popPrize="1888工豆" popNumber="10" popBtn='继续抽奖'/>,document.getElementById('pop'))
-                            //ReactDOM.render(<PopZero closePopHandle={this.closePopHandler}/>,document.getElementById('pop'))
-
-                            window.once_delay = false;
-                        }, 1000);
-                    }
-                } else {
-                    s = speed + this.state.position;
+                var distance = (i) * 182;
+                if (position >= (productList.length - 1) * 182) {
                     this.setState({
-                        position: s
+                        position: speed
                     });
+                    count++;
+                } else {
+                    if (count >= 3) {
+                        if (this.state.position > 182) {
+                            s = (distance - this.state.position) / 8;
+                            s = s > 0 ? Math.ceil(s) : Math.floor(s);
+                            this.setState({
+                                position: this.state.position + s
+                            });
+                        } else {
+                            this.setState({
+                                position: distance
+                            });
+                        }
+                        if (this.state.position == distance) {
+                            clearInterval(timer);
+                            setTimeout(()=> {
+                                ReactDOM.render(<PopOnePrize closePopHandle={this.props.closePopHandler}
+                                                             popPrize={prize}
+                                                             popNumber={remainTimes}
+                                                             popBtn='继续抽奖'/>, document.getElementById('pop'));
+                                window.once_delay = false;
+                            }, 1000);
+                        }
+                    } else {
+                        s = speed + this.state.position;
+                        this.setState({
+                            position: s
+                        });
+                    }
                 }
             }
         }, 30)
@@ -99,39 +102,47 @@ const RockProduct = React.createClass({
     tenLotteryDrawHandler(speed, productList, remainTimes, prize_list) {
         var s = 0;
         var count = 0;
-        var timer = setInterval(() => {
-            var position = this.state.position;
-            var distance = (prize_list.length - 1) * 182;
-            if (position >= distance) {
-                this.setState({
-                    position: speed
-                });
-                count++;
-            } else {
-                if (count >= 2) {
-                    s = (distance - this.state.position) / 8;
-                    s = s > 0 ? Math.ceil(s) : Math.floor(s);
+        if (productList.length) {
+            var timer = setInterval(() => {
+                var position = this.state.position;
+                var distance = (prize_list.length - 1) * 182;
+                if (position >= distance) {
                     this.setState({
-                        position: this.state.position + s
+                        position: speed
                     });
-                    if (this.state.position == distance) {
-                        clearInterval(timer);
-                        setTimeout(()=> {
-                            window.once_delay = false;
-                            ReactDOM.render(<PopTenPrice closePopHandle={this.tenClosePopHandler }
-                                                         productList={productList}
-                                                         popNumber={remainTimes}
-                                                         popBtn='继续抽奖'/>, document.getElementById('pop'));
-                        }, 1000);
-                    }
+                    count++;
                 } else {
-                    s = speed + this.state.position;
-                    this.setState({
-                        position: s
-                    });
+                    if (count >= 2) {
+                        s = (distance - this.state.position) / 8;
+                        s = s > 0 ? Math.ceil(s) : Math.floor(s);
+                        this.setState({
+                            position: this.state.position + s
+                        });
+                        if (this.state.position == distance) {
+                            clearInterval(timer);
+                            setTimeout(()=> {
+                                window.once_delay = false;
+                                ReactDOM.render(<PopTenPrice closePopHandle={this.tenClosePopHandler }
+                                                             productList={productList}
+                                                             popNumber={remainTimes}
+                                                             popBtn='继续抽奖'/>, document.getElementById('pop'));
+
+                            }, 1000);
+                        }
+                    } else {
+                        s = speed + this.state.position;
+                        this.setState({
+                            position: s
+                        });
+                    }
                 }
-            }
-        }, 30)
+            }, 30)
+        } else {
+            ReactDOM.render(<PopMessage closePopHandle={this.closePopHandler} popTop="抽奖异常" popTitle={"抱歉，抽奖异常！"}
+                                        popText={"请稍后再试，如需咨询请联系客服400-0322-988 。"}
+                                        popBtn="朕知道了"/>, document.getElementById('pop'))
+        }
+
     },
     render() {
         let position = {

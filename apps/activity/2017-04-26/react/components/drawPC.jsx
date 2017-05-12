@@ -188,13 +188,14 @@ class DrawPC extends React.Component {
     }
 
     judgeStageHandler() {
-        var timeStart = +new Date("2017-05-16 00:00:00");//5.16号
-        var timeMiddle = +new Date("2017-06-13 23:59:59");//6.13号
-        var timeEnd = +new Date("2017-07-12 23:59:59");//7.12号
+        var timeStart = new Date("2017-05-16 00:00:00").getTime();//5.16号
+        var timeMiddle = new Date("2017-06-13 23:59:59").getTime();//6.13号
+        var timeEnd = new Date("2017-07-12 23:59:59").getTime();//7.12号
 
         var startDate = '2017-05-16 00:00:00';
         var endDate = '2017-07-12 23:59:59';
         this.getServerTimestamp(function (currentTime) {
+            console.log(currentTime);
             if (currentTime < timeStart) {
                 ReactDOM.render(<PopNoStart popTitle={"活动暂未开启"} popText={true}/>,document.getElementById("pop"))
             } else if (currentTime < timeMiddle) {
@@ -204,7 +205,6 @@ class DrawPC extends React.Component {
                     stageMay: '进行中', stageJune: '未开始',
                     start: startDate, end: endDate, type: 'mayActf'
                 }, this.ajaxPersonTeamData)
-
             } else if (currentTime < timeEnd) {
                 startDate = '2017-06-14 00:00:00';
                 endDate = '2017-07-12 23:59:59';
@@ -212,8 +212,8 @@ class DrawPC extends React.Component {
                     stageMay: '已结束', stageJune: '进行中',
                     selectedMay: false, selectedJune: true, start: startDate, end: endDate, type: 'mayActt'
                 }, this.ajaxPersonTeamData)
-            }else{
-                ReactDOM.render(<PopNoStart popTitle={"来晚了，抽奖已结束"} popEnd={true}/>,document.getElementById("pop"))
+            }else if(currentTime >= timeEnd){
+                ReactDOM.render(<PopNoStart popTitle={"来晚了，活动已结束"} popEnd={true}/>,document.getElementById("pop"))
             }
         }.bind(this));
     }
