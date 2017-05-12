@@ -336,7 +336,7 @@ class DrawPC extends React.Component {
 
                     <p>2、抽奖机会仅在本活动期间（5月16日-7月12日）有效。</p>
                 </div>
-                <div className="drawTitle">投资冲月榜，个人团队大作战</div>
+                <div className="drawTitle drawTitle2">投资冲月榜，个人团队大作战</div>
                 <div className="monthStateTab">
                     {monthMayTab(stageMay, "五月", "5.16 ~ 6.13")}
                     {monthJuneTab(stageJune, "六月", "6.14 ~ 7.12")}
@@ -354,7 +354,7 @@ class DrawPC extends React.Component {
                         <div style={{height:height}} className="pillars"></div>
                     </div>
                 </div>
-                <div className="remindText">
+                <div className="remindText remindText2">
                     <div className='loginRemain'>进榜规则：个人累投金额≥50万元；或团队累投金额≥1000万且团队人数≥50人。<br/>
                         月度奖金分配方式：个人和团队奖金分配比例=4（个人）：6（团队）
                     </div>
@@ -387,7 +387,7 @@ class DrawPC extends React.Component {
 
                     <p>5. 活动期间，单月内平台达到相应任务目标，且个人及团队排行前20名的工友，即可累计赢得最高百万奖金包！累计金额越多获得的奖金就越多。</p>
                 </div>
-                <div className="drawTitle">终级排行榜 百万壕礼奉上</div>
+                <div className="drawTitle drawTitle3">终级排行榜 百万壕礼奉上</div>
                 {
                     isLogin ? <div className="remindText">
                         <div className='loginRemain'>5.16-7.12，平台达到相应累计交易量，且个人及团队排行前30名的工友，最高获分100万元奖金。<br/>
@@ -405,7 +405,7 @@ class DrawPC extends React.Component {
                         <div style={{height:totalHeight}} className="pillars"></div>
                     </div>
                 </div>
-                <div className="remindText">
+                <div className="remindText remindText3">
                     <div className='loginRemain'>进榜规则：个人累投金额≥100万元；或团队累投金额≥1200万且团队人数≥50人。<br/>
                         月度奖金分配方式：个人和团队奖金分配比例=4（个人）：6（团队）
                     </div>

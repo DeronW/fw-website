@@ -370,10 +370,11 @@ class DrawMobile extends React.Component {
                 <PersonTeamMonthLadderMobile start={start} end={end} isImgFun={this.isImgFun} personData={personData} teamData={teamData} getServerTimestamp={this.getServerTimestamp}/>
             </div>
 
-            <div className="drawTips">
+            <div className="drawTips drawTips2">
                 <div className="tips">温馨提示:</div>
                 <div className="briefText" style={monthTipsBriefStyle}>
-                    1.以上数据实时更新，最终发放奖金请以每月结束后数据为准...
+                    <div className="briefText">1.以上数据实时更新，最终发放奖金请以每月结束后数据为准;</div>
+                    <div className="mask">2.奖金包奖励以工豆形式发放；</div>
                     <div className="showBtn" onClick={()=>this.toggleMonthTips()}>展开全部<img src="images/arrow.png"/>
                     </div>
                 </div>
@@ -422,7 +423,7 @@ class DrawMobile extends React.Component {
                     1.以上数据实时更新，最终发放奖金请以每月结束后数据为准；
                 </div>
                 <div className="briefText" style={totalTipsBriefStyle}>
-                    2.奖金包奖励以工豆形式...
+                    <div className="mask">2.奖金包奖励以工豆形式...</div>
                     <div className="showBtn" onClick={()=>this.toggleTotalTips()}>展开全部<img src="images/arrow.png"/>
                     </div>
                 </div>

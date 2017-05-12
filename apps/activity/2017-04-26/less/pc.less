@@ -52,7 +52,7 @@
     .drawMachine {
       width: 1140px;
       height: 540px;
-      margin: auto;
+      margin: 0 auto -40px;
       .machine {
         float: left;
       }
@@ -120,7 +120,7 @@
     }
     .remindText {
       width: 880px;
-      margin: 50px auto 50px;
+      margin: 30px auto 30px;
       border-radius: 70px;
       background: @colorDarkBlue;
       font-size: @fontSize14;
@@ -142,6 +142,12 @@
           color: @colorYellow;
         }
       }
+    }
+    .remindText2{
+      margin: 30px auto 80px;
+    }
+    .remindText3{
+      margin: 80px auto 30px;
     }
     .drawMonthLadder {
       width: 100%;
@@ -169,6 +175,9 @@
         text-align: center;
         font-size: @fontSize26;
         padding-top: 16px;
+        div{
+          margin-top: -10px;
+        }
       }
       .teamTitle {
         position: relative;
@@ -280,33 +289,38 @@
     .drawTips {
       width: 1068px;
       border-radius: 8px;
-      margin: 20px auto 86px;
+      margin: 60px auto 86px;
       background: @colorDarkBlue;
-      padding: 32px 36px;
+      padding: 26px 36px;
       .tips {
-        height: 30px;
+        height: 24px;
         font-size: @fontSize18;
         margin-bottom: 20px;
       }
       p {
         font-size: @fontSize14;
-        line-height: 22px;
+        line-height: 18px;
       }
     }
     .drawTitle {
       width: 622px;
       height: 112px;
       background: url("../images/drawTitle.png") no-repeat;
-      margin: 0 auto 40px;
+      margin: -50px auto 50px;
       line-height: 62px;
       text-align: center;
       font-size: @fontSize30;
-
+    }
+    .drawTitle2{
+      margin: 0 auto 70px;
+    }
+    .drawTitle3{
+      margin: 0 auto 50px;
     }
     .drawTotalLadder {
       width: 1140px;
       height: 770px;
-      margin: 80px auto;
+      margin: 80px auto 90px;
       .person {
         float: left;
       }
@@ -328,6 +342,9 @@
         text-align: center;
         font-size: @fontSize26;
         padding-top: 16px;
+        div{
+          margin-top: -10px;
+        }
       }
       .teamTotalTitle {
         position: relative;
@@ -381,7 +398,7 @@
     }
     .platformPC {
       width: 1140px;
-      margin: 20px auto;
+      margin: 20px auto 80px;
       .platformBg {
         width: 911px;
         height: 538px;
@@ -509,9 +526,12 @@
     color: @colorWhite;
     font-size: @fontSize14;
     .explainContent {
-      width: 1140px;
+      width: 1080px;
       padding: 32px 0;
       margin: auto;
+      p{
+        line-height: 18px;
+      }
       .explainTitle {
         font-size: @fontSize34;
         img {

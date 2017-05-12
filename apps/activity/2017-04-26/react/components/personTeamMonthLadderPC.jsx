@@ -113,7 +113,7 @@ class PersonTeamMonthLadderPC extends React.Component {
             </tbody>
         );
         return <div className="personMonthLadder">
-            <div className={title == "个人榜"?"personTitle":"teamTitle"}>{title}</div>
+            <div className={title == "个人榜"?"personTitle":"teamTitle"}><div>{title}</div></div>
             <div className="personTable">
                 <table>
                     <thead>
