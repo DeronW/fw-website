@@ -21,6 +21,8 @@ const TOPIC_PAGES = [
     'topic-yi-shou-bao',//易收宝专题页
     'topic-yi-zhuan-ying',//易赚盈专题页
     'topic-you-ju-dai',//友居贷专题页
+    'topic-hui-shang',//微商银行存管
+    'topic-hui-shang-guide',//徽商银行存管操作指引
 ]
 
 const USER_PAGES = [
