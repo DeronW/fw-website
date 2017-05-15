@@ -258,7 +258,7 @@ class DrawPC extends React.Component {
     }
 
     render() {
-        let {stageMay,stageJune,selectedMay,selectedJune,total,totalSum,bonus,totalBonus,close,isLogin,start,end,type,personData,teamData,height,platBg,totalHeight,platTotalBg} = this.state;
+        let {stageMay,stageJune,selectedMay,selectedJune,total,totalSum,bonus,totalBonus,close,isLogin,type,personData,teamData,height,platBg,totalHeight,platTotalBg} = this.state;
 
         let no = {
             width: "237px",
@@ -371,16 +371,12 @@ class DrawPC extends React.Component {
                 <div className="drawMonthLadder">
                     <div className="person">
                         {
-                            <PersonTeamMonthLadderPC title={"个人榜"} start={start} end={end}
-                                                     getServerTimestamp={this.getServerTimestamp}
-                                                     isImgFun={this.isImgFun} personData={personData}/>
+                            <PersonTeamMonthLadderPC title={"个人榜"} isImgFun={this.isImgFun} personData={personData}/>
                         }
                     </div>
                     <div className="team">
                         {
-                            <PersonTeamMonthLadderPC title={"团队榜"} start={start} end={end}
-                                                     getServerTimestamp={this.getServerTimestamp}
-                                                     isImgFun={this.isImgFun} teamData={teamData}/>
+                            <PersonTeamMonthLadderPC title={"团队榜"} isImgFun={this.isImgFun} teamData={teamData}/>
                         }
                     </div>
                 </div>

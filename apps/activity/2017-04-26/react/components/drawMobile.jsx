@@ -60,14 +60,9 @@ class DrawMobile extends React.Component {
         d.setMinutes(minutes || 0);
         d.setSeconds(seconds || 0);
         d.setMilliseconds(0);
-        let t = new Date(d).getTime();
-        return t
+        return new Date(d).getTime()
     }
     judgeStageHandler() {
-        var that =this;
-        //var timeStart = new Date("2017/05/16 00:00:00").getTime();
-        //var timeMiddle = new Date("2017/06/13 23:59:59").getTime();
-        //var timeEnd = new Date("2017/07/12 23:59:59").getTime();
         var timeStart = this.standardTime(2017,5,16,0,0,0);//5.16号
         var timeMiddle = this.standardTime(2017,6,13,23,59,59);//6.13号
         var timeEnd = this.standardTime(2017,7,12,23,59,59);//7.12号
@@ -79,21 +74,21 @@ class DrawMobile extends React.Component {
             }else if (currentTime < timeMiddle) {
                 startDate = '2017-05-16 00:00:00';
                 endDate = '2017-06-13 23:59:59';
-                that.setState({
+                this.setState({
                     stageMay: '进行中', stageJune: '未开始',
                     start:startDate,end:endDate,type:'mayActf'
-                },that.ajaxPersonTeamData)
+                },this.ajaxPersonTeamData)
             } else if (currentTime < timeEnd) {
                 startDate = '2017-06-14 00:00:00';
                 endDate = '2017-07-12 23:59:59';
-                that.setState({stageMay: '已结束', stageJune: '进行中',
+                this.setState({stageMay: '已结束', stageJune: '进行中',
                     selectedMay: false, selectedJune: true,
                     start:startDate,end:endDate,type:'mayActt'
-                },that.ajaxPersonTeamData)
+                },this.ajaxPersonTeamData)
             }else if(currentTime >= timeEnd){
                 ReactDOM.render(<PopNoStartMobile popTitle={"来晚了，活动已结束"} popEnd={true}/>,document.getElementById("pop"))
             }
-        });
+        }.bind(this));
 
     }
     ajaxPersonTeamData() {
@@ -205,13 +200,15 @@ class DrawMobile extends React.Component {
                 type:'mayActf'
             },this.ajaxPersonTeamData)
         } else {
-            if (stage != "未开始")  this.setState({
-                selectedMay: false,
-                selectedJune: true,
-                start: '2017-06-14 00:00:00',
-                end: '2017-07-12 23:59:59',
-                type:'mayActt'
-            },this.ajaxPersonTeamData)
+            if (stage != "未开始"){
+                this.setState({
+                    selectedMay: false,
+                    selectedJune: true,
+                    start: '2017-06-14 00:00:00',
+                    end: '2017-07-12 23:59:59',
+                    type:'mayActt'
+                },this.ajaxPersonTeamData)
+            }
         }
     }
     closeHandler() {
@@ -261,7 +258,7 @@ class DrawMobile extends React.Component {
         window.location.href = link;
     }
     render() {
-        let {stageMay,stageJune,selectedMay,selectedJune,close,bonus,total,totalSum,totalBonus,show,showWater,isLogin,totalLadderTab,monthTipsClose,totalTipsClose,start,end,type,personData,teamData,height,platBg,totalHeight,platTotalBg,isApp} = this.state;
+        let {stageMay,stageJune,selectedMay,selectedJune,close,bonus,total,totalSum,totalBonus,show,showWater,isLogin,totalLadderTab,monthTipsClose,totalTipsClose,type,personData,teamData,height,platBg,totalHeight,platTotalBg,isApp} = this.state;
         let no = {
             width: "237px",
             height: "96px",
