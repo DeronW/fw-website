@@ -188,12 +188,22 @@ class DrawPC extends React.Component {
             this.setState({platTotalBg: "url('images/platformTotalPC3.png')"})
         }
     }
-
+    standardTime(year,month,day,hours,minutes,seconds){
+        let d = new Date();
+        d.setFullYear(year || 0);
+        d.setMonth(month-1 || 0);
+        d.setDate(day || 0);
+        d.setHours(hours || 0);
+        d.setMinutes(minutes || 0);
+        d.setSeconds(seconds || 0);
+        d.setMilliseconds(0);
+        return new Date(d).getTime()
+    }
     judgeStageHandler() {
-        var timeStart = new Date("2017-05-16 00:00:00").getTime();//5.16号
-        var timeMiddle = new Date("2017-06-13 23:59:59").getTime();//6.13号
-        var timeEnd = new Date("2017-07-12 23:59:59").getTime();//7.12号
-
+        var timeStart = this.standardTime(2017,5,16,0,0,0);//5.16号
+        var timeMiddle = this.standardTime(2017,6,13,23,59,59);//6.13号
+        var timeEnd = this.standardTime(2017,7,12,23,59,59);//7.12号
+        
         var startDate = '2017-05-16 00:00:00';
         var endDate = '2017-07-12 23:59:59';
         this.getServerTimestamp(function (currentTime) {
