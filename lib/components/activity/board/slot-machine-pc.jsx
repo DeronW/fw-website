@@ -86,14 +86,13 @@ const RockProduct = React.createClass({
         clearInterval(this.cycleTimer);
     },
     lotteryDrawHandler(speed, prizeMark, prize, remainTimes) {
-        clearInterval(this.cycleTimer);
+        this.clearTimerHandler();
         var productList = this.props.productList;
         var s = 0, i = "error", count = 0;
         var timer = setInterval(() => {
             var position = this.state.position;
             productList.forEach((item, index) => {
                 if (item.prizeMark == prizeMark) {
-                    console.log(index);
                     i = index;
                 }
             });
@@ -246,7 +245,6 @@ const SlotMachinePC = React.createClass({
                 var prize = data.data.resultAward[0].prize;
                 var prizeMark = data.data.resultAward[0].prizeMark;
                 var remainTimes = data.data.remainTimes;
-
                 this.refs.rockProduct.lotteryDrawHandler(30, prizeMark, prize, remainTimes);
                 setTimeout(() => {
                     this.refs.rockProduct2.lotteryDrawHandler(30, prizeMark, prize, remainTimes);
