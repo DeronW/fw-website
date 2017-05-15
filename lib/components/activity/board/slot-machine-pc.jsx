@@ -1,6 +1,7 @@
 const RockProduct = React.createClass({
     getInitialState() {
         this.t = null;
+        this.cycleTimer = null;
         this._time_gap = 0;
         return {
             position: 0,
@@ -44,8 +45,48 @@ const RockProduct = React.createClass({
     clearTimerHandler(){
         clearInterval(this.t);
     },
+    oneSimulation(speed){
+        this.clearTimerHandler();
+        var s = 0;
+        var productList = this.props.productList;
+        this.cycleTimer = setInterval(()=>{
+            var position = this.state.position;
+            var distance = (productList.length - 1) * 182;
+            if (position >= distance) {
+                this.setState({
+                    position: speed
+                });
+            }else{
+                s = speed + this.state.position;
+                this.setState({
+                    position: s
+                });
+            }
+        },30)
+    },
+    tenSimulation(speed,prize_list){
+        this.clearTimerHandler();
+        var s = 0;
+        this.cycleTimer = setInterval(()=>{
+            var position = this.state.position;
+            var distance = (prize_list.length - 1) * 182;
+            if (position >= distance) {
+                this.setState({
+                    position: speed
+                });
+            }else{
+                s = speed + this.state.position;
+                this.setState({
+                    position: s
+                });
+            }
+        },30)
+    },
+    clearCycleTimerHandler(){
+        clearInterval(this.cycleTimer);
+    },
     lotteryDrawHandler(speed, prizeMark, prize, remainTimes) {
-
+        this.clearCycleTimerHandler();
         var productList = this.props.productList;
         var s = 0, i = "error", count = 0;
         var timer = setInterval(() => {
@@ -68,7 +109,7 @@ const RockProduct = React.createClass({
                     });
                     count++;
                 } else {
-                    if (count >= 3) {
+                    if (count >= 2) {
                         if (this.state.position > 182) {
                             s = (distance - this.state.position) / 8;
                             s = s > 0 ? Math.ceil(s) : Math.floor(s);
@@ -100,7 +141,9 @@ const RockProduct = React.createClass({
             }
         }, 30)
     },
+
     tenLotteryDrawHandler(speed, productList, remainTimes, prize_list) {
+        this.clearCycleTimerHandler();
         var s = 0;
         var count = 0;
         if (productList.length) {
@@ -189,11 +232,16 @@ const SlotMachinePC = React.createClass({
 
     //请求一次抽奖
     ajaxOnePrize(){
-        this.refs.rockProduct.clearTimerHandler();
-        this.refs.rockProduct2.clearTimerHandler();
-        this.refs.rockProduct3.clearTimerHandler();
         if (window.once_delay) return;
         window.once_delay = true;
+
+        this.refs.rockProduct.oneSimulation(30);
+        setTimeout(() => {
+            this.refs.rockProduct2.oneSimulation(30);
+        }, 300);
+        setTimeout(() => {
+            this.refs.rockProduct3.oneSimulation(30);
+        }, 600);
         $.get(API_PATH + 'api/activityPullInvest/v1/play.json', {
             configNo: 1,
             drawCount: 1
@@ -205,14 +253,13 @@ const SlotMachinePC = React.createClass({
                 var remainTimes = data.data.remainTimes;
 
                 this.refs.rockProduct.lotteryDrawHandler(30, prizeMark, prize, remainTimes);
-                setTimeout(() => {
-                    this.refs.rockProduct2.lotteryDrawHandler(30, prizeMark, prize, remainTimes);
-                }, 300);
-                setTimeout(() => {
-                    this.refs.rockProduct3.lotteryDrawHandler(30, prizeMark, prize, remainTimes);
-                }, 600);
+                this.refs.rockProduct2.lotteryDrawHandler(30, prizeMark, prize, remainTimes);
+                this.refs.rockProduct3.lotteryDrawHandler(30, prizeMark, prize, remainTimes);
             } else {
                 window.once_delay = false;
+                this.refs.rockProduct.clearCycleTimerHandler();
+                this.refs.rockProduct2.clearCycleTimerHandler();
+                this.refs.rockProduct3.clearCycleTimerHandler();
                 ReactDOM.render(<PopMessage closePopHandle={this.closePopHandler} popTop="抽奖异常" popTitle={"抱歉，抽奖异常！"}
                                             popText={"请稍后再试，如需咨询请联系客服400-0322-988 。"}
                                             popBtn="朕知道了"/>, document.getElementById('pop'))
@@ -222,11 +269,17 @@ const SlotMachinePC = React.createClass({
     },
     //请求十次抽奖
     ajaxTenPrize(){
-        this.refs.rockProduct.clearTimerHandler();
-        this.refs.rockProduct2.clearTimerHandler();
-        this.refs.rockProduct3.clearTimerHandler();
         if (window.once_delay) return;
         window.once_delay = true;
+        let {prize_list} = this.props;
+
+        this.refs.rockProduct.tenSimulation(30,prize_list);
+        setTimeout(() => {
+            this.refs.rockProduct2.tenSimulation(30,prize_list);
+        }, 300);
+        setTimeout(() => {
+            this.refs.rockProduct3.tenSimulation(30,prize_list);
+        }, 600);
         $.get(API_PATH + 'api/activityPullInvest/v1/play.json', {
             configNo: 1,
             drawCount: 10
@@ -235,20 +288,17 @@ const SlotMachinePC = React.createClass({
                 this.ajaxCount();
                 var resultAward = data.data.resultAward;
                 var remainTimes = data.data.remainTimes;
-                let {prize_list} = this.props;
-
                 prize_list && prize_list.push({
                     img: 'images/gift.png',
                     name: '抽奖十次大礼包'
                 });
                 this.refs.rockProduct.tenLotteryDrawHandler(30, resultAward, remainTimes, prize_list);
-                setTimeout(() => {
-                    this.refs.rockProduct2.tenLotteryDrawHandler(30, resultAward, remainTimes, prize_list);
-                }, 300);
-                setTimeout(() => {
-                    this.refs.rockProduct3.tenLotteryDrawHandler(30, resultAward, remainTimes, prize_list);
-                }, 600);
+                this.refs.rockProduct2.tenLotteryDrawHandler(30, resultAward, remainTimes, prize_list);
+                this.refs.rockProduct3.tenLotteryDrawHandler(30, resultAward, remainTimes, prize_list);
             } else {
+                this.refs.rockProduct.clearCycleTimerHandler();
+                this.refs.rockProduct2.clearCycleTimerHandler();
+                this.refs.rockProduct3.clearCycleTimerHandler();
                 window.once_delay = false;
                 ReactDOM.render(<PopMessage closePopHandle={this.closePopHandler} popTop="抽奖异常" popTitle={"抱歉，抽奖异常！"}
                                             popText={"请稍后再试，如需咨询请联系客服400-0322-988 。"}
