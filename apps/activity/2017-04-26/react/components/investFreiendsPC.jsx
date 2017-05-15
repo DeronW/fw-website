@@ -32,7 +32,7 @@ class InvestFriendsPC extends React.Component {
             <div className="pcNoticeContentNo">
                 <div className="noticeTitle">如何邀友</div>
                 <div className="noticeClose" onClick={()=>closePopHandler()}></div>
-                <div className="noticeText">请好友用您的工场码，<em>好友注册7天内累投年化额≥1000元</em>，且投资<br />等额标时，超过18个月按18个月计算年化，才算一个有效邀请。<br />
+                <div className="noticeText">请好友用您的工场码注册，去投标，达成团队目标。<br />
                     登录后查看我的工场码。<br />
                     还没有工场码？注册即可拥有。
                 </div>

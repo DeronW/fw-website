@@ -412,7 +412,7 @@ class DrawPC extends React.Component {
                 </div>
                 <div className="remindText remindText3">
                     <div className='loginRemain'>进榜规则：个人累投金额≥100万元；或团队累投金额≥1200万且团队人数≥50人。<br/>
-                        月度奖金分配方式：个人和团队奖金分配比例=4（个人）：6（团队）
+                        奖金分配方式：个人和团队奖金分配比例=4（个人）：6（团队）
                     </div>
                 </div>
                 <div className="drawTotalLadder">
