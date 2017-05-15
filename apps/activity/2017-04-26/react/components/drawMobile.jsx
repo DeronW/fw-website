@@ -65,12 +65,12 @@ class DrawMobile extends React.Component {
     }
     judgeStageHandler() {
         var that =this;
-        var timeStart = new Date("2017/05/16 00:00:00").getTime();//5.16号
-        var timeMiddle = new Date("2017/06/13 23:59:59").getTime();//6.13号
-        var timeEnd = new Date("2017/07/12 23:59:59").getTime();//7.12号
-        //var timeStart = this.standardTime(2017,5,16,0,0,0);
-        //var timeMiddle = this.standardTime(2017,6,13,23,59,59);
-        //var timeEnd = this.standardTime(2017,6,13,23,59,59);
+        //var timeStart = new Date("2017/05/16 00:00:00").getTime();
+        //var timeMiddle = new Date("2017/06/13 23:59:59").getTime();
+        //var timeEnd = new Date("2017/07/12 23:59:59").getTime();
+        var timeStart = this.standardTime(2017,5,16,0,0,0);//5.16号
+        var timeMiddle = this.standardTime(2017,6,13,23,59,59);//6.13号
+        var timeEnd = this.standardTime(2017,7,12,23,59,59);//7.12号
         var startDate = '2017-05-16 00:00:00';
         var endDate = '2017-07-12 23:59:59';
         this.getServerTimestamp(function (currentTime) {
