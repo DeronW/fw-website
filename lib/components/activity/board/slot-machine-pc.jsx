@@ -86,13 +86,14 @@ const RockProduct = React.createClass({
         clearInterval(this.cycleTimer);
     },
     lotteryDrawHandler(speed, prizeMark, prize, remainTimes) {
-        this.clearCycleTimerHandler();
+        clearInterval(this.cycleTimer);
         var productList = this.props.productList;
         var s = 0, i = "error", count = 0;
         var timer = setInterval(() => {
             var position = this.state.position;
             productList.forEach((item, index) => {
                 if (item.prizeMark == prizeMark) {
+                    console.log(index);
                     i = index;
                 }
             });
@@ -109,7 +110,7 @@ const RockProduct = React.createClass({
                     });
                     count++;
                 } else {
-                    if (count >= 2) {
+                    if (count >= 3) {
                         if (this.state.position > 182) {
                             s = (distance - this.state.position) / 8;
                             s = s > 0 ? Math.ceil(s) : Math.floor(s);
@@ -122,6 +123,7 @@ const RockProduct = React.createClass({
                             });
                         }
                         if (this.state.position == distance) {
+                            this.setState({position:distance});
                             clearInterval(timer);
                             setTimeout(()=> {
                                 ReactDOM.render(<PopOnePrize closePopHandle={this.props.closePopHandler}
@@ -143,11 +145,12 @@ const RockProduct = React.createClass({
     },
 
     tenLotteryDrawHandler(speed, productList, remainTimes, prize_list) {
-        this.clearCycleTimerHandler();
+        clearInterval(this.cycleTimer);
+        var timer = null;
         var s = 0;
         var count = 0;
         if (productList.length) {
-            var timer = setInterval(() => {
+            timer = setInterval(() => {
                 var position = this.state.position;
                 var distance = (prize_list.length - 1) * 182;
                 if (position >= distance) {
@@ -234,14 +237,6 @@ const SlotMachinePC = React.createClass({
     ajaxOnePrize(){
         if (window.once_delay) return;
         window.once_delay = true;
-
-        this.refs.rockProduct.oneSimulation(30);
-        setTimeout(() => {
-            this.refs.rockProduct2.oneSimulation(30);
-        }, 300);
-        setTimeout(() => {
-            this.refs.rockProduct3.oneSimulation(30);
-        }, 600);
         $.get(API_PATH + 'api/activityPullInvest/v1/play.json', {
             configNo: 1,
             drawCount: 1
@@ -253,13 +248,14 @@ const SlotMachinePC = React.createClass({
                 var remainTimes = data.data.remainTimes;
 
                 this.refs.rockProduct.lotteryDrawHandler(30, prizeMark, prize, remainTimes);
-                this.refs.rockProduct2.lotteryDrawHandler(30, prizeMark, prize, remainTimes);
-                this.refs.rockProduct3.lotteryDrawHandler(30, prizeMark, prize, remainTimes);
+                setTimeout(() => {
+                    this.refs.rockProduct2.lotteryDrawHandler(30, prizeMark, prize, remainTimes);
+                },300);
+                setTimeout(() => {
+                    this.refs.rockProduct3.lotteryDrawHandler(30, prizeMark, prize, remainTimes);
+                },600);
             } else {
                 window.once_delay = false;
-                this.refs.rockProduct.clearCycleTimerHandler();
-                this.refs.rockProduct2.clearCycleTimerHandler();
-                this.refs.rockProduct3.clearCycleTimerHandler();
                 ReactDOM.render(<PopMessage closePopHandle={this.closePopHandler} popTop="抽奖异常" popTitle={"抱歉，抽奖异常！"}
                                             popText={"请稍后再试，如需咨询请联系客服400-0322-988 。"}
                                             popBtn="朕知道了"/>, document.getElementById('pop'))
