@@ -20,7 +20,6 @@ class PersonTeamMonthLadderMobile extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        this.setState({start: nextProps.start, end: nextProps.end});
         this.ajaxLadder(this.state.ladderTab, nextProps.personData, nextProps.teamData);
     }
 
@@ -88,7 +87,6 @@ class PersonTeamMonthLadderMobile extends React.Component {
 
     render() {
         let {totalPage,tab,ladderTab,cursor,thead,list} = this.state;
-        let {personData,teamData} = this.props;
         let pageImg = (item, index) => {
             return <div key={index}
                         className={totalPage>1?(tab == item ? 'selectedPage':null):'selectedPage'}

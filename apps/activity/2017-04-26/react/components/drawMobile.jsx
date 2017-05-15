@@ -372,7 +372,7 @@ class DrawMobile extends React.Component {
                 6（团队）
             </div>
             <div className="switchMonthLadder">
-                <PersonTeamMonthLadderMobile start={start} end={end} isImgFun={this.isImgFun} personData={personData} teamData={teamData} getServerTimestamp={this.getServerTimestamp}/>
+                <PersonTeamMonthLadderMobile isImgFun={this.isImgFun} personData={personData} teamData={teamData}/>
             </div>
 
             <div className="drawTips drawTips2">
@@ -418,8 +418,7 @@ class DrawMobile extends React.Component {
                 6（团队）
             </div>
             <div className="switchTotalLadder">
-                <PersonTeamTotalLadderMobile isImgFun={this.isImgFun} fixedPrice={this.fixedPrice}
-                                       totalLadderTab={totalLadderTab}/>
+                <PersonTeamTotalLadderMobile isImgFun={this.isImgFun} totalLadderTab={totalLadderTab}/>
             </div>
 
             <div className="drawTips">
