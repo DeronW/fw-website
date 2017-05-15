@@ -44,6 +44,7 @@ module.exports = function (gulp, generate_task, settings) {
     ];
 
     let INCLUDE_JAVASCRIPTS = [
+        'promise-polyfill.min.js',
         `${PROJ}/fw-fix-console.js`,
         `${PROJ}/fw-common.js`,
         `${PROJ}/native-bridge-0.3.0.js`,
