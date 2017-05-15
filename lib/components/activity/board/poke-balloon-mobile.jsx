@@ -104,10 +104,17 @@ const PokeBalloonMobile = React.createClass({
         this.showMessagePop('恭喜中奖');
         if (window.poke_delay) return;
         window.poke_delay = true;
+        var timeout=setTimeout(function(){
+            ReactDOM.render(<PopAllSituation closePopHandler={this.closePopHandler} popTitle="抽奖超时" popBtn="知道了" popText={"抽奖超时，请稍后再试。"}/>, document.getElementById("pop"))
+        }.bind(this),10000);
         $.get(API_PATH + "api/activityPullInvest/v1/play.json?", {
             configNo: 1,
             drawCount: 1
         }).then((data) => {
+            if(timeout){ //清除定时器
+                clearTimeout(timeout);
+                timeout=null;
+            }
             if(data.code == 10000){
                 this.ajaxCount();
                 this.showMessagePop('恭喜中奖', data.data.resultAward[0].prize);
@@ -122,10 +129,17 @@ const PokeBalloonMobile = React.createClass({
         this.showMessagePop('恭喜中奖');
         if (window.poke_delay) return;
         window.poke_delay = true;
+        var timeout=setTimeout(function(){
+            ReactDOM.render(<PopAllSituation closePopHandler={this.closePopHandler} popTitle="抽奖超时" popBtn="知道了" popText={"抽奖超时，请稍后再试。"}/>, document.getElementById("pop"))
+        }.bind(this),10000);
         $.get(API_PATH + "api/activityPullInvest/v1/play.json?", {
             configNo: 1,
             drawCount: 10
         }).then((data) => {
+            if(timeout){ //清除定时器
+                clearTimeout(timeout);
+                timeout=null;
+            }
             if(data.code == 10000){
                 this.ajaxCount();
                 this.showMessagePop('恭喜中奖', '', data.data.resultAward);

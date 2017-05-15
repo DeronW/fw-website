@@ -236,10 +236,18 @@ const SlotMachinePC = React.createClass({
     ajaxOnePrize(){
         if (window.once_delay) return;
         window.once_delay = true;
+        var timeout=setTimeout(function(){
+            ReactDOM.render(<PopMessage closePopHandle={this.closePopHandler} popNoTitle={"抽奖超时，请稍后再试。"}
+                                        popBtn="朕知道了"/>, document.getElementById('pop'))
+        }.bind(this),10000);
         $.get(API_PATH + 'api/activityPullInvest/v1/play.json', {
             configNo: 1,
             drawCount: 1
         }).then(data => {
+            if(timeout){ //清除定时器
+                clearTimeout(timeout);
+                timeout=null;
+            }
             if (data.code == 10000) {
                 this.ajaxCount();
                 var prize = data.data.resultAward[0].prize;
@@ -274,10 +282,21 @@ const SlotMachinePC = React.createClass({
         setTimeout(() => {
             this.refs.rockProduct3.tenSimulation(30,prize_list);
         }, 600);
+        var timeout=setTimeout(function(){
+            this.refs.rockProduct.clearCycleTimerHandler();
+            this.refs.rockProduct2.clearCycleTimerHandler();
+            this.refs.rockProduct3.clearCycleTimerHandler();
+            ReactDOM.render(<PopMessage closePopHandle={this.closePopHandler} popNoTitle={"抽奖超时，请稍后再试。"}
+                                        popBtn="朕知道了"/>, document.getElementById('pop'))
+        }.bind(this),10000);
         $.get(API_PATH + 'api/activityPullInvest/v1/play.json', {
             configNo: 1,
             drawCount: 10
         }).then(data => {
+            if(timeout){ //清除定时器
+                clearTimeout(timeout);
+                timeout=null;
+            }
             if (data.code == 10000) {
                 this.ajaxCount();
                 var resultAward = data.data.resultAward;
