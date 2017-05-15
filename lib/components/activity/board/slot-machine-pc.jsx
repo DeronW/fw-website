@@ -56,6 +56,7 @@ const RockProduct = React.createClass({
                 }
             });
             if (i == "error") {
+                window.once_delay = false;
                 ReactDOM.render(<PopMessage closePopHandle={this.closePopHandler} popTop="抽奖异常" popTitle={"抱歉，抽奖异常！"}
                                             popText={"请稍后再试，如需咨询请联系客服400-0322-988 。"}
                                             popBtn="朕知道了"/>, document.getElementById('pop'))
@@ -138,6 +139,7 @@ const RockProduct = React.createClass({
                 }
             }, 30)
         } else {
+            window.once_delay = false;
             ReactDOM.render(<PopMessage closePopHandle={this.closePopHandler} popTop="抽奖异常" popTitle={"抱歉，抽奖异常！"}
                                         popText={"请稍后再试，如需咨询请联系客服400-0322-988 。"}
                                         popBtn="朕知道了"/>, document.getElementById('pop'))

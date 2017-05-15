@@ -85,7 +85,7 @@ class DrawPC extends React.Component {
         this.ajaxPersonTeamData();
         this.ajaxTotalData();
     }
-
+    //请求各个月的数据
     ajaxPersonTeamData() {
         let {start,end,type} =this.state;
         $.get(API_PATH + "api/activityPullInvest/v1/singularMonthTeamList.json", {
@@ -107,7 +107,6 @@ class DrawPC extends React.Component {
             }
         })
     }
-
     //总榜奖金
     ajaxTotalData() {
         $.get(API_PATH + "api/activityPullInvest/v1/singularMonthTeamList.json", {
@@ -198,7 +197,6 @@ class DrawPC extends React.Component {
         var startDate = '2017-05-16 00:00:00';
         var endDate = '2017-07-12 23:59:59';
         this.getServerTimestamp(function (currentTime) {
-            console.log(currentTime);
             if (currentTime < timeStart) {
                 ReactDOM.render(<PopNoStart popTitle={"活动暂未开启"} popText={true}/>,document.getElementById("pop"))
             } else if (currentTime < timeMiddle) {

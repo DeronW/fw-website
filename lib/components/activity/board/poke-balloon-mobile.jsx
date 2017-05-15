@@ -113,10 +113,9 @@ const PokeBalloonMobile = React.createClass({
                 this.showMessagePop('恭喜中奖', data.data.resultAward[0].prize);
                 this.refs.productListAuto.rewardPoolHandler();
             }else{
-                ReactDOM.render(<PopAllSituation closePopHandler={this.closePopHandler} popTitle="抽奖异常" popBtn="知道了" popText={"请稍后再试，如需咨询请联系客服400-0322-988 。"}/>, document.getElementById("pop"))
+                ReactDOM.render(<PopAllSituation closePopHandler={this.closePopHandler} popTitle="抽奖异常" popBtn="知道了" popText={"请稍后再试，<br/>如需咨询请联系客服400-0322-988 。"}/>, document.getElementById("pop"))
             }
         });
-
     },
     //十次
     promiseMoreLotteryResult(){
@@ -132,7 +131,7 @@ const PokeBalloonMobile = React.createClass({
                 this.showMessagePop('恭喜中奖', '', data.data.resultAward);
                 this.refs.productListAuto.rewardPoolHandler();
             }else{
-                ReactDOM.render(<PopAllSituation closePopHandler={this.closePopHandler} popTitle="抽奖异常" popBtn="知道了" popText={"请稍后再试，如需咨询请联系客服400-0322-988 。"}/>, document.getElementById("pop"))
+                ReactDOM.render(<PopAllSituation closePopHandler={this.closePopHandler} popTitle="抽奖异常" popBtn="知道了" popText={"请稍后再试，<br/>如需咨询请联系客服400-0322-988 。"}/>, document.getElementById("pop"))
             }
         });
     },
