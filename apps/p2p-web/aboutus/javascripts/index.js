@@ -51,15 +51,9 @@ $(document).ready(function () {
     })
     // 百度地图API功能
     var map = new BMap.Map("bdmap");
-    var point = new BMap.Point(116.4347124,39.957053);
-    map.centerAndZoom(point,12);
-    var myGeo = new BMap.Geocoder();
-    myGeo.getPoint("北京市朝阳区朝阳门外大街18号", function(point){
-        if (point) {
-            map.centerAndZoom(point, 16);
-            map.addOverlay(new BMap.Marker(point));
-        }else{
-            alert("您选择地址没有解析到结果!");
-        }
-    }, "北京市");
+    map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);
+    var local = new BMap.LocalSearch(map, {
+        renderOptions:{map: map}
+    });
+    local.search("北京市朝阳区朝阳门外大街18号");
 })
