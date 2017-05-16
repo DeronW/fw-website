@@ -7,14 +7,19 @@ $(document).ready(function () {
         $(".a-left").height($(".a-right").height());
     }
     if(hash==="#aboutus"){
-        jumplink(hash);
-    }else if(hash==="#partner"){
-        jumplink(hash);
+        jumplink($(".left-item")[0]);
     }else if(hash==="#contactus"){
-        jumplink(hash);
-    }else if(hash==="#school"){
-        jumplink(hash);
+        jumplink($(".left-item")[1]);
     }
+    $(window).on("hashchange", function () {
+        hash = location.hash;
+        if(hash==="#aboutus"){
+            jumplink(hash);
+        }else if(hash==="#contactus"){
+            jumplink(hash);
+        }
+    });
+
     $(".left-item").each(function (index, item) {
         $(this).click(function () {
             $(this).addClass("active").siblings().removeClass("active")
@@ -29,6 +34,7 @@ $(document).ready(function () {
         })
     });
     function hashChnage(key){
+        window.scrollTo(0,0);
         history.pushState({}, '', `#${key}`)
     }
     $(".policy-item").each(function (index, item) {
