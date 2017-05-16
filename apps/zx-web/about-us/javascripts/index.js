@@ -14,9 +14,9 @@ $(document).ready(function () {
     $(window).on("hashchange", function () {
         hash = location.hash;
         if(hash==="#aboutus"){
-            jumplink(hash);
+            jumplink($(".left-item")[0]);
         }else if(hash==="#contactus"){
-            jumplink(hash);
+            jumplink($(".left-item")[1]);
         }
     });
 
