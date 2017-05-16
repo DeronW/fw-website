@@ -386,7 +386,7 @@ class DrawMobile extends React.Component {
                     </div>
                     <div className="briefText">2. 奖金包奖励以工豆形式发放；</div>
                     <div className="briefText">3. 月度奖金分配方式：个人和团队奖金分配比例=4（个人）：6（团队）；</div>
-                    <div className="briefText">4. 奖金包占比分配公式：个人（或团队）累投总额÷前20名个人（或团队）累投总额。仅计算满足获奖资格的用户；</div>
+                    <div className="briefText">4. 奖金包占比分配公式：个人（或团队）累投总额÷前20名个人（或团队）累投总额。仅计算满足获奖资格的用户。团队即：邀请人及被邀请人（例如：A邀请的好友有B、C、D、E，那么ABCDE算一个团队）；</div>
                     <div className="briefText">5. 活动期间，单月内平台达到相应任务目标，且个人及团队排行前20名的工友，即可累计赢得不同金额的奖金包！累计金额越多获得的奖金就越多。
                         <div className="showBtn" onClick={()=>this.toggleMonthTips()}>收起<img src="images/arrow.png"/>
                         </div>
@@ -434,7 +434,7 @@ class DrawMobile extends React.Component {
                     </div>
                     <div className="briefText">2. 奖金包奖励以工豆形式发放；</div>
                     <div className="briefText">3. 奖金分配方式：个人和团队奖金分配比例=4（个人）：6（团队）；</div>
-                    <div className="briefText">4. 奖金包占比分配公式：个人（或团队）累投总额÷前30名个人（或团队）累投总额。仅计算满足获奖资格的用户；</div>
+                    <div className="briefText">4. 奖金包占比分配公式：个人（或团队）累投总额÷前20名个人（或团队）累投总额。仅计算满足获奖资格的用户。团队即：邀请人及被邀请人（例如：A邀请的好友有B、C、D、E，那么ABCDE算一个团队）；</div>
                     <div className="briefText">5. 活动期间，平台累投金额达标。个人及团队排行前30的工友，将按照其累计投资金额占比进行最高100万元奖金分配。累计金额越多获得的奖金就越多。
                         <div className="showBtn" onClick={()=>this.toggleTotalTips()}>收起<img src="images/arrow.png"/>
                         </div>
