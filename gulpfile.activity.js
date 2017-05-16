@@ -97,7 +97,7 @@ module.exports = function (gulp, generate_task, settings) {
         generate_task(PROJ, i, Object.assign({}, default_options, {
             api_path: "//www.9888.cn/",
             cmd_prefix: 'pack',
-            enviroument: 'production',
+            environment: 'production',
             cdn_prefix: `/static/${PROJ}/${i.name || i}/`,
         }))
     });
