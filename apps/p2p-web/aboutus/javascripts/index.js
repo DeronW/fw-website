@@ -1,19 +1,21 @@
 $(document).ready(function () {
     var hash = location.hash;
     function jumplink(ele) {
+        window.scrollTo(0,0)
         $(ele).addClass("active").siblings().removeClass("active")
         $(".r-item").eq($(ele).index()).css({display: "block"}).siblings().css({display: "none"})
         $(".aboutus").text($(ele).find(".l-content").text());
         $(".a-left").height($(".a-right").height());
+
     }
     if(hash==="#aboutus"){
-        jumplink(hash);
+        jumplink($(".left-item")[0]);
     }else if(hash==="#partner"){
-        jumplink(hash);
+        jumplink($(".left-item")[1])
     }else if(hash==="#contactus"){
-        jumplink(hash);
+        jumplink($(".left-item")[2]);
     }else if(hash==="#school"){
-        jumplink(hash);
+        jumplink($(".left-item")[3]);
     }
     $(".left-item").each(function (index, item) {
         $(this).click(function () {
@@ -23,13 +25,17 @@ $(document).ready(function () {
             $(".aboutus").text($(this).find(".l-content").text());
             $(".a-left").height($(".a-right").height());
             if(index==0){
-                location.hash = "#aboutus"
+                location.hash = "#aboutus";
+                window.scrollTo(0,0);
             }else if(index==1){
-                location.hash ="#partner"
+                location.hash ="#partner";
+                window.scrollTo(0,0);
             }else if(index==2){
-                location.hash="#contactus"
+                location.hash="#contactus";
+                window.scrollTo(0,0);
             }else if(index==3){
-                location.hash="#school"
+                location.hash="#school";
+                window.scrollTo(0,0);
             }
         })
     })
