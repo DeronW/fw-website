@@ -8,7 +8,7 @@ const APP_NAMES = [
     // 'topic-template-one',
     // 'topic-template-two',
     // 'template-columns', // 动态分配的 列数 模板
-     'template-lottery-draw',//戳气球
+    'template-lottery-draw',//戳气球
     // 'template-one-arm-bandit', // 老虎机 模板
 ];
 
@@ -97,6 +97,7 @@ module.exports = function (gulp, generate_task, settings) {
         generate_task(PROJ, i, Object.assign({}, default_options, {
             api_path: "//www.9888.cn/",
             cmd_prefix: 'pack',
+            enviroument: 'production',
             cdn_prefix: `/static/${PROJ}/${i.name || i}/`,
         }))
     });
