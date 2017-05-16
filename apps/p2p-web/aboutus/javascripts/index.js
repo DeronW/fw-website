@@ -1,22 +1,28 @@
 $(document).ready(function () {
-    var hash = location.hash;
     function jumplink(ele) {
         window.scrollTo(0,0)
         $(ele).addClass("active").siblings().removeClass("active")
         $(".r-item").eq($(ele).index()).css({display: "block"}).siblings().css({display: "none"})
         $(".aboutus").text($(ele).find(".l-content").text());
         $(".a-left").height($(".a-right").height());
+    }
+    function hashHandler() {
+        var hash = location.hash;
+        if(hash==="#aboutus"){
+            jumplink($(".left-item")[0]);
+        }else if(hash==="#partner"){
+            jumplink($(".left-item")[1])
+        }else if(hash==="#contactus"){
+            jumplink($(".left-item")[2]);
+        }else if(hash==="#school"){
+            jumplink($(".left-item")[3]);
+        }
+    }
+    hashHandler();
+    window.addEventListener("hashchange",function () {
+        hashHandler();
+    })
 
-    }
-    if(hash==="#aboutus"){
-        jumplink($(".left-item")[0]);
-    }else if(hash==="#partner"){
-        jumplink($(".left-item")[1])
-    }else if(hash==="#contactus"){
-        jumplink($(".left-item")[2]);
-    }else if(hash==="#school"){
-        jumplink($(".left-item")[3]);
-    }
     $(".left-item").each(function (index, item) {
         $(this).click(function () {
             console.log(index);
