@@ -35,10 +35,10 @@
 
 <div id="header-status-bar"></div>
 
-{% include 'zx/header-nav-bar-zx.swig.html' %}
+{% include 'zx-web/header-nav-bar-zx.swig.html' %}
 {% block content %}{% endblock %}
-{% include 'zx/footer-zx.swig.html' %}
-{% include 'zx/sidebar-fn.swig.html' %}
+{% include 'zx-web/footer-zx.swig.html' %}
+{% include 'zx-web/sidebar-fn.swig.html' %}
 {% include 'partial/not-support-ie6-ie7.swig.html' %}
 
 
@@ -60,7 +60,7 @@
 {% block javascripts %}{% endblock %}
 
 {% if ENV == 'production' %}
-{% include 'web/tong-ji.swig.html' %}
+{% include 'zx-web/tong-ji.swig.html' %}
 {% endif %}
 </body>
 </html>
