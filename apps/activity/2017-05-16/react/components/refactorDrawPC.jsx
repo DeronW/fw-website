@@ -1,119 +1,129 @@
 class RefactorDrawPC extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            isLogin: false,
-            monthNotice: "",
-            stageMay: '未开始',
-            stageJune: '未开始',
-            selectedMay: true,
-            selectedJune: false,
-            start: '',
-            end: '',
-            type: 'mayActf',
-            close: false,
-            bonus: 0,
-            totalBonus: 0,
-            total: '',
-            totalSum: '',
-            personData: [],
-            teamData: [],
-            height: 50,
-            totalHeight: 30,
-            platBg: '',
-            platTotalBg: '',
-            prize_list: [{
-                img: 'images/p1.jpg',
-                name: 'No.1  Iphone7',
-                prizeMark: 1
-            }, {
-                img: 'images/p2.jpg',
-                name: 'No.2  小米6',
-                prizeMark: 2
-            }, {
-                img: 'images/p3.jpg',
-                name: 'No.3  2%返息券',
-                prizeMark: 3
-            }, {
-                img: 'images/p4.jpg',
-                name: 'No.4  550返现券礼包',
-                prizeMark: 4
-            }, {
-                img: 'images/p5.jpg',
-                name: 'No.5  1%返息券',
-                prizeMark: 5
-            }, {
-                img: 'images/p6.jpg',
-                name: 'No.6  10元返现券',
-                prizeMark: 6
-            }, {
-                img: 'images/p7.jpg',
-                name: 'No.7  0.5%返息券',
-                prizeMark: 7
-            }, {
-                img: 'images/p8.jpg',
-                name: 'No.8  5元返现券',
-                prizeMark: 8
-            }, {
-                img: 'images/p9.jpg',
-                name: 'No.9  2元返现券',
-                prizeMark: 9
-            }]
-        };
+    static start = ""
+    state = {
+        monthNotice: "",
+        stageMay: '未开始',
+        stageJune: '未开始',
+        selectedMay: true,
+        selectedJune: false,
+        close: false,
+        bonus: 0,
+        totalBonus: 0,
+        total: '',
+        totalSum: '',
+        personData: [],
+        teamData: [],
+        height: 50,
+        totalHeight: 30,
+        platBg: '',
+        platTotalBg: '',
     }
-
-    closePopHandler() {
+    componentDidMount() {
+        this.defaultHash();
+        this.ajaxTotalData();
+    }
+    //关闭pop层
+    closePopHandler = () => {
         ReactDOM.unmountComponentAtNode(document.getElementById('pop'));
     }
-
-    getServerTimestamp(callback) {
+    //debug模式
+    getServerTimestamp = (callback) => {
         var ts = $getDebugParams().timestamp;
         if (ts) {
             callback(ts)
         } else {
-            $.get(API_PATH + "api/userState/v1/timestamp.json", function (data) {
-                callback(data.data.timestamp)
-            }.bind(this), 'json')
+            callback(this.props.timestamp)
         }
     }
-
-    componentDidMount() {
-        $UserReady(function (isLogin, user) {
-            this.setState({isLogin: isLogin});
-        }.bind(this));
-        this.judgeStageHandler();
-        this.ajaxPersonTeamData();
-        this.ajaxTotalData();
+    standardTime(year, month, day, hours, minutes, seconds) {
+        let d = new Date();
+        d.setFullYear(year || 0);
+        d.setMonth(month - 1 || 0);
+        d.setDate(day || 0);
+        d.setHours(hours || 0);
+        d.setMinutes(minutes || 0);
+        d.setSeconds(seconds || 0);
+        d.setMilliseconds(0);
+        return new Date(d).getTime()
     }
-    //请求各个月的数据
-    ajaxPersonTeamData() {
-        let {start,end,type} =this.state;
-        $.get(API_PATH + "api/activityPullInvest/v1/singularMonthTeamList.json", {
-            start: start,
-            end: end,
-            type: type
-        }).then(data=> {
-            let total,personData,teamData;
-            if(data&&data.data){
+    defaultHash = () => {
+        var timeStart = this.standardTime(2017, 5, 16, 0, 0, 0);//5.16号
+        var timeMiddle = this.standardTime(2017, 6, 13, 23, 59, 59);//6.13号
+        var timeEnd = this.standardTime(2017, 7, 12, 23, 59, 59);//7.12号
+
+        var startDate = '';
+        var endDate = '';
+        this.getServerTimestamp(function (currentTime) {
+            if (currentTime < timeStart) {
+                ReactDOM.render(<PopNoStart popTitle={"活动暂未开启"} popText={true} />, document.getElementById("pop"))
+            } else if (currentTime < timeMiddle) {
+                startDate = '2017-05-16 00:00:00';
+                endDate = '2017-06-13 23:59:59';
+                this.setHashCode("may");
+                this.setState({
+                    stageMay: '进行中', stageJune: '未开始',
+                    start: startDate, end: endDate, type: 'mayActf'
+                }, this.ajaxPersonTeamData)
+            } else if (currentTime < timeEnd) {
+                startDate = '2017-06-14 00:00:00';
+                endDate = '2017-07-12 23:59:59';
+                this.setHashCode("june");
+                this.setState({
+                    stageMay: '已结束', stageJune: '进行中',
+                    selectedMay: false, selectedJune: true, start: startDate, end: endDate, type: 'mayActt'
+                }, this.ajaxPersonTeamData)
+            } else if (currentTime >= timeEnd) {
+                ReactDOM.render(<PopNoStart popTitle={"来晚了，活动已结束"} popEnd={true} />, document.getElementById("pop"))
+            }
+        }.bind(this));
+    }
+    
+    //设置hash值
+    setHashCode = (key) => {
+        if (key == "may") {
+            window.location.hash = key;
+            this.setState({ selectedMay: true, selectedJune: false }, this.ajaxMayData)
+        }else if (key == "june") {
+            if (this.props.timestamp >= this.standardTime(2017, 6, 13, 23, 59, 59)) {
+                window.location.hash = key;
+                this.setState({ selectedMay: false, selectedJune: true, }, this.ajaxJuneData)
+            }
+        }
+    }
+    
+    //请求五月榜数据
+    ajaxMayData = () => {
+        $.get(API_PATH + "activity/v1/mayMonthData.json").then(data => {
+            let total, personData, teamData;
+            data = JSON.parse(data);
+            if (data && data.data) {
                 total = data.data.total;
                 personData = data.data.persondata;
                 teamData = data.data.teamdata;
-                this.setState({personData: personData, teamData: teamData});
-                if (type == 'mayActf') {
-                    this.judgePlatformSingle(total);
-                } else if (type == 'mayActt') {
-                    this.judgePlatformDouble(total)
-                }
+                this.setState({ personData: personData, teamData: teamData });
+                this.judgePlatformSingle(total);
+
             }
         })
     }
-    //总榜奖金
-    ajaxTotalData() {
-        $.get(API_PATH + "api/activityPullInvest/v1/singularMonthTeamList.json", {
-            start: '2017-05-16 00:00:00',
-            end: '2017-07-12 23:59:59',
-            type: 'mayActBig'
-        }).then(data => {
+    //请求六月榜数据
+    ajaxJuneData = () => {
+        $.get(API_PATH + "activity/v1/juneMonthData.json").then(data => {
+            let total, personData, teamData;
+            data = JSON.parse(data);
+            if (data && data.data) {
+                total = data.data.total;
+                personData = data.data.persondata;
+                teamData = data.data.teamdata;
+                this.setState({ personData: personData, teamData: teamData });
+                this.judgePlatformDouble(total)
+            }
+        })
+    }
+    //请求总榜奖金
+    ajaxTotalData = () => {
+        $.get(API_PATH + "activity/v1/totalMonthData.json").then(data => {
+            data = JSON.parse(data);
             let totalBonus = 0;
             let totalSum = data.data && data.data.total;
             if (totalSum >= 1000000000 && totalSum < 1300000000) {
@@ -136,16 +146,16 @@ class RefactorDrawPC extends React.Component {
         let bonus = 0;
         if (total < 150000000) {
             bonus = 0;
-            this.setState({platBg: "url('images/platformPC1.png')"})
+            this.setState({ platBg: "url('images/platformPC1.png')" })
         } else if (total < 380000000) {
             bonus = '6万';
-            this.setState({platBg: "url('images/platformPC2.png')"})
+            this.setState({ platBg: "url('images/platformPC2.png')" })
         } else if (total < 450000000) {
             bonus = '18万';
-            this.setState({platBg: "url('images/platformPC3.png')"})
+            this.setState({ platBg: "url('images/platformPC3.png')" })
         } else {
             bonus = '33万';
-            this.setState({platBg: "url('images/platformPC4.png')"})
+            this.setState({ platBg: "url('images/platformPC4.png')" })
         }
         let height = Number(total) / 10000000 * 4;
         if (height > 203) height = 203;
@@ -160,16 +170,16 @@ class RefactorDrawPC extends React.Component {
         let bonus = 0;
         if (total < 180000000) {
             bonus = 0;
-            this.setState({platBg: "url('images/platformPC12.png')"})
+            this.setState({ platBg: "url('images/platformPC12.png')" })
         } else if (total < 400000000) {
             bonus = '8万';
-            this.setState({platBg: "url('images/platformPC22.png')"})
+            this.setState({ platBg: "url('images/platformPC22.png')" })
         } else if (total < 500000000) {
             bonus = '23万';
-            this.setState({platBg: "url('images/platformPC32.png')"})
+            this.setState({ platBg: "url('images/platformPC32.png')" })
         } else {
             bonus = '41万';
-            this.setState({platBg: "url('images/platformPC42.png')"})
+            this.setState({ platBg: "url('images/platformPC42.png')" })
         }
         let height = Number(total) / 10000000 * 4;
         if (height > 203) height = 203;
@@ -181,77 +191,20 @@ class RefactorDrawPC extends React.Component {
 
     judgePlatformTotalBg(total) {
         if (total < 1000000000) {
-            this.setState({platTotalBg: "url('images/platformTotalPC1.png')"})
+            this.setState({ platTotalBg: "url('images/platformTotalPC1.png')" })
         } else if (total < 1300000000) {
-            this.setState({platTotalBg: "url('images/platformTotalPC2.png')"})
+            this.setState({ platTotalBg: "url('images/platformTotalPC2.png')" })
         } else {
-            this.setState({platTotalBg: "url('images/platformTotalPC3.png')"})
+            this.setState({ platTotalBg: "url('images/platformTotalPC3.png')" })
         }
     }
-    standardTime(year,month,day,hours,minutes,seconds){
-        let d = new Date();
-        d.setFullYear(year || 0);
-        d.setMonth(month-1 || 0);
-        d.setDate(day || 0);
-        d.setHours(hours || 0);
-        d.setMinutes(minutes || 0);
-        d.setSeconds(seconds || 0);
-        d.setMilliseconds(0);
-        return new Date(d).getTime()
+    gotoLogin() {
+        var loginUrl = location.protocol + '//www.9888.cn/api/activityPullNew/pullnewParty.do?id=241';
+        $FW.gotoSpecialPage("登录", loginUrl);
     }
-    judgeStageHandler() {
-        var timeStart = this.standardTime(2017,5,16,0,0,0);//5.16号
-        var timeMiddle = this.standardTime(2017,6,13,23,59,59);//6.13号
-        var timeEnd = this.standardTime(2017,7,12,23,59,59);//7.12号
-        
-        var startDate = '2017-05-16 00:00:00';
-        var endDate = '2017-07-12 23:59:59';
-        this.getServerTimestamp(function (currentTime) {
-            if (currentTime < timeStart) {
-                ReactDOM.render(<PopNoStart popTitle={"活动暂未开启"} popText={true}/>,document.getElementById("pop"))
-            } else if (currentTime < timeMiddle) {
-                startDate = '2017-05-16 00:00:00';
-                endDate = '2017-06-13 23:59:59';
-                this.setState({
-                    stageMay: '进行中', stageJune: '未开始',
-                    start: startDate, end: endDate, type: 'mayActf'
-                }, this.ajaxPersonTeamData)
-            } else if (currentTime < timeEnd) {
-                startDate = '2017-06-14 00:00:00';
-                endDate = '2017-07-12 23:59:59';
-                this.setState({
-                    stageMay: '已结束', stageJune: '进行中',
-                    selectedMay: false, selectedJune: true, start: startDate, end: endDate, type: 'mayActt'
-                }, this.ajaxPersonTeamData)
-            }else if(currentTime >= timeEnd){
-                ReactDOM.render(<PopNoStart popTitle={"来晚了，活动已结束"} popEnd={true}/>,document.getElementById("pop"))
-            }
-        }.bind(this));
-    }
-
-    switchTabHandler(stage, month) {
-        if (month == "五月") {
-            this.setState({
-                selectedMay: true,
-                selectedJune: false,
-                start: '2017-05-16 00:00:00',
-                end: '2017-06-13 23:59:59',
-                type: 'mayActf'
-            }, this.ajaxPersonTeamData)
-        } else {
-            if (stage != "未开始")  this.setState({
-                selectedMay: false,
-                selectedJune: true,
-                start: '2017-06-14 00:00:00',
-                end: '2017-07-12 23:59:59',
-                type: 'mayActt'
-            }, this.ajaxPersonTeamData)
-        }
-    }
-
     investFriends() {
         ReactDOM.render(<InvestFriendsPC gotoLogin={this.gotoLogin}
-                                         closePopHandler={this.closePopHandler}/>, document.getElementById("pop"))
+            closePopHandler={this.closePopHandler} />, document.getElementById("pop"))
     }
 
     isImgFun(index) {
@@ -259,17 +212,12 @@ class RefactorDrawPC extends React.Component {
     }
 
     closeHandler() {
-        this.setState({close: !this.state.close})
+        this.setState({ close: !this.state.close })
     }
-
-    gotoLogin() {
-        var loginUrl = location.protocol + '//www.9888.cn/api/activityPullNew/pullnewParty.do?id=241';
-        $FW.gotoSpecialPage("登录", loginUrl);
-    }
-
     render() {
-        let {stageMay,stageJune,selectedMay,selectedJune,total,totalSum,bonus,totalBonus,close,isLogin,type,personData,teamData,height,platBg,totalHeight,platTotalBg} = this.state;
-
+        // console.log(RefactorDrawPC.start);
+        let { stageMay, stageJune, selectedMay, selectedJune, total, totalSum, bonus, totalBonus, close, type, personData, teamData, height, platBg, totalHeight, platTotalBg } = this.state;
+        let { isLogin, prize_list } = this.props
         let no = {
             width: "237px",
             height: "96px",
@@ -278,8 +226,8 @@ class RefactorDrawPC extends React.Component {
             cursor: 'default'
         };
         let monthMayTab = (stage, month, section) => {
-            return <div className={selectedMay ?"monthTab going":"monthTab end"}
-                        onClick={()=>this.switchTabHandler(stage,month)}>
+            return <div className={selectedMay ? "monthTab going" : "monthTab end"}
+                onClick={() => this.setHashCode("may")}>
                 <div className="tabLeft">{stage}</div>
                 <div className="tabRight">
                     <div className="month">{month}</div>
@@ -290,9 +238,9 @@ class RefactorDrawPC extends React.Component {
         let monthJuneTab = (stage, month, section) => {
             let change;
             if (stage == "未开始") change = true;
-            return <div className={selectedJune?"monthTab going":"monthTab end"}
-                        style={change && no}
-                        onClick={()=>this.switchTabHandler(stage,month)}>
+            return <div className={selectedJune ? "monthTab going" : "monthTab end"}
+                style={change && no}
+                onClick={() => this.setHashCode("june")}>
                 <div className="tabLeft">{stage}</div>
                 <div className="tabRight">
                     <div className="month">{month}</div>
@@ -300,13 +248,12 @@ class RefactorDrawPC extends React.Component {
                 </div>
             </div>
         };
-
         let closeStyle = {
             display: close ? "none" : "block"
         };
         let noLoginRemain = (
             <div className="remindText">
-                <div className='noLoginRemain'>请登录后，查看您的投资获奖情况。<a onClick={()=>this.gotoLogin()}>立即登录</a></div>
+                <div className='noLoginRemain'>请登录后，查看您的投资获奖情况。<a onClick={() => this.gotoLogin()}>立即登录</a></div>
             </div>
         );
         let loginRemain = (
@@ -322,7 +269,7 @@ class RefactorDrawPC extends React.Component {
         );
         let noLoginChance = (
             <div className="drawChance">
-                <div className='noLoginChance'>活动期间单标单笔投资每满10000元获1次抽奖机会，登录后可查抽奖机会，<a onClick={()=>this.gotoLogin()}>立即登录</a>
+                <div className='noLoginChance'>活动期间单标单笔投资每满10000元获1次抽奖机会，登录后可查抽奖机会，<a onClick={() => this.gotoLogin()}>立即登录</a>
                 </div>
             </div>
         );
@@ -342,11 +289,10 @@ class RefactorDrawPC extends React.Component {
                 }
                 <div className="drawMachine">
                     <div className="machine">
-                        <SlotMachinePC isLogin={isLogin} gotoLogin={this.gotoLogin} prize_list={this.state.prize_list}
-                                       result={this.state.result}/>
+                        <SlotMachinePC isLogin={isLogin} gotoLogin={this.gotoLogin} prize_list={prize_list} />
                     </div>
                     <div className="winningList">
-                        <WinningListPC isLogin={isLogin} gotoLogin={this.gotoLogin}/>
+                        <WinningListPC isLogin={isLogin} gotoLogin={this.gotoLogin} />
                     </div>
                 </div>
                 <div className="drawTips">
@@ -363,30 +309,22 @@ class RefactorDrawPC extends React.Component {
                 {
                     isLogin ? loginRemain : noLoginRemain
                 }
-                <div className="platformPC">
-                    <div className="platformBg" style={{background:platBg}}>
-                        <a href="https://www.9888.cn/" target="_blank">
-                            <div className="injectPC">活动期间，累投越多可获分的奖金越多，快来注入！</div>
-                        </a>
-                        <img style={{bottom:height + 64}} src="images/water.png" alt=""/>
+                <InjectPoolMonthPool platBg={platBg} height={height}/>
 
-                        <div style={{height:height}} className="pillars"></div>
-                    </div>
-                </div>
                 <div className="remindText remindText2">
-                    <div className='loginRemain'>进榜规则：个人累投金额≥50万元；或团队累投金额≥1000万且团队人数≥50人。<br/>
+                    <div className='loginRemain'>进榜规则：个人累投金额≥50万元；或团队累投金额≥1000万且团队人数≥50人。<br />
                         月度奖金分配方式：个人和团队奖金分配比例=4（个人）：6（团队）
                     </div>
                 </div>
                 <div className="drawMonthLadder">
                     <div className="person">
                         {
-                            <PersonTeamMonthLadderPC title={"个人榜"} isImgFun={this.isImgFun} personData={personData}/>
+                            <PersonTeamMonthLadderPC title={"个人榜"} isImgFun={this.isImgFun} personData={personData} />
                         }
                     </div>
                     <div className="team">
                         {
-                            <PersonTeamMonthLadderPC title={"团队榜"} isImgFun={this.isImgFun} teamData={teamData}/>
+                            <PersonTeamMonthLadderPC title={"团队榜"} isImgFun={this.isImgFun} teamData={teamData} />
                         }
                     </div>
                 </div>
@@ -404,23 +342,14 @@ class RefactorDrawPC extends React.Component {
                 <div className="drawTitle drawTitle3">终级排行榜 百万壕礼奉上</div>
                 {
                     isLogin ? <div className="remindText">
-                        <div className='loginRemain'>5.16-7.12，平台达到相应累计交易量，且个人及团队排行前30名的工友，最高获分100万元奖金。<br/>
+                        <div className='loginRemain'>5.16-7.12，平台达到相应累计交易量，且个人及团队排行前30名的工友，最高获分100万元奖金。<br />
                             当前平台累计交易量<em>{totalSum}</em>元，可获分<em>{totalBonus}</em>元奖金！
                         </div>
                     </div> : noLoginRemain
                 }
-                <div className="platformTotalPC">
-                    <div className="platformBg" style={{background:platTotalBg}}>
-                        <a href="https://www.9888.cn/" target="_blank">
-                            <div className="injectPC">活动期间，累投越多可获分的奖金越多，快来注入！</div>
-                        </a>
-                        <img style={{bottom:totalHeight + 64}} src="images/waterTotal.png" alt=""/>
-
-                        <div style={{height:totalHeight}} className="pillars"></div>
-                    </div>
-                </div>
+                <InjectPoolTotalPool platTotalBg={platTotalBg} totalHeight={totalHeight}/>
                 <div className="remindText remindText3">
-                    <div className='loginRemain'>进榜规则：个人累投金额≥100万元；或团队累投金额≥1200万且团队人数≥50人。<br/>
+                    <div className='loginRemain'>进榜规则：个人累投金额≥100万元；或团队累投金额≥1200万且团队人数≥50人。<br />
                         奖金分配方式：个人和团队奖金分配比例=4（个人）：6（团队）
                     </div>
                 </div>
@@ -428,13 +357,13 @@ class RefactorDrawPC extends React.Component {
                     <div className="person">
                         {
                             <PersonTeamTotalLadderPC title={"个人榜"} getServerTimestamp={this.getServerTimestamp}
-                                                     isImgFun={this.isImgFun}/>
+                                isImgFun={this.isImgFun} />
                         }
                     </div>
                     <div className="team">
                         {
                             <PersonTeamTotalLadderPC title={"团队榜"} getServerTimestamp={this.getServerTimestamp}
-                                                     isImgFun={this.isImgFun}/>
+                                isImgFun={this.isImgFun} />
                         }
                     </div>
                 </div>
@@ -454,7 +383,7 @@ class RefactorDrawPC extends React.Component {
             <div className="drawExplain" id="explain">
                 <div className="explainContent">
                     <div className="explainTitle">
-                        <img src="images/explain.png" alt=""/>
+                        <img src="images/explain.png" alt="" />
                         <em>活动说明</em>
                     </div>
                     <p>1. 投资债权转让产品，不能参与本次活动；</p>
@@ -474,12 +403,12 @@ class RefactorDrawPC extends React.Component {
             </div>
             <div className="pcFooterBar" style={closeStyle}>
                 <div className="footerBarContent">
-                    <img src="images/logo.png" alt=""/>
+                    <img src="images/logo.png" alt="" />
 
                     <div className="barText">朋友多，这些奖励还觉得不够？</div>
-                    <a className="moreAward" onClick={()=> {$toggleYaoQingYouLi()}}>更多邀友奖励</a>
-                    <a className="howAward" onClick={()=>this.investFriends()}>如何邀友</a>
-                    <em className="barClose" onClick={()=>this.closeHandler()}></em>
+                    <a className="moreAward" onClick={() => { $toggleYaoQingYouLi() }}>更多邀友奖励</a>
+                    <a className="howAward" onClick={() => this.investFriends()}>如何邀友</a>
+                    <em className="barClose" onClick={() => this.closeHandler()}></em>
                 </div>
             </div>
         </div>
