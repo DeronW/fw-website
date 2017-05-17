@@ -19,7 +19,7 @@ class RefactorDrawPC extends React.Component {
         platTotalBg: '',
     }
     componentDidMount() {
-        this.defaultHash();
+        this.InitialHash();
         this.ajaxTotalData();
     }
     //关闭pop层
@@ -35,6 +35,7 @@ class RefactorDrawPC extends React.Component {
             callback(this.props.timestamp)
         }
     }
+    //格式化时间
     standardTime(year, month, day, hours, minutes, seconds) {
         let d = new Date();
         d.setFullYear(year || 0);
@@ -46,51 +47,42 @@ class RefactorDrawPC extends React.Component {
         d.setMilliseconds(0);
         return new Date(d).getTime()
     }
-    defaultHash = () => {
+    //初始状态
+    InitialHash = () => {
         var timeStart = this.standardTime(2017, 5, 16, 0, 0, 0);//5.16号
         var timeMiddle = this.standardTime(2017, 6, 13, 23, 59, 59);//6.13号
         var timeEnd = this.standardTime(2017, 7, 12, 23, 59, 59);//7.12号
 
-        var startDate = '';
-        var endDate = '';
-        this.getServerTimestamp(function (currentTime) {
+        this.getServerTimestamp((currentTime) => {
             if (currentTime < timeStart) {
                 ReactDOM.render(<PopNoStart popTitle={"活动暂未开启"} popText={true} />, document.getElementById("pop"))
             } else if (currentTime < timeMiddle) {
-                startDate = '2017-05-16 00:00:00';
-                endDate = '2017-06-13 23:59:59';
                 this.setHashCode("may");
-                this.setState({
-                    stageMay: '进行中', stageJune: '未开始',
-                    start: startDate, end: endDate, type: 'mayActf'
-                }, this.ajaxPersonTeamData)
+                this.setState({ stageMay: '进行中', stageJune: '未开始' },
+                    this.ajaxPersonTeamData)
             } else if (currentTime < timeEnd) {
-                startDate = '2017-06-14 00:00:00';
-                endDate = '2017-07-12 23:59:59';
                 this.setHashCode("june");
-                this.setState({
-                    stageMay: '已结束', stageJune: '进行中',
-                    selectedMay: false, selectedJune: true, start: startDate, end: endDate, type: 'mayActt'
-                }, this.ajaxPersonTeamData)
+                this.setState({ stageMay: '已结束', stageJune: '进行中', selectedMay: false, selectedJune: true },
+                    this.ajaxPersonTeamData)
             } else if (currentTime >= timeEnd) {
                 ReactDOM.render(<PopNoStart popTitle={"来晚了，活动已结束"} popEnd={true} />, document.getElementById("pop"))
             }
-        }.bind(this));
+        });
     }
-    
+
     //设置hash值
     setHashCode = (key) => {
         if (key == "may") {
             window.location.hash = key;
             this.setState({ selectedMay: true, selectedJune: false }, this.ajaxMayData)
-        }else if (key == "june") {
+        } else if (key == "june") {
             if (this.props.timestamp >= this.standardTime(2017, 6, 13, 23, 59, 59)) {
                 window.location.hash = key;
                 this.setState({ selectedMay: false, selectedJune: true, }, this.ajaxJuneData)
             }
         }
     }
-    
+
     //请求五月榜数据
     ajaxMayData = () => {
         $.get(API_PATH + "activity/v1/mayMonthData.json").then(data => {
@@ -102,7 +94,6 @@ class RefactorDrawPC extends React.Component {
                 teamData = data.data.teamdata;
                 this.setState({ personData: personData, teamData: teamData });
                 this.judgePlatformSingle(total);
-
             }
         })
     }
@@ -126,9 +117,11 @@ class RefactorDrawPC extends React.Component {
             data = JSON.parse(data);
             let totalBonus = 0;
             let totalSum = data.data && data.data.total;
-            if (totalSum >= 1000000000 && totalSum < 1300000000) {
+            if (totalSum < 1000000000) {
+                totalBonus = 0;
+            } else if (totalSum < 1300000000) {
                 totalBonus = 40;
-            } else if (totalSum >= 1300000000) {
+            } else {
                 totalBonus = 100;
             }
             this.judgePlatformTotalBg(totalSum);
@@ -212,7 +205,7 @@ class RefactorDrawPC extends React.Component {
     }
 
     closeHandler() {
-        this.setState({ close: !this.state.close })
+        this.setState({ close: false })
     }
     render() {
         // console.log(RefactorDrawPC.start);
@@ -309,7 +302,8 @@ class RefactorDrawPC extends React.Component {
                 {
                     isLogin ? loginRemain : noLoginRemain
                 }
-                <InjectPoolMonthPool platBg={platBg} height={height}/>
+
+                <InjectPoolMonthPool platBg={platBg} height={height} />
 
                 <div className="remindText remindText2">
                     <div className='loginRemain'>进榜规则：个人累投金额≥50万元；或团队累投金额≥1000万且团队人数≥50人。<br />
@@ -347,7 +341,9 @@ class RefactorDrawPC extends React.Component {
                         </div>
                     </div> : noLoginRemain
                 }
-                <InjectPoolTotalPool platTotalBg={platTotalBg} totalHeight={totalHeight}/>
+
+                <InjectPoolTotalPool platTotalBg={platTotalBg} totalHeight={totalHeight} />
+
                 <div className="remindText remindText3">
                     <div className='loginRemain'>进榜规则：个人累投金额≥100万元；或团队累投金额≥1200万且团队人数≥50人。<br />
                         奖金分配方式：个人和团队奖金分配比例=4（个人）：6（团队）
