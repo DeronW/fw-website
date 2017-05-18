@@ -1,8 +1,8 @@
 class RefactorDrawMobile extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            isLogin: false,
+    }
+    state = {
             monthNotice: "",
             stageMay: '未开始',
             stageJune: '未开始',
@@ -15,7 +15,7 @@ class RefactorDrawMobile extends React.Component {
             close: false,
             bonus: 0,
             total:0,
-            totalSum: '',
+            totalSum: 0,
             totalBonus:0,
             height: 60,
             totalHeight: 60,
@@ -26,29 +26,25 @@ class RefactorDrawMobile extends React.Component {
             show: false,
             personData:[],
             teamData:[],
+            personTeamData:[],
+            teamTeamData:[],
             showWater:false,
             isApp:false,
         }
-    }
-
     componentDidMount() {
-        $UserReady(function (isLogin, user) {
-            this.setState({isLogin: isLogin});
-        }.bind(this));
         let isApp = navigator.userAgent.match(/FinancialWorkshop/i)?true:false;
         this.setState({isApp:isApp});
-        this.judgeStageHandler();
+        this.InitialHash();
         this.ajaxPersonTeamData();
         this.ajaxTotalData();
     }
-    getServerTimestamp(callback) {
+    //debug模式
+    getServerTimestamp = (callback) => {
         var ts = $getDebugParams().timestamp;
         if (ts) {
-            callback(ts);
+            callback(ts)
         } else {
-            $.get(API_PATH + "api/userState/v1/timestamp.json", function (data) {
-                callback(data.data.timestamp);
-            }.bind(this), 'json')
+            callback(this.props.timestamp)
         }
     }
     standardTime(year,month,day,hours,minutes,seconds){
@@ -62,34 +58,40 @@ class RefactorDrawMobile extends React.Component {
         d.setMilliseconds(0);
         return new Date(d).getTime()
     }
-    judgeStageHandler() {
-        var timeStart = this.standardTime(2017,5,16,0,0,0);//5.16号
-        var timeMiddle = this.standardTime(2017,6,13,23,59,59);//6.13号
-        var timeEnd = this.standardTime(2017,7,12,23,59,59);//7.12号
-        var startDate = '2017-05-16 00:00:00';
-        var endDate = '2017-07-12 23:59:59';
-        this.getServerTimestamp(function (currentTime) {
-            if(currentTime < timeStart){
+    //初始状态
+    InitialHash = () => {
+        var timeStart = this.standardTime(2017, 5, 16, 0, 0, 0);//5.16号
+        var timeMiddle = this.standardTime(2017, 6, 13, 23, 59, 59);//6.13号
+        var timeEnd = this.standardTime(2017, 7, 12, 23, 59, 59);//7.12号
+
+        this.getServerTimestamp((currentTime) => {
+            if (currentTime < timeStart) {
                 ReactDOM.render(<PopNoStartMobile popTitle={"活动暂未开启"} popText={true}/>,document.getElementById("pop"))
-            }else if (currentTime < timeMiddle) {
-                startDate = '2017-05-16 00:00:00';
-                endDate = '2017-06-13 23:59:59';
-                this.setState({
-                    stageMay: '进行中', stageJune: '未开始',
-                    start:startDate,end:endDate,type:'mayActf'
-                },this.ajaxPersonTeamData)
+            } else if (currentTime < timeMiddle) {
+                this.setHashCode("may");
+                this.setState({ stageMay: '进行中', stageJune: '未开始' },
+                    this.ajaxPersonTeamData)
             } else if (currentTime < timeEnd) {
-                startDate = '2017-06-14 00:00:00';
-                endDate = '2017-07-12 23:59:59';
-                this.setState({stageMay: '已结束', stageJune: '进行中',
-                    selectedMay: false, selectedJune: true,
-                    start:startDate,end:endDate,type:'mayActt'
-                },this.ajaxPersonTeamData)
-            }else if(currentTime >= timeEnd){
+                this.setHashCode("june");
+                this.setState({ stageMay: '已结束', stageJune: '进行中', selectedMay: false, selectedJune: true },
+                    this.ajaxPersonTeamData)
+            } else if (currentTime >= timeEnd) {
                 ReactDOM.render(<PopNoStartMobile popTitle={"来晚了，活动已结束"} popEnd={true}/>,document.getElementById("pop"))
             }
-        }.bind(this));
+        });
+    }
 
+    //设置hash值
+    setHashCode = (key) => {
+        if (key == "may") {
+            window.location.hash = key;
+            this.setState({ selectedMay: true, selectedJune: false }, this.ajaxMayData)
+        } else if (key == "june") {
+            if (this.props.timestamp >= this.standardTime(2017, 6, 13, 23, 59, 59)) {
+                window.location.hash = key;
+                this.setState({ selectedMay: false, selectedJune: true, }, this.ajaxJuneData)
+            }
+        }
     }
     ajaxPersonTeamData() {
         let {start,end,type} =this.state;
@@ -258,7 +260,8 @@ class RefactorDrawMobile extends React.Component {
         window.location.href = link;
     }
     render() {
-        let {stageMay,stageJune,selectedMay,selectedJune,close,bonus,total,totalSum,totalBonus,show,showWater,isLogin,totalLadderTab,monthTipsClose,totalTipsClose,type,personData,teamData,height,platBg,totalHeight,platTotalBg,isApp} = this.state;
+        let {stageMay,stageJune,selectedMay,selectedJune,close,bonus,total,totalSum,totalBonus,show,showWater,totalLadderTab,monthTipsClose,totalTipsClose,type,personData,teamData,height,platBg,totalHeight,platTotalBg,isApp} = this.state;
+        let {isLogin}=this.props;
         let no = {
             width: "237px",
             height: "96px",

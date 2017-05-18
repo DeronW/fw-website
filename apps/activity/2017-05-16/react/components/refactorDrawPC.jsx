@@ -1,5 +1,5 @@
 class RefactorDrawPC extends React.Component {
-    static start = ""
+    // static start = ""
     state = {
         monthNotice: "",
         stageMay: '未开始',
@@ -13,6 +13,8 @@ class RefactorDrawPC extends React.Component {
         totalSum: '',
         personData: [],
         teamData: [],
+        personTotalData: [],
+        teamTotalData: [],
         height: 50,
         totalHeight: 30,
         platBg: '',
@@ -74,32 +76,20 @@ class RefactorDrawPC extends React.Component {
     setHashCode = (key) => {
         if (key == "may") {
             window.location.hash = key;
-            this.setState({ selectedMay: true, selectedJune: false }, this.ajaxMayData)
+            this.setState({ selectedMay: true, selectedJune: false }, this.ajaxMonthData(API_PATH + "activity/v1/mayMonthData.json"))
         } else if (key == "june") {
             if (this.props.timestamp >= this.standardTime(2017, 6, 13, 23, 59, 59)) {
                 window.location.hash = key;
-                this.setState({ selectedMay: false, selectedJune: true, }, this.ajaxJuneData)
+                this.setState({ selectedMay: false, selectedJune: true, }, this.ajaxMonthData(API_PATH + "activity/v1/juneMonthData.json"))
             }
         }
     }
-
-    //请求五月榜数据
-    ajaxMayData = () => {
-        $.get(API_PATH + "activity/v1/mayMonthData.json").then(data => {
-            let total, personData, teamData;
-            data = JSON.parse(data);
-            if (data && data.data) {
-                total = data.data.total;
-                personData = data.data.persondata;
-                teamData = data.data.teamdata;
-                this.setState({ personData: personData, teamData: teamData });
-                this.judgePlatformSingle(total);
-            }
-        })
+    getHashCode() {
+        return window.location.hash
     }
-    //请求六月榜数据
-    ajaxJuneData = () => {
-        $.get(API_PATH + "activity/v1/juneMonthData.json").then(data => {
+    //请求月榜数据
+    ajaxMonthData = (url) => {
+        $.get(url).then(data => {
             let total, personData, teamData;
             data = JSON.parse(data);
             if (data && data.data) {
@@ -107,7 +97,11 @@ class RefactorDrawPC extends React.Component {
                 personData = data.data.persondata;
                 teamData = data.data.teamdata;
                 this.setState({ personData: personData, teamData: teamData });
-                this.judgePlatformDouble(total)
+                if (this.getHashCode() == "may") {
+                    this.judgePlatformSingle(total);
+                } else if (this.getHashCode() == "june") {
+                    this.judgePlatformDouble(total)
+                }
             }
         })
     }
@@ -157,36 +151,32 @@ class RefactorDrawPC extends React.Component {
             total: t, bonus: bonus, height: height
         });
     }
-    //请求总榜奖金
+    //请求总榜数据和奖金
     ajaxTotalData = () => {
         $.get(API_PATH + "activity/v1/totalMonthData.json").then(data => {
             data = JSON.parse(data);
-            let totalBonus = 0;
-            let totalSum = data.data && data.data.total;
-            if (totalSum < 1000000000) {
-                totalBonus = 0;
-            } else if (totalSum < 1300000000) {
-                totalBonus = 40;
-            } else {
-                totalBonus = 100;
+            let totalBonus = 0, totalSum, personTotalData, teamTotalData;
+            if (data && data.data) {
+                totalSum = data.data && data.data.total;
+                personTotalData = data.data && data.data.persondata;
+                teamTotalData = data.data && data.data.teamdata;
+                if (totalSum < 1000000000) {
+                    totalBonus = 0;
+                    this.setState({ platTotalBg: "url('images/platformTotalPC1.png')" })
+                } else if (totalSum < 1300000000) {
+                    totalBonus = 40;
+                    this.setState({ platTotalBg: "url('images/platformTotalPC2.png')" })
+                } else {
+                    totalBonus = 100;
+                    this.setState({ platTotalBg: "url('images/platformTotalPC3.png')" })
+                }
+                let totalHeight = Number(totalSum) / 50000000 * 5 < 135 ? Number(totalSum) / 50000000 * 5 : 135;
+                let t = ((totalSum / 10000).toFixed(2)) + "万";
+                this.setState({
+                    totalSum: t, totalBonus: totalBonus, totalHeight: totalHeight, personTotalData: personTotalData, teamTotalData: teamTotalData
+                });
             }
-            this.judgePlatformTotalBg(totalSum);
-            let totalHeight = Number(totalSum) / 50000000 * 5 < 135 ? Number(totalSum) / 50000000 * 5 : 135;
-            let t = ((totalSum / 10000).toFixed(2)) + "万";
-            this.setState({
-                totalSum: t, totalBonus: totalBonus, totalHeight: totalHeight
-            });
         })
-    }
-    //总榜注水池
-    judgePlatformTotalBg(total) {
-        if (total < 1000000000) {
-            this.setState({ platTotalBg: "url('images/platformTotalPC1.png')" })
-        } else if (total < 1300000000) {
-            this.setState({ platTotalBg: "url('images/platformTotalPC2.png')" })
-        } else {
-            this.setState({ platTotalBg: "url('images/platformTotalPC3.png')" })
-        }
     }
     gotoLogin() {
         var loginUrl = location.protocol + '//www.9888.cn/api/activityPullNew/pullnewParty.do?id=241';
@@ -196,17 +186,12 @@ class RefactorDrawPC extends React.Component {
         ReactDOM.render(<InvestFriendsPC gotoLogin={this.gotoLogin}
             closePopHandler={this.closePopHandler} />, document.getElementById("pop"))
     }
-
-    isImgFun(index) {
-        return ['images/no1.png', 'images/no2.png', 'images/no3.png'][index]
-    }
-
     closeHandler() {
         this.setState({ close: false })
     }
     render() {
         // console.log(RefactorDrawPC.start);
-        let { stageMay, stageJune, selectedMay, selectedJune, total, totalSum, bonus, totalBonus, close, type, personData, teamData, height, platBg, totalHeight, platTotalBg } = this.state;
+        let { stageMay, stageJune, selectedMay, selectedJune, total, totalSum, bonus, totalBonus, close, type, personData, teamData, personTotalData, teamTotalData, height, platBg, totalHeight, platTotalBg } = this.state;
         let { isLogin, prize_list } = this.props;
         let no = {
             width: "237px",
@@ -310,12 +295,14 @@ class RefactorDrawPC extends React.Component {
                 <div className="drawMonthLadder">
                     <div className="person">
                         {
-                            <PersonTeamMonthLadderPC title={"个人榜"} personData={personData} />
+                            <PersonTeamLadderPC ladder="month" title="个人榜" personData={personData} />
+                            // <PersonTeamMonthLadderPC title={"个人榜"} personData={personData} />
                         }
                     </div>
                     <div className="team">
                         {
-                            <PersonTeamMonthLadderPC title={"团队榜"} teamData={teamData} />
+                            <PersonTeamLadderPC ladder="month" title="团队榜" teamData={teamData} />
+                            // <PersonTeamMonthLadderPC title={"团队榜"} teamData={teamData} />
                         }
                     </div>
                 </div>
@@ -349,12 +336,14 @@ class RefactorDrawPC extends React.Component {
                 <div className="drawTotalLadder">
                     <div className="person">
                         {
-                            <PersonTeamTotalLadderPC title={"个人榜"} />
+                            <PersonTeamLadderPC ladder="total" title="个人榜" personTotalData={personTotalData} />
+                            // <PersonTeamTotalLadderPC title={"个人榜"} />
                         }
                     </div>
                     <div className="team">
                         {
-                            <PersonTeamTotalLadderPC title={"团队榜"} />
+                            <PersonTeamLadderPC ladder="total" title="团队榜" teamTotalData={teamTotalData} />
+                            // <PersonTeamTotalLadderPC title={"团队榜"} />
                         }
                     </div>
                 </div>
