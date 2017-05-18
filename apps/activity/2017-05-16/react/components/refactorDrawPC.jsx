@@ -111,28 +111,6 @@ class RefactorDrawPC extends React.Component {
             }
         })
     }
-    //请求总榜奖金
-    ajaxTotalData = () => {
-        $.get(API_PATH + "activity/v1/totalMonthData.json").then(data => {
-            data = JSON.parse(data);
-            let totalBonus = 0;
-            let totalSum = data.data && data.data.total;
-            if (totalSum < 1000000000) {
-                totalBonus = 0;
-            } else if (totalSum < 1300000000) {
-                totalBonus = 40;
-            } else {
-                totalBonus = 100;
-            }
-            this.judgePlatformTotalBg(totalSum);
-            let totalHeight = Number(totalSum) / 50000000 * 5;
-            if (totalHeight > 135) totalHeight = 135;
-            let t = ((totalSum / 10000).toFixed(2)) + "万";
-            this.setState({
-                totalSum: t, totalBonus: totalBonus, totalHeight: totalHeight
-            });
-        })
-    }
 
     //单月奖金
     judgePlatformSingle(total) {
@@ -150,8 +128,7 @@ class RefactorDrawPC extends React.Component {
             bonus = '33万';
             this.setState({ platBg: "url('images/platformPC4.png')" })
         }
-        let height = Number(total) / 10000000 * 4;
-        if (height > 203) height = 203;
+        let height = Number(total) / 10000000 * 4 < 203 ? Number(total) / 10000000 * 4 : 203;
         let t = ((total / 10000).toFixed(2)) + "万";
         this.setState({
             total: t, bonus: bonus, height: height
@@ -174,14 +151,34 @@ class RefactorDrawPC extends React.Component {
             bonus = '41万';
             this.setState({ platBg: "url('images/platformPC42.png')" })
         }
-        let height = Number(total) / 10000000 * 4;
-        if (height > 203) height = 203;
+        let height = Number(total) / 10000000 * 4 < 203 ? Number(total) / 10000000 * 4 : 203;
         let t = ((total / 10000).toFixed(2)) + "万";
         this.setState({
             total: t, bonus: bonus, height: height
         });
     }
-
+    //请求总榜奖金
+    ajaxTotalData = () => {
+        $.get(API_PATH + "activity/v1/totalMonthData.json").then(data => {
+            data = JSON.parse(data);
+            let totalBonus = 0;
+            let totalSum = data.data && data.data.total;
+            if (totalSum < 1000000000) {
+                totalBonus = 0;
+            } else if (totalSum < 1300000000) {
+                totalBonus = 40;
+            } else {
+                totalBonus = 100;
+            }
+            this.judgePlatformTotalBg(totalSum);
+            let totalHeight = Number(totalSum) / 50000000 * 5 < 135 ? Number(totalSum) / 50000000 * 5 : 135;
+            let t = ((totalSum / 10000).toFixed(2)) + "万";
+            this.setState({
+                totalSum: t, totalBonus: totalBonus, totalHeight: totalHeight
+            });
+        })
+    }
+    //总榜注水池
     judgePlatformTotalBg(total) {
         if (total < 1000000000) {
             this.setState({ platTotalBg: "url('images/platformTotalPC1.png')" })
@@ -210,7 +207,7 @@ class RefactorDrawPC extends React.Component {
     render() {
         // console.log(RefactorDrawPC.start);
         let { stageMay, stageJune, selectedMay, selectedJune, total, totalSum, bonus, totalBonus, close, type, personData, teamData, height, platBg, totalHeight, platTotalBg } = this.state;
-        let { isLogin, prize_list } = this.props
+        let { isLogin, prize_list } = this.props;
         let no = {
             width: "237px",
             height: "96px",
@@ -313,12 +310,12 @@ class RefactorDrawPC extends React.Component {
                 <div className="drawMonthLadder">
                     <div className="person">
                         {
-                            <PersonTeamMonthLadderPC title={"个人榜"} isImgFun={this.isImgFun} personData={personData} />
+                            <PersonTeamMonthLadderPC title={"个人榜"} personData={personData} />
                         }
                     </div>
                     <div className="team">
                         {
-                            <PersonTeamMonthLadderPC title={"团队榜"} isImgFun={this.isImgFun} teamData={teamData} />
+                            <PersonTeamMonthLadderPC title={"团队榜"} teamData={teamData} />
                         }
                     </div>
                 </div>
@@ -352,14 +349,12 @@ class RefactorDrawPC extends React.Component {
                 <div className="drawTotalLadder">
                     <div className="person">
                         {
-                            <PersonTeamTotalLadderPC title={"个人榜"} getServerTimestamp={this.getServerTimestamp}
-                                isImgFun={this.isImgFun} />
+                            <PersonTeamTotalLadderPC title={"个人榜"} />
                         }
                     </div>
                     <div className="team">
                         {
-                            <PersonTeamTotalLadderPC title={"团队榜"} getServerTimestamp={this.getServerTimestamp}
-                                isImgFun={this.isImgFun} />
+                            <PersonTeamTotalLadderPC title={"团队榜"} />
                         }
                     </div>
                 </div>

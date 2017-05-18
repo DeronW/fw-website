@@ -3,18 +3,15 @@ class PersonTeamMonthLadderPC extends React.Component {
     constructor(props) {
         super(props);
         this.PRE_PAGE = 10;
-        this.state = {
-            list: [],
-            page: 1,
-            totalPage: 1,
-            tab: '上一页',
-            isClick: true,
-            cursor: 0
-        }
     }
-
+    state = {
+        list: [],
+        page: 1,
+        tab: '上一页',
+        cursor: 0
+    }
     componentDidMount() {
-        let {title,personData,teamData} = this.props;
+        let { title, personData, teamData } = this.props;
         this.ajaxLadder(title, personData, teamData);
     }
 
@@ -25,19 +22,16 @@ class PersonTeamMonthLadderPC extends React.Component {
     //请求个人、小组数据
     ajaxLadder(title, personData, teamData) {
         if (title == "个人榜") {
-            this.setState({list: personData || []});
-            if (personData && personData.length > this.PRE_PAGE) this.setState({totalPage: 2})
+            this.setState({ list: personData || [] });
         } else if (title == "团队榜") {
-            this.setState({list: teamData || []});
-            if(teamData && teamData.length > this.PRE_PAGE) this.setState({totalPage: 2})
+            this.setState({ list: teamData || [] });
         }
     }
 
-
     switchPageHandler(type) {
-        this.setState({tab: type});
-        let {page,totalPage}=this.state;
-        let cursor, min, new_page, len = this.state.list.length;
+        this.setState({ tab: type });
+        let { page,list } = this.state;
+        let cursor, min, new_page, len = this.state.list.length,totalCount = Math.ceil(len / this.PRE_PAGE);
         if (type == '上一页') {
             if (len % this.PRE_PAGE) {
                 min = parseInt(len / this.PRE_PAGE) * this.PRE_PAGE
@@ -45,12 +39,12 @@ class PersonTeamMonthLadderPC extends React.Component {
                 min = len - this.PRE_PAGE
             }
             cursor = this.state.cursor > 0 ? Math.min(min, this.state.cursor - this.PRE_PAGE) : 0;
-            this.setState({cursor: cursor});
+            this.setState({ cursor: cursor });
             if (page > 1) {
                 new_page = page - 1;
-                this.setState({page: new_page});
+                this.setState({ page: new_page });
                 if (page > 2) {
-                    this.setState({tab: ''})
+                    this.setState({ tab: '' })
                 }
             }
         } else {
@@ -60,29 +54,29 @@ class PersonTeamMonthLadderPC extends React.Component {
                 min = len - this.PRE_PAGE
             }
             cursor = Math.min(min, this.state.cursor + this.PRE_PAGE);
-            this.setState({cursor: cursor});
-            if (page < totalPage) {
+            this.setState({ cursor: cursor });
+            if (page < totalCount) {
                 new_page = page + 1;
-                this.setState({page: new_page});
-                if (page < totalPage - 1) {
-                    this.setState({tab: ''})
+                this.setState({ page: new_page });
+                if (page < totalCount - 1) {
+                    this.setState({ tab: '' })
                 }
             }
         }
     }
 
     get_current_page() {
-        let {list} =this.state;
+        let { list } = this.state;
         return list && list.slice(this.state.cursor, this.state.cursor + this.PRE_PAGE);
     }
 
     render() {
-        let {totalPage,tab,cursor,list}=this.state;
-        let {title,isImgFun} = this.props;
+        let {tab, cursor, list} = this.state;
+        let { title, isImgFun } = this.props;
         let pageImg = (item, index) => {
             return <div key={index}
-                        className={totalPage > 1?(tab == item ? 'selectedPage':null):'selectedPage'}
-                        onClick={totalPage > 1?()=>{this.switchPageHandler(item)}:null}>{item}</div>
+                className={list.length > this.PRE_PAGE ? (tab == item ? 'selectedPage' : null) : 'selectedPage'}
+                onClick={list.length > this.PRE_PAGE ? () => { this.switchPageHandler(item) } : null}>{item}</div>
         };
         let page = (
             <div className="page">
@@ -95,33 +89,32 @@ class PersonTeamMonthLadderPC extends React.Component {
             index += cursor;
             return <tr key={index}>
                 <td>
-                    {isImgFun(index) ? <img className="tdImg" src={isImgFun(index)}/> :
-                        <span className="twoSpan">{index + 1}</span>}
-                    {<span className="oneSpan">{item.loginName}</span>}
+                    <span className={"twoSpan span-item-" + index}>{index > 2 ? (index + 1) : ''}</span>
+                    <span className="oneSpan">{item.loginName}</span>
                 </td>
                 <td>
                     {item.amount}
                 </td>
-                <td className={item.bonus>0?"bodyPrice":''}>{item.bonus}</td>
+                <td className={item.bonus > 0 ? "bodyPrice" : ''}>{item.bonus}</td>
             </tr>
         };
         let tBody = (
             <tbody>
-            {
-                this.get_current_page().map(bodyImg)
-            }
+                {
+                    this.get_current_page().map(bodyImg)
+                }
             </tbody>
         );
         return <div className="personMonthLadder">
-            <div className={title == "个人榜"?"personTitle":"teamTitle"}><div>{title}</div></div>
+            <div className={title == "个人榜" ? "personTitle" : "teamTitle"}><div>{title}</div></div>
             <div className="personTable">
                 <table>
                     <thead>
-                    <tr>
-                        <td>用户名</td>
-                        <td>{title == "个人榜" ? "个人累投金额（元）" : "团队累投金额（元）"}</td>
-                        <td>奖金（元）</td>
-                    </tr>
+                        <tr>
+                            <td>用户名</td>
+                            <td>{title == "个人榜" ? "个人累投金额（元）" : "团队累投金额（元）"}</td>
+                            <td>奖金（元）</td>
+                        </tr>
                     </thead>
                     {
                         list.length ? tBody : null
