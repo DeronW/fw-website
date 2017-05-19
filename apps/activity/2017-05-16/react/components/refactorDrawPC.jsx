@@ -74,18 +74,21 @@ class RefactorDrawPC extends React.Component {
 
     //设置hash值
     setHashCode = (key) => {
-        if (key == "may") {
-            window.location.hash = key;
-            this.setState({ selectedMay: true, selectedJune: false }, this.ajaxMonthData(API_PATH + "activity/v1/mayMonthData.json"))
-        } else if (key == "june") {
-            if (this.props.timestamp >= this.standardTime(2017, 6, 13, 23, 59, 59)) {
+        this.getServerTimestamp(currentTime => {
+            if (key == "may") {
                 window.location.hash = key;
-                this.setState({ selectedMay: false, selectedJune: true, }, this.ajaxMonthData(API_PATH + "activity/v1/juneMonthData.json"))
+                this.setState({ selectedMay: true, selectedJune: false }, this.ajaxMonthData(API_PATH + "activity/v1/mayMonthData.json"))
+            } else if (key == "june") {
+                if (currentTime >= this.standardTime(2017, 6, 13, 23, 59, 59)) {
+                    window.location.hash = key;
+                    this.setState({ selectedMay: false, selectedJune: true, }, this.ajaxMonthData(API_PATH + "activity/v1/juneMonthData.json"))
+                }
             }
-        }
+        })
     }
+    //获取hash值
     getHashCode() {
-        return window.location.hash
+        return window.location.hash.slice(1)
     }
     //请求月榜数据
     ajaxMonthData = (url) => {
@@ -118,7 +121,7 @@ class RefactorDrawPC extends React.Component {
         } else if (total < 450000000) {
             bonus = '18万';
             this.setState({ platBg: "url('images/platformPC3.png')" })
-        } else {
+        } else if (total >= 450000000){
             bonus = '33万';
             this.setState({ platBg: "url('images/platformPC4.png')" })
         }
@@ -141,7 +144,7 @@ class RefactorDrawPC extends React.Component {
         } else if (total < 500000000) {
             bonus = '23万';
             this.setState({ platBg: "url('images/platformPC32.png')" })
-        } else {
+        } else  if (total >= 450000000){
             bonus = '41万';
             this.setState({ platBg: "url('images/platformPC42.png')" })
         }
@@ -166,7 +169,7 @@ class RefactorDrawPC extends React.Component {
                 } else if (totalSum < 1300000000) {
                     totalBonus = 40;
                     this.setState({ platTotalBg: "url('images/platformTotalPC2.png')" })
-                } else {
+                } else if (totalSum >= 1300000000){
                     totalBonus = 100;
                     this.setState({ platTotalBg: "url('images/platformTotalPC3.png')" })
                 }
@@ -284,8 +287,7 @@ class RefactorDrawPC extends React.Component {
                 {
                     isLogin ? loginRemain : noLoginRemain
                 }
-
-                <InjectPoolMonthPool platBg={platBg} height={height} />
+                <InjectPoolPC ladder="month" platBg={platBg} height={height} />
 
                 <div className="remindText remindText2">
                     <div className='loginRemain'>进榜规则：个人累投金额≥50万元；或团队累投金额≥1000万且团队人数≥50人。<br />
@@ -296,13 +298,11 @@ class RefactorDrawPC extends React.Component {
                     <div className="person">
                         {
                             <PersonTeamLadderPC ladder="month" title="个人榜" personData={personData} />
-                            // <PersonTeamMonthLadderPC title={"个人榜"} personData={personData} />
                         }
                     </div>
                     <div className="team">
                         {
                             <PersonTeamLadderPC ladder="month" title="团队榜" teamData={teamData} />
-                            // <PersonTeamMonthLadderPC title={"团队榜"} teamData={teamData} />
                         }
                     </div>
                 </div>
@@ -325,8 +325,7 @@ class RefactorDrawPC extends React.Component {
                         </div>
                     </div> : noLoginRemain
                 }
-
-                <InjectPoolTotalPool platTotalBg={platTotalBg} totalHeight={totalHeight} />
+                <InjectPoolPC ladder="total" platTotalBg={platTotalBg} totalHeight={totalHeight} />
 
                 <div className="remindText remindText3">
                     <div className='loginRemain'>进榜规则：个人累投金额≥100万元；或团队累投金额≥1200万且团队人数≥50人。<br />
@@ -337,13 +336,11 @@ class RefactorDrawPC extends React.Component {
                     <div className="person">
                         {
                             <PersonTeamLadderPC ladder="total" title="个人榜" personTotalData={personTotalData} />
-                            // <PersonTeamTotalLadderPC title={"个人榜"} />
                         }
                     </div>
                     <div className="team">
                         {
                             <PersonTeamLadderPC ladder="total" title="团队榜" teamTotalData={teamTotalData} />
-                            // <PersonTeamTotalLadderPC title={"团队榜"} />
                         }
                     </div>
                 </div>
