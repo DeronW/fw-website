@@ -24,10 +24,7 @@ class RefactorDrawPC extends React.Component {
         this.InitialHash();
         this.ajaxTotalData();
     }
-    //关闭pop层
-    closePopHandler = () => {
-        ReactDOM.unmountComponentAtNode(document.getElementById('pop'));
-    }
+
     //debug模式
     getServerTimestamp = (callback) => {
         var ts = $getDebugParams().timestamp;
@@ -181,13 +178,10 @@ class RefactorDrawPC extends React.Component {
             }
         })
     }
-    gotoLogin() {
-        var loginUrl = location.protocol + '//www.9888.cn/api/activityPullNew/pullnewParty.do?id=241';
-        $FW.gotoSpecialPage("登录", loginUrl);
-    }
+
     investFriends() {
-        ReactDOM.render(<InvestFriendsPC gotoLogin={this.gotoLogin}
-            closePopHandler={this.closePopHandler} />, document.getElementById("pop"))
+        ReactDOM.render(<InvestFriendsPC gotoLogin={this.props.gotoLogin}
+            closePopHandler={this.props.closePopHandler} />, document.getElementById("pop"))
     }
     closeHandler() {
         this.setState({ close: false })
@@ -195,7 +189,7 @@ class RefactorDrawPC extends React.Component {
     render() {
         // console.log(RefactorDrawPC.start);
         let { stageMay, stageJune, selectedMay, selectedJune, total, totalSum, bonus, totalBonus, close, type, personData, teamData, personTotalData, teamTotalData, height, platBg, totalHeight, platTotalBg } = this.state;
-        let { isLogin, prize_list } = this.props;
+        let { isLogin, prize_list, gotoLogin } = this.props;
         let no = {
             width: "237px",
             height: "96px",
@@ -231,7 +225,7 @@ class RefactorDrawPC extends React.Component {
         };
         let noLoginRemain = (
             <div className="remindText">
-                <div className='noLoginRemain'>请登录后，查看您的投资获奖情况。<a onClick={() => this.gotoLogin()}>立即登录</a></div>
+                <div className='noLoginRemain'>请登录后，查看您的投资获奖情况。<a onClick={() => gotoLogin()}>立即登录</a></div>
             </div>
         );
         let loginRemain = (
@@ -247,7 +241,7 @@ class RefactorDrawPC extends React.Component {
         );
         let noLoginChance = (
             <div className="drawChance">
-                <div className='noLoginChance'>活动期间单标单笔投资每满10000元获1次抽奖机会，登录后可查抽奖机会，<a onClick={() => this.gotoLogin()}>立即登录</a>
+                <div className='noLoginChance'>活动期间单标单笔投资每满10000元获1次抽奖机会，登录后可查抽奖机会，<a onClick={() => gotoLogin()}>立即登录</a>
                 </div>
             </div>
         );
@@ -267,10 +261,10 @@ class RefactorDrawPC extends React.Component {
                 }
                 <div className="drawMachine">
                     <div className="machine">
-                        <SlotMachinePC isLogin={isLogin} gotoLogin={this.gotoLogin} prize_list={prize_list} />
+                        <SlotMachinePC isLogin={isLogin} gotoLogin={gotoLogin} prize_list={prize_list} />
                     </div>
                     <div className="winningList">
-                        <WinningListPC isLogin={isLogin} gotoLogin={this.gotoLogin} />
+                        <WinningListPC isLogin={isLogin} gotoLogin={gotoLogin} />
                     </div>
                 </div>
                 <div className="drawTips">
@@ -296,14 +290,10 @@ class RefactorDrawPC extends React.Component {
                 </div>
                 <div className="drawMonthLadder">
                     <div className="person">
-                        {
-                            <PersonTeamLadderPC ladder="month" title="个人榜" personData={personData} />
-                        }
+                        <PersonTeamLadderPC ladder="month" title="个人榜" personData={personData} />
                     </div>
                     <div className="team">
-                        {
-                            <PersonTeamLadderPC ladder="month" title="团队榜" teamData={teamData} />
-                        }
+                        <PersonTeamLadderPC ladder="month" title="团队榜" teamData={teamData} />
                     </div>
                 </div>
                 <div className="drawTips">
@@ -334,14 +324,10 @@ class RefactorDrawPC extends React.Component {
                 </div>
                 <div className="drawTotalLadder">
                     <div className="person">
-                        {
-                            <PersonTeamLadderPC ladder="total" title="个人榜" personTotalData={personTotalData} />
-                        }
+                        <PersonTeamLadderPC ladder="total" title="个人榜" personTotalData={personTotalData} />
                     </div>
                     <div className="team">
-                        {
-                            <PersonTeamLadderPC ladder="total" title="团队榜" teamTotalData={teamTotalData} />
-                        }
+                        <PersonTeamLadderPC ladder="total" title="团队榜" teamTotalData={teamTotalData} />
                     </div>
                 </div>
                 <div className="drawTips">

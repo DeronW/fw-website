@@ -1,14 +1,10 @@
 class RefactorDrawMobile extends React.Component {
-    constructor(props) {
-        super(props);
-    }
     state = {
         monthNotice: "",
         stageMay: '未开始',
         stageJune: '未开始',
         selectedMay: true,
         selectedJune: false,
-        type: 'mayActf',
         remain: '',
         close: false,
         bonus: 0,
@@ -91,7 +87,6 @@ class RefactorDrawMobile extends React.Component {
                 }
             }
         })
-
     }
     //获取hash值
     getHashCode() {
@@ -201,12 +196,8 @@ class RefactorDrawMobile extends React.Component {
     }
 
     investFriends() {
-        ReactDOM.render(<InvestFriendsMobile gotoLogin={this.gotoLogin}
-            closePopHandler={this.closePopHandler} />, document.getElementById("pop"))
-    }
-
-    closePopHandler() {
-        ReactDOM.unmountComponentAtNode(document.getElementById('pop'));
+        ReactDOM.render(<InvestFriendsMobile gotoLogin={this.props.gotoLogin}
+            closePopHandler={this.props.closePopHandler} />, document.getElementById("pop"))
     }
 
     toggleMonthTips() {
@@ -217,17 +208,13 @@ class RefactorDrawMobile extends React.Component {
         this.setState({ totalTipsClose: !this.state.totalTipsClose })
     }
 
-    gotoLogin() {
-        var loginUrl = location.protocol + '//www.9888.cn/api/activityPullNew/pullnewParty.do?id=241';
-        $FW.gotoSpecialPage("登录", loginUrl);
-    }
     gotoDraw() {
         var link = "https://www.9888.cn/static/activity/template-lottery-draw/index.html";
         window.location.href = link;
     }
     render() {
         let { stageMay, stageJune, selectedMay, selectedJune, close, bonus, total, totalSum, totalBonus, show, monthTipsClose, totalTipsClose, type, personData, teamData, personTotalData, teamTotalData, height, platBg, totalHeight, platTotalBg, isApp } = this.state;
-        let { isLogin } = this.props;
+        let { isLogin,gotoLogin } = this.props;
 
         let no = {
             width: "237px",
@@ -264,7 +251,7 @@ class RefactorDrawMobile extends React.Component {
             <div className="drawTips">
                 <p>请登录后，查看您的邀友排名及可获奖金</p>
 
-                <div className="login" onClick={() => this.gotoLogin()}>立即登录</div>
+                <div className="login" onClick={() => gotoLogin()}>立即登录</div>
             </div>
         );
         let tipsBonus = (
@@ -310,7 +297,7 @@ class RefactorDrawMobile extends React.Component {
                 <div className="activityExplain" onClick={() => this.showHandler()}></div>
             </div>
             <div className="drawTitleMobile">大奖抽抽抽，100%中奖</div>
-            <div className="drawGift" onClick={isLogin ? () => { this.gotoDraw() } : () => this.gotoLogin()}><p>{isLogin ? "去抽奖" : "登录"}</p></div>
+            <div className="drawGift" onClick={isLogin ? () => { this.gotoDraw() } : () => gotoLogin()}><p>{isLogin ? "去抽奖" : "登录"}</p></div>
             <div className="drawTitleMobile">投资冲月榜，个人团队大作战</div>
             <div className="monthStateTab">
                 {monthMayTab(stageMay, "五月", "5.16 ~ 6.13")}
