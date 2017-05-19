@@ -10,7 +10,6 @@ class InjectPoolMobile extends React.Component {
     }
     render() {
         let { platBg, height, platTotalBg, totalHeight, ladder } = this.props;
-        console.log(totalHeight);
         let monthBg = {
             background: platBg
         };
@@ -39,7 +38,7 @@ class InjectPoolMobile extends React.Component {
                     <div className="injectWater" onTouchEnd={(e) => {
                         e.preventDefault();
                         e.stopPropagation();
-                        this.toggleWaterRemain()
+                        this.showWaterRemain()
                     }}></div>
                     <img style={bottomMonthStyle} src="images/waterMobile.png" alt="" />
 
@@ -54,7 +53,7 @@ class InjectPoolMobile extends React.Component {
                     <div className="injectWater" onTouchEnd={(e) => {
                         e.preventDefault();
                         e.stopPropagation();
-                        this.toggleWaterRemain()
+                        this.showWaterRemain()
                     }}></div>
                     <img style={bottomTotalStyle} src="images/zongbang.png" alt="" />
 

@@ -121,7 +121,7 @@ class RefactorDrawPC extends React.Component {
         } else if (total < 450000000) {
             bonus = '18万';
             this.setState({ platBg: "url('images/platformPC3.png')" })
-        } else if (total >= 450000000){
+        } else if (total >= 450000000) {
             bonus = '33万';
             this.setState({ platBg: "url('images/platformPC4.png')" })
         }
@@ -144,7 +144,7 @@ class RefactorDrawPC extends React.Component {
         } else if (total < 500000000) {
             bonus = '23万';
             this.setState({ platBg: "url('images/platformPC32.png')" })
-        } else  if (total >= 450000000){
+        } else if (total >= 450000000) {
             bonus = '41万';
             this.setState({ platBg: "url('images/platformPC42.png')" })
         }
@@ -169,7 +169,7 @@ class RefactorDrawPC extends React.Component {
                 } else if (totalSum < 1300000000) {
                     totalBonus = 40;
                     this.setState({ platTotalBg: "url('images/platformTotalPC2.png')" })
-                } else if (totalSum >= 1300000000){
+                } else if (totalSum >= 1300000000) {
                     totalBonus = 100;
                     this.setState({ platTotalBg: "url('images/platformTotalPC3.png')" })
                 }
@@ -236,7 +236,7 @@ class RefactorDrawPC extends React.Component {
         );
         let loginRemain = (
             <div className="remindText">
-                {type == 'mayActf' ? <div className='loginRemain'>
+                {this.getHashCode() == "may" ? <div className='loginRemain'>
                     5.16 ~ 6.13，平台达到相应累计交易量，且个人及团队排行前20名的工友，最高可获分33万奖金。当前平台累计交易量<em>{total}</em> 元，可获分<em>{bonus}</em>元奖金！
                 </div> :
                     <div className='loginRemain'>

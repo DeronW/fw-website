@@ -7,23 +7,13 @@ class PersonTeamLadderPC extends React.Component {
         cursor: 0,
         pre_page: 10,
     }
-    componentDidMount() {
-        let { title, personData, teamData, personTotalData, teamTotalData, ladder } = this.props;
+    componentWillReceiveProps(nextProps) {
+        let { title, personData, teamData, personTotalData, teamTotalData, ladder } = nextProps;
         if (ladder == "month") {
             this.ajaxMonthLadder(title, personData, teamData);
             this.setState({ pre_page: 10 });
         } else if (ladder == "total") {
-            this.ajaxTotalLadder(title, personTotalData, teamTotalData)
-            this.setState({ pre_page: 15 });
-        }
-    }
-
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.ladder == "month") {
-            this.ajaxMonthLadder(nextProps.title, nextProps.personData, nextProps.teamData);
-            this.setState({ pre_page: 10 });
-        } else if (nextProps.ladder == "total") {
-            this.ajaxTotalLadder(nextProps.title, nextProps.personTotalData, nextProps.teamTotalData);
+            this.ajaxTotalLadder(title, personTotalData, teamTotalData);
             this.setState({ pre_page: 15 });
         }
     }
@@ -88,7 +78,7 @@ class PersonTeamLadderPC extends React.Component {
 
     render() {
         let { tab, cursor, list, pre_page } = this.state;
-        let { ladder,title } = this.props;
+        let { ladder, title } = this.props;
         let pageImg = (item, index) => {
             return <div key={index}
                 className={list.length > pre_page ? (tab == item ? 'selectedPage' : null) : 'selectedPage'}

@@ -10,9 +10,9 @@ class PersonTeamLadderMobile extends React.Component {
         pre_page: 10
     }
     componentWillReceiveProps(nextProps) {
-        let { personData, teamData, personTotalData, teamTotalData, ladder } = this.props;
+        let { personData, teamData, personTotalData, teamTotalData, ladder } = nextProps;
         let { ladderTab } = this.state;
-        
+
         if (ladder == "month") {
             this.setState({ pre_page: 10 });
             this.ajaxMonthLadder(ladderTab, personData, teamData);

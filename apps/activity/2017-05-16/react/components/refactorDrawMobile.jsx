@@ -8,8 +8,6 @@ class RefactorDrawMobile extends React.Component {
         stageJune: '未开始',
         selectedMay: true,
         selectedJune: false,
-        start: '',
-        end: '',
         type: 'mayActf',
         remain: '',
         close: false,
@@ -167,27 +165,31 @@ class RefactorDrawMobile extends React.Component {
     ajaxTotalData() {
         $.get(API_PATH + "activity/v1/totalMonthData.json").then(data => {
             data = JSON.parse(data);
-            let totalBonus = 0;
-            let totalSum = data.data && data.data.total;
-            let personTotalData = data.data && data.data.persondata;
-            let teamTotalData = data.data && data.data.teamdata;
-            if (totalSum < 1000000000) {
-                totalBonus = 0;
-                this.setState({ platTotalBg: "url('images/platformTotalM1.png')" })
-            } else if (totalSum < 1300000000) {
-                totalBonus = 40;
-                this.setState({ platTotalBg: "url('images/platformTotalM2.png')" })
-            } else if (totalSum >= 1300000000) {
-                totalBonus = 100;
-                this.setState({ platTotalBg: "url('images/platformTotalM3.png')" })
+            let totalBonus = 0, totalSum, personTotalData, teamTotalData;
+
+            if (data && data.data) {
+                totalSum = data.data.total;
+                personTotalData = data.data.persondata;
+                teamTotalData = data.data.teamdata;
+                if (totalSum < 1000000000) {
+                    totalBonus = 0;
+                    this.setState({ platTotalBg: "url('images/platformTotalM1.png')" })
+                } else if (totalSum < 1300000000) {
+                    totalBonus = 40;
+                    this.setState({ platTotalBg: "url('images/platformTotalM2.png')" })
+                } else if (totalSum >= 1300000000) {
+                    totalBonus = 100;
+                    this.setState({ platTotalBg: "url('images/platformTotalM3.png')" })
+                }
+
+                let totalHeight = Number(totalSum) / 50000000 * 5 < 135 ? Number(totalSum) / 50000000 * 5 : 135;
+                let t = ((totalSum / 10000).toFixed(2)) + "万";
+                this.setState({
+                    totalSum: t, totalBonus: totalBonus, totalHeight: totalHeight,
+                    personTotalData: personTotalData, teamTotalData: teamTotalData
+                });
             }
 
-            let totalHeight = Number(totalSum) / 50000000 * 5 < 135 ? Number(totalSum) / 50000000 * 5 : 135;
-            let t = ((totalSum / 10000).toFixed(2)) + "万";
-            this.setState({
-                totalSum: t, totalBonus: totalBonus, totalHeight: totalHeight,
-                personTotalData: personTotalData, teamTotalData: teamTotalData
-            });
         })
     }
     closeHandler() {
@@ -215,10 +217,6 @@ class RefactorDrawMobile extends React.Component {
         this.setState({ totalTipsClose: !this.state.totalTipsClose })
     }
 
-    isImgFun(index) {
-        return ['images/no1.png', 'images/no2.png', 'images/no3.png'][index]
-    }
-
     gotoLogin() {
         var loginUrl = location.protocol + '//www.9888.cn/api/activityPullNew/pullnewParty.do?id=241';
         $FW.gotoSpecialPage("登录", loginUrl);
@@ -230,7 +228,6 @@ class RefactorDrawMobile extends React.Component {
     render() {
         let { stageMay, stageJune, selectedMay, selectedJune, close, bonus, total, totalSum, totalBonus, show, monthTipsClose, totalTipsClose, type, personData, teamData, personTotalData, teamTotalData, height, platBg, totalHeight, platTotalBg, isApp } = this.state;
         let { isLogin } = this.props;
-        // console.log(totalHeight);
 
         let no = {
             width: "237px",
@@ -272,7 +269,7 @@ class RefactorDrawMobile extends React.Component {
         );
         let tipsBonus = (
             <div className='drawTips'>
-                {type == 'mayActf' ? <div>5.16 ~ 6.13，平台达到相应累计交易量，且个人及团队排行前20名的工友，最高可获分33万奖金。<br />
+                {this.getHashCode() == "may" ? <div>5.16 ~ 6.13，平台达到相应累计交易量，且个人及团队排行前20名的工友，最高可获分33万奖金。<br />
                     当前平台累计交易量<em>{total}</em>元，可获分<em>{bonus}</em>元奖金！</div> :
                     <div>6.14-7.12，平台达到相应累计交易量，且个人及团队排行前20名的工友，最高获分41万元奖金。当前平台累计交易量<em>{total}</em>
                         元，可获分<em>{bonus}</em>元奖金！</div>}
@@ -357,7 +354,7 @@ class RefactorDrawMobile extends React.Component {
             <div className="drawTitleMobile">终级排行榜，百万壕礼奉上</div>
             {isLogin ? tipsTotalBonus : tipsNoLogin}
             {
-                platTotalBg && <InjectPoolMobile ladder="total" platBg={platTotalBg} height={totalHeight} ref="injectPool2" />
+                <InjectPoolMobile ladder="total" platTotalBg={platTotalBg} totalHeight={totalHeight} ref="injectPool2" />
             }
 
             <div className="drawTips">
