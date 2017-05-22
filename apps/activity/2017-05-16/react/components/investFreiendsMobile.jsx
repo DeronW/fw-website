@@ -28,8 +28,7 @@ class InvestFriendsMobile extends React.Component {
     render() {
         let {isLogin,gcm}=this.state;
         let {closePopHandler,gotoLogin} =this.props;
-        let noLoginNotice = (
-            <div className="mobileNoticeContentNo">
+        let noLoginNotice =  <div className="mobileNoticeContentNo">
                 <div className="noticeClose" onClick={()=>closePopHandler()}></div>
                 <div className="noticeText">请好友用您的工场码注册，去投标，达成团队目标。<br/>
                     登录后查看我的工场码。<br/>
@@ -42,10 +41,8 @@ class InvestFriendsMobile extends React.Component {
                 </div>
                 <a className="moreNew"
                    href="https://www.9888.cn/cms/addhtml/2078.html?reloadworkpage=y">更多新手秘笈></a>
-            </div>
-        );
-        let loginNotice = (
-            <div className="mobileNoticeContentLogin">
+            </div> ;
+        let loginNotice = <div className="mobileNoticeContentLogin">
                 <div className="noticeClose" onClick={()=>closePopHandler()}></div>
                 <div className="noticeText1">请好友注册或投资时填写我的工场码</div>
                 <div className="noticeCode">{gcm}</div>
@@ -55,8 +52,7 @@ class InvestFriendsMobile extends React.Component {
                 </div>
                 <a className="moreNew"
                    href="http://mp.weixin.qq.com/s?__biz=MjM5MjQwMjcyNA==&mid=507798032&idx=1&sn=6593ce9f7358486685b84006fa3c2fff&scene=0#wechat_redirect">更多新手秘笈></a>
-            </div>
-        );
+            </div>;
         return <div className="mobileNotice">
             {
                 isLogin ? loginNotice : noLoginNotice

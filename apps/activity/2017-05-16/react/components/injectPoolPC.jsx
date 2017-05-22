@@ -1,7 +1,5 @@
 class InjectPoolPC extends React.Component {
-    state = {
-        
-    }
+    
     render() {
         let { platBg, height, platTotalBg, totalHeight, ladder } = this.props;
         let monthBg = {

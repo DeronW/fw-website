@@ -17,12 +17,12 @@ class PersonTeamLadderMobile extends React.Component {
             this.setState({ pre_page: 10 });
             this.ajaxMonthLadder(ladderTab, personData, teamData);
         } else if (ladder == "total") {
-            this.setState({ pre_page: 15 })
+            this.setState({ pre_page: 15 });
             this.ajaxTotalLadder(ladderTab, personTotalData, teamTotalData)
         }
     }
 
-    //切换月榜tab
+    //切换个人榜、团队榜tab
     switchLadderTabHandler(t) {
         let { personData, teamData, personTotalData, teamTotalData, ladder } = this.props;
         if (t == this.state.ladderTab) return;
@@ -37,22 +37,20 @@ class PersonTeamLadderMobile extends React.Component {
     //请求个人、小组数据
     ajaxMonthLadder(title, personData, teamData) {
         if (title == "个人榜") {
-            this.setState({ thead: ['用户名', '个人累投金额(元)', '奖金(元)'], cursor: 0, tab: '上一页' });
             this.setState({ list: personData || [] });
         } else if (title == "团队榜") {
-            this.setState({ thead: ['用户名', '团队累投金额(元)', '奖金(元)'], cursor: 0, tab: '上一页' });
             this.setState({ list: teamData || [] });
         }
+        this.setState({ cursor: 0, tab: '上一页', })
     }
     //请求总榜数据
     ajaxTotalLadder(title, personTotalData, teamTotalData) {
         if (title == "个人榜") {
-            this.setState({ thead: ['用户名', '个人累投金额(元)', '奖金(元)'], cursor: 0, tab: '上一页' });
             this.setState({ list: personTotalData || [] });
         } else if (title == "团队榜") {
-            this.setState({ thead: ['用户名', '团队累投金额(元)', '奖金(元)'], cursor: 0, tab: '上一页' });
             this.setState({ list: teamTotalData || [] });
         }
+        this.setState({ cursor: 0, tab: '上一页', })
     }
     switchPageHandler(type) {
         this.setState({ tab: type });
@@ -100,6 +98,8 @@ class PersonTeamLadderMobile extends React.Component {
         let { tab, ladderTab, cursor, thead, list, pre_page } = this.state;
         let { ladder } = this.props;
         let len = list.length;
+        let tHeadTab = ladderTab == "个人榜" ? ['用户名', '个人累投金额(元)', '奖金(元)'] : ['用户名', '团队累投金额(元)', '奖金(元)'];
+
         let pageImg = (item, index) => {
             return <div key={index}
                 className={item == tab ? 'selectedPage' : null}
@@ -154,7 +154,7 @@ class PersonTeamLadderMobile extends React.Component {
                 <table>
                     <thead>
                         <tr>
-                            {thead.map(tHead)}
+                            {tHeadTab.map(tHead)}
                         </tr>
                     </thead>
                     {
