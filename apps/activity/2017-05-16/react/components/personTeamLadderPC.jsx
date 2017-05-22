@@ -81,8 +81,8 @@ class PersonTeamLadderPC extends React.Component {
         let { ladder, title } = this.props;
         let pageImg = (item, index) => {
             return <div key={index}
-                className={list.length > pre_page ? (tab == item ? 'selectedPage' : null) : 'selectedPage'}
-                onClick={list.length > pre_page ? () => { this.switchPageHandler(item) } : null}>{item}</div>
+                className={tab == item ? 'selectedPage' : null}
+                onClick={() => { this.switchPageHandler(item) }}>{item}</div>
         };
         let page = (
             <div className="page">
@@ -91,7 +91,7 @@ class PersonTeamLadderPC extends React.Component {
                 }
             </div>
         );
-        let bodyImg = (item, index) => {
+        let bodyItem = (item, index) => {
             index += cursor;
             return <tr key={index}>
                 <td>
@@ -107,7 +107,7 @@ class PersonTeamLadderPC extends React.Component {
         let tBody = (
             <tbody>
                 {
-                    this.get_current_page().map(bodyImg)
+                    this.get_current_page().map(bodyItem)
                 }
             </tbody>
         );
@@ -132,7 +132,7 @@ class PersonTeamLadderPC extends React.Component {
                 </table>
             </div>
             {
-                list.length ? page : null
+                list.length > pre_page ? page : null
             }
             {
                 list.length ? null : <div className={ladder == "month" ? "monthLadderPcNot" : "monthLadderPcNot totalLadderPcNot"}>人气王还在堵车，马上就来</div>

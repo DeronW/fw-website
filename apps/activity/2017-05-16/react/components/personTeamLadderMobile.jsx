@@ -102,8 +102,8 @@ class PersonTeamLadderMobile extends React.Component {
         let len = list.length;
         let pageImg = (item, index) => {
             return <div key={index}
-                className={len > pre_page ? (item == tab ? 'selectedPage' : null) : 'selectedPage'}
-                onClick={len > pre_page ? () => { this.switchPageHandler(item) } : null}>{item}</div>
+                className={item == tab ? 'selectedPage' : null}
+                onClick={() => { this.switchPageHandler(item) }}>{item}</div>
         };
         let page = (
             <div className="page">
@@ -112,7 +112,7 @@ class PersonTeamLadderMobile extends React.Component {
                 }
             </div>
         );
-        let bodyImg = (item, index) => {
+        let bodyItem = (item, index) => {
             index += cursor;
             return <tr key={index}>
                 <td>
@@ -133,7 +133,7 @@ class PersonTeamLadderMobile extends React.Component {
         let tBody = (
             <tbody>
                 {
-                    this.get_current_page().map(bodyImg)
+                    this.get_current_page().map(bodyItem)
                 }
             </tbody>
         );
@@ -163,7 +163,7 @@ class PersonTeamLadderMobile extends React.Component {
                 </table>
             </div>
             {
-                list.length ? page : null
+                list.length > pre_page ? page : null
             }
             {
                 list.length ? null : <div className={ladder == "month" ? "monthLadderMobileNot" : "monthLadderMobileNot monthLadderTotalNot"}>人气王还在堵车，马上就来</div>
