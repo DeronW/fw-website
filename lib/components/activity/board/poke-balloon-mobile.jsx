@@ -8,8 +8,8 @@ const BalloonBoom = React.createClass({
         }
     },
     componentDidMount(){
-        $.get(API_PATH+"api/userState/v1/timestamp.json", (data)=> {
-            if (data.data.timestamp > 1499875200000) {
+        $.get(API_PATH + "api/userState/v1/timestamp.json", (data)=> {
+            if (data.data.timestamp < 1494864000000 || data.data.timestamp > 1499875200000) {
                 this.setState({outTime: true})
             }
         }, 'json')
@@ -55,7 +55,7 @@ const BalloonBoom = React.createClass({
     render() {
         let pathStyle = {
             position: 'absolute',
-            left: '0',
+            left: '40px',
             top: '110px'
         };
         return <div className="ballBoom">
@@ -79,9 +79,13 @@ const PokeBalloonMobile = React.createClass({
             type: 'single',
             giftPath: '',
             isAnimation: true,
+            isLogin: false
         }
     },
     componentDidMount() {
+        $UserReady(function (isLogin, user) {
+            this.setState({isLogin: isLogin});
+        }.bind(this));
         this.ajaxCount();
     },
     ajaxCount(){
@@ -97,32 +101,58 @@ const PokeBalloonMobile = React.createClass({
     },
     //一次
     promiseOnceLotteryResult(){
-        $.get(API_PATH+"api/activityPullInvest/v1/play.json?",{
-            configNo:1,
-            drawCount:1
+        this.showMessagePop('恭喜中奖');
+        if (window.poke_delay) return;
+        window.poke_delay = true;
+        var timeout=setTimeout(function(){
+            ReactDOM.render(<PopAllSituation closePopHandler={this.closePopHandler} popTitle="抽奖超时" popBtn="知道了" popText={"抽奖超时，请稍后再试。"}/>, document.getElementById("pop"))
+        }.bind(this),10000);
+        $.get(API_PATH + "api/activityPullInvest/v1/play.json?", {
+            configNo: 1,
+            drawCount: 1
         }).then((data) => {
-            this.ajaxCount();
-            this.refs.productListAuto.rewardPoolHandler();
-            this.showMessagePop('恭喜中奖', '', data.data.resultAward[0].prize)
+            if(timeout){ //清除定时器
+                clearTimeout(timeout);
+                timeout=null;
+            }
+            if(data.code == 10000){
+                this.ajaxCount();
+                this.showMessagePop('恭喜中奖', data.data.resultAward[0].prize);
+                this.refs.productListAuto.rewardPoolHandler();
+            }else{
+                ReactDOM.render(<PopAllSituation closePopHandler={this.closePopHandler} popTitle="抽奖异常" popBtn="知道了" popText={"请稍后再试，<br/>如需咨询请联系客服400-0322-988 。"}/>, document.getElementById("pop"))
+            }
         });
-
     },
     //十次
     promiseMoreLotteryResult(){
-        $.get(API_PATH+"api/activityPullInvest/v1/play.json?",{
-            configNo:1,
-            drawCount:10
+        this.showMessagePop('恭喜中奖');
+        if (window.poke_delay) return;
+        window.poke_delay = true;
+        var timeout=setTimeout(function(){
+            ReactDOM.render(<PopAllSituation closePopHandler={this.closePopHandler} popTitle="抽奖超时" popBtn="知道了" popText={"抽奖超时，请稍后再试。"}/>, document.getElementById("pop"))
+        }.bind(this),10000);
+        $.get(API_PATH + "api/activityPullInvest/v1/play.json?", {
+            configNo: 1,
+            drawCount: 10
         }).then((data) => {
-            this.ajaxCount();
-            this.refs.productListAuto.rewardPoolHandler();
-            this.showMessagePop('恭喜中奖', '', '', data.data.resultAward)
+            if(timeout){ //清除定时器
+                clearTimeout(timeout);
+                timeout=null;
+            }
+            if(data.code == 10000){
+                this.ajaxCount();
+                this.showMessagePop('恭喜中奖', '', data.data.resultAward);
+                this.refs.productListAuto.rewardPoolHandler();
+            }else{
+                ReactDOM.render(<PopAllSituation closePopHandler={this.closePopHandler} popTitle="抽奖异常" popBtn="知道了" popText={"请稍后再试，<br/>如需咨询请联系客服400-0322-988 。"}/>, document.getElementById("pop"))
+            }
         });
     },
-    showMessagePop(title, message, productName, prizeList){
+    showMessagePop(title, productName, prizeList){
         this.setState({isAnimation: false});
         ReactDOM.render(<PopAllSituation closePopHandler={this.closePopHandler} popBtn="知道了"
                                          popTitle={title}
-                                         popText={message}
                                          popOneProduct={productName}
                                          popMoreProducts={prizeList}/>, document.getElementById("pop"))
     },

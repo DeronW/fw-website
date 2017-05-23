@@ -38,6 +38,7 @@ const DEVELOPING_PAGES = [
     'topic-zun-xiang', // 尊享标计划
     //'user-login-history', //用户登录日志页面
     'user-bank-phone',//用户预留手机号页面
+    'about-us'//关于我们
     //'user-messages', // 用户消息页面
     //'user-center', //用户中心
     //'user-bean', // 用户工豆

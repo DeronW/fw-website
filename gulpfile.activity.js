@@ -5,10 +5,11 @@ const PROJ = 'activity';
 const APP_NAMES = [
     //  '2017-01-05', //不再更能 旧专题
     '2017-04-26',//五月份上线的专题
+    '2017-05-16',//五月份上线的专题重构版
     // 'topic-template-one',
     // 'topic-template-two',
     // 'template-columns', // 动态分配的 列数 模板
-     'template-lottery-draw',//戳气球
+    'template-lottery-draw',//戳气球
     // 'template-one-arm-bandit', // 老虎机 模板
 ];
 
@@ -44,6 +45,7 @@ module.exports = function (gulp, generate_task, settings) {
     ];
 
     let INCLUDE_JAVASCRIPTS = [
+        'promise-polyfill.min.js',
         `${PROJ}/fw-fix-console.js`,
         `${PROJ}/fw-common.js`,
         `${PROJ}/native-bridge-0.3.0.js`,
@@ -96,11 +98,14 @@ module.exports = function (gulp, generate_task, settings) {
         generate_task(PROJ, i, Object.assign({}, default_options, {
             api_path: "//www.9888.cn/",
             cmd_prefix: 'pack',
+            environment: 'production',
             cdn_prefix: `/static/${PROJ}/${i.name || i}/`,
         }))
     });
 
-    gulp.task(`build:${PROJ}`, gulp.series(APP_NAMES.map(i => `${PROJ}:pack:${i.name || i}:revision`)));
+    gulp.task(`build:${PROJ}`, gulp.series(APP_NAMES.map(
+        i => `${PROJ}:pack:${i.name || i}:revision`)));
+
     gulp.task(`lint:${PROJ}`, gulp.series(() => {
         return gulp.src([
             `apps/${PROJ}/**/*.+(js|jsx)`,

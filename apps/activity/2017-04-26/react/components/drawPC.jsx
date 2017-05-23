@@ -85,26 +85,29 @@ class DrawPC extends React.Component {
         this.ajaxPersonTeamData();
         this.ajaxTotalData();
     }
-
+    //请求各个月的数据
     ajaxPersonTeamData() {
-        let {start, end, type}=this.state;
+        let {start,end,type} =this.state;
         $.get(API_PATH + "api/activityPullInvest/v1/singularMonthTeamList.json", {
             start: start,
             end: end,
             type: type
         }).then(data=> {
-            let total = data.data&&data.data.total;
-            var personData = data.data&&data.data.persondata;
-            var teamData = data.data&&data.data.teamdata;
-            this.setState({personData: personData, teamData: teamData});
-            if (type == 'mayActf') {
-                this.judgePlatformSingle(total);
-            } else if (type == 'mayActt') {
-                this.judgePlatformDouble(total)
+            let total,personData,teamData;
+            if(data&&data.data){
+                total = data.data.total;
+                personData = data.data.persondata;
+                teamData = data.data.teamdata;
+                this.setState({personData: personData, teamData: teamData});
+                if (type == 'mayActf') {
+                    this.judgePlatformSingle(total);
+                } else if (type == 'mayActt') {
+                    this.judgePlatformDouble(total)
+                }
             }
         })
     }
-
+    //总榜奖金
     ajaxTotalData() {
         $.get(API_PATH + "api/activityPullInvest/v1/singularMonthTeamList.json", {
             start: '2017-05-16 00:00:00',
@@ -112,63 +115,67 @@ class DrawPC extends React.Component {
             type: 'mayActBig'
         }).then(data => {
             let totalBonus = 0;
-            let totalSum = data.data.total;
-            //let personData = data.data.persondata;
-            //let teamData = data.data.teamdata;
-            if (totalSum >= 100000000 && totalSum < 130000000) {
+            let totalSum = data.data && data.data.total;
+            if (totalSum >= 1000000000 && totalSum < 1300000000) {
                 totalBonus = 40;
-            } else if (totalSum >= 130000000) {
+            } else if (totalSum >= 1300000000) {
                 totalBonus = 100;
             }
             this.judgePlatformTotalBg(totalSum);
             let totalHeight = Number(totalSum) / 50000000 * 5;
+            if (totalHeight > 135) totalHeight = 135;
+            let t = ((totalSum / 10000).toFixed(2)) + "万";
             this.setState({
-                totalSum: totalSum, totalBonus: totalBonus, totalHeight: totalHeight
+                totalSum: t, totalBonus: totalBonus, totalHeight: totalHeight
             });
         })
     }
+
     //单月奖金
     judgePlatformSingle(total) {
         let bonus = 0;
         if (total < 150000000) {
-            bonus = 0
-        } else if (total < 380000000) {
-            bonus = 6
-        } else if (total < 450000000) {
-            bonus = 18
-        } else {
-            bonus = 33
-        }
-        if (total < 150000000) {
+            bonus = 0;
             this.setState({platBg: "url('images/platformPC1.png')"})
         } else if (total < 380000000) {
+            bonus = '6万';
             this.setState({platBg: "url('images/platformPC2.png')"})
         } else if (total < 450000000) {
+            bonus = '18万';
             this.setState({platBg: "url('images/platformPC3.png')"})
+        } else {
+            bonus = '33万';
+            this.setState({platBg: "url('images/platformPC4.png')"})
         }
         let height = Number(total) / 10000000 * 4;
+        if (height > 203) height = 203;
+        let t = ((total / 10000).toFixed(2)) + "万";
         this.setState({
-            total: total, bonus: bonus, height: height
+            total: t, bonus: bonus, height: height
         });
     }
+
     //双月奖金
     judgePlatformDouble(total) {
         let bonus = 0;
         if (total < 180000000) {
             bonus = 0;
-            this.setState({platBg: "url('images/platformPC1.png')"})
+            this.setState({platBg: "url('images/platformPC12.png')"})
         } else if (total < 400000000) {
-            bonus = 8;
-            this.setState({platBg: "url('images/platformPC2.png')"})
+            bonus = '8万';
+            this.setState({platBg: "url('images/platformPC22.png')"})
         } else if (total < 500000000) {
-            bonus = 23;
-            this.setState({platBg: "url('images/platformPC3.png')"})
+            bonus = '23万';
+            this.setState({platBg: "url('images/platformPC32.png')"})
         } else {
-            bonus = 41;
+            bonus = '41万';
+            this.setState({platBg: "url('images/platformPC42.png')"})
         }
         let height = Number(total) / 10000000 * 4;
+        if (height > 203) height = 203;
+        let t = ((total / 10000).toFixed(2)) + "万";
         this.setState({
-            total: total, bonus: bonus, height: height
+            total: t, bonus: bonus, height: height
         });
     }
 
@@ -181,17 +188,27 @@ class DrawPC extends React.Component {
             this.setState({platTotalBg: "url('images/platformTotalPC3.png')"})
         }
     }
-
+    standardTime(year,month,day,hours,minutes,seconds){
+        let d = new Date();
+        d.setFullYear(year || 0);
+        d.setMonth(month-1 || 0);
+        d.setDate(day || 0);
+        d.setHours(hours || 0);
+        d.setMinutes(minutes || 0);
+        d.setSeconds(seconds || 0);
+        d.setMilliseconds(0);
+        return new Date(d).getTime()
+    }
     judgeStageHandler() {
-        var timeStart = +new Date("2017-05-16 00:00:00");//5.16号
-        var timeMiddle = +new Date("2017-06-13 23:59:59");//6.13号
-        var timeEnd = +new Date("2017-07-12 23:59:59");//7.12号
-
+        var timeStart = this.standardTime(2017,5,16,0,0,0);//5.16号
+        var timeMiddle = this.standardTime(2017,6,13,23,59,59);//6.13号
+        var timeEnd = this.standardTime(2017,7,12,23,59,59);//7.12号
+        
         var startDate = '2017-05-16 00:00:00';
         var endDate = '2017-07-12 23:59:59';
         this.getServerTimestamp(function (currentTime) {
             if (currentTime < timeStart) {
-                //ReactDOM.render(<PopNoStart />,document.getElementById("pop"))
+                ReactDOM.render(<PopNoStart popTitle={"活动暂未开启"} popText={true}/>,document.getElementById("pop"))
             } else if (currentTime < timeMiddle) {
                 startDate = '2017-05-16 00:00:00';
                 endDate = '2017-06-13 23:59:59';
@@ -199,7 +216,6 @@ class DrawPC extends React.Component {
                     stageMay: '进行中', stageJune: '未开始',
                     start: startDate, end: endDate, type: 'mayActf'
                 }, this.ajaxPersonTeamData)
-
             } else if (currentTime < timeEnd) {
                 startDate = '2017-06-14 00:00:00';
                 endDate = '2017-07-12 23:59:59';
@@ -207,6 +223,8 @@ class DrawPC extends React.Component {
                     stageMay: '已结束', stageJune: '进行中',
                     selectedMay: false, selectedJune: true, start: startDate, end: endDate, type: 'mayActt'
                 }, this.ajaxPersonTeamData)
+            }else if(currentTime >= timeEnd){
+                ReactDOM.render(<PopNoStart popTitle={"来晚了，活动已结束"} popEnd={true}/>,document.getElementById("pop"))
             }
         }.bind(this));
     }
@@ -250,7 +268,7 @@ class DrawPC extends React.Component {
     }
 
     render() {
-        let {stageMay,stageJune,selectedMay,selectedJune,total,totalSum,bonus,totalBonus,close,isLogin,start,end,type,personData,teamData,height,platBg,totalHeight,platTotalBg} = this.state;
+        let {stageMay,stageJune,selectedMay,selectedJune,total,totalSum,bonus,totalBonus,close,isLogin,type,personData,teamData,height,platBg,totalHeight,platTotalBg} = this.state;
 
         let no = {
             width: "237px",
@@ -294,10 +312,10 @@ class DrawPC extends React.Component {
         let loginRemain = (
             <div className="remindText">
                 {type == 'mayActf' ? <div className='loginRemain'>
-                    单月内，平台达到相应累计交易量，且个人及团队排行前20名的工友，最高可获分33万奖金。当前平台累计交易量<em>{total}</em> 元，可获分<em>{bonus}</em>万奖金！
+                    5.16 ~ 6.13，平台达到相应累计交易量，且个人及团队排行前20名的工友，最高可获分33万奖金。当前平台累计交易量<em>{total}</em> 元，可获分<em>{bonus}</em>元奖金！
                 </div> :
                     <div className='loginRemain'>
-                        5.16-7.12，平台达到相应累计交易量，且个人及团队排行前30名的工友，最高获分100万元奖金。当前平台累计交易量<em>{total}</em>
+                        6.14-7.12，平台达到相应累计交易量，且个人及团队排行前20名的工友，最高获分41万元奖金。当前平台累计交易量<em>{total}</em>
                         元，可获分<em>{bonus}</em>元奖金！
                     </div>}
             </div>
@@ -315,7 +333,7 @@ class DrawPC extends React.Component {
         );
         return <div className="drawPC">
             <div className="drawBanner">
-                <div className="banner"></div>
+                <a href="#explain"></a>
             </div>
             <div className="drawBox">
                 <div className="drawTitle">大奖抽抽抽，100%中奖</div>
@@ -337,7 +355,7 @@ class DrawPC extends React.Component {
 
                     <p>2、抽奖机会仅在本活动期间（5月16日-7月12日）有效。</p>
                 </div>
-                <div className="drawTitle">投资冲月榜，个人团队大作战</div>
+                <div className="drawTitle drawTitle2">投资冲月榜，个人团队大作战</div>
                 <div className="monthStateTab">
                     {monthMayTab(stageMay, "五月", "5.16 ~ 6.13")}
                     {monthJuneTab(stageJune, "六月", "6.14 ~ 7.12")}
@@ -355,7 +373,7 @@ class DrawPC extends React.Component {
                         <div style={{height:height}} className="pillars"></div>
                     </div>
                 </div>
-                <div className="remindText">
+                <div className="remindText remindText2">
                     <div className='loginRemain'>进榜规则：个人累投金额≥50万元；或团队累投金额≥1000万且团队人数≥50人。<br/>
                         月度奖金分配方式：个人和团队奖金分配比例=4（个人）：6（团队）
                     </div>
@@ -363,36 +381,31 @@ class DrawPC extends React.Component {
                 <div className="drawMonthLadder">
                     <div className="person">
                         {
-                            <PersonTeamMonthLadderPC title={"个人榜"} start={start} end={end}
-                                                     getServerTimestamp={this.getServerTimestamp}
-                                                     isImgFun={this.isImgFun} personData={personData}/>
+                            <PersonTeamMonthLadderPC title={"个人榜"} isImgFun={this.isImgFun} personData={personData}/>
                         }
                     </div>
                     <div className="team">
                         {
-                            <PersonTeamMonthLadderPC title={"团队榜"} start={start} end={end}
-                                                     getServerTimestamp={this.getServerTimestamp}
-                                                     isImgFun={this.isImgFun} teamData={teamData}/>
+                            <PersonTeamMonthLadderPC title={"团队榜"} isImgFun={this.isImgFun} teamData={teamData}/>
                         }
                     </div>
                 </div>
                 <div className="drawTips">
                     <div className="tips">温馨提示：</div>
-                    <p>1. 以上数据实时更新，最终发放奖金请以每月结束后数据为准；</p>
+                    <p>1. 以上数据实时更新，排名以时间先后顺序为准，最终发放奖金请以每月结束后数据为准；</p>
 
                     <p>2. 奖金包奖励以工豆形式发放；</p>
 
-                    <p>3. 月度奖金分配方式：个人和团队奖金分配比例=4（个人）：6（团队）</p>
+                    <p>3. 月度奖金分配方式：个人和团队奖金分配比例=4（个人）：6（团队）；</p>
 
-                    <p>4. 奖金包占比分配公式：个人（或团队）累投总额÷前20名个人（或团队）累投总额。仅计算满足获奖资格的用户。</p>
-
-                    <p>5. 活动期间，单月内平台达到相应任务目标，且个人及团队排行前20名的工友，即可累计赢得最高百万奖金包！累计金额越多获得的奖金就越多。</p>
+                    <p>4. 奖金包占比分配公式：个人（或团队）累投总额÷前20名个人（或团队）累投总额。仅计算满足获奖资格的用户。团队即：邀请人及被邀请人（例如：A邀请的好友有B、C、D、E，那么ABCDE算一个团队）；</p>
+                    <p>5. 活动期间，单月内平台达到相应任务目标，且个人及团队排行前20名的工友，即可累计赢得不同金额的奖金包！累计金额越多获得的奖金就越多。</p>
                 </div>
-                <div className="drawTitle">终级排行榜 百万壕礼奉上</div>
+                <div className="drawTitle drawTitle3">终级排行榜 百万壕礼奉上</div>
                 {
                     isLogin ? <div className="remindText">
                         <div className='loginRemain'>5.16-7.12，平台达到相应累计交易量，且个人及团队排行前30名的工友，最高获分100万元奖金。<br/>
-                            当前平台累计交易量<em>{totalSum}</em>元，可获分<em>{totalBonus}</em>万奖金！
+                            当前平台累计交易量<em>{totalSum}</em>元，可获分<em>{totalBonus}</em>元奖金！
                         </div>
                     </div> : noLoginRemain
                 }
@@ -406,9 +419,9 @@ class DrawPC extends React.Component {
                         <div style={{height:totalHeight}} className="pillars"></div>
                     </div>
                 </div>
-                <div className="remindText">
+                <div className="remindText remindText3">
                     <div className='loginRemain'>进榜规则：个人累投金额≥100万元；或团队累投金额≥1200万且团队人数≥50人。<br/>
-                        月度奖金分配方式：个人和团队奖金分配比例=4（个人）：6（团队）
+                        奖金分配方式：个人和团队奖金分配比例=4（个人）：6（团队）
                     </div>
                 </div>
                 <div className="drawTotalLadder">
@@ -427,18 +440,18 @@ class DrawPC extends React.Component {
                 </div>
                 <div className="drawTips">
                     <div className="tips">温馨提示：</div>
-                    <p>1. 以上数据实时更新，排名先后由最近一次成功投标判定，最终发放奖金请以每月结束后数据为准；</p>
+                    <p>1. 以上数据实时更新，排名以时间先后顺序为准，最终发放奖金请以活动结束后数据为准；</p>
 
                     <p>2. 奖金包奖励以工豆形式发放；</p>
 
-                    <p>3. 奖金分配方式：个人和团队奖金分配比例=4（个人）：6（团队）</p>
+                    <p>3. 奖金分配方式：个人和团队奖金分配比例=4（个人）：6（团队）；</p>
 
-                    <p>4. 奖金包占比分配公式：个人（或团队）累投总额÷前30名个人（或团队）累投总额。仅计算满足获奖资格的用户。</p>
+                    <p>4. 奖金包占比分配公式：个人（或团队）累投总额÷前20名个人（或团队）累投总额。仅计算满足获奖资格的用户。团队即：邀请人及被邀请人（例如：A邀请的好友有B、C、D、E，那么ABCDE算一个团队）；</p>
 
                     <p>5. 活动期间，平台累投金额达标。个人及团队排行前30的工友，将按照其累计投资金额占比进行最高100万元奖金分配。累计金额越多获得的奖金就越多。</p>
                 </div>
             </div>
-            <div className="drawExplain">
+            <div className="drawExplain" id="explain">
                 <div className="explainContent">
                     <div className="explainTitle">
                         <img src="images/explain.png" alt=""/>

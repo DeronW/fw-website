@@ -27,6 +27,7 @@ class DrawMobile extends React.Component {
             personData:[],
             teamData:[],
             showWater:false,
+            isApp:false,
         }
     }
 
@@ -34,6 +35,8 @@ class DrawMobile extends React.Component {
         $UserReady(function (isLogin, user) {
             this.setState({isLogin: isLogin});
         }.bind(this));
+        let isApp = navigator.userAgent.match(/FinancialWorkshop/i)?true:false;
+        this.setState({isApp:isApp});
         this.judgeStageHandler();
         this.ajaxPersonTeamData();
         this.ajaxTotalData();
@@ -49,7 +52,7 @@ class DrawMobile extends React.Component {
         }
     }
     standardTime(year,month,day,hours,minutes,seconds){
-        var d = new Date();
+        let d = new Date();
         d.setFullYear(year || 0);
         d.setMonth(month-1 || 0);
         d.setDate(day || 0);
@@ -60,34 +63,32 @@ class DrawMobile extends React.Component {
         return new Date(d).getTime()
     }
     judgeStageHandler() {
-        var that =this;
-        var timeStart = new Date("2017/05/16 00:00:00").getTime();//5.16号
-        var timeMiddle = new Date("2017/06/13 23:59:59").getTime();//6.13号
-        var timeEnd = new Date("2017/07/12 23:59:59").getTime();//7.12号
-        //var timeStart = this.standardTime(2017,5,16,0,0,0);
-        //var timeMiddle = this.standardTime(2017,6,13,23,59,59);
-        //var timeEnd = this.standardTime(2017,6,13,23,59,59);
+        var timeStart = this.standardTime(2017,5,16,0,0,0);//5.16号
+        var timeMiddle = this.standardTime(2017,6,13,23,59,59);//6.13号
+        var timeEnd = this.standardTime(2017,7,12,23,59,59);//7.12号
         var startDate = '2017-05-16 00:00:00';
         var endDate = '2017-07-12 23:59:59';
         this.getServerTimestamp(function (currentTime) {
             if(currentTime < timeStart){
-                //ReactDOM.render(<PopNoStart />,document.getElementById("pop"))
+                ReactDOM.render(<PopNoStartMobile popTitle={"活动暂未开启"} popText={true}/>,document.getElementById("pop"))
             }else if (currentTime < timeMiddle) {
                 startDate = '2017-05-16 00:00:00';
                 endDate = '2017-06-13 23:59:59';
-                that.setState({
+                this.setState({
                     stageMay: '进行中', stageJune: '未开始',
                     start:startDate,end:endDate,type:'mayActf'
-                },that.ajaxPersonTeamData)
+                },this.ajaxPersonTeamData)
             } else if (currentTime < timeEnd) {
                 startDate = '2017-06-14 00:00:00';
                 endDate = '2017-07-12 23:59:59';
-                that.setState({stageMay: '已结束', stageJune: '进行中',
+                this.setState({stageMay: '已结束', stageJune: '进行中',
                     selectedMay: false, selectedJune: true,
                     start:startDate,end:endDate,type:'mayActt'
-                },that.ajaxPersonTeamData)
+                },this.ajaxPersonTeamData)
+            }else if(currentTime >= timeEnd){
+                ReactDOM.render(<PopNoStartMobile popTitle={"来晚了，活动已结束"} popEnd={true}/>,document.getElementById("pop"))
             }
-        });
+        }.bind(this));
 
     }
     ajaxPersonTeamData() {
@@ -108,6 +109,7 @@ class DrawMobile extends React.Component {
             }
         })
     }
+    //计算总榜奖金
     ajaxTotalData(){
         $.get(API_PATH + "api/activityPullInvest/v1/singularMonthTeamList.json",{
             start: '2017-05-16 00:00:00',
@@ -115,17 +117,17 @@ class DrawMobile extends React.Component {
             type: 'mayActBig'
         }).then(data =>{
             let totalBonus = 0;
-            let totalSum = data&&data.data.total;
-            //let personData = data.data.persondata;
-            //let teamData = data.data.teamdata;
-            if (totalSum >= 100000000 && totalSum < 130000000) {
+            let totalSum = data.data&&data.data.total;
+            if (totalSum >= 1000000000 && totalSum < 1300000000) {
                 totalBonus = 40;
-            } else if (totalSum >= 130000000) {
+            } else if (totalSum >= 1300000000) {
                 totalBonus = 100;
             }
             this.judgePlatformTotalBg(totalSum);
             let totalHeight = Number(totalSum) / 50000000 * 5;
-            this.setState({totalSum:totalSum,totalBonus: totalBonus,totalHeight: totalHeight
+            if (totalHeight > 135) totalHeight = 135;
+            let t = ((totalSum/10000).toFixed(2))+"万";
+            this.setState({totalSum:t,totalBonus: totalBonus,totalHeight: totalHeight
             });
         })
     }
@@ -136,18 +138,21 @@ class DrawMobile extends React.Component {
             bonus = 0;
             this.setState({platBg: "url('images/platformM1.png')"})
         } else if (total < 380000000) {
-            bonus = 6;
+            bonus = '6万';
             this.setState({platBg: "url('images/platformM2.png')"})
         } else if (total < 450000000) {
-            bonus = 18;
+            bonus = '18万';
             this.setState({platBg: "url('images/platformM3.png')"})
         } else {
-            bonus = 33
+            bonus = '33万';
+            this.setState({platBg: "url('images/platformM4.png')"})
         }
 
         let height = Number(total) / 10000000 * 4;
+        if (height > 203) height = 203;
+        let t = ((total/10000).toFixed(2))+"万";
         this.setState({
-            total: total, bonus: bonus, height: height
+            total: t, bonus: bonus, height: height
         });
     }
     //双月奖金
@@ -155,19 +160,22 @@ class DrawMobile extends React.Component {
         let bonus = 0;
         if (total < 180000000) {
             bonus = 0;
-            this.setState({platBg: "url('images/platformM1.png')"})
+            this.setState({platBg: "url('images/platformM12.png')"})
         } else if (total < 400000000) {
-            bonus = 8;
-            this.setState({platBg: "url('images/platformM2.png')"})
+            bonus = '8万';
+            this.setState({platBg: "url('images/platformM22.png')"})
         } else if (total < 500000000) {
-            bonus = 23;
-            this.setState({platBg: "url('images/platformM3.png')"})
+            bonus = '23万';
+            this.setState({platBg: "url('images/platformM32.png')"})
         } else {
-            bonus = 41;
+            bonus = '41万';
+            this.setState({platBg: "url('images/platformM42.png')"})
         }
         let height = Number(total) / 10000000 * 4;
+        if (height > 203) height = 203;
+        let t = ((total/10000).toFixed(2))+"万";
         this.setState({
-            total: total, bonus: bonus, height: height
+            total: t, bonus: bonus, height: height
         });
     }
     judgePlatformTotalBg(total) {
@@ -192,13 +200,15 @@ class DrawMobile extends React.Component {
                 type:'mayActf'
             },this.ajaxPersonTeamData)
         } else {
-            if (stage != "未开始")  this.setState({
-                selectedMay: false,
-                selectedJune: true,
-                start: '2017-06-14 00:00:00',
-                end: '2017-07-12 23:59:59',
-                type:'mayActt'
-            },this.ajaxPersonTeamData)
+            if (stage != "未开始"){
+                this.setState({
+                    selectedMay: false,
+                    selectedJune: true,
+                    start: '2017-06-14 00:00:00',
+                    end: '2017-07-12 23:59:59',
+                    type:'mayActt'
+                },this.ajaxPersonTeamData)
+            }
         }
     }
     closeHandler() {
@@ -248,7 +258,7 @@ class DrawMobile extends React.Component {
         window.location.href = link;
     }
     render() {
-        let {stageMay,stageJune,selectedMay,selectedJune,close,bonus,total,totalSum,totalBonus,show,showWater,isLogin,totalLadderTab,monthTipsClose,totalTipsClose,start,end,type,personData,teamData,height,platBg,totalHeight,platTotalBg} = this.state;
+        let {stageMay,stageJune,selectedMay,selectedJune,close,bonus,total,totalSum,totalBonus,show,showWater,isLogin,totalLadderTab,monthTipsClose,totalTipsClose,type,personData,teamData,height,platBg,totalHeight,platTotalBg,isApp} = this.state;
         let no = {
             width: "237px",
             height: "96px",
@@ -289,10 +299,9 @@ class DrawMobile extends React.Component {
         );
         let tipsBonus = (
             <div className='drawTips'>
-                {type == 'mayActf' ?<div>单月内，平台达到相应累计交易量，且个人及团队排行前20
-                    名的工友，最高可获分33万奖金。<br/>
+                {type == 'mayActf' ?<div>5.16 ~ 6.13，平台达到相应累计交易量，且个人及团队排行前20名的工友，最高可获分33万奖金。<br/>
                     当前平台累计交易量<em>{total}</em>元，可获分<em>{bonus}</em>元奖金！</div>:
-                    <div>5.16-7.12，平台达到相应累计交易量，且个人及团队排行前30名的工友，最高获分100万元奖金。当前平台累计交易量<em>{total}</em>
+                    <div>6.14-7.12，平台达到相应累计交易量，且个人及团队排行前20名的工友，最高获分41万元奖金。当前平台累计交易量<em>{total}</em>
                         元，可获分<em>{bonus}</em>元奖金！</div>}
             </div>
         );
@@ -325,7 +334,10 @@ class DrawMobile extends React.Component {
         let waterStyle = {
             display:showWater ?"block":"none"
         };
-        return <div className="drawMobile" onTouchEnd={()=>{this.closeWaterRemain()}}>
+        let appTop = {
+            marginTop:isApp?"-80px":"0"
+        };
+        return <div className="drawMobile" style={appTop} onTouchEnd={()=>{this.closeWaterRemain()}}>
             <div className="drawBanner">
                 <div className="activityExplain" onClick={()=>this.showHandler()}></div>
             </div>
@@ -345,9 +357,9 @@ class DrawMobile extends React.Component {
                         e.stopPropagation();
                         this.showWaterRemain()
                     }}></div>
-                    <img style={{bottom:height + 61}} src="images/waterMobile.png" alt=""/>
+                    <img style={{bottom:height + 67}} src="images/waterMobile.png" alt=""/>
 
-                    <div style={{height:height}} className="pillars"></div>
+                    <div style={{height:height}} className="pillars"></div>`
                 </div>
             </div>
             <div className="drawTips">
@@ -357,24 +369,25 @@ class DrawMobile extends React.Component {
                 6（团队）
             </div>
             <div className="switchMonthLadder">
-                <PersonTeamMonthLadderMobile start={start} end={end} isImgFun={this.isImgFun} personData={personData} teamData={teamData} getServerTimestamp={this.getServerTimestamp}/>
+                <PersonTeamMonthLadderMobile isImgFun={this.isImgFun} personData={personData} teamData={teamData}/>
             </div>
 
-            <div className="drawTips">
+            <div className="drawTips drawTips2">
                 <div className="tips">温馨提示:</div>
                 <div className="briefText" style={monthTipsBriefStyle}>
-                    1.以上数据实时更新，最终发放奖金请以每月结束后数据为准...
+                    <div className="briefText">1. 以上数据实时更新，排名以时间先后顺序为准，最终发放奖金请以每月结束后数据为准；</div>
+                    <div className="mask">2. 奖金包奖励以工豆形式发放；</div>
                     <div className="showBtn" onClick={()=>this.toggleMonthTips()}>展开全部<img src="images/arrow.png"/>
                     </div>
                 </div>
                 <div className="fullText" style={monthTipsFullStyle}>
                     <div className="briefText">
-                        1.以上数据实时更新，最终发放奖金请以每月结束后数据为准；
+                        1. 以上数据实时更新，排名以时间先后顺序为准，最终发放奖金请以每月结束后数据为准；
                     </div>
-                    <div className="briefText">2.奖金包奖励以工豆形式发放；</div>
-                    <div className="briefText">3.月度奖金分配方式：个人和团队奖金分配比例=4(个人)：6(团队)；</div>
-                    <div className="briefText">4.奖金包占比分配公式：个人(或团队)累投总额÷前20名个人(或团队)累投总额。仅计算满足获奖资格的用户；</div>
-                    <div className="briefText">5.活动期间，单月内平台达到相应任务目标，且个人及团队排行前20名的工友，即可赢得最高百万奖金包！累计金额越多获得的奖金就越多。
+                    <div className="briefText">2. 奖金包奖励以工豆形式发放；</div>
+                    <div className="briefText">3. 月度奖金分配方式：个人和团队奖金分配比例=4（个人）：6（团队）；</div>
+                    <div className="briefText">4. 奖金包占比分配公式：个人（或团队）累投总额÷前20名个人（或团队）累投总额。仅计算满足获奖资格的用户。团队即：邀请人及被邀请人（例如：A邀请的好友有B、C、D、E，那么ABCDE算一个团队）；</div>
+                    <div className="briefText">5. 活动期间，单月内平台达到相应任务目标，且个人及团队排行前20名的工友，即可累计赢得不同金额的奖金包！累计金额越多获得的奖金就越多。
                         <div className="showBtn" onClick={()=>this.toggleMonthTips()}>收起<img src="images/arrow.png"/>
                         </div>
                     </div>
@@ -390,7 +403,7 @@ class DrawMobile extends React.Component {
                         e.stopPropagation();
                         this.showWaterRemain()
                     }}></div>
-                    <img style={{bottom:totalHeight + 63}} src="images/waterTotal.png" alt=""/>
+                    <img style={{bottom:totalHeight + 67}} src="images/zongbang.png" alt=""/>
 
                     <div style={{height:totalHeight}} className="pillars"></div>
                 </div>
@@ -398,32 +411,31 @@ class DrawMobile extends React.Component {
             <div className="drawTips">
                 进榜规则：个人累投金额≥100万元；或团队累投金额≥1200
                 万且团队人数≥50人。<br/>
-                月度奖金分配方式：个人和团队奖金分配比例=4（个人）：
+                奖金分配方式：个人和团队奖金分配比例=4（个人）：
                 6（团队）
             </div>
             <div className="switchTotalLadder">
-                <PersonTeamTotalLadderMobile isImgFun={this.isImgFun} fixedPrice={this.fixedPrice}
-                                       totalLadderTab={totalLadderTab}/>
+                <PersonTeamTotalLadderMobile isImgFun={this.isImgFun} totalLadderTab={totalLadderTab}/>
             </div>
 
             <div className="drawTips">
                 <div className="tips">温馨提示:</div>
                 <div className="briefText" style={totalTipsBriefStyle}>
-                    1.以上数据实时更新，最终发放奖金请以每月结束后数据为准；
+                    1. 以上数据实时更新，排名以时间先后顺序为准，最终发放奖金请以活动结束后数据为准；
                 </div>
                 <div className="briefText" style={totalTipsBriefStyle}>
-                    2.奖金包奖励以工豆形式...
+                    <div className="mask">2.奖金包奖励以工豆形式...</div>
                     <div className="showBtn" onClick={()=>this.toggleTotalTips()}>展开全部<img src="images/arrow.png"/>
                     </div>
                 </div>
                 <div className="fullText" style={totalTipsFullStyle}>
                     <div className="briefText">
-                        1.以上数据实时更新，排名先后由最近一次成功投标判定，最终发放奖金请以每月结束后数据为准；
+                        1. 以上数据实时更新，排名以时间先后顺序为准，最终发放奖金请以活动结束后数据为准；
                     </div>
-                    <div className="briefText">2.奖金包奖励以工豆形式发放；</div>
-                    <div className="briefText">3.月度奖金分配方式：个人和团队奖金分配比例=4(个人)：6(团队)；</div>
-                    <div className="briefText">4.奖金包占比分配公式：个人(或团队)累投总额÷前20名个人(或团队)累投总额。仅计算满足获奖资格的用户；</div>
-                    <div className="briefText">5.活动期间，单月内平台达到相应任务目标，且个人及团队排行前20名的工友，即可累计赢得不同金额的奖金包！累计金额越多获得的奖金就越多。
+                    <div className="briefText">2. 奖金包奖励以工豆形式发放；</div>
+                    <div className="briefText">3. 奖金分配方式：个人和团队奖金分配比例=4（个人）：6（团队）；</div>
+                    <div className="briefText">4. 奖金包占比分配公式：个人（或团队）累投总额÷前20名个人（或团队）累投总额。仅计算满足获奖资格的用户。团队即：邀请人及被邀请人（例如：A邀请的好友有B、C、D、E，那么ABCDE算一个团队）；</div>
+                    <div className="briefText">5. 活动期间，平台累投金额达标。个人及团队排行前30的工友，将按照其累计投资金额占比进行最高100万元奖金分配。累计金额越多获得的奖金就越多。
                         <div className="showBtn" onClick={()=>this.toggleTotalTips()}>收起<img src="images/arrow.png"/>
                         </div>
                     </div>

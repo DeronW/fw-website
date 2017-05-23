@@ -1,4 +1,7 @@
 const PopAllSituation = React.createClass({
+    componentDidMount(){
+        window.poke_delay = false;
+    },
     render(){
         let product = (item, index) => {
             return <tr key={index}>
@@ -9,7 +12,7 @@ const PopAllSituation = React.createClass({
         return <div className="popAllSituation">
             <div className="popAllContent">
                 <div className="popTitle">{this.props.popTitle}</div>
-                <div className="popText" dangerouslySetInnerHTML={{__html:this.props.popText}}></div>
+                {this.props.popText &&<div className="popText" dangerouslySetInnerHTML={{__html:this.props.popText}}></div>}
                 <div className="popOneProduct">{this.props.popOneProduct}</div>
                 <table className="popTable">
                     <tbody>

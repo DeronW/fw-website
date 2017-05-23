@@ -23,20 +23,19 @@
     <script src='javascripts/es6-shim.min.js'></script>
     <script src='javascripts/es6-sham.min.js'></script>
     <![endif]-->
-    <!--[if gt IE 9]>
-    <script src='javascripts/clipboard.min.js'></script>
-    <![endif]-->
-    <!--[if !IE]><!--><script src='javascripts/clipboard.min.js'></script><!--<![endif]-->
+
     {% block head_javascripts %}
     <script src="javascripts/jquery-1.11.3.min.js"></script>
+    <script src='javascripts/clipboard.min.js'></script>
     <script src="javascripts/lib.js"></script>
     <script src="javascripts/bundle.js"></script>
     {% endblock %}
 </head>
 <body>
 
+{% include 'partial/fix-viewport.html' %}
 <!--接口地址前缀,结尾需要添加斜线-->
-<input type="hidden" id="api-path" value="{{API_PATH}}"/>
+<input type="hidden" id="api-path" value="{{ API_PATH }}"/>
 
 {% block header %}{% include './activity/header.swig.html' %}{% endblock %}
 
@@ -49,9 +48,12 @@
 {% block javascripts %}{% endblock %}
 
 {% if ENV == 'production'  %}
-{% include 'partial/expection-handler.swig.html' with {SENTRY_DSN: 'https://4135eb9a33e248e984bcc7789424be8e@sentry.dougemall.com/3'} %}
+{% include 'partial/expection-handler.swig.html' with
+{SENTRY_DSN: 'https://4135eb9a33e248e984bcc7789424be8e@sentry.dougemall.com/3'} %}
 {% endif %}
 
-{% if ENV == 'production' %} {% include './activity/tong-ji.swig.html' %} {% endif %}
+{% if ENV == 'production' %}
+{% include 'partial/growing-io.swig.html' with { ACCOUNT_ID: '99b8ecbb093eec0e' } %}
+{% endif %}
 </body>
 </html>

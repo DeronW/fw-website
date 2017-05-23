@@ -8,13 +8,23 @@
   background: @colorBg;
   overflow: hidden;
   .drawBanner {
-    height: 788px;
+    height: 786px;
     width: 1920px;
     position: relative;
-    background: url("../images/bannerPC.png") no-repeat center center;
+    background: url("../images/bannerPC.jpg") no-repeat center center;
     top: 0;
     left: 50%;
     margin-left: -960px;
+    margin-top: -2px;
+    a{
+      display: block;
+      width: 90px;
+      height: 90px;
+      position: absolute;
+      top: 110px;
+      right: 474px;
+      cursor: pointer;
+    }
   }
   .drawBox {
     width: 1140px;
@@ -43,7 +53,7 @@
     .drawMachine {
       width: 1140px;
       height: 540px;
-      margin: auto;
+      margin: 0 auto -40px;
       .machine {
         float: left;
       }
@@ -111,7 +121,7 @@
     }
     .remindText {
       width: 880px;
-      margin: 50px auto 50px;
+      margin: 30px auto 30px;
       border-radius: 70px;
       background: @colorDarkBlue;
       font-size: @fontSize14;
@@ -133,6 +143,12 @@
           color: @colorYellow;
         }
       }
+    }
+    .remindText2{
+      margin: 30px auto 70px;
+    }
+    .remindText3{
+      margin: 70px auto 30px;
     }
     .drawMonthLadder {
       width: 100%;
@@ -160,6 +176,9 @@
         text-align: center;
         font-size: @fontSize26;
         padding-top: 16px;
+        div{
+          margin-top: -10px;
+        }
       }
       .teamTitle {
         position: relative;
@@ -271,33 +290,38 @@
     .drawTips {
       width: 1068px;
       border-radius: 8px;
-      margin: 20px auto 86px;
+      margin: 60px auto 86px;
       background: @colorDarkBlue;
-      padding: 32px 36px;
+      padding: 26px 36px;
       .tips {
-        height: 30px;
+        height: 24px;
         font-size: @fontSize18;
         margin-bottom: 20px;
       }
       p {
         font-size: @fontSize14;
-        line-height: 22px;
+        line-height: 18px;
       }
     }
     .drawTitle {
       width: 622px;
       height: 112px;
       background: url("../images/drawTitle.png") no-repeat;
-      margin: 0 auto 40px;
+      margin: -100px auto 50px;
       line-height: 62px;
       text-align: center;
       font-size: @fontSize30;
-
+    }
+    .drawTitle2{
+      margin: 0 auto 70px;
+    }
+    .drawTitle3{
+      margin: 0 auto 50px;
     }
     .drawTotalLadder {
       width: 1140px;
       height: 770px;
-      margin: 80px auto;
+      margin: 80px auto 90px;
       .person {
         float: left;
       }
@@ -319,6 +343,9 @@
         text-align: center;
         font-size: @fontSize26;
         padding-top: 16px;
+        div{
+          margin-top: -10px;
+        }
       }
       .teamTotalTitle {
         position: relative;
@@ -363,16 +390,16 @@
           margin-left: 60px;
           font-size: @fontSize16;
           color: @colorWhite;
+          background: @colorPageBgTotal;
         }
         .selectedPage {
-          background: @colorPageBgTotal;
           color: @colorPageTotal;
         }
       }
     }
     .platformPC {
       width: 1140px;
-      margin: 20px auto;
+      margin: 20px auto 70px;
       .platformBg {
         width: 911px;
         height: 538px;
@@ -381,20 +408,26 @@
         position: relative;
         a {
           display: block;
-          width: 120px;
-          height: 120px;
+          width: 80px;
+          height: 140px;
           background: transparent;
           position: absolute;
           top: 40px;
           right: 54px;
           cursor: pointer;
+          background: url("../images/comePC.png") no-repeat;
+          -webkit-animation: cloudMove 2s 0.2s infinite ease-in-out;
+          -o-animation: cloudMove 2s 0.2s infinite ease-in-out;
+          -ms-animation: cloudMove 2s 0.2s infinite ease-in-out;
+          -moz-animation: cloudMove 2s 0.2s infinite ease-in-out;
+          animation: cloudMove 2s 0.2s infinite ease-in-out;
           .injectPC {
             display: none;
             width: 349px;
             height: 55px;
             background: url("../images/injectPC.png") no-repeat;
             position: absolute;
-            right: -68px;
+            right: -100px;
             top: -58px;
             font-size: @fontSize14;
             color: @color6;
@@ -428,7 +461,7 @@
     }
     .platformTotalPC {
       width: 1140px;
-      margin: 20px auto;
+      margin: 20px auto 10px;
       .platformBg {
         width: 911px;
         height: 497px;
@@ -440,16 +473,21 @@
           position: absolute;
           top: 40px;
           right: 66px;
-          width: 120px;
-          height: 120px;
-          background: transparent;
+          width: 80px;
+          height: 140px;
+          background: url("../images/comePC.png") no-repeat;
+          -webkit-animation: cloudMove 2s 0.2s infinite ease-in-out;
+          -o-animation: cloudMove 2s 0.2s infinite ease-in-out;
+          -ms-animation: cloudMove 2s 0.2s infinite ease-in-out;
+          -moz-animation: cloudMove 2s 0.2s infinite ease-in-out;
+          animation: cloudMove 2s 0.2s infinite ease-in-out;
           .injectPC {
-            display: block;
+            display: none;
             width: 349px;
             height: 55px;
             background: url("../images/injectPC.png") no-repeat;
             position: absolute;
-            right: -68px;
+            right: -100px;
             top: -58px;
             font-size: @fontSize14;
             color: @color6;
@@ -467,11 +505,11 @@
           position: absolute;
           left: 360px;
           bottom: 64px;
-          width: 279px;
-          height: 39px;
+          width: 271px;
+          height: 36px;
         }
         .pillars {
-          width: 279px;
+          width: 271px;
           background: #ffe8b8;
           position: absolute;
           bottom: 64px;
@@ -489,9 +527,12 @@
     color: @colorWhite;
     font-size: @fontSize14;
     .explainContent {
-      width: 1140px;
+      width: 1080px;
       padding: 32px 0;
       margin: auto;
+      p{
+        line-height: 18px;
+      }
       .explainTitle {
         font-size: @fontSize34;
         img {
@@ -601,7 +642,7 @@
     }
     .noticeText {
       width: 616px;
-      margin: 164px auto 0;
+      margin: 194px auto 0;
       color: @color6;
       text-align: center;
       line-height: 30px;

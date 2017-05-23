@@ -1,0 +1,169 @@
+{% extends '../../../lib/templates/p2p-web-base.swig.html' %}
+
+{% block title %}工场微金是由北京凤凰信用管理有限公司（简称：凤凰信用）倾力打造的专注于小贷公司资产交易的P2P平台—上金融工场，圆财富梦想！{% endblock %}
+
+{% block javascripts %}
+<script type='text/javascript' src='javascripts/jquery.jqdock.min.js'></script>
+<script src="javascripts/index.js"></script>
+<script type="text/javascript">
+jQuery(document).ready(function($){
+	var dockOptions =
+		{ align: 'top'
+		, distance: 72
+		, labels: 'bl'
+		, coefficient: 6
+		};
+
+	var a = 130
+	$('#menu').jqDock({
+		size: a,
+		distance: 3 * a,
+		/*active: 3*/
+	});
+});
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="banner"></div>
+
+<div class="Finance">
+	<div class="Workshop">
+		<h1 class="elec">工场微金电子数据保全</h1>
+		<p class="Jointly">工场微金联手易保全电子数据保全中心，为出借者提供交易凭证（出借凭证、借款合同等信息）保全服务，其内容、生成时间等信息将被加密固定，且生成唯一的保全证书供下载。事后任何细微修改，都会导致保全证书函数值变化，有效防止人为篡改，其私密性、安全性也比实物资料更为可靠。如发生司法纠纷，易保全电子数据保全中心提供的认证证书可作为法院或仲裁机构的有效、可靠证据，从而获得举证的优势地位。</p>
+		<div class="mixed clearfix">
+			<dl>
+				<dt><img src="images/bao-a.jpg"/></dt>
+				<dd>
+					<h4>安全</h4>
+					<p>为客户电子内容进行保全，数据存管不丢失，不可篡改。</p>
+				</dd>
+			</dl>
+			<dl>
+				<dt><img src="images/bao-b.jpg"/></dt>
+				<dd>
+					<h4>权威</h4>
+					<p>出具公证处公证及司法鉴定中心文书，提供有效的法律依据。</p>
+				</dd>
+			</dl>
+			<dl>
+				<dt><img src="images/bao-c.jpg"/></dt>
+				<dd>
+					<h4>合法</h4>
+					<p>电子数据保全中心提供的保全证书，可作为《刑事诉讼法》、《民事诉讼法》的有效证据。</p>
+				</dd>
+			</dl>
+			<dl>
+				<dt><img src="images/bao-d.jpg"/></dt>
+				<dd>
+					<h4>便捷</h4>
+					<p>可在线向公证处和司法鉴定中心申请，帮助代办公证和司法鉴定文书。</p>
+				</dd>
+			</dl>
+			<dl>
+				<dt><img src="images/bao-e.jpg"/></dt>
+				<dd>
+					<h4>保密</h4>
+					<p>系统仅在本地生成数据的数字摘要，绝无泄露隐私、商业机密、内容的风险。</p>
+				</dd>
+			</dl>
+		</div>
+	</div>
+</div>
+
+<div class="bao-f"><img src="images/bao-f.png"/></div>
+
+<div class="contract">
+	<div class="core">七大核心优势</div>
+	<div id="page">
+	  <div id="menu">
+	  	<a href="#"><img src='images/1.png' width="110" height="110" alt='' /></a>
+	    <a href="#"><img src='images/2.png' width="130" height="130" alt='' /></a>
+	    <a href="#"><img src='images/3.png' width="150" height="150" alt='' /></a>
+	    <a href="#"><img src='images/4.png' width="190" height="190" alt='' /></a>
+	    <a href="#"><img src='images/5.png' width="150" height="150" alt='' /></a>
+	    <a href="#"><img src='images/6.png' width="130" height="130" alt='' /></a>
+	    <a href="#"><img src='images/7.png' width="110" height="110" alt='' /></a>
+	  </div>
+	</div>
+
+	<div class="mouse">用鼠标指向以上各个气泡来进一步了解金融工场电子数据保全的更多优点吧！</div>
+
+	<ul class="option">
+		<li style="display: none;">
+			<div class="zl">
+				<p><img class="bao-e" src="images/bao-e.png"/>申请流程简化：有商业银行U盾，即可实名认证。</p>
+				<p><img class="bao-e" src="images/bao-e.png"/>多端无缝接入：用户在移动和PC端都可CA认证。</p>
+			</div>
+			<div class="Id">
+				<p><img class="bao-e" id="icn" src="images/bao-e.png"/><span class="infor">身份信息安全：U盾为用户本人在银行现场办理、面签。</span></p>
+			</div>
+		</li>
+		<li style="display: none;">
+			<div class="zl">
+				<p><img class="bao-e" id="show" src="images/bao-e.png"/><span class="Stamp">合同上加盖中心的电子签章，一旦发生篡改，用户点击电子签章会显示文件更改详情，更加及时和直观的展现了电子文档的真实和完整性。</span></p>
+			</div>
+		</li>
+		<li style="display: none;">
+			<div class="zl">
+				<p><img class="bao-e" src="images/bao-e.png"/>合同同步托管，可在中心合同保查询、确认，提升用户在平台出借的安全感。</p>
+			</div>
+		</li>
+		<li style="display: none;">
+			<div class="zl">
+				<p><img class="bao-e" src="images/bao-e.png"/>哈希公众密码社群严密检验。</p>
+				<p><img class="bao-e" src="images/bao-e.png"/>北斗卫星授时，毫秒级精确保障数据的时间。</p>
+			</div>
+			<div class="yr">
+				<p><img class="bao-e" src="images/bao-e.png"/>将用户/企业信息与数据绑定，用户信息不可篡改。</p>
+				<p><img class="bao-e" src="images/bao-e.png"/>原始信息固化，定期+实时发布，接受公众监督。</p>
+			</div>
+		</li>
+		<li style="display: none;">
+			<div class="zl">
+				<p><img class="bao-e" id="higher" src="images/bao-e.png"/><span class="Notar">公证处与司法鉴定中心高度认可电子数据保全中心的电子数据保全结果，可直接在线申请司法出证，公证书、司法鉴定书、保全验证证书邮寄到家。</span></p>
+			</div>
+		</li>
+		<li style="display: none;">
+			<div class="zl">
+				<p><img class="bao-e" src="images/bao-e.png"/>1400万互联网存量用户品牌认可，并可通过电子数据保全中心官网了解平台信息。</p>
+			</div>
+		</li>
+		<li style="display: none;">
+			<div class="zl">
+				<p><img class="bao-e" src="images/bao-e.png"/>免费在线咨询：国内首家在线对接了找法网和法帮网。</p>
+				<p><img class="bao-e" src="images/bao-e.png"/>法律服务：在线法律咨询、维权法务协助、合同审查/代写、版权登记服务。</p>
+			</div>
+		</li>
+	</ul>
+
+</div>
+
+
+
+<div class="common">
+	<h1>常见问题解答</h1>
+	<div class="answer">
+		<div class="line">
+			<div class="what">1.电子数据保全是什么？</div>
+			<div class="Include">电子数据在线保全是指对以电子数据形式（包括文字、图形、字母、数字、三维标志、颜色组合声音以及上述要素的组合等下同）存在的各类电子数据信息，<span class="more_txt">运用专利技术进行运算、加密固定，载明保全生成的标准时间、运算值、档案编号等，以防止被人篡改，确保电子数据的原始性、客观性的程序及方法。</span></div>
+		</div>
+		<div class="line law">
+			<div class="what center">2.易保全电子数据保全中心提供什么？</div>
+			<div class="Include">提供受法律认可的电子数据认证证书服务<br/>国家专利局、CNAS中国国家实验室资格认证，让易保全电子数据保全中心出具的电子认证证书，受法律认可！</div>
+			<div class="Include">CFCA身份认证、电子签章服务<br/>提供CFCA身份认证、电子签章，让身份认证更可靠。</div>
+			<div class="Include">一站式存取证服务<br/>电子数据保全中心打通保全存证、司法鉴定、法律服务等环节，真正做到一站式服务。</div>
+		</div>
+		<div class="line">
+			<div class="what center">3.出借者如何检验保全证书真伪？</div>
+			<div class="Include">出借者拿到保全证书后，可以登录www.ebaoquan.org，录入证书上的备案号及上传被保全文件（如电子合同）进行真伪验证，或者从收到证书生成的邮件中，点击“查看我的保全证书”，进入证书页面使用验证功能。</div>
+		</div>
+		<div>
+			<div class="what center">4.电子数据保全是否具有法律效力？</div>
+			<div class="Include">最新修正的《刑法诉讼法》、《民事诉讼法》均将电子数据列为证据的一种，电子数据保全中心提供的保全证书，可作为司法人员和律师分析、认定案件事实的有效证据，让受保者在司法纠纷中占据有利地位，根据受保护者需要，电子数据保全中心还可以为受保者需要，电子数据保全中心还可以为受保者提供合作机构出具的公证书或司法鉴定书。</div>
+		</div>
+
+	</div>
+</div>
+
+{% endblock %}

@@ -31,7 +31,7 @@ class InvestFriendsMobile extends React.Component {
         let noLoginNotice = (
             <div className="mobileNoticeContentNo">
                 <div className="noticeClose" onClick={()=>closePopHandler()}></div>
-                <div className="noticeText">请好友用您的工场码，<em>好友注册7天内累投年化额≥1000元</em>，且投资等额标时，超过18个月按18个月计算年化，才算一个有效邀请。<br/>
+                <div className="noticeText">请好友用您的工场码注册，去投标，达成团队目标。<br/>
                     登录后查看我的工场码。<br/>
                     还没有工场码？注册即可拥有。
                 </div>
@@ -41,7 +41,7 @@ class InvestFriendsMobile extends React.Component {
                     新手注册即送<em>120</em>元
                 </div>
                 <a className="moreNew"
-                   href="http://mp.weixin.qq.com/s?__biz=MjM5MjQwMjcyNA==&mid=507798032&idx=1&sn=6593ce9f7358486685b84006fa3c2fff&scene=0#wechat_redirect">更多新手秘笈></a>
+                   href="https://www.9888.cn/cms/addhtml/2078.html?reloadworkpage=y">更多新手秘笈></a>
             </div>
         );
         let loginNotice = (

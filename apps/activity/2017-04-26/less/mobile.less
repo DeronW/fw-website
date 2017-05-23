@@ -9,12 +9,12 @@
   background: @colorBg;
   padding-top: 1px;
   color: @colorWhite;
-  margin-top: -80px;
   .drawBanner{
     width: 100%;
     height: 547px;
     background: url("../images/bannerMobile.jpg") no-repeat;
     position: relative;
+    margin-top: -2px;
     .activityExplain{
       position: absolute;
       width:150px;
@@ -28,7 +28,7 @@
     width: 655px;
     height: 406px;
     background: url("../images/bigGift.png") no-repeat;
-    margin: auto;
+    margin-left:60px;
     font-size: @fontSize40;
     color: @colorYellow;
     position: relative;
@@ -44,7 +44,7 @@
     width: 664px;
     height: 118px;
     background: url("../images/drawTitleMobile.png") no-repeat;
-    margin: 20px auto 80px;
+    margin: 90px auto 80px;
     font-size: @fontSize32;
     text-align: center;
     line-height: 60px;
@@ -111,16 +111,22 @@
     color: @colorWhite;
     font-size: @fontSize24;
     padding: 20px 30px;
-    margin: 50px 30px 0;
+    margin: 70px 30px 0;
     background: @colorDarkBlue;
     border-radius: 8px;
+    line-height: 40px;
+    .mask{
+      height: 24px;
+      display: inline-block;
+      overflow: hidden;
+    }
     .tips{
       font-size: @fontSize28;
       margin-bottom: 10px;
     }
     .briefText,.fullText{
       font-size: @fontSize24;
-      line-height: 50px;
+      line-height: 40px;
       .showBtn{
         display: inline-block;
         width: 180px;
@@ -161,11 +167,14 @@
       border-radius: 62px;
     }
   }
+  .drawTips2{
+    margin: 50px 30px 0;
+  }
   .switchMonthLadder {
     width: 632px;
     height: 638px;
     background: url("../images/monthLadder.png") no-repeat;
-    margin: 100px auto;
+    margin: 100px auto 70px;
     position: relative;
     .ladderTab {
       position: absolute;
@@ -279,7 +288,7 @@
     width: 638px;
     height: 818px;
     background: url("../images/totalLadderMobile.png") no-repeat;
-    margin: 100px auto;
+    margin: 100px auto 80px;
     position: relative;
     .ladderTab {
       position: absolute;
@@ -437,7 +446,7 @@
   .appleMobile{
     width: 678px;
     height: 64px;
-    margin: 30px auto 0;
+    margin: 50px auto 0;
     text-align: center;
     line-height: 64px;
     border-radius: 64px;
@@ -454,11 +463,14 @@
       background: url("../images/platformM1.png") no-repeat;
       position: relative;
       .injectWater{
-        width: 140px;
-        height: 146px;
+        width: 103px;
+        height: 134px;
         position: absolute;
         right: 28px;
         top: 24px;
+        background: url("../images/comeMobile.png") no-repeat;
+        -webkit-animation: cloudMove 4s  infinite  ease-in-out;
+        animation: cloudMove 4s  infinite  ease-in-out;
       }
       .injectText{
         display: block;
@@ -475,17 +487,17 @@
       }
       img{
         display: block;
-        width: 229px;
-        height: 39px;
+        width: 221px;
+        height: 36px;
         position: absolute;
         left: 240px;
-        bottom: 100px;
+        bottom: 112px;
       }
       .pillars{
-        width: 229px;
+        width: 221px;
         background: #8fe5fe;
         position: absolute;
-        bottom: 62px;
+        bottom: 68px;
         left: 240px;
         border-bottom-left-radius: 5px;
         border-bottom-right-radius: 5px;
@@ -501,11 +513,14 @@
       background: url("../images/platformTotalM1.png") no-repeat;
       position: relative;
       .injectWater{
-        width: 140px;
-        height: 146px;
+        width: 103px;
+        height: 134px;
         position: absolute;
         right: 28px;
         top: 24px;
+        background: url("../images/comeMobile.png") no-repeat;
+        -webkit-animation: cloudMove 4s  infinite  ease-in-out;
+        animation: cloudMove 4s  infinite  ease-in-out;
       }
       .injectText{
         display: block;
@@ -522,18 +537,18 @@
       }
       img{
         display: block;
-        width: 239px;
-        height: 39px;
+        width: 229px;
+        height: 31px;
         position: absolute;
-        left: 254px;
+        left: 260px;
         bottom: 100px;
       }
       .pillars{
-        width: 239px;
+        width: 229px;
         background: #ffe8b8;
         position: absolute;
-        bottom: 64px;
-        left: 254px;
+        bottom: 68px;
+        left: 260px;
         border-bottom-left-radius: 5px;
         border-bottom-right-radius: 5px;
       }
@@ -571,7 +586,7 @@
     }
     .noticeText{
       width: 556px;
-      margin: 150px auto 0;
+      margin: 200px auto 0;
       font-size: @fontSize24;
       color: @color6;
       text-align: center;
