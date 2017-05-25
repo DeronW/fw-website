@@ -42,7 +42,7 @@ $(function () {
                 clearInterval(obj.timer);
             }
         }, 15)
-        setTimeout(function(){clearInterval(obj.timer)}, 1000)
+        setTimeout(function () { clearInterval(obj.timer) }, 1000)
     }
 
     var onesize1, onesize2, onesize3, onesize4, onesize5, onesize7;
@@ -52,6 +52,7 @@ $(function () {
     })
     function getHeight() {
         onesize1 = $(".block1").height();
+        onesizeTrader = $(".blockTrade").height();
         onesize2 = $(".block2").height();
         onesize3 = $(".block3").height();
         onesize4 = $(".block4").height();
@@ -64,28 +65,29 @@ $(function () {
         starMove(document, { 'scrollbar': iH + iTop })
     });
     $(".menue ul li.list2").click(function () {
-        starMove(document, { 'scrollbar': onesize1 + iH + iTop + 50 })
+        starMove(document, { 'scrollbar': onesize1 + onesizeTrader + iH + iTop + 50 })
     });
     $(".menue ul li.list3").click(function () {
-        starMove(document, { 'scrollbar': onesize1 + onesize2 + iH + iTop + 30 })
+        starMove(document, { 'scrollbar': onesize1 + onesizeTrader + onesize2 + iH + iTop + 30 })
     });
     $(".menue ul li.list4").click(function () {
-        starMove(document, { 'scrollbar': onesize1 + onesize2 + onesize3 + onesize7 + iH + iTop })
+        starMove(document, { 'scrollbar': onesize1 + onesizeTrader + onesize2 + onesize3 + onesize7 + iH + iTop -400})
     });
     $(".menue ul li.list5").click(function () {
-        starMove(document, { 'scrollbar': onesize1 + onesize2 + onesize3 + onesize7 + onesize4 + iH + iTop - 30 })
+        starMove(document, { 'scrollbar': onesize1 + onesizeTrader + onesize2 + onesize3 + onesize7 + onesize4 + iH + iTop  -400})
     });
 
     $(window).on("scroll resize", function () {
-        if ($(window).scrollTop() >= iH + iTop && $(window).scrollTop() < onesize1 + iH + iTop  + 50) {
+        if ($(window).scrollTop() >= iH + iTop && $(window).scrollTop() < onesize1 + iH + iTop + 50) {
             iNum = 0;
-        } else if ($(window).scrollTop() >= onesize1 + iH + iTop  + 50&& $(window).scrollTop() < onesize1 + onesize2 + iH + iTop + 30) {
+        } else if ($(window).scrollTop() >= onesize1 + onesizeTrader + iH + iTop + 50 && $(window).scrollTop() < onesize1+onesizeTrader + onesize2 + iH + iTop + 30) {
             iNum = 1;
-        } else if ($(window).scrollTop() >= onesize1 + onesize2 + iH + iTop  + 30&& $(window).scrollTop() < onesize1 + onesize2 + onesize3 + iH + iTop) {
+        } else if ($(window).scrollTop() >= onesize1 + onesizeTrader + onesize2 + iH + iTop + 30 && $(window).scrollTop() < onesize1+onesizeTrader + onesize2 + onesize3 + iH + iTop) {
             iNum = 2;
-        } else if ($(window).scrollTop() >= onesize1 + onesize2 + onesize3 + iH + iTop && $(window).scrollTop() < onesize1 + onesize2 + onesize3 + onesize7 + onesize4 + iH + iTop - 30 ) {
+        } else if ($(window).scrollTop() >= onesize1 + onesizeTrader + onesize2 + onesize3 + iH + iTop && $(window).scrollTop() < onesize1+onesizeTrader + onesize2 + onesize3 + onesize7 + onesize4 + iH + iTop - 400) {
+           console.log(3);
             iNum = 3;
-        } else if ($(window).scrollTop() >= onesize1 + onesize2 + onesize3 + onesize7 + onesize4 + iH + iTop - 30 ) {
+        } else if ($(window).scrollTop() >= onesize1 + onesizeTrader + onesize2 + onesize3 + onesize7 + onesize4 + iH + iTop - 400) {
             iNum = 4
         }
         if (flag == false) {
@@ -99,7 +101,7 @@ $(function () {
             $(".menue ul li a").attr("class", "");
             $(".menue ul li a").eq(iNum).attr("class", "on");
         } else {
-            $(".menue").css("position", "relative").css("top", -6+'px').css("left", 0);
+            $(".menue").css("position", "relative").css("top", -6 + 'px').css("left", 0);
             //$(".innerment").css("top",0);
             $(".moment.last").css("paddingBottom", 38);
             $(".menue ul li a").attr("class", "");
@@ -156,5 +158,7 @@ $(function () {
             timer = setInterval(autoplay, 3000);
         })
     }
-    fn($(".agency"));
+    fn($(".agencyCooperate"));
+    fn($(".agencyTrade"));
+    fn($(".agencyRisk"));
 });
