@@ -63,7 +63,7 @@ const HeaderStatusBar = React.createClass({
                     <div className="text">
                         <div> {this.state.realname} </div>
                         <div>
-                            <a href="/prdOrder/uinvest.shtml"> 我的投资 </a>
+                            <a href="/prdOrder/uinvest.shtml"> 我的出借 </a>
                             <span className="v-line"> &nbsp;|&nbsp; </span>
                             <a href="/actUser/funds.shtml"> 交易记录 </a>
                         </div>
