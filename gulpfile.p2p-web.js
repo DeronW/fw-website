@@ -27,8 +27,9 @@ const TOPIC_PAGES = [
 
 const USER_PAGES = [
     //用户界面
-    'notice-information-disclosure',//信息披露页
-    'protocol-user-service'//用户服务协议页面
+    'notice-information-disclosure',//新信息披露页
+    'protocol-user-service',//用户服务协议页面
+    'notice-corporate-structure'//旧信息披露页
 ]
 
 const DEVELOPING_PAGES = [
