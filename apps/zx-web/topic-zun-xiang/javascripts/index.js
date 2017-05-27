@@ -62,7 +62,8 @@ $(function () {
     var iTop = $(".head-top").outerHeight();
     var iH = $(".top1").height();
     $(".menue ul li.list1").click(function () {
-        starMove(document, { 'scrollbar': iH + iTop })
+        console.log('s')
+        starMove(document, { 'scrollbar': 0 })
     });
     $(".menue ul li.list2").click(function () {
         starMove(document, { 'scrollbar': onesize1 + onesizeTrader + iH + iTop + 50 })
@@ -78,7 +79,7 @@ $(function () {
     });
 
     $(window).on("scroll resize", function () {
-        if ($(window).scrollTop() >= iH + iTop && $(window).scrollTop() < onesize1 + iH + iTop + 50) {
+        if ($(window).scrollTop() >= iH + iTop && $(window).scrollTop() < onesize1 +onesizeTrader+ iH + iTop + 50) {
             iNum = 0;
         } else if ($(window).scrollTop() >= onesize1 + onesizeTrader + iH + iTop + 50 && $(window).scrollTop() < onesize1+onesizeTrader + onesize2 + iH + iTop + 30) {
             iNum = 1;
