@@ -3,29 +3,14 @@ const eslint = require('gulp-eslint');
 const PROJ = 'zx-web';
 
 let APP_NAMES = [
-    //'guide', // 新手引导
-    //'app-download', // app 下载页面
-    //'welcome-register', // 推广用户注册落地页面
-    //'welcome-register-success', // 推广用户注册 成功页面
 ];
 
 // 公告类页面
 const NOTICE_PAGES = [
-    //    'preservation', // 安全保障介绍页面
-    //    'guide-cookbook', // 玩赚攻略页
-    //    'vip-prerogative', // 等级攻略页
-    //    'notice-corporate-structure', // 信息披露页面
-    //    'notice-information-disclosure',//信息披露新页面
-    //    'protocol-user-service',//金融工场用户协议
 ]
 
 // 专题说明类页面
 const TOPIC_PAGES = [
-    // 专题说明页面
-    //'topic-annual-commision', // A码 用户返利规则 佣金说明
-    //'topic-hui-shang', // 徽商
-    //'topic-gong-you-hui', //工友会专题页
-    //'topic-hui-shang-guide', // 徽商 开户引导
 ]
 
 const USER_PAGES = [
@@ -36,12 +21,8 @@ const USER_PAGES = [
 
 const DEVELOPING_PAGES = [
     'topic-zun-xiang', // 尊享标计划
-    //'user-login-history', //用户登录日志页面
     'user-bank-phone',//用户预留手机号页面
     'about-us'//关于我们
-    //'user-messages', // 用户消息页面
-    //'user-center', //用户中心
-    //'user-bean', // 用户工豆
 ]
 
 APP_NAMES.push(
