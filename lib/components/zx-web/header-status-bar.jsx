@@ -123,7 +123,7 @@ const HeaderStatusBar = React.createClass({
                 {this.state.is_login ? null : <a className="link" href="/orderUser/register.shtml">注册</a>}
                 {this.state.is_login ? null : separate_line}
                 {this.state.is_login ? null :
-                    <div className="link">你好，欢迎来到工场微金！&nbsp;&nbsp;<a href="/orderUser/login.shtml">登录</a></div>}
+                    <div className="link">你好，欢迎来到工场尊享！&nbsp;&nbsp;<a href="/orderUser/login.shtml">登录</a></div>}
                 {/*{separate_line}*/}
             </div>
 
