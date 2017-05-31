@@ -6,7 +6,8 @@ const HeaderStatusBar = React.createClass({
             realname: null,
             avatar: null,
             msg_count: 0,
-            showUserPop: false
+            showUserPop: false,
+            showApp: false
         }
     },
     componentDidMount: function () {
@@ -49,11 +50,11 @@ const HeaderStatusBar = React.createClass({
     hideUserPopHandler: function () {
         this.setState({showUserPop: false})
     },
-    showApp: function () {
-        this.setState({showUserPop: false})
+    showAppHandler: function () {
+        this.setState({showApp: true})
     },
-    hideApp: function () {
-        this.setState({showUserPop: false})
+    hideAppHandler: function () {
+        this.setState({showApp: false})
     },
     render: function () {
         let user_state = null, msg = null;
@@ -122,7 +123,7 @@ const HeaderStatusBar = React.createClass({
                 <div className="hsb-xin-dai">
                     <a href="http://www.creditchina.hk/">400-6677-988</a>
                     (周一至周日8:30-21:00)
-                    <span class="app-li" onMouseOver={this.showApp}  onMouseLeave={this.hideApp}>
+                    <span class="app-li" onMouseOver={this.showAppHandler}  onMouseLeave={this.hideAppHandler}>
                         <span class="g-ico-phone"></span>
                         <a href="http://www.9888keji.com/static/web/app-download/index.html">APP客户端</a>
                         <div class="img" style="display: none;">
