@@ -49,6 +49,12 @@ const HeaderStatusBar = React.createClass({
     hideUserPopHandler: function () {
         this.setState({showUserPop: false})
     },
+    showApp: function () {
+        this.setState({showUserPop: false})
+    },
+    hideApp: function () {
+        this.setState({showUserPop: false})
+    },
     render: function () {
         let user_state = null, msg = null;
         let separate_line = <span className="separate-line"> </span>;
@@ -114,8 +120,15 @@ const HeaderStatusBar = React.createClass({
         let p2pHeader = (
             <div className="container">
                 <div className="hsb-xin-dai">
-                    <a href="http://www.creditchina.hk/">中國信貸科技(08207.HK)</a>
-                    旗下互联网金融平台
+                    <a href="http://www.creditchina.hk/">400-6677-988</a>
+                    (周一至周日8:30-21:00)
+                    <span class="app-li" onMouseOver={this.showApp}  onMouseLeave={this.hideApp}>
+                        <span class="g-ico-phone"></span>
+                        <a href="http://www.9888keji.com/static/web/app-download/index.html">APP客户端</a>
+                        <div class="img" style="display: none;">
+                            <a href="http://www.9888keji.com/static/web/app-download/index.html"><img src="/img/head/menu-app.jpg"></a>
+                        </div>
+                    </span>
                 </div>
                 {/*<a className="link" href="http://bbs.9888.cn" target="_blank">工友之家</a>*/}
                 {/*{separate_line}*/}
