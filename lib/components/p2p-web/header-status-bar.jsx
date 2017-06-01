@@ -65,7 +65,7 @@ const HeaderStatusBar = React.createClass({
                         <div>
                             <a href="/prdOrder/uinvest.shtml"> 我的出借 </a>
                             <span className="v-line"> &nbsp;|&nbsp; </span>
-                            <a href="/actUser/funds.shtml"> 交易记录 </a>
+                            <a href="/actUser/funds.shtml"> 资金流水 </a>
                         </div>
                         <a href="/payBill/recharges.shtml" className="btn-recharge">充值</a>
                     </div>
