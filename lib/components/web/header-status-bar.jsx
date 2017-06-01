@@ -50,12 +50,6 @@ const HeaderStatusBar = React.createClass({
     hideUserPopHandler: function () {
         this.setState({showUserPop: false})
     },
-    showAppHandler: function () {
-        this.setState({showApp: true})
-    },
-    hideAppHandler: function () {
-        this.setState({showApp: false})
-    },
     render: function () {
         let user_state = null, msg = null;
         let separate_line = <span className="separate-line"> </span>;
@@ -121,42 +115,37 @@ const HeaderStatusBar = React.createClass({
         let p2pHeader = (
             <div className="container">
                 <div className="hsb-xin-dai">
-                    <a href="http://www.creditchina.hk/">400-6677-988</a>
+                    <span className="pc-iphone" href="http://www.creditchina.hk/">400-6677-988</span>
                     (周一至周日8:30-21:00)
-                    <span class="app-li" onMouseOver={this.showAppHandler}  onMouseLeave={this.hideAppHandler}>
-                        <span class="g-ico-phone"></span>
-                        <a href="http://www.9888keji.com/static/web/app-download/index.html">APP客户端</a>
-                        <div class="img" style="display: none;">
-                            <a href="http://www.9888keji.com/static/web/app-download/index.html"><img src="/img/head/menu-app.jpg"></a>
-                        </div>
+                    <span className="app-li">
+                        <span className="g-ico-phone"></span>
+                        <span className="header-span-app" href="http://www.9888keji.com/static/web/app-download/index.html">APP 客户端
+                            <div className="img">
+                                <a href="http://www.9888keji.com/static/web/app-download/index.html"><img src="images/global-header/menu-app.png"/></a>
+                            </div>
+                        </span>
                     </span>
                 </div>
                 {/*<a className="link" href="http://bbs.9888.cn" target="_blank">工友之家</a>*/}
                 {/*{separate_line}*/}
                 <a className="link" href="https://bbs.9888.cn/">工友之家</a>
-                {separate_line}
-                <a className="link" href="/static/web/notice-corporate-structure/index.html">信息披露</a>
-                {separate_line}
-                <div className="hsb-guide-nav">
+                <a className="" href="/static/web/guide-cookbook/index.html">玩赚攻略</a>
+                {/*<div className="hsb-guide-nav">
                     <div className="hsb-guide-nav-box">
                         <i className="arrow"> </i>
                         <a className="" href="/static/web/guide/index.html"> 新手指引 </a>
-                        <a className="" href="/static/web/guide-cookbook/index.html">玩赚攻略</a>
+
                     </div>
-                </div>
-                {separate_line}
+                </div>*/}
                 <a className="link" href="/mesageCenter/msssageList.shtml?messageType=1">
                     消息
                     {msg}
                 </a>
-                {separate_line}
                 {this.state.is_login && this.state.username ? user_state : null}
                 {this.state.is_login ? null : <a className="link" href="/orderUser/register.shtml">注册</a>}
-                {this.state.is_login ? null : separate_line}
                 {this.state.is_login ? null : <a className="link" href="/orderUser/login.shtml">登录</a>}
-                {separate_line}
                 <div className="header-status-bar-app">
-                    <a href="/static/web/app-download/index.html">APP 客户端</a>
+                    {/*<a href="/static/web/app-download/index.html">APP 客户端</a>*/}
                     <a href="/static/web/app-download/index.html" className="hsb-qrcode">
                         <img src="images/global-header/menu-app.png"/>
                     </a>
