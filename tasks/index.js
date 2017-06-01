@@ -37,6 +37,7 @@ module.exports = function generate_task(site_name, page_name, configs) {
             include_javascripts: [],
             include_less: [],
             main_jsx: 'react/index.jsx',
+            react_version: '0.14',
             html_engine: 'swig'
         }, configs, singlePageCfg);
 
@@ -51,17 +52,30 @@ module.exports = function generate_task(site_name, page_name, configs) {
     less_files.push(...CONFIG.include_less.map(i => `${lib_path}less/${i}`));
     less_files.push(`${app_path}less/index.less`);
 
-    let jsx_files = CONFIG.include_components.map((i) => `${lib_path}components/${i}`);
+    let jsx_files = CONFIG.include_components.map(i => `${lib_path}components/${i}`);
     jsx_files.push(`${app_path}react/components/*.jsx`);
     jsx_files.push(`${app_path}${CONFIG.main_jsx}`);
 
     let common_javascript_files = [];
+
     if (CONFIG.debug) {
-        common_javascript_files.push(`${lib_path}react-0.14.8/react.js`);
-        common_javascript_files.push(`${lib_path}react-0.14.8/react-dom.js`);
+        if (CONFIG.react_version == '15') {
+            common_javascript_files.push(`${lib_path}react-15.5.4/prop-types.js`);
+            common_javascript_files.push(`${lib_path}react-15.5.4/react.js`);
+            common_javascript_files.push(`${lib_path}react-15.5.4/react-dom.js`);
+        } else {
+            common_javascript_files.push(`${lib_path}react-0.14.8/react.js`);
+            common_javascript_files.push(`${lib_path}react-0.14.8/react-dom.js`);
+        }
     } else {
-        common_javascript_files.push(`${lib_path}react-0.14.8/react.min.js`);
-        common_javascript_files.push(`${lib_path}react-0.14.8/react-dom.min.js`);
+        if (CONFIG.react_version == '15') {
+            common_javascript_files.push(`${lib_path}react-15.5.4/prop-types.min.js`);
+            common_javascript_files.push(`${lib_path}react-15.5.4/react.min.js`);
+            common_javascript_files.push(`${lib_path}react-15.5.4/react-dom.min.js`);
+        } else {
+            common_javascript_files.push(`${lib_path}react-0.14.8/react.min.js`);
+            common_javascript_files.push(`${lib_path}react-0.14.8/react-dom.min.js`);
+        }
     }
 
     common_javascript_files = common_javascript_files.concat(
