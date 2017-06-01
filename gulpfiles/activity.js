@@ -85,6 +85,7 @@ module.exports = function (gulp, generate_task, settings) {
     ];
 
     let default_options = {
+        // react_version: '15',
         include_components: INCLUDE_COMPONENTS,
         include_javascripts: INCLUDE_JAVASCRIPTS,
         include_less: INCLUDE_LESS
