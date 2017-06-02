@@ -92,7 +92,7 @@ const HeaderStatusBar = React.createClass({
         let p2pHeader = (
             <div className="container">
                 <div className="hsb-xin-dai">
-                    <a href="https://www.9888keji.com">前往金融工场首页</a>
+                    <a href="https://www.9888keji.com" target="_blank">前往金融工场首页</a>
                 </div>
                 {/*<a className="link" href="http://bbs.9888.cn" target="_blank">工友之家</a>*/}
                 {/*{separate_line}*/}
