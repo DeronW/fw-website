@@ -25,6 +25,7 @@ const HeaderStatusBar = React.createClass({
             jsonp: "callback",
             // Tell jQuery we're expecting JSONP
             dataType: "jsonp",
+            xhrFields: {withCredentials: true},
             data: {
                 token: login_token
             }

@@ -111,6 +111,7 @@
                 $.ajax({
                     url: "https://www.gongchangp2p.com/api/userState/v2/userState.json",
                     jsonp: "callback",
+                    xhrFields: { withCredentials: true },
                     dataType: "jsonp",
                 }).done(function (data) {
                     var data = data.data, ou = data.orderUser;
