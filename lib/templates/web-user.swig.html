@@ -1,14 +1,10 @@
-{% extends 'p2p-web-base.swig.html' %}
-
-{% block content %}
+{% extends 'p2p-web-base.swig.html' %} {% block content %}
 <div class="partial-user-center-panel">
     <div class="ucp-left-nav-bg"></div>
     <div class="ucp-right-panel"> {% block user_content %}{% endblock %}</div>
     {% include './p2p-web/partial/user-center-panel.swig.html' %}
 </div>
-{% endblock %}
-
-{% block javascripts %}
+{% endblock %} {% block javascripts %}
 <script>
     'use strict';
     (function ($, window, document, undefined) {
@@ -89,13 +85,13 @@
                 if (arg.borrowCount > 0 || arg.subrogationCount > 0 || arg.debtorsCount > 0) {
                     $('#ucpLinkContract').removeClass('hide')
                     $('[data-line=true]').removeClass('hide')
-                }else{
+                } else {
                     $('[data-line=true]').addClass('hide')
                 }
                 //我的借款
                 //if (arg.borrowCount > 0) {
-                    $('#ucpLinkBorrow').removeClass('hide');
-               // }
+                $('#ucpLinkBorrow').removeClass('hide');
+                // }
                 //权益转让
                 if (arg.subrogationCount > 0) {
                     $('#ucpLinkTransfer').removeClass('hide')
@@ -109,11 +105,11 @@
 
         $UserReady(function (is_login, user) {
             if (!is_login) {
-                window.location.href = "http://passport.9888.cn/passport/login?sourceSite=jrgc"
+                window.location.href = "http://passport.9888keji.com/passport/login?sourceSite=jrgc"
             } else {
                 var API_PATH = document.getElementById('api-path').value;
-                $.get(API_PATH + "/api/userState/v2/userState.json", null,
-                    function (data) {
+                $.getJSON("https://www.gongchangp2p.com/api/userState/v2/userState.json")
+                    .done(function (data) {
                         var data = data.data, ou = data.orderUser;
                         window._data = data;
                         methods.head(ou);
@@ -122,7 +118,7 @@
                         if (data.userLevel) methods.level(data.userLevel);
                         methods.state(data, ou);
                         methods.left(data);
-                    }, 'json');
+                    })
             }
         });
 
@@ -136,6 +132,6 @@
         })
 
     })(jQuery, window, document);
+
 </script>
-{% block extra_js %}{% endblock %}
-{% endblock %}
+{% block extra_js %}{% endblock %} {% endblock %}
