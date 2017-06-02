@@ -19,8 +19,15 @@ const HeaderStatusBar = React.createClass({
             if (p[0] == 'ticket') login_token = p[1].split('.')[0]
         });
 
-        $.getJSON('https://www.gongchangp2p.com/api/userState/v1/userState.json', {
-            token: login_token
+        $.ajax({
+            url: 'https://www.gongchangp2p.com/api/userState/v1/userState.json',
+            // The name of the callback parameter, as specified by the YQL service
+            jsonp: "callback",
+            // Tell jQuery we're expecting JSONP
+            dataType: "jsonp",
+            data: {
+                token: login_token
+            }
         }).done(function (data) {
             if (data.code != 10000) throw `got error ${data.message}`;
             let { avatar, sex, isLogin } = data.data, username = data.data.userName, realname = data.data.realName;

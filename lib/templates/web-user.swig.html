@@ -108,17 +108,20 @@
                 window.location.href = "http://passport.9888keji.com/passport/login?sourceSite=jrgc"
             } else {
                 var API_PATH = document.getElementById('api-path').value;
-                $.getJSON("https://www.gongchangp2p.com/api/userState/v2/userState.json")
-                    .done(function (data) {
-                        var data = data.data, ou = data.orderUser;
-                        window._data = data;
-                        methods.head(ou);
-                        methods.name(data, ou);
-                        methods.wscode(data.open_name ? null : ou.promotioncode);
-                        if (data.userLevel) methods.level(data.userLevel);
-                        methods.state(data, ou);
-                        methods.left(data);
-                    })
+                $.ajax({
+                    url: "https://www.gongchangp2p.com/api/userState/v2/userState.json",
+                    jsonp: "callback",
+                    dataType: "jsonp",
+                }).done(function (data) {
+                    var data = data.data, ou = data.orderUser;
+                    window._data = data;
+                    methods.head(ou);
+                    methods.name(data, ou);
+                    methods.wscode(data.open_name ? null : ou.promotioncode);
+                    if (data.userLevel) methods.level(data.userLevel);
+                    methods.state(data, ou);
+                    methods.left(data);
+                })
             }
         });
 
