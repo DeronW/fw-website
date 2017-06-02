@@ -263,7 +263,7 @@ class DrawPC extends React.Component {
     }
 
     gotoLogin() {
-        var loginUrl = location.protocol + '//www.9888.cn/api/activityPullNew/pullnewParty.do?id=241';
+        var loginUrl = location.protocol + '//www.9888keji.com/api/activityPullNew/pullnewParty.do?id=241';
         $FW.gotoSpecialPage("登录", loginUrl);
     }
 
