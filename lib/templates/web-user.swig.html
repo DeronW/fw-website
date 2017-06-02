@@ -43,38 +43,7 @@
             },
             //是否绑定开通存管和设置交易密码
             state: function (arg1, arg2) {
-                var certPhoneTips = $('.ucp-user-state .cert-phone .tips');
-                if (arg2.mobile != null) {
-                    var html = '已完成手机绑定';
-                    html += arg2.mobile.substring(0, 3) + '****' + arg2.mobile.substring(7, 11);
-                    html += ' <a href="/depository/account/changePhoneOld.shtml" class="blue-color">修改</a>';
-                    html += '<span class="tips-icon-tail"></span>';
-                    certPhoneTips.html(html);
-                } else {
-                    certPhoneTips.remove()
-                }
 
-                var certBank = $('.ucp-user-state .cert-bank');
-                if ([2, 3, 4, 5].indexOf(arg1.openAccountStatus) > -1) {
-                    certBank.removeClass('not').addClass('yes');
-                } else {
-                    var html = '为确保资金安全，请尽快开通存管账户，';
-                    html += '<a href="/depository/openAccount/toOpenAccount.shtml" class="blue-color">立即开户</a>';
-                    html += '<span class="tips-icon-tail red"></span>';
-                    certBank.find('.tips').html(html);
-                }
-
-                var certPWD = $('.ucp-user-state .cert-pwd');
-                if ((arg1.openAccountStatus != null) && (arg1.openAccountStatus == 5)) {
-                    certPWD.removeClass('not').addClass('pending');
-                } else if ((arg1.openAccountStatus != null) && (arg1.openAccountStatus == 4)) {
-                    certPWD.removeClass('not').addClass('yes');
-                } else {
-                    var html = '为确保资金安全，请尽快设置交易密码，';
-                    html += '<a href="/depository/openAccount/toTradePwd.shtml" class="blue-color">立即设置</a>'
-                    html += '<span class="tips-icon-tail red"></span>';
-                    certPWD.find('.tips').html(html);
-                }
             },
             //左侧栏显示
             left: function (arg) {

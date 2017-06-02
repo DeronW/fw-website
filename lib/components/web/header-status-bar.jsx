@@ -68,15 +68,10 @@ const HeaderStatusBar = React.createClass({
         if (this.state.is_login) {
             let pop = (
                 <div className="login-user-state-pop">
-                    <a href="/account/home.shtml"> <img src={this.state.avatar} /> </a>
+                    <a href="/account/myHome.shtml"> <img src={this.state.avatar} /> </a>
                     <div className="text">
                         <div> {this.state.realname} </div>
-                        <div>
-                            <a href="/prdOrder/uinvest.shtml"> 我的投资 </a>
-                            <span className="v-line"> &nbsp;|&nbsp; </span>
-                            <a href="/actUser/funds.shtml"> 交易记录 </a>
-                        </div>
-                        <a href="/payBill/recharges.shtml" className="btn-recharge">充值</a>
+                        <a href="/account/myHome.shtml" className="btn-recharge">我的工场</a>
                     </div>
                 </div>
             );
