@@ -1,0 +1,245 @@
+.clearfix::after {
+  display: block;
+  clear: both;
+  content: '';
+  visibility: hidden;
+  height: 0;
+}
+
+.clearfix {
+  zoom: 1;
+}
+body,html{
+  font-size: 14px;
+}
+
+.fl {
+  float: left;
+}
+
+.fr {
+  float: right;
+}
+
+.con {
+  //width: 100%;
+  width: 1140px;
+  margin: 0 auto;
+  .main {
+    width: 1140px;
+    margin: 0 auto;
+    border: 1px solid #eaeaea;
+    margin-bottom: 30px;
+    .basicInfo {
+      width: 1140px;
+      height: 720px;
+      .basicInfoTitle {
+        width: 1110px;
+        height: 54px;
+        font-size: 18px;
+        line-height: 54px;
+        color: #333333;
+        background-color: #f9f9f9;
+        padding-left: 30px;
+        border-bottom: 1px solid #eaeaea;
+      }
+      .basicInfoContent {
+        width: 100%;
+        padding-top: 70px;
+        padding-left: 74px;
+        .ContentLeft {
+          width: 206px;
+          height: 380px;
+          .line {
+            width: 176px;
+            height: 15px;
+            font-size: 14px;
+            padding-bottom: 14px;
+            padding-left: 30px;
+          }
+          .range {
+            width: 176px;
+            height: 127px;
+            padding-left: 30px;
+          }
+        }
+        .ContentRight {
+          width: 791px;
+          height: 380px;
+          .rline {
+            width: 760px;
+            height: 15px;
+            font-size: 14px;
+            padding-bottom: 14px;
+          }
+          .rrange {
+            width: 760px;
+            height: 127px;
+            line-height: 24px;
+          }
+        }
+      }
+    }
+    .webInfo {
+      width: 1140px;
+      height: 510px;
+      background-color: #fff;
+      .webInfoTitle {
+        width: 1110px;
+        height: 54px;
+        font-size: 18px;
+        line-height: 54px;
+        color: #333333;
+        background-color: #f9f9f9;
+        padding-left: 30px;
+        border-bottom: 1px solid #eaeaea;
+        border-top: 1px solid #eaeaea;
+      }
+      .webInfoContent {
+        width: 100%;
+        padding-top: 70px;
+        .webInfoContentL {
+          width: 206px;
+          height: 240px;
+          margin-left: 75px;
+          .line {
+            width: 176px;
+            height: 15px;
+            font-size: 14px;
+            line-height: 15px;
+            padding-left: 30px;
+            padding-bottom: 16px;
+          }
+        }
+        .webInfoContentR {
+          width: 791px;
+          height: 240px;
+          .rline {
+            width: 791px;
+            height: 15px;
+            font-size: 14px;
+            line-height: 15px;
+            padding-bottom: 16px;
+          }
+        }
+
+      }
+
+    }
+    .organization {
+      width: 1140px;
+      height: 535px;
+      background-color: #fff;
+      border-bottom: 1px solid #eaeaea;
+      .orgTitle {
+        width: 1110px;
+        height: 54px;
+        font-size: 18px;
+        line-height: 54px;
+        color: #333333;
+        background-color: #f9f9f9;
+        padding-left: 30px;
+        border-bottom: 1px solid #eaeaea;
+        border-top: 1px solid #eaeaea;
+
+      }
+      .orgPic {
+        padding-top: 70px;
+        width: 937px;
+        height: 325px;
+        margin: 0 auto;
+        display: block;
+      }
+
+    }
+    .shareholder {
+      width: 1000px;
+      height: 277px;
+      .shareTitle {
+        width: 1110px;
+        height: 54px;
+        font-size: 18px;
+        line-height: 54px;
+        color: #333333;
+        background-color: #f9f9f9;
+        padding-left: 30px;
+        border-bottom: 1px solid #eaeaea;
+      }
+      .shareContent {
+        width: 1140px;
+        height: 226px;
+        .sharePic {
+          width: 245px;
+          height: 58px;
+          display: block;
+          margin: 0 auto;
+          padding-top: 70px;
+        }
+        .des {
+          text-align: center;
+          color: #999999;
+          padding-left: 28px;
+        }
+      }
+    }
+    .chairman {
+      width: 1140px;
+      height: 1520px;
+      .chairmanRightTitle {
+        width: 1110px;
+        height: 54px;
+        font-size: 18px;
+        line-height: 54px;
+        color: #333333;
+        background-color: #f9f9f9;
+        padding-left: 30px;
+        border-bottom: 1px solid #eaeaea;
+      }
+      .chairmanRightTitleContent {
+        width: 1140px;
+        .person {
+          width: 900px;
+          height: 200px;
+          border-bottom: 1px dashed #eaeaea;
+          margin: 0 auto;
+          .personL {
+            width: 205px;
+            height: 200px;
+            .personPic {
+              display: block;
+              width: 120px;
+              height: 120px;
+              margin: 40px auto;
+            }
+          }
+          .personR {
+            width: 660px;
+            height: 92px;
+            margin: 40px auto;
+            .personRTitle {
+              width: 248px;
+              height: 40px;
+              font-size: 18px;
+              color: #333;
+              .position {
+                font-size: 14px;
+                color: #71b5fb;
+                padding-left: 20px;
+              }
+            }
+            .personRContent {
+              font-size: 14px;
+              color: #999;
+            }
+          }
+        }
+        .first {
+          padding-top: 30px;
+        }
+        .end {
+          padding-bottom: 30px;
+        }
+      }
+    }
+  }
+}
