@@ -51,7 +51,7 @@ class InvestFriendsPC extends React.Component {
                 <div className="noticeCode">{gcm}</div>
                 <div className="noticeText2">复制以下链接，发送给好友！</div>
                 <div className="noticeLink"
-                     id="copy-value-pc">{`https://www.9888keji.com/regist/toRegist.shtml?gcm=${gcm}`}</div>
+                     id="copy-value-pc">{`https://www.9888keji.com/depository/regist/toRegist.shtml?gcm=${gcm}`}</div>
                 <div className="copyCode" data-clipboard-action="copy" data-clipboard-target="#copy-value-pc">复制链接</div>
                 <div className="noticeRemind">
                     新手注册即送<em>120</em>元<a href="http://www.9888keji.com/news/notice/1861.html">更多新手秘笈></a>
