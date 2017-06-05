@@ -1,13 +1,8 @@
-{% extends '../../../lib/templates/p2p-web-base.swig.html' %}
-
-{% block javascripts %}
+{% extends '../../../lib/templates/p2p-web-base.swig.html' %} {% block javascripts %}
 <script src="javascripts/index.js"></script>
-<script type="text/javascript"
-        src="https://api.map.baidu.com/api?v=2.0&ak=1k0hI3NQCtMWDQN0D0kmpXuIYV2GjM0e"></script>
+<script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=1k0hI3NQCtMWDQN0D0kmpXuIYV2GjM0e"></script>
 <script type="text/javascript" src="https://api.map.baidu.com/library/AreaRestriction/1.2/src/AreaRestriction_min.js"></script>
-{% endblock %}
-
-{% block content %}
+{% endblock %} {% block content %}
 <div class="aboutus-container">
     <div class="aboutus-title">
         首页&nbsp;&nbsp;><span class="aboutus">关于我们</span>
@@ -107,7 +102,10 @@
                             <div class="line">企业QQ：<span class="blueline">4006766988</span>（点击可直接和在线客服聊天）</div>
                             <div class="line">客服邮箱：<span class="blueline">kefu@9888.cn</span></div>
                         </div>
-                    </div></div>
+                    </div>
+                </div>
+
+            </div>
             <div class="r-item r-item3" style="display: none">
                 <div class="item-box item3-box">
                     <div class="item-title item3-title">
@@ -198,8 +196,4 @@
             </div>
         </div>
     </div>
-</div>
-{% endblock %}
-
-
-
+    {% endblock %}

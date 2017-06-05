@@ -8,11 +8,13 @@ $(document).ready(function () {
     }
     function hashHandler() {
         var hash = location.hash;
+        console.log(hash);
         if(hash==="#aboutus"){
             jumplink($(".left-item")[0]);
         }else if(hash==="#partner"){
             jumplink($(".left-item")[1])
         }else if(hash==="#contactus"){
+            console.log("联系我")
             jumplink($(".left-item")[2]);
         }else if(hash==="#school"){
             jumplink($(".left-item")[3]);
