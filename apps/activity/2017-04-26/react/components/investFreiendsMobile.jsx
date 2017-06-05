@@ -41,7 +41,7 @@ class InvestFriendsMobile extends React.Component {
                     新手注册即送<em>120</em>元
                 </div>
                 <a className="moreNew"
-                   href="https://www.9888.cn/cms/addhtml/2078.html?reloadworkpage=y">更多新手秘笈></a>
+                   href="https://www.9888keji.com/cms/addhtml/2078.html?reloadworkpage=y">更多新手秘笈></a>
             </div>
         );
         let loginNotice = (
@@ -54,7 +54,7 @@ class InvestFriendsMobile extends React.Component {
                     新手注册即送<em>120</em>元
                 </div>
                 <a className="moreNew"
-                   href="https://www.9888.cn/cms/addhtml/2078.html?reloadworkpage=y">更多新手秘笈></a>
+                   href="https://www.9888keji.com/cms/addhtml/2078.html?reloadworkpage=y">更多新手秘笈></a>
             </div>
         );
         return <div className="mobileNotice">
