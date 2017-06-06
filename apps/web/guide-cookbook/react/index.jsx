@@ -443,7 +443,7 @@ var Content = React.createClass({
                                 <img src="images/weChat-icon.png"/>
                             </div>
                             <span className="strong-text">微信公众号</span>
-                            <p className="text">打开微信扫描二维码或搜索公众号jrgc_p2p，<br />关注金融工场微信，轻松自如投资，第一时间<br />了解最新活动。</p>
+                            <p className="text">打开微信扫描二维码，关注金融工场<br />，轻松自如投资，第一时间<br />了解最新活动。</p>
                         </li>
                         <li className="web-li">
                             <div className="img">
