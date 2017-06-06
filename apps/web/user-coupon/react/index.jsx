@@ -20,7 +20,7 @@ const Content = React.createClass({
         return (
             <div className="couponContent">
                 <div className="couponTips">
-                    注：此处为我在工场P2P和工场尊享共获得的优惠券。
+
                 </div>
                 <a className="couponTitle" href="/help/explanation/472.html"> 了解更多优惠券> </a>
                 <div className="couponContainer">
