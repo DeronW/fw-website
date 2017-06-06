@@ -41,7 +41,7 @@ var Content = React.createClass({
             <div className="content-area">
                 <div className="content-title-info">
                     <p className="title-text">
-                        金融工场平台是由北京豆哥投资管理有限公司倾力打造并运营的金融资产交易综合信息服务平台。平台以金融全球化发展趋势为契机，融合信息技术创新手段，以健全的风险管控体系为基础，为广大机构、企业与合格投资者等提供专业、高效、安全的综合性金融资产交易相关信息服务及投融资顾问服务，致力于通过优质服务及在交易品种与交易组织模式上的持续创新，提升交易效率，优化金融资产配置，成为中国领先并具有重要影响力的金融资产交易综合服务平台。
+                        金融工场，品牌创立于2012年，是中国领先的综合金融信息服务平台。平台以金融全球化发展趋势为契机，融合信息技术创新手段，秉承安全、专业、透明的经营理念，为用户提供多样化高效智能的金融产品，为企业和个人提供定制化金融服务解决方案。平台在交易品种与交易组织模式上持续创新，优化金融资产配置，提供多样化金融产品,让每个用户都能平等、轻松、高效地享受互联网金融服务，享有高品质金融生活。
                     </p>
 
                     <div className="block">
@@ -90,7 +90,7 @@ var Content = React.createClass({
                                     <h2 className="text">新工友注册好福利</h2>
                                     <i className="icon-r"></i>
                                 </div>
-                                <a href="https://www.9888.cn/news/notice/2046.html?reloadworkpage=y" target="_blank"
+                                <a href="/news/notice/2046.html?reloadworkpage=y" target="_blank"
                                    className="btn-link">完整新手秘笈></a>
                             </div>
 
@@ -152,7 +152,7 @@ var Content = React.createClass({
                                     <h2 className="text">邀请好友礼上礼</h2>
                                     <i className="icon-r"></i>
                                 </div>
-                                <a href="https://www.9888.cn/news/notice/2046.html?reloadworkpage=y" target="_blank"
+                                <a href="/news/notice/2046.html?reloadworkpage=y" target="_blank"
                                    className="btn-link">完整邀友返利攻略></a>
                             </div>
                             <div className="info-block">
@@ -254,7 +254,7 @@ var Content = React.createClass({
                                             <p className="text">根据会员贡献值不同，工友将荣升为不同的VIP等级，级别越高享有的权益越多哦~~ </p>
                                             <p className="text">贡献值包括投资贡献值和邀友贡献值。</p>
                                             <p className="text">还不明白，豆哥这里还有更详细的哦， <a
-                                                href="https://www.9888.cn/static/web/vip-prerogative/index.html" target="_blank"
+                                                href="/static/web/vip-prerogative/index.html" target="_blank"
                                                 className="c-629df9">查看升级攻略></a></p>
                                         </div>
 
