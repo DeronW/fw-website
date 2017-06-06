@@ -1,4 +1,8 @@
-body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td { margin:0;padding:0}
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td {
+  margin: 0;
+  padding: 0
+}
+
 //select,input,textarea,button{font-family:Microsoft YaHei,Arial,Sans;font-size:12px;color:#000}
 //button{cursor:pointer; _cursor:hand;}
 //table {border-collapse:collapse;border-spacing:0}
@@ -14,43 +18,46 @@ body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,
 //a:hover{text-decoration:none}
 //.clearfix{zoom:1}
 //.clearfix:after{content:"";display:block;clear:both}
-.safety_box{
+.safety_box {
   width: 100%;
-  .safe_banner{
+  .fl {
+    float: left;
+  }
+  .safe_banner {
     width: 100%;
     height: 300px;
     background: url("../images/banner.jpg") no-repeat center;
   }
-  .safe_ensure{
+  .safe_ensure {
     width: 1140px;
     padding: 80px 0;
     margin: 0 auto;
     text-align: center;
-    .safe_enTit{
+    .safe_enTit {
       font-size: 30px;
       color: #224d7d;
       margin-bottom: 20px;
       line-height: 30px;
     }
-    .safe_enExp{
+    .safe_enExp {
       font-size: 16px;
       color: #666666;
       line-height: 20px;
     }
-    .safe_enico{
+    .safe_enico {
       overflow: hidden;
       margin-top: 50px;
-      .safe_enContA{
+      .safe_enContA {
         width: 33.3%;
-        img{
+        img {
           margin-bottom: 30px;
         }
-        .safe_entitle{
+        .safe_entitle {
           font-size: 16px;
           color: #333333;
           line-height: 32px;
         }
-        .safe_exptitle{
+        .safe_exptitle {
           font-size: 13px;
           width: 200px;
           margin: 0 auto;
@@ -59,10 +66,82 @@ body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,
           line-height: 23px;
         }
       }
-      .fl{
+      .fl {
         float: left;
       }
     }
   }
+  .safe_cen {
+    background: url(../images/safe_cenbg.png) top center no-repeat;
+    width: 100%;
+    min-width: 1000px;
+    height: 628px;
+    .safe_cenBox {
+      padding: 70px 0 100px 0;
+      width: 1140px;
+      margin: 0 auto;
+      text-align: center;
+      .safe_centit {
+        font-size: 30px;
+        line-height: 30px;
+        color: #ffffff;
+        margin-bottom: 15px;
+      }
+      .safe_cenexp {
+        font-size: 16px;
+        line-height: 32px;
+        color: #ffffff;
+        margin-bottom: 45px;
+      }
+      .safe_cencont {
+        overflow: hidden;
+      }
+      .safe_cencontA {
+        width: 385px;
+        height: 340px;
+        margin: 0 36px 0 114px;
+        background: #ffffff;
+      }
+      .safe_cencontAtit{
+        height: 60px;
+        background: #f05d6a;
+        font-size: 22px;
+        line-height: 60px;
+        color: #fff;
+      }
+      .safe_cencontBtit{
+        background:#5d8fce
+      }
+      .safe_cencontAlist{
+        padding: 40px 30px;
+        text-align: left;
+      }
+      .overhidden{
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .safe_listico{
+        width: 50px;
+        text-align: center;
+        float: left;
+        margin-right: 10px;
+      }
+      .safe_listtit{
+        font-size: 14px;
+        color: #333333;
+      }
+      .safe_listexp{
+        font-size: 14px;
+        color: #969696;
+        line-height: 27px;
+      }
+      .safe_list{
+        margin: 25px 0px;
+      }
+
+    }
+  }
+
 }
 
