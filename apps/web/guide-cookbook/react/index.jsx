@@ -320,7 +320,7 @@ var Content = React.createClass({
                                     <div className="list-title">
                                         <h3 className="text">2.工友可用兑换券换礼物</h3>
                                         <p className="" style={{'font-size':'14px'}}>兑换券是领取工场促销活动礼品的小凭证，可以自主在工豆商城中兑换虚拟或实物礼品。可在 <a
-                                            href="https://m.dougemall.com/member/ticket.shtm" target="_blank"
+                                            href="https://dougemall.com/member/ticket.shtm" target="_blank"
                                             className="c-629df9">我的商城>我的兑换券</a> 中查看。</p>
                                     </div>
                                 </div>
