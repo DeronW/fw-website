@@ -190,7 +190,7 @@ var Content = React.createClass({
                                             {/*<p className="text">*/}
                                                 {/*好友达VIP2及以上所赠返现券在好友注册后的第30天10:00（注册当天算第1天）,按好友当时的等级发放。</p>*/}
                                             <p className="text">相应好友投资返利可去 <a
-                                                href="http://www.9888.cn/factoryCode/info.shtml" target="_blank"
+                                                href="/factoryCode/info.shtml" target="_blank"
                                                 className="c-629df9">我的工场>工场码</a> 中查看。</p>
                                         </div>
 
@@ -330,7 +330,7 @@ var Content = React.createClass({
                                         <div className="text-block">
                                             <p className="text">去豆哥商城兑换前，别忘了赚工分哦~~</p>
                                             <p className="text">工分是金融工场给工友的回馈奖励，签到、投资、参加论坛活动都能领取哦~~，在豆哥商城兑换后扣减相应工分。</p>
-                                            <p className="text">更详细的赚工分秘笈在这里，<a href="http://www.9888.cn/activity/gfxq/"
+                                            <p className="text">更详细的赚工分秘笈在这里，<a href="/activity/gfxq/"
                                                                                 target="_blank" className="c-629df9">点击查看></a>
                                             </p>
                                         </div>
@@ -369,7 +369,7 @@ var Content = React.createClass({
                                                 <img src="images/more-img-1.png"/>
                                             </div>
                                             <p className="text">返现券是返现型优惠券，投资成功即以现金形式返至工场账户，可投资或提现。<a
-                                                href="http://www.9888.cn/help/explanation/1636.html" target="_blank"
+                                                href="/help/explanation/1636.html" target="_blank"
                                                 className="c-629df9">了解更多></a></p>
                                         </li>
                                         <li>
@@ -377,7 +377,7 @@ var Content = React.createClass({
                                                 <img src="images/more-img-2.png"/>
                                             </div>
                                             <p className="text">返息券是返息型优惠券，投资成功即以工豆形式返至工场工豆账户，可投资使用。<a
-                                                href="http://www.9888.cn/help/explanation/1537.html" target="_blank"
+                                                href="/help/explanation/1537.html" target="_blank"
                                                 className="c-629df9">了解更多></a></p>
                                         </li>
                                         <li className="">
@@ -385,7 +385,7 @@ var Content = React.createClass({
                                                 <img src="images/more-img-3.png"/>
                                             </div>
                                             <p className="text">红包含工豆红包和返现券红包，须通过微信分享及领取，抢光后可获相应奖励红包。<a
-                                                href="http://www.9888.cn/help/explanation/1638.html" target="_blank"
+                                                href="/help/explanation/1638.html" target="_blank"
                                                 className="c-629df9">了解更多></a></p>
                                         </li>
                                         <li className="last-li">
@@ -393,7 +393,7 @@ var Content = React.createClass({
                                                 <img src="images/more-img-4.png"/>
                                             </div>
                                             <p className="text">100个工豆等值1元人民币，投资时当钱花！<a
-                                                href="http://www.9888.cn/help/explanation/1637.html" target="_blank"
+                                                href="/help/explanation/1637.html" target="_blank"
                                                 className="c-629df9">了解更多></a></p>
                                         </li>
                                     </ul>
@@ -466,9 +466,9 @@ var LNav = React.createClass({
         return (
             <div className="l-nav">
                 <div className="">
-                    <a href="http://www.9888.cn/orderUser/register.shtml" className="" target="_blank">我要注册</a>
-                    <a href="http://www.9888.cn/prdClaims/list.shtml" className="" target="_blank">我要投资</a>
-                    <a href="http://www.9888.cn/factoryCode/info.shtml" className="" target="_blank">如何邀友</a>
+                    <a href="/orderUser/register.shtml" className="" target="_blank">我要注册</a>
+                    <a href="/prdClaims/list.shtml" className="" target="_blank">我要投资</a>
+                    <a href="/factoryCode/info.shtml" className="" target="_blank">如何邀友</a>
                 </div>
             </div>
         );
