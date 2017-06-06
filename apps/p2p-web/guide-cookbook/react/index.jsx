@@ -320,7 +320,7 @@ var Content = React.createClass({
                                     <div className="list-title">
                                         <h3 className="text">2.工友可用兑换券换礼物</h3>
                                         <p className="" style={{'font-size':'14px'}}>兑换券是领取工场促销活动礼品的小凭证，可以自主在工豆商城中兑换虚拟或实物礼品。可在 <a
-                                            href="https://m.dougemall.com/member/ticket.shtm" target="_blank"
+                                            href="http://mall.9888.cn/member/ticket.shtm" target="_blank"
                                             className="c-629df9">我的商城>我的兑换券</a> 中查看。</p>
                                     </div>
                                 </div>
@@ -450,7 +450,7 @@ var Content = React.createClass({
                                 <img src="images/web-icon.png"/>
                             </div>
                             <span className="strong-text">手机WAP版</span>
-                            <p className="text">用户可通过手机浏览器输入金融工场网<br/>址：www.9888keji.com，或直接搜索“金融<br />工场”，即可快捷注册投资。</p>
+                            <p className="text">用户可通过手机浏览器输入金融工场网<br/>址：www.9888.cn，或直接搜索“金融<br />工场”，即可快捷注册投资。</p>
                         </li>
                     </ul>
                 </div>
@@ -466,6 +466,8 @@ var LNav = React.createClass({
         return (
             <div className="l-nav">
                 <div className="">
+                    <a href="/orderUser/register.shtml" className="" target="_blank">我要注册</a>
+                    <a href="/prdClaims/list.shtml" className="" target="_blank">我要投资</a>
                     <a href="/factoryCode/info.shtml" className="" target="_blank">如何邀友</a>
                 </div>
             </div>
