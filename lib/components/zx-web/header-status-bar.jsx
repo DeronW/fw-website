@@ -23,7 +23,7 @@ const HeaderStatusBar = React.createClass({
         }, function (data) {
             if (data.code != 10000) throw `got error ${data.message}`;
             let {avatar, sex, isLogin} = data.data, username = data.data.userName, realname = data.data.realName;
-            avatar = avatar || `http://www.9888.cn/img/${parseInt(sex) ? 'man' : 'woman'}.png`;
+            avatar = avatar || `http://www.9888keji.com/img/${parseInt(sex) ? 'man' : 'woman'}.png`;
             this.setState({
                 is_login: isLogin,
                 username: username,
@@ -92,7 +92,7 @@ const HeaderStatusBar = React.createClass({
         let p2pHeader = (
             <div className="container">
                 <div className="hsb-xin-dai">
-                    <a href="https://www.9888.cn">前往金融工场首页</a>
+                    <a href="https://www.9888keji.com" target="_blank">前往金融工场首页</a>
                 </div>
                 {/*<a className="link" href="http://bbs.9888.cn" target="_blank">工友之家</a>*/}
                 {/*{separate_line}*/}
@@ -114,8 +114,8 @@ const HeaderStatusBar = React.createClass({
                 {/*</a>*/}
                 {/*{separate_line}*/}
                 <div className="header-status-bar-app">
-                    <a href="/static/web/app-download/index.html">APP 客户端</a>
-                    <a href="/static/web/app-download/index.html" className="hsb-qrcode">
+                    <a href="/static/zx-web/app-download/index.html">APP 客户端</a>
+                    <a href="/static/zx-web/app-download/index.html" className="hsb-qrcode">
                         <img src="images/global-header/menu-app.png"/>
                     </a>
                 </div>

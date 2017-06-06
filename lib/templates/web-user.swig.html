@@ -4,7 +4,7 @@
 <div class="partial-user-center-panel">
     <div class="ucp-left-nav-bg"></div>
     <div class="ucp-right-panel"> {% block user_content %}{% endblock %}</div>
-    {% include './p2p-web/partial/user-center-panel.swig.html' %}
+    {% include 'web/partial/user-center-panel.swig.html' %}
 </div>
 {% endblock %}
 
@@ -47,38 +47,7 @@
             },
             //是否绑定开通存管和设置交易密码
             state: function (arg1, arg2) {
-                var certPhoneTips = $('.ucp-user-state .cert-phone .tips');
-                if (arg2.mobile != null) {
-                    var html = '已完成手机绑定';
-                    html += arg2.mobile.substring(0, 3) + '****' + arg2.mobile.substring(7, 11);
-                    html += ' <a href="/depository/account/changePhoneOld.shtml" class="blue-color">修改</a>';
-                    html += '<span class="tips-icon-tail"></span>';
-                    certPhoneTips.html(html);
-                } else {
-                    certPhoneTips.remove()
-                }
 
-                var certBank = $('.ucp-user-state .cert-bank');
-                if ([2, 3, 4, 5].indexOf(arg1.openAccountStatus) > -1) {
-                    certBank.removeClass('not').addClass('yes');
-                } else {
-                    var html = '为确保资金安全，请尽快开通存管账户，';
-                    html += '<a href="/depository/openAccount/toOpenAccount.shtml" class="blue-color">立即开户</a>';
-                    html += '<span class="tips-icon-tail red"></span>';
-                    certBank.find('.tips').html(html);
-                }
-
-                var certPWD = $('.ucp-user-state .cert-pwd');
-                if ((arg1.openAccountStatus != null) && (arg1.openAccountStatus == 5)) {
-                    certPWD.removeClass('not').addClass('pending');
-                } else if ((arg1.openAccountStatus != null) && (arg1.openAccountStatus == 4)) {
-                    certPWD.removeClass('not').addClass('yes');
-                } else {
-                    var html = '为确保资金安全，请尽快设置交易密码，';
-                    html += '<a href="/depository/openAccount/toTradePwd.shtml" class="blue-color">立即设置</a>'
-                    html += '<span class="tips-icon-tail red"></span>';
-                    certPWD.find('.tips').html(html);
-                }
             },
             //左侧栏显示
             left: function (arg) {
@@ -89,13 +58,13 @@
                 if (arg.borrowCount > 0 || arg.subrogationCount > 0 || arg.debtorsCount > 0) {
                     $('#ucpLinkContract').removeClass('hide')
                     $('[data-line=true]').removeClass('hide')
-                }else{
+                } else {
                     $('[data-line=true]').addClass('hide')
                 }
                 //我的借款
                 //if (arg.borrowCount > 0) {
-                    $('#ucpLinkBorrow').removeClass('hide');
-               // }
+                $('#ucpLinkBorrow').removeClass('hide');
+                // }
                 //权益转让
                 if (arg.subrogationCount > 0) {
                     $('#ucpLinkTransfer').removeClass('hide')
@@ -109,20 +78,24 @@
 
         $UserReady(function (is_login, user) {
             if (!is_login) {
-                window.location.href = "http://passport.9888.cn/passport/login?sourceSite=jrgc"
+                window.location.href = "http://passport.9888keji.com/passport/login?sourceSite=jrgc"
             } else {
                 var API_PATH = document.getElementById('api-path').value;
-                $.get(API_PATH + "/api/userState/v2/userState.json", null,
-                    function (data) {
-                        var data = data.data, ou = data.orderUser;
-                        window._data = data;
-                        methods.head(ou);
-                        methods.name(data, ou);
-                        methods.wscode(data.open_name ? null : ou.promotioncode);
-                        if (data.userLevel) methods.level(data.userLevel);
-                        methods.state(data, ou);
-                        methods.left(data);
-                    }, 'json');
+                $.ajax({
+                    url: "https://www.gongchangp2p.com/api/userState/v2/userState.json",
+                    jsonp: "callback",
+                    xhrFields: { withCredentials: true },
+                    dataType: "jsonp",
+                }).done(function (data) {
+                    var data = data.data, ou = data.orderUser;
+                    window._data = data;
+                    methods.head(ou);
+                    methods.name(data, ou);
+                    methods.wscode(data.open_name ? null : ou.promotioncode);
+                    if (data.userLevel) methods.level(data.userLevel);
+                    methods.state(data, ou);
+                    methods.left(data);
+                })
             }
         });
 
@@ -136,6 +109,6 @@
         })
 
     })(jQuery, window, document);
+
 </script>
-{% block extra_js %}{% endblock %}
-{% endblock %}
+{% block extra_js %}{% endblock %} {% endblock %}

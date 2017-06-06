@@ -19,11 +19,19 @@ const HeaderStatusBar = React.createClass({
             if (p[0] == 'ticket') login_token = p[1].split('.')[0]
         });
 
-        $.get(API_PATH + '/api/userState/v1/userState.json', {
-            token: login_token
-        }, function (data) {
+        $.ajax({
+            url: 'https://www.gongchangp2p.com/api/userState/v1/userState.json',
+            // The name of the callback parameter, as specified by the YQL service
+            jsonp: "callback",
+            // Tell jQuery we're expecting JSONP
+            dataType: "jsonp",
+            xhrFields: {withCredentials: true},
+            data: {
+                token: login_token
+            }
+        }).done(function (data) {
             if (data.code != 10000) throw `got error ${data.message}`;
-            let {avatar, sex, isLogin} = data.data, username = data.data.userName, realname = data.data.realName;
+            let { avatar, sex, isLogin } = data.data, username = data.data.userName, realname = data.data.realName;
             avatar = avatar || `http://www.9888.cn/img/${parseInt(sex) ? 'man' : 'woman'}.png`;
             this.setState({
                 is_login: isLogin,
@@ -32,23 +40,23 @@ const HeaderStatusBar = React.createClass({
                 avatar: avatar
             });
             // set current page is login or not. this is base function, very IMPORTANT!
-            $UserReady.fire(isLogin, {username, realname, avatar});
-        }.bind(this), 'json');
+            $UserReady.fire(isLogin, { username, realname, avatar });
+        }.bind(this));
 
         // 获取用户未读消息数
         $.get(API_PATH + '/mesageCenter/refressSession.shtml', null, function (data) {
             if (!isNaN(data)) {
-                this.setState({msg_count: data})
+                this.setState({ msg_count: data })
             } else {
                 throw 'unread message count is not a number';
             }
         }.bind(this), 'json')
     },
     showUserPopHandler: function () {
-        this.setState({showUserPop: true})
+        this.setState({ showUserPop: true })
     },
     hideUserPopHandler: function () {
-        this.setState({showUserPop: false})
+        this.setState({ showUserPop: false })
     },
     render: function () {
         let user_state = null, msg = null;
@@ -60,15 +68,10 @@ const HeaderStatusBar = React.createClass({
         if (this.state.is_login) {
             let pop = (
                 <div className="login-user-state-pop">
-                    <a href="/account/home.shtml"> <img src={this.state.avatar}/> </a>
+                    <a href="/account/myHome.shtml"> <img src={this.state.avatar} /> </a>
                     <div className="text">
                         <div> {this.state.realname} </div>
-                        <div>
-                            <a href="/prdOrder/uinvest.shtml"> 我的投资 </a>
-                            <span className="v-line"> &nbsp;|&nbsp; </span>
-                            <a href="/actUser/funds.shtml"> 交易记录 </a>
-                        </div>
-                        <a href="/payBill/recharges.shtml" className="btn-recharge">充值</a>
+                        <a href="/account/myHome.shtml" className="btn-recharge">我的工场</a>
                     </div>
                 </div>
             );
@@ -121,7 +124,7 @@ const HeaderStatusBar = React.createClass({
                         <span className="g-ico-phone"></span>
                         <span className="header-span-app" href="http://www.9888keji.com/static/web/app-download/index.html">APP 客户端
                             <div className="img">
-                                <a href="http://www.9888keji.com/static/web/app-download/index.html"><img src="images/global-header/menu-app.png"/></a>
+                                <a href="http://www.9888keji.com/static/web/app-download/index.html"><img src="images/global-header/menu-app.png" /></a>
                             </div>
                         </span>
                     </span>
@@ -147,7 +150,7 @@ const HeaderStatusBar = React.createClass({
                 <div className="header-status-bar-app">
                     {/*<a href="/static/web/app-download/index.html">APP 客户端</a>*/}
                     <a href="/static/web/app-download/index.html" className="hsb-qrcode">
-                        <img src="images/global-header/menu-app.png"/>
+                        <img src="images/global-header/menu-app.png" />
                     </a>
                 </div>
             </div>
@@ -166,7 +169,7 @@ const HeaderStatusBar = React.createClass({
                 <div className="header-status-bar-app">
                     <a href="/static/web/app-download/index.html">APP 客户端</a>
                     <a href="/static/web/app-download/index.html" className="hsb-qrcode">
-                        <img src="images/global-header/menu-app.png"/>
+                        <img src="images/global-header/menu-app.png" />
                     </a>
                 </div>
                 {/*<a className="link" href="/mesageCenter/msssageList.shtml?messageType=1">*/}

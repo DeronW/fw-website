@@ -1,15 +1,8 @@
-{% extends '../../../lib/templates/p2p-web-base.swig.html' %}
-
-{% block title %}工场微金是由北京凤凰信用管理有限公司（简称：凤凰信用）倾力打造的专注于小贷公司资产交易的P2P平台—上工场微金，圆财富梦想！{% endblock %}
-
-{% block javascripts %}
+{% extends '../../../lib/templates/p2p-web-base.swig.html' %} {% block javascripts %}
 <script src="javascripts/index.js"></script>
-<script type="text/javascript"
-        src="https://api.map.baidu.com/api?v=2.0&ak=1k0hI3NQCtMWDQN0D0kmpXuIYV2GjM0e"></script>
+<script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=1k0hI3NQCtMWDQN0D0kmpXuIYV2GjM0e"></script>
 <script type="text/javascript" src="https://api.map.baidu.com/library/AreaRestriction/1.2/src/AreaRestriction_min.js"></script>
-{% endblock %}
-
-{% block content %}
+{% endblock %} {% block content %}
 <div class="aboutus-container">
     <div class="aboutus-title">
         首页&nbsp;&nbsp;><span class="aboutus">关于我们</span>
@@ -87,7 +80,7 @@
                         联系我们
                     </div>
                     <div class="item2-name">
-                        工场微金（总部）
+                        工场微金
                     </div>
                     <div class="item2-adress">
                         地址：北京市朝阳区朝阳门外大街18号11层1105内008号
@@ -110,34 +103,8 @@
                             <div class="line">客服邮箱：<span class="blueline">kefu@9888.cn</span></div>
                         </div>
                     </div>
-                    <div class="interview">
-                        <div class="inter-title">媒体采访</div>
-                        <div class="inter-line">如果您有采访需求，请将采访提纲资料发送邮件至<span class="blueline">pr@9888.cn</span>。</div>
-                    </div>
-                    <div class="expand">
-                        <div class="extend-title">推广合作</div>
-                        <div class="extend-line">如果您有市场推广，媒体投放，PC线上推广业务、移动端及其他商务合作需求，请发送邮件至<span class="blueline">promote@9888.cn</span>。</div>
-                    </div>
-                    <div class="expand">
-                        <div class="extend-title">战略发展</div>
-                        <div class="extend-line">如果您有互联网金融创新业务合作（不含市场运营、推广及媒体投放），请发送邮件至<span class="blueline">idea@9888.cn</span>。</div>
-                    </div>
-                    <div class="expand">
-                        <div class="extend-title">诚聘英才</div>
-                        <div class="extend-line">如果您需要寻求新的职位，请发送简历至人力资源邮箱：<span class="blueline">hr@9888.cn</span>。</div>
-                    </div>
-                    <div class="info">
-                        <div class="info-title">
-                            信息同步
-                        </div>
-                        <div class="info-content">
-                            <div class="info-line">如果您还希望了解我们更多信息和最新活动，请关注我们的微信及官方论坛。</div>
-                            <div class="info-line">打开微信扫描下方二维码或搜索公众号jrgc_p2p，关注工场微金微信：</div>
-                            <img src="images/erweima-p2p.png">
-                            <div class="info-line">工场微金工友之家论坛：<span class="blueline">http://bbs.9888.cn</span></div>
-                        </div>
-                    </div>
                 </div>
+
             </div>
             <div class="r-item r-item3" style="display: none">
                 <div class="item-box item3-box">
@@ -229,8 +196,4 @@
             </div>
         </div>
     </div>
-</div>
-{% endblock %}
-
-
-
+    {% endblock %}

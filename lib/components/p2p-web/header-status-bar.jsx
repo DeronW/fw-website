@@ -63,9 +63,9 @@ const HeaderStatusBar = React.createClass({
                     <div className="text">
                         <div> {this.state.realname} </div>
                         <div>
-                            <a href="/prdOrder/uinvest.shtml"> 我的出借 </a>
+                            <a href="/prdOrder/uinvest.shtml">我的出借</a>
                             <span className="v-line"> &nbsp;|&nbsp; </span>
-                            <a href="/actUser/funds.shtml"> 交易记录 </a>
+                            <a href="/actUser/funds.shtml">资金流水</a>
                         </div>
                         <a href="/payBill/recharges.shtml" className="btn-recharge">充值</a>
                     </div>
@@ -92,7 +92,7 @@ const HeaderStatusBar = React.createClass({
         let p2pHeader = (
             <div className="container">
                 <div className="hsb-xin-dai">
-                    <a href="https://www.9888.cn">前往金融工场首页</a>
+                    <a href="https://www.9888keji.com" target="_blank">前往金融工场首页</a>
                 </div>
                 {/*<a className="link" href="http://bbs.9888.cn" target="_blank">工友之家</a>*/}
                 {/*{separate_line}*/}
@@ -114,8 +114,8 @@ const HeaderStatusBar = React.createClass({
                 {/*</a>*/}
                 {/*{separate_line}*/}
                 <div className="header-status-bar-app">
-                    <a href="/static/web/app-download/index.html">APP 客户端</a>
-                    <a href="/static/web/app-download/index.html" className="hsb-qrcode">
+                    <a href="/static/p2p-web/app-download/index.html">APP 客户端</a>
+                    <a href="/static/p2p-web/app-download/index.html" className="hsb-qrcode">
                         <img src="images/global-header/menu-app.png"/>
                     </a>
                 </div>
