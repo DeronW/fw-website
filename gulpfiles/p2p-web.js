@@ -11,7 +11,6 @@ const NOTICE_PAGES = [
     'aboutus',//关于我们相关页面
     'preservation',//易保全页面
     'topic-safety',//安全保障页面
-    'guide-cookbook',//玩转攻略页面
 ]
 
 // 专题说明类页面
@@ -30,7 +29,6 @@ const TOPIC_PAGES = [
 const USER_PAGES = [
     //用户界面
     'notice-information-disclosure',//新信息披露页
-    'protocol-user-service',//用户服务协议页面
     'notice-corporate-structure'//旧信息披露页
 ]
 
