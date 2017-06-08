@@ -6,7 +6,17 @@
             <li><a href="http://www.gongchangp2p.com" target="_blank">工场微金</a></li>
             <li><a href="http://www.gongchangzx.com" target="_blank">工场尊享</a></li>
             <li><a href="https://www.easyloan888.com" target="_blank">我要借款</a></li>
-            <li><a href="https://www.dougemall.com" target="_blank">豆哥商城</a></li>
+            <li><a id="douge" href="https://www.dougemall.com" target="_blank">豆哥商城</a></li>
         </div>
     </div>
 </div>
+
+<script>
+    'use strict';
+    $UserReady(function (is_login, user) {
+        if (!is_login) {
+          } else {
+            document.getElementById("douge").setAttribute("href","https://passport.9888keji.com/passport/login?sourceSite=dgsc&service=https://www.dougemall.com/");
+        }
+    })
+</script>
