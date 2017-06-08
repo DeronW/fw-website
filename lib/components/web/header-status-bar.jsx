@@ -81,7 +81,7 @@ const HeaderStatusBar = React.createClass({
                     <div
                         className={this.state.showUserPop ? "hover login-user-state-username" : "login-user-state-username"}
                         onMouseEnter={this.showUserPopHandler} onMouseLeave={this.hideUserPopHandler}>
-                        <a href="/account/home.shtml"> {this.state.username} </a>
+                        <a href="/account/myHome.shtml"> {this.state.username} </a>
                         <i className="arrow"> </i>
                         <div className="hidden-stone"></div>
                         {this.state.showUserPop ? pop : null}
@@ -95,7 +95,7 @@ const HeaderStatusBar = React.createClass({
                     <div
                         className={this.state.showUserPop ? "hover login-user-state-username" : "login-user-state-username"}
                         onMouseEnter={this.showUserPopHandler} onMouseLeave={this.hideUserPopHandler}>
-                        <a href="/account/home.shtml"> {this.state.username} </a>
+                        <a href="/account/myHome.shtml"> {this.state.username} </a>
                         <i className="arrow"> </i>
                         <div className="hidden-stone"></div>
                         {this.state.showUserPop ? pop : null}
