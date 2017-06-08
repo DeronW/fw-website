@@ -21,7 +21,7 @@ const USER_PAGES = [
 
 const DEVELOPING_PAGES = [
     'topic-zun-xiang', // 尊享标计划
-    'user-bank-phone',//用户预留手机号页面
+    // 'user-bank-phone',//用户预留手机号页面
     'about-us',//关于我们
     'app-download',//app下载
 ]
