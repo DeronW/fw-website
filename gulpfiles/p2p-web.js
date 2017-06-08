@@ -11,7 +11,6 @@ const NOTICE_PAGES = [
     'aboutus',//关于我们相关页面
     'preservation',//易保全页面
     'topic-safety',//安全保障页面
-    'guide-cookbook',//玩转攻略页面
 ]
 
 // 专题说明类页面
