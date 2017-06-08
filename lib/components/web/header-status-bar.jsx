@@ -77,7 +77,7 @@ const HeaderStatusBar = React.createClass({
             );
             let p2p_state = (
                 <div className="login-user-state">
-                    你好,
+                    你好 ,
                     <div
                         className={this.state.showUserPop ? "hover login-user-state-username" : "login-user-state-username"}
                         onMouseEnter={this.showUserPopHandler} onMouseLeave={this.hideUserPopHandler}>
@@ -122,7 +122,7 @@ const HeaderStatusBar = React.createClass({
                     (周一至周日8:30-21:00)
                     <span className="app-li">
                         <span className="g-ico-phone"></span>
-                        <span className="header-span-app" href="http://www.9888keji.com/static/web/app-download/index.html">APP 客户端
+                        <span className="header-span-app" href="http://www.9888keji.com/static/web/app-download/index.html">APP客户端
                             <div className="img">
                                 <a href="http://www.9888keji.com/static/web/app-download/index.html"><img src="images/global-header/menu-app.png" /></a>
                             </div>
