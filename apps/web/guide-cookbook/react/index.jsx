@@ -436,21 +436,21 @@ var Content = React.createClass({
                                 <img src="images/phone-icon.png"/>
                             </div>
                             <span className="strong-text">手机客户端</span>
-                            <p className="text">用户可扫描上方二维码下载金融工场<br />手机APP手机APP。快捷支付，随手可投。</p>
+                            <p className="text">用户可扫描上方二维码下载金融工场手机APP手机APP。快捷支付，随手可投。</p>
                         </li>
                         <li className="weChat-li">
                             <div className="img">
                                 <img src="images/weChat-icon.png"/>
                             </div>
                             <span className="strong-text">微信公众号</span>
-                            <p className="text">打开微信扫描二维码，关注金融工场<br />，轻松自如投资，第一时间<br />了解最新活动。</p>
+                            <p className="text">打开微信扫描二维码，关注金融工场，轻松自如投资，第一时间了解最新活动。</p>
                         </li>
                         <li className="web-li">
                             <div className="img">
                                 <img src="images/web-icon.png"/>
                             </div>
                             <span className="strong-text">手机WAP版</span>
-                            <p className="text">用户可通过手机浏览器输入金融工场网<br/>址：www.9888keji.com，或直接搜索“金融<br />工场”，即可快捷注册投资。</p>
+                            <p className="text">用户可通过手机浏览器输入金融工场网址：www.9888keji.com，或直接搜索“金融工场”，即可快捷注册投资。</p>
                         </li>
                     </ul>
                 </div>
