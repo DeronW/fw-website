@@ -80,6 +80,7 @@
             if (!is_login) {
                 window.location.href = "http://passport.9888keji.com/passport/login?sourceSite=jrgc"
             } else {
+                document.getElementById("douge").setAttribute("href","https://passport.9888keji.com/passport/login?sourceSite=dgsc&service=https://www.dougemall.com/");
                 var API_PATH = document.getElementById('api-path').value;
                 $.ajax({
                     url: "https://www.gongchangp2p.com/api/userState/v2/userState.json",
