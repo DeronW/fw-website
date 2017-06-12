@@ -190,8 +190,7 @@ var Content = React.createClass({
                                             {/*<p className="text">*/}
                                                 {/*好友达VIP2及以上所赠返现券在好友注册后的第30天10:00（注册当天算第1天）,按好友当时的等级发放。</p>*/}
                                             <p className="text">相应好友投资返利可去 <a
-                                                href="/factoryCode/info.shtml" target="_blank"
-                                                className="c-629df9">我的工场>工场码</a> 中查看。</p>
+                                                className="c-629df9">我的微金(我的尊享) >我的返利</a> 中查看。</p>
                                         </div>
 
                                         <div className="pop-arrow-icon"></div>
@@ -320,7 +319,7 @@ var Content = React.createClass({
                                     <div className="list-title">
                                         <h3 className="text">2.工友可用兑换券换礼物</h3>
                                         <p className="" style={{'font-size':'14px'}}>兑换券是领取工场促销活动礼品的小凭证，可以自主在工豆商城中兑换虚拟或实物礼品。可在 <a
-                                            href="https://dougemall.com/member/ticket.shtm" target="_blank"
+                                            target="_blank"
                                             className="c-629df9">我的商城>我的兑换券</a> 中查看。</p>
                                     </div>
                                 </div>
