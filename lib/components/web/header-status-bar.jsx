@@ -118,7 +118,7 @@ const HeaderStatusBar = React.createClass({
         let p2pHeader = (
             <div className="container">
                 <div className="hsb-xin-dai">
-                    <span className="pc-iphone" href="http://www.creditchina.hk/">400-6677-988</span>
+                    <span className="pc-iphone" href="http://www.creditchina.hk/">400-6766-988</span>
                     (周一至周日8:30-21:00)
                     <span className="app-li">
                         <span className="g-ico-phone"></span>
