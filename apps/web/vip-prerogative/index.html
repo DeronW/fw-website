@@ -1,7 +1,5 @@
 {% extends '../../../lib/templates/web_base.swig.html' %}
 
-{% block title %}金融工场是由北京凤凰信用管理有限公司（简称：凤凰信用）倾力打造的专注于小贷公司资产交易的P2P平台—上金融工场，圆财富梦想！{% endblock %}
-
 {% block content %}
 <div class="up-banner">
     <img src="images/up_a.jpg">
@@ -154,7 +152,7 @@
                     <div class="wie">
                         <div class="tile"><span class="te-a">01</span><span class="ti">如何获得贡献值？</span></div>
                         <div class="involve">
-                            <p>贡献值包括投资贡献值和邀友贡献值，其中投资贡献值即用户实时待收年化投资额度，邀友贡献值即每成功邀请1名首投5000元的好友奖励1000贡献值。<span
+                            <p>贡献值包括投资贡献值和邀友贡献值，其中投资贡献值即用户实时待收年化投资额度，邀友贡献值即每成功邀请1名首投2000元的好友奖励1000贡献值。<span
                                     class="user-a">（A码用户不获取邀友贡献值。）</span></p>
                         </div>
                         <div class="clientele">
@@ -173,7 +171,7 @@
                                     <span class="ns ybl yuan"><a>10000元</a></span>
                                 </div>
                                 <div class="term tmr">
-                                    <span class="kh tz je invt"><a>邀请人数</a><p>30天内，好友首投满5000元</p></span>
+                                    <span class="kh tz je invt"><a>邀请人数</a><p>30天内，好友首投满2000元</p></span>
                                     <span class="ns ybl yuan peo"><a>1人</a></span>
                                 </div>
                             </div>
@@ -253,7 +251,7 @@
             }
         });
 
-        var levelInfoUrl = 'https://www.9888.cn/api/userLevel/v1/giftVO.json';
+        var levelInfoUrl = '/api/userLevel/v1/giftVO.json';
         $.get(levelInfoUrl, {}, function (data) {
             console.log(data);
             if (data.code != 10000) throw new Error('接口异常, ' + levelInfoUrl);

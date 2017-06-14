@@ -234,11 +234,15 @@ function showPopList(type, value, id, cb) {
         },
         type: 'get',
         success: (data) => {
-            if (data.data.pageData.result.length > 0) {
-                ReactDOM.render(<PopList type={type} value={value} id={id}
-                                         callback={cb}/>, document.getElementById('popList'))
-            } else {
-                GlobalAlert('抱歉，您暂无推荐好友，无法进行赠送。');
+            if(data.code == 10000) {
+                if (data.data.pageData.result.length > 0) {
+                    ReactDOM.render(<PopList type={type} value={value} id={id}
+                                             callback={cb}/>, document.getElementById('popList'))
+                } else {
+                    GlobalAlert('抱歉，您暂无推荐好友，无法进行赠送。');
+                }
+            }else{
+                GlobalAlert(data.message)
             }
         },
         fail: (err) => GlobalAlert(err)

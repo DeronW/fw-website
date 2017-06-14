@@ -250,11 +250,11 @@ class DrawMobile extends React.Component {
     }
 
     gotoLogin() {
-        var loginUrl = location.protocol + '//www.9888.cn/api/activityPullNew/pullnewParty.do?id=241';
+        var loginUrl = location.protocol + '//www.gongchangp2p.com/api/activityPullNew/pullnewParty.do?id=241';
         $FW.gotoSpecialPage("登录", loginUrl);
     }
     gotoDraw(){
-        var link = "https://www.9888.cn/static/activity/template-lottery-draw/index.html";
+        var link = "https://www.gongchangp2p.com/static/activity/template-lottery-draw/index.html";
         window.location.href = link;
     }
     render() {

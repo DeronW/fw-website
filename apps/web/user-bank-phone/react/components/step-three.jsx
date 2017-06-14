@@ -3,16 +3,11 @@ const StepThree = React.createClass({
         return {}
     },
     render: function () {
-        let successfulReturn;
-        if(window.DOMAIN_ZX!=null){
-            successfulReturn = <a className="return" href="http://www.gongchangzx.com/depository/recharge/toQRecharge.shtml">
-                返回充值
-            </a>
-        }else{
-            successfulReturn = <a className="return" href="https://www.9888.cn/depository/recharge/toQRecharge.shtml">
-                返回充值
-            </a>
-        }
+        let successfulReturn = <a className="return"
+                                  href="https://www.gongchangp2p.com/depository/recharge/toRecharge.shtml">
+            返回充值
+        </a>
+
         return (
             <div className="thirdContent">
                 <div className="markedWords">
