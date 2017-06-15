@@ -263,7 +263,7 @@ class DrawPC extends React.Component {
     }
 
     gotoLogin() {
-        var loginUrl = location.protocol + '//www.gongchangp2p.com/api/activityPullNew/pullnewParty.do?id=241';
+        var loginUrl = location.protocol + '//www.gongchangp2p.cn/api/activityPullNew/pullnewParty.do?id=241';
         $FW.gotoSpecialPage("登录", loginUrl);
     }
 
@@ -365,7 +365,7 @@ class DrawPC extends React.Component {
                 }
                 <div className="platformPC">
                     <div className="platformBg" style={{background:platBg}}>
-                        <a href="https://www.9888keji.com/" target="_blank">
+                        <a href="http://www.9888keji.com/" target="_blank">
                             <div className="injectPC">活动期间，累投越多可获分的奖金越多，快来注入！</div>
                         </a>
                         <img style={{bottom:height + 64}} src="images/water.png" alt=""/>
@@ -411,7 +411,7 @@ class DrawPC extends React.Component {
                 }
                 <div className="platformTotalPC">
                     <div className="platformBg" style={{background:platTotalBg}}>
-                        <a href="https://www.9888keji.com/" target="_blank">
+                        <a href="http://www.9888keji.com/" target="_blank">
                             <div className="injectPC">活动期间，累投越多可获分的奖金越多，快来注入！</div>
                         </a>
                         <img style={{bottom:totalHeight + 64}} src="images/waterTotal.png" alt=""/>
