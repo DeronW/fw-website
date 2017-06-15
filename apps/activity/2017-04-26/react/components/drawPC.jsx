@@ -263,7 +263,7 @@ class DrawPC extends React.Component {
     }
 
     gotoLogin() {
-        var loginUrl = location.protocol + '//www.gongchangp2p.com/api/activityPullNew/pullnewParty.do?id=241';
+        var loginUrl = location.protocol + '//www.gongchangp2p.cn/api/activityPullNew/pullnewParty.do?id=241';
         $FW.gotoSpecialPage("登录", loginUrl);
     }
 
