@@ -24,6 +24,7 @@ const TOPIC_PAGES = [
     'topic-you-ju-dai',//友居贷专题页
     'topic-hui-shang',//微商银行存管
     'topic-hui-shang-guide',//徽商银行存管操作指引
+    'protocol-user-service',//用户服务协议
 ]
 
 const USER_PAGES = [
