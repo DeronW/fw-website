@@ -29,4 +29,5 @@ $(() => {
                     closePopHandler={closePopHandler}/>;
         ReactDOM.render(C, document.getElementById("cnt"))
     })
+
 });
