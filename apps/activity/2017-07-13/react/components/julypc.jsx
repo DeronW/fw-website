@@ -24,9 +24,9 @@ class JulyPc extends React.Component {
         let {isLogin, timestamp} = this.props;
         console.log(timestamp);
         let july_start_time = this.standardTime(2017, 7, 13, 0, 0, 0);
-        let july_end_time = this.standardTime(2017, 7, 23, 0, 0, 0);
-        console.log(july_start_time)
-        console.log(july_end_time)
+        let july_end_time = this.standardTime(2017, 8, 15, 0, 0, 0);
+        console.log(`pc:${july_start_time}`)
+        console.log(`pc:${july_end_time}`)
         if (timestamp < july_start_time) {
             ReactDOM.render(<PopStartOrEnd text="活动尚未开始"/>, document.getElementById("pop"))
         } else if (timestamp > july_end_time) {
@@ -59,14 +59,4 @@ class BottomShow extends React.Component {
     }
 }
 
-class PopStartOrEnd extends React.Component {
-    render() {
-        let {text} = this.props
-        return <div className="pop_notbegun_box">
-            <div className="pop_notbegun_text">
-                {text}
-            </div>
-        </div>
-    }
-}
 
