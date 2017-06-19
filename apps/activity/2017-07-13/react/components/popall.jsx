@@ -9,36 +9,36 @@ class PopStartOrEnd extends React.Component {
     }
 }
 
-class PopInvitePCPre extends React.Component {
+class PopInvitePC extends React.Component {
+    constructor(props){
+        super(props)
+        this.state={}
+    }
     render(){
-        return  <div>
+        return  <div className="pop-invite-pc">
+            <div className="pop-invite-pc-text">
+                <div>如何邀请</div>
+                <div>请好友用您的工场码注册，去投标，达成团队目标。</div>
+                <div className="confrim-btn" onClick={()=>{this.props.closePopHandler()}}>确定</div>
+            </div>
 
         </div>
     }
 }
 
-class PopInvitePcAfter extends React.Component {
+
+class PopInviteMobile extends React.Component {
+    constructor(props){
+        super(props)
+        this.state = {}
+    }
     render(){
         return  <div>
-
+            <div>如何邀请</div>
+            <div>请好友用您的工场码注册，去投标，达成团队目标。</div>
         </div>
     }
 }
 
-class PopInviteMobilePre extends React.Component {
-    render(){
-        return  <div>
-
-        </div>
-    }
-}
-
-class PopInviteMobileAfter extends React.Component {
-    render(){
-        return  <div>
-
-        </div>
-    }
-}
 
 

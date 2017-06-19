@@ -21,7 +21,7 @@ class JulyPc extends React.Component {
     }
 
     render() {
-        let {isLogin, timestamp} = this.props;
+        let {isLogin, timestamp,gotoLogin,closePopHandler} = this.props;
         console.log(timestamp);
         let july_start_time = this.standardTime(2017, 7, 13, 0, 0, 0);
         let july_end_time = this.standardTime(2017, 8, 15, 0, 0, 0);
@@ -35,7 +35,7 @@ class JulyPc extends React.Component {
 
         return <div className="july_pc_box">
             this is pc box
-            <BottomShow isLogin={isLogin}/>
+            <BottomShow isLogin={isLogin} gotoLogin={gotoLogin} closePopHandler={closePopHandler}/>
         </div>
     }
 }
@@ -45,10 +45,18 @@ class BottomShow extends React.Component {
         super(props)
     }
 
+    showHowInvite = () => {
+        ReactDOM.render(<PopInvitePC gotoLogin={this.props.gotoLogin}
+                                     closePopHandler={this.props.closePopHandler}/>, document.getElementById("pop"))
+    }
+
     render() {
         let isLogin = this.props.isLogin;
         let logged = <div className="log-box logged-box">
-            活动内，您可以邀请50人参与活动，如何邀请 | 立即投资
+            活动内，您可以邀请50人参与活动，
+            <div className="invite-pc-pre" onClick={()=>{this.showHowInvite()}}>如何邀请</div>
+            |
+            <a href="">立即投资</a>
         </div>;
         let unlogged = <div className="log-box unlogged-box">
             请登录后查看您活动内的邀友和投标情况，立即登录 | 如何邀请
