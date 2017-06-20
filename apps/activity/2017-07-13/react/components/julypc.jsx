@@ -21,19 +21,24 @@ class JulyPc extends React.Component {
     }
 
     render() {
-        let {isLogin, timestamp,gotoLogin,closePopHandler} = this.props;
+        let {isLogin, timestamp, gotoLogin, closePopHandler} = this.props;
         console.log(timestamp);
         let july_start_time = this.standardTime(2017, 7, 13, 0, 0, 0);
         let july_end_time = this.standardTime(2017, 8, 15, 0, 0, 0);
         console.log(`pc:${july_start_time}`)
         console.log(`pc:${july_end_time}`)
         if (timestamp < july_start_time) {
-            ReactDOM.render(<PopStartOrEnd text="活动尚未开始" isLogin={isLogin} gotoLogin={gotoLogin} closePopHandler={closePopHandler}/>, document.getElementById("pop"))
+            ReactDOM.render(<PopStartOrEnd text="活动尚未开始"/>, document.getElementById("pop"))
         } else if (timestamp > july_end_time) {
-            ReactDOM.render(<PopStartOrEnd text="活动已结束" isLogin={isLogin} gotoLogin={gotoLogin} closePopHandler={closePopHandler}/>, document.getElementById("pop"))
+            ReactDOM.render(<PopStartOrEnd text="活动已结束"/>, document.getElementById("pop"))
         }
 
-        return <div className="july_pc_box">
+        return <div className="july-pc-box">
+            <div className="section-banner"></div>
+            <div className="coupon-box"></div>
+            <div className="welfare-box"></div>
+            <div className="fight-box"></div>
+            <div className="explain-box"></div>
             this is pc box
             <BottomShow isLogin={isLogin} gotoLogin={gotoLogin} closePopHandler={closePopHandler}/>
         </div>
@@ -54,7 +59,10 @@ class BottomShow extends React.Component {
         let isLogin = this.props.isLogin;
         let logged = <div className="log-box logged-box">
             活动内，您可以邀请50人参与活动，
-            <div className="invite-pc-pre" onClick={()=>{this.showHowInvite()}}>如何邀请</div>
+            <div className="invite-pc-pre" onClick={() => {
+                this.showHowInvite()
+            }}>如何邀请
+            </div>
             |
             <a href="">立即投资</a>
         </div>;

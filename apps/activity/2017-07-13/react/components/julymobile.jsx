@@ -31,7 +31,7 @@ class JulyMobile extends React.Component {
         } else if (timestamp > july_end_time) {
             ReactDOM.render(<PopStartOrEnd text="活动已结束"/>, document.getElementById("pop"))
         }
-        return <div>
+        return <div className="july-mobile-box">
             this is mobile box
         </div>
     }
