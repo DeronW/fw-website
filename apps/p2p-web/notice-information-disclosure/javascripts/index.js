@@ -340,6 +340,7 @@ $(function () {
             endCon.eq(1).find(".money span").text(judgeCash(data.data.total_overdueSum));
             endCon.eq(2).find(".money span").text(prevent(data.data.total_overdueSum / data.data.total_invest * 100));
             endCon.eq(3).find(".money span").text(prevent(data.data.total_overdueCount / data.data.total_orderCount * 100));
-        }
+            endCon.eq(4).find(".money span").text(data.data.total_lendSum)
+    }
     });
 });
