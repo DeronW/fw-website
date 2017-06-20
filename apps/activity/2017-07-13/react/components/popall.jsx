@@ -4,6 +4,7 @@ class PopStartOrEnd extends React.Component {
         return  <div className="pop_notbegun_box">
             <div className="pop_notbegun_text">
                 {text}
+                <div className="close-btn" onClick={()=>{this.props.closePopHandler()}}>确定</div>
             </div>
         </div>
     }

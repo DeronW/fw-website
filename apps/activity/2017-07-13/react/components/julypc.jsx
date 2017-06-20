@@ -28,9 +28,9 @@ class JulyPc extends React.Component {
         console.log(`pc:${july_start_time}`)
         console.log(`pc:${july_end_time}`)
         if (timestamp < july_start_time) {
-            ReactDOM.render(<PopStartOrEnd text="活动尚未开始"/>, document.getElementById("pop"))
+            ReactDOM.render(<PopStartOrEnd text="活动尚未开始" isLogin={isLogin} gotoLogin={gotoLogin} closePopHandler={closePopHandler}/>, document.getElementById("pop"))
         } else if (timestamp > july_end_time) {
-            ReactDOM.render(<PopStartOrEnd text="活动已结束"/>, document.getElementById("pop"))
+            ReactDOM.render(<PopStartOrEnd text="活动已结束" isLogin={isLogin} gotoLogin={gotoLogin} closePopHandler={closePopHandler}/>, document.getElementById("pop"))
         }
 
         return <div className="july_pc_box">
