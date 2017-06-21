@@ -40,10 +40,10 @@ class JulyPc extends React.Component {
                     <div className="coupon-title">
                         <img src="images/coupon-title.png"/>
                     </div>
+                    <div className="coupon-des">
+                        每周、限时抢高达千元返现、1%返息
+                    </div>
                     <div className="coupon-code">
-                        <div className="coupon-des">
-                            每周、限时抢高达千元返现、1%返息
-                        </div>
                         <img src="images/coupon-qrcode.png" className="coupon-pic"/>
                     </div>
                     <div className="code-tips">
@@ -157,7 +157,20 @@ class JulyPc extends React.Component {
                 </div>
             </div>
             <div className="pc-rank">
+                <div className="rank-content">
+                    <div className="rank-name">
+                        <span className="name-item item-one">排名</span>
+                        <span className="name-item item-two">用户名</span>
+                        <span className="name-item item-three">团队累投年化额(元)</span>
+                        <span className="name-item item-four">奖金(元)</span>
+                    </div>
+                    <div className="rank-data">
 
+                    </div>
+                </div>
+                <div className="rank-tips">
+                    温馨提示：以上数据实时更新，最终奖金以活动结束后数据为准发放。
+                </div>
             </div>
             <div className="pc-explain">
                 <div className="explain">
