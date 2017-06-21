@@ -22,12 +22,12 @@ $(() => {
 
         isLogin = d1.data.isLogin;
         timestamp = d2.data.timestamp;
-        let C = navigator.userAgent.match(/Android|iPhone|iPad|Mobile/i) ?
+        let Content = navigator.userAgent.match(/Android|iPhone|iPad|Mobile/i) ?
             <JulyMobile isLogin={isLogin} timestamp={timestamp} gotoLogin={gotoLogin}
                         closePopHandler={closePopHandler}/> :
             <JulyPc isLogin={isLogin} timestamp={timestamp} gotoLogin={gotoLogin}
                     closePopHandler={closePopHandler}/>;
-        ReactDOM.render(C, document.getElementById("cnt"))
+        ReactDOM.render(Content, document.getElementById("cnt"))
     })
 
 });

@@ -1,22 +1,318 @@
 @import "variables.less";
-.pc-header{
-  background: rgba(0,0,0,0.7) !important;
+.pc-header {
+  background: rgba(0, 0, 0, 0.7) !important;
 }
+
 //七月份活动PC端
-.july-pc-box{
+.july-pc-box {
+  width: 100%;
   margin-top: 50px;
+  height: auto;
+  background: #205494;
+  .pc-banner {
+    width: 100%;
+    height: 900px;
+    background: url("../images/banner.png") no-repeat center;
+    background-size: 100%;
+  }
+  .pc-content {
+    width: 1140px;
+    margin: 0 auto;
+    .pc-coupon {
+      width: 100%;
+      height: 670px;
+      margin-top: 80px;
+      .coupon-title {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+      .coupon-code {
+        width: 804px;
+        height: 439px;
+        margin: 0 auto;
+        background: url("../images/coupon-centent.png") no-repeat center;
+        text-align: center;
+        .coupon-des {
+          height: 45px;
+          font-size: 22px;
+          color: #fff;
+          line-height: 45px;
+          text-align: center;
+        }
+        .coupon-pic {
+          margin-top: 45px;
+        }
+      }
+      .code-tips {
+        height:103px;
+        text-align: center;
+        position: relative;
+        top:-84px;
+        .tips-text{
+          position: absolute;
+          top: 42px;
+          left: 50%;
+          font-size: 20px;
+          color: #677ba8;
+          margin-left: -160px;
+        }
+      }
+    }
+    //邀友福利
+    .pc-welfare {
+      margin-top: 150px;
+      .welfare-title{
+        height: 230px;
+        background: url("../images/welfare-title-bg.png") no-repeat 10px -130px;
+        text-align: center;
+      }
+      .welfare-tips{
+        width: 804px;
+        height: 45px;
+        font-size: 20px;
+        color: #fff;
+        background: url("../images/welfare-des-bg.png") no-repeat center;
+        text-align: center;
+        line-height: 45px;
+        margin: 0 auto;
+      }
+      .welfare-one{
+        width: 995px;
+        height: 408px;
+        margin: 100px auto 0;
+        background: url("../images/welfare-one-bg.png") no-repeat center;
+        .one-text{
+          font-size: 18px;
+          color: #fff;
+          padding-top: 80px;
+          text-align: center;
+          .one-link{
+            display: inline-block;
+            font-size: 18px;
+            color: #3ab2ff;
+            text-decoration: underline;
+          }
+        }
+      }
+      .welfare-two{
+        width: 995px;
+        height: 620px;
+        margin: 100px auto 0;
+        background: url("../images/welfare-two-bg.png") no-repeat center;
+        .two-text{
+          font-size: 18px;
+          color: #fff;
+          padding-top: 80px;
+          text-align: center;
+        }
+        .common-text{
+          margin-top: 362px;
+          font-size: 19px;
+          color: #fff;
+        }
+        .left-text{
+          float: left;
+          padding-left: 150px;
+        }
+        .right-text{
+          float: right;
+          padding-right: 150px;
+        }
+        .yellow-text{
+          color: #ffe400;
+        }
+        .red-text{
+          color: #f04460;
+        }
+      }
+      .welfare-three{
+        width: 995px;
+        height: 600px;
+        margin: 100px auto 0;
+        background: url("../images/welfare-three-bg.png") no-repeat center;
+        display: table;
+        .three-text{
+          font-size: 18px;
+          color: #fff;
+          text-align: center;
+          margin-top: 80px;
+        }
+        .bottom-text{
+          font-size: 14px;
+          color: #79b5ff;
+          margin-top: 420px;
+          text-align: center;
+        }
+      }
+
+    }
+    //争夺赛
+    .pc-fight {
+
+    }
+    //奖金
+    .pc-bonus {
+
+    }
+    //活动说明
+    .pc-explain {
+
+    }
+  }
+  .pc-fight{
+    width: 1157px;
+    height: 530px;
+    margin: 90px auto 0;
+    background: url("../images/fight-bg.png") no-repeat center;
+    display: table;
+    .fight-data-box{
+      width: 1138px;
+      height: 158px;
+      margin: 373px auto 0;
+      display: table;
+      .data-item{
+        width: 194px;
+        height: 100%;
+        margin-left: 30px;
+        float: left;
+        .item-up{
+          width: 100%;
+          height: 60px;
+          text-align: center;
+          font-size: 24px;
+          color: #fff;
+          line-height: 60px;
+        }
+        .item-down{
+          font-size: 24px;
+          color: #f3c000;
+          text-align: center;
+          height: 128px;
+          line-height: 128px;
+        }
+      }
+    }
+  }
+  .pc-bonus{
+    width: 1140px;
+    margin: 180px auto 30px;
+    text-align: center;
+    display: table;
+    position: relative;
+    .bouns-tips{
+      width: 804px;
+      height: 45px;
+      background: url("../images/bonus-des-bg.png") no-repeat center;
+      color: #fff;
+      line-height: 45px;
+      font-size: 22px;
+      float: left;
+      margin-top: 30px;
+      margin-left: 170px;
+    }
+    .bonus-star{
+      display: inline-block;
+      width: 113px;
+      height: 120px;
+      background: url("../images/bonus-star.png") no-repeat center;
+      float: right;
+      margin-right: 24px;
+      cursor: pointer;
+      .star-tips{
+        display: none;
+        width: 269px;
+        height: 141px;
+        background: url("../images/bonus-star-des-bg.png") no-repeat center;
+        position: absolute;
+        top: 20px;
+        right: -60px;
+        font-size: 18px;
+        color: #fff;
+        .star-tips-text{
+          padding: 10px;
+        }
+      }
+    }
+    .bonus-star:hover{
+      .star-tips{
+        display: block;
+      }
+    }
+    .bonus-context{
+      display: table;
+      .bonus-bottom{
+        width: 575px;
+        height: 140px;
+        background: url("../images/bonus-tips-fish.png") no-repeat center;
+        margin: 0 auto;
+        display: table;
+        .bonus-text{
+          font-size: 16px;
+          color: #677ba8;
+          margin-top: 47px;
+          display: table;
+          margin-left: 20px;
+          line-height: 24px;
+        }
+      }
+    }
+  }
+  .pc-rank{
+    width: 847px;
+    height: 625px;
+    margin: 90px auto 0;
+    display: table;
+    background: url("../images/rank-bg.png") no-repeat center;
+  }
+  .pc-explain{
+    width: 100%;
+    height: 820px;
+    background: url("../images/bottom-sea-bg.png") no-repeat left 350px;
+    background-size: 100%;
+    margin-top: 80px;
+    .explain{
+      width: 989px;
+      height: 247px;
+      padding: 30px 40px;
+      margin: 0 auto;
+      background: #0f4785;
+      border-radius:10px;
+      font-size: 14px;
+      color: #fff;
+      line-height: 22px;
+      .explain-title{
+        font-size: 20px;
+        margin-bottom: 20px;
+      }
+      .explain-tips{
+        margin-top: 30px;
+      }
+    }
+  }
 }
+
 //底部弹层
-.log-box{
+.bottom-box {
   width: 100%;
   height: 50px;
-  background: rgba(0,0,0,0.5);
   position: fixed;
   bottom: 0;
-  font-size: 18px;
-  text-align: center;
-  line-height: 50px;
-  color: #fff;
-
+  .log-box {
+    width: 100%;
+    height: 50px;
+    background: rgba(0, 0, 0, 0.5);
+    font-size: 18px;
+    text-align: center;
+    line-height: 50px;
+    color: #fff;
+  }
+  .bottom-btn {
+    position: absolute;
+    top: -10px;
+    right: 200px;
+    font-size: 30px;
+    cursor: pointer;
+  }
 }
+
 
