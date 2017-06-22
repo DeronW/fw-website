@@ -4,7 +4,7 @@ const PROJ = 'activity';
 
 const APP_NAMES = [
     //  '2017-01-05', //不再更能 旧专题
-    // '2017-04-26',//五月份上线的专题
+    '2017-04-26',//五月份上线的专题
     // '2017-05-16',//五月份上线的专题重构版
     // // 'topic-template-one',
     // // 'topic-template-two',
