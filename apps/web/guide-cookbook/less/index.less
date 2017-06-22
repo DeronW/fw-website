@@ -308,6 +308,10 @@
 
         .img {
           float: left;
+          img{
+            display: inline-block;
+            vertical-align: middle;
+          }
         }
 
         .text-block {
@@ -557,7 +561,7 @@
 .ui-guide-cookbook-block {
   position: relative;
   width: 980px;
-  height: 532px;
+  // height: 532px;
   padding: 0 0 50px 0;
 
   .t-back {
@@ -629,7 +633,7 @@
         ul {
           li {
             float: left;
-            width: 445px;
+            width: 275px;
             height: 182px;
             margin: 0 30px 0 0;
             padding: 18px 0;
@@ -643,24 +647,35 @@
               margin-bottom: 5px;
             }
             .title-text-position {
-              margin-bottom: 25px;
+              // margin-bottom: 25px;
             }
             .info-text {
               margin-top: 5px;
               line-height: 22px;
               color: #629df9;
-              padding-left: 5px;
             }
           }
 
           .last-li {
-            margin-right: 0;
+            .img{
+              margin-top: 30px;
+            }
+            .last-li-img{
+              margin-top: -2px;
+            }
+          }
+        }
+      }
+      .list-bottom{
+        ul{
+          li{
+            width: 428px;
           }
         }
       }
 
       .prompt {
-        height: 132px;
+        // height: 132px;
 
         .prompt-text {
           position: relative;
@@ -705,7 +720,9 @@
       }
     }
   }
-
+  .infoTop{
+    height: 330px;
+  }
   .b-back {
     height: 26px;
     background: url(../images/b-radius.png) no-repeat;
