@@ -1,13 +1,24 @@
 class JulyMobile extends React.Component {
     constructor() {
         super()
-        this.state = {}
+        this.state = {
+            move: true
+        }
     }
 
     componentDidMount() {
-
+        this.mover();
     }
 
+    mover = () => {
+        this.timer = setInterval(() => {
+            this.setState({move: !this.state.move})
+        }, 500)
+    }
+
+    stop = () => {
+        clearInterval(this.timer)
+    }
     standardTime = (year, month, day, hours, minutes, seconds) => {
         let d = new Date();
         d.setFullYear(year || 0);
@@ -22,6 +33,10 @@ class JulyMobile extends React.Component {
 
     render() {
         let {isLogin, timestamp} = this.props
+        let start_top, end_top, move_style;
+        start_top = {top:'90px'}
+        end_top = {top:'100px'}
+        this.state.move ? move_style = start_top : move_style = end_top
         let july_start_time = this.standardTime(2017, 7, 13, 0, 0, 0);
         let july_end_time = this.standardTime(2017, 8, 15, 0, 0, 0);
         console.log(`mobile:${july_start_time}`)
@@ -32,7 +47,11 @@ class JulyMobile extends React.Component {
             ReactDOM.render(<PopStartOrEnd text="活动已结束"/>, document.getElementById("pop"))
         }
         return <div className="july-mobile-box">
-            <div className="m-banner"></div>
+            <div className="m-banner">
+                <div className="banner-item" style={move_style}>
+
+                </div>
+            </div>
             <div className="m-coupon">
                 <div className="m-c-title">
                     <img src="images/m-coupon-title.png"/>
@@ -140,8 +159,39 @@ class JulyMobile extends React.Component {
                     <img src="images/m-bonus-title.png"/>
                 </div>
                 <div className="m-n-tips">
-                    活动期间，团队累投年化额≥350万且排名前10的用户<br/>
-                    送出88万奖金！
+                    <div>活动期间，团队累投年化额≥350万且排名前10的用户</div>
+                    <div>送出88万奖金！</div>
+                </div>
+                <div className="m-b-treasure">
+                    <img src="images/m-star.png" className="treasure-pic"/>
+                </div>
+                <div className="m-fish-tips">
+                    <div className="fish-text">
+                        奖金分配方式：<br/>
+                        本人团队累投年化额/前10名团队累投<br/>
+                        年化总额，仅计算满足获奖资格的用户。
+                    </div>
+                </div>
+            </div>
+            <div className="m-rank">
+                <div className="m-r-data">
+                    <div className="data-name">
+                        <span className="name-one">排名</span>
+                        <span className="name-two">用户名</span>
+                        <span className="name-three">团队累投年化额(元)</span>
+                        <span className="name-four">奖金(元)</span>
+                    </div>
+                    <div className="data-detil">
+
+                    </div>
+                </div>
+                <div className="m-rank-tips">
+                    温馨提示：以上数据实时更新，最终奖金以活动结束后数据为准发放。
+                </div>
+            </div>
+            <div className="m-explain">
+                <div className="m-e-text">
+
                 </div>
             </div>
         </div>
