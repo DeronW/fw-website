@@ -109,7 +109,7 @@
 
         $UserReady(function (is_login, user) {
             if (!is_login) {
-                window.location.href = "http://passport.9888.cn/passport/login?sourceSite=jrgc"
+//                window.location.href = "https://passport.gongchangp2p.cn/passport/login?sourceSite=jrgc"
             } else {
                 var API_PATH = document.getElementById('api-path').value;
                 $.get(API_PATH + "/api/userState/v2/userState.json", null,

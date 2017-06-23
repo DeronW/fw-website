@@ -30,7 +30,8 @@ const TOPIC_PAGES = [
 const USER_PAGES = [
     //用户界面
     'notice-information-disclosure',//新信息披露页
-    'notice-corporate-structure'//旧信息披露页
+    'notice-corporate-structure',//旧信息披露页
+    'user-bank-phone'//银行预留手机号修改页
 ]
 
 const DEVELOPING_PAGES = [
