@@ -34,6 +34,7 @@
     "clean": "node scripts/clean.js",
     "gulp": "node node_modules/gulp/bin/gulp.js",
     "build:web": "npm run clean && npm run gulp web:common_js && npm run gulp build:web",
+    "build:keji-web": "npm run clean && npm run gulp keji-web:common_js && npm run gulp build:keji-web",
     "build:loan-web": "npm run clean && npm run gulp loan-web:common_js && npm run gulp build:loan-web",
     "build:p2p-web": "npm run clean && npm run gulp p2p-web:common_js && npm run gulp build:p2p-web",
     "build:zx-web": "npm run clean && npm run gulp zx-web:common_js && npm run gulp build:zx-web",

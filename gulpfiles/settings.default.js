@@ -17,5 +17,8 @@ module.exports = {
     },
     "p2p-web": {
         dev_api_path: '//fe.9888.cn/api/test-b/web'
+    },
+    "keji-web": {
+        dev_api_path: '//fe.9888.cn/api/test-b/web'
     }
 };

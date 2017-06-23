@@ -20,6 +20,7 @@ const SETTINGS = Object.assign({}, require('./gulpfiles/settings.default.js'), s
 // gulpfile 本地扩展配置
 require('./gulpfiles/activity.js')(gulp, gt, SETTINGS);
 require('./gulpfiles/web.js')(gulp, gt, SETTINGS);
+require('./gulpfiles/keji-web.js')(gulp, gt, SETTINGS);
 require('./gulpfiles/loan-web.js')(gulp, gt, SETTINGS);
 require('./gulpfiles/zx-web.js')(gulp, gt, SETTINGS);
 require('./gulpfiles/p2p-web.js')(gulp, gt, SETTINGS);

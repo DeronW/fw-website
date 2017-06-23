@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<!--[if lt IE 9 ]>
+<html lang="zh-cn" class="not-support-ie6-7">
+<![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html lang="zh-cn">
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="target-densitydpi=device-dpi, width=720, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=EDGE"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+    <meta name="renderer" content="webkit"/>
+    <title>{% block title %}金融工场 — 安全、专业、透明的综合性金融服务平台。{% endblock %}</title>
+    <link type="text/css" rel="stylesheet" href="stylesheets/all.less.css"/>
+    {% block css %}{% endblock %}
+    <!--[if lt IE 9]>
+    <script src='javascripts/es5-shim.js'></script>
+    <script src='javascripts/es5-sham.js'></script>
+    <script src='javascripts/json3.min.js'></script>
+    <script src='javascripts/es6-shim.min.js'></script>
+    <script src='javascripts/es6-sham.min.js'></script>
+    <![endif]-->
+</head>
+<body>
+
+<!--接口地址前缀,结尾需要添加斜线-->
+<input type="hidden" id="api-path" value="{{ API_PATH }}"/>
+
+<div id="header-status-bar"></div>
+
+{% include 'web/header-nav-bar.swig.html' %}
+{% block content %}{% endblock %}
+{% include 'web/footer.swig.html' %}
+{% include 'web/sidebar-fn.swig.html' %}
+{% include 'partial/not-support-ie6-ie7.swig.html' %}
+
+
+<!--// jQuery 不能加入公共库中, 因为公共库的uglify过程破坏了jQuery源码中兼容IE8的语法 -->
+<script src="javascripts/jquery-1.11.3.min.js"></script>
+<script src="javascripts/lib.js"></script>
+{% if ENV == 'not-set-this' %}
+<script src="https://cdn.ravenjs.com/3.9.1/raven.min.js"></script>
+<script>
+    Raven.config('https://4135eb9a33e248e984bcc7789424be8e@sentry.dougemall.com/3').install()
+</script>
+{% endif %}
+<script src="javascripts/bundle.js"></script>
+{% if ENV == 'production' %}
+{% include 'partial/expection-handler.swig.html' with {SENTRY_DSN:
+'https://4135eb9a33e248e984bcc7789424be8e@sentry.dougemall.com/3'} %}
+{% endif %}
+
+{% block javascripts %}{% endblock %}
+
+{% if ENV == 'production' %}
+{% include 'web/tong-ji.swig.html' %}
+{% endif %}
+</body>
+</html>
