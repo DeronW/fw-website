@@ -22,6 +22,16 @@
       left: 100px;
       background-color: #fff;
       border-radius: 50%;
+      cursor: pointer;
+      -webkit-animation: cloudMove 2s 0.2s infinite ease-in-out;
+      -o-animation: cloudMove 2s 0.2s infinite ease-in-out;
+      -ms-animation: cloudMove 2s 0.2s infinite ease-in-out;
+      -moz-animation: cloudMove 2s 0.2s infinite ease-in-out;
+      animation: cloudMove 2s 0.2s infinite ease-in-out;
+    }
+    .banner-item:hover{
+      animation-play-state: paused;
+      background-color: #ccc;
     }
   }
   .m-coupon {

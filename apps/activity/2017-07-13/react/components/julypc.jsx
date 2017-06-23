@@ -20,6 +20,9 @@ class JulyPc extends React.Component {
         return new Date(d).getTime()
     }
 
+    scroll = ()=>{
+        window.scrollTo(0,2000)
+    }
     render() {
         let {isLogin, timestamp, gotoLogin, closePopHandler} = this.props;
         console.log(`current_time:${timestamp}`);
@@ -34,7 +37,11 @@ class JulyPc extends React.Component {
         }
 
         return <div className="july-pc-box">
-            <div className="pc-banner"></div>
+            <div className="pc-banner">
+                <div className="pc-banner-item" onClick={()=>this.scroll()}>
+
+                </div>
+            </div>
             <div className="pc-content">
                 <div className="pc-coupon">
                     <div className="coupon-title">

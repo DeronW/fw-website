@@ -1,24 +1,13 @@
 class JulyMobile extends React.Component {
     constructor() {
         super()
-        this.state = {
-            move: true
-        }
+        this.state = {}
     }
 
     componentDidMount() {
-        this.mover();
+
     }
 
-    mover = () => {
-        this.timer = setInterval(() => {
-            this.setState({move: !this.state.move})
-        }, 500)
-    }
-
-    stop = () => {
-        clearInterval(this.timer)
-    }
     standardTime = (year, month, day, hours, minutes, seconds) => {
         let d = new Date();
         d.setFullYear(year || 0);
@@ -31,12 +20,12 @@ class JulyMobile extends React.Component {
         return new Date(d).getTime()
     }
 
+    startmove = () => {
+        window.scrollTo(0, 2000)
+    }
+
     render() {
-        let {isLogin, timestamp} = this.props
-        let start_top, end_top, move_style;
-        start_top = {top:'90px'}
-        end_top = {top:'100px'}
-        this.state.move ? move_style = start_top : move_style = end_top
+        let {timestamp} = this.props
         let july_start_time = this.standardTime(2017, 7, 13, 0, 0, 0);
         let july_end_time = this.standardTime(2017, 8, 15, 0, 0, 0);
         console.log(`mobile:${july_start_time}`)
@@ -48,9 +37,7 @@ class JulyMobile extends React.Component {
         }
         return <div className="july-mobile-box">
             <div className="m-banner">
-                <div className="banner-item" style={move_style}>
-
-                </div>
+                <div className="banner-item" onClick={this.startmove}></div>
             </div>
             <div className="m-coupon">
                 <div className="m-c-title">

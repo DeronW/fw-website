@@ -14,6 +14,26 @@
     height: 900px;
     background: url("../images/banner.png") no-repeat center;
     background-size: 100%;
+    position: relative;
+    .pc-banner-item{
+      width: 80px;
+      height: 150px;
+      background-color: #fe6962;
+      position: absolute;
+      top:100px;
+      left:100px;
+      border-radius: 50%;
+      cursor: pointer;
+      -webkit-animation: cloudMove 2s 0.2s infinite ease-in-out;
+      -o-animation: cloudMove 2s 0.2s infinite ease-in-out;
+      -ms-animation: cloudMove 2s 0.2s infinite ease-in-out;
+      -moz-animation: cloudMove 2s 0.2s infinite ease-in-out;
+      animation: cloudMove 2s 0.2s infinite ease-in-out;
+    }
+    .pc-banner-item:hover{
+      animation-play-state: paused;
+      background-color: #ccc;
+    }
   }
   .pc-content {
     width: 1140px;
@@ -146,18 +166,6 @@
           text-align: center;
         }
       }
-
-    }
-    //争夺赛
-    .pc-fight {
-
-    }
-    //奖金
-    .pc-bonus {
-
-    }
-    //活动说明
-    .pc-explain {
 
     }
   }
