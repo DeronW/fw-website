@@ -43,7 +43,6 @@ module.exports = function (gulp, generate_task, settings) {
     let INCLUDE_JAVASCRIPTS = [
         `${PROJ}/common-functions.js`,
         `${PROJ}/interest-calculator.js`,
-        `${PROJ}/ajax-extend.js`
     ];
 
     let INCLUDE_LESS = [
