@@ -46,7 +46,6 @@ module.exports = function generate_task(site_name, page_name, configs) {
     let less_files = [
         `${lib_path}less/colors.less`,
         `${lib_path}less/common.less`,
-        `${lib_path}less/grid.less`,
         `${lib_path}less/not-support-ie6-ie7.less`
     ];
     less_files.push(...CONFIG.include_less.map(i => `${lib_path}less/${i}`));
