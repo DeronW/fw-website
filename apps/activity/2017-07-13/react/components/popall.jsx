@@ -1,4 +1,4 @@
-class PopStartOrEnd extends React.Component {
+class PopStatusPanel extends React.Component {
     render() {
         let {text} = this.props
         return  <div className="pop_notbegun_box">

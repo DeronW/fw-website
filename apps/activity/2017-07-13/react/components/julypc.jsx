@@ -5,40 +5,33 @@ class JulyPc extends React.Component {
     }
 
     componentDidMount() {
-
+        this.popStatusHandler();
     }
 
-    standardTime = (year, month, day, hours, minutes, seconds) => {
-        let d = new Date();
-        d.setFullYear(year || 0);
-        d.setMonth(month - 1 || 0);
-        d.setDate(day || 0);
-        d.setHours(hours || 0);
-        d.setMinutes(minutes || 0);
-        d.setSeconds(seconds || 0);
-        d.setMilliseconds(0);
-        return new Date(d).getTime()
-    }
-
-    scroll = ()=>{
-        window.scrollTo(0,2000)
-    }
-    render() {
-        let {isLogin, timestamp, gotoLogin, closePopHandler} = this.props;
-        console.log(`current_time:${timestamp}`);
-        let july_start_time = this.standardTime(2017, 7, 13, 0, 0, 0);
-        let july_end_time = this.standardTime(2017, 8, 15, 0, 0, 0);
+    popStatusHandler = () => {
+        let july_start_time = 1499875200000;//2017-07-13 00:00:00  时间戳
+        let july_end_time = 1502726400000;//2017-08-15 00:00:00 时间戳
+        let {timestamp} = this.props
+        console.log(timestamp)
         console.log(`pc_start_time:${july_start_time}`)
         console.log(`pc_end_time:${july_end_time}`)
         if (timestamp < july_start_time) {
-            ReactDOM.render(<PopStartOrEnd text="活动尚未开始"/>, document.getElementById("pop"))
+            ReactDOM.render(<PopStatusPanel text="活动尚未开始"/>, document.getElementById("pop"))
         } else if (timestamp > july_end_time) {
-            ReactDOM.render(<PopStartOrEnd text="活动已结束"/>, document.getElementById("pop"))
+            ReactDOM.render(<PopStatusPanel text="活动已结束"/>, document.getElementById("pop"))
         }
+    }
 
+    scroll = (x, y) => {
+        window.scrollTo(x, y)
+    }
+
+    render() {
+        let {isLogin, timestamp, gotoLogin, closePopHandler} = this.props;
+        console.log(`current_time:${timestamp}`);
         return <div className="july-pc-box">
             <div className="pc-banner">
-                <div className="pc-banner-item" onClick={()=>this.scroll()}>
+                <div className="pc-banner-item" onClick={this.scroll(0, 2000)}>
 
                 </div>
             </div>
@@ -96,50 +89,7 @@ class JulyPc extends React.Component {
                     </div>
                 </div>
             </div>
-            <div className="pc-fight">
-                <div className="fight-data-box">
-                    <div className="data-item">
-                        <div className="item-up">
-                            暂无奖金
-                        </div>
-                        <div className="item-down">
-                            马上就来...
-                        </div>
-                    </div>
-                    <div className="data-item">
-                        <div className="item-up">
-
-                        </div>
-                        <div className="item-down">
-
-                        </div>
-                    </div>
-                    <div className="data-item">
-                        <div className="item-up">
-
-                        </div>
-                        <div className="item-down">
-
-                        </div>
-                    </div>
-                    <div className="data-item">
-                        <div className="item-up">
-
-                        </div>
-                        <div className="item-down">
-
-                        </div>
-                    </div>
-                    <div className="data-item">
-                        <div className="item-up">
-
-                        </div>
-                        <div className="item-down">
-
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <FightPCPanel />
             <div className="pc-bonus">
                 <img src="images/bonus-title.png" className="bonus-title"/>
                 <div className="bouns-tips">
@@ -163,40 +113,25 @@ class JulyPc extends React.Component {
                     </div>
                 </div>
             </div>
-            <div className="pc-rank">
-                <div className="rank-content">
-                    <div className="rank-name">
-                        <span className="name-item item-one">排名</span>
-                        <span className="name-item item-two">用户名</span>
-                        <span className="name-item item-three">团队累投年化额(元)</span>
-                        <span className="name-item item-four">奖金(元)</span>
-                    </div>
-                    <div className="rank-data">
-
-                    </div>
-                </div>
-                <div className="rank-tips">
-                    温馨提示：以上数据实时更新，最终奖金以活动结束后数据为准发放。
-                </div>
-            </div>
+            <RankPCPanel />
             <div className="pc-explain">
                 <div className="explain">
                     <div className="explain-title">活动说明</div>
                     1.活动期间，投资债权转让产品，不能参与本次活动；
                     若被邀请人首次投资选择债权转让项目，则该被邀请的好友不计入邀请人奖励统计；<br/>
-                        2.投资等额标时，＞18个月的项目按18个月计算年化投资额<br/>
-                        3.奖金奖励以工豆形式发放；<br/>
-                        4.工豆奖励将于活动结束后7个工作日内，统一发放至邀请人的工场账户；<br/>
-                        5.金融工场有权随时随机抽查邀请人所推荐好友的真实性，一旦发现存在好友用虚假手机号注册、好友对注册金融工场账户不知情及非好友真实意愿等造假和欺骗行为，则立即清除虚假好友的统计数据并回收相关奖励，且保留追究由此给金融工场带来的一切损失的权利；<br/>
-                        6.活动最终解释权归金融工场所有，活动详情致电客服热线咨询：400-0322-988。
+                    2.投资等额标时，＞18个月的项目按18个月计算年化投资额<br/>
+                    3.奖金奖励以工豆形式发放；<br/>
+                    4.工豆奖励将于活动结束后7个工作日内，统一发放至邀请人的工场账户；<br/>
+                    5.金融工场有权随时随机抽查邀请人所推荐好友的真实性，一旦发现存在好友用虚假手机号注册、好友对注册金融工场账户不知情及非好友真实意愿等造假和欺骗行为，则立即清除虚假好友的统计数据并回收相关奖励，且保留追究由此给金融工场带来的一切损失的权利；<br/>
+                    6.活动最终解释权归金融工场所有，活动详情致电客服热线咨询：400-0322-988。
                     <div className="explain-tips">
                         声明：以上活动由金融工场主办 与Apple Inc. 无关。
                     </div>
+                </div>
             </div>
-        </div>
 
-        <BottomShow isLogin={isLogin} gotoLogin={gotoLogin} closePopHandler={closePopHandler}/>
-    </div>
+            <BottomShow isLogin={isLogin} gotoLogin={gotoLogin} closePopHandler={closePopHandler}/>
+        </div>
     }
 }
 
@@ -223,9 +158,7 @@ class BottomShow extends React.Component {
         let close_name = closeBottom ? "none" : "block";
         let logged = <div className="log-box logged-box">
             活动内，您可以邀请50人参与活动，
-            <div className="invite-pc-pre" onClick={() => {
-                this.showHowInvite()
-            }}>如何邀请
+            <div className="invite-pc-pre" onClick={this.showHowInvite}>如何邀请
             </div>
             |
             <a href="">立即投资</a>
@@ -235,9 +168,81 @@ class BottomShow extends React.Component {
         </div>;
         return <div className="bottom-box" style={{display: close_name}}>
             {isLogin ? logged : unlogged}
-            <div className="bottom-btn" onClick={() => {
-                this.closeBottom()
-            }}>&times;</div>
+            <div className="bottom-btn" onClick={this.closeBottom}>&times;</div>
+        </div>
+    }
+}
+class FightPCPanel extends React.Component {
+    constructor(props){
+        super(props)
+    }
+    render(){
+        return <div className="pc-fight">
+            <div className="fight-data-box">
+                <div className="data-item">
+                    <div className="item-up">
+                        暂无奖金
+                    </div>
+                    <div className="item-down">
+                        马上就来...
+                    </div>
+                </div>
+                <div className="data-item">
+                    <div className="item-up">
+
+                    </div>
+                    <div className="item-down">
+
+                    </div>
+                </div>
+                <div className="data-item">
+                    <div className="item-up">
+
+                    </div>
+                    <div className="item-down">
+
+                    </div>
+                </div>
+                <div className="data-item">
+                    <div className="item-up">
+
+                    </div>
+                    <div className="item-down">
+
+                    </div>
+                </div>
+                <div className="data-item">
+                    <div className="item-up">
+
+                    </div>
+                    <div className="item-down">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}
+class RankPCPanel extends React.Component {
+    constructor(props){
+        super(props)
+    }
+    render(){
+        return <div className="pc-rank">
+            <div className="rank-content">
+                <div className="rank-name">
+                    <span className="name-item item-one">排名</span>
+                    <span className="name-item item-two">用户名</span>
+                    <span className="name-item item-three">团队累投年化额(元)</span>
+                    <span className="name-item item-four">奖金(元)</span>
+                </div>
+                <div className="rank-data">
+
+                </div>
+            </div>
+            <div className="rank-tips">
+                温馨提示：以上数据实时更新，最终奖金以活动结束后数据为准发放。
+            </div>
         </div>
     }
 }
