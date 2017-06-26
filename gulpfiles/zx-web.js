@@ -17,6 +17,7 @@ const USER_PAGES = [
     //用户界面
     //'user-coupon', //用户优惠券
     //'user-score', //用户工分
+    'user-bank-phone',//修改银行预留手机号
 ]
 
 const DEVELOPING_PAGES = [

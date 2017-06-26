@@ -1,5 +1,6 @@
 const StepOne = React.createClass({
     getInitialState: function () {
+        this._timer = null
         return {
             phone: null,
             sms_code: null,
@@ -61,6 +62,9 @@ const StepOne = React.createClass({
         }, 'json');
 
 
+    },
+    componentWillUnmount(){
+        clearInterval(this._timer);
     },
     nextStepHandler: function () {
         // this.props.nextStepHandler()
