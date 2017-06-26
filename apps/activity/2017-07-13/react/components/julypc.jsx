@@ -31,6 +31,7 @@ class JulyPc extends React.Component {
         console.log(`current_time:${timestamp}`);
         return <div className="july-pc-box">
             <div className="pc-banner">
+                <img src="images/banner.jpg" width="100%" height="100%" />
                 <div className="pc-banner-item" onClick={this.scroll(0, 2000)}>
 
                 </div>
