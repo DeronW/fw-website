@@ -183,7 +183,7 @@ class InviteMobilePanel extends React.Component {
     }
 }
 class BounsMobilePanel extends React.Component {
-    render(){
+    render() {
         return <div className="m-bonus">
             <div className="m-b-title">
                 <img src="images/m-bonus-title.png"/>
@@ -206,7 +206,7 @@ class BounsMobilePanel extends React.Component {
     }
 }
 class ExplainMobilePanel extends React.Component {
-    render(){
+    render() {
         return <div className="m-explain">
             <div className="m-e-text">
                 <div className="m-x-title">活动说明</div>
