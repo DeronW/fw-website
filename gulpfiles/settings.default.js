@@ -13,7 +13,7 @@ module.exports = {
         dev_api_path: '//fe.9888.cn/'
     },
     "zx-web": {
-        dev_api_path: '//fe.9888.cn/api/test-b/zx'
+        dev_api_path: '//fe.gongzhangzx.com/api/test-c/zx-web'
     },
     "p2p-web": {
         dev_api_path: '//fe.9888.cn/api/test-b/web'

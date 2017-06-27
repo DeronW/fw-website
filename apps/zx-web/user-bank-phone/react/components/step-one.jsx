@@ -10,7 +10,7 @@ const StepOne = React.createClass({
         }
     },
     componentDidMount: function () {
-        $.post(API_PATH + '/api/recharge/v1/getUserRegPhone.json',
+        $.post(`${API_PATH}/api/recharge/v1/getUserRegPhone.json`,
             (data) => this.setState({phone: data.data.regPhone}), 'json')
     },
     codeChangeHandler: function (e) {
