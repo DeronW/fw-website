@@ -37,7 +37,7 @@ class JulyPc extends React.Component {
                 <img src="images/anchor-3.png" className="anchor-item anchor-three"
                      onClick={() => this.scroll(0, 2450)}/>
                 <img src="images/anchor-4.png" className="anchor-item anchor-four"
-                     onClick={() => this.scroll(0, 1550)}/>
+                     onClick={() => this.scroll(0, 1950)}/>
                 <img src="images/anchor-5.png" className="anchor-item anchor-five"
                      onClick={() => this.scroll(0, 4600)}/>
             </div>
