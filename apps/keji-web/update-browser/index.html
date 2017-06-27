@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>请升级您的浏览器</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+
+<body class="not-support-ie8">
+    <style>
+        a {
+            text-decoration: none;
+        }
+
+        .not-support-ie8 html,
+        .not-support-ie8 body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .please-update-your-browser {
+            display: block;
+            position: absolute;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 999;
+        }
+
+        .please-update-your-browser .ub-bg {
+            position: absolute;
+            z-index: 998;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0.5;
+            filter: alpha(opacity=50);
+            background-color: black;
+        }
+
+        .please-update-your-browser .ub-dialog {
+            position: absolute;
+            z-index: 999;
+            top: 50%;
+            left: 50%;
+            margin-left: -330px;
+            margin-top: -263px;
+            width: 719px;
+            height: 516px;
+            background: transparent url(images/bg.gif) no-repeat center center;
+        }
+
+        .please-update-your-browser .ub-dialog-content {
+
+            position: absolute;
+            top: 27px;
+            left: 26px;
+            width: 583px;
+            height: 328px;
+            padding-top: 12px;
+        }
+
+        .please-update-your-browser .ub-dialog-content .big-text {
+            margin-left: 20px;
+            font-size: 20px;
+            color: #405c82;
+            line-height: 32px;
+        }
+
+        .please-update-your-browser .recommended-browser {
+            display: table;
+            width: 100%;
+            font-size: 20px;
+            color: #405c82;
+            padding-left: 20px;
+            margin-top: 10px;
+        }
+
+        .please-update-your-browser .recommended-browser a {
+            display: inline-block;
+            margin-right: 10px;
+            padding: 0 20px;
+            color: #7fb5fb;
+            border: 1px solid #7fb5fb;
+            height: 48px;
+            line-height: 48px;
+            &:hover {
+                color: #fc6456;
+            }
+        }
+
+        .please-update-your-browser .recommended-browser img {
+            width: 25px;
+            height: 25px;
+            position: relative;
+            top: 5px;
+        }
+
+
+        .please-update-your-browser .use-app {
+            color: #bac3d0;
+            font-size: 16px;
+            padding-left: 20px;
+            margin-top: 58px;
+        }
+
+        .please-update-your-browser .download-app {
+            margin-top: 10px;
+            padding-left: 20px;
+        }
+
+        .please-update-your-browser .download-app img {
+            width: 86px;
+            height: 86px;
+            margin-right: 20px;
+        }
+    </style>
+
+    <div class="please-update-your-browser">
+        <div class="ub-bg"></div>
+        <div class="ub-dialog">
+            <div class="ub-dialog-content">
+                <div class="big-text"> Hi, 您当前的浏览器版本过低, 可能存在安全风险,</div>
+                <div class="big-text"> 建议您升级浏览器:</div>
+                <div class="recommended-browser">
+                    <a target="_blank" href="http://www.google.cn/intl/zh-CN/chrome/browser/desktop/index.html">
+                    <img src="images/icon-browser-chrome.jpg"> Chrome </a>
+                    <a target="_blank" href="https://support.microsoft.com/zh-cn/help/17621/internet-explorer-downloads">
+                    <img src="./images/icon-browser-ie.jpg"> IE浏览器
+                </a>
+                </div>
+                <div class="use-app">推荐金融工场APP, 扫码下载</div>
+
+                <div class="download-app">
+                    <img src="images/logo.jpg">
+                    <img src="images/icon-footer.png">
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

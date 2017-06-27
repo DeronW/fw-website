@@ -4,7 +4,8 @@ const PROJ = 'keji-web';
 
 // 专题说明类页面
 const APP_NAMES = [
-    'app-download'
+    'app-download',
+    'update-browser'
 ]
 
 APP_NAMES.push(
