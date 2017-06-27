@@ -1,5 +1,5 @@
 const del = require('del');
-var colors = require('colors');
+const colors = require('colors');
 
 del(['build', 'dest', 'dist', 'cdn']).then(paths => {
     console.log(colors.red('删除文件及目录:'));
