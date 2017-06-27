@@ -32,9 +32,11 @@ class JulyPc extends React.Component {
         return <div className="july-pc-box">
             <div className="pc-banner">
                 <img src="images/banner.jpg" width="100%" height="100%" />
-                <div className="pc-banner-item" onClick={this.scroll(0, 2000)}>
-
-                </div>
+                <img src="images/anchor-1.png" className="anchor-item anchor-one" onClick={()=>this.scroll(0,750)}/>
+                <img src="images/anchor-2.png" className="anchor-item anchor-two" onClick={()=>this.scroll(0,3850)}/>
+                <img src="images/anchor-3.png" className="anchor-item anchor-three" onClick={()=>this.scroll(0,2450)}/>
+                <img src="images/anchor-4.png" className="anchor-item anchor-four" onClick={()=>this.scroll(0,1550)}/>
+                <img src="images/anchor-5.png" className="anchor-item anchor-five" onClick={()=>this.scroll(0,4600)}/>
             </div>
             <div className="pc-content">
                 <div className="pc-coupon">

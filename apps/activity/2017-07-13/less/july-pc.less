@@ -1,4 +1,5 @@
 @import "variables.less";
+
 .pc-header {
   background: rgba(0, 0, 0, 0.7) !important;
 }
@@ -15,14 +16,9 @@
     //background: url("../images/banner.jpg") no-repeat center;
     //background-size: contain;
     position: relative;
-    .pc-banner-item{
-      width: 80px;
-      height: 150px;
-      background-color: #fe6962;
+    .anchor-item {
+      display: block;
       position: absolute;
-      top:100px;
-      left:100px;
-      border-radius: 50%;
       cursor: pointer;
       -webkit-animation: cloudMove 2s 0.2s infinite ease-in-out;
       -o-animation: cloudMove 2s 0.2s infinite ease-in-out;
@@ -30,9 +26,39 @@
       -moz-animation: cloudMove 2s 0.2s infinite ease-in-out;
       animation: cloudMove 2s 0.2s infinite ease-in-out;
     }
-    .pc-banner-item:hover{
+    .anchor-one {
+      width: 80px;
+      height: 124px;
+      top: 270px;
+      left: 500px;
+    }
+    .anchor-two {
+      width: 80px;
+      height: 133px;
+      top: 285px;
+      left: 800px;
+    }
+    .anchor-three {
+      width: 80px;
+      height: 133px;
+      top: 385px;
+      left: 426px;
+    }
+    .anchor-four {
+      width: 80px;
+      height: 133px;
+      top: 516px;
+      left: 614px;
+    }
+    .anchor-five {
+      width: 82px;
+      height: 133px;
+      top: 485px;
+      right: 400px;
+    }
+    .anchor-item:hover {
+      transform: scale(1.1);
       animation-play-state: paused;
-      background-color: #ccc;
     }
   }
   .pc-content {
@@ -66,11 +92,11 @@
         }
       }
       .code-tips {
-        height:103px;
+        height: 103px;
         text-align: center;
         position: relative;
-        top:-84px;
-        .tips-text{
+        top: -84px;
+        .tips-text {
           position: absolute;
           top: 42px;
           left: 50%;
@@ -83,12 +109,12 @@
     //邀友福利
     .pc-welfare {
       margin-top: 150px;
-      .welfare-title{
+      .welfare-title {
         height: 230px;
         background: url("../images/welfare-title-bg.png") no-repeat 10px -130px;
         text-align: center;
       }
-      .welfare-tips{
+      .welfare-tips {
         width: 804px;
         height: 45px;
         font-size: 20px;
@@ -98,17 +124,17 @@
         line-height: 45px;
         margin: 0 auto;
       }
-      .welfare-one{
+      .welfare-one {
         width: 995px;
         height: 408px;
         margin: 100px auto 0;
         background: url("../images/welfare-one-bg.png") no-repeat center;
-        .one-text{
+        .one-text {
           font-size: 18px;
           color: #fff;
           padding-top: 80px;
           text-align: center;
-          .one-link{
+          .one-link {
             display: inline-block;
             font-size: 18px;
             color: #3ab2ff;
@@ -116,50 +142,50 @@
           }
         }
       }
-      .welfare-two{
+      .welfare-two {
         width: 995px;
         height: 620px;
         margin: 100px auto 0;
         background: url("../images/welfare-two-bg.png") no-repeat center;
-        .two-text{
+        .two-text {
           font-size: 18px;
           color: #fff;
           padding-top: 80px;
           text-align: center;
         }
-        .common-text{
+        .common-text {
           margin-top: 362px;
           font-size: 19px;
           color: #fff;
         }
-        .left-text{
+        .left-text {
           float: left;
           padding-left: 150px;
         }
-        .right-text{
+        .right-text {
           float: right;
           padding-right: 150px;
         }
-        .yellow-text{
+        .yellow-text {
           color: #ffe400;
         }
-        .red-text{
+        .red-text {
           color: #f04460;
         }
       }
-      .welfare-three{
+      .welfare-three {
         width: 995px;
         height: 600px;
         margin: 100px auto 0;
         background: url("../images/welfare-three-bg.png") no-repeat center;
         display: table;
-        .three-text{
+        .three-text {
           font-size: 18px;
           color: #fff;
           text-align: center;
           margin-top: 80px;
         }
-        .bottom-text{
+        .bottom-text {
           font-size: 14px;
           color: #79b5ff;
           margin-top: 420px;
@@ -169,23 +195,23 @@
 
     }
   }
-  .pc-fight{
+  .pc-fight {
     width: 1157px;
     height: 530px;
     margin: 90px auto 0;
     background: url("../images/fight-bg.png") no-repeat center;
     display: table;
-    .fight-data-box{
+    .fight-data-box {
       width: 1138px;
       height: 158px;
       margin: 373px auto 0;
       display: table;
-      .data-item{
+      .data-item {
         width: 194px;
         height: 100%;
         margin-left: 30px;
         float: left;
-        .item-up{
+        .item-up {
           width: 100%;
           height: 42px;
           text-align: center;
@@ -194,7 +220,7 @@
           line-height: 60px;
           padding-top: 14px;
         }
-        .item-down{
+        .item-down {
           font-size: 24px;
           color: #f3c000;
           text-align: center;
@@ -204,13 +230,13 @@
       }
     }
   }
-  .pc-bonus{
+  .pc-bonus {
     width: 1140px;
     margin: 180px auto 30px;
     text-align: center;
     display: table;
     position: relative;
-    .bouns-tips{
+    .bouns-tips {
       width: 804px;
       height: 45px;
       background: url("../images/bonus-des-bg.png") no-repeat center;
@@ -221,7 +247,7 @@
       margin-top: 30px;
       margin-left: 170px;
     }
-    .bonus-star{
+    .bonus-star {
       display: inline-block;
       width: 113px;
       height: 120px;
@@ -229,7 +255,9 @@
       float: right;
       margin-right: 24px;
       cursor: pointer;
-      .star-tips{
+      transform: scale(0.9);
+      -webkit-transform: scale(0.9);
+      .star-tips {
         display: none;
         width: 269px;
         height: 141px;
@@ -239,25 +267,28 @@
         right: -60px;
         font-size: 18px;
         color: #fff;
-        .star-tips-text{
+        .star-tips-text {
           padding: 10px;
         }
       }
     }
-    .bonus-star:hover{
-      .star-tips{
+    .bonus-star:hover {
+      transform: scale(1);
+      -webkit-transform: scale(1);
+      .star-tips {
         display: block;
+        top: -120px;
       }
     }
-    .bonus-context{
+    .bonus-context {
       display: table;
-      .bonus-bottom{
+      .bonus-bottom {
         width: 575px;
         height: 140px;
         background: url("../images/bonus-tips-fish.png") no-repeat center;
         margin: 0 auto;
         display: table;
-        .bonus-text{
+        .bonus-text {
           font-size: 16px;
           color: #677ba8;
           margin-top: 47px;
@@ -268,44 +299,44 @@
       }
     }
   }
-  .pc-rank{
+  .pc-rank {
     width: 847px;
     height: 625px;
     margin: 90px auto 0;
     display: table;
     background: url("../images/rank-bg.png") no-repeat center;
-    .rank-content{
+    .rank-content {
       width: 536px;
       height: 490px;
       margin: 93px auto 0;
-      .rank-name{
+      .rank-name {
         height: 41px;
         line-height: 22px;
         font-size: 14px;
         color: #fff;
-        .name-item{
+        .name-item {
           display: inline-block;
         }
-        .item-one{
+        .item-one {
           padding-left: 40px;
         }
-        .item-two{
+        .item-two {
           padding-left: 86px;
         }
-        .item-three{
+        .item-three {
           padding-left: 74px;
         }
-        .item-four{
+        .item-four {
           padding-left: 60px;
         }
       }
-      .rank-data{
+      .rank-data {
         margin: 0 1px 0 6px;
         height: 388px;
         background-color: #fff;
       }
     }
-    .rank-tips{
+    .rank-tips {
       height: 30px;
       line-height: 30px;
       color: #fff;
@@ -313,27 +344,27 @@
       text-align: center;
     }
   }
-  .pc-explain{
+  .pc-explain {
     width: 100%;
     height: 670px;
     background: url("../images/bottom-sea-bg.png") no-repeat left 205px;
     background-size: 100%;
     margin-top: 80px;
-    .explain{
+    .explain {
       width: 989px;
       height: 247px;
       padding: 30px 40px;
       margin: 0 auto;
-      background-color: rgba(15,71,133,0.5);
-      border-radius:10px;
+      background-color: rgba(15, 71, 133, 0.5);
+      border-radius: 10px;
       font-size: 14px;
       color: #fff;
       line-height: 22px;
-      .explain-title{
+      .explain-title {
         font-size: 20px;
         margin-bottom: 20px;
       }
-      .explain-tips{
+      .explain-tips {
         margin-top: 30px;
       }
     }
