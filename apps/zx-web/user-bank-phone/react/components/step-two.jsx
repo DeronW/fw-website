@@ -1,15 +1,22 @@
 const StepTwo = React.createClass({
     getInitialState: function () {
+        this._timer = null;
         return {
             sms_code: null,
             counting: null,
             sms_call: false,
             voice_call: false,
             newphone: null,
+            pic_code: null,//图片验证码
+            pic_num: 1
+
         }
     },
     componentDidMount: function () {
 
+    },
+    componentWillUnmount:function () {
+        clearInterval(this._timer);
     },
     codeChangeHandler: function (e) {
         this.setState({sms_code: e.target.value})
@@ -17,7 +24,10 @@ const StepTwo = React.createClass({
     newphonevalue: function (e) {
         this.setState({newphone: e.target.value});
     },
-    gainNumberHandler: function (e) {
+    picCodeHandler: function (e) {
+        this.setState({pic_code: e.target.value})
+    },
+    gainNumberHandler: function () {
         this.getSMSCode();
     },
     startCountingDown: function () {
@@ -48,7 +58,8 @@ const StepTwo = React.createClass({
         let _this = this;
         $.post(`${API_PATH}/api/recharge/v1/sendChangeBankPhoneSms.json`, {
             bankPhone: _this.state.newphone,
-            isVms: type
+            imgCode: _this.state.pic_code,
+            isVms: type,
         }, (data) => {
             let txt = data.message;
             if (data.code == 10000) {
@@ -64,6 +75,9 @@ const StepTwo = React.createClass({
             GlobalAlert(txt);
         }, 'json');
     },
+    picNumHandler: function () {
+        this.setState({pic_num: this.state.pic_num+1})
+    },
     nextStepHandler: function () {
         $.post(API_PATH + '/api/recharge/v1/doChangeBankPhone.json', {
             bankPhone: this.state.newphone,
@@ -77,7 +91,7 @@ const StepTwo = React.createClass({
         }, 'json');
     },
     render: function () {
-        let {phone, counting, sms_code, voice_call, sms_call, newphone} = this.state;
+        let {phone, counting, sms_code, voice_call, sms_call, newphone, pic_code, pic_num} = this.state;
         let btn_text = counting ? `${counting}秒` : '获取验证码';
         let tips;
 
@@ -88,10 +102,10 @@ const StepTwo = React.createClass({
                 tips = <div className="tips">已向{newphone}发送语音验证码，请注意收听</div>
             } else {
                 tips = <div className="tips">
-                        若获取不到，请
-                        <span className="link" onClick={this.makeVoiceHandler}>点击这里</span>，
-                        获取语音验证码
-                    </div>
+                    若获取不到，请
+                    <span className="link" onClick={this.makeVoiceHandler}>点击这里</span>，
+                    获取语音验证码
+                </div>
             }
         }
 
@@ -103,6 +117,15 @@ const StepTwo = React.createClass({
                                                                                              className="linefNum"
                                                                                              value={newphone}
                                                                                              onChange={this.newphonevalue}></input>
+                    </div>
+                    <div className="lines-pic">
+                        <span className="pic-text">图片验证码：</span>
+                        <input type="text" value={pic_code} onChange={this.picCodeHandler} className="pic-input"/>
+                        <img className="pic-code"
+                             src={`${API_PATH}/kaptcha/getKaptchaImage.do?num=${pic_num}`}
+                             onClick={() => {
+                                 this.picNumHandler()
+                             }}></img>
                     </div>
                     <div className="lines">手机验证码：
                         <input type="text" value={sms_code} onChange={this.codeChangeHandler}/>

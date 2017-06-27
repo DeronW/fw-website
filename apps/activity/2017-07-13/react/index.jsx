@@ -5,9 +5,10 @@ $(() => {
     }
     //登录
     let gotoLogin = () => {
-        let loginUrl = location.protocol + '//www.9888.cn/api/activityPullNew/pullnewParty.do?id=241';
+        let loginUrl = location.protocol + '//www.9888keji.com/api/activityPullNew/pullnewParty.do?id=241';//活动线上链接
         $FW.gotoSpecialPage("登录", loginUrl);
     }
+
     Promise.all([
         $.get(API_PATH + "activity/v1/userState.json"),
         $.get(API_PATH + "activity/v1/timestamp.json")
@@ -19,14 +20,17 @@ $(() => {
             d1 = JSON.parse(data[0]);
             d2 = JSON.parse(data[1]);
         }
-
         isLogin = d1.data.isLogin;
         timestamp = d2.data.timestamp;
-        let Content = navigator.userAgent.match(/Android|iPhone|iPad|Mobile/i) ?
-            <JulyMobile isLogin={isLogin} timestamp={timestamp} gotoLogin={gotoLogin}
-                        closePopHandler={closePopHandler}/> :
-            <JulyPc isLogin={isLogin} timestamp={timestamp} gotoLogin={gotoLogin}
-                    closePopHandler={closePopHandler}/>;
+
+        let isMobile = navigator.userAgent.match(/Android|iPhone|iPad|Mobile/i);
+
+        let props = {
+            isLogin:isLogin, timestamp:timestamp, gotoLogin:gotoLogin,
+            closePopHandler:closePopHandler
+        }
+
+        let Content = isMobile ? <JulyMobile {...props}/> : <JulyPc {...props}/>;
         ReactDOM.render(Content, document.getElementById("cnt"))
     })
 

@@ -12,26 +12,41 @@
   font-size: 24px;
   .m-banner {
     width: 100%;
-    height: 630px;
+    height: 660px;
     position: relative;
-    .banner-item{
-      width: 60px;
-      height: 120px;
+    background: url("../images/m-banner.png") no-repeat center bottom;
+    margin-bottom: 70px;
+    .banner-item {
+      display: block;
       position: absolute;
-      top:100px;
-      left: 100px;
-      background-color: #fff;
-      border-radius: 50%;
       cursor: pointer;
-      -webkit-animation: cloudMove 2s 0.2s infinite ease-in-out;
-      -o-animation: cloudMove 2s 0.2s infinite ease-in-out;
-      -ms-animation: cloudMove 2s 0.2s infinite ease-in-out;
-      -moz-animation: cloudMove 2s 0.2s infinite ease-in-out;
-      animation: cloudMove 2s 0.2s infinite ease-in-out;
+      width: 85px;
+      height: 128px;
+      -webkit-animation: cloudMoveMobile 2s 0.2s infinite ease-in-out;
+      -o-animation: cloudMoveMobile 2s 0.2s infinite ease-in-out;
+      -ms-animation: cloudMoveMobile 2s 0.2s infinite ease-in-out;
+      -moz-animation: cloudMoveMobile 2s 0.2s infinite ease-in-out;
+      animation: cloudMoveMobile 2s 0.2s infinite ease-in-out;
     }
-    .banner-item:hover{
-      animation-play-state: paused;
-      background-color: #ccc;
+    .m-anchor-one {
+      top: 230px;
+      left: 233px;
+    }
+    .m-anchor-two {
+      top: 235px;
+      right: 157px;
+    }
+    .m-anchor-three {
+      top: 335px;
+      left: 97px;
+    }
+    .m-anchor-four {
+      top: 415px;
+      left: 287px;
+    }
+    .m-anchor-five {
+      top: 377px;
+      right: 135px;
     }
   }
   .m-coupon {
@@ -233,14 +248,14 @@
         margin: 10px 0 0 15px;
       }
     }
-    .m-fish-tips{
+    .m-fish-tips {
       width: 657px;
       height: 141px;
       margin: 40px auto 0;
       background: url("../images/m-fish-tips.png") no-repeat center;
       color: #677ba8;
       text-align: center;
-      .fish-text{
+      .fish-text {
         width: 433px;
         padding: 20px 0 0 20px;
       }
@@ -248,7 +263,7 @@
   }
   .m-rank {
     height: auto;
-    .m-r-data{
+    .m-r-data {
       width: 700px;
       height: 772px;
       background: url("../images/m-rank.png") no-repeat center;
@@ -256,24 +271,24 @@
       color: #fff;
       font-size: 22px;
       margin-bottom: 20px;
-      .data-name{
+      .data-name {
         color: #fff;
         font-size: 22px;
         padding: 90px 0 0 70px;
-        .name-one{
+        .name-one {
           padding-left: 30px;
         }
-        .name-two{
+        .name-two {
           padding-left: 30px;
         }
-        .name-three{
+        .name-three {
           padding-left: 40px;
         }
-        .name-four{
+        .name-four {
           padding-left: 46px;
         }
       }
-      .data-detil{
+      .data-detil {
         width: 540px;
         height: 580px;
         margin: 0 auto;
@@ -281,7 +296,7 @@
         margin-top: 5px;
       }
     }
-    .m-rank-tips{
+    .m-rank-tips {
       font-size: 22px;
       color: #79b5ff;
       height: 60px;
@@ -289,25 +304,25 @@
       text-align: center;
     }
   }
-  .m-explain{
+  .m-explain {
     width: 100%;
     height: 910px;
     background: url("../images/m-sea.png") no-repeat left 653px;
     background-size: 100%;
-    .m-e-text{
+    .m-e-text {
       width: 610px;
       height: 656px;
-      background-color: rgba(15,71,133,0.5);
+      background-color: rgba(15, 71, 133, 0.5);
       margin: 0 auto;
       border-radius: 10px;
       padding: 30px 40px 36px 30px;
       color: #fff;
       line-height: 36px;
-      .m-x-title{
+      .m-x-title {
         font-size: 30px;
         margin-bottom: 20px;
       }
-      .m-x-des{
+      .m-x-des {
         margin-top: 50px;
       }
     }

@@ -1,5 +1,6 @@
 const StepOne = React.createClass({
     getInitialState: function () {
+        this._timer = null
         return {
             phone: null,
             sms_code: null,
@@ -9,7 +10,7 @@ const StepOne = React.createClass({
         }
     },
     componentDidMount: function () {
-        $.post(API_PATH + '/api/recharge/v1/getUserRegPhone.json',
+        $.post(`${API_PATH}/api/recharge/v1/getUserRegPhone.json`,
             (data) => this.setState({phone: data.data.regPhone}), 'json')
     },
     codeChangeHandler: function (e) {
@@ -61,6 +62,9 @@ const StepOne = React.createClass({
         }, 'json');
 
 
+    },
+    componentWillUnmount(){
+        clearInterval(this._timer);
     },
     nextStepHandler: function () {
         // this.props.nextStepHandler()
