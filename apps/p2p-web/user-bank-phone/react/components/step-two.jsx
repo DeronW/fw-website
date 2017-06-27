@@ -122,7 +122,7 @@ const StepTwo = React.createClass({
                         <span className="pic-text">图片验证码：</span>
                         <input type="text" value={pic_code} onChange={this.picCodeHandler} className="pic-input"/>
                         <img className="pic-code"
-                             src={`http://www.gongchangp2p.cn/kaptcha/getKaptchaImage.do?num=${pic_num}`}
+                             src={`${API_PATH}/kaptcha/getKaptchaImage.do?num=${pic_num}`}
                              onClick={() => {
                                  this.picNumHandler()
                              }}></img>

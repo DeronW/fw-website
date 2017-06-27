@@ -29,7 +29,12 @@ class JulyMobile extends React.Component {
     render() {
         return <div className="july-mobile-box">
             <div className="m-banner">
-                <div className="banner-item" onClick={this.startmove(0, 2000)}></div>
+                {/*<div className="banner-item" onClick={this.startmove(0, 2000)}></div>*/}
+                <img src="images/m-anchor-1.png" className="banner-item m-anchor-one" onClick={()=>this.startmove(0,700)}/>
+                <img src="images/m-anchor-2.png" className="banner-item m-anchor-two" onClick={()=>this.startmove(0,3200)}/>
+                <img src="images/m-anchor-3.png" className="banner-item m-anchor-three" onClick={()=>this.startmove(0,2540)}/>
+                <img src="images/m-anchor-4.png" className="banner-item m-anchor-four"/>
+                <img src="images/m-anchor-5.png" className="banner-item m-anchor-five"/>
             </div>
             <CouponMobilePanel />
             <InviteMobilePanel />
