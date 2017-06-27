@@ -4,7 +4,7 @@ const StepThree = React.createClass({
     },
     render: function () {
         let successfulReturn = <a className="return"
-                                  href="https://www.gongchangp2p.com/depository/recharge/toRecharge.shtml">
+                                  href="http://www.gongchangp2p.cn/depository/recharge/toQRecharge.do">
             返回充值
         </a>
 
