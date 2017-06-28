@@ -20,7 +20,7 @@ const HeaderStatusBar = React.createClass({
         });
 
         $.ajax({
-            url: 'http://www.9888keji.com/api/userState/v1/userState.json',
+            url: 'http://www.gongchangp2p.cn/api/userState/v1/userState.json',
             // The name of the callback parameter, as specified by the YQL service
             jsonp: "callback",
             // Tell jQuery we're expecting JSONP
@@ -32,7 +32,7 @@ const HeaderStatusBar = React.createClass({
         }).done(function (data) {
             if (data.code != 10000) throw `got error ${data.message}`;
             let { avatar, sex, isLogin } = data.data, username = data.data.userName, realname = data.data.realName;
-            avatar = avatar || `http://www.9888.cn/img/${parseInt(sex) ? 'man' : 'woman'}.png`;
+            avatar = avatar || `http://www.9888keji.com/img/${parseInt(sex) ? 'man' : 'woman'}.png`;
             this.setState({
                 is_login: isLogin,
                 username: username,
