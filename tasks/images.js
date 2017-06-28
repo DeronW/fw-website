@@ -1,6 +1,6 @@
 var gulp = require('gulp');
 
-const imagemin = require('gulp-imagemin');
+// const imagemin = require('gulp-imagemin');
 const changed = require('gulp-changed');
 
 module.exports = image = function (src_path, build_path) {
