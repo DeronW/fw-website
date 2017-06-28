@@ -33,7 +33,7 @@ class JulyPc extends React.Component {
             <div className="pc-banner">
                 <img src="images/banner.jpg" width="100%" height="100%"/>
                 <img src="images/anchor-1.png" className="anchor-item anchor-one" onClick={() => this.scroll(0, 750)}/>
-                <img src="images/anchor-2.png" className="anchor-item anchor-two" onClick={() => this.scroll(0, 3850)}/>
+                <img src="images/anchor-2.png" className="anchor-item anchor-two" onClick={() => this.scroll(0, 3170)}/>
                 <img src="images/anchor-3.png" className="anchor-item anchor-three"
                      onClick={() => this.scroll(0, 2450)}/>
                 <img src="images/anchor-4.png" className="anchor-item anchor-four"

@@ -8,7 +8,8 @@ const StepTwo = React.createClass({
             voice_call: false,
             newphone: null,
             pic_code: null,//图片验证码
-            pic_num: 1
+            pic_num: 1,
+            newstaticphone:null
 
         }
     },
@@ -66,6 +67,7 @@ const StepTwo = React.createClass({
                 txt = data.data.remainCount >= 0 ?
                     `尊敬的客户，您还有${data.data.remainCount}次机会获取验证码` :
                     '尊敬的客户，您今日的机会已用完'
+                this.setState({newstaticphone:this.state.newphone,pic_num:this.state.pic_num+1})
                 successCallback && successCallback();
                 resetcallback && resetcallback();
             } else if (data.code == 51022) {
@@ -91,15 +93,15 @@ const StepTwo = React.createClass({
         }, 'json');
     },
     render: function () {
-        let {phone, counting, sms_code, voice_call, sms_call, newphone, pic_code, pic_num} = this.state;
+        let {phone, counting, sms_code, voice_call, sms_call, newphone, pic_code, pic_num,newstaticphone} = this.state;
         let btn_text = counting ? `${counting}秒` : '获取验证码';
         let tips;
 
         if (counting) {
-            tips = <div className="tips">已向{newphone}发送短信验证码</div>
+            tips = <div className="tips">已向{newstaticphone}发送短信验证码</div>
         } else if (sms_call) {
             if (voice_call) {
-                tips = <div className="tips">已向{newphone}发送语音验证码，请注意收听</div>
+                tips = <div className="tips">已向{newstaticphone}发送语音验证码，请注意收听</div>
             } else {
                 tips = <div className="tips">
                     若获取不到，请
