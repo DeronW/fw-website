@@ -15,8 +15,9 @@ APP_NAMES.push(
 module.exports = function (gulp, generate_task, settings) {
 
     let INCLUDE_COMPONENTS = [
-        `${PROJ}/header-status-bar.jsx`, `${PROJ}/alert.jsx`,
-        `${PROJ}/confirm.jsx`, 'circle-progress.jsx', `${PROJ}/invest-list.jsx`
+        `${PROJ}/header-status-bar.jsx`,
+        `${PROJ}/alert.jsx`,
+        `${PROJ}/confirm.jsx`
     ];
 
     let INCLUDE_JAVASCRIPTS = [
@@ -32,6 +33,7 @@ module.exports = function (gulp, generate_task, settings) {
     ];
 
     let common_config = {
+        react_version: '15',
         include_components: INCLUDE_COMPONENTS,
         include_javascripts: INCLUDE_JAVASCRIPTS,
         include_less: INCLUDE_LESS
