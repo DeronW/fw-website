@@ -1,11 +1,10 @@
 let fs = require('fs')
-var colors = require('colors');
+const util = require('gulp-util');
 
 // 需要传入一个参数是表示差量编译检测项目名称
 // example : npm run pre-compile -- loan
 const PROJ = process.argv[2];
 
-// 每个代码库的每个项目配置文件需要不同
 const sourceF = `/tmp/website.${PROJ}.git.diff`
 const targetF = `differential.compile.${PROJ}.sh`
 
@@ -16,19 +15,23 @@ fs.readFile(sourceF, (err, data) => {
     let lines = data.toString().split('\n');
     let r = {
         lib: false,
+        npm: false,
         pages: {}
     }
     let reg_page = new RegExp(`apps/${PROJ}/([-\\w]+)/`)
 
     lines.forEach(line => {
-        ['lib', 'public', 'tasks', 'scripts', `gulpfile.js`, `gulpfile.${PROJ}`].forEach(i => {
+        ['lib', 'public', 'tasks', 'scripts', `gulpfile.${PROJ}`].forEach(i => {
             if (line.trim().startsWith(i)) r.lib = true
         });
         let m = line.match(reg_page);
-        if (m) r.pages[m[1]] = true;
+        if (m && m[1] != 'lib') r.pages[m[1]] = true;
+
+        if (line.match('package.json')) r.npm = true;
     })
 
     let sh_script = [];
+    if (r.npm) sh_script.push('npm install')
     if (r.lib) {
         sh_script.push(`npm run build:${PROJ}`)
     } else {
@@ -47,7 +50,12 @@ fs.readFile(sourceF, (err, data) => {
             sh_script.length ?
                 '可以差量编译' :
                 '无更新, 不需要编译';
-        console.log(colors.yellow(`完成差量编译检测:${t}`));
+        util.log(util.colors.yellow(`完成差量编译检测:${t}`));
+        if (r.npm) {
+            util.log(util.colors.yellow('package.json 包有更新, 需要执行 npm install'))
+        } else {
+            util.log(util.colors.yellow('package.json 没有变更, 不用更新 npm'))
+        }
 
         fs.chmod(targetF, parseInt('755', 8));
     });
