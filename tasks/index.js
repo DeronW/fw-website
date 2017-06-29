@@ -126,7 +126,11 @@ module.exports = function generate_task(site_name, page_name, configs) {
     }
 
     function compile_public_images() {
-        return copy([`${public_path}/common/images/**`, `${public_path}/${site_name}/images/**`], `${build_path}images`)
+        return copy([
+            `${public_path}/common/images/**`,
+            `${public_path}/${site_name}/images/**`,
+            `${project_lib_path}/images/**`
+        ], `${build_path}images`)
     }
 
     function copy_audios() {

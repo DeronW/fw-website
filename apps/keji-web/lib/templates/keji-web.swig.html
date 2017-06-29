@@ -48,8 +48,9 @@
         iframe.frameborder = 0
         iframe.width = '100%'
         iframe.height = '100%'
-        iframe.style = 'display: block; position: absolute; z-index: 99; top: 0; left: 0; right: 0; bottom: 0; border: 0;'
+        iframe.setAttribute('style', 'display: block; position: absolute; z-index: 999; top: 0; left: 0; right: 0; bottom: 0; border: 0; background: transparent;')
         document.body.appendChild(iframe)
+        document.body.style.overflow = 'hidden'
     }
 </script>
 
