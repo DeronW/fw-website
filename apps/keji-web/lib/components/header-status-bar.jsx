@@ -90,12 +90,10 @@ class HeaderStatusBar extends React.Component {
                     <span>(周一至周日8:30-21:00)</span>
                     <span className="app-li">
                         <span className="g-ico-phone"></span>
-                        <span className="header-span-app" href="https://www.9888keji.com/static/keji-web/app-download/index.html">
-                            APP客户端
-                            <div className="img">
-                                <a href="https://www.9888keji.com/static/keji-web/app-download/index.html">
-                                    <img src="images/global-header/menu-app.png" /></a>
-                            </div>
+                        <span className="header-span-app">
+                            <a href="/static/keji-web/app-download/index.html">
+                                APP客户端<div className="img"><img src="images/global-header/menu-app.png" /></div>
+                            </a>
                         </span>
                     </span>
                 </div>
