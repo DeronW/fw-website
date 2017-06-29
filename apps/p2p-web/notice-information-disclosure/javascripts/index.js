@@ -315,7 +315,7 @@ $(function () {
     }
     //args顺序：女，男，18,25,35,45,60以上
 
-    $.get(API_PATH+"/dataTopics/data.shtml").then((data)=>{
+    $.get("https://www.gongchangp2p.com/dataTopics/data.shtml").then((data)=>{
         //截止前一天日期
         $(".partStatisticsText span").text(data.data.date);
         //计算总额
