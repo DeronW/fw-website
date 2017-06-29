@@ -57,7 +57,7 @@ module.exports = function generate_task(site_name, page_name, configs) {
     less_files.push(`${app_path}less/index.less`);
 
     let jsx_files = CONFIG.include_components.map(i => `${lib_path}components/${i}`);
-    jsx_files = CONFIG.project_components.map(i => `${project_lib_path}/components/${i}`);
+    jsx_files.push(...CONFIG.project_components.map(i => `${project_lib_path}/components/${i}`))
     jsx_files.push(`${app_path}react/components/*.jsx`);
     jsx_files.push(`${app_path}${CONFIG.main_jsx}`);
 
