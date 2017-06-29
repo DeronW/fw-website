@@ -25,6 +25,7 @@ module.exports = function generate_task(site_name, page_name, configs) {
         public_path = 'public/',
         tmp_path = `build/${site_name}-tmp/`,
         lib_path = 'lib/',
+        project_lib_path = `apps/${site_name}/lib`,
         cdn_path = `cdn/${site_name}/${page_name}/`,
         CONFIG = Object.assign({
             debug: false,
@@ -34,8 +35,11 @@ module.exports = function generate_task(site_name, page_name, configs) {
             api_path: '',
             cdn_prefix: '',
             include_components: [],
+            project_components: [],
             include_javascripts: [],
+            project_javascripts: [],
             include_less: [],
+            project_less: [],
             main_jsx: 'react/index.jsx',
             react_version: '0.14',
             html_engine: 'swig'
@@ -49,9 +53,11 @@ module.exports = function generate_task(site_name, page_name, configs) {
         `${lib_path}less/not-support-ie6-ie7.less`
     ];
     less_files.push(...CONFIG.include_less.map(i => `${lib_path}less/${i}`));
+    less_files.push(...CONFIG.project_less.map(i => `${project_lib_path}/less/${i}`));
     less_files.push(`${app_path}less/index.less`);
 
     let jsx_files = CONFIG.include_components.map(i => `${lib_path}components/${i}`);
+    jsx_files = CONFIG.project_components.map(i => `${project_lib_path}/components/${i}`);
     jsx_files.push(`${app_path}react/components/*.jsx`);
     jsx_files.push(`${app_path}${CONFIG.main_jsx}`);
 
@@ -79,6 +85,9 @@ module.exports = function generate_task(site_name, page_name, configs) {
 
     common_javascript_files = common_javascript_files.concat(
         CONFIG.include_javascripts.map(i => `${lib_path}/javascripts/${i}`));
+
+    common_javascript_files = common_javascript_files.concat(
+        CONFIG.project_javascripts.map(i => `${project_lib_path}/javascripts/${i}`));
 
     function compile_html() {
         return html([`${app_path}index.html`], build_path, CONFIG.html_engine, {
