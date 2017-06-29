@@ -64,19 +64,19 @@ class HeaderStatusBar extends React.Component {
         let msg = msg_count > 0 && <div className="unread-msg-count">({msg_count})</div>
 
         let pop = <div className="login-user-state-pop">
-            <a href="/account/myHome.shtml"> <img src={this.state.avatar} /> </a>
+            <a href="/account/myHome.shtml"><img src={this.state.avatar} /></a>
             <div className="text">
-                <div> {realname} </div>
+                <div>{realname}</div>
                 <a href="/account/myHome.shtml" className="btn-recharge">我的工场</a>
             </div>
         </div>
 
-        let user_state = <div className="login-user-state"> 你好 ,
+        let user_state = <div className="login-user-state">你好 ,
                     <div className={showUserPop ? "hover login-user-state-username" : "login-user-state-username"}
                 onMouseEnter={this.showUserPopHandler}
                 onMouseLeave={this.hideUserPopHandler}>
                 <a href="/account/myHome.shtml">{username}</a>
-                <i className="arrow"> </i>
+                <i className="arrow"></i>
                 <div className="hidden-stone"></div>
                 {showUserPop && pop}
             </div>
@@ -90,9 +90,11 @@ class HeaderStatusBar extends React.Component {
                     <span>(周一至周日8:30-21:00)</span>
                     <span className="app-li">
                         <span className="g-ico-phone"></span>
-                        <span className="header-span-app" href="http://www.9888keji.com/static/web/app-download/index.html">APP客户端
+                        <span className="header-span-app" href="https://www.9888keji.com/static/keji-web/app-download/index.html">
+                            APP客户端
                             <div className="img">
-                                <a href="http://www.9888keji.com/static/web/app-download/index.html"><img src="images/global-header/menu-app.png" /></a>
+                                <a href="https://www.9888keji.com/static/keji-web/app-download/index.html">
+                                    <img src="images/global-header/menu-app.png" /></a>
                             </div>
                         </span>
                     </span>
@@ -104,11 +106,6 @@ class HeaderStatusBar extends React.Component {
                 {!is_login && <a className="link blue" href="/orderUser/register.shtml">注册</a>}
                 {!is_login && <a className="link blue" href="/orderUser/login.shtml">登录</a>}
                 {!is_login && <span className="hello">你好，欢迎来到金融工场！</span>}
-                <div className="header-status-bar-app">
-                    <a href="/static/web/app-download/index.html" className="hsb-qrcode">
-                        <img src="images/global-header/menu-app.png" />
-                    </a>
-                </div>
             </div>
         </div>
     }
