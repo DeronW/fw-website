@@ -44,7 +44,7 @@ class HeaderStatusBar extends React.Component {
 
         // 获取用户未读消息数
         $.get(API_PATH + '/mesageCenter/refressSession.shtml').done(data => {
-            if (!isNaN(data)) this.setState({ msg_count: data })
+            if (!isNaN(data)) this.setState({ msg_count: parseInt(data) })
         })
 
     }
@@ -61,7 +61,7 @@ class HeaderStatusBar extends React.Component {
         let { is_login, username, realname, msg_count, showUserPop } = this.state;
 
         let separate_line = <span className="separate-line"> </span>;
-        let msg = msg_count && <div className="unread-msg-count">({msg_count})</div>
+        let msg = msg_count > 0 && <div className="unread-msg-count">({msg_count})</div>
 
         let pop = <div className="login-user-state-pop">
             <a href="/account/myHome.shtml"> <img src={this.state.avatar} /> </a>
@@ -87,7 +87,7 @@ class HeaderStatusBar extends React.Component {
             <div className="container">
                 <div className="hsb-xin-dai">
                     <span className="pc-iphone" href="http://www.creditchina.hk/">400-0322-988</span>
-                    (周一至周日8:30-21:00)
+                    <span>(周一至周日8:30-21:00)</span>
                     <span className="app-li">
                         <span className="g-ico-phone"></span>
                         <span className="header-span-app" href="http://www.9888keji.com/static/web/app-download/index.html">APP客户端
@@ -99,7 +99,7 @@ class HeaderStatusBar extends React.Component {
                 </div>
                 <a className="link" href="https://bbs.9888.cn/">工友之家</a>
                 <a className="link" href="/static/web/guide-cookbook/index.html">玩赚攻略</a>
-                <a className="link" href="/mesageCenter/msssageList.shtml?messageType=1">消息{msg}</a>
+                {is_login && <a className="link" href="/mesageCenter/msssageList.shtml?messageType=1">消息{msg}</a>}
                 {is_login && username && user_state}
                 {!is_login && <a className="link blue" href="/orderUser/register.shtml">注册</a>}
                 {!is_login && <a className="link blue" href="/orderUser/login.shtml">登录</a>}
