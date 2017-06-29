@@ -16,9 +16,9 @@ class JulyPc extends React.Component {
         console.log(`pc_start_time:${july_start_time}`)
         console.log(`pc_end_time:${july_end_time}`)
         if (timestamp < july_start_time) {
-            ReactDOM.render(<PopStatusPanel text="活动尚未开始"/>, document.getElementById("pop"))
+            ReactDOM.render(<PopStartPanel/>, document.getElementById("pop"))
         } else if (timestamp > july_end_time) {
-            ReactDOM.render(<PopStatusPanel text="活动已结束"/>, document.getElementById("pop"))
+            ReactDOM.render(<PopEndPanel/>, document.getElementById("pop"))
         }
     }
 
@@ -75,13 +75,14 @@ class BottomShow extends React.Component {
         let close_name = closeBottom ? "none" : "block";
         let logged = <div className="log-box logged-box">
             活动内，您可以邀请50人参与活动，
-            <div className="invite-pc-pre" onClick={this.showHowInvite}>如何邀请
+            <div className="invite-pc-after" onClick={this.showHowInvite}>如何邀请
             </div>
             |
             <a href="">立即投资</a>
         </div>;
         let unlogged = <div className="log-box unlogged-box">
-            请登录后查看您活动内的邀友和投标情况，立即登录 | 如何邀请
+            请登录后查看您活动内的邀友和投标情况，立即登录 |
+            <div className="invite-pc-pre" onClick={this.showHowInvite}>如何邀请</div>
         </div>;
         return <div className="bottom-box" style={{display: close_name}}>
             {isLogin ? logged : unlogged}
