@@ -4,8 +4,8 @@ const PROJ = 'keji-web';
 
 // 专题说明类页面
 const APP_NAMES = [
-    'app-download',
-    'update-browser'
+    'app-download', // app 下载页面
+    'update-browser' // IE8及一下版本浏览器的升级提示
 ]
 
 APP_NAMES.push(
