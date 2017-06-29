@@ -2,151 +2,246 @@
 @import "variables.less";
 
 #cnt {
-  width: 936px;
-  margin-left: 182px;
-  margin-top: 30px;
-  font-size: 14px;
-  border: 1px solid @colorBorder;
-  height: 700px;
-  border-top: 0 none;
+    width: 936px;
+    margin-left: 182px;
+    margin-top: 30px;
+    font-size: 14px;
+    border: 1px solid @colorBorder;
+    height: 700px;
+    border-top: 0 none;
 }
 
 .topNav {
-  box-sizing: border-box;
-  width: 917px;
-  margin: 20px 20px 50px 20px;
-  border-top: 0 none;
-  font-size: 12px;
-  color: @color3;
-  .title {
-    text-align: left;
-    font-size: 14px;
-    color: @color3;
-    height: 40px;
-    line-height: 30px;
-    .redshow {
-      color: @colorRed;
-    }
-    .blueshow {
-      color: @colorBlue;
-    }
-  }
-  .moneyItemContainer {
+    box-sizing: border-box;
     width: 917px;
-    .beanItem {
-      width: 917px;
-      height: 50px;
-      line-height: 50px;
-      font-size: 16px;
-      border-top: 3px solid @colorBlue;
-      background-color: #fbfbf9;
-      border-left: 1px solid @colorBorder;
-      border-right: 1px solid @colorBorder;
-      .left {
-        float: left;
+    margin: 20px 20px 50px 20px;
+    border-top: 0 none;
+    font-size: 12px;
+    color: @color3;
+    .title {
+        text-align: left;
+        font-size: 14px;
         color: @color3;
-        padding-left: 26px;
-      }
-      .right {
-        float: right;
-        font-size: 14px;
-        color: @color9;
-        padding-right: 26px;
-        cursor: pointer;
-        span {
-          vertical-align: middle;
-        }
-        img {
-          vertical-align: middle;
-          padding-right: 10px;
-        }
-      }
-      .right:hover {
-        color: @colorRed;
-      }
-    }
-    .tabContainer{
-      width: 917px;
-      height: 62px;
-      background: url("../images/newphonebg.png") no-repeat center;
-      border-left: 1px solid @colorBorder;
-      border-right: 1px solid @colorBorder;
-      ul{
-        list-style: none;
-        margin: 0;
-        padding:0;
-      }
-      .tabUl{
-        text-align: center;
-        line-height: 62px;
-        font-size: 16px;
-        color: #999;
-        li{
-          float: left;
-          width: 266px;
-          padding-left: 24px;
-          .number{
-            display: inline-block;
-            width: 16px;
-            height: 16px;
-            line-height: 16px;
-            border-radius: 50%;
-            border: 2px solid #cdcdcd;
-            color: #d0d0d0;
-            margin-right: 10px;
-          }
-        }
-        .active{
-          color: #83b7fb;
-          .number{
-            color: #83b7fb;
-            border: 2px solid #83b7fb;
-          }
-        }
-      }
-    }
-  }
-}
-.done {
-  img {
-    vertical-align: middle;
-    padding-right: 10px;
-  }
-}
-.firstContent,.secondContent,.thirdContent{
-  width: 917px;
-  height: 875px;
-  border: 1px solid #eaeaea;
-  border-top: 0 none;
-  display: table;
-  font-size: 14px;
-  color: #333;
-  .mainbox{
-    width: 438px;
-    height: 168px;
-    margin: 70px auto;
-    text-align: left;
-    color: #333;
-    .linef{
-      margin-bottom: 20px;
-      font-weight: 700;
-      .linefNum{
-        display: inline-block;
-        width: 231px;
-        height: 30px;
+        height: 40px;
         line-height: 30px;
-        border: 1px solid #eaeaea;
-        background-color: #f5f5f5;
-        border-radius: 5px;
-        color: #333;
-        padding-left: 10px;
-        font-size: 14px;
-        margin-left: -4px;
-      }
+        .redshow {
+            color: @colorRed;
+        }
+        .blueshow {
+            color: @colorBlue;
+        }
     }
-    .lines{
-      font-weight: 700;
-      input{
+    .moneyItemContainer {
+        width: 917px;
+        .beanItem {
+            width: 917px;
+            height: 50px;
+            line-height: 50px;
+            font-size: 16px;
+            border-top: 3px solid @colorBlue;
+            background-color: #fbfbf9;
+            border-left: 1px solid @colorBorder;
+            border-right: 1px solid @colorBorder;
+            .left {
+                float: left;
+                color: @color3;
+                padding-left: 26px;
+            }
+            .right {
+                float: right;
+                font-size: 14px;
+                color: @color9;
+                padding-right: 26px;
+                cursor: pointer;
+                span {
+                    vertical-align: middle;
+                }
+                img {
+                    vertical-align: middle;
+                    padding-right: 10px;
+                }
+            }
+            .right:hover {
+                color: @colorRed;
+            }
+        }
+        .tabContainer {
+            width: 917px;
+            height: 62px;
+            background: url("../images/newphonebg.png") no-repeat center;
+            border-left: 1px solid @colorBorder;
+            border-right: 1px solid @colorBorder;
+            ul {
+                list-style: none;
+                margin: 0;
+                padding: 0;
+            }
+            .tabUl {
+                text-align: center;
+                line-height: 62px;
+                font-size: 16px;
+                color: #999;
+                li {
+                    float: left;
+                    width: 266px;
+                    padding-left: 24px;
+                    .number {
+                        display: inline-block;
+                        width: 16px;
+                        height: 16px;
+                        line-height: 16px;
+                        border-radius: 50%;
+                        border: 2px solid #cdcdcd;
+                        color: #d0d0d0;
+                        margin-right: 10px;
+                    }
+                }
+                .active {
+                    color: #83b7fb;
+                    .number {
+                        color: #83b7fb;
+                        border: 2px solid #83b7fb;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.done {
+    img {
+        vertical-align: middle;
+        padding-right: 10px;
+    }
+}
+
+.firstContent,
+.secondContent,
+.thirdContent {
+    width: 917px;
+    height: 875px;
+    border: 1px solid #eaeaea;
+    border-top: 0 none;
+    display: table;
+    font-size: 14px;
+    color: #333;
+    .mainbox {
+        width: 438px;
+        height: 168px;
+        margin: 70px auto;
+        text-align: left;
+        color: #333;
+        .linef {
+            margin-bottom: 20px;
+            font-weight: 700;
+            .linefNum {
+                display: inline-block;
+                width: 231px;
+                height: 30px;
+                line-height: 30px;
+                border: 1px solid #eaeaea;
+                background-color: #f5f5f5;
+                border-radius: 5px;
+                color: #333;
+                padding-left: 10px;
+                font-size: 14px;
+                margin-left: -4px;
+            }
+        }
+        .lines {
+            font-weight: 700;
+            input {
+                width: 230px;
+                height: 30px;
+                border: 1px solid #eaeaea;
+                background-color: #f5f5f5;
+                border-radius: 5px;
+                color: #333;
+                padding-left: 10px;
+                font-size: 14px;
+            }
+            .gainNumber {
+                font-weight: normal;
+                padding-left: 12px;
+                font-size: 12px;
+                color: #4a95e3;
+                cursor: pointer;
+            }
+        }
+        .tips {
+            color: #999;
+            padding-left: 100px;
+            padding-top: 10px;
+            .link {
+                color: #333;
+                text-decoration: underline;
+                cursor: pointer;
+            }
+        }
+        .next {
+            width: 188px;
+            height: 34px;
+            text-align: center;
+            line-height: 34px;
+            background-color: #fc6456;
+            border-radius: 5px;
+            color: #fff;
+            margin-top: 30px;
+            margin-left: 84px;
+            cursor: pointer;
+        }
+    }
+}
+
+.secondContent {
+    .mainbox {
+        width: 450px;
+        .lines {
+            padding-left: 42px;
+        }
+        .tips {
+            padding-left: 143px;
+        }
+        .next {
+            margin-left: 127px;
+        }
+    }
+}
+
+.thirdContent {
+    .markedWords {
+        width: 258px;
+        height: 32px;
+        text-align: right;
+        line-height: 32px;
+        font-size: 16px;
+        font-weight: 700;
+        margin: 60px auto;
+        vertical-align: middle;
+        img {
+            vertical-align: middle;
+            padding-right: 10px;
+        }
+    }
+    .return {
+        display: inline-block;
+        width: 188px;
+        height: 34px;
+        text-align: center;
+        line-height: 34px;
+        background-color: #7fb5fb;
+        border-radius: 5px;
+        color: #fff;
+        cursor: pointer;
+    }
+}
+
+.lines-pic {
+    margin-bottom: 20px;
+    .pic-text {
+        font-weight: 700;
+    }
+    .pic-input {
         width: 230px;
         height: 30px;
         border: 1px solid #eaeaea;
@@ -155,100 +250,11 @@
         color: #333;
         padding-left: 10px;
         font-size: 14px;
-      }
-      .gainNumber{
-        font-weight: normal;
-        padding-left: 12px;
-        font-size: 12px;
-        color: #4a95e3;
+        margin-right: 10px;
+    }
+    .pic-code {
+        display: inline-block;
         cursor: pointer;
-      }
+        vertical-align: middle;
     }
-    .tips{
-      color: #999;
-      padding-left: 100px;
-      padding-top: 10px;
-      .link{
-        color:#333;
-        text-decoration: underline;
-        cursor: pointer;
-      }
-    }
-    .next{
-      width: 188px;
-      height: 34px;
-      text-align: center;
-      line-height: 34px;
-      background-color: #fc6456;
-      border-radius: 5px;
-      color: #fff;
-      margin-top: 30px;
-      margin-left: 84px;
-      cursor: pointer;
-    }
-  }
-}
-.secondContent{
-  .mainbox{
-    width: 450px;
-    .lines{
-      padding-left: 42px;
-    }
-    .tips{
-      padding-left:143px;
-    }
-    .next{
-      margin-left: 127px;
-    }
-  }
-}
-.thirdContent{
-  .markedWords{
-    width: 258px;
-    height: 32px;
-    text-align: right;
-    line-height: 32px;
-    font-size: 16px;
-    font-weight: 700;
-    margin: 60px auto;
-    vertical-align: middle;
-    img{
-      vertical-align: middle;
-      padding-right: 10px;
-    }
-  }
-  .return{
-    display: inline-block;
-    width: 188px;
-    height: 34px;
-    text-align: center;
-    line-height: 34px;
-    background-color: #7fb5fb;
-    border-radius: 5px;
-    color: #fff;
-    cursor: pointer;
-  }
-}
-.lines-pic{
-  margin-bottom: 20px;
-  .pic-text{
-    font-weight: 700;
-  }
-  .pic-input{
-    width: 230px;
-    height: 30px;
-    border: 1px solid #eaeaea;
-    background-color: #f5f5f5;
-    border-radius: 5px;
-    color: #333;
-    padding-left: 10px;
-    font-size: 14px;
-    margin-right: 10px;
-  }
-
-  .pic-code{
-    display: inline-block;
-    cursor: pointer;
-    vertical-align: middle;
-  }
 }
