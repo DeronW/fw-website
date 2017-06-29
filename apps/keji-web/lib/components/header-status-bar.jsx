@@ -1,16 +1,15 @@
-const HeaderStatusBar = React.createClass({
-    getInitialState: function () {
-        return {
-            is_login: false,
-            username: null,
-            realname: null,
-            avatar: null,
-            msg_count: 0,
-            showUserPop: false,
-            showApp: false
-        }
-    },
-    componentDidMount: function () {
+class HeaderStatusBar extends React.Component {
+
+    state = {
+        is_login: false,
+        username: null,
+        realname: null,
+        avatar: null,
+        msg_count: 0,
+        showUserPop: false
+    }
+
+    componentDidMount() {
         // 获取用户登录信息
         // hack: 因为passport和主站的登录方式, 需要通过url传递token, 这里模拟一次
         let qs = location.search.replace('?', '').split('&'), login_token = ' ';
@@ -29,7 +28,7 @@ const HeaderStatusBar = React.createClass({
             data: {
                 token: login_token
             }
-        }).done(function (data) {
+        }).done(data => {
             if (data.code != 10000) throw `got error ${data.message}`;
             let { avatar, sex, isLogin } = data.data, username = data.data.userName, realname = data.data.realName;
             avatar = avatar || `http://www.9888.cn/img/${parseInt(sex) ? 'man' : 'woman'}.png`;
@@ -41,21 +40,24 @@ const HeaderStatusBar = React.createClass({
             });
             // set current page is login or not. this is base function, very IMPORTANT!
             $UserReady.fire(isLogin, { username, realname, avatar });
-        }.bind(this));
+        })
 
         // 获取用户未读消息数
         $.get(API_PATH + '/mesageCenter/refressSession.shtml').done(data => {
             if (!isNaN(data)) this.setState({ msg_count: data })
         })
 
-    },
-    showUserPopHandler: function () {
+    }
+
+    showUserPopHandler = () => {
         this.setState({ showUserPop: true })
-    },
-    hideUserPopHandler: function () {
+    }
+
+    hideUserPopHandler = () => {
         this.setState({ showUserPop: false })
-    },
-    render: function () {
+    }
+
+    render() {
         let { is_login, username, realname, msg_count, showUserPop } = this.state;
 
         let separate_line = <span className="separate-line"> </span>;
@@ -110,4 +112,4 @@ const HeaderStatusBar = React.createClass({
             </div>
         </div>
     }
-});
+}
