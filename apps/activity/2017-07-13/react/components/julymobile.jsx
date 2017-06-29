@@ -16,9 +16,9 @@ class JulyMobile extends React.Component {
         console.log(`mobile:${july_start_time}`)
         console.log(`mobile:${july_end_time}`)
         if (timestamp < july_start_time) {
-            ReactDOM.render(<PopStartOrEnd text="活动尚未开始"/>, document.getElementById("pop"))
+            ReactDOM.render(<PopStartPanel/>, document.getElementById("pop"))
         } else if (timestamp > july_end_time) {
-            ReactDOM.render(<PopStartOrEnd text="活动已结束"/>, document.getElementById("pop"))
+            ReactDOM.render(<PopEndPanel/>, document.getElementById("pop"))
         }
     }
 
@@ -27,21 +27,28 @@ class JulyMobile extends React.Component {
     }
 
     render() {
+        let {isLogin, timestamp, gotoLogin, closePopHandler} = this.props;
         return <div className="july-mobile-box">
             <div className="m-banner">
                 {/*<div className="banner-item" onClick={this.startmove(0, 2000)}></div>*/}
-                <img src="images/m-anchor-1.png" className="banner-item m-anchor-one" onClick={()=>this.startmove(0,700)}/>
-                <img src="images/m-anchor-2.png" className="banner-item m-anchor-two" onClick={()=>this.startmove(0,3200)}/>
-                <img src="images/m-anchor-3.png" className="banner-item m-anchor-three" onClick={()=>this.startmove(0,2540)}/>
-                <img src="images/m-anchor-4.png" className="banner-item m-anchor-four" onClick={()=>this.startmove(0,2000)}/>
-                <img src="images/m-anchor-5.png" className="banner-item m-anchor-five" onClick={()=>this.startmove(0,5750)}/>
+                <img src="images/m-anchor-1.png" className="banner-item m-anchor-one"
+                     onClick={() => this.startmove(0, 700)}/>
+                <img src="images/m-anchor-2.png" className="banner-item m-anchor-two"
+                     onClick={() => this.startmove(0, 3200)}/>
+                <img src="images/m-anchor-3.png" className="banner-item m-anchor-three"
+                     onClick={() => this.startmove(0, 2540)}/>
+                <img src="images/m-anchor-4.png" className="banner-item m-anchor-four"
+                     onClick={() => this.startmove(0, 2000)}/>
+                <img src="images/m-anchor-5.png" className="banner-item m-anchor-five"
+                     onClick={() => this.startmove(0, 5750)}/>
             </div>
             <CouponMobilePanel />
             <InviteMobilePanel />
             <FightMobilePanel />
-            <BounsMobilePanel />
+            <BounsMobilePanel closePopHandler={closePopHandler}/>
             <RankMobilePanel />
             <ExplainMobilePanel />
+            <MobileBottomPanel gotoLogin={gotoLogin} isLogin={isLogin} closePopHandler={closePopHandler}/>
         </div>
     }
 }
@@ -188,6 +195,14 @@ class InviteMobilePanel extends React.Component {
     }
 }
 class BounsMobilePanel extends React.Component {
+    constructor(props) {
+        super(props)
+    }
+
+    popTeamShow = () => {
+        ReactDOM.render(<PopTeamTips closePopHandler={this.props.closePopHandler}/>, document.getElementById("pop"))
+    }
+
     render() {
         return <div className="m-bonus">
             <div className="m-b-title">
@@ -198,7 +213,7 @@ class BounsMobilePanel extends React.Component {
                 <div>送出88万奖金！</div>
             </div>
             <div className="m-b-treasure">
-                <img src="images/m-star.png" className="treasure-pic"/>
+                <img src="images/m-star.png" className="treasure-pic" onClick={this.popTeamShow}/>
             </div>
             <div className="m-fish-tips">
                 <div className="fish-text">
@@ -223,6 +238,34 @@ class ExplainMobilePanel extends React.Component {
                 6.活动最终解释权归金融工场所有，活动详情致电客服热线咨询：400-0322-988。
                 <div className="m-x-des">声明：以上活动由金融工场主办 与Apple Inc. 无关。</div>
             </div>
+        </div>
+    }
+}
+class MobileBottomPanel extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {}
+    }
+
+    showInvitePop = () => {
+        ReactDOM.render(<PopInviteMobile gotoLogin={this.props.gotoLogin}
+                                         closePopHandler={this.props.closePopHandler}
+                                         isLogin={this.props.isLogin}/>, document.getElementById("pop"))
+    }
+
+    render() {
+        let {isLogin, closePopHandler} = this.props;
+        let logged_text = <div className="m-logged">
+            活动内，您可以邀请50人参与活动，
+            <span className="howinvite" onClick={this.showInvitePop}>如何邀请</span> | <a href="">立即投资</a>
+        </div>
+        let notlogged_text = <div className="m-notlogged">
+            请登录后查看您活动内的邀友和投标情况，
+            <span>立即登录</span> |
+            <span className="howinvite" onClick={this.showInvitePop}>如何邀请</span>
+        </div>
+        return <div className="m-bottom">
+            {isLogin ? logged_text : notlogged_text}
         </div>
     }
 }

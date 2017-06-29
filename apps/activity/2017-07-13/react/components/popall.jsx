@@ -16,6 +16,7 @@ class PopEndPanel extends React.Component {
         </div>
     }
 }
+
 class PopInvitePC extends React.Component {
     constructor(props) {
         super(props);
@@ -52,7 +53,8 @@ class PopInvitePC extends React.Component {
             <div>登录后查看我的工场码</div>
             <div>还没有工场码？注册即可拥有。</div>
             <div className="golog" onClick={gotoLogin}>登录注册</div>
-            <div className="tips">新手注册即送<span className="color-red">200元</span>，首投即获<span className="color-red">0.6%返息券</span>，邀请好友升级最高再送<span className="color-red">350元</span></div>
+            <div className="tips">新手注册即送<span className="color-red">200元</span>，首投即获<span
+                className="color-red">0.6%返息券</span>，邀请好友升级最高再送<span className="color-red">350元</span></div>
             <a className="policy-link" href="">更多新手秘笈></a>
         </div>;
         let loginTips = <div className="log-box">
@@ -82,17 +84,68 @@ class PopInvitePC extends React.Component {
     }
 }
 
-
 class PopInviteMobile extends React.Component {
     constructor(props) {
         super(props)
-        this.state = {}
+        this.state = {
+            isLogin: false,
+            gcm: '',
+        }
+    }
+
+    componentDidMount() {
+        let _this = this;
+        $UserReady(function (isLogin, user) {
+            _this.setState({isLogin: isLogin, gcm: user.userCode});
+        })
     }
 
     render() {
-        return <div>
-            <div>如何邀请</div>
-            <div>请好友用您的工场码注册，去投标，达成团队目标。</div>
+        let {isLogin, closePopHandler} = this.props
+        console.log(isLogin)
+        let pre_tips = <div className="pre-box">
+            <div>请好友用您的工场码注册,去投标,达成团队目标。</div>
+            <div>登录后查看我的工场码</div>
+            <div>还没有工场码？注册即可拥有。</div>
+            <div className="log-btn">登录注册</div>
+            <div>新手注册即送<span className="color-red">200元</span>，首投即获<span className="color-red">0.6%返息券</span></div>
+            <div>邀请好友升级最高再送<span className="color-red">350元</span></div>
+            <div className="more">更多新手秘笈</div>
+        </div>
+        let after_tips = <div className="after-box">
+            <div>请好友注册或投资时</div>
+            <div>填写我的工场码</div>
+            <div className="m-gcm">{this.state.gcm}</div>
+            <div className="m-newer">新手注册即送<span className="color-red">200元</span>，首投即获<span className="color-red">0.6%返息券</span>
+            </div>
+            <div className="m-newer">邀请好友升级最高再送<span className="color-red">350元</span></div>
+            <div className="more">更多新手秘笈</div>
+        </div>
+        return <div className="pop-invite-box">
+            <div className="pop-m-invite">
+                {isLogin ? after_tips : pre_tips}
+                <div className="m-close-btn" onClick={closePopHandler}></div>
+            </div>
+        </div>
+
+    }
+}
+
+class PopTeamTips extends React.Component {
+    constructor(props){
+        super(props)
+    }
+
+    render(){
+        return <div className="pop-team">
+            <div className="content">
+                <div className="pra">
+                    团队即：邀请人及被邀请人。(例如:A邀请<br/>
+                    的好友有B、C、D、E，那么ABCDE算一<br/>
+                    个团队），且团队人数≥2人。
+                </div>
+                <div className="m-close" onClick={this.props.closePopHandler}></div>
+            </div>
         </div>
     }
 }

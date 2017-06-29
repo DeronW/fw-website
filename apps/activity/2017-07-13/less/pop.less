@@ -43,7 +43,7 @@
 .pop-invite-pc {
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.6);
   position: fixed;
   top: 0;
   left: 0;
@@ -111,14 +111,15 @@
         .gcm-text {
           display: inline-block;
           width: 136px;
-          height: 40px;
-          line-height: 40px;
+          height: 38px;
+          line-height: 38px;
           font-size: 24px;
           color: #555555;
           text-align: center;
           background: #ededed;
           border-radius: 4px;
           margin-left: 5px;
+          padding-bottom: 2px;
         }
       }
       .copy-box {
@@ -182,3 +183,128 @@
   }
 
 }
+
+.pop-invite-box {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  position: fixed;
+  top: 0;
+  left: 0;
+  .pop-m-invite {
+    width: 656px;
+    height: 699px;
+    background: url("../images/m-invite-bg.png") no-repeat center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -350px;
+    margin-left: -328px;
+    .pre-box {
+      width: 516px;
+      height: 400px;
+      margin: 150px auto 0;
+      font-size: 24px;
+      color: #004179;
+      text-align: center;
+      line-height: 42px;
+      .log-btn {
+        width: 250px;
+        height: 60px;
+        background: #f8544b;
+        line-height: 60px;
+        font-size: 28px;
+        text-align: center;
+        border-radius: 30px;
+        color: #fff;
+        margin: 20px auto 70px;
+      }
+    }
+    .after-box {
+      width: 458px;
+      height: 390px;
+      margin: 160px auto 0;
+      font-size: 28px;
+      color: #004179;
+      text-align: center;
+      line-height: 42px;
+      .m-gcm {
+        width: 320px;
+        height: 72px;
+        text-align: center;
+        line-height: 72px;
+        font-size: 50px;
+        color: #555555;
+        background: #ededed;
+        border-radius: 4px;
+        margin: 25px auto 85px;
+      }
+      .m-newer {
+        font-size: 24px;
+        color: #555555;
+      }
+    }
+    .more {
+      width: 250px;
+      height: 60px;
+      background: #58b7ff;
+      line-height: 60px;
+      font-size: 28px;
+      text-align: center;
+      border-radius: 30px;
+      color: #fff;
+      margin: 20px auto 0;
+    }
+    .m-close-btn {
+      width: 91px;
+      height: 91px;
+      background: url("../images/m-close.png") no-repeat center;
+      position: absolute;
+      bottom: -150px;
+      left: 50%;
+      margin-left: -45px;
+    }
+  }
+}
+
+.color-red {
+  display: inline-block;
+  color: #f8544b;
+}
+
+.pop-team {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.6);
+  .content {
+    width: 600px;
+    height: 334px;
+    background: url("../images/m-team-bg.png") no-repeat center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -167px;
+    margin-left: -300px;
+    font-size: 26px;
+    color: #393939;
+    .pra {
+      padding-left: 65px;
+      padding-top: 140px;
+      line-height: 36px;
+    }
+    .m-close {
+      width: 91px;
+      height: 91px;
+      background: url("../images/m-close.png") no-repeat center;
+      position: absolute;
+      bottom: -150px;
+      left: 50%;
+      margin-left: -45px;
+    }
+  }
+}
+
+
