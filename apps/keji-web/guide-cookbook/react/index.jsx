@@ -5,7 +5,7 @@ var Banner = React.createClass({
                 <div className="banner-cnt">
                     <div className="back-info">
                         <div className="title-block">
-                            <img src="images/banner-title.png" title="攻略 玩转金融工厂" className="zoom-in"/>
+                            <img src="images/banner-title.png" title="攻略 玩转金融工厂" className="zoom-in" />
                         </div>
 
 
@@ -47,7 +47,7 @@ var Content = React.createClass({
                     <div className="block">
                         <div className="block-info">
                             <div className="img">
-                                <img src="images/icon-img-1.png"/>
+                                <img src="images/icon-img-1.png" />
                             </div>
                             <div className="text-block">
                                 <div className="l-back"></div>
@@ -63,7 +63,7 @@ var Content = React.createClass({
 
                         <div className="block-info">
                             <div className="img">
-                                <img src="images/icon-img-2.png"/>
+                                <img src="images/icon-img-2.png" />
                             </div>
                             <div className="text-block">
                                 <div className="l-back"></div>
@@ -91,36 +91,36 @@ var Content = React.createClass({
                                     <i className="icon-r"></i>
                                 </div>
                                 <a href="/news/notice/2046.html?reloadworkpage=y" target="_blank"
-                                   className="btn-link">完整新手秘笈></a>
+                                    className="btn-link">完整新手秘笈></a>
                             </div>
 
                             <div className="info-block">
                                 <div className="list welfare-list">
                                     <ul>
                                         <li>
-                                            <p className="title-text title-text-position">注册成功即可获得<br/><span className="info-text">200元返现券礼包</span></p>
+                                            <p className="title-text title-text-position">注册成功即可获得<br /><span className="info-text">200元返现券礼包</span></p>
                                             <div className="img">
-                                                <img src="images/welfare-1.png"/>
+                                                <img src="images/welfare-1.png" />
                                             </div>
                                         </li>
                                         <li>
-                                            <p className="title-text title-text-position">新工友可投<br/><span className="info-text">新手专享标</span></p>
+                                            <p className="title-text title-text-position">新工友可投<br /><span className="info-text">新手专享标</span></p>
                                             <div className="img">
-                                                <img src="images/welfare-2.png"/>
+                                                <img src="images/welfare-2.png" />
                                             </div>
                                         </li>
                                         <li className="last-li">
-                                            <p className="title-text title-text-position">首次投资再送 <br/><span className="info-text">0.6%返息券</span></p>
+                                            <p className="title-text title-text-position">首次投资再送 <br /><span className="info-text">0.6%返息券</span></p>
                                             <div className="img">
-                                                <img src="images/welfare-4.png"/>
+                                                <img src="images/welfare-4.png" />
                                             </div>
                                         </li>
                                         {/*<li className="last-li">*/}
-                                            {/*<p className="title-text">首投满5000及以上即可获得</p>*/}
-                                            {/*<p className="info-text">最高150元返现券礼包</p>*/}
-                                            {/*<div className="img">*/}
-                                                {/*<img src="images/welfare-3.png"/>*/}
-                                            {/*</div>*/}
+                                        {/*<p className="title-text">首投满5000及以上即可获得</p>*/}
+                                        {/*<p className="info-text">最高150元返现券礼包</p>*/}
+                                        {/*<div className="img">*/}
+                                        {/*<img src="images/welfare-3.png"/>*/}
+                                        {/*</div>*/}
                                         {/*</li>*/}
                                     </ul>
                                 </div>
@@ -159,30 +159,30 @@ var Content = React.createClass({
                                     <i className="icon-r"></i>
                                 </div>
                                 <a href="/news/notice/2046.html?reloadworkpage=y" target="_blank"
-                                   className="btn-link">完整邀友返利攻略></a>
+                                    className="btn-link">完整邀友返利攻略></a>
                             </div>
                             <div className="info-block">
                                 <div className="list gift-list list-bottom">
                                     <ul>
                                         {/*<li>*/}
-                                            {/*<p className="title-text">好友填邀请码注册并首投满<em className="c-629df9">5000</em>，送邀请人*/}
-                                            {/*</p>*/}
-                                            {/*<div className="img">*/}
-                                                {/*<img src="images/gift-1.png"/>*/}
-                                            {/*</div>*/}
+                                        {/*<p className="title-text">好友填邀请码注册并首投满<em className="c-629df9">5000</em>，送邀请人*/}
+                                        {/*</p>*/}
+                                        {/*<div className="img">*/}
+                                        {/*<img src="images/gift-1.png"/>*/}
+                                        {/*</div>*/}
                                         {/*</li>*/}
                                         <li>
                                             <p className="title-text">邀好友投资达<em className="c-629df9">VIP1、VIP2及以上</em>，最高再送邀请人
                                             </p>
                                             <div className="img">
-                                                <img src="images/gift-2.png" style={{'padding-top':'16px'}}/>
+                                                <img src="images/gift-2.png" style={{ 'padding-top': '16px' }} />
                                             </div>
                                         </li>
                                         <li className="last-li">
                                             <p className="title-text">好友每投资一笔，邀请人均可获<em className="c-629df9">投资返利</em>
                                             </p>
                                             <div className="img last-li-img">
-                                                <img src="images/gift-3.png"/>
+                                                <img src="images/gift-3.png" />
                                             </div>
                                         </li>
                                     </ul>
@@ -194,7 +194,7 @@ var Content = React.createClass({
                                             <p className="text">温馨提示：</p>
                                             <p className="text">温馨提示： 邀好友投资升级所得，工豆在好友注册的15天内（注册当天算第1天），按好友当时的等级实时发放。</p>
                                             {/*<p className="text">*/}
-                                                {/*好友达VIP2及以上所赠返现券在好友注册后的第30天10:00（注册当天算第1天）,按好友当时的等级发放。</p>*/}
+                                            {/*好友达VIP2及以上所赠返现券在好友注册后的第30天10:00（注册当天算第1天）,按好友当时的等级发放。</p>*/}
                                             <p className="text">相应好友投资返利可去 <a
                                                 className="c-629df9"> 个人账户 </a> 中查看。</p>
                                         </div>
@@ -202,7 +202,7 @@ var Content = React.createClass({
                                         <div className="pop-arrow-icon"></div>
                                     </div>
                                     <div className="prompt-img">
-                                        <img src="images/icon-img-b.png"/>
+                                        <img src="images/icon-img-b.png" />
                                     </div>
                                 </div>
                             </div>
@@ -227,27 +227,27 @@ var Content = React.createClass({
                             <div className="info-block">
                                 <div className="list vip-list">
                                     <div className="">
-                                        <img src="images/vip-nav.png"/>
+                                        <img src="images/vip-nav.png" />
                                     </div>
                                     <ul>
                                         <li>
                                             <div className="img">
-                                                <img src="images/vip-1.png"/>
+                                                <img src="images/vip-1.png" />
                                             </div>
                                         </li>
                                         <li>
                                             <div className="img">
-                                                <img src="images/vip-2.png"/>
+                                                <img src="images/vip-2.png" />
                                             </div>
                                         </li>
                                         <li className="">
                                             <div className="img">
-                                                <img src="images/vip-3.png"/>
+                                                <img src="images/vip-3.png" />
                                             </div>
                                         </li>
                                         <li className="last-li">
                                             <div className="img last-li-img">
-                                                <img src="images/vip-4.png"/>
+                                                <img src="images/vip-4.png" />
                                             </div>
                                         </li>
                                     </ul>
@@ -266,7 +266,7 @@ var Content = React.createClass({
                                         <div className="pop-arrow-icon"></div>
                                     </div>
                                     <div className="prompt-img">
-                                        <img src="images/icon-img-c.png"/>
+                                        <img src="images/icon-img-c.png" />
                                     </div>
                                 </div>
                             </div>
@@ -302,29 +302,29 @@ var Content = React.createClass({
                                     <ul>
                                         <li>
                                             <div className="img">
-                                                <img src="images/for-gift-1.png"/>
+                                                <img src="images/for-gift-1.png" />
                                             </div>
                                         </li>
                                         <li>
                                             <div className="img">
-                                                <img src="images/for-gift-2.png"/>
+                                                <img src="images/for-gift-2.png" />
                                             </div>
                                         </li>
                                         <li className="">
                                             <div className="img">
-                                                <img src="images/for-gift-3.png"/>
+                                                <img src="images/for-gift-3.png" />
                                             </div>
                                         </li>
                                         <li className="last-li">
                                             <div className="img">
-                                                <img src="images/for-gift-4.png"/>
+                                                <img src="images/for-gift-4.png" />
                                             </div>
                                         </li>
                                     </ul>
 
                                     <div className="list-title">
                                         <h3 className="text">2.工友可用兑换券换礼物</h3>
-                                        <p className="" style={{'font-size':'14px'}}>兑换券是领取工场促销活动礼品的小凭证，可以自主在工豆商城中兑换虚拟或实物礼品。可在 <a
+                                        <p className="" style={{ 'font-size': '14px' }}>兑换券是领取工场促销活动礼品的小凭证，可以自主在工豆商城中兑换虚拟或实物礼品。可在 <a
                                             target="_blank"
                                             className="c-629df9">我的商城>我的兑换券</a> 中查看。</p>
                                     </div>
@@ -336,14 +336,14 @@ var Content = React.createClass({
                                             <p className="text">去豆哥商城兑换前，别忘了赚工分哦~~</p>
                                             <p className="text">工分是金融工场给工友的回馈奖励，签到、投资、参加论坛活动都能领取哦~~，在豆哥商城兑换后扣减相应工分。</p>
                                             <p className="text">更详细的赚工分秘笈在这里，<a href="/activity/gfxq/"
-                                                                                target="_blank" className="c-629df9">点击查看></a>
+                                                target="_blank" className="c-629df9">点击查看></a>
                                             </p>
                                         </div>
 
                                         <div className="pop-arrow-icon"></div>
                                     </div>
                                     <div className="prompt-img">
-                                        <img src="images/icon-img-d.png"/>
+                                        <img src="images/icon-img-d.png" />
                                     </div>
                                 </div>
                             </div>
@@ -371,7 +371,7 @@ var Content = React.createClass({
                                     <ul>
                                         <li>
                                             <div className="img">
-                                                <img src="images/more-img-1.png"/>
+                                                <img src="images/more-img-1.png" />
                                             </div>
                                             <p className="text">返现券是返现型优惠券，投资成功即以现金形式返至工场账户，可投资或提现。<a
                                                 href="/help/explanation/1636.html" target="_blank"
@@ -379,7 +379,7 @@ var Content = React.createClass({
                                         </li>
                                         <li>
                                             <div className="img">
-                                                <img src="images/more-img-2.png"/>
+                                                <img src="images/more-img-2.png" />
                                             </div>
                                             <p className="text">返息券是返息型优惠券，投资成功即以工豆形式返至工场工豆账户，可投资使用。<a
                                                 href="/help/explanation/1537.html" target="_blank"
@@ -387,7 +387,7 @@ var Content = React.createClass({
                                         </li>
                                         <li className="">
                                             <div className="img">
-                                                <img src="images/more-img-3.png"/>
+                                                <img src="images/more-img-3.png" />
                                             </div>
                                             <p className="text">红包含工豆红包和返现券红包，须通过微信分享及领取，抢光后可获相应奖励红包。<a
                                                 href="/help/explanation/1638.html" target="_blank"
@@ -395,7 +395,7 @@ var Content = React.createClass({
                                         </li>
                                         <li className="last-li">
                                             <div className="img">
-                                                <img src="images/more-img-4.png"/>
+                                                <img src="images/more-img-4.png" />
                                             </div>
                                             <p className="text">100个工豆等值1元人民币，投资时当钱花！<a
                                                 href="/help/explanation/1637.html" target="_blank"
@@ -415,7 +415,7 @@ var Content = React.createClass({
                                         <div className="pop-arrow-icon"></div>
                                     </div>
                                     <div className="prompt-img">
-                                        <img src="images/icon-img-e.png"/>
+                                        <img src="images/icon-img-e.png" />
                                     </div>
                                 </div>
                             </div>
@@ -438,21 +438,21 @@ var Content = React.createClass({
                     <ul>
                         <li className="app-li">
                             <div className="img">
-                                <img src="images/phone-icon.png"/>
+                                <img src="images/phone-icon.png" />
                             </div>
                             <span className="strong-text">手机客户端</span>
                             <p className="text">用户可扫描上方二维码下载金融工场手机APP手机APP。快捷支付，随手可投。</p>
                         </li>
                         <li className="weChat-li">
                             <div className="img">
-                                <img src="images/weChat-icon.png"/>
+                                <img src="images/weChat-icon.png" />
                             </div>
                             <span className="strong-text">微信公众号</span>
                             <p className="text">打开微信扫描二维码，关注金融工场，轻松自如投资，第一时间了解最新活动。</p>
                         </li>
                         <li className="web-li">
                             <div className="img">
-                                <img src="images/web-icon.png"/>
+                                <img src="images/web-icon.png" />
                             </div>
                             <span className="strong-text">手机WAP版</span>
                             <p className="text">用户可通过手机浏览器输入金融工场网址：www.9888keji.com，或直接搜索“金融工场”，即可快捷注册投资。</p>

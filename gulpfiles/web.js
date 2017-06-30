@@ -12,7 +12,7 @@ let APP_NAMES = [
 // 公告类页面
 const NOTICE_PAGES = [
     'preservation', // 安全保障介绍页面
-    'guide-cookbook', // 玩赚攻略页
+    // 'guide-cookbook', // 玩赚攻略页
     'vip-prerogative', // 等级攻略页
     'notice-corporate-structure', // 信息披露页面
     'notice-information-disclosure',//信息披露新页面
