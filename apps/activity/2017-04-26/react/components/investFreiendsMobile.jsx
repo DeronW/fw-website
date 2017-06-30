@@ -38,7 +38,7 @@ class InvestFriendsMobile extends React.Component {
                 <a className="login" onClick={gotoLogin}>登录注册</a>
 
                 <div className="noticeRemind">
-                    新手注册即送<em>120</em>元
+                    新手注册即送<em>200</em>元
                 </div>
                 <a className="moreNew"
                    href="http://www.gongchangp2p.cn/cms/addhtml/2078.html?reloadworkpage=y">更多新手秘笈></a>
@@ -51,7 +51,7 @@ class InvestFriendsMobile extends React.Component {
                 <div className="noticeCode">{gcm}</div>
 
                 <div className="noticeRemind">
-                    新手注册即送<em>120</em>元
+                    新手注册即送<em>200</em>元
                 </div>
                 <a className="moreNew"
                    href="http://www.gongchangp2p.cn/cms/addhtml/2078.html?reloadworkpage=y">更多新手秘笈></a>
