@@ -45,7 +45,7 @@ fs.readFile(sourceF, (err, data) => {
 
     fs.writeFile(targetF, sh_script.join('\n'), (err) => {
         if (err) throw err;
-        let t = r.lib ?
+        let t = r.lib || r.npm ?
             '需要完全编译' :
             sh_script.length ?
                 '可以差量编译' :
