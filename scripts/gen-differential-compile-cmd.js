@@ -25,7 +25,13 @@ fs.readFile(sourceF, (err, data) => {
             if (line.trim().startsWith(i)) r.lib = true
         });
         let m = line.match(reg_page);
-        if (m && m[1] != 'lib') r.pages[m[1]] = true;
+        if (m) {
+            if (m[1] != 'lib') {
+                r.lib = true
+            } else {
+                r.pages[m[1]] = true;
+            }
+        }
 
         if (line.match('package.json')) r.npm = true;
     })
