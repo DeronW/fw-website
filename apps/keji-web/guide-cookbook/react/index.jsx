@@ -54,7 +54,7 @@ class Content extends React.Component {
                                     <h2 className="text">新工友注册好福利</h2>
                                     <i className="icon-r"></i>
                                 </div>
-                                <a href="/news/notice/2046.html?reloadworkpage=y" target="_blank"
+                                <a href="/news/notice/2167.html" target="_blank"
                                     className="btn-link">完整新手秘笈></a>
                             </div>
 
@@ -100,7 +100,7 @@ class Content extends React.Component {
                                     <h2 className="text">邀请好友礼上礼</h2>
                                     <i className="icon-r"></i>
                                 </div>
-                                <a href="/news/notice/2046.html?reloadworkpage=y" target="_blank"
+                                <a href="/news/notice/2167.html" target="_blank"
                                     className="btn-link">完整邀友返利攻略></a>
                             </div>
                             <div className="info-block">
