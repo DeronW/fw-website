@@ -26,7 +26,7 @@ fs.readFile(sourceF, (err, data) => {
         });
         let m = line.match(reg_page);
         if (m) {
-            if (m[1] != 'lib') {
+            if (m[1] == 'lib') {
                 r.lib = true
             } else {
                 r.pages[m[1]] = true;
