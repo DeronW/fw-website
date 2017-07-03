@@ -5,6 +5,7 @@ const PROJ = 'keji-web';
 // 专题说明类页面
 const APP_NAMES = [
     'app-download', // app 下载页面
+    'guide', // 新手引导
     'guide-cookbook', // 玩赚攻略页
     'update-browser' // IE8及一下版本浏览器的升级提示
 ]

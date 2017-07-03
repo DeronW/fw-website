@@ -37,6 +37,8 @@ $(function () {
     // 设置全局变量的 API_PATH , 被用作所有接口的前缀地址
     // 该变量很重要 !!!!!
     window.API_PATH = document.getElementById('api-path').value;
+    window.CONTENT_NODE = document.getElementById('cnt');
+    window.HEADER_STATUS_NODE = document.getElementById('header-status-bar');
 });
 
 (function () {
@@ -61,7 +63,6 @@ $(function () {
 
     window.$UserReady = ur;
 })();
-// 添加p2p和尊享的判断
 
 function $getDebugParams() {
     var r = {};
@@ -74,20 +75,3 @@ function $getDebugParams() {
     });
     return r.debug === 'true' && r;
 }
-
-// $(function () {
-//     // 9888.cn p2p
-//     // gongchangzx.com
-//     window.DOMAIN_P2P = $getDebugParams().path == 'p2p' || document.domain.match(/\.9888\.cn/)
-//     window.DOMAIN_ZX = $getDebugParams().path == 'zx' || document.domain.match(/\.gongchangzx\.com/)
-//     if (window.DOMAIN_ZX != null) {
-//         $("[data-zx=true]").removeClass("hide")
-//         $("[data-p2p=true]").addClass("hide")
-//         //尊享的时候飘窗隐藏a
-//         $("[data-zx-sidebar=true]").addClass("hide")
-//         //我的p2p和我的尊享显示区分
-//         $("[data-zx-title=true]").removeClass("hide")
-//         $("[data-p2p-title=true]").addClass("hide")
-
-//     }
-// });

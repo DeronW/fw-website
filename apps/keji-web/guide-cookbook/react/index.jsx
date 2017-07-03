@@ -1,42 +1,6 @@
-var Banner = React.createClass({
-    render: function () {
-        return (
-            <div className="banner">
-                <div className="banner-cnt">
-                    <div className="back-info">
-                        <div className="title-block">
-                            <img src="images/banner-title.png" title="攻略 玩转金融工厂" className="zoom-in" />
-                        </div>
 
-
-                        <div className="earth fade-in-Up">
-
-                        </div>
-
-                        <div className="back-b">
-
-                        </div>
-
-                        <div id="Clouds">
-                            <div className="Cloud cloud-1"></div>
-                            <div className="Cloud cloud-2"></div>
-                            <div className="Cloud cloud-3"></div>
-                            <div className="Cloud cloud-4"></div>
-                        </div>
-
-                        <div className="balloon balloon-in-Up">
-
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        );
-    }
-});
-
-var Content = React.createClass({
-    render: function () {
+class Content extends React.Component {
+    render() {
         return (
             <div className="content-area">
                 <div className="content-title-info">
@@ -115,31 +79,9 @@ var Content = React.createClass({
                                                 <img src="images/welfare-4.png" />
                                             </div>
                                         </li>
-                                        {/*<li className="last-li">*/}
-                                        {/*<p className="title-text">首投满5000及以上即可获得</p>*/}
-                                        {/*<p className="info-text">最高150元返现券礼包</p>*/}
-                                        {/*<div className="img">*/}
-                                        {/*<img src="images/welfare-3.png"/>*/}
-                                        {/*</div>*/}
-                                        {/*</li>*/}
                                     </ul>
                                 </div>
 
-                                {/*<div className="prompt">
-                                    <div className="prompt-text">
-                                        <div className="text-block">
-                                            <h3 className="title-text">如何才能正确的投资赚更多的钱呢？</h3>
-                                            <p className="text">新手必学 → 首投2千稳赚20元（20元新手返现现金）！</p>
-                                            <p className="text">想赚更多 → 首投1万立获100元（100元新手返现现金）！</p>
-                                            <p className="text">最高挑战 → 首投1.2万新手120返现全到手！</p>
-                                        </div>
-
-                                        <div className="pop-arrow-icon"></div>
-                                    </div>
-                                    <div className="prompt-img">
-                                        <img src="images/icon-img-a.png"/>
-                                    </div>
-                                </div>*/}
                             </div>
 
                         </div>
@@ -164,18 +106,11 @@ var Content = React.createClass({
                             <div className="info-block">
                                 <div className="list gift-list list-bottom">
                                     <ul>
-                                        {/*<li>*/}
-                                        {/*<p className="title-text">好友填邀请码注册并首投满<em className="c-629df9">5000</em>，送邀请人*/}
-                                        {/*</p>*/}
-                                        {/*<div className="img">*/}
-                                        {/*<img src="images/gift-1.png"/>*/}
-                                        {/*</div>*/}
-                                        {/*</li>*/}
                                         <li>
                                             <p className="title-text">邀好友投资达<em className="c-629df9">VIP1、VIP2及以上</em>，最高再送邀请人
                                             </p>
                                             <div className="img">
-                                                <img src="images/gift-2.png" style={{ 'padding-top': '16px' }} />
+                                                <img src="images/gift-2.png" style={{ 'paddingTop': '16px' }} />
                                             </div>
                                         </li>
                                         <li className="last-li">
@@ -324,7 +259,7 @@ var Content = React.createClass({
 
                                     <div className="list-title">
                                         <h3 className="text">2.工友可用兑换券换礼物</h3>
-                                        <p className="" style={{ 'font-size': '14px' }}>兑换券是领取工场促销活动礼品的小凭证，可以自主在工豆商城中兑换虚拟或实物礼品。可在 <a
+                                        <p className="" style={{ 'fontSize': '14px' }}>兑换券是领取工场促销活动礼品的小凭证，可以自主在工豆商城中兑换虚拟或实物礼品。可在 <a
                                             target="_blank"
                                             className="c-629df9">我的商城>我的兑换券</a> 中查看。</p>
                                     </div>
@@ -462,39 +397,48 @@ var Content = React.createClass({
             </div>
         );
     }
-});
+}
 
-var LNav = React.createClass({
-    render: function () {
-        var name = window.IS_LOGIN;
+const Cnt = () => <div>
+    <div className="banner">
+        <div className="banner-cnt">
+            <div className="back-info">
+                <div className="title-block">
+                    <img src="images/banner-title.png" title="攻略 玩转金融工厂" className="zoom-in" />
+                </div>
 
-        return (
-            <div className="l-nav">
-                <div className="">
-                    <a href="/factoryCode/info.shtml" className="" target="_blank">如何邀友</a>
+
+                <div className="earth fade-in-Up">
+
+                </div>
+
+                <div className="back-b">
+
+                </div>
+
+                <div id="Clouds">
+                    <div className="Cloud cloud-1"></div>
+                    <div className="Cloud cloud-2"></div>
+                    <div className="Cloud cloud-3"></div>
+                    <div className="Cloud cloud-4"></div>
+                </div>
+
+                <div className="balloon balloon-in-Up">
+
                 </div>
             </div>
-        );
-    }
-});
+        </div>
 
-var Cnt = React.createClass({
-    render: function () {
-        return (
-            <div className="">
-                <Banner />
-
-                <Content />
-
-                <LNav />
-            </div>
-
-        );
-    }
-});
+    </div>
+    <Content />
+    <div className="l-nav">
+        <div className="">
+            <a href="/factoryCode/info.shtml" className="" target="_blank">如何邀友</a>
+        </div>
+    </div>
+</div>
 
 $(function () {
-    ReactDOM.render(<HeaderStatusBar />, document.getElementById('header-status-bar'));
-
-    ReactDOM.render(<Cnt />, document.getElementById("cnt"));
+    ReactDOM.render(<HeaderStatusBar />, HEADER_STATUS_NODE);
+    ReactDOM.render(<Cnt />, CONTENT_NODE);
 });
