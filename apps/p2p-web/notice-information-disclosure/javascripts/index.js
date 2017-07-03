@@ -19,7 +19,7 @@ $(function () {
         } else if (len > 3) {
             v = (value / 10000).toFixed(n) + "万";
         } else {
-            return value
+            return value + ".00"
         }
         return v
     }
@@ -334,8 +334,6 @@ $(function () {
         //待偿金额
         var endCon = $(".enduranceContent .endCommon");
         var len = endCon.length;
-        console.log(judgeCash(data.data.total_overdueSum,2))
-        console.log(judgeCash(data.data.total_lendSum,2))
         for(var i =0 ;i < len;i++){
             endCon.eq(0).find(".money span").text(judgeCash(data.data.total_principalInvest,2));
             endCon.eq(1).find(".money span").text(judgeCash(data.data.total_overdueSum,2));
