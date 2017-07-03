@@ -232,21 +232,6 @@
   }
 }
 
-.Cloud-Loop (@delay, @i) when (@i > 0) {
-  .Cloud:nth-child(@{i}) {
-    animation-delay: (@delay * @i );
-    top: unit(@i * 6 , %);
-  }
-
-  .Cloud-Loop(@delay, (@i - 1)); // Keep Looping
-}
-
-.Cloud-Loop (0) {
-}
-
-// End loop
-.Cloud-Loop ((@duration / 10.5 ) * -1, 4);
-
 .cloud-1 {
   left: 10%;
   top: 80px;
@@ -645,9 +630,6 @@
               line-height: 22px;
               color: #4b4c4d;
               margin-bottom: 5px;
-            }
-            .title-text-position {
-              // margin-bottom: 25px;
             }
             .info-text {
               margin-top: 5px;
