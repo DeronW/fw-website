@@ -19,7 +19,7 @@ $(function () {
         } else if (len > 3) {
             v = (value / 10000).toFixed(n) + "万";
         } else {
-            return value
+            return value + ".00"
         }
         return v
     }
@@ -335,11 +335,11 @@ $(function () {
         var endCon = $(".enduranceContent .endCommon");
         var len = endCon.length;
         for(var i =0 ;i < len;i++){
-            endCon.eq(0).find(".money span").text(judgeCash(data.data.total_principalInvest));
-            endCon.eq(1).find(".money span").text(judgeCash(data.data.total_overdueSum));
+            endCon.eq(0).find(".money span").text(judgeCash(data.data.total_principalInvest,2));
+            endCon.eq(1).find(".money span").text(judgeCash(data.data.total_overdueSum,2));
             endCon.eq(2).find(".money span").text(prevent(data.data.total_overdueSum / data.data.total_invest * 100));
             endCon.eq(3).find(".money span").text(prevent(data.data.total_overdueCount / data.data.total_orderCount * 100));
-            endCon.eq(4).find(".money span").text(data.data.total_lendSum)
+            endCon.eq(4).find(".money span").text(judgeCash(data.data.total_lendSum,2))
     }
     });
 });
