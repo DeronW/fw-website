@@ -11,7 +11,7 @@ $(function () {
     //判断金额 n:四舍五入保留几位小数，默认为2位
     function judgeCash(value, n) {
         n = n > 0 && n <= 20 ? n : 2;
-        value = Number(value.toString().substr(0,11));
+        value = Number(value && value.toString().substr(0, 11));
         var len = value.toString().split(".")[0].length;
         var v = "";
         if (len > 8) {
@@ -37,7 +37,7 @@ $(function () {
 
 
     //计算累计
-    function computeTotal(){
+    function computeTotal() {
         var borrow = document.querySelectorAll(".staCommon");
         for (var i = 0; i < borrow.length; i++) {
             borrow[i].querySelector('.number span').innerText = arguments[i];
@@ -45,8 +45,8 @@ $(function () {
     }
 
     //防止除不尽
-    function prevent(number){
-        return Number(number.toString().substr(0,9)).toFixed(2)
+    function prevent(number) {
+        return Number(number.toString().substr(0, 9)).toFixed(2)
     }
 
 
@@ -153,8 +153,8 @@ $(function () {
                         }
                     },
                     data: [
-                        {value: arguments[0], name: '女士', selected: true},
-                        {value: arguments[1], name: '男士'}
+                        { value: arguments[0], name: '女士', selected: true },
+                        { value: arguments[1], name: '男士' }
                     ]
                 },
                 {
@@ -167,11 +167,11 @@ $(function () {
                         }
                     },
                     data: [
-                        {value: arguments[2], name: '18~25岁'},
-                        {value: arguments[3], name: '25~35岁'},
-                        {value: arguments[4], name: '35~45岁'},
-                        {value: arguments[5], name: '45~60岁'},
-                        {value: arguments[6], name: '60岁以上'}
+                        { value: arguments[2], name: '18~25岁' },
+                        { value: arguments[3], name: '25~35岁' },
+                        { value: arguments[4], name: '35~45岁' },
+                        { value: arguments[5], name: '45~60岁' },
+                        { value: arguments[6], name: '60岁以上' }
                     ]
                 }
             ]
@@ -286,8 +286,8 @@ $(function () {
                         }
                     },
                     data: [
-                        {value: arguments[0], name: '女士', selected: true},
-                        {value: arguments[1], name: '男士'}
+                        { value: arguments[0], name: '女士', selected: true },
+                        { value: arguments[1], name: '男士' }
                     ]
                 },
                 {
@@ -301,11 +301,11 @@ $(function () {
                         }
                     },
                     data: [
-                        {value: arguments[2], name: '18~25岁'},
-                        {value: arguments[3], name: '25~35岁'},
-                        {value: arguments[4], name: '35~45岁'},
-                        {value: arguments[5], name: '45~60岁'},
-                        {value: arguments[6], name: '60岁以上'}
+                        { value: arguments[2], name: '18~25岁' },
+                        { value: arguments[3], name: '25~35岁' },
+                        { value: arguments[4], name: '35~45岁' },
+                        { value: arguments[5], name: '45~60岁' },
+                        { value: arguments[6], name: '60岁以上' }
                     ]
                 }
             ]
@@ -314,19 +314,19 @@ $(function () {
         myChartRight.setOption(optionRight);
     }
     //args顺序：女，男，18,25,35,45,60以上
-    $.get(API_PATH+"/dataTopics/data.shtml").then((data)=>{
+    $.get(API_PATH + "/dataTopics/data.shtml").then((data) => {
         //截止前一天日期
         $(".partStatisticsText span").text(data.data.date);
         //计算总额
-        computeTotal(judgeCash(data.data.total_invest),judgeCash(data.data.total_interest),judgeCash(data.data.total_principal),judgeCash(data.data.total_orderCount));
+        computeTotal(judgeCash(data.data.total_invest), judgeCash(data.data.total_interest), judgeCash(data.data.total_principal), judgeCash(data.data.total_orderCount));
         //借款用户
-        firstPie(data.data.borr_female,data.data.borr_male,data.data.borr_age_level_1,data.data.borr_age_level_2,data.data.borr_age_level_3,data.data.borr_age_level_4,data.data.borr_age_level_5);
+        firstPie(data.data.borr_female, data.data.borr_male, data.data.borr_age_level_1, data.data.borr_age_level_2, data.data.borr_age_level_3, data.data.borr_age_level_4, data.data.borr_age_level_5);
         //借款人数
         $(".pieLeftText .person span").text(formatPerson(data.data.total_borrUserCount));
         //借款累计金额
         $(".pieLeftText .cash span").text(judgeCash(data.data.total_invest / data.data.total_borrUserCount));
         //出借用户
-        secondPie(data.data.female,data.data.male,data.data.age_level_1,data.data.age_level_2,data.data.age_level_3,data.data.age_level_4,data.data.age_level_5);
+        secondPie(data.data.female, data.data.male, data.data.age_level_1, data.data.age_level_2, data.data.age_level_3, data.data.age_level_4, data.data.age_level_5);
         //出借人数
         $(".pieRightText .person span").text(formatPerson(data.data.total_userCount));
         //出借累计金额
@@ -334,12 +334,12 @@ $(function () {
         //待偿金额
         var endCon = $(".enduranceContent .endCommon");
         var len = endCon.length;
-        for(var i =0 ;i < len;i++){
-            endCon.eq(0).find(".money span").text(judgeCash(data.data.total_principalInvest,2));
-            endCon.eq(1).find(".money span").text(judgeCash(data.data.total_overdueSum,2));
+        for (var i = 0; i < len; i++) {
+            endCon.eq(0).find(".money span").text(judgeCash(data.data.total_principalInvest, 2));
+            endCon.eq(1).find(".money span").text(judgeCash(data.data.total_overdueSum, 2));
             endCon.eq(2).find(".money span").text(prevent(data.data.total_overdueSum / data.data.total_invest * 100));
             endCon.eq(3).find(".money span").text(prevent(data.data.total_overdueCount / data.data.total_orderCount * 100));
-            endCon.eq(4).find(".money span").text(judgeCash(data.data.total_lendSum,2))
-    }
+            endCon.eq(4).find(".money span").text(judgeCash(data.data.total_lendSum, 2))
+        }
     });
 });
