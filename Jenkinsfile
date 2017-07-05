@@ -1,4 +1,4 @@
-node("front", "front-virtual") {
+node(params.JENKINS_NODE || "front") {
 
     stage('Preparation') {
         if(params.INITIALIZE) {
