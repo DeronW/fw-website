@@ -1,3 +1,6 @@
+
+//  node : front or  front-virtual
+
 node(params.JENKINS_NODE || "front") {
 
     stage('Preparation') {
