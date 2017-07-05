@@ -1,4 +1,4 @@
-node("front") {
+node("front", "front-virtual") {
 
     stage('Preparation') {
         if(params.INITIALIZE) {
