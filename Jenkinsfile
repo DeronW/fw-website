@@ -65,6 +65,7 @@ node("front") {
     }
 }
 
+if(params.JENKINS_NODE != 'front-virtual') return
 
 node("front-virtual") {
 
