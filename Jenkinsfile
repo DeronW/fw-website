@@ -2,6 +2,8 @@
 //  node : front or  front-virtual
 pipeline {
 
+    agent any
+
     stages {
             
         // node(params.JENKINS_NODE || "front") {
