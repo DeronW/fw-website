@@ -1,0 +1,405 @@
+@import "common.less";
+p{
+  margin: 0;
+  padding: 0;
+}
+.workerBox{
+  width: 100%;
+  height: 100%;
+  background: @colorWhite;
+  .banner{
+    position: relative;
+    height: 300px;
+    width: 100%;
+    overflow: hidden;
+    .bannerImg{
+      position: absolute;
+      width: 1920px;
+      height: 300px;
+      left: 50%;
+      top: 0;
+      background: url(../images/banner.png) no-repeat top center;
+      margin-left: -960px;
+    }
+  }
+  .Question{
+    margin: auto;
+    width: @width;
+    padding-bottom: 100px;
+    .questionTitle{
+      width: 256px;
+      height: 50px;
+      margin: 98px auto 48px;
+      font-size: @fontSize34;
+      color: #333;
+    }
+    .questionContent{
+      text-indent: 2em;
+      font-size: @fontSize16;
+      color: @color4;
+      line-height: 30px;
+    }
+  }
+  .wealth {
+    width: 100%;
+    height: 1646px;
+    background: @colorF1;
+    .wealthBox{
+      width: @width;
+      margin: auto;
+      .wealthTitle{
+        display: block;
+        width: 300px;
+        font-size: @fontSize34;
+        color: @color3;
+        padding: 100px 0 48px 0;
+        margin: auto;
+        span{
+          display: inline-block;
+        }
+        img{
+          float: right;
+          display: inline-block;
+          vertical-align: middle;
+          margin-top: 8px;
+          margin-right: 10px;
+        }
+      }
+      .wealthContent{
+        .wealthContentPeople{
+          display: table;
+          width: 100%;
+          .person{
+            float: left;
+            width: 248px;
+            height: 320px;
+            text-align: center;
+            .name{
+              font-size: @fontSize20;
+              color: @color3;
+              margin: 20px 0 12px 0;
+            }
+            .job{
+              width: 90px;
+              height: 32px;
+              margin: auto;
+              text-align: center;
+              line-height: 32px;
+              color: @colorWhite;
+              font-size: @fontSize16;
+              background: url('../images/job.png') no-repeat;
+            }
+          }
+        }
+        .wealthContentText{
+          margin-top: 30px;
+          font-size: @fontSize16;
+          color: @color4;
+          margin-bottom: 40px;
+          p{
+            text-indent: 2em;
+            line-height: 30px;
+          }
+        }
+        .wealthContentPicture{
+          position: relative;
+          cursor: pointer;
+          .btn{
+            width: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            .leftBtn{
+              position: absolute;
+              left: 10px;
+            }
+            .rightBtn {
+              position: absolute;
+              right: 10px;
+            }
+          }
+          .bigPicture{
+            width: 992px;
+            height: 558px;
+            margin: auto;
+          }
+        }
+
+      }
+    }
+  }
+}
+.moreBtn{
+  display: block;
+  width: 205px;
+  height: 36px;
+  background: url('../images/btnBg.png') no-repeat;
+  margin: 30px auto 80px;
+  line-height: 36px;
+  text-align: center;
+  color: @colorWhite;
+  font-size: @fontSize16;
+}
+/** Stage container **/
+
+
+.northEast{
+  width: 1012px;
+  margin: auto;
+  color: @color3;
+  margin-bottom: 100px;
+  .northEastTitle{
+    width: 530px;
+    margin: 98px auto 0;
+    text-align: center;
+    font-size: @fontSize34;
+  }
+  .northSea{
+    width: 992px;
+    .northSeaTitle{
+      font-size: @fontSize16;
+      margin: 50px 0;
+    }
+  }
+}
+
+.activeNews{
+  width: 100%;
+  //height: 536px;
+  padding-bottom: 20px;
+  background: @colorF1;
+  .news{
+    width: 1012px;
+    margin: auto;
+    .newsTitle{
+      width: 100%;
+      text-align: center;
+      font-size: @fontSize34;
+      color: @color3;
+      margin: 0 auto 48px;
+      padding-top: 98px;
+    }
+    .newsSmallTitle{
+      display: none;
+      padding: 20px 0;
+      border-bottom: 1px dashed @colorD4;
+      color: @color3;
+      .newsOneTitle{
+        span{
+          display: inline-block;
+          margin-left: 4px;
+          font-size: @fontSize20;
+        }
+      }
+      .newsOneText{
+        text-indent: 1.5em;
+        font-size: @fontSize16;
+        margin-top: 15px;
+        a{
+          color: #1a91d5;
+        }
+      }
+    }
+    .lastNewsSmallTitle{
+      border: transparent;
+    }
+  }
+}
+
+ul li {
+  list-style: none;
+}
+.connected-carousels .stage {
+  width: 992px;
+  margin: 20px auto;
+  position: relative;
+}
+.wealthSmallImg li span,.northSmallImg li span,.eastSmallImg li span{
+  display: block;
+  position: absolute;
+  width: 240px;
+  height: 135px;
+  left: 0;
+  top: 0;
+  background: rgba(0,0,0,0.5);
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#7F000000,endColorstr=#7F000000);
+}
+.wealthSmallImg li span:hover{
+  background: rgba(0,0,0,0);
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#19000000,endColorstr=#19000000);
+}
+.northSmallImg li span:hover{
+  background: rgba(0,0,0,0);
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#19000000,endColorstr=#19000000);
+}
+.eastSmallImg li span:hover{
+  background: rgba(0,0,0,0);
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#19000000,endColorstr=#19000000);
+}
+
+.connected-carousels a {
+  color: #fff;
+}
+
+/** Navigation container **/
+
+.connected-carousels .navigation {
+  position: relative;
+  margin: auto;
+  width: 992px !important;
+}
+
+/** Shared carousel styles **/
+
+.connected-carousels .carousel {
+  overflow: hidden;
+  position: relative;
+}
+
+.connected-carousels .carousel ul {
+  width: 20000em;
+  position: relative;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.connected-carousels .carousel li {
+  float: left;
+  width: 992px;
+}
+.connected-carousels .carousel li img{
+  display: inline-block;
+  width: 992px;
+  height: 558px;
+}
+
+/** Stage carousel specific styles **/
+
+.connected-carousels .carousel-stage {
+  height: 558px;
+}
+
+/** Navigation carousel specific styles **/
+
+.connected-carousels .carousel-navigation {
+  height: 135px;
+  width: 992px;
+}
+
+.connected-carousels .carousel-navigation li {
+  cursor: pointer;
+  width: 240px;
+  height: 135px;
+  position: relative;
+  margin-right: 10px;;
+}
+
+.connected-carousels .carousel-navigation li img {
+  display: inline-block;
+  width: 240px;
+  height: 135px;
+}
+.connected-carousels .carousel-navigation li .layer{
+  position: absolute;
+  width: 240px;
+  height: 135px;
+  left: 0;
+  top: 0;
+  background: rgba(0,0,0,0);
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#19000000,endColorstr=#19000000);
+}
+
+.connected-carousels .prev-stage,
+.connected-carousels .next-stage {
+  display: block;
+  position: absolute;
+  top: 0;
+  width: 512px;
+  height: 558px;
+  color: #fff;
+}
+
+.connected-carousels .prev-stage {
+  left: 0px;
+}
+
+.connected-carousels .next-stage {
+  right: 0px;
+}
+
+.connected-carousels .prev-stage.inactive,
+.connected-carousels .next-stage.inactive {
+  display: none;
+}
+
+.connected-carousels .prev-stage span{
+  display: none;
+  position: absolute;
+  text-align: center;
+  color: #fff;
+  text-decoration: none;
+  width: 106px;
+  height: 558px;
+  background: url('../images/left.png') no-repeat;
+  left:0px;
+  //z-index: 10;
+}
+.connected-carousels .next-stage span{
+  display: none;
+  position: absolute;
+  text-align: center;
+  color: #fff;
+  text-decoration: none;
+  width: 106px;
+  height: 558px;
+  background: url('../images/right.png') no-repeat;
+  right: 0px;
+  //z-index: 10;
+}
+
+
+//.connected-carousels .prev-stage:hover span,
+//.connected-carousels .next-stage:hover span {
+//  display: block;
+//}
+
+/** Navigation carousel controls **/
+
+.connected-carousels .prev-navigation,
+.connected-carousels .next-navigation {
+  display: block;
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background: #4E443C;
+  color: #fff;
+  text-decoration: none;
+  text-shadow: 0 0 1px #000;
+  font: 16px/29px Arial, sans-serif;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  border-radius: 30px;
+  -webkit-box-shadow: 0 0 2px #999;
+  -moz-box-shadow: 0 0 2px #999;
+  box-shadow: 0 0 2px #999;
+}
+
+.connected-carousels .prev-navigation {
+  left: -15px;
+  top: 22px;
+  text-indent: 6px;
+}
+
+.connected-carousels .next-navigation {
+  right: -15px;
+  top: 22px;
+  text-indent: 20px;
+}
+
+.connected-carousels .prev-navigation.inactive,
+.connected-carousels .next-navigation.inactive {
+  opacity: .5;
+  cursor: default;
+}
+
