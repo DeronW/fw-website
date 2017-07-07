@@ -28,7 +28,8 @@ const TOPIC_PAGES = [
 ]
 
 APP_NAMES.push(
-    ...NOTICE_PAGES
+    ...NOTICE_PAGES,
+    ...TOPIC_PAGES
 )
 
 module.exports = function (gulp, generate_task, settings) {
