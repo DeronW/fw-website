@@ -21,7 +21,7 @@ if(params.JENKINS_NODE != 'front-virtual') {
                 sh 'git fetch'
                 sh 'git diff --stat=400 origin/$BRANCH > /tmp/website.$PROJECT.git.diff'
             }
-            sh 'git pull'
+            sh 'git pull origin $BRANCH'
         }
 
         stage('Update nodejs lib'){
@@ -89,7 +89,7 @@ if(params.JENKINS_NODE == 'front-virtual') {
                 sh 'git fetch'
                 sh 'git diff --stat=400 origin/$BRANCH > /tmp/website.$PROJECT.git.diff'
             }
-            sh 'git pull'
+            sh 'git pull origin $BRANCH'
         }
 
         stage('Update nodejs lib'){
