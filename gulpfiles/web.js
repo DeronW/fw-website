@@ -36,11 +36,11 @@ const USER_PAGES = [
 ]
 
 const DEVELOPING_PAGES = [
-    'topic-zun-xiang', // 尊享标计划
-    'user-login-history', //用户登录日志页面
-    'user-messages', // 用户消息页面
+    // 'topic-zun-xiang', // 尊享标计划
+    // 'user-login-history', //用户登录日志页面
+    // 'user-messages', // 用户消息页面
     // 'user-center', //用户中心
-    'user-bean', // 用户工豆
+    // 'user-bean', // 用户工豆
 ]
 
 APP_NAMES.push(
