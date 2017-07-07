@@ -11,7 +11,7 @@ if(params.JENKINS_NODE != 'front-virtual') {
 
             if(params.INITIALIZE) {
                 // 初始化项目用, jenkins创建job时需要先pull代码库
-                git credentialsId: '4cac0f9e-5bcd-4f50-a38f-d17f417bbeb5', url: 'git@10.10.100.106:front/website.git'
+                git credentialsId: '4cac0f9e-5bcd-4f50-a38f-d17f417bbeb5', url: 'git@10.105.101.118:front/website.git'
                 // 第一次发布新分支, 需要设置本地与origin分支关联
                 sh 'git branch --set-upstream-to=origin/$BRANCH $BRANCH'
             }
@@ -79,7 +79,7 @@ if(params.JENKINS_NODE == 'front-virtual') {
 
             if(params.INITIALIZE) {
                 // 初始化项目用, jenkins创建job时需要先pull代码库
-                git credentialsId: '4cac0f9e-5bcd-4f50-a38f-d17f417bbeb5', url: 'git@10.10.100.106:front/website.git'
+                git credentialsId: '4cac0f9e-5bcd-4f50-a38f-d17f417bbeb5', url: 'git@10.105.101.118:front/website.git'
                 // 第一次发布新分支, 需要设置本地与origin分支关联
                 sh 'git branch --set-upstream-to=origin/$BRANCH $BRANCH'
             }
