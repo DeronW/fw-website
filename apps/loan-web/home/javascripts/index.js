@@ -170,6 +170,7 @@ $(function () {
                     $("#downCode").hide();
                     $("#captchaChange").val("");
                     $("#gaincode").text('点击获取')
+                    $("#phoneErrorText").text("");
                     $("#captchaErrorText").text(data.message);
                     getCaptcha();
                 }else {
