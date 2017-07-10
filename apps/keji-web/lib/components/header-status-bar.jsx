@@ -35,8 +35,14 @@ class HeaderStatusBar extends React.Component {
             }
         }).done(data => {
             if (data.code != 10000) throw `got error ${data.message}`;
-            let { avatar, sex, isLogin } = data.data, username = data.data.userName, realname = data.data.realName;
+            let { avatar, sex, isLogin } = data.data,
+                username = data.data.userName,
+                realname = data.data.realName,
+                level = data.userLevel
+                code = data.userCode;
+
             avatar = avatar || `http://www.9888.cn/img/${parseInt(sex) ? 'man' : 'woman'}.png`;
+
             this.setState({
                 is_login: isLogin,
                 username: username,
@@ -44,7 +50,7 @@ class HeaderStatusBar extends React.Component {
                 avatar: avatar
             });
             // set current page is login or not. this is base function, very IMPORTANT!
-            $UserReady.fire(isLogin, { username, realname, avatar });
+            $UserReady.fire(isLogin, { username, realname, avatar, level, code });
         })
 
         // 获取用户未读消息数

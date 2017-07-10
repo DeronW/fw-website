@@ -88,5 +88,7 @@ let Fn = {
 
 $(function () {
     ReactDOM.render(<HeaderStatusBar />, HEADER_STATUS_NODE);
+    ReactDOM.render(<UserCenterSidebar />,
+        document.getElementById('user-center-sidebar'));
     ReactDOM.render(<Content />, document.getElementById('userContent'));
 });
