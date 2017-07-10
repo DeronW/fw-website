@@ -145,7 +145,7 @@ $(function () {
 
 
     getCaptcha();
-    $("#captcha-img img").click(function(){
+    $(".captcha-img img").click(function(){
         getCaptcha();
     });
     function getCaptcha(){
