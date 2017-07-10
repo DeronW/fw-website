@@ -4,7 +4,6 @@ $(function () {
 		return reg.test(val)
 	}
 
-
 	$("#close-btn").click(function () {
         $("#popwindow").css({display:"none"});
     });
@@ -32,6 +31,25 @@ $(function () {
 		});
 	}
 
+    function getVal2(obj, objVal, _this) {
+        obj.bind('input propertychange', function() {
+
+            var inputVal = $(this).val();
+
+            if(inputVal) {
+                $(this).val($(this).val());
+
+                _this[objVal] = $(this).val();
+            } else {
+                $(this).val(_this[objVal]);
+            }
+
+        });
+    }
+
+
+
+
 	var registerObj = {
 		phoneVal: '',
 		codeVal: '',
@@ -49,7 +67,7 @@ $(function () {
         captchaValFun:function() {
             var _this = this;
 
-            getVal($('#captchaChange'), 'captchaVal', _this);
+            getVal2($('#captchaChange'), 'captchaVal', _this);
 
         },
 		codeValFun: function() {
