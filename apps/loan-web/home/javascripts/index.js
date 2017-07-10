@@ -4,7 +4,6 @@ $(function () {
 		return reg.test(val)
 	}
 
-
 	$("#close-btn").click(function () {
         $("#popwindow").css({display:"none"});
     });
@@ -32,6 +31,22 @@ $(function () {
 		});
 	}
 
+    function getVal2(obj, objVal, _this) {
+        obj.bind('input propertychange', function() {
+
+            var inputVal = $(this).val();
+
+            if(inputVal) {
+                $(this).val($(this).val());
+
+                _this[objVal] = $(this).val();
+            } else {
+                $(this).val(_this[objVal]);
+            }
+
+        });
+    }
+
 	var registerObj = {
 		phoneVal: '',
 		codeVal: '',
@@ -49,7 +64,7 @@ $(function () {
         captchaValFun:function() {
             var _this = this;
 
-            getVal($('#captchaChange'), 'captchaVal', _this);
+            getVal2($('#captchaChange'), 'captchaVal', _this);
 
         },
 		codeValFun: function() {
@@ -59,7 +74,6 @@ $(function () {
 
 		}
 	};
-
 	registerObj.phoneValFun();
 	registerObj.codeValFun();
 	registerObj.captchaValFun();
@@ -99,13 +113,10 @@ $(function () {
 				}
 			});
 		}
-
-
 	});
 
 
     $("#gaincode").click(function () {
-		console.log('xxx');
 		var phone = registerObj.phoneVal;
         var captcha = registerObj.captchaVal;
 
@@ -155,8 +166,10 @@ $(function () {
                     clearInterval(timer);
                     $("#gaincode").show();
                     $("#downCode").hide();
+                    $("#captchaChange").val("");
                     $("#gaincode").text('点击获取')
                     $("#captchaErrorText").text(data.message);
+                    getCaptcha();
                 }else {
                     clearInterval(timer);
                     $("#gaincode").show();
