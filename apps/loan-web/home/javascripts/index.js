@@ -117,7 +117,6 @@ $(function () {
 
 
     $("#gaincode").click(function () {
-		console.log('xxx');
 		var phone = registerObj.phoneVal;
         var captcha = registerObj.captchaVal;
 
@@ -167,6 +166,7 @@ $(function () {
                     clearInterval(timer);
                     $("#gaincode").show();
                     $("#downCode").hide();
+                    $("#captchaChange").val("");
                     $("#gaincode").text('点击获取')
                     $("#captchaErrorText").text(data.message);
                     getCaptcha();
