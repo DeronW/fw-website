@@ -22,7 +22,7 @@ module.exports = function generate_task(site_name, page_name, configs) {
 
     let app_path = `apps/${site_name}/${page_name}/`,
         build_path = `build/${site_name}/${page_name}/`,
-        public_path = 'public/',
+        public_path = 'public',
         tmp_path = `build/${site_name}-tmp/`,
         lib_path = 'lib/',
         project_lib_path = `apps/${site_name}/lib`,
@@ -161,10 +161,12 @@ module.exports = function generate_task(site_name, page_name, configs) {
         gulp.watch(`${app_path}images/**`, gulp.parallel(compile_images));
         gulp.watch(`${app_path}stylesheets/**`, gulp.parallel(compile_stylesheets));
         gulp.watch(`${app_path}less/**`, gulp.parallel(compile_less));
+        gulp.watch(`${project_lib_path}/less/**`, gulp.parallel(compile_less));
         gulp.watch(`${app_path}javascripts/**`, gulp.parallel(compile_javascripts));
         gulp.watch(`${app_path}react/**`, gulp.parallel(compile_react));
+        gulp.watch(`${project_lib_path}/components/**`, gulp.parallel(compile_react));
 
-        gulp.watch(`${public_path}common/images/**`, gulp.parallel(compile_images));
+        gulp.watch(`${public_path}/common/images/**`, gulp.parallel(compile_images));
         gulp.watch(`lib/components/**`, gulp.parallel(compile_react));
         gulp.watch(`lib/templates/**/*.html`, gulp.parallel(compile_html));
         gulp.watch(`lib/less/**/*.less`, gulp.parallel(compile_less));
