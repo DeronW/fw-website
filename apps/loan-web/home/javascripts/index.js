@@ -35,6 +35,7 @@ $(function () {
 	var registerObj = {
 		phoneVal: '',
 		codeVal: '',
+        captchaVal:'',
 		codeToken: '',
 		codeType: '',
 		getCode: false,
@@ -44,6 +45,12 @@ $(function () {
 			getVal($('#phoneChange'), 'phoneVal', _this);
 
 		},
+        captchaValFun:function() {
+            var _this = this;
+
+            getVal($('#captchaChange'), 'captchaVal', _this);
+
+        },
 		codeValFun: function() {
 			var _this = this;
 
@@ -54,14 +61,18 @@ $(function () {
 
 	registerObj.phoneValFun();
 	registerObj.codeValFun();
+	registerObj.captchaValFun();
 
 	$("#registerButn").click(function() {
 		var phone = registerObj.phoneVal;
 		var code = registerObj.codeVal;
+		var captcha = registerObj.captchaVal;
 
 		if(phone == '') {
 			$("#phoneErrorText").text("请输入手机号");
-		} else if (!isMobilePhone(phone)) {
+		} else if(captcha == ''){
+            $("#captchaErrorText").text("请输入图形验证码");
+        }else if (!isMobilePhone(phone)) {
 			$("#phoneErrorText").text("手机号格式不正确");
 		} else if(!registerObj.getCode) {
 			$("#codeErrorText").text("请先获取验证码");
@@ -81,7 +92,6 @@ $(function () {
 					if(data.code == 10000) {
 						$("#rgisterContent").hide();
 						$("#qrBlock").show();
-
 					} else {
 						alert(data.message);
 					}
@@ -135,7 +145,7 @@ $(function () {
 
 
     getCaptcha();
-    $("#captcha-img img").click(function(){
+    $(".captcha-img img").click(function(){
         getCaptcha();
     });
     function getCaptcha(){
@@ -149,7 +159,7 @@ $(function () {
             },
             success: function(data) {
                 if(data.code == 10000) {
-                    $("#captcha-img img").setAttribute('src', data.data.url);
+                    $(".captcha-img img").attr('src', data.data.url);
                 }
             }
         });
