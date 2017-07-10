@@ -153,6 +153,9 @@ $(function () {
                     $("#downCode").text(num+'秒');
                 } else if(data.code == 20010){
                     clearInterval(timer);
+                    $("#gaincode").show();
+                    $("#downCode").hide();
+                    $("#gaincode").text('点击获取')
                     $("#captchaErrorText").text(data.message);
                 }else {
                     clearInterval(timer);
