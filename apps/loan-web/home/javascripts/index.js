@@ -164,7 +164,7 @@ $(function () {
                     $("#downCode").text(num+'秒');
                     $("#captchaErrorText").text("");
                     $("#phoneErrorText").text("");
-                } else if(data.code == 20010){
+                } else if(data.code == 20020){
                     clearInterval(timer);
                     $("#gaincode").show();
                     $("#downCode").hide();
@@ -179,7 +179,6 @@ $(function () {
                     $("#downCode").hide();
                     $("#gaincode").text('点击获取')
                     alert(data.message);
-
                 }
             }
         });
