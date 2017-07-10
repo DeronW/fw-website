@@ -178,7 +178,10 @@ $(function () {
                     $("#gaincode").show();
                     $("#downCode").hide();
                     $("#gaincode").text('点击获取')
-                    alert(data.message);
+                    if(isMobilePhone(phone)){
+                        $("#phoneErrorText").text("");
+                        $("#captchaErrorText").text(data.message);
+                    }
                 }
             }
         });
