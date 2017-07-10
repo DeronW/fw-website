@@ -163,6 +163,7 @@ $(function () {
                     registerObj.codeType = data.data.codeType;
                     $("#downCode").text(num+'秒');
                     $("#captchaErrorText").text("");
+                    $("#phoneErrorText").text("");
                 } else if(data.code == 20010){
                     clearInterval(timer);
                     $("#gaincode").show();
