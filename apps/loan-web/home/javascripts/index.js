@@ -4,7 +4,7 @@ $(function () {
 		return reg.test(val)
 	}
 
-	
+
 	$("#close-btn").click(function () {
         $("#popwindow").css({display:"none"});
     });
@@ -22,11 +22,11 @@ $(function () {
 			var inputVal = $(this).val();
 
 			if(verificationNum(inputVal)) {
-				$(this).val($(this).val());				
+				$(this).val($(this).val());
 
-				_this[objVal] = $(this).val();				
+				_this[objVal] = $(this).val();
 			} else {
-				$(this).val(_this[objVal]);	
+				$(this).val(_this[objVal]);
 			}
 
 		});
@@ -84,40 +84,40 @@ $(function () {
 
 					} else {
 						alert(data.message);
-					}	
+					}
 				}
-			});	
+			});
 		}
-		
-		
+
+
 	});
 
 
     $("#gaincode").click(function () {
 		console.log('xxx');
-		var phone = registerObj.phoneVal;		
-		
+		var phone = registerObj.phoneVal;
+
 		if(phone == '') {
 			$("#phoneErrorText").text("请输入手机号");
 			return false;
 		} else if (!isMobilePhone(phone)) {
 			$("#phoneErrorText").text("手机号格式不正确");
 			return false;
-		} 
+		}
 
         var num = 60;
         var _this=$(this);
 
 		$("#gaincode").hide();
-		$("#downCode").show();	
-		$("#downCode").text(num+'秒');	
+		$("#downCode").show();
+		$("#downCode").text(num+'秒');
 
 		registerObj.getCode = true;
 
 
         _this.text(num+'秒');
         var timer = setInterval(function () {
-            if(num==0){                
+            if(num==0){
 				$("#gaincode").text('点击获取')
                 num = 60;
 				$("#gaincode").show();
@@ -125,37 +125,38 @@ $(function () {
                 clearInterval(timer);
             }else{
 				$("#downCode").text(num+'秒')
-                
+
                 num--;
             }
         },1000);
 
-
-		$.ajax({
-			url: $("#api-path").val() + 'api/userBase/v1/sendVerifyCode.json',
-			method: 'POST',
-			data: {
-				mobile: registerObj.phoneVal,
-				userOperationType: 3,
-				sourceType: 5
-			},
-			success: function(data) {
-				if(data.code == 10000) {					
-					registerObj.codeToken = data.data.codeToken;
-					registerObj.codeType = data.data.codeType;
-					$("#downCode").text(num+'秒');
-				} else {
-					clearInterval(timer);
-					$("#gaincode").show();
-					$("#downCode").hide();	
-					$("#gaincode").text('点击获取')
-					alert(data.message);
-					
-				}				
-			}
-		});	
     });
-    function  time() {
 
+
+
+    getCaptcha();
+    $("#captcha-img img").click(function(){
+        getCaptcha();
+    });
+    function getCaptcha(){
+        $.ajax({
+            url: $("#api-path").val() + 'api/userBase/v1/verifyNum.json',
+            method: 'POST',
+            data: {
+                mobile: registerObj.phoneVal,
+                userOperationType: 3,
+                sourceType: 5
+            },
+            success: function(data) {
+                if(data.code == 10000) {
+                    $("#captcha-img img").setAttribute('src', data.data.url);
+                }
+            }
+        });
     }
+
+
+
+
+
 });
