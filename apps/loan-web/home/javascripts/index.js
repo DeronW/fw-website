@@ -34,15 +34,15 @@ $(function () {
     function getVal2(obj, objVal, _this) {
         obj.bind('input propertychange', function() {
 
-            var inputVal = $(this).val();
-
-            if(inputVal) {
-                $(this).val($(this).val());
-
                 _this[objVal] = $(this).val();
-            } else {
-                $(this).val(_this[objVal]);
-            }
+
+            // var inputVal = $(this).val();
+
+            // if(inputVal) {
+            //     $(this).val($(this).val());
+            // } else {
+            //     $(this).val(_this[objVal]);
+            // }
 
         });
     }
