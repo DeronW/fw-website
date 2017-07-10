@@ -157,6 +157,7 @@ $(function () {
                     $("#downCode").hide();
                     $("#gaincode").text('点击获取')
                     $("#captchaErrorText").text(data.message);
+                    getCaptcha();
                 }else {
                     clearInterval(timer);
                     $("#gaincode").show();
