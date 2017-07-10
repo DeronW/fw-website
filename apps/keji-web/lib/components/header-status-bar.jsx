@@ -18,8 +18,13 @@ class HeaderStatusBar extends React.Component {
             if (p[0] == 'ticket') login_token = p[1].split('.')[0]
         });
 
+        var url = 'http://www.gongchangp2p.cn/api/userState/v1/userState.json';
+
+        if ($getDebugParams().login)
+            url = API_PATH + '/api/userState/v1/userState.json';
+
         $.ajax({
-            url: 'http://www.gongchangp2p.cn/api/userState/v1/userState.json',
+            url: url,
             // The name of the callback parameter, as specified by the YQL service
             jsonp: "callback",
             // Tell jQuery we're expecting JSONP

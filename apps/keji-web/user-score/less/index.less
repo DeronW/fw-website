@@ -1,0 +1,220 @@
+@import "../../lib/less/partial/user-center-panel.less";
+@import "variables.less";
+
+ul{
+  list-style: none;
+}
+
+
+#cnt{
+  width: 796px;
+  height: 700px;
+  margin: 30px 0 0 182px;
+  font-size: @fontsizeNormal;
+  border: 1px solid @colorC;
+  border-top: 0 none;
+}
+
+.topNav {
+  width:930px;
+  margin-bottom: 50px;
+  font-size: @fontSizeSmall;
+  height: 700px;
+  position: relative;
+  .scoreTips{
+    position: absolute;
+    top:12px;
+    right:16px;
+    font-size: 12px;
+    color: #999;
+  }
+  .topRow {
+    background: #f9fbfc;
+    height: 50px;
+    width: 930px;
+    border-bottom: none;
+    div {
+      width: 128px;
+      float: left;
+      height: 50px;
+      cursor: pointer;
+      text-align: center;
+      line-height: 50px;
+    }
+    .on {
+      border-bottom: 0 none;
+      border-radius: 2px 5px 0 0;
+      color: #444;
+      font-weight: bold;
+      font-size: 14px;
+    }
+  }
+  .moneyItemContainer {
+    width: 870px;
+    margin: 0 auto;
+    height: 576px;
+    .beanItem {
+      width: 100%;
+      height: 40px;
+      font-size: @fontSizeSmall;
+      border-bottom: 1px solid @colorC;
+      div {
+        float: left;
+        width: 118px;
+        height: 40px;
+        text-align: center;
+        line-height: 40px;
+        cursor: pointer;
+      }
+      .active {
+        background-color: @colorWhite;
+        border-bottom: 2px solid @color8c;
+        font-weight: bold;
+      }
+    }
+  }
+  .details {
+    width: 100%;
+    height: 450px;
+    border: 1px solid @colorC;
+  }
+}
+
+.bean-info {
+  width: 850px;
+  margin: 20px auto;
+  height: 45px;
+  line-height: 45px;
+  background: #f9fbfc;
+  padding: 0 12px;
+  text-align: left;
+  .des {
+    padding: 0 20px 0 0;
+    font-size: 12px;
+  }
+  .data {
+    padding: 0 2px;
+    font-weight: bold;
+  }
+}
+
+.tableContaner {
+  width: 850px;
+  margin: 20px 10px 50px 5px;
+  position: relative;
+  min-height: 516px;
+}
+
+.table-read-only {
+  width: 870px;
+  border: 1px solid @colorC;
+  border-collapse: collapse;
+  margin:0 auto;
+  padding:0;
+  tr {
+    height: 35px;
+    text-align: center;
+    th {
+      background-color: @colorF2;
+      font-weight: normal;
+      border-bottom: 1px solid @colorC;
+      border-right: 1px solid @colorC;
+      border-collapse: collapse;
+    }
+    td {
+      height: 45px;
+      border-bottom: 1px solid @colorC;
+      border-right: 1px solid @colorC;
+    }
+    td:last-child {
+      text-align: left;
+      padding-left: 20px;
+    }
+  }
+}
+
+.green {
+  color: green;
+  font-weight: bold;
+}
+
+.red {
+  color: red;
+  font-weight: bold;
+}
+
+.blue {
+  color: @color8c;
+}
+
+.pagination {
+  width: 100%;
+  position: absolute;
+  bottom: -50px;
+  text-align: center;
+  .paginationPage {
+    margin: 10px 0;
+    .totalCount {
+      display: inline-block;
+      padding-right: 10px;
+      span {
+        padding-left: 5px;
+      }
+      .calculate {
+        font-weight: bold;
+      }
+    }
+    a {
+      display: inline-block;
+      margin: 0 3px;
+    }
+    .first {
+      border: 1px solid @colorC;
+      padding: 3px 5px;
+      cursor: pointer;
+      background-color: @colorF2;
+      border-radius: 3px;
+      margin: 0 3px;
+    }
+    .first:hover {
+      color: @colorRed;
+    }
+    .last {
+      border: 1px solid @colorC;
+      padding: 3px 5px;
+      cursor: pointer;
+      background-color: @colorF2;
+      border-radius: 3px;
+      margin: 0 3px;
+    }
+    .last:hover {
+      color: @colorRed;
+    }
+    .prev {
+      border: 1px solid @colorC;
+      padding: 3px 5px;
+      cursor: pointer;
+      background-color: @colorF2;
+      border-radius: 3px;
+      margin: 0 3px;
+    }
+    .prev:hover {
+      color: @colorRed;
+    }
+    .next {
+      border: 1px solid @colorC;
+      padding: 3px 5px;
+      cursor: pointer;
+      background-color: @colorF2;
+      border-radius: 3px;
+      margin: 0 3px;
+    }
+    .next:hover {
+      color: @colorRed;
+    }
+  }
+}
+
+.emptyRecords {
+  margin: 110px 0;
+}
