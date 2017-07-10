@@ -14,7 +14,7 @@ const APP_NAMES = [
 const NOTICE_PAGES = [
     'notice-preservation', // 安全保障介绍页面
     'notice-corporate-structure', // 信息披露页面
-    // 'vip-prerogative', // 等级攻略页
+    'notice-vip-prerogative', // 等级攻略页
     'notice-user-protocol'//金融工场用户协议
 ]
 
