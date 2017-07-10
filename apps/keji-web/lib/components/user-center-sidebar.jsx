@@ -3,7 +3,7 @@ class UserCenterSidebar extends React.Component {
     state = {
         is_login: false,
         username: null,
-        realname: null,
+        realname: '用户真名',
         code: 'A123456',
         level: 2,
         avatar: 'http://www.9888.cn/img/man.png',
@@ -43,7 +43,13 @@ class UserCenterSidebar extends React.Component {
 
     render() {
 
-        let { level, avatar, code, orderUser } = this.state
+        let { level, avatar, code, realname, orderUser } = this.state
+
+        let path = location.pathname;
+
+        let nav_link_cn = p => {
+            return path.indexOf(p) > -1 ? 'ucp-link active' : 'ucp-link'
+        }
 
         return <div className="ucp-left-nav">
             <div className="ucp-head">
@@ -61,7 +67,7 @@ class UserCenterSidebar extends React.Component {
                     </div>
                 </a>
 
-                <div className="user-name"></div>
+                <div className="user-name">{realname}</div>
 
                 <div className="ws-code">
                     工场码：
@@ -73,45 +79,50 @@ class UserCenterSidebar extends React.Component {
                 <i className="ucp-icon icon-user"></i>
                 <span>工场总览</span>
             </a>
-            <a className="ucp-link hover-blue" href="/factoryCode/info.shtml">
+            <a className="ucp-link" href="/factoryCode/info.shtml">
                 <i className="ucp-icon icon-invest"></i>
                 <span>邀请返利</span>
             </a>
-            <a data-zx-title="true" className="ucp-link hover-blue hide" href="/factoryCode/info.shtml">
+            <a data-zx-title="true" className="ucp-link hide" href="/factoryCode/info.shtml">
                 <i className="ucp-icon icon-user"></i>
                 <span>我的尊享</span>
             </a>
-            <a className="ucp-link hover-blue" href="http://www.gongchangp2p.cn/account/home.shtml">
-                <i className="ucp-icon icon-invest"></i>
+            <a className="ucp-link" href="http://www.gongchangp2p.cn/account/home.shtml">
+                <i className="ucp-icon icon-p2p"></i>
                 <span>我的微金</span>
             </a>
-            <a className="ucp-link hover-blue" href="http://www.gongchangzx.com/account/home.shtml">
-                <i className="ucp-icon icon-invest"></i>
+            <a className="ucp-link" href="http://www.gongchangzx.com/account/home.shtml">
+                <i className="ucp-icon icon-zx"></i>
                 <span>我的尊享</span>
             </a>
 
-            <a className="ucp-link hover-red" href="/static/web/user-coupon/index.html">
+            <div className="ucp-horizon-line"></div>
+
+            <a
+                className={nav_link_cn('/user-coupon/')}
+                href="/static/web/user-coupon/index.html">
                 <i className="ucp-icon icon-coupon"></i>
                 <span>优惠券</span>
             </a>
 
-            <a className="ucp-link hover-red" href="/static/web/user-score/index.html">
+            <a className={nav_link_cn('/user-score/')}
+                href="/static/web/user-score/index.html">
                 <i className="ucp-icon icon-score"></i>
                 <span>工分</span>
             </a>
-            <a className="ucp-link hover-red" href="/userBeans/userAccount.shtml">
+            <a className="ucp-link" href="/userBeans/userAccount.shtml">
                 <i className="ucp-icon icon-bean"></i>
                 <span>工豆</span>
             </a>
 
             <div className="ucp-horizon-line"></div>
 
-            <a className="ucp-link hover-blue" href="/depository/account/toAccountSetup.shtml">
+            <a className="ucp-link" href="/depository/account/toAccountSetup.shtml">
                 <i className="ucp-icon icon-set"></i>
                 <span>会员设置</span>
             </a>
 
-            <a className="ucp-link hover-blue" href="/mesageCenter/msssageList.shtml">
+            <a className="ucp-link" href="/mesageCenter/msssageList.shtml">
                 <i className="ucp-icon icon-msg"></i>
                 <span>消息中心</span>
             </a>

@@ -28,9 +28,14 @@ const TOPIC_PAGES = [
 
 //用户界面
 const USER_PAGES = [
-    // 'user-coupon', //用户优惠券
     {
         name: 'user-score', //用户工分
+        project_components: [
+            'header-status-bar.jsx',
+            'user-center-sidebar.jsx'
+        ]
+    }, {
+        name: 'user-coupon', //用户优惠券
         project_components: [
             'header-status-bar.jsx',
             'user-center-sidebar.jsx'
