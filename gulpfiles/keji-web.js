@@ -26,9 +26,16 @@ const TOPIC_PAGES = [
     'topic-hui-shang-guide', // 徽商 开户引导
 ]
 
+//用户界面
+const USER_PAGES = [
+    // 'user-coupon', //用户优惠券
+    'user-score', //用户工分
+]
+
 APP_NAMES.push(
     ...NOTICE_PAGES,
-    ...TOPIC_PAGES
+    ...TOPIC_PAGES,
+    ...USER_PAGES
 )
 
 module.exports = function (gulp, generate_task, settings) {
