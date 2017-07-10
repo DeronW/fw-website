@@ -159,7 +159,7 @@ $(function () {
             },
             success: function(data) {
                 if(data.code == 10000) {
-                    $("#captcha-img img").attr('src', data.data.url);
+                    $(".captcha-img img").attr('src', data.data.url);
                 }
             }
         });
