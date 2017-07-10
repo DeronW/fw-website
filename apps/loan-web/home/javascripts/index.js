@@ -47,9 +47,6 @@ $(function () {
         });
     }
 
-
-
-
 	var registerObj = {
 		phoneVal: '',
 		codeVal: '',
@@ -77,7 +74,6 @@ $(function () {
 
 		}
 	};
-
 	registerObj.phoneValFun();
 	registerObj.codeValFun();
 	registerObj.captchaValFun();
@@ -117,8 +113,6 @@ $(function () {
 				}
 			});
 		}
-
-
 	});
 
 
