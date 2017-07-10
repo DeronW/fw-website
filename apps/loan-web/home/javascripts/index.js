@@ -36,6 +36,7 @@ $(function () {
 		phoneVal: '',
 		codeVal: '',
         captchaVal:'',
+        captchaToken:'',
 		codeToken: '',
 		codeType: '',
 		getCode: false,
@@ -106,6 +107,7 @@ $(function () {
     $("#gaincode").click(function () {
 		console.log('xxx');
 		var phone = registerObj.phoneVal;
+        var captcha = registerObj.captchaVal;
 
 		if(phone == '') {
 			$("#phoneErrorText").text("请输入手机号");
@@ -114,17 +116,12 @@ $(function () {
 			$("#phoneErrorText").text("手机号格式不正确");
 			return false;
 		}
-
         var num = 60;
         var _this=$(this);
-
 		$("#gaincode").hide();
 		$("#downCode").show();
 		$("#downCode").text(num+'秒');
-
 		registerObj.getCode = true;
-
-
         _this.text(num+'秒');
         var timer = setInterval(function () {
             if(num==0){
@@ -139,9 +136,35 @@ $(function () {
                 num--;
             }
         },1000);
+        $.ajax({
+            url: $("#api-path").val() + 'api/userBase/v1/sendVerifyCode.json',
+            method: 'POST',
+            data: {
+                mobile: registerObj.phoneVal,
+                verifyCode:registerObj.captchaVal,
+                verifyToken:registerObj.captchaToken,
+                userOperationType: 3,
+                sourceType: 5
+            },
+            success: function(data) {
+                if(data.code == 10000) {
+                    registerObj.codeToken = data.data.codeToken;
+                    registerObj.codeType = data.data.codeType;
+                    $("#downCode").text(num+'秒');
+                } else if(data.code == 20010){
+                    clearInterval(timer);
+                    $("#captchaErrorText").text(data.message);
+                }else {
+                    clearInterval(timer);
+                    $("#gaincode").show();
+                    $("#downCode").hide();
+                    $("#gaincode").text('点击获取')
+                    alert(data.message);
 
+                }
+            }
+        });
     });
-
 
 
     getCaptcha();
@@ -160,13 +183,11 @@ $(function () {
             success: function(data) {
                 if(data.code == 10000) {
                     $(".captcha-img img").attr('src', data.data.url);
+                    registerObj.captchaToken = data.data.verifyToken;
                 }
             }
         });
     }
-
-
-
 
 
 });
