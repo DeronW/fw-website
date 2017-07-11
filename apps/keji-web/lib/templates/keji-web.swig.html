@@ -43,16 +43,15 @@
 <script>
     // 如果是IE8及以下版本的浏览器, 弹出浏览器升级提示框
     var tag = document.getElementsByTagName('html')[0];
-    if(tag && tag.className.indexOf('not-supported-ie8') >= 0) {
+    if (tag && tag.className === 'not-support-ie8') {
         // 看来是不支持IE8了
         var iframe = document.createElement('iframe');
         iframe.src = 'http://www.9888keji.com/static/keji-web/update-browser/index.html'
         iframe.frameborder = 0
         iframe.width = '100%'
         iframe.height = '100%'
-        iframe.setAttribute('style', 'display: block; position: absolute; z-index: 999; top: 0; left: 0; right: 0; bottom: 0; border: 0; background: transparent;')
         document.body.appendChild(iframe)
-        document.body.style.overflow = 'hidden'
+        iframe.setAttribute('style', 'display: block; position: absolute; z-index: 99; top: 0; left: 0; right: 0; bottom: 0; border: 0;')
     }
 </script>
 
