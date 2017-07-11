@@ -86,7 +86,7 @@ $(function () {
 		if(phone == '') {
 			$("#phoneErrorText").text("请输入手机号");
 		} else if(captcha == ''){
-            $("#captchaErrorText").text("请输入图形验证码");
+            $("#captchaErrorText").text("请输入图片验证码");
         }else if (!isMobilePhone(phone)) {
 			$("#phoneErrorText").text("手机号格式不正确");
 		} else if(!registerObj.getCode) {
