@@ -1,0 +1,119 @@
+<div class="global-sidebar-fn">
+    <a href="/activity/app/" target="_blank">
+        <img class="icon" src="images/global-sidebar/icon-sidebar-fn-phone.png">
+        <div class="cover-text">
+            <div> APP</div>
+            <div> 下载</div>
+        </div>
+
+        <div class="qrcode">
+            <img src="images/global-sidebar/icon-sidebar-fn-app.png">
+            <div>扫码下载APP</div>
+        </div>
+    </a>
+
+    <a>
+        <img class="icon" src="images/global-sidebar/icon-sidebar-fn-wx.png">
+        <div class="cover-text">
+            <div>官方</div>
+            <div>微信</div>
+        </div>
+
+        <div class="qrcode">
+            <img src="images/global-sidebar/icon-sidebar-fn-wx-qrcode.png">
+            <div>公众号</div>
+        </div>
+    </a>
+
+    <a onClick="GlobalInterestCalculator.show()">
+        <img class="icon" src="images/global-sidebar/icon-sidebar-fn-cal.png">
+        <div class="cover-text">
+            <div>计算</div>
+            <div>收益</div>
+        </div>
+    </a>
+
+    <a target="_blank" href="https://wpa.b.qq.com/cgi/wpa.php?ln=1&key=XzkzODA1MDEyNl80NTQzNjZfNDAwNjc2Njk4OF8yXw">
+        <img class="icon" src="images/global-sidebar/icon-sidebar-fn-qq.png">
+        <div class="cover-text">
+            <div>在线</div>
+            <div>客服</div>
+        </div>
+    </a>
+
+    <a id="sidebar-btn-scroll-top" style="display: none">
+        <img class="icon" src="images/global-sidebar/icon-sidebar-fn-scroll-top.png">
+        <div class="cover-text">
+            <div>返回</div>
+            <div> 顶部</div>
+        </div>
+    </a>
+</div>
+
+<div class="interest-calculator">
+    <div class="bg" onClick="GlobalInterestCalculator.hide()"></div>
+    <div class="ic-panel">
+        <div class="ic-title">投资计算器 <b onClick="GlobalInterestCalculator.hide()">&times;</b></div>
+
+        <table>
+            <tr>
+                <td style="width: 114px"></td>
+                <td class="error-tips"></td>
+            </tr>
+            <tr>
+                <td>投资金额</td>
+                <td>
+                    <div class="ic-input">
+                        <div class="ic-unit">元</div>
+                        <input id="ic-total-invest" placeholder="" value="5000"/>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>年化收益率</td>
+                <td>
+                    <div class="ic-input">
+                        <div class="ic-unit">%</div>
+                        <input id="ic-interest-rate" placeholder="" value="12"/>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>还款方式</td>
+                <td>
+                    <div class="ic-input">
+                        <select id="ic-return-way" class="ic-return-way">
+                            <option value="once" selected="selected">一次性还款付息</option>
+                            <option value="monthly">按月付息到期还本</option>
+                            <option value="daily">按天一次性还款付息</option>
+                        </select>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>投资期限</td>
+                <td>
+                    <div class="ic-input">
+                        <div class="ic-unit" id="ic-invest-time-unit">月</div>
+                        <input id="ic-invest-time" placeholder="" value="12"/>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <a class="ic-cal" onClick="GlobalInterestCalculator.calculate()">计算</a>
+                    <a class="ic-reset" onClick="GlobalInterestCalculator.reset()">重置</a>
+                </td>
+            </tr>
+        </table>
+
+        <div class="ic-result">
+            <div class="ic-result-title">计算结果</div>
+            <div class="ic-result-item">本息总计： <b class="color-red">0.00</b></div>
+            <div class="ic-result-item">应收利息： <b>0.00</b></div>
+            <div class="ic-result-item">每月应收本息： <b>0.00</b></div>
+            <div class="ic-result-item">最后一月应收本息： <b>0.00</b></div>
+        </div>
+    </div>
+</div>
