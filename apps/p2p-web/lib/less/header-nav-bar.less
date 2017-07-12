@@ -1,0 +1,104 @@
+@barHeight: 80px;
+
+.header-nav-bar {
+  height: @barHeight;
+  display: table;
+  width: 100%;
+  background: white;
+  border-bottom:1px solid #eaeaea;
+  .container{
+    width: 1140px;
+    margin: 0 auto;
+  }
+  img {
+    max-height: @barHeight;
+    display: block;
+    float: left;
+    position: relative;
+    transition: all 0.3s linear 4.5s;
+  }
+
+  .header-nav-bar-logo {
+    background: transparent url(../images/global-header/p2p-logo-header.png) no-repeat center center;
+    width: 314px;
+    height: 80px;
+    display: block;
+    float: left;
+  }
+  .header-nav-bar-links {
+    height: @barHeight;
+    float: right;
+    li {
+      float: left;
+      padding: 0 30px;
+      cursor: pointer;
+      font-size: 18px;
+      height: @barHeight;
+      line-height: @barHeight;
+      list-style: none;
+
+      &:last-child {
+        padding-right: 0;
+      }
+
+      &.active {
+        color: #f9655a;
+      }
+      a.active{
+        color: #f9655a;
+      }
+    }
+    #p2p {
+      height: 80px;
+      padding: 0 10px;
+      #tab-p2p {
+        position: relative;
+        width: 60px;
+        height: 30px;
+        padding: 0 9px;
+        overflow: hidden;
+        margin: 26px 0 0 0;
+
+        .text-block {
+          height: 30px;
+          line-height: 30px;
+          text-align: center;
+
+          a {
+            display: block;
+          }
+          .arrow {
+            float: right;
+            width: 12px;
+            height: 12px;
+            margin: 10px 0 0 0;
+            transition: all ease-in-out 0.5s;
+            background: transparent url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAALBAMAAABbgmoVAAAAHlBMVEUAAABmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmbpCqcMAAAACnRSTlMAP/flxs6yJBEKjLmKuAAAAB9JREFUCNdjwA5MGqYZACmhcCcBIMWopAgWFQZy8AEAfaMCnbpszsgAAAAASUVORK5CYII=') no-repeat center center;
+          }
+        }
+
+        .text-list {
+          min-height: 30px;
+          line-height: 30px;
+          text-align: center;
+        }
+
+        &:hover {
+          height: 59px;
+          padding: 0 8px;
+          border: 1px solid transparent;
+          box-shadow: -1px 0 1px #f2f2f2, /*左边阴影*/ 1px 0 1px #f2f2f2; /*右边阴影*/
+          background-color: #fff;
+          border-top: none;
+          .arrow {
+            transform: rotate(180deg);
+          }
+        }
+      }
+
+    }
+    a:hover {
+      color: #f03b43 !important;
+    }
+  }
+}
