@@ -38,7 +38,7 @@ const USER_PAGES = [
 APP_NAMES.push(
     ...TOPIC_PAGES,
     ...USER_PAGES,
-    ...NOTICE_PAGES,
+    ...NOTICE_PAGES
 )
 
 module.exports = function (gulp, generate_task, settings) {
