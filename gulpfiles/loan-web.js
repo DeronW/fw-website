@@ -8,19 +8,17 @@ let APP_NAMES = [
 
 module.exports = function (gulp, generate_task, settings) {
 
-    let INCLUDE_COMPONENTS = [
-    ];
-
-    let INCLUDE_JAVASCRIPTS = [
-    ];
-
-    let INCLUDE_LESS = [
-    ];
-
     let common_config = {
-        include_components: INCLUDE_COMPONENTS,
-        include_javascripts: INCLUDE_JAVASCRIPTS,
-        include_less: INCLUDE_LESS
+        react_version: '15',
+        project_components: [
+        ],
+        project_javascripts: [
+            'jquery-1.11.3.js',
+            'promise-polyfill.min.js'
+        ],
+        project_less: [
+            'common.less'
+        ]
     }
 
     APP_NAMES.forEach(i => {

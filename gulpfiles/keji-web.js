@@ -58,6 +58,7 @@ module.exports = function (gulp, generate_task, settings) {
             'confirm.jsx'
         ],
         project_javascripts: [
+            'jquery-1.12.4.min.js',
             'common-functions.js',
             'interest-calculator.js'
         ],
