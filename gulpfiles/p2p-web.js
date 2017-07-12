@@ -4,18 +4,21 @@ const PROJ = 'p2p-web';
 
 let APP_NAMES = [
     'app-download',//下载引导页
+    'protocol-user-service',//用户服务协议
+    'aboutus',//关于我们相关页面
+    'about-us',//关于我们相关页面
+    'preservation',//易保全页面
 ];
 
 // 公告类页面
 const NOTICE_PAGES = [
-    'aboutus',//关于我们相关页面
-    'about-us',//关于我们相关页面
-    'preservation',//易保全页面
-    'topic-safety',//安全保障页面
+    'notice-information-disclosure',//新信息披露页
+    'notice-corporate-structure',//旧信息披露页
 ]
 
 // 专题说明类页面
 const TOPIC_PAGES = [
+    'topic-safety',//安全保障页面
     'topic-bu-mao-tong',//埠贸通专题页
     'topic-li-sui-xiang',//利随想专题页
     'topic-xiao-fei-dai',//消费贷专题页
@@ -25,12 +28,9 @@ const TOPIC_PAGES = [
     'topic-you-ju-dai',//友居贷专题页
     'topic-hui-shang',//微商银行存管
     'topic-hui-shang-guide',//徽商银行存管操作指引
-    'protocol-user-service',//用户服务协议
 ]
 
 const USER_PAGES = [
-    'notice-information-disclosure',//新信息披露页
-    'notice-corporate-structure',//旧信息披露页
     'user-bank-phone'//银行预留手机号修改页
 ]
 
