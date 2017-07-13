@@ -35,7 +35,7 @@ class Content extends React.Component{
                     <div className="ad-content">
                         <div className="c-item">
                             <div className="item-pic">
-                                <img src="../home/images/featureone.jpg" />
+                                <img src="../images/featureone.jpg" />
                             </div>
                             <div class="item-text">
                                 <div className="t-f">简单</div>
@@ -44,7 +44,7 @@ class Content extends React.Component{
                         </div>
                         <div className="c-item">
                             <div className="item-pic">
-                                <img src="../home/images/feature2.jpg" />
+                                <img src="../images/feature2.jpg" />
                             </div>
                             <div className="item-text">
                                 <div className="t-f">快速</div>
@@ -53,7 +53,7 @@ class Content extends React.Component{
                         </div>
                         <div className="c-item">
                             <div className="item-pic">
-                                <img src="../home/images/feature3.png" />
+                                <img src="../images/feature3.png" />
                             </div>
                             <div className="item-text">
                                 <div className="t-f">便捷</div>
@@ -62,7 +62,7 @@ class Content extends React.Component{
                         </div>
                         <div className="c-item" style={{marginRight: 0}}>
                             <div className="item-pic">
-                                <img src="../home/images/feature4.jpg" />
+                                <img src="../images/feature4.jpg" />
                             </div>
                             <div className="item-text">
                                 <div className="t-f">无抵押</div>
@@ -74,12 +74,12 @@ class Content extends React.Component{
                 <div className="flow">
                     <div className="flow-content">
                         <div className="flow-title">
-                            <img src="../home/images/title2.png"/>
+                            <img src="../images/title2.png"/>
                         </div>
                         <div className="blueline"></div>
                         <div className="flow-item-box">
                             <div className="f-item">
-                                <img src="../home/images/iphone1.png"/>
+                                <img src="../images/iphone1.png"/>
                                 <div className="f-l">
                                     注册
                                 </div>
@@ -88,7 +88,7 @@ class Content extends React.Component{
                                 </div>
                             </div>
                             <div className="f-item">
-                                <img src="../home/images/iphone2.png"/>
+                                <img src="../images/iphone2.png"/>
                                 <div className="f-l">
                                     申请
                                 </div>
@@ -97,7 +97,7 @@ class Content extends React.Component{
                                 </div>
                             </div>
                             <div className="f-item" style={{marginRight: 0}}>
-                                <img src="../home/images/iphone3.png" />
+                                <img src="../images/iphone3.png" />
                                 <div className="f-l">
                                     放款
                                 </div>
@@ -111,7 +111,7 @@ class Content extends React.Component{
                 <div className="footer">
                     <div className="footer-content">
                         <div className="f-logo">
-                            <img src="../home/images/flogo.png"/>
+                            <img src="../images/flogo.png"/>
                         </div>
                         <div className="some-info">
                             <div>
@@ -135,24 +135,24 @@ class Content extends React.Component{
                 <div className="bottom" style={{position:this.state.position}}>
                     <div className="bottom-content">
                         <div className="b-pic">
-                            <img src="../home/images/footerperdon.png"/>
+                            <img src="../images/footerperdon.png"/>
                         </div>
                         <div className="b-des">
-                            <img src="../home/images/b-des.png"/>
+                            <img src="../images/b-des.png"/>
                         </div>
                         <div className="b-er">
-                            <img src="../home/images/erweima1.png"/>
-                            <img src="../home/images/erweima2.png"/>
+                            <img src="../images/erweima1.png"/>
+                            <img src="../images/erweima2.png"/>
                         </div>
                     </div>
                 </div>
                 <div className="popwindow" style={{display: "none"}} id="popwindow">
                     <div class="pop-box">
                         <div class="close" id="close-btn">
-                            <img src="../home/images/closebtn.png"/>
+                            <img src="../images/closebtn.png"/>
                         </div>
                         <div class="warn">
-                            <img src="../home/images/warn.png"/>
+                            <img src="../images/warn.png"/>
                         </div>
                         <div class="pop-text">
                             <div class="p-f">您的手机号138****1921注册失败</div>
