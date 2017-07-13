@@ -29,7 +29,7 @@ class Content extends React.Component{
                 </div>
                 <div className="advantage">
                     <div className="advantage-title">
-                        <img src="../home/images/title1.jpg" />
+                        <img src="../images/title1.jpg" />
                     </div>
                     <div className="blueline"></div>
                     <div className="ad-content">
