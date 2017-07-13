@@ -164,7 +164,7 @@ const HeaderStatusBar = React.createClass({
                         <a className="zxh-left-link l-first" href="http://www.9888keji.com/">金融工场</a>
                         <a className="zxh-left-link" href="https://www.easyloan888.com">放心花</a>
                         <a className="zxh-left-link" href="http://mall.9888.cn">豆哥商城</a>
-                        <a className="zxh-left-link l-last" href="https://bbs.9888.cn/">工友之家</a>
+                        {/*<a className="zxh-left-link l-last" href="https://bbs.9888.cn/">工友之家</a>*/}
                     </div>
                 </div>
                 <div className="header-status-bar-app">
