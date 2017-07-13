@@ -131,7 +131,7 @@ const HeaderStatusBar = React.createClass({
                 </div>
                 {/*<a className="link" href="http://bbs.9888.cn" target="_blank">工友之家</a>*/}
                 {/*{separate_line}*/}
-                <a className="link" href="https://bbs.9888.cn/">工友之家</a>
+                {/*<a className="link" href="https://bbs.9888.cn/">工友之家</a>*/}
                 <a className="link" href="/static/web/guide-cookbook/index.html">玩赚攻略</a>
                 {/*<div className="hsb-guide-nav">
                     <div className="hsb-guide-nav-box">
