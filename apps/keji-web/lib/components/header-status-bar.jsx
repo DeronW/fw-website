@@ -108,7 +108,7 @@ class HeaderStatusBar extends React.Component {
                         </span>
                     </span>
                 </div>
-                <a className="link" href="https://bbs.9888.cn/">工友之家</a>
+                {/*<a className="link" href="https://bbs.9888.cn/">工友之家</a>*/}
                 <a className="link" href="/static/web/guide-cookbook/index.html">玩赚攻略</a>
                 {is_login && <a className="link" href="/mesageCenter/msssageList.shtml?messageType=1">消息{msg}</a>}
                 {is_login && username && user_state}
