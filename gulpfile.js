@@ -18,7 +18,6 @@ try {
 
 const SETTINGS = Object.assign({}, require('./gulpfiles/settings.default.js'), settings);
 // gulpfile 本地扩展配置
-require('./gulpfiles/activity.js')(gulp, gt, SETTINGS);
 require('./gulpfiles/web.js')(gulp, gt, SETTINGS);
 require('./gulpfiles/keji-web.js')(gulp, gt, SETTINGS);
 require('./gulpfiles/loan-web.js')(gulp, gt, SETTINGS);

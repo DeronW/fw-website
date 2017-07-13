@@ -5,10 +5,6 @@ module.exports = {
     mall: {
         dev_api_path: '//fe.9888.cn/api/test-a/mall'
     },
-    activity: {
-        // dev_api_path: '//fe.9888.cn'
-        dev_api_path: '//localhost/fake-api/'
-    },
     "loan-web": {
         dev_api_path: '//fe.9888.cn/'
     },
