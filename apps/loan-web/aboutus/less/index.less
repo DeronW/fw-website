@@ -34,7 +34,7 @@
 .clearfix {
   zoom: 1;
 }
-#content{height:660px;background:#eaeaea;border-bottom:1px solid #ddd;border-top:2px solid #3e7cd4;}
+#content{min-height:660px;background:#eaeaea;border-bottom:1px solid #ddd;border-top:2px solid #3e7cd4;}
 
 .aboutus-container {
 //   border-top: 1px solid #eaeaea;
@@ -46,55 +46,65 @@
 .aboutus-container .aboutus-box {
   width: 1000px;
   min-height: 520px;
-  margin: 0 auto 30px;
+  margin: 0 auto;
+  box-sizing: border-box;
 //   border-right: 1px solid #eaeaea;
 }
 
 .aboutus-box .a-left {
   width: 200px;
-  height: 600px;
+  min-height:520px;
   float: left;
   background-color: #fff;
   border-right: 1px solid #eaeaea;
+//   padding-top:30px;
+height:590px !important;
+border-radius:0 0 0 4px;
 }
 
 .aboutus-box .a-left .left-item {
   width: 200px;
   text-align: center;
-  height: 46px;
-  line-height: 50px;
+  height: 30px;
+  line-height: 36px;
+  margin-bottom:15px;
 //   border-bottom: 1px solid #eaeaea;
   cursor: pointer;
+  font-size:16px;
+  &:first-child{
+      margin-top:30px;
+  }
 }
 
-.aboutus-box .a-left .left-item .l-content {
+.l-content {
   display: inline-block;
   vertical-align: middle;
   padding-left: 5px;
-  margin-top: -7px;
+  margin-top: -6px;
+  color:#999;
 }
 
 .aboutus-box .a-left .left-item .l-icon {
   display: inline-block;
   width: 18px;
-  height: 15px;
+  height: 18px;
   vertical-align: middle;
 }
 
 .aboutus-box .a-left .left-item .icon-aboutus {
-  margin-top: -7px;
+  margin-top: -6px;
   background: url("../images/aboutus.png") no-repeat center;
 }
 .aboutus-box .a-left .left-item .icon-contactus {
-  width: 14px;
+  width: 18px;
   height: 18px;
-  margin-top: -7px;
+  margin-top: -6px;
   background: url("../images/contactus.png") no-repeat center;
 }
 .aboutus-box .a-left .left-item .icon-partner {
-  width: 17px;
-  height: 17px;
-  margin-top: -7px;
+  width: 18px;
+  height: 18px;
+  margin-top: -6px;
   background: url("../images/partner.png") no-repeat center;
 }
 
@@ -102,53 +112,79 @@
 
 .aboutus-box .a-left .active {
 //   background: url("../images/active.png") no-repeat center;
-  color: #85b8f8;
+  color: #478cee;
 //   width: 181px;
-background:#eaeaea;
+background:#f6f7fc;
+}
+.aboutus-box .a-left .active .l-content{
+      color: #478cee;
 }
 
 .aboutus-box .a-left .active .icon-aboutus {
-  margin-top: -7px;
+  margin-top: -6px;
   background: url("../images/aboutus-active.png") no-repeat center;
 }
 
 .aboutus-box .a-left .active .icon-contactus {
-  margin-top: -7px;
+  margin-top: -6px;
   background: url("../images/contactus-active.png") no-repeat center;
 }
 .aboutus-box .a-left .active .icon-partner {
-  margin-top: -7px;
+  margin-top: -6px;
   background: url("../images/partner-active.png") no-repeat center;
 }
 
 .aboutus-box .a-right {
   width: 799px;
-  height: 600px;
+  min-height: 540px;
   float: left;
+border-radius: 0 4px 0 0;
+  
 }
+// .right-items{
+//     padding-bottom:30px;
+//     background:#fff;
+// }
 
 .aboutus-box .a-right .r-item {
-  height: 580px;
+  min-height: 540px;
   width: 799px;
+  font-size:14px;
 //   margin: 20px;
 //   border: 1px solid #eaeaea;
 //   border-radius: 4px;
   border-top: 0 none;
   background:#fff;
-  padding-left: 16px;
-    padding-right: 16px;
-    padding-top: 20px;
-    line-height: 20px;
+//   padding-left: 40px;
+    // padding-right: 40px;
+    padding-top: 50px;
+    line-height: 24px;
+    border-radius: 0 0 4px 0;
+    // padding-bottom:60px;
+    // padding:50px 40px auto;
 }
 .text{
     text-indent: 2em;
+    padding:0 40px;
+    &:first-child{
+        margin:0;
+    }
+}
+.contact-item,.bdmap{
+    margin-left:40px;
+}
+.sub-partner{
+    width:740px;
+    padding-left:40px;
 }
 .partner-item{
     display: inline-block;
     margin-right: 20px;
     margin-bottom: 10px;
+    // margin-left:40px;
     img{
-        border:1px solid #ddd;
+        border:1px solid #eaeaea;
+        border-radius:2px;
     }
 }
 
@@ -162,12 +198,26 @@ background:#eaeaea;
 
 .left-line{
     display: inline-block;
-    width: 2px;
-    height: 12px;
-    background: #000;
-    margin-bottom: -1px;
-    margin-right: 5px;
+    width: 3px;
+    height: 18px;
+    background: #3a4a79;
+    margin-bottom: -4px;
+    margin-right: 12px;
 }
-
+.contact-item{
+    span{
+        font-size: 18px;
+        color:#3a4a79;
+    }
+    margin-bottom:20px;
+    p{
+        margin:0;
+    }
+}
+.bdmap{
+    width:600px;
+    height:260px;
+    margin-top:-8px;
+}
 
 

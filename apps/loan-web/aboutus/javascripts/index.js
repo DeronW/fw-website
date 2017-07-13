@@ -11,6 +11,8 @@ $(document).ready(function() {
         jumplink($(".left-item")[0]);
     } else if (hash === "#contactus") {
         jumplink($(".left-item")[1]);
+    } else if (hash === "#partner") {
+        jumplink($(".left-item")[2]);
     }
     $(window).on("hashchange", function() {
         hash = location.hash;
@@ -33,6 +35,8 @@ $(document).ready(function() {
                 hashChnage("aboutus");
             } else if (index == 1) {
                 hashChnage("contactus");
+            } else if (index == 2) {
+                hashChnage("partner");
             }
         })
     });
@@ -41,17 +45,17 @@ $(document).ready(function() {
         window.scrollTo(0, 0);
         history.pushState({}, '', `#${key}`)
     }
-    $(".policy-item").each(function(index, item) {
-        $(this).mouseenter(function() {
-            $(this).addClass("active").siblings().removeClass("active")
-        })
-    })
-    $(".policy-item").each(function(index, item) {
-            $(this).mouseleave(function() {
-                $(this).removeClass("active")
-            })
-        })
-        // 百度地图API功能
+    // $(".policy-item").each(function(index, item) {
+    //     $(this).mouseenter(function() {
+    //         $(this).addClass("active").siblings().removeClass("active")
+    //     })
+    // })
+    // $(".policy-item").each(function(index, item) {
+    //         $(this).mouseleave(function() {
+    //             $(this).removeClass("active")
+    //         })
+    //     })
+    // 百度地图API功能
 
     var map = new BMap.Map("allmap");
     map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);
@@ -60,9 +64,9 @@ $(document).ready(function() {
     });
     local.search("北京市朝阳区朝阳门外大街18号");
 
-    //map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);
-    //var local = new BMap.LocalSearch(map, {
-    //    renderOptions:{map: map, autoViewport:true}
-    //});
-    //local.searchNearby("丰联广场", "北京市朝阳区朝阳门外大街18号");
+    map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);
+    var local = new BMap.LocalSearch(map, {
+        renderOptions: { map: map, autoViewport: true }
+    });
+    local.searchNearby("丰联广场", "北京市朝阳区朝阳门外大街18号");
 })
