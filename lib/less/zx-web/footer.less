@@ -4,14 +4,14 @@
   display: table;
   width: 100%;
   font-size: 14px;
-  .row-zx{
+  .row-zx {
     margin-top: 60px;
     color: #8ba3bf;
     text-align: center;
     font-size: 12px;
     line-height: 20px;
   }
-  .contaner-zx{
+  .contaner-zx {
   }
 
   .row-1 {
@@ -21,11 +21,11 @@
       float: left;
       width: 33.3%;
       box-sizing: border-box;
-      .zx-des{
+      .zx-des {
         font-size: 16px;
         color: #8ba3bf;
         width: 270px;
-        a{
+        a {
           font-size: 14px;
         }
       }
@@ -33,7 +33,7 @@
 
     .column-1 {
       border-right: solid 1px #3c4b63;
-      height:148px;
+      height: 148px;
       width: 365px;
       padding-left: 15px;
       .home-link {
@@ -52,13 +52,76 @@
           color: white;
         }
       }
+      .service-connect {
+        padding-top: 25px;
+        .service-qq {
+          display: block;
+          width: 125px;
+          height: 30px;
+          color: #b4d6fe;
+          border: solid 1px #b4d6fe;
+          border-radius: 3px;
+          line-height: 30px;
+          font-size: 14px;
+          cursor: pointer;
+          float: left;
+
+          .icon-qq {
+            display: inline-block;
+            width: 30px;
+            height: 22px;
+            float: left;
+            background: url(../images/global-footer/icon-footer-no.3.png) no-repeat;
+            margin-top: 4px;
+            margin-left: 15px;
+          }
+
+          &:hover {
+
+            background-color: rgb(180, 214, 254);
+            color: rgb(51, 67, 91);
+
+            .icon-qq {
+              background-position: 0px -25px;
+            }
+          }
+        }
+        .service-wechat {
+          margin-left: 20px;
+          cursor: pointer;
+          float: left;
+          display: block;
+          width: 36px;
+          height: 36px;
+          position: relative;
+          top: -2px;
+          .wechat-qrcode {
+            display: none;
+            width: 172px;
+            height: 200px;
+            top: -195px;
+            left: -110px;
+            position: absolute;
+          }
+
+          &:hover {
+            .wechat-qrcode {
+              display: block;
+            }
+          }
+        }
+      }
     }
 
     .column-2 {
-      padding-left: 50px;
+      padding-left: 30px;
       color: #b4d6fe;
       border-right: solid 1px #3c4b63;
-      height:148px;
+      height: 148px;
+      .zx-phone{
+        padding-left: 20px;
+        display: inline-block;
+      }
       .service-time {
         font-size: 14px;
         margin-bottom: 40px;
@@ -71,44 +134,7 @@
       .service-phone {
         font-size: 24px;
         font-family: arial;
-        margin-bottom: 5px;
-      }
-
-      .service-connect {
-        padding-top: 1px;
-      }
-
-      .service-qq {
-        display: block;
-        width: 125px;
-        height: 30px;
-        color: #b4d6fe;
-        border: solid 1px #b4d6fe;
-        border-radius: 3px;
-        line-height: 30px;
-        font-size: 14px;
-        cursor: pointer;
-        float: left;
-
-        .icon-qq {
-          display: inline-block;
-          width: 30px;
-          height: 22px;
-          float: left;
-          background: url(../images/global-footer/icon-footer-no.3.png) no-repeat;
-          margin-top: 4px;
-          margin-left: 15px;
-        }
-
-        &:hover {
-
-          background-color: rgb(180, 214, 254);
-          color: rgb(51, 67, 91);
-
-          .icon-qq {
-            background-position: 0px -25px;
-          }
-        }
+        margin-bottom: 15px;
       }
 
       .service-weibo {
@@ -119,30 +145,7 @@
         margin-left: 20px;
         cursor: pointer;
       }
-      .service-wechat {
-        margin-left: 20px;
-        cursor: pointer;
-        float: left;
-        display: block;
-        width: 36px;
-        height: 36px;
-        position: relative;
-        top: -2px;
-        .wechat-qrcode {
-          display: none;
-          width: 172px;
-          height: 200px;
-          top: -195px;
-          left: -110px;
-          position: absolute;
-        }
 
-        &:hover {
-          .wechat-qrcode {
-            display: block;
-          }
-        }
-      }
     }
 
     .column-3 {
