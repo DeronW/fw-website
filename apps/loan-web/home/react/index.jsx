@@ -25,42 +25,7 @@ class Content extends React.Component{
     }
     render(){
         return <div className="easyloan-box">
-                <div className="header">
-                    <div className="logo"></div>
-                    <div className="sevice-phone">
-                        <div className="phone-text">客服电话：400-102-0066</div>
-                        <div className="phone-text">周一至周日：9:00-18:00</div>
-                    </div>
-                </div>
                 <div className="banner"  ref="bannerHeight">
-                    {/*<div className="resiter-box">
-                        <div className="register">
-                            <div id="rgisterContent" className="register-content">
-                                <label>
-                                    <input id="phoneChange" type="text" maxlength="11" className="phonenum" placeholder="请输入手机号" />
-                                    <div id="phoneErrorText" className="p-tips"></div>
-                                </label>
-                                <div className="container">
-                                    <input id="captchaChange" type="text" maxlength="4" className="securitycode" placeholder="请输入图片验证码" value="" />
-                                    <span className="captcha-img"><img src=" "/></span>
-                                    <div id="captchaErrorText" className="c-tips"></div>
-                                </div>
-                                <div class="container">
-                                    <input id="codeChange" type="text" maxlength="6" className="securitycode" placeholder="请输入验证码" value="" />
-                                    <span className="gaincode" id="gaincode">点击获取</span>
-                                    <span className="gaincode down-code" id="downCode" style={{display: "none"}}></span>
-                                    <div id="codeErrorText" className="c-tips"></div>
-                                </div>
-                                <div className="deal">同意<a href="/static/loan-web/register-protocol/index.html" target="_blank" className="deallink">《放心花用户注册协议》</a></div>
-                                <div id="registerButn" className="registerbutton" >立即借款</div>
-                            </div>
-
-                            <div id="qrBlock" className="qr-block" style={{display: "none"}}>
-                                <img src="../home/images/QR.png" />
-                            </div>
-                        </div>
-                    </div>*/}
-
                 </div>
                 <div className="advantage">
                     <div className="advantage-title">
@@ -148,15 +113,22 @@ class Content extends React.Component{
                         <div className="f-logo">
                             <img src="../home/images/flogo.png"/>
                         </div>
-                        <div className="f-t">
-                            <div className="copyright">Copyright©2017 深圳市众利财富管理有限公司<span style={{paddingLeft: "23px"}}></span>
-                            </div>
-                            <div className="f-sevice">客服电话 <span style={{padding: "0 15px",color: "#666"}}>400-102-0066</span>周一至周日<span>9:00-18:00</span>
-                            </div>
+                        <div className="some-info">
                             <div>
-                                粤ICP备17034889号-1
+                                <span className="info-item"><a href="/static/loan-web/aboutus/index.html#aboutus" target="_blank">关于我们</a></span>
+                                <b className="gap-line"></b>
+                                <span className="info-item"><a href="/static/loan-web/aboutus/index.html#contactus" target="_blank">联系我们</a></span>
+                                <b className="gap-line"></b>
+                                <span className="info-item"><a href="/static/loan-web/aboutus/index.html#partner" target="_blank">合作伙伴</a></span>
                             </div>
-                            <div>投资有风险，入市需谨慎</div>
+                            <p>友情链接：金融工场，易宝支付，百融金服，Face++</p>
+                        </div>
+                        <div className="f-t">
+                            <p className="copyright">Copyright©2017 深圳市众利财富管理有限公司 粤ICP备17034889号-1<span style={{paddingLeft: "23px"}}></span>
+                            </p>
+                            <p className="f-sevice">客服电话 <span style={{padding: "0 15px",color: "#666"}}>400-102-0066</span>周一至周日<span>9:00-18:00</span>
+                            </p>
+                            <p className="hint">投资有风险，入市需谨慎</p>
                         </div>
                     </div>
                 </div>
@@ -197,6 +169,7 @@ class Content extends React.Component{
 
 
 $(function () {
-    // ReactDOM.render(<HeaderStatusBar />, document.getElementById('header-status-bar'));
+    ReactDOM.render(<Header />, document.getElementById('header'));
     ReactDOM.render(<Content />, document.getElementById('content'));
+    // ReactDOM.render(<Footer />, document.getElementById('footer'));
 });

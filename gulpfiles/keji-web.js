@@ -15,7 +15,7 @@ const NOTICE_PAGES = [
     'notice-preservation', // 安全保障介绍页面
     'notice-corporate-structure', // 信息披露页面
     'notice-vip-prerogative', // 等级攻略页
-    'notice-user-protocol'//金融工场用户协议
+    'notice-user-protocol' //金融工场用户协议
 ]
 
 // 专题说明类页面
@@ -27,21 +27,19 @@ const TOPIC_PAGES = [
 ]
 
 //用户界面
-const USER_PAGES = [
-    {
-        name: 'user-score', //用户工分
-        project_components: [
-            'header-status-bar.jsx',
-            'user-center-sidebar.jsx'
-        ]
-    }, {
-        name: 'user-coupon', //用户优惠券
-        project_components: [
-            'header-status-bar.jsx',
-            'user-center-sidebar.jsx'
-        ]
-    }
-]
+const USER_PAGES = [{
+    name: 'user-score', //用户工分
+    project_components: [
+        'header-status-bar.jsx',
+        'user-center-sidebar.jsx'
+    ]
+}, {
+    name: 'user-coupon', //用户优惠券
+    project_components: [
+        'header-status-bar.jsx',
+        'user-center-sidebar.jsx'
+    ]
+}]
 
 APP_NAMES.push(
     ...NOTICE_PAGES,
@@ -49,7 +47,7 @@ APP_NAMES.push(
     ...USER_PAGES
 )
 
-module.exports = function (gulp, generate_task, settings) {
+module.exports = function(gulp, generate_task, settings) {
     let common_config = {
         react_version: '15',
         project_components: [
@@ -85,8 +83,9 @@ module.exports = function (gulp, generate_task, settings) {
     gulp.task(`build:${PROJ}`, gulp.series(APP_NAMES.map(i => `${PROJ}:pack:${i.name || i}:revision`)));
     gulp.task(`lint:${PROJ}`, gulp.series(() => {
         return gulp.src([
-            `apps/${PROJ}/**/*.+(js|jsx)`, '!node_modules/**',
-            '!**/jquery.*.js', '!**.min.js'])
+                `apps/${PROJ}/**/*.+(js|jsx)`, '!node_modules/**',
+                '!**/jquery.*.js', '!**.min.js'
+            ])
             .pipe(eslint())
             .pipe(eslint.result(result => null))
             .pipe(eslint.format())

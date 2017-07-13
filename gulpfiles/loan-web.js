@@ -3,14 +3,17 @@ const eslint = require('gulp-eslint');
 const PROJ = 'loan-web';
 
 let APP_NAMES = [
-    'home'
+    'home',
+    'aboutus'
 ];
 
-module.exports = function (gulp, generate_task, settings) {
+module.exports = function(gulp, generate_task, settings) {
 
     let common_config = {
         react_version: '15',
         project_components: [
+            'header.jsx',
+            'footer.jsx'
         ],
         project_javascripts: [
             'jquery-1.11.3.js',
@@ -36,8 +39,9 @@ module.exports = function (gulp, generate_task, settings) {
     gulp.task(`build:${PROJ}`, gulp.series(APP_NAMES.map(i => `${PROJ}:pack:${i.name || i}:revision`)));
     gulp.task(`lint:${PROJ}`, gulp.series(() => {
         return gulp.src([
-            `apps/${PROJ}/**/*.+(js|jsx)`, '!node_modules/**',
-            '!**/jquery.*.js', '!**.min.js'])
+                `apps/${PROJ}/**/*.+(js|jsx)`, '!node_modules/**',
+                '!**/jquery.*.js', '!**.min.js'
+            ])
             .pipe(eslint())
             .pipe(eslint.result(result => null))
             .pipe(eslint.format())
