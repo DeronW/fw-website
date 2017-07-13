@@ -48,10 +48,10 @@ class Content extends React.Component{
                 </div>
                 <div className="r-item r-item3" style={{display: "none"}}>
                     <div className="sub-partner">
-                        <a className="partner-item" href=""><img src="images/logo-gongchang.png" /></a>
-                        <a className="partner-item" href=""><img src="images/logo-yibao.png" /></a>
-                        <a className="partner-item" href=""><img src="images/logo-bairong.png" /></a>
-                        <a className="partner-item" href=""><img src="images/logo-face.png" /></a>
+                        <a className="partner-item" href="http://www.9888keji.com"><img src="images/logo-gongchang.png" /></a>
+                        <a className="partner-item" href="http://www.yeepay.com"><img src="images/logo-yibao.png" /></a>
+                        <a className="partner-item" href="http://www.100credit.com"><img src="images/logo-bairong.png" /></a>
+                        <a className="partner-item" href="https://www.faceplusplus.com.cn"><img src="images/logo-face.png" /></a>
                     </div>
                 </div>
             </div>
