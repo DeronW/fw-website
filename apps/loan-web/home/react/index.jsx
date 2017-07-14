@@ -138,9 +138,14 @@ class Content extends React.Component{
                             <img src="../images/b-des.png"/>
                         </div>
                         <div className="b-er">
-                            <img src="../images/erweima1.png"/>
-                            <img src="../images/erweima1.png"/>
-                            {/*<img src="../images/erweima2.jpg"/>*/}
+                            <div className="left">
+                                <img src="../images/weixin.jpg"/>
+                                <p className="weixin-download">微信下载</p>
+                            </div>
+                            <div className="right">
+                                <img className="right-qr" src="../images/app.jpg"/>
+                                <p className="app-download">App下载</p>
+                            </div>
                         </div>
                     </div>
                 </div>
