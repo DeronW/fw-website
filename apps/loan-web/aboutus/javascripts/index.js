@@ -45,28 +45,30 @@ $(document).ready(function() {
         window.scrollTo(0, 0);
         history.pushState({}, '', `#${key}`)
     }
-    // $(".policy-item").each(function(index, item) {
-    //     $(this).mouseenter(function() {
-    //         $(this).addClass("active").siblings().removeClass("active")
-    //     })
-    // })
-    // $(".policy-item").each(function(index, item) {
-    //         $(this).mouseleave(function() {
-    //             $(this).removeClass("active")
-    //         })
-    //     })
+
     // 百度地图API功能
 
-    var map = new BMap.Map("allmap");
-    map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);
-    var local = new BMap.LocalSearch(map, {
-        renderOptions: { map: map }
-    });
-    local.search("北京市朝阳区朝阳门外大街18号");
+    // var map = new BMap.Map("allmap");
+    // map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);
+    // var local = new BMap.LocalSearch(map, {
+    //     renderOptions: { map: map }
+    // });
+    // local.search("北京市朝阳区朝阳门外大街18号");
 
-    map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);
-    var local = new BMap.LocalSearch(map, {
-        renderOptions: { map: map, autoViewport: true }
-    });
-    local.searchNearby("丰联广场", "北京市朝阳区朝阳门外大街18号");
+    // map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);
+    // var local = new BMap.LocalSearch(map, {
+    //     renderOptions: { map: map, autoViewport: true }
+    // });
+    // local.searchNearby("丰联广场", "北京市朝阳区朝阳门外大街18号");
+    var map = new BMap.Map("allmap");
+    var point = new BMap.Point(116.445056, 39.929543);
+    var marker = new BMap.Marker(point);
+    map.addOverlay(marker);
+    map.centerAndZoom(point, 15);
+    var opts = {
+        width: 200,
+        height: 100,
+        title: "北京市朝阳区朝阳门外大街18号丰联广场",
+    }
+    var infoWindow = new BMap.InfoWindow("地址：北京市朝阳区朝阳门外大街18号丰联广场11层1105", opts);
 })
