@@ -71,4 +71,5 @@ $(document).ready(function() {
         title: "北京市朝阳区朝阳门外大街18号丰联广场",
     }
     var infoWindow = new BMap.InfoWindow("地址：北京市朝阳区朝阳门外大街18号丰联广场11层1105", opts);
+    map.openInfoWindow(infoWindow, point);
 })
