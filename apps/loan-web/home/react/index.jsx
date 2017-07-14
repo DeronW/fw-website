@@ -139,7 +139,8 @@ class Content extends React.Component{
                         </div>
                         <div className="b-er">
                             <img src="../images/erweima1.png"/>
-                            <img src="../images/erweima2.jpg"/>
+                            <img src="../images/erweima1.png"/>
+                            {/*<img src="../images/erweima2.jpg"/>*/}
                         </div>
                     </div>
                 </div>
