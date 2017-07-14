@@ -20,13 +20,8 @@ class Content extends React.Component{
             </div>
             <div className="a-right">
                 <div className="r-item r-item1" style={{display: "none"}}>
-                    {/*<div className="item-box item1-box">*/}
-                        {/*<div className="item-title item1-title">平台介绍</div>*/}
-                        {/*<div className="item1-des">*/}
                             <p className="text">放心花是金融工场旗下在线科技贷款平台，基于移动端的线上贷款信息聚合平台，对接多家主流平台，满足您的各类贷款需求。</p> 
                             <p className="text">放心花主要为用户提供短期的小额急借的现金借贷服务。用户通过授信认证获得授信额度，在额度内随时可进行借款，借款额度在500元-50000元之间。操作简单、方便快速、实时秒到账，做年轻人专属的手机钱包。</p> 
-                        {/*</div>*/}
-                    {/*</div>*/}
                 </div>
                 
                 <div className="r-item r-item2" style={{display: "block"}}>

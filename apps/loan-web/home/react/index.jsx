@@ -15,9 +15,6 @@ class Content extends React.Component{
             if (scrollHeight>= 350) {
                 this.setState({position:"fixed"})
             }
-            // if(this.state.position == "fixed" && this.refs.bannerHeight.offsetTop >=0){
-            //     this.setState({position:"static"})
-            // }
             if(this.state.position == "fixed" && !scrollHeight){
                 this.setState({position:"static"})
             }
@@ -171,5 +168,4 @@ class Content extends React.Component{
 $(function () {
     ReactDOM.render(<Header />, document.getElementById('header'));
     ReactDOM.render(<Content />, document.getElementById('content'));
-    // ReactDOM.render(<Footer />, document.getElementById('footer'));
 });
