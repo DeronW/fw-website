@@ -58,7 +58,10 @@ module.exports = function (gulp, generate_task, settings) {
             'footer.less',
             'sidebar-fn.less',
             'header-nav-bar.less',
-            'header-status-bar.less'
+            'header-status-bar.less',
+            // only for user center
+            'partial/ucp-icon.less',
+            'partial/user-center-panel.less'
         ]
     }
 
@@ -69,6 +72,7 @@ module.exports = function (gulp, generate_task, settings) {
         }, common_config))
         generate_task(PROJ, i, Object.assign({
             api_path: "",
+            environment: "production",
             cmd_prefix: 'pack',
             cdn_prefix: `/static/${PROJ}/${i.name || i}/`
         }, common_config))

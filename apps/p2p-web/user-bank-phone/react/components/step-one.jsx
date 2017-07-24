@@ -1,49 +1,63 @@
-const StepOne = React.createClass({
-    getInitialState: function () {
+class StepOne extends React.Component {
+
+    constructor(props) {
+        super(props)
+
         this._timer = null
-        return {
-            phone: null,
-            sms_code: null,
+
+        this.state = {
+            phone: '',
+            sms_code: '',
             counting: null,
             sms_call: false,
             voice_call: false,
         }
-    },
-    componentDidMount: function () {
+    }
+
+    componentDidMount() {
         $.post(API_PATH + '/api/recharge/v1/getUserRegPhone.json',
-            (data) => this.setState({phone: data.data.regPhone}), 'json')
-    },
-    codeChangeHandler: function (e) {
-        this.setState({sms_code: e.target.value})
-    },
-    gainNumberHandler: function (e) {
-        this.getSMSCode();
-    },
-    startCountingDown: function () {
-        this.setState({counting: 60}, this.startCountingTimer);
-    },
-    startCountingTimer: function () {
+            (data) => this.setState({ phone: data.data.regPhone }), 'json')
+    }
+
+    codeChangeHandler = e => {
+        this.setState({ sms_code: e.target.value })
+    }
+
+    gainNumberHandler = e => {
+        this.getSMSCode()
+    }
+
+    startCountingDown = () => {
+        this.setState({ counting: 60 }, this.startCountingTimer);
+    }
+
+    startCountingTimer = () => {
         this._timer = setInterval(() => {
-            this.setState({counting: this.state.counting - 1});
+            this.setState({ counting: this.state.counting - 1 });
             if (this.state.counting <= 0) {
                 clearInterval(this._timer);
-                this.setState({couting: null});
+                this.setState({ couting: null });
             }
         }, 1000)
-    },
-    reset: function () {
-        this.setState(this.setState({sms_call: true, voice_call: false}));
-    },
-    voiceReset: function () {
-        this.setState({voice_call: true});
-    },
-    makeVoiceHandler: function () {
+    }
+
+    reset = () => {
+        this.setState(this.setState({ sms_call: true, voice_call: false }));
+    }
+
+    voiceReset = () => {
+        this.setState({ voice_call: true });
+    }
+
+    makeVoiceHandler = () => {
         this.getPhoneVerifyMessage('VMS', this.voiceReset.bind(this));
-    },
-    getSMSCode: function () {
+    }
+
+    getSMSCode = () => {
         this.getPhoneVerifyMessage('VSMS', this.startCountingDown.bind(this), this.reset.bind(this))
-    },
-    getPhoneVerifyMessage: function (type, successCallback, resetcallback) {
+    }
+
+    getPhoneVerifyMessage = (type, successCallback, resetcallback) => {
         $.post(`${API_PATH}/api/recharge/v1/sendVerifyRegPhoneSms.json`, {
             isVms: type
         }, (data) => {
@@ -55,20 +69,18 @@ const StepOne = React.createClass({
                 successCallback && successCallback();
                 resetcallback && resetcallback();
             } else if (data.code == 51022) {
-                this.setState({sms_call: false, voice_call: false});
+                this.setState({ sms_call: false, voice_call: false });
                 txt = '尊敬的客户，您今日的机会已用完';
             }
             GlobalAlert(txt);
         }, 'json');
+    }
 
-
-    },
-    componentWillUnmount(){
+    componentWillUnmount() {
         clearInterval(this._timer);
-    },
-    nextStepHandler: function () {
-        // this.props.nextStepHandler()
-        // return
+    }
+
+    nextStepHandler = () => {
         $.post(API_PATH + '/api/recharge/v1/doVerifyRegPhone.json', {
             validateCode: this.state.sms_code,
         }, (data) => {
@@ -78,9 +90,10 @@ const StepOne = React.createClass({
                 GlobalAlert(data.message);
             }
         }, 'json');
-    },
-    render: function () {
-        let {phone, counting, sms_code, voice_call, sms_call} = this.state;
+    }
+
+    render() {
+        let { phone, counting, sms_code, voice_call, sms_call } = this.state;
         let btn_text = counting ? `${counting}秒` : '获取验证码';
         let tips;
 
@@ -91,20 +104,19 @@ const StepOne = React.createClass({
                 tips = <div className="tips">已向{phone}发送语音验证码，请注意收听</div>
             } else {
                 tips = <div className="tips">
-                        若获取不到，请
+                    若获取不到，请
                         <span className="link" onClick={this.makeVoiceHandler}>点击这里</span>，
                         获取语音验证码
                     </div>
             }
         }
 
-
         return (
             <div className="firstContent">
                 <div className="mainbox">
                     <div className="linef">注册手机号： <span className="linefNum">{phone}</span></div>
                     <div className="lines">手机验证码：
-                        <input type="text" value={sms_code} onChange={this.codeChangeHandler}/>
+                        <input type="text" value={sms_code} onChange={this.codeChangeHandler} />
                         <span className="gainNumber" onClick={this.gainNumberHandler}>{btn_text}</span>
                     </div>
                     {tips}
@@ -113,4 +125,4 @@ const StepOne = React.createClass({
             </div>
         )
     }
-})
+}
