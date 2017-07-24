@@ -6,7 +6,6 @@ let APP_NAMES = [
     'app-download',//下载引导页
     'protocol-user-service',//用户服务协议
     'aboutus',//关于我们相关页面
-    'about-us',//关于我们相关页面
     'preservation',//易保全页面
 ];
 
