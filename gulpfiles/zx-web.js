@@ -44,6 +44,8 @@ module.exports = function (gulp, generate_task, settings) {
         react_version: '15',
         project_components: [
             'header-status-bar.jsx',
+            'alert.jsx',
+            'confirm.jsx'
         ],
         project_javascripts: [
             'jquery-1.12.4.min.js',
