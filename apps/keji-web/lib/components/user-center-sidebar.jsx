@@ -3,10 +3,10 @@ class UserCenterSidebar extends React.Component {
     state = {
         is_login: false,
         username: null,
-        realname: '用户真名',
-        code: 'A123456',
-        level: 2,
-        avatar: 'http://www.9888.cn/img/man.png',
+        realname: '',
+        code: '',
+        level: null,
+        avatar: '',
         orderUser: {}
     }
 
@@ -17,28 +17,36 @@ class UserCenterSidebar extends React.Component {
         //     url = 'http://localhost/fake-api/userState/v2/userState.json'
         // }
 
-        // $.ajax({
-        //     url: url,
-        //     jsonp: "callback",
-        //     xhrFields: { withCredentials: true },
-        //     dataType: "jsonp"
-        // }).done(data => {
-        //     data = data.data
-        //     if (!data.isLogin) {
-        //         // 如果没登录 , 先去登录
-        //         location.href = "http://passport.9888keji.com/passport/login?sourceSite=jrgc"
-        //         return
-        //     }
+        $.ajax({
+            url: url,
+            jsonp: "callback",
+            xhrFields: { withCredentials: true },
+            dataType: "jsonp"
+        }).done(data => {
+            data = data.data
+            if (!data.isLogin) {
+                // 如果没登录 , 先去登录
+                location.href = "http://passport.9888keji.com/passport/login?sourceSite=jrgc"
+                return
+            }
 
-        //     let orderUser = data.orderUser;
-        //     window._data = data;
-        // })
+            let user = data.orderUser;
+            window._data = data;
 
-        // $UserReady((is_login, user) => {
-        //     if (is_login) return
+            let avatar = ''
+            if (user.sex == '1') avatar = '/img/man.png'
+            if (user.sex == '2') avatar = '/img/woman.png'
 
-        //     this.setState({ avatar: user.avatar })
-        // })
+            this.setState({
+                is_login: true,
+                username: user.loginName,
+                realname: user.realName,
+                code: user.promotioncode,
+                level: data.userLevel,
+                avatar: avatar,
+                orderUser: user
+            })
+        })
     }
 
     render() {
