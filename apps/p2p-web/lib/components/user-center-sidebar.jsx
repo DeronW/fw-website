@@ -13,16 +13,7 @@ class UserCenterSidebar extends React.Component {
     componentDidMount() {
         let url = "http://www.gongchangp2p.cn/api/userState/v2/userState.json"
 
-        // if($getDebugParams().login) {
-        //     url = 'http://localhost/fake-api/userState/v2/userState.json'
-        // }
-
-        $.ajax({
-            url: url,
-            jsonp: "callback",
-            xhrFields: { withCredentials: true },
-            dataType: "jsonp"
-        }).done(data => {
+        let cb = data => {
             data = data.data
             if (!data.isLogin) {
                 // 如果没登录 , 先去登录
@@ -46,7 +37,20 @@ class UserCenterSidebar extends React.Component {
                 avatar: avatar,
                 orderUser: user
             })
-        })
+        }
+
+        $.ajax({
+            url: url,
+            jsonp: "callback",
+            xhrFields: { withCredentials: true },
+            dataType: "jsonp"
+        }).done(cb)
+
+        // if ($getDebugParams().login) {
+        //     $.get('http://localhost/fake-api/api/userState/v2/userState.json').done(cb)
+        //     // url = 'http://localhost/fake-api/api/userState/v2/userState.json'
+        // }
+
     }
 
     render() {
@@ -70,55 +74,54 @@ class UserCenterSidebar extends React.Component {
                 </div>
 
                 <a href="/account/home.shtml">
-                    <div className="ucp-avatar">
-                        <img src={avatar} />
-                    </div>
+                    <div className="ucp-avatar"><img src={avatar} /></div>
                 </a>
 
                 <div className="user-name">{realname}</div>
 
                 <div className="ws-code">
-                    工场码：
-                    <a href="/factoryCode/info.shtml">{code}</a>
+                    工场码：<a href="/factoryCode/info.shtml">{code}</a>
+                </div>
+                <div className="">
+
                 </div>
             </div>
 
-            <a className="ucp-link" href="/account/myHome.shtml">
+            <a className="ucp-link" href="/account/home.shtml">
                 <i className="ucp-icon icon-user"></i>
-                <span>工场总览</span>
-            </a>
-            <a className="ucp-link" href="/factoryCode/info.shtml">
-                <i className="ucp-icon icon-invest"></i>
-                <span>邀请返利</span>
-            </a>
-            <a data-zx-title="true" className="ucp-link hide" href="/factoryCode/info.shtml">
-                <i className="ucp-icon icon-user"></i>
-                <span>我的尊享</span>
-            </a>
-            <a className="ucp-link" href="http://www.gongchangp2p.cn/account/home.shtml">
-                <i className="ucp-icon icon-p2p"></i>
                 <span>我的微金</span>
             </a>
-            <a className="ucp-link" href="http://www.gongchangzx.com/account/home.shtml">
-                <i className="ucp-icon icon-zx"></i>
-                <span>我的尊享</span>
+            <a className="ucp-link" href="/prdOrder/uinvest.shtml">
+                <i className="ucp-icon icon-invest"></i>
+                <span>我的出借</span>
+            </a>
+            <a className="ucp-link" href="/prdOrder/refundLsit.shtml">
+                <i className="ucp-icon icon-payback"></i>
+                <span>回款明细</span>
+            </a>
+            <a className="ucp-link" href="/actUser/funds.shtml">
+                <i className="ucp-icon icon-records"></i>
+                <span>资金流水</span>
+            </a>
+            <a className="ucp-link" href="/factoryCode/info.shtml">
+                <i className="ucp-icon icon-interest"></i>
+                <span>我的返利</span>
             </a>
 
             <div className="ucp-horizon-line"></div>
 
-            <a
-                className={nav_link_cn('/user-coupon/')}
-                href="/static/web/user-coupon/index.html">
+            <a className={nav_link_cn('/user-coupon/')}
+                href="https://www.9888keji.com/static/web/user-coupon/index.html">
                 <i className="ucp-icon icon-coupon"></i>
                 <span>优惠券</span>
             </a>
 
             <a className={nav_link_cn('/user-score/')}
-                href="/static/web/user-score/index.html">
+                href="https://www.9888keji.com/static/web/user-score/index.html">
                 <i className="ucp-icon icon-score"></i>
                 <span>工分</span>
             </a>
-            <a className="ucp-link" href="/userBeans/userAccount.shtml">
+            <a className="ucp-link" href="https://www.9888keji.com/userBeans/userAccount.shtml">
                 <i className="ucp-icon icon-bean"></i>
                 <span>工豆</span>
             </a>
@@ -127,12 +130,12 @@ class UserCenterSidebar extends React.Component {
 
             <a className="ucp-link" href="/depository/account/toAccountSetup.shtml">
                 <i className="ucp-icon icon-set"></i>
-                <span>会员设置</span>
+                <span>账户设置</span>
             </a>
 
-            <a className="ucp-link" href="/mesageCenter/msssageList.shtml">
-                <i className="ucp-icon icon-msg"></i>
-                <span>消息中心</span>
+            <a className="ucp-link" href="/depository/bankCard/toMyBankCard.shtml">
+                <i className="ucp-icon icon-card"></i>
+                <span>银行卡</span>
             </a>
 
         </div>

@@ -50,6 +50,7 @@ class Panel extends React.Component {
 }
 
 $(function () {
-    ReactDOM.render(<HeaderStatusBar />, document.getElementById('header-status-bar'));
+    ReactDOM.render(<HeaderStatusBar />, HEADER_STATUS_NODE);
+    ReactDOM.render(<UserCenterSidebar />, USER_CENTER_SIDEBAR_NODE);
     ReactDOM.render(<Panel />, document.getElementById('userContent'));
 });
