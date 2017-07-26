@@ -42,7 +42,8 @@ module.exports = function (gulp, generate_task, settings) {
         project_components: [
             'header-status-bar.jsx',
             'alert.jsx',
-            'confirm.jsx'
+            'confirm.jsx',
+            'user-center-sidebar.jsx'
         ],
         project_javascripts: [
             'jquery-1.12.4.min.js',
@@ -56,8 +57,7 @@ module.exports = function (gulp, generate_task, settings) {
             'header-nav-bar.less',
             'header-status-bar.less',
             // only for user center
-            'partial/ucp-icon.less',
-            'partial/user-center-panel.less'
+            'partial/user-center-sidebar.less'
         ]
     }
 
