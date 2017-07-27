@@ -7,7 +7,8 @@ class UserCenterSidebar extends React.Component {
         code: '',
         level: null,
         avatar: '',
-        orderUser: {}
+        orderUser: {},
+        status: {}
     }
 
     componentDidMount() {
@@ -35,7 +36,12 @@ class UserCenterSidebar extends React.Component {
                 code: user.promotioncode,
                 level: data.userLevel,
                 avatar: avatar,
-                orderUser: user
+                orderUser: user,
+                status: {
+                    phone: (data.orderUser.mobile || '').replace(/(\d{3})\d+(\d{3})/, '$1***$2'),
+                    open_account: [2, 3, 4, 5].indexOf(data.openAccountStatus) > -1,
+                    deal_pwd: [4, 5].indexOf(data.openAccountStatus) > -1
+                }
             })
         }
 
@@ -55,7 +61,7 @@ class UserCenterSidebar extends React.Component {
 
     render() {
 
-        let { level, avatar, code, realname, orderUser } = this.state
+        let { level, avatar, code, realname, orderUser, status } = this.state
 
         let path = location.pathname;
 
@@ -82,8 +88,22 @@ class UserCenterSidebar extends React.Component {
                 <div className="ws-code">
                     工场码：<a href="/factoryCode/info.shtml">{code}</a>
                 </div>
-                <div className="">
 
+                <div className="user-status">
+                    <div className={"us-icon " + (status.phone ? "icon-phone-a" : "icon-phone-b")}>
+                        <div className="tips">恭喜完成手机绑定{status.phone},
+                            <a href="/depository/account/changePhoneOld.shtml">修改</a></div>
+                    </div>
+                    <div className={"us-icon " + (status.open_account ? "icon-account-a" : "icon-account-b")}>
+                        {!status.open_account &&
+                            <div className="tips red">为确保资金安全, 请尽快开通存管账户
+                            <a href="/depository/openAccount/toOpenAccount.shtml">立即开通</a></div>
+                        }
+                    </div>
+                    <div className={"us-icon " + (status.deal_pwd ? "icon-deal-a" : "icon-deal-b")}>
+                        <div className="tips red">为确保资金安全，请尽快设置交易密码，
+                            <a href="/depository/openAccount/toOpenAccount.do">立即设置</a></div>
+                    </div>
                 </div>
             </div>
 
