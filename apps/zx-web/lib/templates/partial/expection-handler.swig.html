@@ -1,0 +1,23 @@
+<script src="javascripts/raven-3.10.0.min.js" crossorigin="anonymous"></script>
+<script>
+    Raven.config('{{ SENTRY_DSN }}', {
+        autoBreadcrumbs: { xhr: false }
+    }).install();
+    // 全局JS异常捕获方法
+    window.onerror = function (msg, file, line, column, error) {
+        // 如果是 raven 自己尝试上报错误导致的错误, 不捕捉
+        if (file && String(file).indexOf('raven-') > -1) return;
+        // 如果是 _vds 相关错误, 不捕捉, 这是growing io的错误
+        if (msg.indexOf('_vds_hybrid') > -1) return;
+        var err;
+        err = 'Uncatch Error in ' + file + ':' + line;
+        if (column) err += ',' + column;
+        err += ' -> ' + msg;
+        if (error) err = error;
+        if (typeof (Raven) === 'object' && Raven.isSetup()) {
+            error ? Raven.captureException(err) : Raven.captureMessage(err);
+        }
+        console.error(err);
+    }
+
+</script>
