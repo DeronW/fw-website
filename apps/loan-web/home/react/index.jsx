@@ -26,7 +26,8 @@ class Content extends React.Component{
                 </div>
                 <div className="advantage">
                     <div className="advantage-title">
-                        <img src="../images/title1.jpg" />
+                        {/*<img src="../images/title1.jpg" />*/}
+                        借款优势
                     </div>
                     <div className="blueline"></div>
                     <div className="ad-content">
@@ -71,7 +72,8 @@ class Content extends React.Component{
                 <div className="flow">
                     <div className="flow-content">
                         <div className="flow-title">
-                            <img src="../images/title2.png"/>
+                            {/*<img src="../images/title2.png"/>*/}
+                            借款流程
                         </div>
                         <div className="blueline"></div>
                         <div className="flow-item-box">
