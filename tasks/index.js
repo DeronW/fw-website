@@ -68,7 +68,7 @@ module.exports = function generate_task(site_name, page_name, configs) {
             common_javascript_files.push(`${lib_path}react-15.5.4/prop-types.js`);
             common_javascript_files.push(`${lib_path}react-15.5.4/react.js`);
             common_javascript_files.push(`${lib_path}react-15.5.4/react-dom.js`);
-        } else {
+        } else if (CONFIG.react_version == '0.14') {
             common_javascript_files.push(`${lib_path}react-0.14.8/react.js`);
             common_javascript_files.push(`${lib_path}react-0.14.8/react-dom.js`);
         }
@@ -77,7 +77,7 @@ module.exports = function generate_task(site_name, page_name, configs) {
             common_javascript_files.push(`${lib_path}react-15.5.4/prop-types.min.js`);
             common_javascript_files.push(`${lib_path}react-15.5.4/react.min.js`);
             common_javascript_files.push(`${lib_path}react-15.5.4/react-dom.min.js`);
-        } else {
+        } else if (CONFIG.react_version == '0.14') {
             common_javascript_files.push(`${lib_path}react-0.14.8/react.min.js`);
             common_javascript_files.push(`${lib_path}react-0.14.8/react-dom.min.js`);
         }
