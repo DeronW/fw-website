@@ -12,13 +12,13 @@ class UserCenterSidebar extends React.Component {
     }
 
     componentDidMount() {
-        let url = "http://www.gongchangp2p.cn/api/userState/v2/userState.json"
+        let url = "https://www.gongchangp2p.com/api/userState/v2/userState.json"
 
         let cb = data => {
             data = data.data
             if (!data.isLogin) {
                 // 如果没登录 , 先去登录
-                location.href = "http://passport.9888keji.com/passport/login?sourceSite=jrgc"
+                location.href = "https://passport.9888keji.com/passport/login?sourceSite=jrgc"
                 return
             }
 

@@ -11,11 +11,7 @@ class UserCenterSidebar extends React.Component {
     }
 
     componentDidMount() {
-        let url = "http://www.gongchangp2p.cn/api/userState/v2/userState.json"
-
-        // if($getDebugParams().login) {
-        //     url = 'http://localhost/fake-api/userState/v2/userState.json'
-        // }
+        let url = "https://www.gongchangp2p.com/api/userState/v2/userState.json"
 
         $.ajax({
             url: url,
@@ -95,7 +91,7 @@ class UserCenterSidebar extends React.Component {
                 <i className="ucp-icon icon-user"></i>
                 <span>我的尊享</span>
             </a>
-            <a className="ucp-link" href="http://www.gongchangp2p.cn/account/home.shtml">
+            <a className="ucp-link" href="https://www.gongchangp2p.com/account/home.shtml">
                 <i className="ucp-icon icon-p2p"></i>
                 <span>我的微金</span>
             </a>

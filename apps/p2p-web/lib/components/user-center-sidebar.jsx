@@ -12,7 +12,7 @@ class UserCenterSidebar extends React.Component {
     }
 
     componentDidMount() {
-        let url = "http://www.gongchangp2p.cn/api/userState/v2/userState.json"
+        let url = "https://www.gongchangp2p.com/api/userState/v2/userState.json"
 
         let cb = data => {
             data = data.data

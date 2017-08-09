@@ -21,7 +21,7 @@ class HeaderStatusBar extends React.Component {
         }, function (data) {
             if (data.code != 10000) throw `got error ${data.message}`;
             let { avatar, sex, isLogin } = data.data, username = data.data.userName, realname = data.data.realName;
-            avatar = avatar || `http://www.gongchangp2p.cn/img/${parseInt(sex) ? 'man' : 'woman'}.png`;
+            avatar = avatar || `https://www.gongchangp2p.com/img/${parseInt(sex) ? 'man' : 'woman'}.png`;
             this.setState({
                 is_login: isLogin,
                 username: username,

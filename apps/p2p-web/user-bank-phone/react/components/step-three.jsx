@@ -2,7 +2,7 @@ class StepThree extends React.Component {
 
     render() {
         let successfulReturn = <a className="return"
-            href="http://www.gongchangp2p.cn/depository/recharge/toQRecharge.do">
+            href="/depository/recharge/toQRecharge.do">
             返回充值
         </a>
 

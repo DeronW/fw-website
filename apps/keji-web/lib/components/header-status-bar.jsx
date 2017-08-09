@@ -18,7 +18,7 @@ class HeaderStatusBar extends React.Component {
             if (p[0] == 'ticket') login_token = p[1].split('.')[0]
         });
 
-        var url = 'http://www.gongchangp2p.cn/api/userState/v1/userState.json';
+        var url = 'https://www.gongchangp2p.com/api/userState/v1/userState.json';
 
         if ($getDebugParams().login)
             url = API_PATH + '/api/userState/v1/userState.json';

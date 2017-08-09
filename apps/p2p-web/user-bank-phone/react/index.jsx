@@ -29,7 +29,7 @@ class Panel extends React.Component {
             section = <StepThree />
         }
         let back = <a className="right" target="_self"
-            href="http://www.gongchangp2p.cn/depository/recharge/toQRecharge.shtml">
+            href="/depository/recharge/toQRecharge.shtml">
             <img src="images/return.png" />返回</a>;
 
         return (
