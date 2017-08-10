@@ -22,7 +22,6 @@ module.exports = function generate_task(site_name, page_name, configs) {
 
     let app_path = `apps/${site_name}/${page_name}/`,
         build_path = `build/${site_name}/${page_name}/`,
-        public_path = 'public',
         tmp_path = `build/${site_name}-tmp/`,
         lib_path = 'lib/',
         project_lib_path = `apps/${site_name}/lib`,
@@ -105,19 +104,11 @@ module.exports = function generate_task(site_name, page_name, configs) {
     }
 
     function compile_public_images() {
-        return copy([
-            `${public_path}/common/images/**`,
-            `${public_path}/${site_name}/images/**`,
-            `${project_lib_path}/images/**`
-        ], `${build_path}images`)
+        return copy([`${project_lib_path}/images/**`], `${build_path}images`)
     }
 
     function copy_audios() {
         return copy([`${app_path}audios/*`], `${build_path}audios`)
-    }
-
-    function compile_public_javascripts() {
-        return copy([`${public_path}/common/javascripts/*.js`, `${public_path}/${site_name}/javascripts/*.js`], `${build_path}javascripts`)
     }
 
     function copy2cdn() {
@@ -145,7 +136,6 @@ module.exports = function generate_task(site_name, page_name, configs) {
         gulp.watch(`${app_path}react/**`, gulp.parallel(compile_react));
         gulp.watch(`${project_lib_path}/components/**`, gulp.parallel(compile_react));
 
-        gulp.watch(`${public_path}/common/images/**`, gulp.parallel(compile_images));
         gulp.watch(`lib/components/**`, gulp.parallel(compile_react));
         gulp.watch(`lib/templates/**/*.html`, gulp.parallel(compile_html));
         gulp.watch(`lib/less/**/*.less`, gulp.parallel(compile_less));
@@ -163,8 +153,7 @@ module.exports = function generate_task(site_name, page_name, configs) {
             common_javascripts,
             compile_images,
             compile_public_images,
-            copy_audios,
-            compile_public_javascripts
+            copy_audios
         ));
 
     CONFIG.debug ?
