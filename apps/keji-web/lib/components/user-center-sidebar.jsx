@@ -30,8 +30,8 @@ class UserCenterSidebar extends React.Component {
             window._data = data;
 
             let avatar = ''
-            if (user.sex == '1') avatar = '/img/man.png'
-            if (user.sex == '2') avatar = '/img/woman.png'
+            if (user.sex == '1') avatar = 'https://www.gongchangp2p.com/img/man.png'
+            if (user.sex == '2') avatar = 'https://www.gongchangp2p.com/img/woman.png'
 
             this.setState({
                 is_login: true,
