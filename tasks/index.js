@@ -34,57 +34,36 @@ module.exports = function generate_task(site_name, page_name, configs) {
             cmd_prefix: '', // 通用指令前缀，比如 pack:
             api_path: '',
             cdn_prefix: '',
-            include_components: [],
             project_components: [],
-            include_javascripts: [],
             project_javascripts: [],
-            include_less: [],
             project_less: [],
             main_jsx: 'react/index.jsx',
-            react_version: '0.14',
             html_engine: 'swig'
         }, configs, singlePageCfg);
 
     let task_name = site_name + ':' + (CONFIG.cmd_prefix ? CONFIG.cmd_prefix + ':' : '') + page_name;
 
-    let less_files = [
-        // `${lib_path}less/colors.less`,
-        // `${lib_path}less/common.less`,
-        // `${lib_path}less/not-support-ie6-ie7.less`
-    ];
-    less_files.push(...CONFIG.include_less.map(i => `${lib_path}less/${i}`));
+    let less_files = [];
     less_files.push(...CONFIG.project_less.map(i => `${project_lib_path}/less/${i}`));
     less_files.push(`${app_path}less/index.less`);
 
-    let jsx_files = CONFIG.include_components.map(i => `${lib_path}components/${i}`);
-    jsx_files.push(...CONFIG.project_components.map(i => `${project_lib_path}/components/${i}`))
+    let jsx_files = []
+    jsx_files.push(...CONFIG.project_components.map(
+        i => `${project_lib_path}/components/${i}`))
     jsx_files.push(`${app_path}react/components/*.jsx`);
     jsx_files.push(`${app_path}${CONFIG.main_jsx}`);
 
     let common_javascript_files = [];
 
     if (CONFIG.debug) {
-        if (CONFIG.react_version == '15') {
-            common_javascript_files.push(`${lib_path}react-15.5.4/prop-types.js`);
-            common_javascript_files.push(`${lib_path}react-15.5.4/react.js`);
-            common_javascript_files.push(`${lib_path}react-15.5.4/react-dom.js`);
-        } else if (CONFIG.react_version == '0.14') {
-            common_javascript_files.push(`${lib_path}react-0.14.8/react.js`);
-            common_javascript_files.push(`${lib_path}react-0.14.8/react-dom.js`);
-        }
+        common_javascript_files.push(`${lib_path}react-15.5.4/prop-types.js`);
+        common_javascript_files.push(`${lib_path}react-15.5.4/react.js`);
+        common_javascript_files.push(`${lib_path}react-15.5.4/react-dom.js`);
     } else {
-        if (CONFIG.react_version == '15') {
-            common_javascript_files.push(`${lib_path}react-15.5.4/prop-types.min.js`);
-            common_javascript_files.push(`${lib_path}react-15.5.4/react.min.js`);
-            common_javascript_files.push(`${lib_path}react-15.5.4/react-dom.min.js`);
-        } else if (CONFIG.react_version == '0.14') {
-            common_javascript_files.push(`${lib_path}react-0.14.8/react.min.js`);
-            common_javascript_files.push(`${lib_path}react-0.14.8/react-dom.min.js`);
-        }
+        common_javascript_files.push(`${lib_path}react-15.5.4/prop-types.min.js`);
+        common_javascript_files.push(`${lib_path}react-15.5.4/react.min.js`);
+        common_javascript_files.push(`${lib_path}react-15.5.4/react-dom.min.js`);
     }
-
-    common_javascript_files = common_javascript_files.concat(
-        CONFIG.include_javascripts.map(i => `${lib_path}/javascripts/${i}`));
 
     common_javascript_files = common_javascript_files.concat(
         CONFIG.project_javascripts.map(i => `${project_lib_path}/javascripts/${i}`));

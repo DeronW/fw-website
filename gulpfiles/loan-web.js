@@ -10,7 +10,6 @@ let APP_NAMES = [
 module.exports = function(gulp, generate_task, settings) {
 
     let common_config = {
-        react_version: '15',
         project_components: [
             'header.jsx',
             'footer.jsx'

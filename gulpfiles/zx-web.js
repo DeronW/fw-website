@@ -12,33 +12,7 @@ let APP_NAMES = [
 
 module.exports = function (gulp, generate_task, settings) {
 
-    // let INCLUDE_COMPONENTS = [
-    //     `${PROJ}/header-status-bar.jsx`,
-    //     `${PROJ}/alert.jsx`,
-    //     `${PROJ}/confirm.jsx`,
-    //     'circle-progress.jsx',
-    // ];
-
-    // let INCLUDE_JAVASCRIPTS = [
-    //     `${PROJ}/common-functions.js`,
-    //     `${PROJ}/interest-calculator.js`,
-    // ];
-
-    // let INCLUDE_LESS = [
-    //     `${PROJ}/header-nav-bar.less`,
-    //     `${PROJ}/header-status-bar.less`,
-    //     `${PROJ}/footer.less`,
-    //     `${PROJ}/sidebar-fn.less`,
-    // ];
-
-    // let common_config = {
-    //     include_components: INCLUDE_COMPONENTS,
-    //     include_javascripts: INCLUDE_JAVASCRIPTS,
-    //     include_less: INCLUDE_LESS
-    // }
-
     let common_config = {
-        react_version: '15',
         project_components: [
             'header-status-bar.jsx',
             'alert.jsx',
