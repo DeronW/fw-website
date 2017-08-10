@@ -52,6 +52,7 @@ module.exports = function (gulp, generate_task, settings) {
             'interest-calculator.js'
         ],
         project_less: [
+            'common.less',
             'footer.less',
             'sidebar-fn.less',
             'header-nav-bar.less',
