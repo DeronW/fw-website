@@ -1,325 +1,299 @@
 .global-footer {
-  padding: 100px 0 150px;
-  background: #2f383d;
-  display: table;
-  width: 100%;
-  font-size: 14px;
-  .row-zx{
-    margin-top: 30px;
-    color: #8ba3bf;
-    text-align: center;
-  }
-  .contaner-zx{
-    border-bottom: 1px solid #3c4b63;
-  }
-
-  .row-1 {
-    height: 185px;
-
-    .column {
-      float: left;
-      width: 33.3%;
-      box-sizing: border-box;
-      .zx-des{
-        font-size: 16px;
+    padding: 100px 0 150px;
+    background: #2f383d;
+    display: table;
+    width: 100%;
+    font-size: 14px;
+    .container {
+        width: 1140px;
+        margin: 0 auto;
+    }
+    .row-zx {
+        margin-top: 30px;
         color: #8ba3bf;
-      }
-    }
-
-    .column-1 {
-      border-right: solid 1px #3c4b63;
-      height:150px;
-      width: 415px;
-      line-height: 40px;
-      .home-link {
-        display: block;
-        margin-bottom: 46px;
-      }
-      a {
-
-        color: #b4d6fe;
-        display: inline-block;
-        width: 95px;
-        height: 30px;
-        line-height: 30px;
-
-        &:hover {
-          color: white;
-        }
-      }
-    }
-
-    .column-2 {
-      padding-left: 60px;
-      color: #b4d6fe;
-      border-right: solid 1px #3c4b63;
-      width:400px;
-
-      .service-time {
-        font-size: 14px;
-        margin-bottom: 20px;
-        b {
-          font-size: 22px;
-          line-height: 22px;
-          font-weight: normal;
-        }
-      }
-      .serverPhone_box{
-        float: left;
-      }
-      .service-phone {
-        font-size: 20px;
-        font-family: arial;
-        margin-top: 15px;
-      }
-
-      .service-connect {
-        float: right;
-        padding-top: 1px;
-        height: 36px;
-        margin-right: 40px;
-        img{
-          top:-2px
-        }
-      }
-
-      .service-qq {
-        display: block;
-        width: 125px;
-        height: 30px;
-        color: #b4d6fe;
-        border: solid 1px #b4d6fe;
-        border-radius: 3px;
-        line-height: 30px;
-        font-size: 14px;
-        cursor: pointer;
-        margin-top: 15px;
-        .icon-qq {
-          display: inline-block;
-          width: 30px;
-          height: 22px;
-          float: left;
-          background: url(../images/global-footer/icon-footer-no.3.png) no-repeat;
-          margin-top: 4px;
-          margin-left: 15px;
-        }
-
-        &:hover {
-
-          background-color: rgb(180, 214, 254);
-          color: rgb(51, 67, 91);
-
-          .icon-qq {
-            background-position: 0px -25px;
-          }
-        }
-      }
-
-      .service-weibo {
-        float: left;
-        display: block;
-        width: 36px;
-        height: 36px;
-        margin-left: 18px;
-        cursor: pointer;
-        margin-top: 20px;
-      }
-      .service-wechat {
-        margin-left: 20px;
-        cursor: pointer;
-        float: left;
-        display: block;
-        width: 36px;
-        height: 36px;
-        position: relative;
-        margin-top: 20px;
-
-        .wechat-qrcode {
-          display: none;
-          width: 172px;
-          height: 200px;
-          top: -195px;
-          left: -110px;
-          position: absolute;
-        }
-
-        &:hover {
-          .wechat-qrcode {
-            display: block;
-          }
-        }
-      }
-      &:last-child{
-          margin-left: 25px;
-      }
-    }
-
-    .column-3 {
-      padding-left: 75px;
-      width: 325px;
-
-      .app-title {
-        font-size: 22px;
-        color: #b4d6fe;
-        line-height: 22px;
-        margin-bottom: 40px;
-      }
-
-      .app-iphone, .app-android {
-        display: block;
-        margin-right: 200px;
-        width: 128px;
-        height: 30px;
-        border: solid 1px #b4d6fe;
-        border-radius: 3px;
-        line-height: 30px;
-        font-size: 14px;
-        color: #b4d6fe;
-        margin-bottom: 20px;
-
-        b {
-          display: inline-block;
-          width: 30px;
-          height: 22px;
-          float: left;
-          background: url(../images/global-footer/icon-footer-no.3.png) no-repeat;
-          margin-top: 4px;
-          margin-left: 15px;
-        }
-
-        &:hover {
-          background-color: rgb(180, 214, 254);
-          color: rgb(51, 67, 91);
-        }
-      }
-
-      .app-iphone {
-        b {
-          background-position: -104px 0px;
-        }
-        &:hover {
-          b {
-            background-position: -104px -25px;
-
-          }
-        }
-      }
-
-      .app-android {
-        b {
-          background-position: -133px 0px;
-        }
-        &:hover {
-          b {
-            background-position: -133px -25px;
-          }
-        }
-      }
-
-      .app-qrcode {
-        float: right;
-        width: 87px;
         text-align: center;
-        color: #b4d6fe;
-        line-height: 20px;
-
-        img {
-          display: block;
-          margin: 0 auto 5px;
-          border-radius: 3px;
-          border: solid 2px #b4d6fe;
-          width: 83px;
+    }
+    .contaner-zx {
+        border-bottom: 1px solid #3c4b63;
+    }
+    .row-1 {
+        height: 185px;
+        .column {
+            float: left;
+            width: 33.3%;
+            box-sizing: border-box;
+            .zx-des {
+                font-size: 16px;
+                color: #8ba3bf;
+            }
         }
-
-        &:hover {
-          color: #b4d6fe !important;
+        .column-1 {
+            border-right: solid 1px #3c4b63;
+            height: 150px;
+            width: 415px;
+            line-height: 40px;
+            .home-link {
+                display: block;
+                margin-bottom: 46px;
+            }
+            a {
+                color: #b4d6fe;
+                display: inline-block;
+                width: 95px;
+                height: 30px;
+                line-height: 30px;
+                &:hover {
+                    color: white;
+                }
+            }
         }
-      }
+        .column-2 {
+            padding-left: 60px;
+            color: #b4d6fe;
+            border-right: solid 1px #3c4b63;
+            width: 400px;
+            .service-time {
+                font-size: 14px;
+                margin-bottom: 20px;
+                b {
+                    font-size: 22px;
+                    line-height: 22px;
+                    font-weight: normal;
+                }
+            }
+            .serverPhone_box {
+                float: left;
+            }
+            .service-phone {
+                font-size: 20px;
+                font-family: arial;
+                margin-top: 15px;
+            }
+            .service-connect {
+                float: right;
+                padding-top: 1px;
+                height: 36px;
+                margin-right: 40px;
+                img {
+                    top: -2px
+                }
+            }
+            .service-qq {
+                display: block;
+                width: 125px;
+                height: 30px;
+                color: #b4d6fe;
+                border: solid 1px #b4d6fe;
+                border-radius: 3px;
+                line-height: 30px;
+                font-size: 14px;
+                cursor: pointer;
+                margin-top: 15px;
+                .icon-qq {
+                    display: inline-block;
+                    width: 30px;
+                    height: 22px;
+                    float: left;
+                    background: url(../images/global-footer/icon-footer-no.3.png) no-repeat;
+                    margin-top: 4px;
+                    margin-left: 15px;
+                }
+                &:hover {
+                    background-color: rgb(180, 214, 254);
+                    color: rgb(51, 67, 91);
+                    .icon-qq {
+                        background-position: 0px -25px;
+                    }
+                }
+            }
+            .service-weibo {
+                float: left;
+                display: block;
+                width: 36px;
+                height: 36px;
+                margin-left: 18px;
+                cursor: pointer;
+                margin-top: 20px;
+            }
+            .service-wechat {
+                margin-left: 20px;
+                cursor: pointer;
+                float: left;
+                display: block;
+                width: 36px;
+                height: 36px;
+                position: relative;
+                margin-top: 20px;
+                .wechat-qrcode {
+                    display: none;
+                    width: 172px;
+                    height: 200px;
+                    top: -195px;
+                    left: -110px;
+                    position: absolute;
+                }
+                &:hover {
+                    .wechat-qrcode {
+                        display: block;
+                    }
+                }
+            }
+            &:last-child {
+                margin-left: 25px;
+            }
+        }
+        .column-3 {
+            padding-left: 75px;
+            width: 325px;
+            .app-title {
+                font-size: 22px;
+                color: #b4d6fe;
+                line-height: 22px;
+                margin-bottom: 40px;
+            }
+            .app-iphone,
+            .app-android {
+                display: block;
+                margin-right: 200px;
+                width: 128px;
+                height: 30px;
+                border: solid 1px #b4d6fe;
+                border-radius: 3px;
+                line-height: 30px;
+                font-size: 14px;
+                color: #b4d6fe;
+                margin-bottom: 20px;
+                b {
+                    display: inline-block;
+                    width: 30px;
+                    height: 22px;
+                    float: left;
+                    background: url(../images/global-footer/icon-footer-no.3.png) no-repeat;
+                    margin-top: 4px;
+                    margin-left: 15px;
+                }
+                &:hover {
+                    background-color: rgb(180, 214, 254);
+                    color: rgb(51, 67, 91);
+                }
+            }
+            .app-iphone {
+                b {
+                    background-position: -104px 0px;
+                }
+                &:hover {
+                    b {
+                        background-position: -104px -25px;
+                    }
+                }
+            }
+            .app-android {
+                b {
+                    background-position: -133px 0px;
+                }
+                &:hover {
+                    b {
+                        background-position: -133px -25px;
+                    }
+                }
+            }
+            .app-qrcode {
+                float: right;
+                width: 87px;
+                text-align: center;
+                color: #b4d6fe;
+                line-height: 20px;
+                img {
+                    display: block;
+                    margin: 0 auto 5px;
+                    border-radius: 3px;
+                    border: solid 2px #b4d6fe;
+                    width: 83px;
+                }
+                &:hover {
+                    color: #b4d6fe !important;
+                }
+            }
+        }
     }
-  }
-
-  .row-2, .row-3 {
-    font-size: 14px;
-    color: #8ba3bf;
-    margin-right: 15px;
-
-    a {
-      font-size: 14px;
-      color: #8ba3bf;
-      margin-right: 15px;
+    .row-2,
+    .row-3 {
+        font-size: 14px;
+        color: #8ba3bf;
+        margin-right: 15px;
+        a {
+            font-size: 14px;
+            color: #8ba3bf;
+            margin-right: 15px;
+        }
     }
-  }
-
-  .row-4 {
-    height: 110px;
-
-    a {
-      display: block;
-      float: left;
-      background: transparent url(../images/global-footer/icon-footer-no.2.png) no-repeat;
+    .row-4 {
+        height: 110px;
+        a {
+            display: block;
+            float: left;
+            background: transparent url(../images/global-footer/icon-footer-no.2.png) no-repeat;
+        }
+        .link-1 {
+            height: 35px;
+            margin-right: 20px;
+            margin-bottom: 25px;
+            margin-top: 50px;
+            width: 86px;
+            background-position: 0px -69px;
+            &:hover {
+                background-position: 0 0;
+            }
+        }
+        .link-2 {
+            height: 35px;
+            margin-right: 20px;
+            margin-bottom: 25px;
+            margin-top: 50px;
+            width: 86px;
+            background-position: -106px -69px;
+            &:hover {
+                background-position: -106px 0;
+            }
+        }
+        .link-3 {
+            height: 35px;
+            margin-right: 20px;
+            margin-bottom: 25px;
+            margin-top: 50px;
+            width: 95px;
+            background-position: -212px -69px;
+            &:hover {
+                background-position: -212px 0;
+            }
+        }
+        .link-4 {
+            height: 35px;
+            margin-right: 20px;
+            margin-bottom: 25px;
+            margin-top: 50px;
+            width: 86px;
+            background-position: -327px -69px;
+            &:hover {
+                background-position: -327px 0;
+            }
+        }
+        .link-5 {
+            height: 35px;
+            margin-right: 20px;
+            margin-bottom: 25px;
+            margin-top: 50px;
+            width: 139px;
+            background-position: -432px -69px;
+            &:hover {
+                background-position: -432px 0;
+            }
+        }
     }
-
-    .link-1 {
-      height: 35px;
-      margin-right: 20px;
-      margin-bottom: 25px;
-      margin-top: 50px;
-      width: 86px;
-      background-position: 0px -69px;
-      &:hover {
-        background-position: 0 0;
-      }
+    .row-5 {
+        color: #8ba3bf;
+        text-align: left;
+        font-size: 14px;
+        margin-top: 60px;
     }
-    .link-2 {
-      height: 35px;
-      margin-right: 20px;
-      margin-bottom: 25px;
-      margin-top: 50px;
-      width: 86px;
-      background-position: -106px -69px;
-      &:hover {
-        background-position: -106px 0;
-      }
-    }
-    .link-3 {
-      height: 35px;
-      margin-right: 20px;
-      margin-bottom: 25px;
-      margin-top: 50px;
-      width: 95px;
-      background-position: -212px -69px;
-      &:hover {
-        background-position: -212px 0;
-      }
-    }
-    .link-4 {
-      height: 35px;
-      margin-right: 20px;
-      margin-bottom: 25px;
-      margin-top: 50px;
-      width: 86px;
-      background-position: -327px -69px;
-      &:hover {
-        background-position: -327px 0;
-      }
-    }
-    .link-5 {
-      height: 35px;
-      margin-right: 20px;
-      margin-bottom: 25px;
-      margin-top: 50px;
-      width: 139px;
-      background-position: -432px -69px;
-      &:hover {
-        background-position: -432px 0;
-      }
-    }
-  }
-
-  .row-5 {
-    color: #8ba3bf;
-    text-align: left;
-    font-size: 14px;
-    margin-top: 60px;
-  }
 }
