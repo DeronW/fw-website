@@ -34,7 +34,7 @@ class UserCenterSidebar extends React.Component {
                 username: user.loginName,
                 realname: user.realName,
                 code: user.promotioncode,
-                level: data.userLevel,
+                level: data.userLevel - 1,
                 avatar: avatar,
                 orderUser: user,
                 status: {
@@ -51,11 +51,6 @@ class UserCenterSidebar extends React.Component {
             xhrFields: { withCredentials: true },
             dataType: "jsonp"
         }).done(cb)
-
-        // if ($getDebugParams().login) {
-        //     $.get('http://localhost/fake-api/api/userState/v2/userState.json').done(cb)
-        //     // url = 'http://localhost/fake-api/api/userState/v2/userState.json'
-        // }
 
     }
 
@@ -74,7 +69,8 @@ class UserCenterSidebar extends React.Component {
                 <div className={`ucp-angle ${level > 0 && 'vip'}`}>
                     <img className="with-vip"
                         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAbBAMAAACtquM+AAAAElBMVEUAAAD/TU3/TU3/TU3/TU3/TU2w629YAAAABXRSTlMA6atUFHg89q8AAAAXSURBVAjXY2BmYGBwBGJVIA4NDaUlBgCl3xhS+GI+yQAAAABJRU5ErkJggg==" />
-                    <a className="text" href="/user/level/userLevel.shtml">VIP{level}</a>
+                    <a className="text" href="/user/level/userLevel.shtml">
+                        VIP{level > 0 && level}</a>
                     <img className="with-vip"
                         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAbBAMAAACzY9ONAAAAMFBMVEUAAAD/TU3/TU3/TU3/TU3/TU3/TU3/TU3/TU3/TU3/TU3/TU3/TU3/TU3/TU3/TU0SdRv/AAAAD3RSTlMA1N6Kg3g1MCYg2c3KfnPm+PSeAAAASklEQVQI113KSxFAYBhAURFEEEEEEUQQQQQRRBBFFBV+b2PMx9m6i7O62a+ISFhxYECF9mO2LNhRoESDHhNGXNhwIzrUyHHiQXoBAv1MW5PIhMkAAAAASUVORK5CYII=" />
                 </div>
