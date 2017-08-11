@@ -38,7 +38,7 @@ class UserCenterSidebar extends React.Component {
                 username: user.loginName,
                 realname: user.realName,
                 code: user.promotioncode,
-                level: data.userLevel,
+                level: data.userLevel - 1,
                 avatar: avatar,
                 orderUser: user
             })
