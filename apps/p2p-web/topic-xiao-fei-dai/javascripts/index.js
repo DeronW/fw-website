@@ -59,7 +59,7 @@ $(function () {
         $(this).children("a").addClass("on").parent().siblings().children("a").removeClass("on");
     });
     $(".centerNav ul li.list2").click(function () {
-        $(document).scrollTop(onesize1 + iH + iTop-70);
+        $(document).scrollTop(onesize1 + iH + iTop-40);
         $(this).children("a").addClass("on").parent().siblings().children("a").removeClass("on");
     });
     $(".centerNav ul li.list3").click(function () {
@@ -68,12 +68,12 @@ $(function () {
 
     });
     $(".centerNav ul li.list4").click(function () {
-        $(document).scrollTop(onesize1 + onesize2 + onesize3 + iH + iTop - 30);
+        $(document).scrollTop(onesize1 + onesize2 + onesize3 + iH + iTop);
         $(this).children("a").addClass("on").parent().siblings().children("a").removeClass("on");
 
     });
     $(".centerNav ul li.list5").click(function () {
-        $(document).scrollTop(onesize1 + onesize2 + onesize3 + onesize4 + iH + iTop - 30);
+        $(document).scrollTop(onesize1 + onesize2 + onesize3 + onesize4 + iH + iTop);
         $(this).children("a").addClass("on").parent().siblings().children("a").removeClass("on");
     });
     $(window).scroll(function () {
