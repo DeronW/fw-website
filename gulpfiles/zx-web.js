@@ -7,6 +7,7 @@ let APP_NAMES = [
     'app-download',//app下载
     'topic-zun-xiang', // 尊享标计划
     'topic-huang-jin', // 尊享金计划
+    'topic-zengjinbao', // 增金宝计划
     'user-bank-phone',//修改银行预留手机号
 ];
 
