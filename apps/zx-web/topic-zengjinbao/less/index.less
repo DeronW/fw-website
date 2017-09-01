@@ -56,11 +56,16 @@ body {
 
 .tab-group {
   position: -webkit-sticky;
+  position: -moz-sticky;
+  position: -ms-sticky;
+  position: -o-sticky;
   position: sticky;
+  top: -1px;
+  z-index: 999;
   display: table;
   width: 1140.5px;
   height: 62px;
-  margin: -4px auto 0;
+  margin: -3px auto 0;
   background-color: #fff;
 
   .tab-item {
@@ -346,7 +351,7 @@ body {
 .partner {
   .sub-title {
     font-size: 22px;
-    margin-bottom: 54px;
+    margin-bottom: 18px;
     text-align: center;
   }
 }
