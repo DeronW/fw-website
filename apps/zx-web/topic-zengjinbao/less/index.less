@@ -81,35 +81,66 @@ body {
     .tab-icon {
       display: inline-block;
       width: 21px;
-      height: 62px;
+      height: 24px;
       margin-right: 3px;
-      vertical-align: bottom;
+      background: url('../images/tab-icons.png') no-repeat center;
+      vertical-align: middle;
+    }
+
+    .tab-icon-0 {
+      .tab-icon;
+      background-position: 0 0;
     }
 
     .tab-icon-1 {
       .tab-icon;
-      background: url('../images/intro-icon.png') no-repeat center;
+      background-position: 0 -62px;
     }
 
     .tab-icon-2 {
       .tab-icon;
-      background: url('../images/security-icon.png') no-repeat center;
+      background-position: 0 -133px;
     }
 
     .tab-icon-3 {
       .tab-icon;
-      background: url('../images/case-icon.png') no-repeat center;
+      background-position: 0 -196px;
     }
 
     .tab-icon-4 {
       .tab-icon;
-      background: url('../images/partner-icon.png') no-repeat center;
+      background-position: 0 -274px;
+    }
+  }
+
+  .tab-item--active {
+    background-color: #fff;
+    .text--gold;
+
+    .tab-icon-0 {
+      background-position: 0 -32px;
     }
 
-    .tab-icon-5 {
-      .tab-icon;
-      background: url('../images/qa-icon.png') no-repeat center;
+    .tab-icon-1 {
+      background-position: 0 -98px;
     }
+
+    .tab-icon-2 {
+      background-position: 0 -166px;
+    }
+
+    .tab-icon-3 {
+      background-position: 0 -234px;
+    }
+
+    .tab-icon-4 {
+      background-position: 0 -312px;
+    }
+  }
+
+  .tab-item:hover {
+    .tab-item--active;
+    cursor: pointer;
   }
 }
 
@@ -183,7 +214,10 @@ body {
       float: left;
       width: ~"calc((100% - 90px)/3)";
       margin-right: 45px;
-      padding-top: 98px;
+
+      .card-bg {
+        height: 110px;
+      }
 
       .no {
         margin-top: 24px;
@@ -201,18 +235,24 @@ body {
 
     .ensure-card-1 {
       .ensure-card;
-      background: url('../images/security-step1.png') no-repeat top;
+      .card-bg {
+        background: url('../images/security-step1.png') no-repeat center;
+      }
     }
 
     .ensure-card-2 {
       .ensure-card;
-      background: url('../images/security-step2.png') no-repeat top;
+      .card-bg {
+        background: url('../images/security-step2.png') no-repeat center;
+      }
     }
 
     .ensure-card-3 {
       .ensure-card;
+      .card-bg {
+        background: url('../images/security-step3.png') no-repeat center;
+      }
       margin-right: 0;
-      background: url('../images/security-step3.png') no-repeat top;
     }
   }
 }
@@ -316,22 +356,6 @@ body {
         font-size: 22px;
         line-height: 2;
       }
-    }
-
-    .invest-link-btn {
-      position: absolute;
-      bottom: 0;
-      display: block;
-      width: 100%;
-      height: 68px;
-      line-height: 68px;
-      background-color: #f9655a;
-      color: #fff;
-      font-size: 22px;
-      font-weight: bold;
-      text-align: center;
-      border-bottom-left-radius: 6px;
-      border-bottom-right-radius: 6px;
     }
   }
 
