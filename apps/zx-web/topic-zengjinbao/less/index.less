@@ -1,0 +1,390 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  background-color: #8d81c3;
+  color: #777;
+  font-size: 14px;
+}
+
+.text--gold {
+  color: #f6b311;
+}
+
+.text--red {
+  color: #f9655a;
+}
+
+.text--blue {
+  color: #5157ae;
+}
+
+.text--paragraph {
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.text--ribbon {
+  width: 290px;
+  height: 60px;
+  line-height: 39px;
+  margin: 81px auto 36px;
+  background-image: url('../images/ribbon.png');
+  color: #fff;
+  font-size: 22px;
+  text-align: center;
+}
+
+.banner {
+  img {
+    width: 100%;
+  }
+}
+
+.cnt {
+  width: 1140px;
+  margin: auto;
+  padding: 0 80px 100px;
+  background-color: #fff;
+  border-bottom-left-radius: 24px;
+  border-bottom-right-radius: 24px;
+  border: 1px solid #fff;
+}
+
+.tab-group {
+  position: -webkit-sticky;
+  position: sticky;
+  display: table;
+  width: 1140.5px;
+  height: 62px;
+  margin: -4px auto 0;
+  background-color: #fff;
+
+  .tab-item {
+    float: left;
+    width: 228px;
+    height: 62px;
+    line-height: 62px;
+    background-color: #ededed;
+    color: #777;
+    font-size: 16px;
+    text-align: center;
+
+    .tab-icon {
+      display: inline-block;
+      width: 21px;
+      height: 62px;
+      margin-right: 3px;
+      vertical-align: bottom;
+    }
+
+    .tab-icon-1 {
+      .tab-icon;
+      background: url('../images/intro-icon.png') no-repeat center;
+    }
+
+    .tab-icon-2 {
+      .tab-icon;
+      background: url('../images/security-icon.png') no-repeat center;
+    }
+
+    .tab-icon-3 {
+      .tab-icon;
+      background: url('../images/case-icon.png') no-repeat center;
+    }
+
+    .tab-icon-4 {
+      .tab-icon;
+      background: url('../images/partner-icon.png') no-repeat center;
+    }
+
+    .tab-icon-5 {
+      .tab-icon;
+      background: url('../images/qa-icon.png') no-repeat center;
+    }
+  }
+}
+
+.fragment {
+  margin-top: 72px;
+
+  >.title {
+    height: 40px;
+    line-height: 40px;
+    margin-bottom: 54px;
+    background: url('../images/fragment-division.png') no-repeat 130px;
+
+    span {
+      display: inline-block;
+      width: 130px;
+      height: 40px;
+      line-height: 40px;
+      background-color: #f9655a;
+      border-radius: 20px;
+      color: #fff;
+      font-size: 20px;
+      font-weight: lighter;
+      text-align: center;
+    }
+  }
+}
+
+.product {
+  .sub-title {
+    color: #555;
+    font-size: 26px;
+    font-weight: bold;
+    text-align: center;
+    margin: 30px 0;
+  }
+
+  .advantages-list {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: url('../images/list-style-bg.png') inside;
+
+    li {
+      width: 50%;
+      float: left;
+      padding-left: 114px;
+      line-height: 2;
+    }
+  }
+
+  .comparison {
+    clear: left;
+    border: 1px solid transparent;
+  }
+
+  .deal-process {
+    img {
+      display: block;
+      margin: auto;
+    }
+  }
+}
+
+.security {
+  .ensure-card-group {
+    display: table;
+    width: 100%;
+    height: 270px;
+
+    .ensure-card {
+      float: left;
+      width: ~"calc((100% - 90px)/3)";
+      margin-right: 45px;
+      padding-top: 98px;
+
+      .no {
+        margin-top: 24px;
+        font-size: 16px;
+        text-align: center;
+      }
+
+      .title {
+        color: #5157ae;
+        font-size: 24px;
+        line-height: 1.8;
+        text-align: center;
+      }
+    }
+
+    .ensure-card-1 {
+      .ensure-card;
+      background: url('../images/security-step1.png') no-repeat top;
+    }
+
+    .ensure-card-2 {
+      .ensure-card;
+      background: url('../images/security-step2.png') no-repeat top;
+    }
+
+    .ensure-card-3 {
+      .ensure-card;
+      margin-right: 0;
+      background: url('../images/security-step3.png') no-repeat top;
+    }
+  }
+}
+
+.invest-case {
+  .sub-title {
+    height: 54px;
+    line-height: 54px;
+    background-color: #e8e8e8;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    color: #323232;
+    font-size: 22px;
+    text-align: center;
+
+    i {
+      display: inline-block;
+      width: 26px;
+      height: 54px;
+      margin-right: 12px;
+      vertical-align: top;
+    }
+  }
+
+  .case-background {
+    float: left;
+    width: 480px;
+    height: 420px;
+    margin-bottom: 30px;
+    background: url('../images/case-bg.png') no-repeat;
+    border-radius: 4px;
+
+    table {
+      width: 480px;
+      height: 244px;
+
+      .sub-title {
+        i {
+          background: url('../images/case-bg-icon.png') no-repeat center;
+        }
+      }
+
+      th {
+        width: 169px;
+        text-align: right;
+        padding-right: 21px;
+        color: #777;
+        font-size: 14px;
+        font-weight: normal;
+      }
+
+      td {
+        text-align: left;
+        padding-left: 21px;
+        color: #323232;
+        font-weight: normal;
+        font-size: 14px;
+      }
+    }
+  }
+
+  .case-income {
+    position: relative;
+    float: right;
+    width: 480px;
+    height: 420px;
+    background-color: #f9f9f9;
+    border-radius: 4px;
+
+    .sub-title {
+      i {
+        background: url('../images/income-cal-icon.png') no-repeat center;
+      }
+    }
+
+    .income-cal {
+      padding-top: 30px;
+      margin-bottom: 30px;
+      color: #333;
+      font-size: 16px;
+      line-height: 1.5;
+      text-align: center;
+
+      .income-ammount {
+        font-size: 32px;
+        line-height: 2;
+        span {
+          font-size: 24px;
+        }
+      }
+
+      .cal {
+        color: #333;
+        line-height: 2;
+        span {
+          font-size: 14px;
+        }
+      }
+
+      .cal-formula {
+        font-size: 22px;
+        line-height: 2;
+      }
+    }
+
+    .invest-link-btn {
+      position: absolute;
+      bottom: 0;
+      display: block;
+      width: 100%;
+      height: 68px;
+      line-height: 68px;
+      background-color: #f9655a;
+      color: #fff;
+      font-size: 22px;
+      font-weight: bold;
+      text-align: center;
+      border-bottom-left-radius: 6px;
+      border-bottom-right-radius: 6px;
+    }
+  }
+
+  .info {
+    clear: left;
+    margin-bottom: 80px;
+  }
+
+  .purchase-process {
+    img {
+      display: block;
+      margin: auto;
+    }
+  }
+}
+
+.partner {
+  .sub-title {
+    font-size: 22px;
+    margin-bottom: 54px;
+    text-align: center;
+  }
+}
+
+.qa {
+  .qa-item {
+    margin: 0 60px 0 27px;
+
+    .q {
+      font-size: 18px;
+      height: 18px;
+      line-height: 18px;
+      margin: 24px auto 12px;
+
+      .q-no {
+        display: inline-block;
+        width: 18px;
+        height: 18px;
+        line-height: 18px;
+        margin-right: 12px;
+        border-radius: 50%;
+        background-color: #9b9ec9;
+        color: #fff;
+        font-size: 12px;
+        text-align: center;
+        vertical-align: bottom;
+      }
+    }
+
+    .a {
+      margin-left: 28px;
+    }
+  }
+}
+
+.warning {
+  margin: 30px auto 60px;
+  color: #5f479a;
+  font-size: 16px;
+  text-align: center;
+}
