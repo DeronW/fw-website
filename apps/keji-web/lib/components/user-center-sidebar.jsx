@@ -96,9 +96,13 @@ class UserCenterSidebar extends React.Component {
                 <i className="ucp-icon icon-p2p"></i>
                 <span>我的微金</span>
             </a>
-            <a className="ucp-link" href="http://www.gongchangzx.com/account/home.shtml">
+            <a className="ucp-link" href="https://www.gongchangzx.com/account/home.shtml">
                 <i className="ucp-icon icon-zx"></i>
                 <span>我的尊享</span>
+            </a>
+            <a className="ucp-link" href="https://www.gongchangzx.com/gold/home.shtml">
+                <i className="ucp-icon icon-zx"></i>
+                <span>我的黄金</span>
             </a>
 
             <div className="ucp-horizon-line"></div>
