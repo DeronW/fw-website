@@ -1,6 +1,7 @@
 
 gulpfile.settings.js
 package-lock.json
+differential.compile.*.sh
 .swp
 
 .idea
