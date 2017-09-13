@@ -89,19 +89,27 @@ class UserCenterSidebar extends React.Component {
                 <span>邀请返利</span>
             </a>
             <a data-zx-title="true" className="ucp-link hide" href="/factoryCode/info.shtml">
-                <i className="ucp-icon icon-user"></i>
+                <i className="ucp-icon icon-zx"></i>
                 <span>我的尊享</span>
             </a>
             <a className="ucp-link" href="https://www.gongchangp2p.com/account/home.shtml">
                 <i className="ucp-icon icon-p2p"></i>
                 <span>我的微金</span>
             </a>
+<<<<<<< HEAD
             <a className="ucp-link" href="https://www.gongchangzx.com/account/home.shtml">
+=======
+            <a data-zx-title="true" className="ucp-link" href="/factoryCode/info.shtml">
+>>>>>>> release-keji-web
                 <i className="ucp-icon icon-zx"></i>
                 <span>我的尊享</span>
             </a>
             <a className="ucp-link" href="https://www.gongchangzx.com/gold/home.shtml">
+<<<<<<< HEAD
                 <i className="ucp-icon icon-zx"></i>
+=======
+                <i className="ucp-icon icon-hj"></i>
+>>>>>>> release-keji-web
                 <span>我的黄金</span>
             </a>
 
