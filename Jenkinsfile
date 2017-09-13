@@ -1,4 +1,3 @@
-
 //  node : front or  front-virtual
 
 if(params.JENKINS_NODE != 'front-virtual') {
@@ -15,6 +14,8 @@ if(params.JENKINS_NODE != 'front-virtual') {
                 // 第一次发布新分支, 需要设置本地与origin分支关联
                 sh 'git branch --set-upstream-to=origin/$BRANCH $BRANCH'
             }
+            
+            sh 'git checkout .'
             sh 'git checkout $BRANCH'
 
             if(!params.FORCE) {
