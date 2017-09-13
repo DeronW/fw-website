@@ -4,6 +4,7 @@ class Panel extends React.Component {
     nextStepHandler = () => {
         this.setState({ step: this.state.step + 1 })
     }
+
     render() {
 
         let { step } = this.state, section;

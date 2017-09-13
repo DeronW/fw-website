@@ -19,7 +19,7 @@ spaces_around_operators = true
 spaces_around_brackets = both
 indent_brace_style = K&R
 
-[*.{html,js.jsx}]
+[*.{html,js,jsx}]
 indent_size = 4
 
 [*.{css,less}]

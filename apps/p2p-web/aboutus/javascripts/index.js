@@ -25,7 +25,6 @@ $(document).ready(function () {
 
     $(".left-item").each(function (index, item) {
         $(this).click(function () {
-            console.log(index);
             $(this).addClass("active").siblings().removeClass("active")
             $(".r-item").eq(index).css({display: "block"}).siblings().css({display: "none"})
             $(".aboutus").text($(this).find(".l-content").text());

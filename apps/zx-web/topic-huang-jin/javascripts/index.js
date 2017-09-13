@@ -62,7 +62,6 @@ $(function () {
     var iTop = $(".head-top").outerHeight();
     var iH = $(".top1").height();
     $(".menue ul li.list1").click(function () {
-        console.log('s')
         starMove(document, { 'scrollbar': 0 })
     });
     $(".menue ul li.list2").click(function () {
@@ -72,21 +71,20 @@ $(function () {
         starMove(document, { 'scrollbar': onesize1 + onesizeTrader + onesize2 + iH + iTop + 850 })
     });
     $(".menue ul li.list4").click(function () {
-        starMove(document, { 'scrollbar': onesize1 + onesizeTrader + onesize2 + onesize3 + onesize7 + iH + iTop - 100})
+        starMove(document, { 'scrollbar': onesize1 + onesizeTrader + onesize2 + onesize3 + onesize7 + iH + iTop - 100 })
     });
     $(".menue ul li.list5").click(function () {
-        starMove(document, { 'scrollbar': onesize1 + onesizeTrader + onesize2 + onesize3 + onesize7 + onesize4 + iH + iTop  - 200})
+        starMove(document, { 'scrollbar': onesize1 + onesizeTrader + onesize2 + onesize3 + onesize7 + onesize4 + iH + iTop - 200 })
     });
 
     $(window).on("scroll resize", function () {
-        if ($(window).scrollTop() >= iH && $(window).scrollTop() < onesize1 +onesizeTrader+ iH + iTop + 750) {
+        if ($(window).scrollTop() >= iH && $(window).scrollTop() < onesize1 + onesizeTrader + iH + iTop + 750) {
             iNum = 0;
-        } else if ($(window).scrollTop() >= onesize1 + onesizeTrader + iH + iTop + 750 && $(window).scrollTop() < onesize1+onesizeTrader + onesize2 + iH + iTop + 850) {
+        } else if ($(window).scrollTop() >= onesize1 + onesizeTrader + iH + iTop + 750 && $(window).scrollTop() < onesize1 + onesizeTrader + onesize2 + iH + iTop + 850) {
             iNum = 1;
-        } else if ($(window).scrollTop() >= onesize1 + onesizeTrader + onesize2 + iH + iTop + 850 && $(window).scrollTop() < onesize1+onesizeTrader + onesize2 + onesize3 + iH + iTop + 600) {
+        } else if ($(window).scrollTop() >= onesize1 + onesizeTrader + onesize2 + iH + iTop + 850 && $(window).scrollTop() < onesize1 + onesizeTrader + onesize2 + onesize3 + iH + iTop + 600) {
             iNum = 2;
-        } else if ($(window).scrollTop() >= onesize1 + onesizeTrader + onesize2 + onesize3 + iH + iTop + 600 && $(window).scrollTop() < onesize1+onesizeTrader + onesize2 + onesize3 + onesize7 + onesize4 + iH + iTop - 400) {
-           console.log(3);
+        } else if ($(window).scrollTop() >= onesize1 + onesizeTrader + onesize2 + onesize3 + iH + iTop + 600 && $(window).scrollTop() < onesize1 + onesizeTrader + onesize2 + onesize3 + onesize7 + onesize4 + iH + iTop - 400) {
             iNum = 3;
         } else if ($(window).scrollTop() >= onesize1 + onesizeTrader + onesize2 + onesize3 + onesize7 + onesize4 + iH + iTop - 400) {
             iNum = 4
