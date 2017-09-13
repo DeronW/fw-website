@@ -15,7 +15,6 @@ if(params.JENKINS_NODE != 'front-virtual') {
                 sh 'git branch --set-upstream-to=origin/$BRANCH $BRANCH'
             }
 
-            sh 'git reset --hard'
             sh 'git checkout $BRANCH'
 
             if(!params.FORCE) {
