@@ -21,7 +21,8 @@ if(params.JENKINS_NODE != 'front-virtual') {
                 sh 'git fetch'
                 sh 'git diff --stat=400 origin/$BRANCH > /tmp/website.$PROJECT.git.diff'
             }
-            sh 'git pull origin $BRANCH'
+            // sh 'git pull origin $BRANCH'
+            git branch: BRANCH, credentialsId: '4cac0f9e-5bcd-4f50-a38f-d17f417bbeb5', url: 'git@10.105.101.118:front/website.git'
         }
 
         stage('Update nodejs lib'){
@@ -89,7 +90,8 @@ if(params.JENKINS_NODE == 'front-virtual') {
                 sh 'git fetch'
                 sh 'git diff --stat=400 origin/$BRANCH > /tmp/website.$PROJECT.git.diff'
             }
-            sh 'git pull origin $BRANCH'
+            // sh 'git pull origin $BRANCH'
+            git branch: BRANCH, credentialsId: '4cac0f9e-5bcd-4f50-a38f-d17f417bbeb5', url: 'git@10.105.101.118:front/website.git'
         }
 
         stage('Update nodejs lib'){
