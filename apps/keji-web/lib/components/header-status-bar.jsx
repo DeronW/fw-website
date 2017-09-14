@@ -41,7 +41,10 @@ class HeaderStatusBar extends React.Component {
                 level = data.userLevel,
                 code = data.userCode;
 
-            avatar = avatar || `http://www.9888.cn/img/${parseInt(sex) ? 'man' : 'woman'}.png`;
+            if (!avatar) {
+                let sex = parseInt(sex) ? 'man' : 'woman'
+                avatar = `http://www.gongchangp2p.com/img/${sex}.png`
+            }
 
             this.setState({
                 is_login: isLogin,
