@@ -62,7 +62,7 @@ class Content extends React.Component {
                                 <div className="list welfare-list">
                                     <ul>
                                         <li>
-                                            <p className="title-text title-text-position">注册成功即可获得<br /><span className="info-text">200元返现券礼包</span></p>
+                                            <p className="title-text title-text-position">注册成功即可获得<br /><span className="info-text">200元和2.6克黄金</span></p>
                                             <div className="img">
                                                 <img src="images/welfare-1.png" />
                                             </div>
