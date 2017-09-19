@@ -30,7 +30,7 @@ node(node_name) {
             sh 'npm install'
         } else {
             // 忽略掉 npm 的更新
-            echo 'ignore npm update'
+            echo 'no need force update npm'
         }
     }
 
