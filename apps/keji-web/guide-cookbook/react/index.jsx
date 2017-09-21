@@ -62,19 +62,24 @@ class Content extends React.Component {
                                 <div className="list welfare-list">
                                     <ul>
                                         <li>
-                                            <p className="title-text title-text-position">注册成功即可获得<br /><span className="info-text">200元返现券礼包</span></p>
+                                            <p className="title-text title-text-position">注册成功即可获得<br />
+                                                <span className="info-text">200元和2.6克黄金</span>
+                                            </p>
                                             <div className="img">
                                                 <img src="images/welfare-1.png" />
                                             </div>
                                         </li>
                                         <li>
-                                            <p className="title-text title-text-position">新工友可投<br /><span className="info-text">新手专享标</span></p>
+                                            <p className="title-text title-text-position">新工友可投<br />
+                                                <span className="info-text">新手专享标</span>
+                                            </p>
                                             <div className="img">
                                                 <img src="images/welfare-2.png" />
                                             </div>
                                         </li>
                                         <li className="last-li">
-                                            <p className="title-text title-text-position">首次投资再送 <br /><span className="info-text">0.6%返息券</span></p>
+                                            <p className="title-text title-text-position">首次投资再送 <br />
+                                                <span className="info-text">0.6%返息券</span></p>
                                             <div className="img">
                                                 <img src="images/welfare-4.png" />
                                             </div>
