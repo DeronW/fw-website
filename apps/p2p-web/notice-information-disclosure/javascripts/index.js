@@ -314,7 +314,7 @@ $(function () {
         myChartRight.setOption(optionRight);
     }
     //args顺序：女，男，18,25,35,45,60以上
-    $.get(API_PATH + "/dataTopics/data.shtml").then((data) => {
+    $.get(API_PATH + "/dataTopics/data.shtml", {}, function (data) {
         //截止前一天日期
         $(".partStatisticsText span").text(data.data.date);
         //计算总额
@@ -341,5 +341,5 @@ $(function () {
             endCon.eq(3).find(".money span").text(prevent(data.data.total_overdueCount / data.data.total_orderCount * 100));
             endCon.eq(4).find(".money span").text(judgeCash(data.data.total_lendSum, 2))
         }
-    });
+    }, 'json')
 });
