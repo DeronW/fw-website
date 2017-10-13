@@ -1,3 +1,32 @@
 before_script:
   - node -v
   - npm -v
+
+after_script:
+  - echo 'DONE'
+
+stages:
+  - build
+  - test
+  - deploy
+
+job_fetch:
+  stage: build
+  script:
+    - echo 'fetch'
+
+job_check:
+  stage: build
+  script:
+    - echo 'check'
+
+job_compile:
+  stage: build
+  script:
+    - echo 'compile'
+
+job_revision:
+  stage: build
+  script:
+    - echo 'synchronous'
+
