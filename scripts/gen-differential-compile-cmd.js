@@ -38,7 +38,7 @@ fs.readFile(sourceF, (err, data) => {
 
     let sh_script = [];
     if (r.npm) sh_script.push('npm install')
-    if (r.lib) {
+    if (r.npm || r.lib) {
         sh_script.push(`npm run build:${PROJ}`)
     } else {
         sh_script.push(`npm run gulp ${PROJ}:common_js`)
