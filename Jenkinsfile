@@ -54,7 +54,7 @@ node(node_name) {
             sh 'npm run build:$PROJECT'
         }
         if(!params.FORCE) {
-            sh '~/workspace/front-$PROJECT/differential.compile.$PROJECT.sh'
+            sh "~/workspace/front-$PROJECT/differential.compile.$PROJECT.sh"
         }
     }
     
