@@ -5,7 +5,6 @@
 当前代码库中包含2个项目
 
 * web 金融工场 主站PC端部分页面
-* activity  金融工场 专题活动页面
 * keji-web
 * p2p-web
 * zx-web
