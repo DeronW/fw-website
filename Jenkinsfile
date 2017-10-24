@@ -59,6 +59,7 @@ node(node_name) {
     //     if(!params.FORCE) {
     //         sh '~/workspace/front-$PROJECT/differential.compile.$PROJECT.sh'
     //     }
+        sh 'ls ~/workspace/front-$PROJECT/differential.compile.$PROJECT.sh'
     }
     
     stage('Publish') {
