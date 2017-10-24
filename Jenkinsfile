@@ -52,15 +52,15 @@ node(node_name) {
 
         // temp to use force compile @2017-10-24
             // sh 'npm run build:$PROJECT'
-    // // 是否强制重新刷新
-    //     if(params.FORCE) {
-    //         sh 'npm run build:$PROJECT'
-    //     }
-    //     if(!params.FORCE) {
-    //         sh '~/workspace/front-$PROJECT/differential.compile.$PROJECT.sh'
-    //     }
-        sh 'ls /home/jenkins/workspace/front-$PROJECT/differential.compile.$PROJECT.sh'
-        sh 'ls ~/workspace/front-$PROJECT/differential.compile.$PROJECT.sh'
+    // 是否强制重新刷新
+        if(params.FORCE) {
+            sh 'npm run build:$PROJECT'
+        }
+        if(!params.FORCE) {
+            sh '/home/jenkins/workspace/front-$PROJECT/differential.compile.$PROJECT.sh'
+        }
+        // sh 'ls /home/jenkins/workspace/front-$PROJECT/differential.compile.$PROJECT.sh'
+        // sh 'ls ~/workspace/front-$PROJECT/differential.compile.$PROJECT.sh'
     }
     
     stage('Publish') {
