@@ -49,14 +49,16 @@ node(node_name) {
     }
 
     stage('Build') {
-    // 是否强制重新刷新
-        if(params.FORCE) {
+
+        // temp to use force compile @2017-10-24
             sh 'npm run build:$PROJECT'
-        }
-        if(!params.FORCE) {
-            sh "~/workspace/front-zx-web/differential.compile.zx-web.sh"
-            sh '~/workspace/front-$PROJECT/differential.compile.$PROJECT.sh'
-        }
+    // // 是否强制重新刷新
+    //     if(params.FORCE) {
+    //         sh 'npm run build:$PROJECT'
+    //     }
+    //     if(!params.FORCE) {
+    //         sh '~/workspace/front-$PROJECT/differential.compile.$PROJECT.sh'
+    //     }
     }
     
     stage('Publish') {
