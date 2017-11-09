@@ -130,16 +130,17 @@
                 <div class="what-con">
                     <h1>什么是贡献值</h1>
                     <div class="wta">
-                        <p class="wa-a">贡献值是衡量用户等级的标准，用户可以通过投资（购买债权转让除外）获取贡献值。</p>
-                        <p class="wa-b">贡献值越多，相应的会员等级越高，可享的优惠福利也就越大。</p>
+                        <p class="wa-a">贡献值是衡量用户等级的标准，用户可以通过投资（购买债权转让除外）或邀请好友投资来获取贡献值。</p>
+                        <p class="wa-b">贡献值=投资贡献值+邀友贡献值</p>
                     </div>
                 </div>
 
                 <div class="what-con hwat">
                     <h1>怎么获取贡献值</h1>
                     <div class="wta atw">
-                        <p class="wa-a">贡献值即用户实时待收年化投资额度；</p>
-                        <p class="aw">计算公式：贡献值=投资金额*投资期限/360</p>
+                        <p class="wa-a">投资贡献值：用户实时待收年化投资额度；</p>
+                        <p class="aw">邀友贡献值：<span id="tagText"></span>天内，每成功邀请一位好友首投<span
+                                id="moneyText"></span>元，邀请人获得<span id="contributionText"></span>贡献值。</p>
                     </div>
                 </div>
             </div>
@@ -151,7 +152,8 @@
                     <div class="wie">
                         <div class="tile"><span class="te-a">01</span><span class="ti">如何获得贡献值？</span></div>
                         <div class="involve">
-                            <p>贡献值即用户实时待收年化投资额度， 计算公式为：贡献值=投资金额*投资期限/360</p>
+                            <p>贡献值包括投资贡献值和邀友贡献值，其中投资贡献值即用户实时待收年化投资额度，邀友贡献值即每成功邀请1名首投2000元的好友奖励1000贡献值。<span
+                                    class="user-a">（A码用户不获取邀友贡献值。）</span></p>
                         </div>
                         <div class="clientele">
                             <div class="cen-lf">
@@ -164,36 +166,46 @@
                                     <span class="kh tz"><a>投资期限</a></span>
                                     <span class="ns ybl"><a>180天</a></span>
                                 </div>
-                                <div class="term investBorder">
+                                <div class="term">
                                     <span class="kh tz je"><a>投资金额</a></span>
                                     <span class="ns ybl yuan"><a>10000元</a></span>
                                 </div>
+                                <div class="term tmr">
+                                    <span class="kh tz je invt"><a>邀请人数</a><p>30天内，好友首投满2000元</p></span>
+                                    <span class="ns ybl yuan peo"><a>1人</a></span>
+                                </div>
                             </div>
                             <div class="telert">
-                                <div class="demo"><img src="images/up-o.jpg">贡献值计算及对应权益</div>
+                                <div class="demo"><img src="images/up-o.jpg">贡献值计算</div>
                                 <div class="touzi">
                                     <p class="gzj"><span>投资贡献值=投资金额*投资期限/360</span></p>
                                     <p class="num"><span>10000*180/360=5000</span></p>
                                 </div>
                                 <div class="touzi friends">
+                                    <p class="gzj"><span>邀友贡献值=有效邀请好友数*1000</span></p>
+                                    <p class="num"><span>1*1000=1000</span></p>
+                                </div>
+                                <div class="touzi">
+                                    <p class="gzj"><span>当前贡献值=投资贡献值+邀友贡献值</span></p>
+                                    <p class="num"><span>5000+1000=6000</span></p>
+                                </div>
+                                <div class="touzi friends king">
                                     <p class="gzj"><span>王女士当前的会员等级</span></p>
                                     <p class="num"><span class="vip">VIP1</span></p>
-                                </div>
-                                <div class="touzi  king investBorder">
-                                    <p class="gzj"><span>VIP1等级权益</span></p>
-                                    <p class="bigGift">生日大礼包<span class="vip">60元返现券</span> 升级大礼包<span class="vip">60元返现券</span></p>
                                 </div>
                             </div>
                         </div>
 
                         <div class="tile xshk"><span class="te-a">02</span><span class="ti">贡献值会不会减少呢？</span></div>
                         <div class="involve">
-                            <p>用户回款、流标后，您对应产品的投资贡献值会减少；</p>
+                            <p>投资贡献值：用户回款、流标后，您对应产品的投资贡献值会减少；</p>
+                            <p>邀友贡献值：30天内最高可累计100000贡献值（100位好友）。</p>
                         </div>
 
                         <div class="tile xshk"><span class="te-a">03</span><span class="ti">个人获得贡献值有上限么？</span></div>
                         <div class="involve">
-                            <p>贡献值没有上限；</p>
+                            <p>投资贡献值没有上限；</p>
+                            <p>邀友贡献值在特权等级统计时最多只能奖励100000分（100个有效邀请）, 超出部分不奖励。</p>
                         </div>
 
                         <div class="tile xshk"><span class="te-a">04</span><span class="ti">等级是如何变化的？</span></div>
