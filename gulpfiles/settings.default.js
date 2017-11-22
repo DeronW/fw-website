@@ -15,6 +15,6 @@ module.exports = {
         dev_api_path: '//fe.9888.cn/api/test-c/web'
     },
     "keji-web": {
-        dev_api_path: '//fe.9888.cn/api/test-b/web'
+        dev_api_path: '//fe.9888keji.com/api/test-c/keji-web'
     }
 };

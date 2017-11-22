@@ -7,7 +7,7 @@ const APP_NAMES = [
     'guide', // 新手引导
     'guide-cookbook', // 玩赚攻略页
     'app-download', // app 下载页面
-    'update-browser' // IE8及一下版本浏览器的升级提示
+    'update-browser', // IE8及一下版本浏览器的升级提示
 ]
 
 // 公告类页面
@@ -15,7 +15,8 @@ const NOTICE_PAGES = [
     'notice-preservation', // 安全保障介绍页面
     'notice-corporate-structure', // 信息披露页面
     'notice-vip-prerogative', // 等级攻略页
-    'notice-user-protocol' //金融工场用户协议
+    'notice-user-protocol',//金融工场用户协议
+    'welcome'//PC落地渠道页
 ]
 
 // 专题说明类页面
