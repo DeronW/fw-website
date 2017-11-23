@@ -3,12 +3,37 @@ class Welcome extends React.Component {
         isCheck: true,
         next_step: false,
         counting: null,
-        timer: null
+        timer: null,
+        new_phone: null,
+        new_phone_tips: '',
+        pic_code: null,
+        pic_code_tips: '',
+        ver_code: null,
+        ver_code_tips: '',
+        psd_code: null,
+        psd_code_tips: '',
+        referral_code: null,
+        referral_code_tips: '',
+        have_referral: true
     }
 
     nextStepHandler = () => {
-        this.setState({next_step: true})
+        this.testStepOne()
+
     }
+    testStepOne = () => {
+        let {new_phone, pic_code} = this.state
+        if (new_phone === '' || new_phone === null) {
+            this.setState({new_phone_tips: '请填写手机号'})
+        } else if (!(/^1[3|4|5|8][0-9]\d{4,8}$/.test(new_phone))) {
+            this.setState({new_phone_tips: '手机号格式错误'})
+        } else if (pic_code === '' || pic_code === null) {
+            this.setState({new_phone_tips: '', pic_code_tips: '请填写网页验证码'})
+        } else {
+            this.setState({pic_code_tips: '', next_step: true})
+        }
+    }
+
 
     toggleProHandler = () => {
         this.setState({isCheck: !this.state.isCheck})
@@ -28,24 +53,42 @@ class Welcome extends React.Component {
     }
 
     registerHandler = () => {
+        this.testStepTwo()
+    }
 
+    testStepTwo = () => {
+        let {ver_code, psd_code, referral_code, have_referral} = this.state
+        if (ver_code === '' || ver_code === null) {
+            this.setState({ver_code_tips: '请填写手机验证码'})
+        } else if (psd_code === '' || psd_code == null) {
+            this.setState({ver_code_tips: '', psd_code_tips: '登录密码由6-16位字母、数字、符号两两组成，区分大小写'})
+        } else if (have_referral && (referral_code === '' || referral_code === null)) {
+            this.setState({psd_code_tips: '', referral_code_tips: '无效的工场码填写'})
+        } else {
+            location.href = 'www.baidu.com'
+        }
+    }
+    changeHandler = type => e => {
+        let value = e.target.value;
+        this.setState({[type]: value})
     }
 
     render() {
-        let {next_step, counting} = this.state
+        let {have_referral, next_step, counting, new_phone, new_phone_tips, pic_code_tips, psd_code_tips, ver_code_tips, referral_code_tips} = this.state
         let step_one = () => {
             return <div className="stepOne">
                 <div className="inputWrapper">
                     <span className="iconPhone"></span>
-                    <input type="text" placeholder="手机号" className="input"/>
+                    <input type="text" placeholder="手机号" className="input" onChange={this.changeHandler('new_phone')}/>
                 </div>
-                <div className="inputTips">手机号格式错误</div>
+                <div className="inputTips">{new_phone_tips}</div>
                 <div className="codeWrapper">
                     <span className="iconComputer"></span>
-                    <input type="text" placeholder="网页验证码" className="inputCode"/>
+                    <input type="text" placeholder="网页验证码" className="inputCode"
+                           onChange={this.changeHandler('pic_code')}/>
                 </div>
                 <span className="code"></span>
-                <div className="inputTips">网页验证码不能为空</div>
+                <div className="inputTips">{pic_code_tips}</div>
                 <div className="protocol">
                     <span className={this.state.isCheck ? "checked" : "unChecked"}
                           onClick={this.toggleProHandler}></span>
@@ -65,23 +108,26 @@ class Welcome extends React.Component {
         let step_two = () => {
             let text = counting ? `${counting}秒` : '获取验证码';
             return <div className="stepTwo">
-                <div className="phoneNum">手机号<span className="number">13323981234</span></div>
+                <div className="phoneNum">手机号<span className="number">{new_phone}</span></div>
                 <div className="vCodeWrapper">
                     <span className="iconVcode"></span>
-                    <input type="text" placeholder="手机验证码" className="inputVcode"/>
+                    <input type="text" placeholder="手机验证码" className="inputVcode"
+                           onChange={this.changeHandler("ver_code")}/>
                 </div>
                 <span className="getCode" onClick={this.startCountingDown}>{text}</span>
-                <div className="inputTips">验证码</div>
+                <div className="inputTips">{ver_code_tips}</div>
                 <div className="psdWrapper">
                     <span className="iconLock"></span>
-                    <input type="text" placeholder="密码，6-16位字母、数字、符号" className="inputPsd"/>
+                    <input type="text" placeholder="密码，6-16位字母、数字、符号" className="inputPsd"
+                           onChange={this.changeHandler("psd_code")}/>
                 </div>
-                <div className="inputTips">验证码</div>
-                <div className="psdWrapper">
+                <div className="inputTips">{psd_code_tips}</div>
+                {have_referral && <div className="psdWrapper">
                     <span className="iconBook"></span>
-                    <input type="text" placeholder="推荐人工场码，选填" className="inputPsd"/>
-                </div>
-                <div className="inputTips">验证码</div>
+                    <input type="text" placeholder="推荐人工场码，选填" className="inputPsd"
+                           onChange={this.changeHandler("referral_code")}/>
+                </div>}
+                <div className="inputTips">{referral_code_tips}</div>
                 <div className="register" onClick={this.registerHandler}>立即注册</div>
             </div>
         }
@@ -98,36 +144,36 @@ class Welcome extends React.Component {
                     </div>
                 </div>
             </div>
-            <div class="wrapper">
-                <div class="title">为什么选择金融工场</div>
-                <div class="feature">
-                    <div class="featureItem">
+            <div className="wrapper">
+                <div className="title">为什么选择金融工场</div>
+                <div className="feature">
+                    <div className="featureItem">
                         <img src="images/icon--house.png" width="177" height="166"/>
-                            <div class="itemTitle">会员单位</div>
-                            <div class="itemDes">中国互联网金融协会<br/>首批会员单位</div>
+                        <div className="itemTitle">会员单位</div>
+                        <div className="itemDes">中国互联网金融协会<br/>首批会员单位</div>
                     </div>
-                    <div class="featureItem">
+                    <div className="featureItem">
                         <img src="images/icon-box.png" width="177" height="166"/>
-                            <div class="itemTitle">银行存管</div>
-                            <div class="itemDes">徽商银行资金存管</div>
+                        <div className="itemTitle">银行存管</div>
+                        <div className="itemDes">徽商银行资金存管</div>
                     </div>
-                    <div class="featureItem">
+                    <div className="featureItem">
                         <img src="images/icon-safe.png" width="177" height="166"/>
-                            <div class="itemTitle">信息安全</div>
-                            <div class="itemDes">等保三级权威认证</div>
+                        <div className="itemTitle">信息安全</div>
+                        <div className="itemDes">等保三级权威认证</div>
                     </div>
-                    <div class="featureItem">
+                    <div className="featureItem">
                         <img src="images/icon-sign.png" width="177" height="166"/>
-                            <div class="itemTitle">电子签章</div>
-                            <div class="itemDes">CFCA电子签章</div>
+                        <div className="itemTitle">电子签章</div>
+                        <div className="itemDes">CFCA电子签章</div>
                     </div>
                 </div>
             </div>
         </div>
     }
-    }
+}
 
 
-    $(function () {
-        ReactDOM.render(<Welcome/>, document.getElementById('cnt'));
-    });
+$(function () {
+    ReactDOM.render(<Welcome/>, document.getElementById('cnt'));
+});
