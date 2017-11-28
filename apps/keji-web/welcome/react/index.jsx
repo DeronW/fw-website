@@ -17,23 +17,41 @@ class Welcome extends React.Component {
         have_referral: true
     }
 
-    nextStepHandler = () => {
-        this.testStepOne()
+
+    componentDidMount() {
 
     }
-    testStepOne = () => {
+
+    nextStepHandler = () => {
         let {new_phone, pic_code} = this.state
+        if (new_phone == null && pic_code == null) {
+            this.setState({new_phone_tips: '请填写手机号', pic_code_tips: '请填写网页验证码'})
+        } else if (this.testPhoneOne() && this.testPicOne()) {
+            this.setState({pic_code_tips: '', new_phone_tips: '', next_step: true})
+        }
+    }
+
+    testPhoneOne = () => {
+        let {new_phone} = this.state;
         if (new_phone === '' || new_phone === null) {
             this.setState({new_phone_tips: '请填写手机号'})
         } else if (!(/^1[3|4|5|8][0-9]\d{4,8}$/.test(new_phone))) {
             this.setState({new_phone_tips: '手机号格式错误'})
-        } else if (pic_code === '' || pic_code === null) {
-            this.setState({new_phone_tips: '', pic_code_tips: '请填写网页验证码'})
         } else {
-            this.setState({pic_code_tips: '', next_step: true})
+            this.setState({new_phone_tips: ''})
+            return true
         }
     }
 
+    testPicOne = () => {
+        let {pic_code} = this.state;
+        if (pic_code === '' || pic_code === null) {
+            this.setState({pic_code_tips: '请填写网页验证码'})
+        } else {
+            this.setState({pic_code_tips: ''})
+            return true
+        }
+    }
 
     toggleProHandler = () => {
         this.setState({isCheck: !this.state.isCheck})
@@ -79,13 +97,14 @@ class Welcome extends React.Component {
             return <div className="stepOne">
                 <div className="inputWrapper">
                     <span className="iconPhone"></span>
-                    <input type="text" placeholder="手机号" className="input" onChange={this.changeHandler('new_phone')}/>
+                    <input type="text" placeholder="手机号" className="input" onChange={this.changeHandler('new_phone')}
+                           onBlur={this.testPhoneOne}/>
                 </div>
                 <div className="inputTips">{new_phone_tips}</div>
                 <div className="codeWrapper">
                     <span className="iconComputer"></span>
                     <input type="text" placeholder="网页验证码" className="inputCode"
-                           onChange={this.changeHandler('pic_code')}/>
+                           onChange={this.changeHandler('pic_code')} onBlur={this.testPicOne}/>
                 </div>
                 <span className="code"></span>
                 <div className="inputTips">{pic_code_tips}</div>
