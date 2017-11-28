@@ -27,7 +27,7 @@ class Welcome extends React.Component {
         if (new_phone == null && pic_code == null) {
             this.setState({new_phone_tips: '请填写手机号', pic_code_tips: '请填写网页验证码'})
         } else if (this.testPhoneOne() && this.testPicOne()) {
-            this.setState({pic_code_tips: '', new_phone_tips: '', next_step: true})
+            this.setState({next_step: true})
         }
     }
 
@@ -71,21 +71,45 @@ class Welcome extends React.Component {
     }
 
     registerHandler = () => {
-        this.testStepTwo()
-    }
-
-    testStepTwo = () => {
-        let {ver_code, psd_code, referral_code, have_referral} = this.state
-        if (ver_code === '' || ver_code === null) {
-            this.setState({ver_code_tips: '请填写手机验证码'})
-        } else if (psd_code === '' || psd_code == null) {
-            this.setState({ver_code_tips: '', psd_code_tips: '登录密码由6-16位字母、数字、符号两两组成，区分大小写'})
-        } else if (have_referral && (referral_code === '' || referral_code === null)) {
-            this.setState({psd_code_tips: '', referral_code_tips: '无效的工场码填写'})
-        } else {
-            location.href = 'www.baidu.com'
+        let {ver_code, psd_code, referral_code} = this.state
+        if (ver_code == null && psd_code == null && referral_code == null) {
+            this.setState({ver_code_tips: '请填写手机验证码', psd_code_tips: '请填写密码', referral_code_tips: '请填写工场码'})
+        } else if (this.testVerCode() && this.testPsdCode() && this.testReferralCode()) {
+            location.href = 'http://www.9888keji.com'
         }
     }
+
+
+    testVerCode = () => {
+        let {ver_code} = this.state
+        if (ver_code === '' || ver_code === null) {
+            this.setState({ver_code_tips: '请填写手机验证码'})
+        } else {
+            this.setState({ver_code_tips: ''})
+            return true
+        }
+    }
+
+    testPsdCode = () => {
+        let {psd_code} = this.state
+        if (psd_code === '' || psd_code == null) {
+            this.setState({psd_code_tips: '登录密码由6-16位字母、数字、符号两两组成，区分大小写'})
+        } else {
+            this.setState({psd_code_tips: ''})
+            return true
+        }
+    }
+
+    testReferralCode = () => {
+        let {have_referral, referral_code} = this.state
+        if (have_referral && (referral_code === '' || referral_code === null)) {
+            this.setState({referral_code_tips: '无效的工场码填写'})
+        } else {
+            this.setState({referral_code_tips: ''})
+            return true
+        }
+    }
+
     changeHandler = type => e => {
         let value = e.target.value;
         this.setState({[type]: value})
@@ -131,20 +155,20 @@ class Welcome extends React.Component {
                 <div className="vCodeWrapper">
                     <span className="iconVcode"></span>
                     <input type="text" placeholder="手机验证码" className="inputVcode"
-                           onChange={this.changeHandler("ver_code")}/>
+                           onChange={this.changeHandler("ver_code")} onBlur={this.testVerCode}/>
                 </div>
                 <span className="getCode" onClick={this.startCountingDown}>{text}</span>
                 <div className="inputTips">{ver_code_tips}</div>
                 <div className="psdWrapper">
                     <span className="iconLock"></span>
                     <input type="text" placeholder="密码，6-16位字母、数字、符号" className="inputPsd"
-                           onChange={this.changeHandler("psd_code")}/>
+                           onChange={this.changeHandler("psd_code")} onBlur={this.testPsdCode}/>
                 </div>
                 <div className="inputTips">{psd_code_tips}</div>
                 {have_referral && <div className="psdWrapper">
                     <span className="iconBook"></span>
                     <input type="text" placeholder="推荐人工场码，选填" className="inputPsd"
-                           onChange={this.changeHandler("referral_code")}/>
+                           onChange={this.changeHandler("referral_code")} onBlur={this.testReferralCode}/>
                 </div>}
                 <div className="inputTips">{referral_code_tips}</div>
                 <div className="register" onClick={this.registerHandler}>立即注册</div>
