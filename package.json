@@ -30,6 +30,8 @@
   },
   "scripts": {
     "clean": "node scripts/clean.js",
+    "prestart": "node scripts/clean.js",
+    "start": "node node_modules/gulp/bin/gulp.js",
     "gulp": "node node_modules/gulp/bin/gulp.js",
     "build:keji-web": "npm run clean && npm run gulp keji-web:common_js && npm run gulp build:keji-web",
     "build:loan-web": "npm run clean && npm run gulp loan-web:common_js && npm run gulp build:loan-web",
