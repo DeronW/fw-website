@@ -22,14 +22,12 @@
 
 <!--接口地址前缀,结尾需要添加斜线-->
 <input type="hidden" id="api-path" value="{{ API_PATH }}"/>
-<div id="header-status-bar"></div>
+{% block header-status-bar %}<div id="header-status-bar"></div>{% endblock %}
 
-{% include 'header-nav-bar.swig.html' %}
-{% block content %}
-<div id="cnt"></div>
-{% endblock %}
+{% block header-nav-bar %}{% include 'header-nav-bar.swig.html' %}{% endblock %}
+{% block content %}<div id="cnt"></div>{% endblock %}
 {% include 'footer.swig.html' %}
-{% include 'sidebar-fn.swig.html' %}
+{% block sidebar-fn %}{% include 'sidebar-fn.swig.html' %}{% endblock %}
 
 <script src="javascripts/lib.js"></script>
 <script src="javascripts/bundle.js"></script>
