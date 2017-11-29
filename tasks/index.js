@@ -54,18 +54,18 @@ module.exports = function generate_task(site_name, page_name, configs) {
 
     let common_javascript_files = [];
 
-    let react_v = 'react-15.5.4'
-    react_v = 'react-15.6.1'
-    react_v = 'react-16.0.0'
+    let react_v = 'react-16.2.0'
 
     if (CONFIG.debug) {
-        common_javascript_files.push(`${lib_path}${react_v}/prop-types.js`);
-        common_javascript_files.push(`${lib_path}${react_v}/react.js`);
-        common_javascript_files.push(`${lib_path}${react_v}/react-dom.js`);
+        common_javascript_files.push(...[
+            `${lib_path}${react_v}/react.development.js`,
+            `${lib_path}${react_v}/react-dom.development.js`
+        ])
     } else {
-        common_javascript_files.push(`${lib_path}${react_v}/prop-types.min.js`);
-        common_javascript_files.push(`${lib_path}${react_v}/react.min.js`);
-        common_javascript_files.push(`${lib_path}${react_v}/react-dom.min.js`);
+        common_javascript_files.push(...[
+            `${lib_path}${react_v}/react.production.min.js`,
+            `${lib_path}${react_v}/react-dom.production.min.js`
+        ])
     }
 
     common_javascript_files = common_javascript_files.concat(
