@@ -1,59 +1,3 @@
-let getSessionId = () => {
-    let session_id = {keji: '', p2p: '', zx: ''}
-    return new Promise((resolve, reject) => {
-        $.ajax({
-            url: `https://passport.9888keji.com/passport/synAuth`,
-            success: data => {
-                session_id.keji = data.data.curr
-                resolve()
-            },
-            dataType: 'jsonp'
-        })
-    }).then(() => {
-        return new Promise((resolve, reject) => {
-            $.ajax({
-                url: `https://passport.gongchangp2p.com/passport/synAuth`,
-                success: data => {
-                    session_id.p2p = data.data.curr
-                    resolve()
-                },
-                dataType: 'jsonp'
-            })
-        })
-    }).then(() => {
-        return new Promise((resolve, reject) => {
-            $.ajax({
-                url: `https://passport.gongchangzx.com/passport/synAuth`,
-                success: data => {
-                    session_id.zx = data.data.curr
-                    resolve()
-                },
-                dataType: 'jsonp'
-            })
-        })
-    }).then(() => {
-        return session_id
-    })
-}
-
-
-let getToken = () => {
-    let token = {loginTicket: '', pubsec: ''};
-    return new Promise((resolve, reject) => {
-        $.ajax({
-            url: `https://passport.9888keji.com/passport/async/getToken`,
-            success: data => {
-                token.loginTicket = data.data.loginTicket
-                token.pubsec = data.data.pubsec
-                resolve()
-            },
-            dataType: 'jsonp'
-        })
-    }).then(() => {
-        return token
-    })
-}
-
 class Welcome extends React.Component {
     state = {
         is_check: true,
@@ -71,20 +15,18 @@ class Welcome extends React.Component {
         referral_code: '',
         referral_code_tips: '',
         have_referral: true,
-        session_id_keji: null,
-        session_id_p2p: null,
-        session_id_zx: null,
         img_num: 0
     }
 
-
     componentDidMount() {
-        getSessionId().then(data => {
-            console.log(data)
-        })
-        getToken().then(data => {
-            console.log(data)
-        })
+        // getSessionId().then(data => {
+        //     // console.log(data)
+        // })
+        // getToken().then(data => {
+        //     console.log(this.enscr(this.state.psd_code, data.pubsec))
+        //     // console.log(data)
+        // })
+        // goSyncLog('li', '123456')
     }
 
     nextStepHandler = () => {
@@ -92,11 +34,20 @@ class Welcome extends React.Component {
         if (new_phone == null && pic_code == null) {
             this.setState({new_phone_tips: '请填写手机号', pic_code_tips: '请填写网页验证码'})
         } else if (this.testPhoneOne() && this.testPicOne()) {
-            $.get({
+            $.ajax({
                 url: 'https://passport.9888keji.com/passport/asyncRegist/phoneIsExit',
-                data: {imgValidCode: pic_code, phoneNum: new_phone}
-            }).done(data => {
-                console.log(data)
+                data: {imgValidCode: pic_code, phoneNum: new_phone},
+                dataType: 'jsonp',
+                success: data => {
+                    if (data.data.result === '03') {
+                        this.setState({pic_code_tips: "验证码填写错误"})
+                    } else if (data.data.code == true) {
+                        this.setState({new_phone_tips: "该手机号已注册"})
+                    } else {
+                        this.setState({new_phone_tips: "", pic_code_tips: ""})
+                        this.setState({next_step: true})
+                    }
+                }
             })
         }
 
@@ -131,7 +82,21 @@ class Welcome extends React.Component {
     }
 
     startCountingDown = () => {
+        this.sendVerCode()
         this.setState({counting: 5}, this.startCountingTimer);
+
+    }
+
+    sendVerCode = () => {
+        let {new_phone, ver_code, ver_code_tips} = this.state
+        $.ajax({
+            url: 'https://passport.9888keji.com/passport/asyncRegist/sendSms',
+            data: {phoneNum: new_phone},
+            dataType: 'jsonp',
+            success: data => {
+
+            }
+        })
     }
     startCountingTimer = () => {
         this.state.timer = setInterval(() => {
@@ -302,7 +267,6 @@ class Welcome extends React.Component {
         </div>
     }
 }
-
 
 $(
     function () {
