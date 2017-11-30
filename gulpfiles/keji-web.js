@@ -6,18 +6,21 @@ const APP_NAMES = [
     'guide',// 新手引导
     'guide-cookbook', // 玩赚攻略页
     'app-download', // app 下载页面
-    'update-browser',// IE8及一下版本浏览器的升级提示
 
     'notice-preservation', // 安全保障介绍页面
     'notice-corporate-structure', // 信息披露页面
     'notice-vip-prerogative', // 等级攻略页
     'notice-user-protocol',//金融工场用户协议
-    'welcome', // 'welcome'//PC落地渠道页
+    // 'welcome', // 'welcome'//PC落地渠道页
 
     'topic-annual-commision', // A码 用户返利规则 佣金说明
     'topic-hui-shang', // 徽商
     'topic-gong-you-hui', //工友会专题页
     'topic-hui-shang-guide', // 徽商 开户引导
+    {
+        name: 'update-browser',// IE8及一下版本浏览器的升级提示
+        html_engine: ''
+    }
 ]
 
 //用户界面

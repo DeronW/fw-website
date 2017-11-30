@@ -1,10 +1,10 @@
-{% extends '../lib/templates/zx-base.swig.html' %}
+{{> base }}
 
-{% block javascripts %}
+{{#* inline "javascripts" }}
 <script src="javascripts/index.js" type="text/javascript" charset="utf-8"></script>
-{% endblock %}
+{{/inline}}
 
-{% block content %}
+{{#* inline "content"}}
 
 <div class="top_event">
     <div class="top1">
@@ -132,4 +132,4 @@
 </div>
 </div>
 
-{% endblock %}
+{{/inline}}
