@@ -3,8 +3,11 @@ const eslint = require('gulp-eslint');
 const PROJ = 'keji-web';
 
 // 专题说明类页面
-const APP_NAMES = [
-    'guide', // 新手引导
+const APP_NAMES = [{
+    // 'guide', // 新手引导
+    name: 'guide',
+    html_engine: 'hbs'
+},
     'guide-cookbook', // 玩赚攻略页
     'app-download', // app 下载页面
     'update-browser', // IE8及一下版本浏览器的升级提示
@@ -16,7 +19,10 @@ const NOTICE_PAGES = [
     'notice-corporate-structure', // 信息披露页面
     'notice-vip-prerogative', // 等级攻略页
     'notice-user-protocol',//金融工场用户协议
-    'welcome'//PC落地渠道页
+    {
+        // 'welcome'//PC落地渠道页
+        name: 'welcome',
+    }
 ]
 
 // 专题说明类页面
@@ -54,6 +60,10 @@ APP_NAMES.push(
 
 module.exports = function (gulp, generate_task, settings) {
     let common_config = {
+        hbs_partials: [
+            'base', 'footer', 'header-nav-bar',
+            'growing-io', 'shortcut'
+        ],
         project_components: [
             'header-status-bar.jsx',
             'alert.jsx',
@@ -74,10 +84,12 @@ module.exports = function (gulp, generate_task, settings) {
     }
 
     APP_NAMES.forEach(i => {
+
         generate_task(PROJ, i, Object.assign({
             debug: true,
             api_path: settings[PROJ].dev_api_path
         }, common_config))
+
         generate_task(PROJ, i, Object.assign({
             api_path: "",
             cmd_prefix: 'pack',

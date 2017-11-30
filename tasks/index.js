@@ -14,6 +14,7 @@ const revision = require('./revision.js');
 let COMMON_JAVASCRIPTS_TASK = {};
 
 module.exports = function generate_task(site_name, page_name, configs) {
+
     let singlePageCfg = {};
     if (typeof (page_name) == 'object') {
         singlePageCfg = page_name;
@@ -27,12 +28,14 @@ module.exports = function generate_task(site_name, page_name, configs) {
         project_lib_path = `apps/${site_name}/lib`,
         cdn_path = `cdn/${site_name}/${page_name}/`,
         CONFIG = Object.assign({
+            site_name: site_name,
             debug: false,
             // 新增编译环境, 有3种环境, development/testing/production
             environment: process.env.ENV || 'development',
             cmd_prefix: '', // 通用指令前缀，比如 pack:
             api_path: '',
             cdn_prefix: '',
+            hbs_partials: [],
             project_components: [],
             project_javascripts: [],
             project_less: [],
@@ -72,7 +75,7 @@ module.exports = function generate_task(site_name, page_name, configs) {
         CONFIG.project_javascripts.map(i => `${project_lib_path}/javascripts/${i}`));
 
     function compile_html() {
-        return html([`${app_path}index.html`], build_path, CONFIG.html_engine, {
+        return html([`${app_path}`], build_path, CONFIG, {
             API_PATH: CONFIG.api_path,
             DEBUG: CONFIG.debug,
             ENV: CONFIG.environment

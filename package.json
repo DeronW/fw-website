@@ -26,7 +26,8 @@
     "gulp-swig": "github:FinanicalWorkshop/gulp-swig#1.0.0",
     "gulp-task-listing": "1.0.1",
     "gulp-uglify": "3.0",
-    "gulp-util": "3.0.8"
+    "gulp-util": "3.0.8",
+    "handlebars": "^4.0.11"
   },
   "scripts": {
     "clean": "node scripts/clean.js",
@@ -34,7 +35,6 @@
     "start": "node node_modules/gulp/bin/gulp.js",
     "gulp": "node node_modules/gulp/bin/gulp.js",
     "build:keji-web": "npm run clean && npm run gulp keji-web:common_js && npm run gulp build:keji-web",
-    "build:loan-web": "npm run clean && npm run gulp loan-web:common_js && npm run gulp build:loan-web",
     "build:p2p-web": "npm run clean && npm run gulp p2p-web:common_js && npm run gulp build:p2p-web",
     "build:zx-web": "npm run clean && npm run gulp zx-web:common_js && npm run gulp build:zx-web",
     "pre-compile": "node scripts/gen-differential-compile-cmd.js"
