@@ -31,7 +31,7 @@ class Welcome extends React.Component {
             b[a[0]] = a[1];
         })
 
-        return b
+        return b ? b : ''
 
     }
     testReferral = () => {
