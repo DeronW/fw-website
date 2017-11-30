@@ -1,11 +1,12 @@
-{% extends '../lib/templates/zx-base.swig.html' %}
+{{> base }}
 
-{% block javascripts %}
+
+{{#* inline "javascripts" }}
 <script src="javascripts/index.js"></script>
 <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=1k0hI3NQCtMWDQN0D0kmpXuIYV2GjM0e"></script>
-{% endblock %}
+{{/inline}}
 
-{% block content %}
+{{#* inline "content"}}
 <div class="aboutus-container">
     <div class="aboutus-title">
         <a href="http://www.gongchangzx.com">首页</a> &nbsp;&nbsp;>
@@ -66,4 +67,4 @@
         </div>
     </div>
 </div>
-{% endblock %}
+{{/inline}}

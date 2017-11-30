@@ -1,10 +1,10 @@
-{% extends '../lib/templates/zx-base.swig.html' %}
+{{> base }}
 
-{% block javascripts %}
+{{#* inline "javascripts" }}
 <script src="javascripts/index.js" type="text/javascript" charset="utf-8"></script>
-{% endblock %}
+{{/inline}}
 
-{% block content %}
+{{#* inline "content"}}
 
 <div class="banner">
     <img src="./images/banner.png"/>
@@ -207,4 +207,4 @@
     风险揭示：增金宝实时参考上海黄金交易所价格，金价正常市场波动带来的收益或可能造成的损失，均由客户自行承担。市场有风险，购买须谨慎。
 </div>
 
-{% endblock %}
+{{/inline}}

@@ -15,6 +15,11 @@ let APP_NAMES = [
 module.exports = function (gulp, generate_task, settings) {
 
     let common_config = {
+        html_engine: 'hbs',
+        hbs_partials: [
+            'base', 'user', 'footer', 'header-nav-bar',
+            'growing-io', 'shortcut'
+        ],
         project_components: [
             'header-status-bar.jsx',
             'alert.jsx',
