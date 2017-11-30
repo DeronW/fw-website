@@ -12,7 +12,7 @@ const APP_NAMES = [
     'notice-corporate-structure', // 信息披露页面
     'notice-vip-prerogative', // 等级攻略页
     'notice-user-protocol',//金融工场用户协议
-    'welcome', // 'welcome'//PC落地渠道页
+    // 'welcome', // 'welcome'//PC落地渠道页
 
     'topic-annual-commision', // A码 用户返利规则 佣金说明
     'topic-hui-shang', // 徽商
