@@ -136,7 +136,7 @@ class Welcome extends React.Component {
     }
 
     registerHandler = () => {
-        let {ver_code, psd_code, referral_code, have_referral} = this.state
+        let {ver_code, psd_code, referral_code, have_referral, new_phone} = this.state
         console.log(this.testVerCode(), this.testPsdCode(), this.testReferralCode())
         if (ver_code == '' && psd_code == '' && referral_code == '') {
             if (have_referral) {
@@ -146,6 +146,7 @@ class Welcome extends React.Component {
             }
         } else if (this.testVerCode() && this.testPsdCode() && this.testReferralCode()) {
             console.log('reregisterHandler')
+            goSyncLog(new_phone, psd_code)
             $.ajax({
                 url: 'https://passport.9888keji.com/passport/asyncRegist/doRegist',
                 data: {

@@ -62,7 +62,8 @@ module.exports = function (gulp, generate_task, settings) {
         project_javascripts: [
             'jquery-1.12.4.min.js',
             'common-functions.js',
-            'interest-calculator.js'
+            'interest-calculator.js',
+            'sync-login.js'
         ],
         project_less: [
             'common.less',
