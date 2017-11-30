@@ -6,7 +6,6 @@ const APP_NAMES = [
     'guide',// 新手引导
     'guide-cookbook', // 玩赚攻略页
     'app-download', // app 下载页面
-    'update-browser',// IE8及一下版本浏览器的升级提示
 
     'notice-preservation', // 安全保障介绍页面
     'notice-corporate-structure', // 信息披露页面
@@ -18,6 +17,10 @@ const APP_NAMES = [
     'topic-hui-shang', // 徽商
     'topic-gong-you-hui', //工友会专题页
     'topic-hui-shang-guide', // 徽商 开户引导
+    {
+        name: 'update-browser',// IE8及一下版本浏览器的升级提示
+        html_engine: ''
+    }
 ]
 
 //用户界面
