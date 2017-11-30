@@ -29,7 +29,7 @@ class UserCenterSidebar extends React.Component {
             let user = data.orderUser;
             window._data = data;
 
-            let avatar = ''
+            let avatar = 'https://www.gongchangp2p.com/img/man.png'
             if (user.sex == '1') avatar = 'https://www.gongchangp2p.com/img/man.png'
             if (user.sex == '2') avatar = 'https://www.gongchangp2p.com/img/woman.png'
 
