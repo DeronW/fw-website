@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<!--[if lt IE 9 ]>
+<html lang="zh-cn" class="not-supported-ie8">
+<![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html lang="zh-cn">
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="target-densitydpi=device-dpi, width=720, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=EDGE"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+    <meta name="renderer" content="webkit"/>
+    <title>{{#> title}}工场尊享 — 专注于金融资产交易的互联网金融服务平台{{/title}}</title>
+     <meta name="keywords" content="工场尊享,理财,投资理财,互联网金融,网络理财,借贷撮合,金融信息服务"/>
+    <meta name="description"
+          content="工场尊享平台是一家多元化、专业化的互联网金融信息服务平台，由北京联合常春藤资产管理有限公司倾力打造并运营。工场尊享平台基于不同类型用户群体、需求特征与收益预期，依托先进的风险防控体系，将传统金融模式与现代互联网、信息通信技术相结合，为投资者提供专业、高效、安全的多元化综合性金融信息咨询服务。"/>
+    <link type="text/css" rel="stylesheet" href="stylesheets/all.less.css"/>
+    {{#> css }}{{/css}}
+</head>
+<body>
+
+<input id="api-path" type="hidden" value="{{ API_PATH }}" />
+
+{{#unless noHeader}} <div id="header-status-bar"></div> {{/unless}}
+{{#unless noHeader}} {{> header-nav-bar}} {{/unless}}
+
+{{#> content }}<div id="cnt"></div>{{/content}}
+
+{{> footer }}
+
+{{#unless noShortcut}} {{> shortcut}} {{/unless}}
+
+<script src="javascripts/lib.js"></script>
+<script src="javascripts/bundle.js"></script>
+
+{{#> javascripts }}{{/javascripts}}
+
+{{#if production }} {{> growing-io}} {{/if}}
+
+<script>
+    // 如果是IE8及以下版本的浏览器, 弹出浏览器升级提示框
+    var tag = document.getElementsByTagName('html')[0];
+    if (tag && tag.className === 'not-support-ie8') {
+        // 看来是不支持IE8了
+        var iframe = document.createElement('iframe');
+        iframe.src = 'http://www.9888keji.com/static/keji-web/update-browser/index.html'
+        iframe.frameborder = 0
+        iframe.width = '100%'
+        iframe.height = '100%'
+        document.body.appendChild(iframe)
+        iframe.setAttribute('style', 'display: block; position: absolute; z-index: 99; top: 0; left: 0; right: 0; bottom: 0; border: 0;')
+    }
+</script>
+
+</body>
+</html>
