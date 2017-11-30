@@ -1,6 +1,6 @@
-{% extends '../lib/templates/keji-web.swig.html' %}
+{{#> base }}
 
-{% block content %}
+{{#* inline "content"}}
 <div class="up-banner">
     <img src="images/up_a.jpg">
 </div>
@@ -264,4 +264,6 @@
         }, 'json');
     })
 </script>
-{% endblock %}
+{{/inline}}
+
+{{/base}}

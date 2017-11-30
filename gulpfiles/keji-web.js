@@ -4,38 +4,55 @@ const PROJ = 'keji-web';
 
 // 专题说明类页面
 const APP_NAMES = [{
-    // 'guide', // 新手引导
-    name: 'guide',
+    name: 'guide', // 'guide', // 新手引导
     html_engine: 'hbs'
-},
-    'guide-cookbook', // 玩赚攻略页
-    'app-download', // app 下载页面
-    'update-browser', // IE8及一下版本浏览器的升级提示
-]
+}, {
+    name: 'guide-cookbook', // 玩赚攻略页
+    html_engine: 'hbs'
+}, {
+    name: 'app-download', // app 下载页面
+    html_engine: 'hbs'
+}, {
+    name: 'update-browser', // IE8及一下版本浏览器的升级提示
+    html_engine: ''
+}]
 
 // 公告类页面
-const NOTICE_PAGES = [
-    'notice-preservation', // 安全保障介绍页面
-    'notice-corporate-structure', // 信息披露页面
-    'notice-vip-prerogative', // 等级攻略页
-    'notice-user-protocol',//金融工场用户协议
-    {
-        // 'welcome'//PC落地渠道页
-        name: 'welcome',
-    }
-]
+const NOTICE_PAGES = [{
+    name: 'notice-preservation', // 安全保障介绍页面
+    html_engine: 'hbs'
+}, {
+    name: 'notice-corporate-structure', // 信息披露页面
+    html_engine: 'hbs'
+}, {
+    name: 'notice-vip-prerogative', // 等级攻略页
+    html_engine: 'hbs'
+}, {
+    name: 'notice-user-protocol',//金融工场用户协议
+    html_engine: 'hbs'
+}, {
+    name: 'welcome', // 'welcome'//PC落地渠道页
+}]
 
 // 专题说明类页面
-const TOPIC_PAGES = [
-    'topic-annual-commision', // A码 用户返利规则 佣金说明
-    'topic-hui-shang', // 徽商
-    'topic-gong-you-hui', //工友会专题页
-    'topic-hui-shang-guide', // 徽商 开户引导
-]
+const TOPIC_PAGES = [{
+    name: 'topic-annual-commision', // A码 用户返利规则 佣金说明
+    html_engine: 'hbs'
+}, {
+    name: 'topic-hui-shang', // 徽商
+    html_engine: 'hbs'
+}, {
+    name: 'topic-gong-you-hui', //工友会专题页
+    html_engine: 'hbs'
+}, {
+    name: 'topic-hui-shang-guide', // 徽商 开户引导
+    html_engine: 'hbs'
+}]
 
 //用户界面
 const USER_PAGES = [{
     name: 'user-score', //用户工分
+    html_engine: 'hbs',
     project_components: [
         'header-status-bar.jsx',
         'alert.jsx',
@@ -61,7 +78,7 @@ APP_NAMES.push(
 module.exports = function (gulp, generate_task, settings) {
     let common_config = {
         hbs_partials: [
-            'base', 'footer', 'header-nav-bar',
+            'base', 'user-base', 'footer', 'header-nav-bar',
             'growing-io', 'shortcut'
         ],
         project_components: [

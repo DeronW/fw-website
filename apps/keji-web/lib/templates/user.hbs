@@ -1,0 +1,13 @@
+{% extends 'keji-web.swig.html' %}
+
+{% block content %}
+<div class="partial-user-center-panel">
+    <div class="ucp-left-nav-bg"></div>
+    <div class="ucp-right-panel">{% block user_content %}{% endblock %}</div>
+    <div id="user-center-sidebar"></div>
+</div>
+{% endblock %}
+
+{% block javascripts %}{% block extra_js %}
+
+{% endblock %}{% endblock %}

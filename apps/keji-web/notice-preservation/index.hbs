@@ -1,8 +1,10 @@
-{% extends '../lib/templates/keji-web.swig.html' %}
+{{#> base }}
 
-{% block title %}金融工场是由北京凤凰信用管理有限公司（简称：凤凰信用）倾力打造的专注于小贷公司资产交易的P2P平台—上金融工场，圆财富梦想！{% endblock %}
+{{#* inline "title" }}
+金融工场是由北京凤凰信用管理有限公司（简称：凤凰信用）倾力打造的专注于小贷公司资产交易的P2P平台—上金融工场，圆财富梦想！
+{{/inline}}
 
-{% block javascripts %}
+{{#* inline "javascripts" }}
 <script type='text/javascript' src='javascripts/jquery.jqdock.min.js'></script>
 <script src="javascripts/index.js"></script>
 <script type="text/javascript">
@@ -22,9 +24,9 @@ jQuery(document).ready(function($){
 	});
 });
 </script>
-{% endblock %}
+{{/inline}}
 
-{% block content %}
+{{#* inline "content" }}
 <div class="banner"></div>
 
 <div class="Finance">
@@ -166,4 +168,6 @@ jQuery(document).ready(function($){
 	</div>
 </div>
 
-{% endblock %}
+{{/inline}}
+
+{{/base}}

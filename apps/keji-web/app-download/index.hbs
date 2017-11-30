@@ -1,10 +1,10 @@
-{% extends '../lib/templates/keji-web.swig.html' %}
+{{#> base }}
 
-{% block javascripts %}
+{{#* inline "javascripts" }}
 <script src="javascripts/index.js"></script>
-{% endblock %}
+{{/inline}}
 
-{% block content %}
+{{#* inline "content"}}
 <div class="carousel">
 
     <a class="android-app-link" href="http://app.9888.cn/download/apk"> </a>
@@ -85,4 +85,7 @@
     <img width="1140" src="images/2.jpg">
 </div>
 <br> <br> <br>
-{% endblock %}
+
+{{/inline}}
+
+{{/base}}

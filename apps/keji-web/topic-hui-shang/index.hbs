@@ -1,8 +1,6 @@
-{% extends '../lib/templates/keji-web.swig.html' %}
+{{#> base }}
 
-{% block title %}金融工场是由北京凤凰信用管理有限公司（简称：凤凰信用）倾力打造的专注于小贷公司资产交易的P2P平台—上金融工场，圆财富梦想！{% endblock %}
-
-{% block content %}
+{{#* inline "content"}}
 <div class="part1">
     <div class="wrap">
         <p>金融工场成立四年来，坚持合规自律开展平台业务。10月19日，金融工场以“银行直连”模式接入徽商银行资金存管，符合监管相关规定，不仅是平台合规自律的有力举措，也是平台各方面综合实力的体现。</p>
@@ -32,4 +30,6 @@
         </div>
     </div>
 </div>
-{% endblock %}
+{{/inline}}
+
+{{/base}}

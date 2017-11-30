@@ -64,7 +64,7 @@ $(function () {
             });
         },
         error: function(){
-            alert("fail");
+            // alert("fail");
         }
     });
     //$.getJSON('http://fore.9888.cn/cms/api/gyh_banner.php?key=0ca175b9c0f726a831d895e&id=28&callback=?', function (data) {
@@ -135,7 +135,7 @@ $(function () {
             });
         },
         error: function(){
-            alert("fail");
+            // alert("fail");
         }
     });
     $.ajax({
@@ -201,7 +201,7 @@ $(function () {
             });
         },
         error: function(){
-            alert("fail");
+            // alert("fail");
         }
     });
     $.ajax({
@@ -220,7 +220,7 @@ $(function () {
             }
         },
         error: function(){
-            alert("fail");
+            // alert("fail");
         }
     });
 

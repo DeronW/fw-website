@@ -1,8 +1,6 @@
-{% extends '../lib/templates/keji-web.swig.html' %}
+{{#> base }}
 
-{% block title %}金融工场是由北京凤凰信用管理有限公司（简称：凤凰信用）倾力打造的专注于小贷公司资产交易的P2P平台—上金融工场，圆财富梦想！{% endblock %}
-
-{% block content %}
+{{#* inline "content"}}
 <div class="commission">
     <div class="title">
     </div>
@@ -166,5 +164,6 @@
         </table>
     </div>
 </div>
+{{/inline}}
 
-{% endblock %}
+{{/base}}
