@@ -14,24 +14,46 @@ class Welcome extends React.Component {
         psd_code_tips: '',
         referral_code: '',
         referral_code_tips: '',
-        have_referral: true,
+        have_referral: false,
         img_num: 0
     }
 
     componentDidMount() {
-        // getSessionId().then(data => {
-        //     // console.log(data)
-        // })
-        // getToken().then(data => {
-        //     console.log(this.enscr(this.state.psd_code, data.pubsec))
-        //     // console.log(data)
-        // })
-        // goSyncLog('li', '123456')
+        //验证是否可添推荐人：
+        this.testReferral()
     }
+
+    //获取当前页面的渠道码
+    getQd = () => {
+        let b = {};
+        location.search.substr(1).split("&").map((item, index) => {
+            let a = item.split("=");
+            b[a[0]] = a[1];
+        })
+
+        return b
+
+    }
+    testReferral = () => {
+        console.log(this.getQd().qd)
+        $.ajax({
+            url: 'https://passport.9888keji.com/passport/asyncRegist/canRecommendCode',
+            data: {qd: this.getQd().qd},
+            dataType: "jsonp",
+            success: (data) => {
+                if (data.data.result === '01') {
+                    this.setState({have_referral: true})
+                } else if (data.data.result === '02') {
+                    this.setState({have_referral: false})
+                }
+            }
+        })
+    }
+
 
     nextStepHandler = () => {
         let {new_phone, pic_code} = this.state
-        if (new_phone == null && pic_code == null) {
+        if (new_phone == '' && pic_code == '') {
             this.setState({new_phone_tips: '请填写手机号', pic_code_tips: '请填写网页验证码'})
         } else if (this.testPhoneOne() && this.testPicOne()) {
             $.ajax({
@@ -61,7 +83,6 @@ class Welcome extends React.Component {
         } else if (!(/^1[3|4|5|8][0-9]\d{4,8}$/.test(new_phone))) {
             this.setState({new_phone_tips: '手机号格式错误'})
         } else {
-
             this.setState({new_phone_tips: ''})
             return true
         }
@@ -94,7 +115,13 @@ class Welcome extends React.Component {
             data: {phoneNum: new_phone},
             dataType: 'jsonp',
             success: data => {
-
+                console.log(data.data.result)
+                console.log(data.data.message)
+                if (data.data.result == '03' || data.data.result == '04' || data.data.result == '05') {
+                    this.setState({ver_code_tips: data.data.message})
+                } else {
+                    this.setState({ver_code_tips: ''})
+                }
             }
         })
     }
@@ -109,16 +136,33 @@ class Welcome extends React.Component {
     }
 
     registerHandler = () => {
-        let {ver_code, psd_code, referral_code} = this.state
-        if (ver_code == null && psd_code == null && referral_code == null) {
-            this.setState({ver_code_tips: '请填写手机验证码', psd_code_tips: '请填写密码', referral_code_tips: '请填写工场码'})
+        let {ver_code, psd_code, referral_code, have_referral} = this.state
+        console.log(this.testVerCode(), this.testPsdCode(), this.testReferralCode())
+        if (ver_code == '' && psd_code == '' && referral_code == '') {
+            if (have_referral) {
+                this.setState({ver_code_tips: '请填写手机验证码', psd_code_tips: '请填写密码', referral_code_tips: '请填写工场码'})
+            } else {
+                this.setState({ver_code_tips: '请填写手机验证码', psd_code_tips: '请填写密码'})
+            }
         } else if (this.testVerCode() && this.testPsdCode() && this.testReferralCode()) {
-
+            console.log('reregisterHandler')
+            $.ajax({
+                url: 'https://passport.9888keji.com/passport/asyncRegist/doRegist',
+                data: {
+                    phoneValidCode: ver_code,
+                    password: psd_code,
+                    recommendCode: referral_code
+                },
+                dataType: "jsonp",
+                success: data => {
+                    if (data.data.result === '01') {
+                        console.log('success')
+                    } else if (data.data.result === '03') {
+                        this.setState({ver_code_tips: "手机验证码填写错误"})
+                    }
+                }
+            })
         }
-    }
-
-    snycLogin = () => {
-
     }
 
     imgCodeHandler = () => {
@@ -136,9 +180,36 @@ class Welcome extends React.Component {
         }
     }
 
+    validatePsd = (str) => {
+        let re1 = /.*[0-9]+.*/;//数字
+        let re2 = /.*[a-zA-Z]+.*/;//字母
+        let re3 = /.*[^a-zA-Z0-9]+.*/;//非字母和数字
+        let re4 = /.*[^\u4E00-\u9FA5]{0,}.*/;//不是中文
+        //长度6-16
+        if (!((str.length >= 6) && (str.length <= 16))) {
+            return false;
+        }
+        //必须是：字母和数字
+        if (re1.test(str) && re2.test(str) && re4.test(str)) {
+            return true;
+        }
+        //必须是：数字和特殊符号
+        if (re1.test(str) && re3.test(str) && re4.test(str)) {
+            return true;
+        }
+        //必须是：字母和特殊符号
+        if (re2.test(str) && re3.test(str) && re4.test(str)) {
+            return true;
+        }
+        return false;
+
+    }
+
     testPsdCode = () => {
         let {psd_code} = this.state
         if (psd_code === '' || psd_code == null) {
+            this.setState({psd_code_tips: '请填写密码'})
+        } else if (!this.validatePsd(psd_code)) {
             this.setState({psd_code_tips: '登录密码由6-16位字母、数字、符号两两组成，区分大小写'})
         } else {
             this.setState({psd_code_tips: ''})
@@ -148,11 +219,22 @@ class Welcome extends React.Component {
 
     testReferralCode = () => {
         let {have_referral, referral_code} = this.state
-        if (have_referral && (referral_code === '' || referral_code === null)) {
-            this.setState({referral_code_tips: '无效的工场码填写'})
-        } else {
-            this.setState({referral_code_tips: ''})
+        if (!have_referral) {
             return true
+        } else if (have_referral && (referral_code !== '' )) {
+            $.ajax({
+                url: 'https://passport.9888keji.com/passport/asyncRegist/recommendCodeExist',
+                data: {recommendCode: referral_code},
+                dataType: "jsonp",
+                success: (data) => {
+                    if (data.data.result === '02') {
+                        this.setState({referral_code_tips: '无效的工场码填写'})
+                    } else if (data.data.result === '01') {
+                        this.setState({referral_code_tips: ''})
+                        return true
+                    }
+                }
+            })
         }
     }
 
@@ -162,7 +244,7 @@ class Welcome extends React.Component {
     }
 
     render() {
-        let {img_code, pic_code, psd_code, ver_code, referral_code, img_num, have_referral, next_step, counting, new_phone, new_phone_tips, pic_code_tips, psd_code_tips, ver_code_tips, referral_code_tips} = this.state
+        let {pic_code, psd_code, ver_code, referral_code, img_num, have_referral, next_step, counting, new_phone, new_phone_tips, pic_code_tips, psd_code_tips, ver_code_tips, referral_code_tips} = this.state
         let step_one = () => {
             return <div className="stepOne">
                 <div className="inputWrapper">
@@ -202,7 +284,8 @@ class Welcome extends React.Component {
         let step_two = () => {
             let text = counting ? `${counting}秒` : '获取验证码';
             return <div className="stepTwo">
-                <div className="phoneNum">手机号<span className="number">{new_phone}</span></div>
+                <div className="phoneNum">手机号<span
+                    className="number">{new_phone.substr(0, 3) + '****' + new_phone.substr(-4)}</span></div>
                 <div className="vCodeWrapper">
                     <span className="iconVcode"></span>
                     <input type="text" placeholder="手机验证码" className="inputVcode"
