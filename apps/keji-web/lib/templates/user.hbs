@@ -1,0 +1,13 @@
+{{> base }}
+
+{{#* inline 'content'}}
+<div class="partial-user-center-panel">
+    <div class="ucp-left-nav-bg"></div>
+    <div class="ucp-right-panel">{{#> user_content }}{{/user_content}}</div>
+    <div id="user-center-sidebar"></div>
+</div>
+{{/inline}}
+
+{{#* inline 'javascripts'}}
+{{#> extra_js }}{{/extra_js}}
+{{/inline}}
