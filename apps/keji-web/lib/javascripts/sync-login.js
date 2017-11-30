@@ -87,6 +87,7 @@ let goSyncLog = (userName, userPsd) => {
                         success: data => {
                             resolve()
                             console.log(data)
+                            return data
                         }
                     })
                 })

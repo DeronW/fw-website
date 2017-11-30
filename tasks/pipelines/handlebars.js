@@ -27,10 +27,11 @@ module.exports = function (opts) {
 
         var contents = file.contents.toString();
         var compiled = null;
+        var data = Object.assign({}, { compiledAt: (new Date().toString()) }, opts.data)
 
         try {
             let template = Handlebars.compile(contents);
-            compiled = template(opts.data);
+            compiled = template(data);
         } catch (err) {
             this.emit('error', new gutil.PluginError(PLUGIN_NAME, err, {
                 fileName: file.path
