@@ -86,8 +86,6 @@ let goSyncLog = (userName, userPsd) => {
                         dataType: "jsonp",
                         success: data => {
                             resolve()
-                            console.log(data)
-                            return data
                         }
                     })
                 })

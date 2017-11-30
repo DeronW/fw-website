@@ -1,1 +1,15 @@
-{{> base }}
+{{#> base}}
+    {{#unless noHeader}} {{> header-nav-bar}} {{/unless}}
+    {{#* inline "content"}}
+        <div id="cnt"></div>
+        <iframe src="https://passport.9888keji.com/passport/blank" style="display: none"></iframe>
+        <iframe src="https://passport.gongchangzx.com/passport/blank" style="display: none"></iframe>
+        <iframe src="https://passport.gongchangp2p.com/passport/blank" style="display: none"></iframe>
+    {{/inline}}
+{{/base}}
+{{#> javascripts }}
+    <script src="http://passport.cnblogs.com/scripts/jsencrypt.min.js"></script>
+{{/javascripts}}
+
+
+

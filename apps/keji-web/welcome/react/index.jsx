@@ -22,10 +22,6 @@ class Welcome extends React.Component {
     componentDidMount() {
         //验证是否可添推荐人：
         this.testReferral()
-        this.getRegToken().then(data => {
-            this.setState({reg_token: data})
-            console.log(this.state.reg_token)
-        })
     }
 
     //获取当前页面的渠道码
@@ -162,39 +158,49 @@ class Welcome extends React.Component {
 
     registerHandler = () => {
         let {ver_code, psd_code, referral_code, have_referral, new_phone} = this.state
-        console.log(this.testVerCode(), this.testPsdCode(), this.testReferralCode())
-        if (ver_code == '' && psd_code == '' && referral_code == '') {
-            if (have_referral) {
-                this.setState({ver_code_tips: '请填写手机验证码', psd_code_tips: '请填写密码', referral_code_tips: '请填写工场码'})
-            } else {
-                this.setState({ver_code_tips: '请填写手机验证码', psd_code_tips: '请填写密码'})
-            }
-        } else if (this.testVerCode() && this.testPsdCode() && this.testReferralCode()) {
-            console.log('reregisterHandler')
-            $.ajax({
-                url: 'https://passport.9888keji.com/passport/asyncRegist/doRegist',
-                data: {
-                    phoneValidCode: ver_code,
-                    password: psd_code,
-                    recommendCode: referral_code,
-                    qd: this.getQd().qd,
-                    registToken: this.state.reg_token,
-                    keyword: ''
-                },
-                dataType: "jsonp",
-                success: data => {
-                    if (data.data.result === '01') {
-                        console.log('success')
-                        goSyncLog(new_phone, psd_code).then(data => {
-                            console.log('gologin')
-                        })
-
-                    } else if (data.data.result === '03') {
-                        this.setState({ver_code_tips: "手机验证码填写错误"})
+        this.getRegToken().then(data => {
+            this.setState({reg_token: data}, () => {
+                if (ver_code == '' && psd_code == '' && referral_code == '') {
+                    if (have_referral) {
+                        this.setState({ver_code_tips: '请填写手机验证码', psd_code_tips: '请填写密码', referral_code_tips: '请填写工场码'})
+                    } else {
+                        this.setState({ver_code_tips: '请填写手机验证码', psd_code_tips: '请填写密码'})
                     }
+                } else if (this.testVerCode() && this.testPsdCode() && this.testReferralCode()) {
+                    console.log('reregisterHandler')
+                    $.ajax({
+                        url: 'https://passport.9888keji.com/passport/asyncRegist/doRegist',
+                        data: {
+                            phoneValidCode: ver_code,
+                            password: psd_code,
+                            recommendCode: referral_code,
+                            qd: this.getQd().qd,
+                            registToken: this.state.reg_token,
+                            keyword: ''
+                        },
+                        dataType: "jsonp",
+                        success: data => {
+                            if (data.data.result === '01') {
+                                console.log('success')
+                                goSyncLog(new_phone, psd_code).then(data => {
+                                    console.log(data.data.result + ' 12313123')
+                                    if (data.data.result !== '01') {
+                                        GlobalAlert("注册成功，登录失败");
+                                    } else {
+                                        console.log('gologin')
+                                        location.href = "https://www.9888keji.com/depository/regist/regSuccess.shtml"
+                                    }
+                                })
+
+                            } else {
+                                this.setState({ver_code_tips: data.data.message})
+                            }
+                        }
+                    })
                 }
             })
-        }
+        })
+
     }
 
     imgCodeHandler = () => {
