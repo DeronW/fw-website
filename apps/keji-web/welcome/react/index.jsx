@@ -15,12 +15,17 @@ class Welcome extends React.Component {
         referral_code: '',
         referral_code_tips: '',
         have_referral: false,
-        img_num: 0
+        img_num: 0,
+        reg_token: ''
     }
 
     componentDidMount() {
         //验证是否可添推荐人：
         this.testReferral()
+        this.getRegToken().then(data => {
+            this.setState({reg_token: data})
+            console.log(this.state.reg_token)
+        })
     }
 
     //获取当前页面的渠道码
@@ -80,7 +85,7 @@ class Welcome extends React.Component {
         let {new_phone} = this.state;
         if (new_phone === '' || new_phone === null) {
             this.setState({new_phone_tips: '请填写手机号'})
-        } else if (!(/^1[3|4|5|8][0-9]\d{4,8}$/.test(new_phone))) {
+        } else if (!(/^[1][3,4,5,7,8][0-9]{9}$/.test(new_phone))) {
             this.setState({new_phone_tips: '手机号格式错误'})
         } else {
             this.setState({new_phone_tips: ''})
@@ -135,6 +140,26 @@ class Welcome extends React.Component {
         }, 1000)
     }
 
+    getRegToken = () => {
+        let reg_token
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                url: 'https://passport.9888keji.com/passport/asyncRegist/getRegToken',
+                dataType: "jsonp",
+                success: data => {
+                    if (data.data.result === '01') {
+                        reg_token = data.data.registTicket
+                        resolve()
+                    }
+                }
+            })
+        }).then(() => {
+            return reg_token
+        })
+
+
+    }
+
     registerHandler = () => {
         let {ver_code, psd_code, referral_code, have_referral, new_phone} = this.state
         console.log(this.testVerCode(), this.testPsdCode(), this.testReferralCode())
@@ -146,18 +171,24 @@ class Welcome extends React.Component {
             }
         } else if (this.testVerCode() && this.testPsdCode() && this.testReferralCode()) {
             console.log('reregisterHandler')
-            goSyncLog(new_phone, psd_code)
             $.ajax({
                 url: 'https://passport.9888keji.com/passport/asyncRegist/doRegist',
                 data: {
                     phoneValidCode: ver_code,
                     password: psd_code,
-                    recommendCode: referral_code
+                    recommendCode: referral_code,
+                    qd: this.getQd().qd,
+                    registToken: this.state.reg_token,
+                    keyword: ''
                 },
                 dataType: "jsonp",
                 success: data => {
                     if (data.data.result === '01') {
                         console.log('success')
+                        goSyncLog(new_phone, psd_code).then(data => {
+                            console.log('gologin')
+                        })
+
                     } else if (data.data.result === '03') {
                         this.setState({ver_code_tips: "手机验证码填写错误"})
                     }
