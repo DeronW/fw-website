@@ -11,13 +11,21 @@ const APP_NAMES = [
     'notice-corporate-structure', // 信息披露页面
     'notice-vip-prerogative', // 等级攻略页
     'notice-user-protocol',//金融工场用户协议
-    'welcome', // 'welcome'//PC落地渠道页
 
     'topic-annual-commision', // A码 用户返利规则 佣金说明
     'topic-hui-shang', // 徽商
     'topic-gong-you-hui', //工友会专题页
     'topic-hui-shang-guide', // 徽商 开户引导
     {
+        name: 'welcome', // 'welcome'//PC落地渠道页
+        project_javascripts: [
+            'jquery-1.12.4.min.js',
+            'common-functions.js',
+            'interest-calculator.js',
+            'es6-promise.min.js',
+            'sync-login.js'
+        ],
+    }, {
         name: 'update-browser',// IE8及一下版本浏览器的升级提示
         html_engine: ''
     }
@@ -59,8 +67,7 @@ module.exports = function (gulp, generate_task, settings) {
         project_javascripts: [
             'jquery-1.12.4.min.js',
             'common-functions.js',
-            'interest-calculator.js',
-            'sync-login.js'
+            'interest-calculator.js'
         ],
         project_less: [
             'common.less',
