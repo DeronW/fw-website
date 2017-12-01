@@ -1,6 +1,6 @@
-const HeaderStatusBar = React.createClass({
-    getInitialState: function () {
-        return {
+class HeaderStatusBar extends React.Component {
+
+        state = {
             is_login: false,
             username: null,
             realname: null,
@@ -8,8 +8,7 @@ const HeaderStatusBar = React.createClass({
             msg_count: 0,
             showUserPop: false
         }
-    },
-    componentDidMount: function () {
+    componentDidMount() {
         // 获取用户登录信息
         // hack: 因为passport和主站的登录方式, 需要通过url传递token, 这里模拟一次
         let qs = location.search.replace('?', '').split('&'), login_token = ' ';
@@ -42,14 +41,14 @@ const HeaderStatusBar = React.createClass({
                 throw 'unread message count is not a number';
             }
         }.bind(this), 'json')
-    },
-    showUserPopHandler: function () {
+    }
+    showUserPopHandler() {
         this.setState({showUserPop: true})
-    },
-    hideUserPopHandler: function () {
+    }
+    hideUserPopHandler() {
         this.setState({showUserPop: false})
-    },
-    render: function () {
+    }
+    render() {
         let user_state = null, msg = null;
         let separate_line = <span className="separate-line"> </span>;
         let header = null;
@@ -134,4 +133,4 @@ const HeaderStatusBar = React.createClass({
             </div>
         )
     }
-});
+}
