@@ -1,9 +1,11 @@
-{% extends "../lib/templates/p2p-base.swig.html" %}
+{{#> base }}
 
-{% block javascripts %}
+{{#* inline "javascripts" }}
 <script type='text/javascript' src="javascripts/echarts.common.min.js"></script>
 <script type="text/javascript" src="javascripts/index.js"></script>
-{% endblock %} {% block content %}
+{{/inline}}
+
+{{#* inline "content"}}
 <div class="informationDisclosure">
     <div class="informationTab">
         <div class="tab tabFirst active">平台运营信息</div>
@@ -390,4 +392,6 @@
     </div>
 
 </div>
-{% endblock %}
+{{/inline}}
+
+{{/base}}
