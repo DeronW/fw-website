@@ -36,7 +36,6 @@ class Welcome extends React.Component {
 
     }
     testReferral = () => {
-        console.log(this.getQd().qd)
         $.ajax({
             url: 'https://passport.9888keji.com/passport/asyncRegist/canRecommendCode',
             data: {qd: this.getQd().qd},
@@ -116,8 +115,6 @@ class Welcome extends React.Component {
             data: {phoneNum: new_phone},
             dataType: 'jsonp',
             success: data => {
-                console.log(data.data.result)
-                console.log(data.data.message)
                 if (data.data.result == '03' || data.data.result == '04' || data.data.result == '05') {
                     this.setState({ver_code_tips: data.data.message})
                 } else {
@@ -167,7 +164,6 @@ class Welcome extends React.Component {
                         this.setState({ver_code_tips: '请填写手机验证码', psd_code_tips: '请填写密码'})
                     }
                 } else if (this.testVerCode() && this.testPsdCode() && this.testReferralCode()) {
-                    console.log('reregisterHandler')
                     $.ajax({
                         url: 'https://passport.9888keji.com/passport/asyncRegist/doRegist',
                         data: {
@@ -181,14 +177,10 @@ class Welcome extends React.Component {
                         dataType: "jsonp",
                         success: data => {
                             if (data.data.result === '01') {
-                                console.log('success')
-                                // goSyncLog(new_phone, psd_code)
                                 goSyncLog(new_phone, psd_code).then(data => {
-                                    console.log(data.data.result)
                                     if (data.data.result !== '01') {
                                         GlobalAlert("注册成功，登录失败");
                                     } else {
-                                        console.log('gologin')
                                         location.href = "https://www.9888keji.com/depository/regist/regSuccess.shtml"
                                     }
                                 })

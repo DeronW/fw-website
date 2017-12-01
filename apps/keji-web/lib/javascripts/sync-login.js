@@ -60,7 +60,7 @@ let enscr = (pwd, pubsec) => {
 
 //tokenid,username,password,loginType,sitid
 let goSyncLog = (userName, userPsd) => {
-    let tokenId, rsaKey, session_id_keji, session_id_p2p, session_id_zx, sessionId, id = {}, result = {}
+    let id = {}
     let p1 = new Promise((resolve, reject) => {
         getSessionId().then(data => {
             id.sessionId = data
@@ -76,13 +76,12 @@ let goSyncLog = (userName, userPsd) => {
     })
 
     return Promise.all([p1, p2]).then(data => {
-        console.log(id)
         return $.ajax({
             url: `http://passport.9888keji.com/passport/async/login`,
             data: {
-                tokenId: id.tokenId,
+                tokenId: id.tokenId.loginTicket,
                 username: userName,
-                password: enscr(userPsd, rsaKey),
+                password: enscr(userPsd, id.tokenId.pubsec),
                 loginType: '01',
                 sitid: `${id.sessionId.keji}:${id.sessionId.p2p}:${id.sessionId.zx}`
             },
