@@ -44,12 +44,10 @@ let getToken = () => {
             success: data => {
                 token.loginTicket = data.data.loginTicket
                 token.pubsec = data.data.pubsec
-                resolve()
+                resolve(token)
             },
             dataType: 'jsonp'
         })
-    }).then(() => {
-        return token
     })
 }
 
@@ -62,34 +60,33 @@ let enscr = (pwd, pubsec) => {
 
 //tokenid,username,password,loginType,sitid
 let goSyncLog = (userName, userPsd) => {
-    let tokenId, rsaKey, session_id_keji, session_id_p2p, session_id_zx
-    return new Promise((resolve, reject) => {
+    let tokenId, rsaKey, session_id_keji, session_id_p2p, session_id_zx, sessionId, id = {}, result = {}
+    let p1 = new Promise((resolve, reject) => {
         getSessionId().then(data => {
-            session_id_keji = data.keji
-            session_id_p2p = data.p2p
-            session_id_zx = data.zx
-        }).then(() => {
-            getToken().then(data => {
-                tokenId = data.loginTicket
-                rsaKey = data.pubsec
-            }).then(() => {
-                return new Promise((resolve, reject) => {
-                    $.ajax({
-                        url: `http://passport.9888keji.com/passport/async/login`,
-                        data: {
-                            tokenId: tokenId,
-                            username: userName,
-                            password: enscr(userPsd, rsaKey),
-                            loginType: '01',
-                            sitid: `${session_id_keji}:${session_id_p2p}:${session_id_zx}`
-                        },
-                        dataType: "jsonp",
-                        success: data => {
-                            resolve()
-                        }
-                    })
-                })
-            })
+            id.sessionId = data
+            resolve()
+        })
+    })
+
+    let p2 = new Promise((resolve, reject) => {
+        getToken().then(data => {
+            id.tokenId = data
+            resolve()
+        })
+    })
+
+    return Promise.all([p1, p2]).then(data => {
+        console.log(id)
+        return $.ajax({
+            url: `http://passport.9888keji.com/passport/async/login`,
+            data: {
+                tokenId: id.tokenId,
+                username: userName,
+                password: enscr(userPsd, rsaKey),
+                loginType: '01',
+                sitid: `${id.sessionId.keji}:${id.sessionId.p2p}:${id.sessionId.zx}`
+            },
+            dataType: "jsonp"
         })
     })
 }
