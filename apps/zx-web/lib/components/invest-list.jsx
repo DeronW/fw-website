@@ -1,31 +1,30 @@
-const GlobalInvestList = React.createClass({
-    getInitialState: function () {
-        console.log(888)
-        return {products: []}
-    },
-    componentDidMount: function () {
+class GlobalInvestList extends React.Component{
+    state = {
+        products: []
+    }
+    componentDidMount(){
         console.log(333)
         $.get(API_PATH + '/prdClaims/phpDataList.shtml', {}, (data) => {
             this.setState({products: data.pageData.result})
         }, 'json')
-    },
-    shouldComponentUpdate: function () {
+    }
+    shouldComponentUpdate = () => {
         return this.state.products.length == 0;
-    },
-    getRepayModeName: function (m) {
+    }
+    getRepayModeName = (m) => {
         if (m == 1) return "按季等额还款";
         if (m == 2) return "按月等额还款";
         if (m == 3) return "一次性还本付息";
         if (m == 4) return "按月付息到期还本";
         if (m == 5) return "按天一次性还本付息";
-    },
-    getRepayPeriod: function (product) {
+    }
+    getRepayPeriod = (product) => {
         if (product.repayMode == 5) return `${product.repayPeriod}天`;
         let v = parseInt(product.repayPeriod);
         let enumerate = [null, 3, 6, 9, 12, 1, 2, 4, 5, 7, 8, 10, 11];
         return `${enumerate[v] || v}个月`;
-    },
-    getProductStatus: function (product) {
+    }
+    getProductStatus = (product) => {
         let title, text, link;
 
         let sold_out = product.fullscaleTime && (product.fullscaleTime + '').split(" ", 1) + '售罄';
@@ -58,8 +57,8 @@ const GlobalInvestList = React.createClass({
             title: title,
             text: text
         }
-    },
-    render: function () {
+    }
+    render() {
 
         let supportSVG = !!document.createElementNS && !!document.createElementNS('http://www.w3.org/2000/svg', 'svg').createSVGRect;
 
@@ -162,4 +161,4 @@ const GlobalInvestList = React.createClass({
             </div>
         )
     }
-});
+}

@@ -77,8 +77,7 @@ module.exports = function generate_task(site_name, page_name, configs) {
     function compile_html() {
         return html([`${app_path}`], build_path, CONFIG, {
             API_PATH: CONFIG.api_path,
-            DEBUG: CONFIG.debug,
-            ENV: CONFIG.environment
+            DEBUG: CONFIG.debug
         })
     }
 
