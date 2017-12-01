@@ -1,4 +1,4 @@
-(()=> {
+((window) => {
     /*
      为了在文字中添加颜色, 使用字符串格式化方法. 颜色目前近支持两种, 工场红色和工场蓝色
      用法一: "这是一段文字, 包含了一个%s的颜色文字", "关键字", "red"
@@ -94,14 +94,14 @@
         color: 'white'
     };
 
-    const Alert = React.createClass({
-        closeHandler: function () {
+    class Alert extends React.Component {
+        closeHandler = () => {
             ReactDOM.unmountComponentAtNode(document.getElementById(this.props.id));
-        },
-        componentWillUnmount: function () {
+        }
+        componentWillUnmount = () => {
             this.props.unMountHandler && this.props.unMountHandler();
-        },
-        getPlaceholders: function (values, colors) {
+        }
+        getPlaceholders = (values, colors) => {
             let placeholders = [];
 
             let get_color = (color) => {
@@ -114,7 +114,7 @@
 
             if (values == null) {
                 values = [];
-            } else if (typeof(values) == 'string' || typeof(values) == 'number') {
+            } else if (typeof (values) == 'string' || typeof (values) == 'number') {
                 values = [values];
                 colors = [colors];
             }
@@ -122,30 +122,30 @@
                 placeholders.push(box(values[i].toString(), colors[i]))
             }
             return placeholders;
-        },
-        render: function () {
-            let {tpl, values, colors} = this.props;
+        }
+        render() {
+            let { tpl, values, colors } = this.props;
             let placeholder = this.getPlaceholders(values, colors);
             let segment = tpl;
 
             for (let i = 0; i < placeholder.length; i++) {
                 segment = segment.replace('%s', placeholder[i])
             }
-            segment = {__html: segment};
+            segment = { __html: segment };
 
             return (
                 <div style={_style_bg}>
                     <div className="ie8-opacity-bg"></div>
                     <div style={_style_panel}>
                         <div style={_style_title}><b onClick={this.closeHandler}
-                                                     style={_style_btn_close}>&times;</b></div>
+                            style={_style_btn_close}>&times;</b></div>
                         <div style={_style_text} dangerouslySetInnerHTML={segment}></div>
                         <a style={_style_btn} onClick={this.closeHandler}>确定</a>
                     </div>
                 </div>
             )
         }
-    });
+    }
 
     window.GlobalAlert = GlobalAlert;
-})();
+})(window);

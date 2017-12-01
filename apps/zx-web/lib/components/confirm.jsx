@@ -1,4 +1,4 @@
-(()=> {
+(() => {
     /*
      为了在文字中添加颜色, 使用字符串格式化方法. 颜色目前近支持两种, 工场红色和工场蓝色
      用法一: "这是一段文字, 包含了一个%s的颜色文字", "关键字", "red"
@@ -17,10 +17,10 @@
             document.body.appendChild(element);
         }
 
-        if (typeof(values) == 'function') {
+        if (typeof (values) == 'function') {
             cb = values;
             values = colors = null;
-        } else if (typeof(colors) == 'function') {
+        } else if (typeof (colors) == 'function') {
             cb = colors;
             colors = null;
         }
@@ -119,21 +119,21 @@
         color: 'white',
     };
 
-    const Confirm = React.createClass({
-        closeHandler: function () {
+    class Confirm extends React.Component {
+        closeHandler = () => {
             ReactDOM.unmountComponentAtNode(document.getElementById(this.props.id));
-        },
-        cancelHandler: function () {
+        }
+        cancelHandler = () => {
             this.closeHandler()
-        },
-        confirmHandler: function () {
+        }
+        confirmHandler = () => {
             this.props.cb && this.props.cb(true);
             this.closeHandler()
-        },
-        componentWillUnmount: function () {
+        }
+        componentWillUnmount() {
             this.props.unMountHandler && this.props.unMountHandler();
-        },
-        getPlaceholders: function (values, colors) {
+        }
+        getPlaceholders = (values, colors) => {
             let placeholders = [];
 
             let get_color = (color) => {
@@ -146,7 +146,7 @@
 
             if (values == null) {
                 values = [];
-            } else if (typeof(values) == 'string' || typeof(values) == 'number') {
+            } else if (typeof (values) == 'string' || typeof (values) == 'number') {
                 values = [values];
                 colors = [colors];
             }
@@ -154,23 +154,23 @@
                 placeholders.push(box(values[i], colors[i]))
             }
             return placeholders;
-        },
-        render: function () {
-            let {tpl, values, colors} = this.props;
+        }
+        render() {
+            let { tpl, values, colors } = this.props;
             let placeholder = this.getPlaceholders(values, colors);
             let segment = tpl;
 
             for (let i = 0; i < placeholder.length; i++) {
                 segment = segment.replace('%s', placeholder[i])
             }
-            segment = {__html: segment};
+            segment = { __html: segment };
 
             return (
                 <div style={_style_bg}>
                     <div className="ie8-opacity-bg"></div>
                     <div style={_style_panel}>
                         <div style={_style_title}><b onClick={this.cancelHandler}
-                                                     style={_style_btn_close}>&times;</b></div>
+                            style={_style_btn_close}>&times;</b></div>
                         <div style={_style_text} dangerouslySetInnerHTML={segment}></div>
                         <a style={_style_confirm_btn} onClick={this.confirmHandler}>确定</a>
                         <a style={_style_cancel_btn} onClick={this.cancelHandler}>取消</a>
@@ -178,7 +178,7 @@
                 </div>
             )
         }
-    });
+    }
 
     window.GlobalConfirm = GlobalConfirm;
 })();
