@@ -83,7 +83,7 @@ let goSyncLog = (userName, userPsd) => {
                 username: userName,
                 password: enscr(userPsd, id.tokenId.pubsec),
                 loginType: '01',
-                sitid: `${id.sessionId.keji}:${id.sessionId.p2p}:${id.sessionId.zx}`
+                sitid: `${id.sessionId.keji};${id.sessionId.p2p};${id.sessionId.zx}`
             },
             dataType: "jsonp"
         })
