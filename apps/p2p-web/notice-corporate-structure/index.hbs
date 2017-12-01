@@ -1,6 +1,6 @@
-{% extends "../lib/templates/p2p-base.swig.html" %}
+{{#> base }}
 
-{% block content %}
+{{#* inline "content"}}
 <div class="con">
     <div class="main">
         <!--基本信息模块-->
@@ -203,4 +203,7 @@
 
     </div>
 </div>
-{% endblock %}
+
+{{/inline}}
+
+{{/base}}
