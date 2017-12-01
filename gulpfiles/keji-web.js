@@ -16,16 +16,8 @@ const APP_NAMES = [
     'topic-hui-shang', // 徽商
     'topic-gong-you-hui', //工友会专题页
     'topic-hui-shang-guide', // 徽商 开户引导
+    'welcome', //PC落地渠道页
     {
-        name: 'welcome', // 'welcome'//PC落地渠道页
-        project_javascripts: [
-            'jquery-1.12.4.min.js',
-            'common-functions.js',
-            'interest-calculator.js',
-            'es6-promise.min.js',
-            'sync-login.js'
-        ],
-    }, {
         name: 'update-browser',// IE8及一下版本浏览器的升级提示
         html_engine: ''
     }
@@ -67,7 +59,8 @@ module.exports = function (gulp, generate_task, settings) {
         project_javascripts: [
             'jquery-1.12.4.min.js',
             'common-functions.js',
-            'interest-calculator.js'
+            'interest-calculator.js',
+            'es6-promise.min.js'
         ],
         project_less: [
             'common.less',
