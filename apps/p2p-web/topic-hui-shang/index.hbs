@@ -1,8 +1,10 @@
-{% extends '../lib/templates/p2p-base.swig.html' %}
+{{#> base }}
 
-{% block title %}工场微金 — 中國信貸科技(08207.HK)旗下网络借贷信息中介平台{% endblock %}
+{{#* inline "title"}}
+工场微金 — 中國信貸科技(08207.HK)旗下网络借贷信息中介平台
+{{/inline}}
 
-{% block content %}
+{{#* inline "javascripts" }}
 <div class="part1">
     <div class="wrap">
         <p>工场微金成立四年来，坚持合规自律开展平台业务。10月19日，工场微金以“银行直连”模式接入徽商银行资金存管，符合监管相关规定，不仅是平台合规自律的有力举措，也是平台各方面综合实力的体现。</p>
@@ -32,4 +34,7 @@
         </div>
     </div>
 </div>
-{% endblock %}
+
+{{/inline}}
+
+{{/base}}
