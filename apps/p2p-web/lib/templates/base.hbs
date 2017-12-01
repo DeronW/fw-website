@@ -14,12 +14,15 @@
     <meta name="screen-orientation" content="portrait">
     <meta name="x5-orientation" content="portrait">
     <meta name="renderer" content="webkit"/>
-    <title>{% block title %}工场微金 - 灵活、分散、智能、稳健的网络借贷信息中介平台{% endblock %}</title>
+
+    <title>{{#> title}}工场微金 - 灵活、分散、智能、稳健的网络借贷信息中介平台{{/title}}</title>
+
     <meta name="keywords" content="工场微金,借贷撮合,网络借贷信息中介平台,理财,互联网金融,网络理财"/>
     <meta name="description"
           content="工场微金由北京凤凰信用管理有限公司管理运营，专注于向借款人及出借人（用户）提供撮合服务的网络借贷信息中介平台。平台作为首批中国互联网金融协会成员单位及北京网贷行业协会发起会员单位，主要为用户提供信息搜集、信息公布、资信评估、信息交互、借贷撮合等服务。平台顺应网贷行业监管要求，更加贴近小微信贷与普惠金融，更好的服务于平台新老用户，服务于中国实体经济，合规发展，稳健运营！"/>
     <link type="text/css" rel="stylesheet" href="stylesheets/all.less.css"/>
-    {% block css %}{% endblock %}
+
+    {{#> css }}{{/css}}
 </head>
 <body>
 
@@ -28,18 +31,19 @@
 
 <div id="header-status-bar"></div>
 
-{% include 'header-nav-bar.swig.html' %}
-{% block content %}{% endblock %}
-{% include 'footer.swig.html' %}
-{% include 'sidebar-fn.swig.html' %}
+{{> header-nav-bar}}
+
+{{#> content}}{{/content}}
+
+{{> footer }}
+
+{{> sidebar-fn }}
 
 <script src="javascripts/lib.js"></script>
 <script src="javascripts/bundle.js"></script>
-{% if ENV == 'production' %}
-{% include 'partial/expection-handler.swig.html' with {SENTRY_DSN:
-'https://4135eb9a33e248e984bcc7789424be8e@sentry.dougemall.com/3'} %}
-{% endif %}
 
-{% block javascripts %}{% endblock %}
+{{#if production }} {{> exception-handler url="https://4135eb9a33e248e984bcc7789424be8e@sentry.dougemall.com/3" }} {{/if}}
+
+{{#> javascripts }}{{/javascripts}}
 </body>
 </html>
