@@ -40,7 +40,7 @@ module.exports = function generate_task(site_name, page_name, configs) {
             project_javascripts: [],
             project_less: [],
             main_jsx: 'react/index.jsx',
-            html_engine: 'swig'
+            html_engine: 'hbs'
         }, configs, singlePageCfg);
 
     let task_name = site_name + ':' + (CONFIG.cmd_prefix ? CONFIG.cmd_prefix + ':' : '') + page_name;
@@ -75,9 +75,11 @@ module.exports = function generate_task(site_name, page_name, configs) {
         CONFIG.project_javascripts.map(i => `${project_lib_path}/javascripts/${i}`));
 
     function compile_html() {
-        return html([`${app_path}`], build_path, CONFIG, {
+        let subfix = CONFIG.html_engine == 'hbs' ? 'hbs' : 'html';
+        return html([`${app_path}index.${subfix}`], build_path, CONFIG, {
             API_PATH: CONFIG.api_path,
-            DEBUG: CONFIG.debug
+            DEBUG: CONFIG.debug,
+            COMPILED_AT: (new Date()).toString()
         })
     }
 
@@ -133,7 +135,7 @@ module.exports = function generate_task(site_name, page_name, configs) {
     }
 
     function monitor() {
-        gulp.watch(`${app_path}index.html`, gulp.parallel(compile_html));
+        gulp.watch(`${app_path}index.hbs`, gulp.parallel(compile_html));
         gulp.watch(`${app_path}images/**`, gulp.parallel(compile_images));
         gulp.watch(`${app_path}stylesheets/**`, gulp.parallel(compile_stylesheets));
         gulp.watch(`${app_path}less/**`, gulp.parallel(compile_less));
@@ -143,7 +145,7 @@ module.exports = function generate_task(site_name, page_name, configs) {
         gulp.watch(`${project_lib_path}/components/**`, gulp.parallel(compile_react));
 
         gulp.watch(`lib/components/**`, gulp.parallel(compile_react));
-        gulp.watch(`lib/templates/**/*.html`, gulp.parallel(compile_html));
+        gulp.watch(`lib/templates/**/*.hbs`, gulp.parallel(compile_html));
         gulp.watch(`lib/less/**/*.less`, gulp.parallel(compile_less));
     }
 
