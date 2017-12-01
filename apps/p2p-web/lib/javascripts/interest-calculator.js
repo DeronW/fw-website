@@ -1,5 +1,5 @@
 
-window.GlobalInterestCalculator = globalInterestCalculator = {
+window.GlobalInterestCalculator = window.globalInterestCalculator = {
     addValidate: function () {
         var ids = ["#ic-total-invest", "#ic-interest-rate", "#ic-invest-time"];
         for (var i = 0; i < ids.length; i++) {
