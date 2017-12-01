@@ -1,12 +1,13 @@
-{% extends '../lib/templates/p2p-base.swig.html' %}
+{{#> base }}
 
-{% block javascripts %}
+{{#* inline "javascripts" }}
 <script src="javascripts/index.js"></script>
 <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=1k0hI3NQCtMWDQN0D0kmpXuIYV2GjM0e"></script>
 <script type="text/javascript"
         src="https://api.map.baidu.com/library/AreaRestriction/1.2/src/AreaRestriction_min.js"></script>
-{% endblock %}
-{% block content %}
+{{/inline}}
+
+{{#* inline "content"}}
 <div class="aboutus-container">
     <div class="aboutus-title">
         首页&nbsp;&nbsp;><span class="aboutus">关于我们</span>
@@ -197,4 +198,7 @@
             </div>
         </div>
     </div>
-    {% endblock %}
+
+{{/inline}}
+
+{{/base}}

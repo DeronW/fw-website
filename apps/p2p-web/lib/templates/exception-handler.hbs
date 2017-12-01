@@ -1,6 +1,6 @@
 <script src="javascripts/raven-3.10.0.min.js" crossorigin="anonymous"></script>
 <script>
-    Raven.config('{{ SENTRY_DSN }}', {
+    Raven.config('{{ url }}', {
         autoBreadcrumbs: { xhr: false }
     }).install();
     // 全局JS异常捕获方法
@@ -19,5 +19,4 @@
         }
         console.error(err);
     }
-
 </script>
