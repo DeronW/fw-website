@@ -77,7 +77,7 @@ let goSyncLog = (userName, userPsd) => {
 
     return Promise.all([p1, p2]).then(data => {
         return $.ajax({
-            url: `http://passport.9888keji.com/passport/async/login`,
+            url: `https://passport.9888keji.com/passport/async/login`,
             data: {
                 tokenId: id.tokenId.loginTicket,
                 username: userName,
