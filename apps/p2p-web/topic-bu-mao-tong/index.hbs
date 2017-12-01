@@ -1,12 +1,13 @@
-{% extends '../lib/templates/p2p-base.swig.html' %}
+{{#> base }}
 
-{% block title %}埠贸通 — 工场微金 — 中國信貸科技(08207.HK)旗下网络借贷信息中介平台{% endblock %}
+{{#* inline "title"}}
+埠贸通 — 工场微金 — 中國信貸科技(08207.HK)旗下网络借贷信息中介平台{{/inline}}
 
-{% block javascripts %}
+{{#* inline "javascripts" }}
 <script src="javascripts/index.js" type="text/javascript" charset="utf-8"></script>
-{% endblock %}
+{{/inline}}
 
-{% block content %}
+{{#* inline "content"}}
 
 <div class="banner">
     <a href="/prdClaims/list.shtml"></a>
@@ -135,4 +136,6 @@
 </div>
 
 
-{% endblock %}
+{{/inline}}
+
+{{/base}}
