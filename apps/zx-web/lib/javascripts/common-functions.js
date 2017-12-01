@@ -24,7 +24,10 @@ $(function () {
 $(function () {
     // 设置全局变量的 API_PATH , 被用作所有接口的前缀地址
     // 该变量很重要 !!!!!
-    window.API_PATH = document.getElementById('api-path').value;
+    window.API_PATH = document.getElementById('api-path').value
+    window.CONTENT_NODE = document.getElementById('cnt')
+    window.HEADER_STATUS_NODE = document.getElementById('header-status-bar')
+    window.USER_CENTER_SIDEBAR_NODE = document.getElementById('user-center-sidebar')
 });
 
 (function () {

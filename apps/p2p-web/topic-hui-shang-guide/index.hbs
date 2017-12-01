@@ -1,6 +1,6 @@
-{% extends '../lib/templates/p2p-base.swig.html' %}
+{{#> base }}
 
-{% block content %}
+{{#* inline "content"}}
 <div class="part1">
     <div class="wrap">
 
@@ -29,4 +29,6 @@
     </div>
 </div>
 
-{% endblock %}
+{{/inline}}
+
+{{/base}}

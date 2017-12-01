@@ -1,8 +1,10 @@
-{% extends '../lib/templates/p2p-base.swig.html' %}
+{{#> base }}
 
-{% block title %}易保全 — 工场微金 — 中國信貸科技(08207.HK)旗下网络借贷信息中介平台{% endblock %}
+{{#* inline "title"}}
+易保全 — 工场微金 — 中國信貸科技(08207.HK)旗下网络借贷信息中介平台
+{{/inline}}
 
-{% block javascripts %}
+{{#* inline "javascripts" }}
 <script type='text/javascript' src='javascripts/jquery.jqdock.min.js'></script>
 <script src="javascripts/index.js"></script>
 <script type="text/javascript">
@@ -22,9 +24,9 @@ jQuery(document).ready(function($){
 	});
 });
 </script>
-{% endblock %}
+{{/inline}}
 
-{% block content %}
+{{#* inline "content"}}
 <div class="banner"></div>
 
 <div class="Finance">
@@ -166,4 +168,6 @@ jQuery(document).ready(function($){
 	</div>
 </div>
 
-{% endblock %}
+{{/inline}}
+
+{{/base}}

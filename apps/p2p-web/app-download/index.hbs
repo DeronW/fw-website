@@ -1,10 +1,10 @@
-{% extends '../lib/templates/p2p-base.swig.html' %}
+{{#> base }}
 
-{% block javascripts %}
+{{#* inline "javascripts" }}
 <script src="javascripts/index.js"></script>
-{% endblock %}
+{{/inline}}
 
-{% block content %}
+{{#* inline "content"}}
 <div class="carousel">
     <a class="android-app-link" href="http://app.9888.cn/download/apk"> </a>
     <a class="ios-app-link" href="https://itunes.apple.com/cn/app/jin-rong-gong-chang/id939125881?mt=8"></a>
@@ -63,4 +63,7 @@
     </div>
 </div>
 <br> <br> <br>
-{% endblock %}
+
+{{/inline}}
+
+{{/base}}

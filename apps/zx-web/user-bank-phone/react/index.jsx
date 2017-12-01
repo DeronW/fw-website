@@ -1,11 +1,11 @@
-const Panel = React.createClass({
-    getInitialState: function () {
-        return { step: 1 }
-    },
-    nextStepHandler: function () {
+class Panel extends React.Component {
+    state = { step: 1 }
+
+    nextStepHandler = () => {
         this.setState({ step: this.state.step + 1 })
-    },
-    render: function () {
+    }
+
+    render() {
 
         let { step } = this.state, section;
 
@@ -29,9 +29,9 @@ const Panel = React.createClass({
         } else if (step == 3) {
             section = <StepThree />
         }
-
-        let back = <a className="right" href="http://www.gongchangzx.com/depository/recharge/toQRecharge.shtml"
-            target="_self"><img src="images/return.png" />返回</a>
+        let back = <a className="right" target="_self"
+            href="/depository/recharge/toQRecharge.shtml">
+            <img src="images/return.png" />返回</a>;
 
         return (
             <div className="topNav">
@@ -41,19 +41,17 @@ const Panel = React.createClass({
                         {back}
                     </div>
                     <div className="tabContainer">
-                        <ul className="tabUl">
-                            {tab_rows.map(tab_item)}
-                        </ul>
+                        <ul className="tabUl">{tab_rows.map(tab_item)}</ul>
                     </div>
                     {section}
                 </div>
             </div>
         )
     }
-})
+}
 
 $(function () {
-    ReactDOM.render(<HeaderStatusBar />, document.getElementById('header-status-bar'));
-    ReactDOM.render(<UserCenterSidebar />, document.getElementById('user-center-sidebar'));
+    ReactDOM.render(<HeaderStatusBar />, HEADER_STATUS_NODE);
+    ReactDOM.render(<UserCenterSidebar />, USER_CENTER_SIDEBAR_NODE);
     ReactDOM.render(<Panel />, document.getElementById('userContent'));
 });
