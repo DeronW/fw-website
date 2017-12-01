@@ -1,6 +1,5 @@
 class Welcome extends React.Component {
     state = {
-        is_check: true,
         next_step: false,
         counting: null,
         timer: null,
@@ -97,10 +96,6 @@ class Welcome extends React.Component {
             this.setState({pic_code_tips: ''})
             return true
         }
-    }
-
-    toggleProHandler = () => {
-        this.setState({is_check: !this.state.is_check})
     }
 
     startCountingDown = () => {
@@ -303,8 +298,7 @@ class Welcome extends React.Component {
                 </span>
                 <div className="inputTips">{pic_code_tips}</div>
                 <div className="protocol">
-                    <span className={this.state.is_check ? "checked" : "unChecked"}
-                          onClick={this.toggleProHandler}></span>
+                    <span className= "checked"></span>
                     <span className="proText">
                         我已阅读并同意
                         <a className="colorBlue proName"
