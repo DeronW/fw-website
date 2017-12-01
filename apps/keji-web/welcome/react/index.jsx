@@ -16,7 +16,8 @@ class Welcome extends React.Component {
         referral_code_tips: '',
         have_referral: false,
         img_num: 0,
-        reg_token: ''
+        reg_token: '',
+        pending: false
     }
 
     componentDidMount() {
@@ -154,7 +155,9 @@ class Welcome extends React.Component {
     }
 
     registerHandler = () => {
-        let {ver_code, psd_code, referral_code, have_referral, new_phone} = this.state
+        let {ver_code, psd_code, referral_code, have_referral, new_phone, pending} = this.state
+        if (pending) return
+        this.setState({pending: true})
         this.getRegToken().then(data => {
             this.setState({reg_token: data}, () => {
                 if (ver_code == '' && psd_code == '' && referral_code == '') {
@@ -188,6 +191,9 @@ class Welcome extends React.Component {
                             } else {
                                 this.setState({ver_code_tips: data.data.message})
                             }
+                        },
+                        fail: () => {
+                            this.setState({pending: false})
                         }
                     })
                 }
