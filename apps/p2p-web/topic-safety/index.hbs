@@ -1,8 +1,9 @@
-{% extends '../lib/templates/p2p-base.swig.html' %}
+{{#> base }}
 
-{% block title %}工场微金 — 中國信貸科技(08207.HK)旗下网络借贷信息中介平台{% endblock %}
+{{#* inline "title"}}工场微金 — 中國信貸科技(08207.HK)旗下网络借贷信息中介平台
+{{/inline}}
 
-{% block content %}
+{{#* inline "content" }}
 <div class="safety_box">
     <div class="safe_banner"></div>
     <div class="safe_ensure">
@@ -148,4 +149,6 @@
         </div>
     </div>
 </div>
-{% endblock %}
+{{/inline}}
+
+{{/base}}
