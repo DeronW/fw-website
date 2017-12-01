@@ -1,13 +1,13 @@
-{% extends '../lib/templates/p2p-base.swig.html' %}
+{{#> base }}
 
-{% block title %}易赚盈 — 工场微金 — 中國信貸科技(08207.HK)旗下网络借贷信息中介平台{% endblock %}
+{{#* inline "title"}}易赚盈 — 工场微金 — 中國信貸科技(08207.HK)旗下网络借贷信息中介平台
+{{/inline}}
 
-{% block javascripts %}
+{{#* inline "javascripts" }}
 <script src="javascripts/index.js" type="text/javascript" charset="utf-8"></script>
-{% endblock %}
+{{/inline}}
 
-{% block content %}
-
+{{#* inline "content"}}
 <div class="top_event">
 	<div class="top1">
     	<!--<span class="dis">易赚盈 预期年化收益率高达6%-13% 认购起点仅100元</span>-->
@@ -125,4 +125,6 @@
     </div>
 </div>
 
-{% endblock %}
+{{/inline}}
+
+{{/base}}
