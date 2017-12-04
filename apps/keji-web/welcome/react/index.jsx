@@ -62,11 +62,13 @@ class Welcome extends React.Component {
                 dataType: 'jsonp',
                 success: data => {
                     if (data.data.result === '03') {
-                        this.setState({pic_code_tips: "验证码填写错误"})
+                        this.setState({pic_code_tips: "验证码填写错误", img_num: this.state.img_num + 1})
                     } else if (data.data.result === '01') {
                         this.setState({new_phone_tips: "该手机号已注册"})
                     } else if (data.data.result === '06') {
-                        this.setState({pic_code_tips: "验证码无效"})
+                        this.setState({pic_code_tips: "验证码无效", img_num: this.state.img_num + 1})
+                    } else if (data.data.result === '08') {
+                        GlobalAlert("接口调用出错");
                     } else {
                         this.setState({new_phone_tips: "", pic_code_tips: ""})
                         this.setState({next_step: true})
