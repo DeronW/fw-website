@@ -15,8 +15,7 @@ class Welcome extends React.Component {
         referral_code_tips: '',
         have_referral: false,
         img_num: 0,
-        reg_token: '',
-        pending: false
+        reg_token: ''
     }
 
     componentDidMount() {
@@ -154,9 +153,7 @@ class Welcome extends React.Component {
     }
 
     registerHandler = () => {
-        let {ver_code, psd_code, referral_code, have_referral, new_phone, pending} = this.state
-        if (pending) return
-        this.setState({pending: true})
+        let {ver_code, psd_code, referral_code, have_referral, new_phone} = this.state
         this.getRegToken().then(data => {
             this.setState({reg_token: data}, () => {
                 if (ver_code == '' && psd_code == '' && referral_code == '') {
@@ -194,9 +191,6 @@ class Welcome extends React.Component {
                             } else if (data.data.result === '06') {
                                 this.setState({ver_code_tips: "手机验证码填写错误"})
                             }
-                        },
-                        fail: () => {
-                            this.setState({pending: false})
                         }
                     })
                 }
