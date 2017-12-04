@@ -343,7 +343,8 @@ class Welcome extends React.Component {
         return <div className="welcomeBg">
             <div className="welcomeTitle">
                 <div className="titleLeft"></div>
-                <div className="titleRight">已有账号？<span className="colorBlue">请登录</span></div>
+                <div className="titleRight">已有账号？<span className="colorBlue" onClick={() => location.href = 'https://passport.9888keji.com/passport/login'}>请登录</span>
+                </div>
             </div>
             <div className="banner">
                 <div className="content">
