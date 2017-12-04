@@ -189,8 +189,10 @@ class Welcome extends React.Component {
 
                             } else if (data.data.result === '02' || data.data.result === '04' || data.data.result === '10') {
                                 GlobalAlert(data.data.message);
-                            } else if (data.data.result === '05' || data.data.result === '06') {
+                            } else if (data.data.result === '05') {
                                 this.setState({ver_code_tips: data.data.message})
+                            } else if (data.data.result === '06') {
+                                this.setState({ver_code_tips: "手机验证码填写错误"})
                             }
                         },
                         fail: () => {
