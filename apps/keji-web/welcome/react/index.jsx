@@ -157,11 +157,7 @@ class Welcome extends React.Component {
         this.getRegToken().then(data => {
             this.setState({reg_token: data}, () => {
                 if (ver_code == '' && psd_code == '' && referral_code == '') {
-                    if (have_referral) {
-                        this.setState({ver_code_tips: '请填写手机验证码', psd_code_tips: '请填写密码', referral_code_tips: '请填写工场码'})
-                    } else {
-                        this.setState({ver_code_tips: '请填写手机验证码', psd_code_tips: '请填写密码'})
-                    }
+                    this.setState({ver_code_tips: '请填写手机验证码', psd_code_tips: '请填写密码'})
                 } else if (this.testVerCode() && this.testPsdCode() && this.testReferralCode()) {
                     $.ajax({
                         url: 'https://passport.9888keji.com/passport/asyncRegist/doRegist',
@@ -255,22 +251,28 @@ class Welcome extends React.Component {
         let {have_referral, referral_code} = this.state
         if (!have_referral) {
             return true
-        } else if (have_referral && (referral_code !== '')) {
-            $.ajax({
-                url: 'https://passport.9888keji.com/passport/asyncRegist/recommendCodeExist',
-                data: {recommendCode: referral_code},
-                dataType: "jsonp",
-                success: (data) => {
-                    if (data.data.result !== '01') {
-                        this.setState({referral_code_tips: data.data.message})
-                    } else {
-                        this.setState({referral_code_tips: ''})
-                        return true
+        } else {
+            if (referral_code === '') {
+                this.setState({referral_code_tips: ''})
+                return true
+            } else {
+                $.ajax({
+                    url: 'https://passport.9888keji.com/passport/asyncRegist/recommendCodeExist',
+                    data: {recommendCode: referral_code},
+                    dataType: "jsonp",
+                    success: (data) => {
+                        if (data.data.result !== '01') {
+                            this.setState({referral_code_tips: "无效的工场码填写"})
+                        } else {
+                            this.setState({referral_code_tips: ''})
+                            return true
+                        }
                     }
-                }
-            })
+                })
+            }
         }
     }
+
 
     changeHandler = type => e => {
         let value = e.target.value;
