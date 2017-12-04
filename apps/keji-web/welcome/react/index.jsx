@@ -63,7 +63,7 @@ class Welcome extends React.Component {
                 success: data => {
                     if (data.data.result === '03') {
                         this.setState({pic_code_tips: "验证码填写错误"})
-                    } else if (data.data.code == true) {
+                    } else if (data.data.result === '01') {
                         this.setState({new_phone_tips: "该手机号已注册"})
                     } else {
                         this.setState({new_phone_tips: "", pic_code_tips: ""})
