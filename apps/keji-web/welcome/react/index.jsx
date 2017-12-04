@@ -65,6 +65,8 @@ class Welcome extends React.Component {
                         this.setState({pic_code_tips: "验证码填写错误"})
                     } else if (data.data.result === '01') {
                         this.setState({new_phone_tips: "该手机号已注册"})
+                    } else if (data.data.result === '06') {
+                        this.setState({pic_code_tips: "验证码无效"})
                     } else {
                         this.setState({new_phone_tips: "", pic_code_tips: ""})
                         this.setState({next_step: true})
@@ -343,7 +345,8 @@ class Welcome extends React.Component {
         return <div className="welcomeBg">
             <div className="welcomeTitle">
                 <div className="titleLeft"></div>
-                <div className="titleRight">已有账号？<span className="colorBlue" onClick={() => location.href = 'https://passport.9888keji.com/passport/login'}>请登录</span>
+                <div className="titleRight">已有账号？<span className="colorBlue"
+                                                       onClick={() => location.href = 'https://passport.9888keji.com/passport/login'}>请登录</span>
                 </div>
             </div>
             <div className="banner">
