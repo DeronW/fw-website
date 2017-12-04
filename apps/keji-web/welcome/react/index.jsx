@@ -100,7 +100,7 @@ class Welcome extends React.Component {
 
     startCountingDown = () => {
         this.sendVerCode()
-        this.setState({counting: 5}, this.startCountingTimer);
+        this.setState({counting: 60}, this.startCountingTimer);
 
     }
 
@@ -298,7 +298,7 @@ class Welcome extends React.Component {
                 </span>
                 <div className="inputTips">{pic_code_tips}</div>
                 <div className="protocol">
-                    <span className= "checked"></span>
+                    <span className="checked"></span>
                     <span className="proText">
                         我已阅读并同意
                         <a className="colorBlue proName"
