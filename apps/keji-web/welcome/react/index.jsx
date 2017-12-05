@@ -63,7 +63,7 @@ class Welcome extends React.Component {
                     if (data.data.result === '03') {
                         this.setState({pic_code_tips: "验证码填写错误", img_num: this.state.img_num + 1})
                     } else if (data.data.result === '01') {
-                        this.setState({new_phone_tips: "该手机号已注册"})
+                        this.setState({new_phone_tips: "该手机号已注册", img_num: this.state.img_num + 1})
                     } else if (data.data.result === '06') {
                         this.setState({pic_code_tips: "验证码无效", img_num: this.state.img_num + 1})
                     } else if (data.data.result === '08') {
