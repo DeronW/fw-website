@@ -17,34 +17,22 @@ function jsonp(url, data) {
 function getSession() {
     let sid = {}
     return jsonp('https://passport.9888keji.com/passport/synAuth')
-        .then(data => {
-            sid.keji = data.data.curr
-        })
+        .then(data => {sid.keji = data.data.curr})
         .then(() => jsonp('https://passport.gongchangp2p.com/passport/synAuth'))
-        .then(data => {
-            sid.p2p = data.data.curr
-        })
+        .then(data => {sid.p2p = data.data.curr})
         .then(() => jsonp('https://passport.gongchangzx.com/passport/synAuth'))
-        .then(data => {
-            sid.zx = data.data.curr
-        })
+        .then(data => {sid.zx = data.data.curr})
         .then(() => sid)
-        .catch(err => {
-            alert(JSON.stringify(err))
-        })
+        .catch(err => {alert(JSON.stringify(err));reject(err)})
 }
 
 function getToken() {
-    let token = {loginTicket: '', pubsec: ''}
     return jsonp('https://passport.9888keji.com/passport/async/getToken')
         .then(data => {
-            token.loginTicket = data.data.loginTicket;
-            token.pubsec = data.data.pubsec
+            let {loginTicket,pubsec} = data.data
+            return {loginTicket,pubsec}
         })
-        .then(() => token)
-        .catch(err => {
-            alert(JSON.stringify(err))
-        })
+        .catch(err => {alert(JSON.stringify(err));reject(err)})
 }
 
 //RSA加密
@@ -55,28 +43,14 @@ function enscr(pwd, pubsec) {
 }
 
 function goSyncLog(userName, userPsd) {
-    let id = {}
-    let p1 = new Promise((resolve, reject) => {
-        getSession().then(data => {
-            id.sessionId = data
-            resolve()
-        })
-    })
-
-    let p2 = new Promise((resolve, reject) => {
-        getToken().then(data => {
-            id.tokenId = data
-            resolve()
-        })
-    })
-
-    return Promise.all([p1, p2]).then(data => {
+    return Promise.all([getSession(), getToken()]).then(data => {
+        let sid = data[0],token= data[1]
         return jsonp('https://passport.9888keji.com/passport/async/login', {
-            tokenId: id.tokenId.loginTicket,
+            tokenId: token.loginTicket,
             username: userName,
-            password: enscr(userPsd, id.tokenId.pubsec),
+            password: enscr(userPsd, token.pubsec),
             loginType: '01',
-            sitid: `${id.sessionId.keji};${id.sessionId.p2p};${id.sessionId.zx}`
+            sitid: `${sid.keji};${sid.p2p};${sid.zx}`
         })
     })
 

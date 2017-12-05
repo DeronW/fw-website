@@ -342,7 +342,7 @@ class Welcome extends React.Component {
                     </div>
                     <div className="featureItem">
                         <img src="images/icon-box.png" width="177" height="166"/>
-                        <div className="itemTitle">银行存管</div>
+                        <div className="itemTitle">银行资金存管</div>
                         <div className="itemDes">徽商银行资金存管</div>
                     </div>
                     <div className="featureItem">
