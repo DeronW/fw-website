@@ -134,7 +134,9 @@ class Welcome extends React.Component {
     }
 
     goRegister = () => {
-        let {ver_code, psd_code, referral_code, new_phone} = this.state
+        let {ver_code, psd_code, referral_code, new_phone, pending} = this.state
+        if (pending) return
+        this.setState({pending: true})
         jsonp('https://passport.9888keji.com/passport/asyncRegist/doRegist', {
             phoneValidCode: ver_code,
             password: psd_code,
@@ -143,6 +145,7 @@ class Welcome extends React.Component {
             registToken: this.state.reg_token,
             keyword: ''
         }).then(data => {
+            this.setState({pending: false})
             if (data.data.result === '01') {
                 goSyncLog(new_phone, psd_code).then(data => {
                     if (data.data.result !== '01') {
@@ -163,11 +166,8 @@ class Welcome extends React.Component {
     }
 
     registerHandler = () => {
-        let {ver_code, psd_code, referral_code, have_referral, pending} = this.state
-        if (pending) return
-        this.setState({pending: true})
+        let {ver_code, psd_code, referral_code, have_referral} = this.state
         this.getRegToken().then(data => {
-            this.setState({pending: false})
             this.setState({reg_token: data}, () => {
                 if (ver_code == '' && psd_code == '' && referral_code == '') {
                     this.setState({ver_code_tips: '请填写手机验证码', psd_code_tips: '请填写密码'})
