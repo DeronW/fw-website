@@ -258,7 +258,7 @@ class Welcome extends React.Component {
             } else {
                 $.ajax({
                     url: 'https://passport.9888keji.com/passport/asyncRegist/recommendCodeExist',
-                    data: {recommendCode: referral_code},
+                    data: {promoteCode: referral_code},
                     dataType: "jsonp",
                     success: (data) => {
                         if (data.data.result !== '01') {
