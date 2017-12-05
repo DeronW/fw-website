@@ -306,7 +306,9 @@ class Welcome extends React.Component {
                     <input type="text" placeholder="密码，6-16位字母、数字、符号" className="inputPsd"
                            onChange={this.changeHandler("psd_code")} onBlur={this.testPsdCode} value={psd_code}/>
                 </div>
-                <div className="inputTips">{psd_code_tips}</div>
+                {(psd_code_tips === '请填写密码' || psd_code_tips === "") ?
+                    <div className="inputTips">{psd_code_tips}</div> :
+                    <div className="inputTips psdTips">{psd_code_tips}</div>}
                 {have_referral && <div className="psdWrapper">
                     <span className="iconBook"></span>
                     <input type="text" placeholder="推荐人工场码，选填" className="inputPsd"
