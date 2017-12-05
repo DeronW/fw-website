@@ -34,6 +34,7 @@ class Welcome extends React.Component {
         return result ? result : ''
 
     }
+
     testReferral = () => {
         jsonp('https://passport.9888keji.com/passport/asyncRegist/canRecommendCode', {qd: this.getQd().qd})
             .then(data => {
@@ -44,7 +45,6 @@ class Welcome extends React.Component {
                 }
             })
     }
-
 
     nextStepHandler = () => {
         let {new_phone, pic_code} = this.state
@@ -70,8 +70,6 @@ class Welcome extends React.Component {
                     }
                 })
         }
-
-
     }
 
     testPhoneOne = () => {
@@ -197,7 +195,6 @@ class Welcome extends React.Component {
     imgCodeHandler = () => {
         this.setState({img_num: this.state.img_num + 1})
     }
-
 
     testVerCode = () => {
         let {ver_code} = this.state
