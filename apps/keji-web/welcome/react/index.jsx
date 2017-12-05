@@ -25,28 +25,24 @@ class Welcome extends React.Component {
 
     //获取当前页面的渠道码
     getQd = () => {
-        let b = {};
+        let result = {};
         location.search.substr(1).split("&").map((item, index) => {
-            let a = item.split("=");
-            b[a[0]] = a[1];
+            let temp = item.split("=");
+            result[temp[0]] = temp[1];
         })
 
-        return b ? b : ''
+        return result ? result : ''
 
     }
     testReferral = () => {
-        $.ajax({
-            url: 'https://passport.9888keji.com/passport/asyncRegist/canRecommendCode',
-            data: {qd: this.getQd().qd},
-            dataType: "jsonp",
-            success: (data) => {
+        jsonp('https://passport.9888keji.com/passport/asyncRegist/canRecommendCode', {qd: this.getQd().qd})
+            .then(data => {
                 if (data.data.result === '01') {
                     this.setState({have_referral: true})
                 } else if (data.data.result === '02') {
                     this.setState({have_referral: false})
                 }
-            }
-        })
+            })
     }
 
 
@@ -55,11 +51,11 @@ class Welcome extends React.Component {
         if (new_phone == '' && pic_code == '') {
             this.setState({new_phone_tips: '请填写手机号', pic_code_tips: '请填写网页验证码'})
         } else if (this.testPhoneOne() && this.testPicOne()) {
-            $.ajax({
-                url: 'https://passport.9888keji.com/passport/asyncRegist/phoneIsExit',
-                data: {imgValidCode: pic_code, phoneNum: new_phone},
-                dataType: 'jsonp',
-                success: data => {
+            jsonp('https://passport.9888keji.com/passport/asyncRegist/phoneIsExit', {
+                imgValidCode: pic_code,
+                phoneNum: new_phone
+            })
+                .then(data => {
                     if (data.data.result === '03') {
                         this.setState({pic_code_tips: "验证码填写错误", img_num: this.state.img_num + 1})
                     } else if (data.data.result === '01') {
@@ -72,8 +68,7 @@ class Welcome extends React.Component {
                         this.setState({new_phone_tips: "", pic_code_tips: ""})
                         this.setState({next_step: true})
                     }
-                }
-            })
+                })
         }
 
 
@@ -109,18 +104,14 @@ class Welcome extends React.Component {
 
     sendVerCode = () => {
         let {new_phone, ver_code, ver_code_tips} = this.state
-        $.ajax({
-            url: 'https://passport.9888keji.com/passport/asyncRegist/sendSms',
-            data: {phoneNum: new_phone},
-            dataType: 'jsonp',
-            success: data => {
+        jsonp('https://passport.9888keji.com/passport/asyncRegist/sendSms', {phoneNum: new_phone})
+            .then(data => {
                 if (data.data.result == '03' || data.data.result == '04' || data.data.result == '05') {
                     this.setState({ver_code_tips: data.data.message})
                 } else {
                     this.setState({ver_code_tips: ''})
                 }
-            }
-        })
+            })
     }
     startCountingTimer = () => {
         this.state.timer = setInterval(() => {
@@ -134,61 +125,69 @@ class Welcome extends React.Component {
 
     getRegToken = () => {
         let reg_token
-        return new Promise((resolve, reject) => {
-            $.ajax({
-                url: 'https://passport.9888keji.com/passport/asyncRegist/getRegToken',
-                dataType: "jsonp",
-                success: data => {
-                    if (data.data.result === '01') {
-                        reg_token = data.data.registTicket
-                        resolve()
-                    }
+        return jsonp('https://passport.9888keji.com/passport/asyncRegist/getRegToken')
+            .then(data => {
+                if (data.data.result === '01') {
+                    reg_token = data.data.registTicket
                 }
             })
-        }).then(() => {
-            return reg_token
+            .then(() => reg_token)
+    }
+
+    goRegister = () => {
+        let {ver_code, psd_code, referral_code, new_phone} = this.state
+        jsonp('https://passport.9888keji.com/passport/asyncRegist/doRegist', {
+            phoneValidCode: ver_code,
+            password: psd_code,
+            recommendCode: referral_code,
+            qd: this.getQd().qd,
+            registToken: this.state.reg_token,
+            keyword: ''
+        }).then(data => {
+            if (data.data.result === '01') {
+                goSyncLog(new_phone, psd_code).then(data => {
+                    if (data.data.result !== '01') {
+                        GlobalAlert("注册成功，登录失败");
+                    } else {
+                        location.href = "https://www.9888keji.com/depository/regist/regSuccess.shtml"
+                    }
+                })
+
+            } else if (data.data.result === '02' || data.data.result === '04' || data.data.result === '10') {
+                GlobalAlert(data.data.message);
+            } else if (data.data.result === '05') {
+                this.setState({ver_code_tips: data.data.message})
+            } else if (data.data.result === '06') {
+                this.setState({ver_code_tips: "手机验证码填写错误"})
+            }
         })
-
-
     }
 
     registerHandler = () => {
-        let {ver_code, psd_code, referral_code, have_referral, new_phone} = this.state
+        let {ver_code, psd_code, referral_code, have_referral} = this.state
         this.getRegToken().then(data => {
             this.setState({reg_token: data}, () => {
                 if (ver_code == '' && psd_code == '' && referral_code == '') {
                     this.setState({ver_code_tips: '请填写手机验证码', psd_code_tips: '请填写密码'})
-                } else if (this.testVerCode() && this.testPsdCode() && this.testReferralCode()) {
-                    $.ajax({
-                        url: 'https://passport.9888keji.com/passport/asyncRegist/doRegist',
-                        data: {
-                            phoneValidCode: ver_code,
-                            password: psd_code,
-                            recommendCode: referral_code,
-                            qd: this.getQd().qd,
-                            registToken: this.state.reg_token,
-                            keyword: ''
-                        },
-                        dataType: "jsonp",
-                        success: data => {
-                            if (data.data.result === '01') {
-                                goSyncLog(new_phone, psd_code).then(data => {
+                } else if (this.testVerCode() && this.testPsdCode()) {
+                    if (!have_referral) {
+                        this.goRegister()
+                    } else {
+                        if (referral_code === '') {
+                            this.setState({referral_code_tips: ''})
+                            this.goRegister()
+                        } else {
+                            jsonp('https://passport.9888keji.com/passport/asyncRegist/recommendCodeExist', {promoteCode: referral_code})
+                                .then(data => {
                                     if (data.data.result !== '01') {
-                                        GlobalAlert("注册成功，登录失败");
+                                        this.setState({referral_code_tips: "无效的工场码"})
                                     } else {
-                                        location.href = "https://www.9888keji.com/depository/regist/regSuccess.shtml"
+                                        this.setState({referral_code_tips: ''})
+                                        this.goRegister()
                                     }
                                 })
-
-                            } else if (data.data.result === '02' || data.data.result === '04' || data.data.result === '10') {
-                                GlobalAlert(data.data.message);
-                            } else if (data.data.result === '05') {
-                                this.setState({ver_code_tips: data.data.message})
-                            } else if (data.data.result === '06') {
-                                this.setState({ver_code_tips: "手机验证码填写错误"})
-                            }
                         }
-                    })
+                    }
                 }
             })
         })
@@ -246,33 +245,6 @@ class Welcome extends React.Component {
             return true
         }
     }
-
-    testReferralCode = () => {
-        let {have_referral, referral_code} = this.state
-        if (!have_referral) {
-            return true
-        } else {
-            if (referral_code === '') {
-                this.setState({referral_code_tips: ''})
-                return true
-            } else {
-                $.ajax({
-                    url: 'https://passport.9888keji.com/passport/asyncRegist/recommendCodeExist',
-                    data: {promoteCode: referral_code},
-                    dataType: "jsonp",
-                    success: (data) => {
-                        if (data.data.result !== '01') {
-                            this.setState({referral_code_tips: "无效的工场码"})
-                        } else {
-                            this.setState({referral_code_tips: ''})
-                            return true
-                        }
-                    }
-                })
-            }
-        }
-    }
-
 
     changeHandler = type => e => {
         let value = e.target.value;
