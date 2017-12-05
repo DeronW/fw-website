@@ -143,7 +143,6 @@ class Welcome extends React.Component {
             registToken: this.state.reg_token,
             keyword: ''
         }).then(data => {
-            this.setState({pending: false})
             if (data.data.result === '01') {
                 goSyncLog(new_phone, psd_code).then(data => {
                     if (data.data.result !== '01') {
