@@ -262,7 +262,7 @@ class Welcome extends React.Component {
                     dataType: "jsonp",
                     success: (data) => {
                         if (data.data.result !== '01') {
-                            this.setState({referral_code_tips: "无效的工场码填写"})
+                            this.setState({referral_code_tips: "无效的工场码"})
                         } else {
                             this.setState({referral_code_tips: ''})
                             return true
