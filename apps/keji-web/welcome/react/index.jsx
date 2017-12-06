@@ -77,7 +77,7 @@ class Welcome extends React.Component {
         let {new_phone} = this.state;
         if (new_phone === '' || new_phone === null) {
             this.setState({new_phone_tips: '请填写手机号'})
-        } else if (!(/^[1][1,3,4,5,7,8][0-9]{9}$/.test(new_phone))) {
+        } else if (!(/^[1][3,4,5,7,8][0-9]{9}$/.test(new_phone))) {
             this.setState({new_phone_tips: '手机号格式错误'})
         } else {
             this.setState({new_phone_tips: ''})
