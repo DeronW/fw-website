@@ -145,7 +145,6 @@ class Welcome extends React.Component {
             registToken: this.state.reg_token,
             keyword: ''
         }).then(data => {
-            this.setState({pending: false})
             if (data.data.result === '01') {
                 goSyncLog(new_phone, psd_code).then(data => {
                     if (data.data.result !== '01') {
@@ -157,16 +156,21 @@ class Welcome extends React.Component {
 
             } else if (data.data.result === '02' || data.data.result === '04' || data.data.result === '10') {
                 GlobalAlert(data.data.message);
+                this.setState({pending: false})
             } else if (data.data.result === '05') {
                 this.setState({ver_code_tips: data.data.message})
+                this.setState({pending: false})
             } else if (data.data.result === '06') {
                 this.setState({ver_code_tips: "手机验证码填写错误"})
+                this.setState({pending: false})
             }
+        }, () => {
+            this.setState({pending: false})
         })
     }
 
     registerHandler = () => {
-        let {ver_code, psd_code, referral_code, have_referral} = this.state
+        let {ver_code, psd_code, referral_code, have_referral,pending} = this.state
         this.getRegToken().then(data => {
             this.setState({reg_token: data}, () => {
                 if (ver_code == '' && psd_code == '' && referral_code == '') {
