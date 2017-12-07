@@ -75,15 +75,15 @@ node('front-virtual') {
     
     stage('Publish') {
         if(SHOULD_GO){
-            // dir(DELIVERY_PATH){
-            //     sh 'git status'
-            //     sh 'git config user.email "jenkins201@ucfgroup.com"'
-            //     sh 'git config user.name "jenkins201"'
-            //     sh 'git add -A'
-            //     sh 'git commit -am "no comment"'
-            //     sh 'git pull origin master'
-            //     sh 'git push origin master'
-            // }
+            dir(DELIVERY_PATH){
+                sh 'git status'
+                sh 'git config user.email "jenkins201@ucfgroup.com"'
+                sh 'git config user.name "jenkins201"'
+                sh 'git add -A'
+                sh 'git commit -am "no comment"'
+                sh 'git pull origin master'
+                sh 'git push origin master'
+            }
         }
     }
     
