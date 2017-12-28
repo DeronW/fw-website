@@ -1,9 +1,9 @@
 //  node : front or  front-virtual
 
-def node_name = 'front'
+def node_name = 'front-virtual'
 
 if(params.JENKINS_NODE == 'front-virtual') {
-    node_name = 'front-virtual'
+    node_name = params.JENKINS_NODE
 }
 
 node(node_name) {
