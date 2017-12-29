@@ -1,5 +1,3 @@
-const eslint = require('gulp-eslint');
-
 const PROJ = 'keji-web';
 
 const APP_NAMES = [
