@@ -1,14 +1,20 @@
-{{#> base }}
-
+{{#> base }} 
 {{#* inline "content"}}
-<div class="part1">
-    <div class="wrap">
-
-    </div>
-</div>
+<div class="part1"></div>
 <div class="part2">
-    <div class="wrap">
-        <img src="images/part2.png"/>
+    <div class="container">
+        <div class="user-example">
+            <img src="images/ua.png" />
+            <div class="user-name">老用户</div>
+            <div class="user-desc">亲爱的工友, 升级后即可开通徽商银行存</div>
+            <div class="user-desc">管账户, 为您提供更真诚透明的借贷服务</div>
+        </div>
+        <div class="user-example">
+            <img src="images/ub.png" />
+            <div class="user-name">新用户</div>
+            <div class="user-desc">安全保障全新升级</div>
+            <div class="user-desc">开启您的借贷之旅</div>
+        </div>
         <div class="part2-btn">
             <a href="/depository/openAccount/toConfirmDepository.shtml" class="part2-upgrade">立即升级</a>
             <a href="/depository/regist/toRegist.shtml?sourceSite=jrgc" class="part2-register">立即注册</a>
@@ -16,12 +22,10 @@
     </div>
 </div>
 <div class="part3">
-    <div class="wrap">
-        <img src="images/part3.png"/>
-    </div>
+    <img src="images/part3.png" />
 </div>
 <div class="part4">
-    <div class="wrap">
+    <div class="container">
         <h4>帮你快速上手</h4>
         <div class="part4-img">
             <a href="http://www.9888keji.com/help/explanation/" class="guide-btn">点击进入详细操作指南</a>
@@ -29,6 +33,4 @@
     </div>
 </div>
 
-{{/inline}}
-
-{{/base}}
+{{/inline}} {{/base}}
