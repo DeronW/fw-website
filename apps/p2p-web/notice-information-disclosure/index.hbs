@@ -36,17 +36,23 @@
             </div>
             <div class="partPie">
                 <div class="partPieLeft">
-                    <div id="main1" style="width: 550px;height:400px;"></div>
+                    <div id="main1" style="width: 550px;height:400px;float:left;"></div>
                     <div class="pieLeftText pieCommon ">
                         <div class="person">借款用户：<span></span></div>
-                        <div class="cash hidden">人均累计融资金额：<span></span></div>
+                        <div class="person">人均累计借款金额：<span></span></div>
+                        <div class="person">最大单一借款人待还金额占比：<span></span></div>
+                        <div class="person">前十大借款人待还金额占比：<span></span></div>
+                        <div class="person">关联关系借款余额：<span></span></div>
+                        <div class="person">关联关系借款余额笔数：<span></span></div>
                     </div>
                 </div>
                 <div class="partPieRight">
-                    <div id="main2" style="width: 550px;height:400px;"></div>
+                    <div id="main2" style="width: 550px;height:400px;float:left;"></div>
                     <div class="pieRightText pieCommon ">
                         <div class="person">出借用户：<span></span></div>
-                        <div class="cash hidden">人均累计出借金额：<span></span></div>
+                        <div class="person">人均累计出借金额：<span></span></div>
+                        <div class="person">最大单户出借余额占比：<span></span></div>
+                        <div class="person">最大十户出借余额占比：<span></span></div>
                     </div>
                 </div>
             </div>
@@ -54,7 +60,7 @@
                 <div class="enduranceTitle">平台风险承受能力</div>
                 <div class="enduranceContent">
                     <div class="endCommon end1">
-                        <div class="text">待偿金额(元)</div>
+                        <div class="text">利息余额(元)</div>
                         <div class="money"><span></span></div>
                     </div>
                     <div class="endCommon end2">
@@ -62,26 +68,130 @@
                         <div class="money"><span></span></div>
                     </div>
                     <div class="endCommon end3">
-                        <div class="text">金额逾期率(％)</div>
+                        <div class="text">逾期90天(不含)以上金额(元)</div>
                         <div class="money"><span></span></div>
                     </div>
                     <div class="endCommon end4">
-                        <div class="text">项目逾期率(％)</div>
+                        <div class="text">逾期90天(不含)以上笔数(笔)</div>
                         <div class="money"><span></span></div>
                     </div>
-                    <div class="endCommon end5">
-                        <div class="text">出借人<br/>本息损失(元)</div>
+
+                    <div class="endCommon end1">
+                        <div class="text">累计代偿金额(元)</div>
+                        <div class="money"><span></span></div>
+                    </div>
+                    <div class="endCommon end2">
+                        <div class="text">逾期笔数(笔)</div>
+                        <div class="money"><span></span></div>
+                    </div>
+                    <div class="endCommon end3">
+                        <div class="text">金额分级逾期率1-90(天)</div>
+                        <div class="money"><span></span></div>
+                    </div>
+                    <div class="endCommon end4">
+                        <div class="text">项目分级逾期率1-90(天)</div>
+                        <div class="money"><span></span></div>
+                    </div>
+
+                    <div class="endCommon end1">
+                        <div class="text">累计代偿笔数(笔)</div>
+                        <div class="money"><span></span></div>
+                    </div>
+                    <div class="endCommon end2">
+                        <div class="text">金额逾期率</div>
+                        <div class="money"><span></span></div>
+                    </div>
+                    <div class="endCommon end3">
+                        <div class="text">金额分级逾期率91-180(天)</div>
+                        <div class="money"><span></span></div>
+                    </div>
+                    <div class="endCommon end4">
+                        <div class="text">项目分级逾期率91-180(天)</div>
+                        <div class="money"><span></span></div>
+                    </div>
+
+                    <div class="endCommon end1">
+                        <div class="text">出借人本息损失(元)</div>
+                        <div class="money"><span></span></div>
+                    </div>
+                    <div class="endCommon end2">
+                        <div class="text">项目逾期率</div>
+                        <div class="money"><span></span></div>
+                    </div>
+                    <div class="endCommon end3">
+                        <div class="text">金额分级逾期率181天以上</div>
+                        <div class="money"><span></span></div>
+                    </div>
+                    <div class="endCommon end4">
+                        <div class="text">项目分级逾期率181天以上</div>
                         <div class="money"><span></span></div>
                     </div>
                 </div>
             </div>
-            <div class="partReportForm">
+            <div class="table">
+                <table border="0" cellspacing="0" cellpadding="0">
+                    <thead>
+                        <tr>
+                            <td colspan="2">收费标准</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>业务类型</td>
+                            <td>资费标准</td>
+                        </tr>
+                        <tr>
+                            <td>用户注册</td>
+                            <td>免费</td>
+                        </tr>
+                        <tr>
+                            <td>开通存管账户</td>
+                            <td>免费</td>
+                        </tr>
+                        <tr height="130">
+                            <td>
+                                <table>
+                                    <td style="padding:0">出借</td>
+                                    <td >普通出借项目<br/>批量出借项目<br/>债权转让项目</td>
+                                </table>
+                            </td>
+                            <td >免费</td>
+                        </tr>
+                        <tr>
+                            <td >回款到账</td>
+                            <td >免费</td>
+                        </tr>
+                        <tr height="88">
+                            <td >债权转让</td>
+                            <td >锁定期满后出借人申请债权转让且转让成功的，按成功 转让债权本金的0.5%向平台支付债权转让手续费。</td>
+                        </tr>
+                        <tr>
+                            <td >充值</td>
+                            <td >免费</td>
+                        </tr>
+                        <tr height="130">
+                            <td>
+                                <table>
+                                    <td style="padding:0">提现</td>
+                                    <td >快速提现<br/>充值未出借提现费</td>
+                                </table>
+                            </td>
+                            <td >免费<br/>对充值后未进行出借的资金进行提现，将收取提现金额的0.4%的提现费。</td>
+                        </tr>
+                        <tr height="70">
+                            <td >借款人收费</td>
+                            <td >工场微金平台对借款人收取的服务费标准为1%-6%（年 化），具体标准以相关合同约定为准。</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            {{!-- <div class="partReportForm">
                 <div class="reportFormTitle">经审计的年度报表</div>
                 <div class="reportFormContent">
                     经审计的年度报表，
                     <a href="https://static.9888.cn/pdf/2016report.pdf">立即查看</a>
                 </div>
-            </div>
+            </div> --}}
             <div class="partStatisticsText">数据截止至 <span></span></div>
         </div>
         <div class="infoConPart infoConPart2 hidden">

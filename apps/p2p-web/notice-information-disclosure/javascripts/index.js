@@ -56,7 +56,7 @@ $(function () {
             title: {
                 text: '借款用户',
                 subtext: '',
-                x: 'center',
+                x: 'left',
                 textStyle: {
                     color: '#384a62',
                     fontSize: 24,
@@ -189,7 +189,7 @@ $(function () {
             title: {
                 text: '出借用户',
                 subtext: '',
-                x: 'center',
+                x: 'left',
                 textStyle: {
                     color: '#384a62',
                     fontSize: 24,
@@ -339,7 +339,7 @@ $(function () {
             endCon.eq(1).find(".money span").text(judgeCash(data.data.total_overdueSum, 2));
             endCon.eq(2).find(".money span").text(prevent(data.data.total_overdueSum / data.data.total_invest * 100));
             endCon.eq(3).find(".money span").text(prevent(data.data.total_overdueCount / data.data.total_orderCount * 100));
-            endCon.eq(4).find(".money span").text(judgeCash(data.data.total_lendSum, 2))
+            // endCon.eq(4).find(".money span").text(judgeCash(data.data.total_lendSum, 2))
         }
     }, 'json')
 });
