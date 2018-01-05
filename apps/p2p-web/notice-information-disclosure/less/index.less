@@ -85,32 +85,34 @@ body, html {
       margin-left: -960px;
       background: url("../images/bg.jpg") no-repeat;
       .statisticsContent {
-        width: 1000px;
+        width: 1072px;
         height: 100%;
         margin: auto;
         .staCommon {
-          width: 220px;
-          height: 220px;
-          background: url("../images/circleBig.png") no-repeat;
+          width: 188px;
+          height: 188px;
+          // background: url("../images/circleBig.png") no-repeat;
+          border-radius: 50%;
+          background:#283975;
           margin: 100px 10px 48px 10px;
           position: relative;
           float: left;
           .text {
-            font-size: @fontSize20;
+            font-size: @fontSize18;
             color: @colorFont;
             width: 200px;
             text-align: center;
             position: absolute;
             top: 60px;
-            left: 10px;
+            // left: 10px;
           }
           .number {
-            font-size: @fontSize38;
+            font-size: @fontSize30;
             width: 200px;
             text-align: center;
             position: absolute;
             top: 100px;
-            left: 10px;
+            // left: 10px;
           }
         }
         .staOne {
@@ -132,6 +134,11 @@ body, html {
         .staFour {
           .number {
             color: #61cdfd;
+          }
+        }
+        .staFive {
+          .number {
+            color: #a195cd;
           }
         }
       }
