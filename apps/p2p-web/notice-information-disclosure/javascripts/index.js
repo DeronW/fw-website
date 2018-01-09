@@ -9,18 +9,20 @@ $(function () {
         $(".infoConPart").eq(i).removeClass("hidden").siblings().addClass("hidden")
     });
     //判断金额 n:四舍五入保留几位小数，默认为2位
-    function judgeCash(value, n) {
+    var judgeCash = function(value,n) {
         n = n > 0 && n <= 20 ? n : 2;
-        value = Number(value.toString().substr(0, 11));
-        var len = value.toString().split(".")[0].length;
+        var len = value && value.toString().split(".")[0].length;
+        value = Number(value && value.toString().substr(0, 11));
+
         var v = "";
         if (len > 8) {
             v = (value / 100000000).toFixed(n) + "亿";
         } else if (len > 3) {
             v = (value / 10000).toFixed(n) + "万";
         } else {
-            return value + ".00"
+            return value.toFixed(n)
         }
+
         return v
     }
 
@@ -43,7 +45,27 @@ $(function () {
             borrow[i].querySelector('.number span').innerText = arguments[i];
         }
     }
-
+    //借款相关
+    function borrow() {
+        var person = document.querySelectorAll(".pieLeftText .person");
+        for (var i = 0; i < person.length; i++) {
+            person[i].querySelector('span').innerText = arguments[i];
+        }
+    }
+    //出借相关
+    function lend() {
+        var lend = document.querySelectorAll(".pieRightText .person");
+        for (var i = 0; i < lend.length; i++) {
+            lend[i].querySelector('span').innerText = arguments[i];
+        }
+    }
+    //平台承受能力
+    function ability(){
+        var endCon = document.querySelectorAll(".enduranceContent .endCommon");
+        for(var i = 0;i<endCon.length;i++){
+            endCon[i].querySelector(".money span").innerText = judgeCash(arguments[i],2);
+        }
+    }
     //防止除不尽
     function prevent(number) {
         return Number(number.toString().substr(0, 9)).toFixed(2)
@@ -315,31 +337,32 @@ $(function () {
     }
     //args顺序：女，男，18,25,35,45,60以上
     $.get(API_PATH + "/dataTopics/data.shtml", {}, function (data) {
+        var d = data.data
         //截止前一天日期
-        $(".partStatisticsText span").text(data.data.date);
+        $(".partStatisticsText span").text(d.date);
         //计算总额
-        computeTotal(judgeCash(data.data.total_invest), judgeCash(data.data.total_interest), judgeCash(data.data.total_principal), judgeCash(data.data.total_orderCount));
+        computeTotal(judgeCash(d.total_invest), judgeCash(d.total_orderCount), judgeCash(d.total_principal), judgeCash(d.total_principalInvest), judgeCash(d.total_principalCount));
         //借款用户
-        firstPie(data.data.borr_female, data.data.borr_male, data.data.borr_age_level_1, data.data.borr_age_level_2, data.data.borr_age_level_3, data.data.borr_age_level_4, data.data.borr_age_level_5);
-        //借款人数
-        $(".pieLeftText .person span").text(formatPerson(data.data.total_borrUserCount));
-        //借款累计金额
-        $(".pieLeftText .cash span").text(judgeCash(data.data.total_invest / data.data.total_borrUserCount));
+        firstPie(d.borr_female, d.borr_male, d.borr_age_level_1, d.borr_age_level_2, d.borr_age_level_3, d.borr_age_level_4, d.borr_age_level_5);
+
+        //借款相关
+        borrow(formatPerson(d.total_borrUserCount),(d.total_borrUserCount / d.total_invest).toFixed(2),d.total_topOnePriInvest,d.total_topTenPriInvest,d.total_relInvest,d.total_relCount)
+
         //出借用户
-        secondPie(data.data.female, data.data.male, data.data.age_level_1, data.data.age_level_2, data.data.age_level_3, data.data.age_level_4, data.data.age_level_5);
-        //出借人数
-        $(".pieRightText .person span").text(formatPerson(data.data.total_userCount));
-        //出借累计金额
-        $(".pieRightText .cash span").text(judgeCash(data.data.total_invest / data.data.total_userCount));
-        //待偿金额
-        var endCon = $(".enduranceContent .endCommon");
-        var len = endCon.length;
-        for (var i = 0; i < len; i++) {
-            endCon.eq(0).find(".money span").text(judgeCash(data.data.total_principalInvest, 2));
-            endCon.eq(1).find(".money span").text(judgeCash(data.data.total_overdueSum, 2));
-            endCon.eq(2).find(".money span").text(prevent(data.data.total_overdueSum / data.data.total_invest * 100));
-            endCon.eq(3).find(".money span").text(prevent(data.data.total_overdueCount / data.data.total_orderCount * 100));
-            // endCon.eq(4).find(".money span").text(judgeCash(data.data.total_lendSum, 2))
-        }
+        secondPie(d.female, d.male, d.age_level_1, d.age_level_2, d.age_level_3, d.age_level_4, d.age_level_5);
+        //出借相关
+        lend(formatPerson(d.total_userCount),(d.total_userCount / d.total_invest).toFixed(2),d.total_topOneBorrInvest,d.total_topTenBorrInvest)
+        //承受能力
+        ability(d.total_repInterest,d.total_ninetyOverdueSum,d.total_compenAmount,d.overdue_ninetySumRate,d.total_compenCount,d.overdue_oneEightySumRate,d.total_lendSum,d.overdue_oneEightyOneSumRate,d.total_overdueSum,d.total_ninetyOverdueCount,d.total_overdueCount,d.overdue_ninetyRate,d.total_lendSum / d.total_invest * 100,d.overdue_oneEightyRate,d.total_overdueCount / d.total_orderCount * 100,d.overdue_oneEightyOneRate)
+
+        // var endCon = $(".enduranceContent .endCommon");
+        // var len = endCon.length;
+        // for (var i = 0; i < len; i++) {
+        //     endCon.eq(0).find(".money span").text(judgeCash(d.total_principalInvest, 2));
+        //     endCon.eq(1).find(".money span").text(judgeCash(d.total_overdueSum, 2));
+        //     endCon.eq(2).find(".money span").text(prevent(d.total_overdueSum / d.total_invest * 100));
+        //     endCon.eq(3).find(".money span").text(prevent(d.total_overdueCount / d.total_orderCount * 100));
+        //     // endCon.eq(4).find(".money span").text(judgeCash(d.total_lendSum, 2))
+        // }
     }, 'json')
 });
