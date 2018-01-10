@@ -64,7 +64,7 @@ $(function () {
         var n = 2
         var endCon = document.querySelectorAll(".enduranceContent .endCommon");
         for(var i = 0;i<endCon.length;i++){
-            if(i == 3 || i == 5 || i == 8){
+            if(i == 5|| i == 8|| i == 3){
                 n = 0
             } else{
                 n = 2
@@ -352,14 +352,14 @@ $(function () {
         firstPie(d.borr_female, d.borr_male, d.borr_age_level_1, d.borr_age_level_2, d.borr_age_level_3, d.borr_age_level_4, d.borr_age_level_5);
 
         //借款相关
-        borrow(formatPerson(d.total_borrUserCount),(d.total_borrUserCount / d.total_invest * 100).toFixed(2),(d.total_topOnePriInvest / d.total_invest * 100).toFixed(2)+"%",(d.total_topTenPriInvest / d.total_invest * 100).toFixed(2),d.total_relInvest,d.total_relCount)
+        borrow(formatPerson(d.total_borrUserCount),(d.total_borrUserCount / d.total_invest * 100).toFixed(2)+"元",(d.total_topOnePriInvest / d.total_invest * 100).toFixed(2)+"%",(d.total_topTenPriInvest / d.total_invest * 100).toFixed(2)+"%",d.total_relInvest+"元",d.total_relCount+"笔")
 
         //出借用户
         secondPie(d.female, d.male, d.age_level_1, d.age_level_2, d.age_level_3, d.age_level_4, d.age_level_5);
         //出借相关
-        lend(formatPerson(d.total_userCount),(d.total_userCount / d.total_invest * 100).toFixed(2),(d.total_topOneBorrInvest / d.total_invest * 100).toFixed(2)+"%",(d.total_topTenBorrInvest / d.total_invest * 100).toFixed(2)+"%")
+        lend(formatPerson(d.total_userCount),(d.total_userCount / d.total_invest * 100).toFixed(2)+"元",(d.total_topOneBorrInvest / d.total_invest * 100).toFixed(2)+"%",(d.total_topTenBorrInvest / d.total_invest * 100).toFixed(2)+"%")
         //承受能力
-        ability(d.total_repInterest,d.total_ninetyOverdueSum,d.total_compenAmount,d.overdue_ninetySumRate,d.total_compenCount,d.overdue_oneEightySumRate,d.total_lendSum,d.overdue_oneEightyOneSumRate,d.total_overdueSum,d.total_ninetyOverdueCount,d.total_overdueCount,d.overdue_ninetyRate,d.total_lendSum / d.total_invest * 100,d.overdue_oneEightyRate,d.total_overdueCount / d.total_orderCount * 100,d.overdue_oneEightyOneRate)
+        ability(d.total_repInterest,d.total_ninetyOverdueSum,d.total_compenAmount,d.overdue_ninetySumRate,d.total_compenAmount,d.overdue_oneEightySumRate,d.total_lendSum,d.overdue_oneEightyOneSumRate,d.total_compenCount,d.total_ninetyOverdueCount,d.total_overdueCount,d.overdue_ninetyRate,d.total_lendSum / d.total_invest * 100,d.overdue_oneEightyRate,d.total_overdueCount / d.total_orderCount * 100,d.overdue_oneEightyOneRate)
 
     }, 'json')
 });
