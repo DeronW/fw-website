@@ -347,12 +347,12 @@ $(function () {
         //截止前一天日期
         $(".partStatisticsText span").text(d.date);
         //计算总额
-        computeTotal(judgeCash(d.total_invest), judgeCash(d.total_orderCount,0), judgeCash(d.total_principal), judgeCash(d.total_principalInvest), judgeCash(d.total_principalCount,0));
+        computeTotal(judgeCash(d.total_invest), judgeCash(d.total_orderCount,0), judgeCash(d.total_interest), judgeCash(d.total_principalInvest), judgeCash(d.total_principalCount,0));
         //借款用户
         firstPie(d.borr_female, d.borr_male, d.borr_age_level_1, d.borr_age_level_2, d.borr_age_level_3, d.borr_age_level_4, d.borr_age_level_5);
 
         //借款相关
-        borrow(formatPerson(d.total_borrUserCount),(d.total_borrUserCount / d.total_invest * 100).toFixed(2)+"%",(d.total_topOnePriInvest / d.total_invest * 100).toFixed(2)+"%",(d.total_topTenPriInvest / d.total_invest * 100).toFixed(2),d.total_relInvest,d.total_relCount)
+        borrow(formatPerson(d.total_borrUserCount),(d.total_borrUserCount / d.total_invest * 100).toFixed(2),(d.total_topOnePriInvest / d.total_invest * 100).toFixed(2)+"%",(d.total_topTenPriInvest / d.total_invest * 100).toFixed(2),d.total_relInvest,d.total_relCount)
 
         //出借用户
         secondPie(d.female, d.male, d.age_level_1, d.age_level_2, d.age_level_3, d.age_level_4, d.age_level_5);
