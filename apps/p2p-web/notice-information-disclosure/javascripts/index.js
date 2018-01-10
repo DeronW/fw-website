@@ -10,7 +10,7 @@ $(function () {
     });
     //判断金额 n:四舍五入保留几位小数，默认为2位
     var judgeCash = function(value,n) {
-        n = n > 0 && n <= 20 ? n : 2;
+        n = n >= 0 && n <= 20 ? n : 2;
         var len = value && value.toString().split(".")[0].length;
         value = Number(value && value.toString().substr(0, 11));
 
@@ -61,9 +61,15 @@ $(function () {
     }
     //平台承受能力
     function ability(){
+        var n = 2
         var endCon = document.querySelectorAll(".enduranceContent .endCommon");
         for(var i = 0;i<endCon.length;i++){
-            endCon[i].querySelector(".money span").innerText = judgeCash(arguments[i],2);
+            if(i == 3 || i == 5 || i == 8){
+                n = 0
+            } else{
+                n = 2
+            }
+            endCon[i].querySelector(".money span").innerText = judgeCash(arguments[i],n);
         }
     }
     //防止除不尽
@@ -341,7 +347,7 @@ $(function () {
         //截止前一天日期
         $(".partStatisticsText span").text(d.date);
         //计算总额
-        computeTotal(judgeCash(d.total_invest), judgeCash(d.total_orderCount), judgeCash(d.total_principal), judgeCash(d.total_principalInvest), judgeCash(d.total_principalCount));
+        computeTotal(judgeCash(d.total_invest), judgeCash(d.total_orderCount,0), judgeCash(d.total_principal), judgeCash(d.total_principalInvest), judgeCash(d.total_principalCount,0));
         //借款用户
         firstPie(d.borr_female, d.borr_male, d.borr_age_level_1, d.borr_age_level_2, d.borr_age_level_3, d.borr_age_level_4, d.borr_age_level_5);
 
@@ -355,14 +361,5 @@ $(function () {
         //承受能力
         ability(d.total_repInterest,d.total_ninetyOverdueSum,d.total_compenAmount,d.overdue_ninetySumRate,d.total_compenCount,d.overdue_oneEightySumRate,d.total_lendSum,d.overdue_oneEightyOneSumRate,d.total_overdueSum,d.total_ninetyOverdueCount,d.total_overdueCount,d.overdue_ninetyRate,d.total_lendSum / d.total_invest * 100,d.overdue_oneEightyRate,d.total_overdueCount / d.total_orderCount * 100,d.overdue_oneEightyOneRate)
 
-        // var endCon = $(".enduranceContent .endCommon");
-        // var len = endCon.length;
-        // for (var i = 0; i < len; i++) {
-        //     endCon.eq(0).find(".money span").text(judgeCash(d.total_principalInvest, 2));
-        //     endCon.eq(1).find(".money span").text(judgeCash(d.total_overdueSum, 2));
-        //     endCon.eq(2).find(".money span").text(prevent(d.total_overdueSum / d.total_invest * 100));
-        //     endCon.eq(3).find(".money span").text(prevent(d.total_overdueCount / d.total_orderCount * 100));
-        //     // endCon.eq(4).find(".money span").text(judgeCash(d.total_lendSum, 2))
-        // }
     }, 'json')
 });
