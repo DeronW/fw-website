@@ -352,12 +352,12 @@ $(function () {
         firstPie(d.borr_female, d.borr_male, d.borr_age_level_1, d.borr_age_level_2, d.borr_age_level_3, d.borr_age_level_4, d.borr_age_level_5);
 
         //借款相关
-        borrow(formatPerson(d.total_borrUserCount),(d.total_invest / d.total_borrUserCount).toFixed(2)+"元",(d.total_topOnePriInvest / d.total_invest * 100).toFixed(2)+"%",(d.total_topTenPriInvest / d.total_invest * 100).toFixed(2)+"%",d.total_relInvest+"元",d.total_relCount+"笔")
+        borrow(formatPerson(d.total_borrUserCount),formatPerson(6621),(d.total_invest / d.total_borrUserCount).toFixed(2)+"元",(d.total_topOnePriInvest / d.total_invest * 100).toFixed(2)+"%",(d.total_topTenPriInvest / d.total_invest * 100).toFixed(2)+"%",d.total_relInvest+"元",d.total_relCount+"笔")
 
         //出借用户
         secondPie(d.female, d.male, d.age_level_1, d.age_level_2, d.age_level_3, d.age_level_4, d.age_level_5);
         //出借相关
-        lend(formatPerson(d.total_userCount),(d.total_invest / d.total_userCount).toFixed(2)+"元",(d.total_topOneBorrInvest / d.total_invest * 100).toFixed(2)+"%",(d.total_topTenBorrInvest / d.total_invest * 100).toFixed(2)+"%")
+        lend(formatPerson(d.total_userCount),formatPerson(9785),(d.total_invest / d.total_userCount).toFixed(2)+"元",(d.total_topOneBorrInvest / d.total_invest * 100).toFixed(2)+"%",(d.total_topTenBorrInvest / d.total_invest * 100).toFixed(2)+"%")
         //承受能力
         ability(d.total_repInterest,
             d.total_ninetyOverdueSum,
