@@ -26,6 +26,7 @@ const TOPIC_PAGES = [
     'topic-hui-shang',//微商银行存管
     'topic-hui-shang-guide',//徽商银行存管操作指引
     'topic-che-xiang-dai',//车享贷专题页
+    'topic-chan-rong-tong',//产融通专题页
 ]
 
 const USER_PAGES = [
