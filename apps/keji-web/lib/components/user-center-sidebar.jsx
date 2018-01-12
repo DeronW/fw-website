@@ -7,12 +7,29 @@ class UserCenterSidebar extends React.Component {
         code: '',
         level: null,
         avatar: '',
-        orderUser: {}
+        orderUser: {},
+        isBuyGold:false,
+        isBuyZxProduct:false,
+        isComplianceOpen:true
     }
 
     componentDidMount() {
         let url = "https://www.gongchangp2p.com/api/userState/v2/userState.json"
-
+        //备案接口
+        $.ajax({
+            url: 'http://www.9888keji.com/api/user/v1/checkComplianceIsOpen.json',
+            // The name of the callback parameter, as specified by the YQL service
+            jsonp: "callback",
+            // Tell jQuery we're expecting JSONP
+            dataType: "jsonp",
+            xhrFields: { withCredentials: true }
+        }).done(data => {
+            this.setState({
+                isBuyGold:data.data.isBuyGold,
+                isBuyZxProduct:data.data.isBuyZxProduct,
+                isComplianceOpen:data.data.isComplianceOpen,
+            })
+        })
         $.ajax({
             url: url,
             jsonp: "callback",
@@ -47,7 +64,7 @@ class UserCenterSidebar extends React.Component {
 
     render() {
 
-        let { level, avatar, code, realname, orderUser } = this.state
+        let { level, avatar, code, realname, orderUser,isBuyGold,isBuyZxProduct,isComplianceOpen } = this.state
 
         let path = location.pathname;
 
@@ -88,34 +105,45 @@ class UserCenterSidebar extends React.Component {
                 <i className="ucp-icon icon-invest"></i>
                 <span>邀请返利</span>
             </a>
-            <a data-zx-title="true" className="ucp-link hide" href="/factoryCode/info.shtml">
-                <i className="ucp-icon icon-zx"></i>
-                <span>我的尊享</span>
-            </a>
             <a className="ucp-link" href="https://www.gongchangp2p.com/account/home.shtml">
                 <i className="ucp-icon icon-p2p"></i>
                 <span>我的微金</span>
             </a>
-            <a className="ucp-link" href="https://www.gongchangzx.com/account/home.shtml">
-                <i className="ucp-icon icon-zx"></i>
-                <span>我的尊享</span>
-            </a>
-            <a className="ucp-link" href="https://www.gongchangzx.com/gold/home.shtml">
-                <i className="ucp-icon icon-hj"></i>
-                <span>我的黄金</span>
-            </a>
-
+            {
+                isComplianceOpen && isBuyZxProduct && <a className="ucp-link" href="https://www.gongchangzx.com/account/home.shtml">
+                    <i className="ucp-icon icon-zx"></i>
+                    <span>我的尊享</span>
+                </a>
+            }
+            {
+               !isComplianceOpen && <a className="ucp-link" href="https://www.gongchangzx.com/account/home.shtml">
+                    <i className="ucp-icon icon-zx"></i>
+                    <span>我的尊享</span>
+                </a>
+            }
+            {
+                isComplianceOpen && isBuyGold && <a className="ucp-link" href="https://www.gongchangzx.com/gold/home.shtml">
+                    <i className="ucp-icon icon-hj"></i>
+                    <span>我的黄金</span>
+                </a>
+            }
+            {
+                !isComplianceOpen && <a className="ucp-link" href="https://www.gongchangzx.com/gold/home.shtml">
+                    <i className="ucp-icon icon-hj"></i>
+                    <span>我的黄金</span>
+                </a>
+            }
             <div className="ucp-horizon-line"></div>
 
             <a
                 className={nav_link_cn('/user-coupon/')}
-                href="/static/web/user-coupon/index.html">
+                href="/static/keji-web/user-coupon/index.html">
                 <i className="ucp-icon icon-coupon"></i>
                 <span>优惠券</span>
             </a>
 
             <a className={nav_link_cn('/user-score/')}
-                href="/static/web/user-score/index.html">
+                href="/static/keji-web/user-score/index.html">
                 <i className="ucp-icon icon-score"></i>
                 <span>工分</span>
             </a>

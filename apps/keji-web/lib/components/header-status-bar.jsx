@@ -8,7 +8,7 @@ class HeaderStatusBar extends React.Component {
         msg_count: 0,
         showUserPop: false,
         isVip:false,
-        isComplianceOpen:false,
+        isComplianceOpen:true,
     }
 
     componentDidMount() {

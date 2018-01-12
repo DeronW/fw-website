@@ -3,7 +3,7 @@ class HeaderNavBar extends React.Component {
         isLogin: false,
         isVip: false,
         isBuyZxProduct:false,
-        isComplianceOpen: false,
+        isComplianceOpen: true,
     }
     componentDidMount(){
         $.ajax({
@@ -15,6 +15,7 @@ class HeaderNavBar extends React.Component {
             xhrFields: { withCredentials: true }
         }).done( data => {
             let d = data.data
+            console.log(d.isBuyZxProduct)
             this.setState({
                 isVip:d.isVip,
                 isLogin:d.isLogin,
@@ -33,7 +34,7 @@ class HeaderNavBar extends React.Component {
                     <li className="active"><a href="/">首页</a></li>
                     <li><a href="https://www.gongchangp2p.com" target="_blank">工场微金</a></li>
                     {
-                        isComplianceOpen && isLogin && isBuyZxProduct && isVip && <li><a href="http://www.gongchangzx.com" target="_blank">工场尊享</a></li>
+                        isComplianceOpen && isLogin && isVip  && isBuyZxProduct && <li><a href="http://www.gongchangzx.com" target="_blank">工场尊享</a></li>
                     }
                     {
                         !isComplianceOpen && <li><a href="http://www.gongchangzx.com" target="_blank">工场尊享</a></li>
