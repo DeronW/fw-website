@@ -26,6 +26,7 @@ const USER_PAGES = [{
     name: 'user-score', //用户工分
     project_components: [
         'header-status-bar.jsx',
+        'header-nav-bar.jsx',
         'alert.jsx',
         'confirm.jsx',
         'user-center-sidebar.jsx'
@@ -34,6 +35,7 @@ const USER_PAGES = [{
     name: 'user-coupon', //用户优惠券
     project_components: [
         'header-status-bar.jsx',
+        'header-nav-bar.jsx',
         'alert.jsx',
         'confirm.jsx',
         'user-center-sidebar.jsx'
@@ -46,11 +48,12 @@ module.exports = function (gulp, generate_task, settings) {
     let common_config = {
         html_engine: 'hbs',
         hbs_partials: [
-            'base', 'user', 'footer', 'header-nav-bar',
+            'base', 'user', 'footer',
             'growing-io', 'shortcut'
         ],
         project_components: [
             'header-status-bar.jsx',
+            'header-nav-bar.jsx',
             'alert.jsx',
             'confirm.jsx'
         ],

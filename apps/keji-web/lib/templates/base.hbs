@@ -25,7 +25,8 @@
 <input id="api-path" type="hidden" value="{{ API_PATH }}" />
 
 {{#unless noHeader}} <div id="header-status-bar"></div> {{/unless}}
-{{#unless noHeader}} {{> header-nav-bar}} {{/unless}}
+{{#unless noHeader}} <div id="header-nav-bar"></div> {{/unless}}
+{{!-- {{#unless noHeader}} {{> header-nav-bar}} {{/unless}} --}}
 
 {{#> content }}<div id="cnt"></div>{{/content}}
 
