@@ -10,7 +10,6 @@ let APP_NAMES = [
 // 公告类页面
 const NOTICE_PAGES = [
     'notice-information-disclosure',//新信息披露页
-    'notice-corporate-structure',//旧信息披露页
 ]
 
 // 专题说明类页面

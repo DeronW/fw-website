@@ -88,13 +88,9 @@ class HeaderStatusBar extends React.Component {
 
         let p2pHeader = <div className="container">
             <div className="hsb-xin-dai">
-                {/* <a href="http://www.9888keji.com" target="_blank">前往金融工场首页</a> */}
             </div>
             <div className="header-status-bar-app">
                 <a href="/static/p2p-web/app-download/index.html">APP 客户端</a>
-                {/* <a href="/static/p2p-web/app-download/index.html" className="hsb-qrcode">
-                    <img src="images/global-header/menu-app.png" />
-                </a> */}
             </div>
             {this.state.is_login && this.state.username ? user_state : null}
             {this.state.is_login ? null : <a className="link" href="/orderUser/register.shtml">注册</a>}
