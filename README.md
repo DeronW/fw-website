@@ -1,10 +1,10 @@
-# 金融工场 网站页面
+# 网站页面
 
 > 启动命令npm run gulp web:文件名:watch
 
 当前代码库中包含2个项目
 
-### web 金融工场 主站PC端部分页面
+### web 主站PC端部分页面
 
 * keji-web
 * p2p-web
