@@ -10,7 +10,8 @@ class UserCenterSidebar extends React.Component {
         orderUser: {},
         isBuyGold:false,
         isBuyZxProduct:false,
-        isComplianceOpen:true
+        isComplianceOpen:true,
+        isVip:false
     }
 
     componentDidMount() {
@@ -28,6 +29,7 @@ class UserCenterSidebar extends React.Component {
                 isBuyGold:data.data.isBuyGold,
                 isBuyZxProduct:data.data.isBuyZxProduct,
                 isComplianceOpen:data.data.isComplianceOpen,
+                isVip:data.data.isVip
             })
         })
         $.ajax({
@@ -64,7 +66,7 @@ class UserCenterSidebar extends React.Component {
 
     render() {
 
-        let { level, avatar, code, realname, orderUser,isBuyGold,isBuyZxProduct,isComplianceOpen } = this.state
+        let { level, avatar, code, realname, orderUser,isBuyGold,isBuyZxProduct,isComplianceOpen,isVip } = this.state
 
         let path = location.pathname;
 
@@ -74,14 +76,14 @@ class UserCenterSidebar extends React.Component {
 
         return <div className="ucp-left-nav">
             <div className="ucp-head">
-                <div className={`ucp-angle ${level > 0 && 'vip'}`}>
+                {isComplianceOpen && isVip &&<div className={`ucp-angle ${level > 0 && 'vip'}`}>
                     <img className="with-vip"
                         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAbBAMAAACtquM+AAAAElBMVEUAAAD/TU3/TU3/TU3/TU3/TU2w629YAAAABXRSTlMA6atUFHg89q8AAAAXSURBVAjXY2BmYGBwBGJVIA4NDaUlBgCl3xhS+GI+yQAAAABJRU5ErkJggg==" />
-                    <a className="text" href="/user/level/userLevel.shtml">
+                     <a className="text" href="/user/level/userLevel.shtml">
                         VIP{level > 0 && level}</a>
                     <img className="with-vip"
                         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAbBAMAAACzY9ONAAAAMFBMVEUAAAD/TU3/TU3/TU3/TU3/TU3/TU3/TU3/TU3/TU3/TU3/TU3/TU3/TU3/TU3/TU0SdRv/AAAAD3RSTlMA1N6Kg3g1MCYg2c3KfnPm+PSeAAAASklEQVQI113KSxFAYBhAURFEEEEEEUQQQQQRRBBFFBV+b2PMx9m6i7O62a+ISFhxYECF9mO2LNhRoESDHhNGXNhwIzrUyHHiQXoBAv1MW5PIhMkAAAAASUVORK5CYII=" />
-                </div>
+                </div>}
 
                 <a href="/account/home.shtml">
                     <div className="ucp-avatar">
