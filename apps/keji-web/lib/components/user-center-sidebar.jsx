@@ -35,6 +35,7 @@ class UserCenterSidebar extends React.Component {
         $.ajax({
             url: 'http://www.9888keji.com/api/user/v1/checkComplianceIsOpen.json',
             type:'POST',
+            dataType: 'json',
             // xhrFields: { withCredentials: true },
             success:data => {
                 this.setState({
