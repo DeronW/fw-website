@@ -33,7 +33,7 @@ class UserCenterSidebar extends React.Component {
         //     })
         // })
         $.ajax({
-            url: 'http://www.9888keji.com/api/user/v1/checkComplianceIsOpen.json',
+            url: API_PATH + '/api/user/v1/checkComplianceIsOpen.json',
             type:'POST',
             dataType: 'json',
             // xhrFields: { withCredentials: true },
@@ -82,7 +82,6 @@ class UserCenterSidebar extends React.Component {
         let { level, avatar, code, realname, orderUser,isBuyGold,isBuyZxProduct,isComplianceOpen,isVip } = this.state
 
         let path = location.pathname;
-
         let nav_link_cn = p => {
             return path.indexOf(p) > -1 ? 'ucp-link active' : 'ucp-link'
         }
