@@ -7,12 +7,9 @@ class HeaderNavBar extends React.Component {
     }
     componentDidMount(){
         $.ajax({
-            url: 'http://www.9888keji.com/api/user/v1/checkComplianceIsOpen.json',
-            // The name of the callback parameter, as specified by the YQL service
-            jsonp: "callback",
-            // Tell jQuery we're expecting JSONP
-            dataType: "jsonp",
-            xhrFields: { withCredentials: true }
+            url: API_PATH + '/api/user/v1/checkComplianceIsOpen.json',
+            type:'POST',
+            dataType: 'json',
         }).done( data => {
             let d = data.data
             console.log(d.isBuyZxProduct)
