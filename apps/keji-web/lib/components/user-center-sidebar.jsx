@@ -35,13 +35,14 @@ class UserCenterSidebar extends React.Component {
         $.ajax({
             url: 'http://www.9888keji.com/api/user/v1/checkComplianceIsOpen.json',
             type:'POST',
-        }).done(data => {
-            this.setState({
-                isBuyGold:data.data.isBuyGold,
-                isBuyZxProduct:data.data.isBuyZxProduct,
-                isComplianceOpen:data.data.isComplianceOpen,
-                isVip:data.data.isVip
-            })
+            success:data => {
+                this.setState({
+                    isBuyGold:data.data.isBuyGold,
+                    isBuyZxProduct:data.data.isBuyZxProduct,
+                    isComplianceOpen:data.data.isComplianceOpen,
+                    isVip:data.data.isVip
+                })
+            }
         })
         $.ajax({
             url: url,
