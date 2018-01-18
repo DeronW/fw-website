@@ -12,7 +12,6 @@ class HeaderNavBar extends React.Component {
             dataType: 'json',
         }).done( data => {
             let d = data.data
-            console.log(d.isBuyZxProduct)
             this.setState({
                 isVip:d.isVip,
                 isLogin:d.isLogin,

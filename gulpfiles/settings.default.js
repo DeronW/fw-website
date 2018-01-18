@@ -12,6 +12,7 @@ module.exports = {
         dev_api_path: '//fe.gongchangp2p.com/api/test-d/p2p-web'
     },
     "keji-web": {
-        dev_api_path: '//fe.9888keji.com/api/test-c/keji-web'
+        // dev_api_path: '//fe.9888keji.com/api/test-c/keji-web',
+        dev_api_path: '//localhost/fake-api'
     }
 };
