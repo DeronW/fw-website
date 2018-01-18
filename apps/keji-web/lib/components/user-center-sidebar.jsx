@@ -17,13 +17,24 @@ class UserCenterSidebar extends React.Component {
     componentDidMount() {
         let url = "https://www.gongchangp2p.com/api/userState/v2/userState.json"
         //备案接口
+        // $.ajax({
+        //     url: 'http://www.9888keji.com/api/user/v1/checkComplianceIsOpen.json',
+        //     // The name of the callback parameter, as specified by the YQL service
+        //     jsonp: "callback",
+        //     // Tell jQuery we're expecting JSONP
+        //     dataType: "jsonp",
+        //     xhrFields: { withCredentials: true }
+        // }).done(data => {
+        //     this.setState({
+        //         isBuyGold:data.data.isBuyGold,
+        //         isBuyZxProduct:data.data.isBuyZxProduct,
+        //         isComplianceOpen:data.data.isComplianceOpen,
+        //         isVip:data.data.isVip
+        //     })
+        // })
         $.ajax({
             url: 'http://www.9888keji.com/api/user/v1/checkComplianceIsOpen.json',
-            // The name of the callback parameter, as specified by the YQL service
-            jsonp: "callback",
-            // Tell jQuery we're expecting JSONP
-            dataType: "jsonp",
-            xhrFields: { withCredentials: true }
+            type:'POST',
         }).done(data => {
             this.setState({
                 isBuyGold:data.data.isBuyGold,
