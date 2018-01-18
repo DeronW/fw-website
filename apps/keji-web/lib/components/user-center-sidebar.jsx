@@ -35,6 +35,7 @@ class UserCenterSidebar extends React.Component {
         $.ajax({
             url: 'http://www.9888keji.com/api/user/v1/checkComplianceIsOpen.json',
             type:'POST',
+            xhrFields: { withCredentials: true },
             success:data => {
                 this.setState({
                     isBuyGold:data.data.isBuyGold,
@@ -77,7 +78,6 @@ class UserCenterSidebar extends React.Component {
     }
 
     render() {
-
         let { level, avatar, code, realname, orderUser,isBuyGold,isBuyZxProduct,isComplianceOpen,isVip } = this.state
 
         let path = location.pathname;
