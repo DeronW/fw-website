@@ -63,7 +63,7 @@ class Content extends React.Component {
                                     <ul>
                                         <li>
                                             <p className="title-text title-text-position">注册成功即可获得<br />
-                                                <span className="info-text">200元和2.6克黄金</span>
+                                                <span className="info-text">200元</span>
                                             </p>
                                             <div className="img">
                                                 <img src="images/welfare-1.png" />
@@ -390,13 +390,13 @@ class Content extends React.Component {
                             <span className="strong-text">微信公众号</span>
                             <p className="text">打开微信扫描二维码，关注金融工场，轻松自如投资，第一时间了解最新活动。</p>
                         </li>
-                        <li className="web-li">
+                        {/*<li className="web-li">
                             <div className="img">
                                 <img src="images/web-icon.png" />
                             </div>
                             <span className="strong-text">手机WAP版</span>
                             <p className="text">用户可通过手机浏览器输入金融工场网址：www.9888keji.com，或直接搜索“金融工场”，即可快捷注册投资。</p>
-                        </li>
+                        </li>*/}
                     </ul>
                 </div>
             </div>
