@@ -2,7 +2,7 @@ class Content extends React.Component {
     state = {
         tab: '返现券',
         isVip: false,
-        isComplianceOpen: false
+        isComplianceOpen: true
     }
     toggleTabHandler = tab_name => {
         this.setState({ tab: tab_name });
