@@ -38,7 +38,6 @@ class HeaderNavBar extends React.Component {
                     {
                         !isComplianceOpen && <li><a href="http://www.gongchangzx.com" target="_blank">工场尊享</a></li>
                     }
-                    <li><a href="https://www.easyloan888.com" target="_blank">我要借款</a></li>
                     <li><a id="_douge_mall" href="https://www.dougemall.com" target="_blank">豆哥商城</a></li>
                 </div>
             </div>
