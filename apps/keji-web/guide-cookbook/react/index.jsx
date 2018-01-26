@@ -5,7 +5,7 @@ class Content extends React.Component {
             <div className="content-area">
                 <div className="content-title-info">
                     <p className="title-text">
-                        金融工场，品牌创立于2012年，是中国领先的综合金融信息服务平台。平台以金融全球化发展趋势为契机，融合信息技术创新手段，秉承安全、专业、透明的经营理念，为用户提供多样化高效智能的金融产品，为企业和个人提供定制化金融服务解决方案。平台在交易品种与交易组织模式上持续创新，优化金融资产配置，提供多样化金融产品,让每个用户都能平等、轻松、高效地享受互联网金融服务，享有高品质金融生活。
+                    金融工场，品牌创立于2012年，是中国领先的综合金融信息服务平台。平台融合信息技术创新手段，秉承安全、专业、透明的经营理念，为用户提供入口及多样化高效智能的服务，为企业和个人提供定制化金融服务解决方案。平台在交易品种与交易组织模式上持续创新，提供多样化金融服务产品,让每个用户都能平等、轻松、高效地享受互联网金融服务，享有高品质金融生活。
                     </p>
 
                     <div className="block">
@@ -63,7 +63,7 @@ class Content extends React.Component {
                                     <ul>
                                         <li>
                                             <p className="title-text title-text-position">注册成功即可获得<br />
-                                                <span className="info-text">200元和2.6克黄金</span>
+                                                <span className="info-text">200元</span>
                                             </p>
                                             <div className="img">
                                                 <img src="images/welfare-1.png" />
@@ -390,13 +390,13 @@ class Content extends React.Component {
                             <span className="strong-text">微信公众号</span>
                             <p className="text">打开微信扫描二维码，关注金融工场，轻松自如投资，第一时间了解最新活动。</p>
                         </li>
-                        <li className="web-li">
+                        {/*<li className="web-li">
                             <div className="img">
                                 <img src="images/web-icon.png" />
                             </div>
                             <span className="strong-text">手机WAP版</span>
                             <p className="text">用户可通过手机浏览器输入金融工场网址：www.9888keji.com，或直接搜索“金融工场”，即可快捷注册投资。</p>
-                        </li>
+                        </li>*/}
                     </ul>
                 </div>
             </div>
@@ -445,5 +445,6 @@ const Cnt = () => <div>
 
 $(function () {
     ReactDOM.render(<HeaderStatusBar />, HEADER_STATUS_NODE);
+    ReactDOM.render(<HeaderNavBar />, HEADER_NAV_NODE);
     ReactDOM.render(<Cnt />, CONTENT_NODE);
 });

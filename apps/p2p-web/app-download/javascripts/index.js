@@ -1,7 +1,8 @@
 $(function () {
-    setTimeout(function () {
-        showCard(1)
-    }, 2000)
+    // 本来有4组动画, 只启用第一组, 然后不再打开后面的动画
+    // setTimeout(function () {
+    //     showCard(1)
+    // }, 2000)
 });
 
 window.CardPosition = 0;
