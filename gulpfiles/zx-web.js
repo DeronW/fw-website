@@ -1,5 +1,3 @@
-const eslint = require('gulp-eslint');
-
 const PROJ = 'zx-web';
 
 let APP_NAMES = [

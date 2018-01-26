@@ -6,7 +6,9 @@ class HeaderStatusBar extends React.Component {
         realname: null,
         avatar: null,
         msg_count: 0,
-        showUserPop: false
+        showUserPop: false,
+        isVip:false,
+        isComplianceOpen:true,
     }
 
     componentDidMount() {
@@ -22,6 +24,21 @@ class HeaderStatusBar extends React.Component {
 
         if ($getDebugParams().login)
             url = API_PATH + '/api/userState/v1/userState.json';
+
+        //备案合规开关接口
+        $.ajax({
+            url: 'http://www.9888keji.com/api/user/v1/checkComplianceIsOpen.json',
+            // The name of the callback parameter, as specified by the YQL service
+            jsonp: "callback",
+            // Tell jQuery we're expecting JSONP
+            dataType: "jsonp",
+            xhrFields: { withCredentials: true }
+        }).done(data => {
+            this.setState({
+                isVip:data.data.isVip,
+                isComplianceOpen:data.data.isComplianceOpen,
+            })
+        })
 
         $.ajax({
             url: url,
@@ -72,7 +89,7 @@ class HeaderStatusBar extends React.Component {
     }
 
     render() {
-        let { is_login, username, realname, msg_count, showUserPop } = this.state;
+        let { is_login, username, realname, msg_count, showUserPop,isVip,isComplianceOpen } = this.state;
 
         let separate_line = <span className="separate-line"> </span>;
         let msg = msg_count > 0 && <div className="unread-msg-count">({msg_count})</div>
@@ -112,7 +129,13 @@ class HeaderStatusBar extends React.Component {
                     </span>
                 </div>
                 {/*<a className="link" href="https://bbs.9888.cn/">工友之家</a>*/}
-                <a className="link" href="/static/web/guide-cookbook/index.html">玩赚攻略</a>
+                {/*开关打开 没有登录和vip以下的不能查看*/}
+                {
+                    isComplianceOpen && is_login && isVip && <a className="link" href="/static/web/guide-cookbook/index.html">玩赚攻略</a>
+                }
+                {
+                    !isComplianceOpen && <a className="link" href="/static/web/guide-cookbook/index.html">玩赚攻略</a>
+                }
                 {is_login && <a className="link" href="/mesageCenter/msssageList.shtml?messageType=1">消息{msg}</a>}
                 {is_login && username && user_state}
                 {!is_login && <a className="link blue" href="/orderUser/register.shtml">注册</a>}

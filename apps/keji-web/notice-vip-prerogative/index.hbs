@@ -215,10 +215,9 @@
         </div>
     </div>
 </div>
-{% endblock %}
+{{/inline}}
 
-
-{% block  javascripts%}
+{{#* inline "javascripts" }}
 <script>
     $(document).ready(function () {
 
@@ -265,5 +264,6 @@
     })
 </script>
 {{/inline}}
+
 
 {{/base}}

@@ -1,5 +1,3 @@
-const eslint = require('gulp-eslint');
-
 const PROJ = 'p2p-web';
 
 let APP_NAMES = [
@@ -12,7 +10,6 @@ let APP_NAMES = [
 // 公告类页面
 const NOTICE_PAGES = [
     'notice-information-disclosure',//新信息披露页
-    'notice-corporate-structure',//旧信息披露页
 ]
 
 // 专题说明类页面
@@ -27,6 +24,8 @@ const TOPIC_PAGES = [
     'topic-you-ju-dai',//友居贷专题页
     'topic-hui-shang',//微商银行存管
     'topic-hui-shang-guide',//徽商银行存管操作指引
+    'topic-che-xiang-dai',//车享贷专题页
+    'topic-chan-rong-tong',//产融通专题页
 ]
 
 const USER_PAGES = [
