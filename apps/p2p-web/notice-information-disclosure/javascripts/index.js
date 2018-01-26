@@ -107,7 +107,7 @@ $(function () {
                 data: [
                     {
                         name: '18~25岁',
-                        icon: 'image://https://static.9888.cn/images/web/circle1.png',
+                        icon: 'image://https://static.gongchangp2p.com/images/web/circle1.png',
                         textStyle: {
                             color: '#666',
                             fontSize: 14
@@ -115,7 +115,7 @@ $(function () {
                     },
                     {
                         name: '25~35岁',
-                        icon: 'image://https://static.9888.cn/images/web/circle2.png',
+                        icon: 'image://https://static.gongchangp2p.com/images/web/circle2.png',
                         textStyle: {
                             color: '#666',
                             fontSize: 14
@@ -123,7 +123,7 @@ $(function () {
                     },
                     {
                         name: '35~45岁',
-                        icon: 'image://https://static.9888.cn/images/web/circle3.png',
+                        icon: 'image://https://static.gongchangp2p.com/images/web/circle3.png',
                         textStyle: {
                             color: '#666',
                             fontSize: 14
@@ -131,7 +131,7 @@ $(function () {
                     },
                     {
                         name: '45~60岁',
-                        icon: 'image://https://static.9888.cn/images/web/circle4.png',
+                        icon: 'image://https://static.gongchangp2p.com/images/web/circle4.png',
                         textStyle: {
                             color: '#666',
                             fontSize: 14
@@ -139,7 +139,7 @@ $(function () {
                     },
                     {
                         name: '60岁以上',
-                        icon: 'image://https://static.9888.cn/images/web/circle5.png',
+                        icon: 'image://https://static.gongchangp2p.com/images/web/circle5.png',
                         textStyle: {
                             color: '#666',
                             fontSize: 14
@@ -147,7 +147,7 @@ $(function () {
                     },
                     {
                         name: '男士',
-                        icon: 'image://https://static.9888.cn/images/web/circleMale.png',
+                        icon: 'image://https://static.gongchangp2p.com/images/web/circleMale.png',
                         textStyle: {
                             color: '#666',
                             fontSize: 14
@@ -155,7 +155,7 @@ $(function () {
                     },
                     {
                         name: '女士',
-                        icon: 'image://https://static.9888.cn/images/web/circleFemale.png',
+                        icon: 'image://https://static.gongchangp2p.com/images/web/circleFemale.png',
                         textStyle: {
                             color: '#666',
                             fontSize: 14
@@ -240,7 +240,7 @@ $(function () {
                 data: [
                     {
                         name: '18~25岁',
-                        icon: 'image://https://static.9888.cn/images/web/circleRight1.png',
+                        icon: 'image://https://static.gongchangp2p.com/images/web/circleRight1.png',
                         textStyle: {
                             color: '#666',
                             fontSize: 14
@@ -248,7 +248,7 @@ $(function () {
                     },
                     {
                         name: '25~35岁',
-                        icon: 'image://https://static.9888.cn/images/web/circleRight2.png',
+                        icon: 'image://https://static.gongchangp2p.com/images/web/circleRight2.png',
                         textStyle: {
                             color: '#666',
                             fontSize: 14
@@ -256,7 +256,7 @@ $(function () {
                     },
                     {
                         name: '35~45岁',
-                        icon: 'image://https://static.9888.cn/images/web/circleRight3.png',
+                        icon: 'image://https://static.gongchangp2p.com/images/web/circleRight3.png',
                         textStyle: {
                             color: '#666',
                             fontSize: 14
@@ -264,7 +264,7 @@ $(function () {
                     },
                     {
                         name: '45~60岁',
-                        icon: 'image://https://static.9888.cn/images/web/circleRight4.png',
+                        icon: 'image://https://static.gongchangp2p.com/images/web/circleRight4.png',
                         textStyle: {
                             color: '#666',
                             fontSize: 14
@@ -272,7 +272,7 @@ $(function () {
                     },
                     {
                         name: '60岁以上',
-                        icon: 'image://https://static.9888.cn/images/web/circleRight5.png',
+                        icon: 'image://https://static.gongchangp2p.com/images/web/circleRight5.png',
                         textStyle: {
                             color: '#666',
                             fontSize: 14
@@ -280,7 +280,7 @@ $(function () {
                     },
                     {
                         name: '男士',
-                        icon: 'image://https://static.9888.cn/images/web/circleRight6.png',
+                        icon: 'image://https://static.gongchangp2p.com/images/web/circleRight6.png',
                         textStyle: {
                             color: '#666',
                             fontSize: 14
@@ -288,7 +288,7 @@ $(function () {
                     },
                     {
                         name: '女士',
-                        icon: 'image://https://static.9888.cn/images/web/circleRight7.png',
+                        icon: 'image://https://static.gongchangp2p.com/images/web/circleRight7.png',
                         textStyle: {
                             color: '#666',
                             fontSize: 14
@@ -352,12 +352,12 @@ $(function () {
         firstPie(d.borr_female, d.borr_male, d.borr_age_level_1, d.borr_age_level_2, d.borr_age_level_3, d.borr_age_level_4, d.borr_age_level_5);
 
         //借款相关
-        borrow(formatPerson(d.total_borrUserCount),(d.total_invest / d.total_borrUserCount).toFixed(2)+"元",(d.total_topOnePriInvest / d.total_invest * 100).toFixed(2)+"%",(d.total_topTenPriInvest / d.total_invest * 100).toFixed(2)+"%",d.total_relInvest+"元",d.total_relCount+"笔")
+        borrow(formatPerson(d.total_borrUserCount),formatPerson(9785),(d.total_invest / d.total_borrUserCount).toFixed(2)+"元",(d.total_topOnePriInvest / d.total_principalInvest * 100).toFixed(2)+"%",(d.total_topTenPriInvest / d.total_principalInvest * 100).toFixed(2)+"%",d.total_relInvest+"元",d.total_relCount+"笔")
 
         //出借用户
         secondPie(d.female, d.male, d.age_level_1, d.age_level_2, d.age_level_3, d.age_level_4, d.age_level_5);
         //出借相关
-        lend(formatPerson(d.total_userCount),(d.total_invest / d.total_userCount).toFixed(2)+"元",(d.total_topOneBorrInvest / d.total_invest * 100).toFixed(2)+"%",(d.total_topTenBorrInvest / d.total_invest * 100).toFixed(2)+"%")
+        lend(formatPerson(d.total_userCount),formatPerson(6621),(d.total_invest / d.total_userCount).toFixed(2)+"元",(d.total_topOneBorrInvest / d.total_principalInvest * 100).toFixed(2)+"%",(d.total_topTenBorrInvest / d.total_principalInvest * 100).toFixed(2)+"%")
         //承受能力
         ability(d.total_repInterest,
             d.total_ninetyOverdueSum,

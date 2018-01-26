@@ -26,7 +26,7 @@ window.GlobalInterestCalculator = window.globalInterestCalculator = {
             time = parseInt($("#ic-invest-time").val());
 
         if (!money) return this.showTips('项目金额不能为空');
-        if (!rate) return this.showTips('年化收益率不能为空');
+        if (!rate) return this.showTips('年化利率不能为空');
         if (!time) return this.showTips('项目期限不能为空');
 
         var monthly_interest = (money * rate / 12);

@@ -35,7 +35,7 @@ function showCard(pos) {
 
     window.clearTimeout(window._card_timer);
     window._card_timer = setTimeout(function () {
-        window.CardPosition < 3 ?
+        window.CardPosition < 2 ?
             showCard(window.CardPosition + 1) :
             showCard(0);
     }, 4500);

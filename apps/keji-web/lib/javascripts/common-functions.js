@@ -27,6 +27,7 @@ $(function () {
     window.API_PATH = document.getElementById('api-path').value
     window.CONTENT_NODE = document.getElementById('cnt')
     window.HEADER_STATUS_NODE = document.getElementById('header-status-bar')
+    window.HEADER_NAV_NODE = document.getElementById('header-nav-bar')
     window.USER_CENTER_SIDEBAR_NODE = document.getElementById('user-center-sidebar')
 });
 

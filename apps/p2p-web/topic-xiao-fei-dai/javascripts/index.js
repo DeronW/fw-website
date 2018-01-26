@@ -30,6 +30,9 @@ $(function () {
             });
         }
     });
+
+    return;
+
     $(".slideBox").slide({mainCell: ".bd ul", autoPlay: true});
     var iNum = 0;
     var flag = false;

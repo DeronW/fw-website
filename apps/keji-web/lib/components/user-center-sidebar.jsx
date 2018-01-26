@@ -7,12 +7,45 @@ class UserCenterSidebar extends React.Component {
         code: '',
         level: null,
         avatar: '',
-        orderUser: {}
+        orderUser: {},
+        isBuyGold:false,
+        isBuyZxProduct:false,
+        isComplianceOpen:true,
+        isVip:false
     }
 
     componentDidMount() {
         let url = "https://www.gongchangp2p.com/api/userState/v2/userState.json"
-
+        //备案接口
+        // $.ajax({
+        //     url: 'http://www.9888keji.com/api/user/v1/checkComplianceIsOpen.json',
+        //     // The name of the callback parameter, as specified by the YQL service
+        //     jsonp: "callback",
+        //     // Tell jQuery we're expecting JSONP
+        //     dataType: "jsonp",
+        //     xhrFields: { withCredentials: true }
+        // }).done(data => {
+        //     this.setState({
+        //         isBuyGold:data.data.isBuyGold,
+        //         isBuyZxProduct:data.data.isBuyZxProduct,
+        //         isComplianceOpen:data.data.isComplianceOpen,
+        //         isVip:data.data.isVip
+        //     })
+        // })
+        $.ajax({
+            url: API_PATH + '/api/user/v1/checkComplianceIsOpen.json',
+            type:'POST',
+            dataType: 'json',
+            // xhrFields: { withCredentials: true },
+            success:data => {
+                this.setState({
+                    isBuyGold:data.data.isBuyGold,
+                    isBuyZxProduct:data.data.isBuyZxProduct,
+                    isComplianceOpen:data.data.isComplianceOpen,
+                    isVip:data.data.isVip
+                })
+            }
+        })
         $.ajax({
             url: url,
             jsonp: "callback",
@@ -46,25 +79,33 @@ class UserCenterSidebar extends React.Component {
     }
 
     render() {
-
-        let { level, avatar, code, realname, orderUser } = this.state
+        let { level, avatar, code, realname, orderUser,isBuyGold,isBuyZxProduct,isComplianceOpen,isVip } = this.state
 
         let path = location.pathname;
-
         let nav_link_cn = p => {
             return path.indexOf(p) > -1 ? 'ucp-link active' : 'ucp-link'
         }
 
         return <div className="ucp-left-nav">
             <div className="ucp-head">
-                <div className={`ucp-angle ${level > 0 && 'vip'}`}>
+                {isComplianceOpen && isVip && <div className={`ucp-angle ${level > 0 && 'vip'}`}>
                     <img className="with-vip"
                         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAbBAMAAACtquM+AAAAElBMVEUAAAD/TU3/TU3/TU3/TU3/TU2w629YAAAABXRSTlMA6atUFHg89q8AAAAXSURBVAjXY2BmYGBwBGJVIA4NDaUlBgCl3xhS+GI+yQAAAABJRU5ErkJggg==" />
-                    <a className="text" href="/user/level/userLevel.shtml">
+                     <a className="text" href="/user/level/userLevel.shtml">
                         VIP{level > 0 && level}</a>
                     <img className="with-vip"
                         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAbBAMAAACzY9ONAAAAMFBMVEUAAAD/TU3/TU3/TU3/TU3/TU3/TU3/TU3/TU3/TU3/TU3/TU3/TU3/TU3/TU3/TU0SdRv/AAAAD3RSTlMA1N6Kg3g1MCYg2c3KfnPm+PSeAAAASklEQVQI113KSxFAYBhAURFEEEEEEUQQQQQRRBBFFBV+b2PMx9m6i7O62a+ISFhxYECF9mO2LNhRoESDHhNGXNhwIzrUyHHiQXoBAv1MW5PIhMkAAAAASUVORK5CYII=" />
-                </div>
+                </div>}
+                {
+                    !isComplianceOpen && <div className={`ucp-angle ${level > 0 && 'vip'}`}>
+                        <img className="with-vip"
+                            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAbBAMAAACtquM+AAAAElBMVEUAAAD/TU3/TU3/TU3/TU3/TU2w629YAAAABXRSTlMA6atUFHg89q8AAAAXSURBVAjXY2BmYGBwBGJVIA4NDaUlBgCl3xhS+GI+yQAAAABJRU5ErkJggg==" />
+                        <a className="text" href="/user/level/userLevel.shtml">
+                            VIP{level > 0 && level}</a>
+                        <img className="with-vip"
+                            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAbBAMAAACzY9ONAAAAMFBMVEUAAAD/TU3/TU3/TU3/TU3/TU3/TU3/TU3/TU3/TU3/TU3/TU3/TU3/TU3/TU3/TU0SdRv/AAAAD3RSTlMA1N6Kg3g1MCYg2c3KfnPm+PSeAAAASklEQVQI113KSxFAYBhAURFEEEEEEUQQQQQRRBBFFBV+b2PMx9m6i7O62a+ISFhxYECF9mO2LNhRoESDHhNGXNhwIzrUyHHiQXoBAv1MW5PIhMkAAAAASUVORK5CYII=" />
+                    </div>
+                }
 
                 <a href="/account/home.shtml">
                     <div className="ucp-avatar">
@@ -88,34 +129,57 @@ class UserCenterSidebar extends React.Component {
                 <i className="ucp-icon icon-invest"></i>
                 <span>邀请返利</span>
             </a>
-            <a data-zx-title="true" className="ucp-link hide" href="/factoryCode/info.shtml">
-                <i className="ucp-icon icon-zx"></i>
-                <span>我的尊享</span>
-            </a>
             <a className="ucp-link" href="https://www.gongchangp2p.com/account/home.shtml">
                 <i className="ucp-icon icon-p2p"></i>
                 <span>我的微金</span>
             </a>
-            <a className="ucp-link" href="https://www.gongchangzx.com/account/home.shtml">
-                <i className="ucp-icon icon-zx"></i>
-                <span>我的尊享</span>
-            </a>
-            <a className="ucp-link" href="https://www.gongchangzx.com/gold/home.shtml">
-                <i className="ucp-icon icon-hj"></i>
-                <span>我的黄金</span>
-            </a>
-
+            {
+                isComplianceOpen && isVip && <a className="ucp-link" href="https://www.gongchangzx.com/account/home.shtml">
+                    <i className="ucp-icon icon-zx"></i>
+                    <span>我的尊享</span>
+                </a>
+            }
+            {
+                isComplianceOpen && !isVip && isBuyZxProduct && <a className="ucp-link" href="https://www.gongchangzx.com/account/home.shtml">
+                    <i className="ucp-icon icon-zx"></i>
+                    <span>我的尊享</span>
+                </a>
+            }
+            {
+               !isComplianceOpen && <a className="ucp-link" href="https://www.gongchangzx.com/account/home.shtml">
+                    <i className="ucp-icon icon-zx"></i>
+                    <span>我的尊享</span>
+                </a>
+            }
+            {
+                isComplianceOpen && isVip && <a className="ucp-link" href="https://www.gongchangzx.com/gold/home.shtml">
+                    <i className="ucp-icon icon-hj"></i>
+                    <span>我的黄金</span>
+                </a>
+            }
+            {
+                isComplianceOpen && !isVip && isBuyGold && <a className="ucp-link" href="https://www.gongchangzx.com/gold/home.shtml">
+                    <i className="ucp-icon icon-hj"></i>
+                    <span>我的黄金</span>
+                </a>
+            }
+            {
+                !isComplianceOpen && <a className="ucp-link" href="https://www.gongchangzx.com/gold/home.shtml">
+                    <i className="ucp-icon icon-hj"></i>
+                    <span>我的黄金</span>
+                </a>
+            }
             <div className="ucp-horizon-line"></div>
 
             <a
                 className={nav_link_cn('/user-coupon/')}
-                href="/static/web/user-coupon/index.html">
+                href="/static/keji-web/user-coupon/index.html">
                 <i className="ucp-icon icon-coupon"></i>
                 <span>优惠券</span>
             </a>
 
             <a className={nav_link_cn('/user-score/')}
-                href="/static/web/user-score/index.html">
+                href="/static/keji-web/user-score/index.html">
                 <i className="ucp-icon icon-score"></i>
                 <span>工分</span>
             </a>
