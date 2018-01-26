@@ -340,6 +340,7 @@ class Welcome extends React.Component {
             </div>
             <div className="wrapper">
                 <div className="title">为什么选择金融工场</div>
+                <div className="sub-title">工场微金资金保障</div>
                 <div className="feature">
                     <div className="featureItem">
                         <img src="images/icon--house.png" width="177" height="166"/>
