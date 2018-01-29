@@ -340,7 +340,10 @@ class Welcome extends React.Component {
             </div>
             <div className="wrapper">
                 <div className="title">为什么选择金融工场</div>
-                <div className="feature">
+                <div className="describe">
+                    金融工场，品牌创立于2012年，是中国领先的综合金融信息服务平台。平台融合信息技术创新手段，秉承安全、专业、透明的经营理念，为用户提供入口及多样化高效智能的服务，为企业和个人提供定制化金融服务解决方案。平台在交易品种与交易组织模式上持续创新，提供多样化金融服务产品,让每个用户都能平等、轻松、高效地享受互联网金融服务，享有高品质金融生活。
+                </div>
+                <div className="feature" style={{display: 'none'}}>
                     <div className="featureItem">
                         <img src="images/icon--house.png" width="177" height="166"/>
                         <div className="itemTitle">会员单位</div>
