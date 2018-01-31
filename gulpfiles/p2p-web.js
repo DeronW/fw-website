@@ -5,11 +5,8 @@ let APP_NAMES = [
     'protocol-user-service',//用户服务协议
     'aboutus',//关于我们相关页面
     'preservation',//易保全页面
-];
-
-// 公告类页面
-const NOTICE_PAGES = [
     'notice-information-disclosure',//新信息披露页
+    'welcome', // 渠道注册页
 ]
 
 // 专题说明类页面
@@ -33,11 +30,7 @@ const USER_PAGES = [
 ]
 
 
-APP_NAMES.push(
-    ...TOPIC_PAGES,
-    ...USER_PAGES,
-    ...NOTICE_PAGES
-)
+APP_NAMES.push(...TOPIC_PAGES, ...USER_PAGES)
 
 module.exports = function (gulp, generate_task, settings) {
 
