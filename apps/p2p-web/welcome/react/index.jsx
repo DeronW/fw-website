@@ -283,9 +283,9 @@ class Welcome extends React.Component {
                     <span className="proText">
                         我已阅读并同意
                         <a className="colorBlue proName"
-                           href="https://www.9888keji.com/register_terms_gc.html"
+                           href="https://www.gongchangp2p.com/register_terms_wj.html"
                            target="_blank"
-                        >《金融工场用户服务协议》
+                        >《工场微金用户服务协议》
                         </a>
                     </span>
                 </div>
@@ -327,7 +327,7 @@ class Welcome extends React.Component {
             <div className="welcomeTitle">
                 <div className="titleLeft"></div>
                 <div className="titleRight">已有账号？<span className="colorBlue cursor"
-                                                       onClick={() => location.href = 'https://passport.9888keji.com/passport/login'}>请登录</span>
+                                                       onClick={() => location.href = 'https://passport.gongchangp2p.com/passport/login'}>请登录</span>
                 </div>
             </div>
             <div className="banner">
@@ -339,7 +339,7 @@ class Welcome extends React.Component {
                 </div>
             </div>
             <div className="wrapper">
-                <div className="title">为什么选择金融工场</div>
+                <div className="title">为什么选择工场微金</div>
                 <div className="feature">
                     <div className="featureItem">
                         <img src="images/icon--house.png" width="177" height="166"/>
