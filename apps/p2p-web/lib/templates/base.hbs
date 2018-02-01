@@ -31,9 +31,8 @@
 <!--接口地址前缀,结尾需要添加斜线-->
 <input type="hidden" id="api-path" value="{{ API_PATH }}"/>
 
-<div id="header-status-bar"></div>
-
-{{> header-nav-bar}}
+{{#unless noHeader}} <div id="header-status-bar"></div> {{/unless}}
+{{#unless noHeader}} <div id="header-nav-bar"></div> {{/unless}}
 
 {{#> content}}{{/content}}
 
