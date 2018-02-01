@@ -150,7 +150,7 @@ class Welcome extends React.Component {
                     if (data.data.result !== '01') {
                         GlobalAlert("注册成功，登录失败");
                     } else {
-                        location.href = "https://www.9888keji.com/depository/regist/regSuccess.shtml"
+                        location.href = "https://www.gongchangp2p.com/depository/regist/regSuccess.shtml"
                     }
                 })
 
