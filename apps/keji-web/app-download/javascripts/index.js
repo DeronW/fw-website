@@ -209,3 +209,9 @@ function showCardHand() {
     $(".card-2-1").css("bottom", "0px");
     $(".card-2-6").css("bottom", "0px");
 }
+
+
+
+$(function(){
+    $("#apk-download-link").attr("href", "http://app.9888.cn/download/apk?t=" + +new Date())
+})
