@@ -347,17 +347,17 @@ $(function () {
         //截止前一天日期
         $(".partStatisticsText span").text(d.date);
         //计算总额
-        computeTotal(judgeCash(d.total_invest), judgeCash(d.total_orderCount,0), judgeCash(d.total_interest), judgeCash(d.total_principalInvest), judgeCash(d.total_principalCount,0));
+        computeTotal(judgeCash(d.total_invest), judgeCash(d.total_orderCount,0), judgeCash(d.total_interest), judgeCash(d.total_principalInvest), (d.total_principalCount/1000).toFixed(2)+"千");
         //借款用户
         firstPie(d.borr_female, d.borr_male, d.borr_age_level_1, d.borr_age_level_2, d.borr_age_level_3, d.borr_age_level_4, d.borr_age_level_5);
 
         //借款相关
-        borrow(formatPerson(d.total_borrUserCount),formatPerson(9785),(d.total_invest / d.total_borrUserCount).toFixed(2)+"元",(d.total_topOnePriInvest / d.total_principalInvest * 100).toFixed(2)+"%",(d.total_topTenPriInvest / d.total_principalInvest * 100).toFixed(2)+"%",d.total_relInvest+"元",d.total_relCount+"笔")
+        borrow(formatPerson(d.total_borrUserCount),formatPerson(3809),(d.total_invest / d.total_borrUserCount).toFixed(2)+"元",(d.total_topOnePriInvest / d.total_principalInvest * 100).toFixed(2)+"%",(d.total_topTenPriInvest / d.total_principalInvest * 100).toFixed(2)+"%",d.total_relInvest+"元",d.total_relCount+"笔")
 
         //出借用户
         secondPie(d.female, d.male, d.age_level_1, d.age_level_2, d.age_level_3, d.age_level_4, d.age_level_5);
         //出借相关
-        lend(formatPerson(d.total_userCount),formatPerson(6621),(d.total_invest / d.total_userCount).toFixed(2)+"元",(d.total_topOneBorrInvest / d.total_principalInvest * 100).toFixed(2)+"%",(d.total_topTenBorrInvest / d.total_principalInvest * 100).toFixed(2)+"%")
+        lend(formatPerson(d.total_userCount),formatPerson(6303),(d.total_invest / d.total_userCount).toFixed(2)+"元",(d.total_topOneBorrInvest / d.total_principalInvest * 100).toFixed(2)+"%",(d.total_topTenBorrInvest / d.total_principalInvest * 100).toFixed(2)+"%")
         //承受能力
         ability(d.total_repInterest,
             d.total_ninetyOverdueSum,
