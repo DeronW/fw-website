@@ -32,7 +32,7 @@
 <input type="hidden" id="api-path" value="{{ API_PATH }}"/>
 
 {{#unless noHeader}} <div id="header-status-bar"></div> {{/unless}}
-{{#unless noHeader}} <div id="header-nav-bar"></div> {{/unless}}
+{{#unless noHeader}} {{> header-nav-bar}} {{/unless}}
 
 {{#> content}}{{/content}}
 
