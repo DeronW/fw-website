@@ -48,15 +48,18 @@ body, html {
     font-size: @fontSize20;
     color: @colorBlue;
     .tab {
-      width: 190px;
+      width: 154px;
       text-align: center;
       float: left;
       border: 2px solid @colorBlue;
       cursor: pointer;
     }
-    .tabFirst {
+    .tabLetter {
       border-top-left-radius: 8px;
       border-bottom-left-radius: 8px;
+    }
+    .tabFirst {
+      border-left: transparent;
     }
     .tabMiddle {
       border-left: transparent;
@@ -73,6 +76,11 @@ body, html {
       background: @colorBlue;
       color: @colorWhite;
     }
+  }
+  .infoLetter{
+    width: 1000px;
+    margin: auto;
+    text-align: center;
   }
   .infoConPart1 {
     position: relative;
