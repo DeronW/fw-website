@@ -61,7 +61,8 @@ module.exports = function (gulp, generate_task, settings) {
             'jquery-1.12.4.min.js',
             'common-functions.js',
             'interest-calculator.js',
-            'es6-promise.min.js'
+            'es6-promise.min.js',
+            'footer.js'
         ],
         project_less: [
             'common.less',

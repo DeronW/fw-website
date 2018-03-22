@@ -142,6 +142,7 @@ module.exports = function generate_task(site_name, page_name, configs) {
         gulp.watch(`${app_path}javascripts/**`, gulp.parallel(compile_javascripts));
         gulp.watch(`${app_path}react/**`, gulp.parallel(compile_react));
         gulp.watch(`${project_lib_path}/less/**`, gulp.parallel(compile_less));
+        gulp.watch(`${project_lib_path}/javascripts/**`, gulp.parallel(compile_javascripts));
         gulp.watch(`${project_lib_path}/templates/**`, gulp.parallel(compile_html));
         gulp.watch(`${project_lib_path}/images/**`, gulp.parallel(compile_images));
         gulp.watch(`${project_lib_path}/components/**`, gulp.parallel(compile_react));

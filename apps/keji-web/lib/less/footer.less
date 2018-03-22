@@ -226,6 +226,34 @@
                     color: #b4d6fe !important;
                 }
             }
+            .friendly-link{
+              width: 220px;
+              height: 30px;
+              border: 1px solid #b3d5ff;
+              line-height: 30px;
+              font-size: 16px;
+              color: #b3d5ff;
+              padding-left: 10px;
+              border-radius: 4px;
+              position: relative;
+              top: 40px;
+              .arrow{
+                display: inline-block;
+                width: 16px;
+                height: 10px;;
+                font-weight: normal;
+                background: url('../images/global-footer/arrow-top.png') no-repeat;
+                position: relative;
+                left: 120px;
+              }
+              &:hover{
+                cursor: pointer;
+                color: #fff;
+                .arrow{
+                  background: url('../images/global-footer/arrow-bottom.png') no-repeat;
+                }
+              }
+            }
         }
     }
     .row-2,
